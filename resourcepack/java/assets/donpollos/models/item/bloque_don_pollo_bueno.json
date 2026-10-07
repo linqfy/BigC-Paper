@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "donpollos:block/bloque_don_pollo_bueno"
+  }
+}

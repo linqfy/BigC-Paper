@@ -1,0 +1,147 @@
+# Don Pollos: cinco variantes de NPC pollo.
+# Por ahora todos los intercambios usan pan (BREAD) como placeholder.
+# model-key es el nombre del .bbmodel en plugins/BetterModel/models/ (sin extension).
+# animation vacio = BetterModel usa sus animaciones idle/walk automaticas. Si el modelo no esta cargado, se ve como aldeano.
+
+# Ruleta de Don Pollo Fino: chance = weight / suma de weights. Si aciertas el color, recibes la apuesta x multiplier.
+fino:
+  roulette:
+    red: { weight: 24, multiplier: 2 }
+    black: { weight: 24, multiplier: 2 }
+    green: { weight: 2, multiplier: 2 }
+
+salsero:
+  follow-radius: 12.0
+  stop-distance: 2.5
+  update-ticks: 10
+  # Bailes del Salsero (sacados de video_referencia/). Solo baila si lo activas con /donpollo bailar <1-5>.
+  dances: [dance1, dance2, dance3, dance4, dance5]
+  # Batalla de baile (clic derecho al Salsero > boton PVP): el Salsero te pide pasos y tenes que hacerlos a tiempo.
+  pvp:
+    hits-to-win: 12          # pasos acertados para dejarlo sin vida
+    lives: 3                 # errores permitidos; si los gastas todos, moris
+    window-ticks: 50         # tiempo para cada paso al principio (20 ticks = 1 segundo)
+    min-window-ticks: 22     # tiempo para cada paso cuando ya casi no le queda vida
+    pause-ticks: 12          # pausa entre pasos
+    reward: { material: DIAMOND, amount: 5 }
+    max-distance: 16.0       # si te alejas mas, la batalla se corta
+
+# Ciudades de Don Pollo: aparecen solas al generar terreno nuevo. El mundo se divide en celdas de
+# spacing x spacing bloques con (como mucho) una ciudad por celda. 1400 = mas o menos una cada
+# media hora caminando. Solo se construyen en chunks nuevos (lo ya explorado no cambia).
+ciudades:
+  enabled: true
+  worlds: [world]
+  spacing: 1400
+  chance: 1.0                   # probabilidad de que una celda tenga ciudad
+  min-distance-from-spawn: 500  # que no aparezca encima del spawn
+  blocks-per-tick: 6000         # velocidad de construccion (mas alto = mas rapido pero mas lag)
+  don-pollos:                   # cuantos de cada uno aparecen en cada ciudad
+    comun: 4
+    gordito: 2
+    salsero: 2
+    aura-67: 2
+    fino: 2
+
+# Don Pollo Boss: solo aparece con /donpollo boss. Estatua de Don Pollo sobre un auto que embiste
+# y tira dos rayos laser por los ojos.
+boss:
+  health: 600
+  scale: 1.8                  # tamano (agranda modelo y hitbox)
+  melee-damage: 14            # dano al embestir
+  laser-damage: 3             # dano de cada pulso del laser (pega varias veces por rafaga)
+  laser-range: 28
+  laser-cooldown-seconds: 7
+  fase-2:                     # desde la mitad de la vida: se aleja y ataca de lejos
+    keep-distance: 10         # bloques que intenta mantener entre el y vos
+    meteor-damage: 6          # dano de cada meteorito de WhatsApp
+    meteor-cooldown-seconds: 2.5
+    chicken-wave-seconds: 7.5 # cada cuanto spawnea gallinas WhatsApp
+    chickens-per-wave: 2
+    max-chickens: 8           # tope de gallinas vivas a la vez
+    chicken-health: 8
+    chicken-damage: 3         # el dano de un zombie
+  fase-3:                     # desde un cuarto de la vida: "No hay picante para ti..."
+    levitate-seconds: 7       # tarda esto en elevarse
+    levitate-height: 20       # bloques que sube
+    pit-depth: 6              # se vacia el chunk de cada jugador con esta profundidad
+    batallas-del-cubo:        # empiezan cuando te hunde en el cubo; al ganarlas te sube y lo rellena
+      max-labubus-vivos: 20
+      pausa-segundos: 3       # entre ronda y ronda
+      rondas:                 # en cada ronda sale un Coronel al empezar
+        - { labubus: 10, cada-segundos: 1.2, coronel-velocidad: 1.0, coronel-dano-extra: 0 }
+        - { labubus: 30, cada-segundos: 0.6, coronel-velocidad: 1.25, coronel-dano-extra: 3 }
+        - { labubus: 50, cada-segundos: 0.3, coronel-velocidad: 1.5, coronel-dano-extra: 6 }
+  fase-final:                 # desde un cuarto de la vida: "Me haz hecho enojar, Papi Don Pollo esta enojado"
+    grow-factor: 1.25         # se agranda un 25%
+    beam-cooldown-seconds: 6  # rayo de warden: se infla 2 veces y tira a donde estabas
+    beam-damage: 10
+    beam-range: 32
+    jump-cooldown-seconds: 9  # mega salto con onda expansiva
+    jump-land-distance: 8     # cae a esta distancia tuya
+    shockwave-radius: 12
+    shockwave-damage: 12      # pegado a la caida (en el borde hace un tercio)
+    sanders-seconds: 10       # cada cuanto invoca Sanders fase final
+    sanders-per-wave: 2
+    max-sanders: 6
+    sanders-speed: 1.6        # multiplicador de velocidad (1 = zombie)
+    sanders-damage-extra: 8
+    sanders-health: 40
+
+variants:
+  comun:
+    display-name: "§eDon Pollo Común"
+    model-key: bigcasares_don_pollo_comun
+    animation: ""
+    wander: true
+
+  gordito:
+    display-name: "§6Don Pollo Gordito"
+    model-key: bigcasares_don_pollo_gordito
+    animation: ""
+    wander: true
+    speed: 0.55               # camina mas lento que el resto (1.0 = normal)
+    menu-title: "§6Intercambios de Don Pollo Gordito"
+    trades:
+      - cost: { material: BREAD, amount: 3 }
+        result: { material: BREAD, amount: 1 }
+      - cost: { material: BREAD, amount: 8 }
+        result: { material: BREAD, amount: 4 }
+      - cost: { material: BREAD, amount: 16 }
+        result: { material: BREAD, amount: 10 }
+      - cost: { material: BREAD, amount: 32 }
+        result: { material: BREAD, amount: 24 }
+
+  salsero:
+    display-name: "§dDon Pollo Salsero"
+    model-key: bigcasares_don_pollo_salsero
+    animation: ""
+    wander: true
+    menu-title: "§dDon Pollo Salsero"
+
+  aura-67:
+    display-name: "§5§lDon Pollo Aura 67"
+    model-key: bigcasares_don_pollo_aura_67
+    animation: ""
+    wander: false
+    menu-title: "§5Intercambios de Don Pollo Aura 67"
+    # Polleria: lo que abre al hacerle clic. Productos: pollo-frito, salsa, picante. Precio en panes.
+    offers:
+      - { item: pollo-frito, amount: 4, price: 5 }
+      - { item: salsa, amount: 1, price: 2 }
+      - { item: picante, amount: 1, price: 3 }
+
+  fino:
+    display-name: "§bDon Pollo Fino"
+    model-key: bigcasares_don_pollo_fino
+    animation: ""
+    wander: false
+    menu-title: "§6§l♠ Casino de Don Pollo Fino ♠"
+
+# Jugadores de Bedrock (Geyser + Floodgate).
+bedrock:
+  # Si los de Bedrock ven los modelos 3D. Bedrock no puede dibujar los modelos de BetterModel por su cuenta:
+  # hace falta GeyserModelEngine (el plugin le instala solo los modelos convertidos).
+  #   auto  = si esta GeyserModelEngine, modelos 3D; si no, ven los mobs de abajo (aldeanos, Ravager, zombies)
+  #   true / false = forzarlo
+  modelos-3d: auto

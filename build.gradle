@@ -60,6 +60,48 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+// Plugins del servidor (no se compilan con BigCasares): runServer los baja a build/run-server/plugins.
+// Bedrock (Geyser + Floodgate) y GeyserModelEngine para que los de Bedrock vean los modelos de BetterModel.
+// Ver docs/don-pollos/compatibilidad-bedrock.md.
+def serverPlugins = [
+    // BetterModel: obligatorio (plugin.yml depend). El servidor usa 3.5.0 aunque se compile contra la API 3.2.0.
+    [modrinth: "bettermodel", version: "QTU9HP83"],                                   // 3.5.0
+    // Geyser y Floodgate: dejan entrar a los jugadores de Bedrock.
+    [modrinth: "geyser", version: "sT6fWVgD"],                                        // 2.11.3-b1249 (26.2)
+    [url: "https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot"],
+    // GeyserUtils (lado servidor) y GeyserModelEngine: modelos 3D para Bedrock.
+    // packetevents: GeyserModelEngine no carga sin el.
+    [modrinth: "packetevents", version: "m78nFxYg"],                                  // 2.14.0 (26.2)
+    [github: "GeyserExtensionists/GeyserUtils", tag: "latest", asset: "geyserutils-spigot-1.0-SNAPSHOT.jar"],
+    [github: "GeyserExtensionists/GeyserModelEngine", tag: "latest", asset: "GeyserModelEngine-1.0.9.jar"],
+]
+
+// Extensiones de Geyser: van en plugins/Geyser-Spigot/extensions (y el pack de GeyserDisplayEntity en packs/).
+def geyserExtensions = [
+    [repo: "GeyserExtensionists/GeyserModelEngine", tag: "latest", asset: "GeyserModelEngineExtension-1.0.9.jar", folder: "extensions"],
+    [repo: "GeyserExtensionists/GeyserUtils", tag: "latest", asset: "geyserutils-geyser-1.0-SNAPSHOT.jar", folder: "extensions"],
+    // Opcional: meteoritos de WhatsApp y cara del bloque del secreto (item displays) para Bedrock.
+    [repo: "GeyserExtensionists/GeyserDisplayEntity", tag: "latest", asset: "GeyserDisplayEntity-1.0.12.jar", folder: "extensions"],
+    [repo: "GeyserExtensionists/GeyserDisplayEntity", tag: "latest", asset: "GeyserDisplayEntityPack.mcpack", folder: "packs"],
+]
+
+tasks.register("downloadGeyserExtensions") {
+    group = "run paper"
+    description = "Downloads the Geyser extensions used for Bedrock players into the run-server Geyser folder."
+    def geyserFolder = layout.buildDirectory.dir("run-server/plugins/Geyser-Spigot")
+    outputs.dir(geyserFolder)
+    doLast {
+        geyserExtensions.each { extension ->
+            File target = geyserFolder.get().dir(extension.folder).file(extension.asset).asFile
+            if (!target.isFile()) {
+                target.parentFile.mkdirs()
+                ant.get(src: "https://github.com/${extension.repo}/releases/download/${extension.tag}/${extension.asset}",
+                    dest: target, verbose: false)
+            }
+        }
+    }
+}
+
 tasks {
     runServer {
         // Configure the Minecraft version for our task.
@@ -67,6 +109,19 @@ tasks {
         // Your plugin's jar (or shadowJar if present) will be used automatically.
         minecraftVersion("26.2")
         runDirectory.set(layout.buildDirectory.dir("run-server"))
+        dependsOn(tasks.named("downloadGeyserExtensions"))
+        downloadPlugins {
+            serverPlugins.each { plugin ->
+                if (plugin.modrinth) {
+                    modrinth(plugin.modrinth, plugin.version)
+                } else if (plugin.github) {
+                    def (owner, repo) = plugin.github.split("/")
+                    github(owner, repo, plugin.tag, plugin.asset)
+                } else {
+                    url(plugin.url)
+                }
+            }
+        }
     }
 }
 

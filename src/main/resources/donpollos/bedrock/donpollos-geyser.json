@@ -1,0 +1,129 @@
+{
+  "format_version": 2,
+  "items": {
+    "minecraft:cooked_chicken": [
+      {
+        "type": "definition",
+        "model": "donpollos:pollo_frito",
+        "bedrock_identifier": "donpollos:pollo_frito",
+        "display_name": "Pollo Frito",
+        "bedrock_options": {
+          "icon": "donpollos_pollo_frito"
+        },
+        "components": {
+          "minecraft:food": {
+            "nutrition": 8,
+            "saturation": 9.6
+          }
+        }
+      }
+    ],
+    "minecraft:cookie": [
+      {
+        "type": "definition",
+        "model": "donpollos:salsa",
+        "bedrock_identifier": "donpollos:salsa",
+        "display_name": "Salsa",
+        "bedrock_options": {
+          "icon": "donpollos_salsa"
+        },
+        "components": {
+          "minecraft:consumable": {
+            "consume_seconds": 1.0,
+            "animation": "drink"
+          },
+          "minecraft:food": {
+            "nutrition": 1,
+            "saturation": 0.4,
+            "can_always_eat": true
+          }
+        }
+      },
+      {
+        "type": "definition",
+        "model": "donpollos:picante",
+        "bedrock_identifier": "donpollos:picante",
+        "display_name": "Picante",
+        "bedrock_options": {
+          "icon": "donpollos_picante"
+        },
+        "components": {
+          "minecraft:consumable": {
+            "consume_seconds": 1.0,
+            "animation": "drink"
+          },
+          "minecraft:food": {
+            "nutrition": 1,
+            "saturation": 0.4,
+            "can_always_eat": true
+          }
+        }
+      }
+    ],
+    "minecraft:paper": [
+      {
+        "type": "definition",
+        "model": "donpollos:balde_pollo_frito",
+        "bedrock_identifier": "donpollos:balde_pollo_frito",
+        "display_name": "Balde de Pollo Frito",
+        "bedrock_options": {
+          "icon": "donpollos_balde_pollo_frito"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "donpollos:balde_kfc_casco",
+        "bedrock_identifier": "donpollos:balde_kfc_casco",
+        "display_name": "Balde de KFC dado vuelta",
+        "bedrock_options": {
+          "icon": "donpollos_balde_kfc_casco",
+          "allow_offhand": false
+        },
+        "components": {
+          "minecraft:equippable": {
+            "slot": "head"
+          },
+          "minecraft:max_stack_size": 1
+        }
+      },
+      {
+        "type": "definition",
+        "model": "donpollos:meteorito_wsp",
+        "bedrock_identifier": "donpollos:meteorito_wsp",
+        "display_name": "Meteorito de WhatsApp",
+        "bedrock_options": {
+          "icon": "donpollos_meteorito_wsp"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "donpollos:bloque_don_pollo_bueno",
+        "bedrock_identifier": "donpollos:cara_don_pollo_bueno",
+        "display_name": "Don Pollo",
+        "bedrock_options": {
+          "icon": "donpollos_cara_don_pollo_bueno"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "donpollos:bloque_don_pollo_malo",
+        "bedrock_identifier": "donpollos:cara_don_pollo_malo",
+        "display_name": "Don Pollo Malo",
+        "bedrock_options": {
+          "icon": "donpollos_cara_don_pollo_malo"
+        }
+      }
+    ],
+    "minecraft:beacon": [
+      {
+        "type": "definition",
+        "model": "donpollos:bloque_don_pollo_bueno",
+        "bedrock_identifier": "donpollos:bloque_don_pollo_bueno",
+        "display_name": "Secreto del Don Pollo",
+        "bedrock_options": {
+          "icon": "donpollos_bloque_don_pollo_bueno"
+        }
+      }
+    ]
+  }
+}

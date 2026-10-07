@@ -13,6 +13,8 @@ modules:
     enabled: true
   jeremy:
     enabled: true
+  don-pollos:
+    enabled: true
   grappling-hook:
     enabled: true
   glider:

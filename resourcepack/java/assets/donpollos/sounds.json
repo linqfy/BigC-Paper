@@ -1,0 +1,56 @@
+{
+  "don_pollo_1": {
+    "subtitle": "Don Pollo",
+    "sounds": [
+      {
+        "name": "donpollos:don_pollo_1",
+        "stream": true
+      }
+    ]
+  },
+  "don_pollo_2": {
+    "subtitle": "Don Pollo",
+    "sounds": [
+      {
+        "name": "donpollos:don_pollo_2",
+        "stream": true
+      }
+    ]
+  },
+  "don_pollo_3": {
+    "subtitle": "Don Pollo",
+    "sounds": [
+      {
+        "name": "donpollos:don_pollo_3",
+        "stream": true
+      }
+    ]
+  },
+  "don_pollo_4": {
+    "subtitle": "Don Pollo",
+    "sounds": [
+      {
+        "name": "donpollos:don_pollo_4",
+        "stream": true
+      }
+    ]
+  },
+  "don_pollo_5": {
+    "subtitle": "Don Pollo",
+    "sounds": [
+      {
+        "name": "donpollos:don_pollo_5",
+        "stream": true
+      }
+    ]
+  },
+  "don_pollo_6": {
+    "subtitle": "Don Pollo",
+    "sounds": [
+      {
+        "name": "donpollos:don_pollo_6",
+        "stream": true
+      }
+    ]
+  }
+}

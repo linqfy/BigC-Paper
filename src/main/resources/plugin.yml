@@ -49,6 +49,11 @@ commands:
     usage: /<command> <start|stop|status> [world|all]
     aliases: [ blood-moon ]
     permission: bigcasares.bloodmoon.admin
+  donpollo:
+    description: Don Pollos (spawn, boss, ciudades, bailes e items)
+    usage: /<command> <spawn <variante>|remove|list|give <item> [cantidad]|bailar <1-5|parar> [todos]|ciudad <aqui|cerca>|boss [quitar]>
+    permission: bigcasares.donpollos.admin
+    aliases: [ donpollos ]
   jeremy:
     description: Manage the Jeremy hunter
     usage: /<command> <status|start [player]|stop|cooldown reset>
@@ -115,6 +120,9 @@ commands:
 
 
 permissions:
+  bigcasares.donpollos.admin:
+    description: Manage Don Pollos (spawn, boss, cities, dances and items)
+    default: op
   bigcasares.*:
     description: Full access to BigCasares commands
     default: op
@@ -154,6 +162,7 @@ permissions:
       bigcasares.bloodmoon.start: true
       bigcasares.bloodmoon.stop: true
       bigcasares.jeremy.admin: true
+      bigcasares.donpollos.admin: true
       bigcasares.jeremy.start: true
       bigcasares.jeremy.stop: true
       bigcasares.glider.admin: true

@@ -28,6 +28,8 @@ atlassian-ide-plugin.xml
 *.nar
 *.ear
 *.zip
+# Don Pollos ships its GeyserModelEngine models as a zip resource
+!src/main/resources/donpollos/bedrock/geysermodelengine.zip
 *.tar.gz
 *.rar
 
