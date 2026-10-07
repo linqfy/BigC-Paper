@@ -4,6 +4,7 @@ import dev.linqfy.bigCasares.BigCasares;
 import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
+import dev.linqfy.bigCasares.modules.celular.CelularModule;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -81,6 +82,7 @@ public final class GeyserIntegrationModule implements PluginModule {
             });
             if (settings.customItems()) {
                 customItemDefinitions().forEach(runtime::registerCustomItem);
+                celularItemDefinitions().forEach(runtime::registerCustomItem);
             }
             if (settings.customEntities()) {
                 runtime.registerCustomEntity(new GeyserCustomEntityDefinition(
@@ -154,6 +156,17 @@ public final class GeyserIntegrationModule implements PluginModule {
             item("crossbow", "crossbow_firework_rocket", "Ballesta de Fuegos Artificiales"),
             item("iron_sword", "sahurs_bat", "Bate de Sahur")
         );
+    }
+
+    private java.util.List<GeyserCustomItemDefinition> celularItemDefinitions() {
+        CelularModule celular = plugin.getCelularModule();
+        if (celular == null) {
+            return java.util.List.of();
+        }
+        return celular.itemModels().stream()
+            .map(model -> new GeyserCustomItemDefinition(
+                "minecraft:clock", model, model, CelularModule.BEDROCK_ICON, CelularModule.DISPLAY_NAME))
+            .toList();
     }
 
     private static GeyserCustomItemDefinition item(String baseItem, String model, String displayName) {

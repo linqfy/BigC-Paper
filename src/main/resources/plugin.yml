@@ -53,6 +53,11 @@ commands:
     description: Manage the Jeremy hunter
     usage: /<command> <status|start [player]|stop|cooldown reset>
     permission: bigcasares.jeremy.admin
+  celular:
+    description: Give a Celular (the phone that plays videos)
+    usage: /<command> give [player]
+    permission: bigcasares.celular.admin
+    aliases: [ celu ]
   glider:
     description: Give one of the six BigCasares Glider tiers
     usage: /<command> give <1-6> [player] [amount]
@@ -156,6 +161,7 @@ permissions:
       bigcasares.jeremy.admin: true
       bigcasares.jeremy.start: true
       bigcasares.jeremy.stop: true
+      bigcasares.celular.admin: true
       bigcasares.glider.admin: true
       bigcasares.glider.give: true
 
@@ -293,6 +299,10 @@ permissions:
 
   bigcasares.jeremy.stop:
     description: Stop the active Jeremy hunt
+    default: op
+
+  bigcasares.celular.admin:
+    description: Give Celular phones with /celular give
     default: op
 
   bigcasares.glider.admin:

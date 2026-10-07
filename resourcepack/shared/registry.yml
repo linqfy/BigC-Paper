@@ -148,3 +148,7 @@ assets:
     type: item-model
     java-model: bigcasares:item/glider_tier_6
     texture: item/glider_tier_6
+  celular:
+    type: item-model
+    java-model: celular:item/celular
+    texture: item/celular_bedrock

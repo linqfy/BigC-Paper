@@ -120,3 +120,6 @@ runs/
 
 # Ignore node_modules directory
 node_modules/
+
+# Celular: videos originales que convierte tools/celular/convertir_videos.py
+tools/celular/videos/
