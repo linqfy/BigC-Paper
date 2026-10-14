@@ -13,6 +13,9 @@ modules:
     enabled: true
   jeremy:
     enabled: true
+  # Nivel de equipo 0-200. Se configura en plugins/BigCasares/cosmicniv_lib.yml
+  cosmicniv-lib:
+    enabled: true
   celular:
     enabled: true
   grappling-hook:

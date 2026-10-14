@@ -43,7 +43,8 @@ del servidor. Los generadores Python son pasos manuales, separados del build.
 - [Operación](docs/operations.md): instalación, configuración, packs y recargas.
 - [Contribución](GUIDELINES.MD) y [guía de agentes](AGENTS.md).
 - [Modelado](docs/blockbench/00-bettermodel-setup.md),
-  [Celular](docs/celular/README.md) y
+  [Celular](docs/celular/README.md),
+  [cosmicniv_lib](docs/cosmicniv-lib/README.md) (nivel de equipo de 0 a 200) y
   [cliente de prueba](tools/minecraft-test-client/README.md).
 
 Los planes fechados describen decisiones históricas; para el comportamiento

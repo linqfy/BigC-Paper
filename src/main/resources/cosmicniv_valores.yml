@@ -1,0 +1,209 @@
+# =====================================================================================================
+#  cosmicniv_valores.yml: CUÁNTO VALE cada cosa para cosmicniv_lib
+# =====================================================================================================
+#  Acá se cambia el valor de armaduras, armas, herramientas, encantamientos y objetos custom sin tocar código.
+#  Después de editar: /cosmicniv reload   (cómo se usan estos valores: cosmicniv_lib.yml y docs/cosmicniv-lib/README.md)
+#
+#  poder de un ítem = valor del ítem (este archivo) + Σ points-per-level × min(nivel, max-level)
+#
+#  Reglas:
+#   - Un ítem que no está en este archivo vale 0 y no cuenta, aunque esté encantado.
+#   - Cada ítem va en UN solo lugar: armor, una familia de weapons, una familia de tools o custom-items.
+#   - Lo que está en armor solo cuenta puesto (casco, pechera, pantalones, botas).
+#     Lo que está en weapons o tools solo cuenta en la mano o el inventario (ver weapon-search y tool-search en
+#     cosmicniv_lib.yml). Si lleva varias piezas o herramientas, cuenta la mejor (ver armor-search).
+#   - Solo importa la PROPORCIÓN entre valores: multiplicar todo por 2 no cambia ningún nivel.
+#   - Claves: "netherite_sword" o "minecraft:netherite_sword" (los ids de /give). Valores entre -1000000 y 1000000.
+#   - Nombres de familia: a-z, 0-9, _ y -. Un mismo nombre no puede estar en weapons y en tools.
+# =====================================================================================================
+
+# ---------------------------------------------------------------------------------------------------
+# Armaduras: valor de cada pieza sin encantar.
+# Fábrica: puntos de armadura + dureza + 10 x resistencia al empuje (atributos vanilla).
+# ---------------------------------------------------------------------------------------------------
+armor:
+  leather_helmet: 1.0
+  leather_chestplate: 3.0
+  leather_leggings: 2.0
+  leather_boots: 1.0
+  golden_helmet: 2.0
+  golden_chestplate: 5.0
+  golden_leggings: 3.0
+  golden_boots: 1.0
+  chainmail_helmet: 2.0
+  chainmail_chestplate: 5.0
+  chainmail_leggings: 4.0
+  chainmail_boots: 1.0
+  copper_helmet: 2.0
+  copper_chestplate: 4.0
+  copper_leggings: 3.0
+  copper_boots: 1.0
+  iron_helmet: 2.0
+  iron_chestplate: 6.0
+  iron_leggings: 5.0
+  iron_boots: 2.0
+  turtle_helmet: 2.0
+  diamond_helmet: 5.0
+  diamond_chestplate: 10.0
+  diamond_leggings: 8.0
+  diamond_boots: 5.0
+  netherite_helmet: 7.0
+  netherite_chestplate: 12.0
+  netherite_leggings: 10.0
+  netherite_boots: 7.0
+
+# ---------------------------------------------------------------------------------------------------
+# Armas, agrupadas por familia. Cada familia necesita su referencia en references.max.weapons (cosmicniv_lib.yml).
+# Fábrica: daño de ataque vanilla. Las lanzas usan una escala aproximada por material.
+# Cada arma se compara solo contra su familia, así que solo importa la diferencia DENTRO de la familia.
+# Para sumar una familia (por ejemplo arcos), agregala acá y poné su referencia en cosmicniv_lib.yml.
+# ---------------------------------------------------------------------------------------------------
+weapons:
+  sword:
+    wooden_sword: 4.0
+    golden_sword: 4.0
+    stone_sword: 5.0
+    copper_sword: 5.0
+    iron_sword: 6.0
+    diamond_sword: 7.0
+    netherite_sword: 8.0
+  axe:
+    wooden_axe: 7.0
+    golden_axe: 7.0
+    stone_axe: 9.0
+    copper_axe: 9.0
+    iron_axe: 9.0
+    diamond_axe: 9.0
+    netherite_axe: 10.0
+  mace:
+    mace: 6.0
+  spear:
+    wooden_spear: 3.0
+    golden_spear: 3.0
+    stone_spear: 4.0
+    copper_spear: 4.0
+    iron_spear: 5.0
+    diamond_spear: 6.0
+    netherite_spear: 7.0
+  trident:
+    trident: 9.0
+
+# ---------------------------------------------------------------------------------------------------
+# Herramientas, agrupadas por familia. Solo cuentan si weights.tool > 0 en cosmicniv_lib.yml, y cada familia
+# necesita su referencia en references.max.tools. El hacha está en weapons (un ítem solo puede estar en un lugar).
+# Fábrica: nivel de material (madera/oro 1, piedra 2, cobre 2.5, hierro 3, diamante 4, netherite 5).
+# ---------------------------------------------------------------------------------------------------
+tools:
+  pickaxe:
+    wooden_pickaxe: 1.0
+    golden_pickaxe: 1.0
+    stone_pickaxe: 2.0
+    copper_pickaxe: 2.5
+    iron_pickaxe: 3.0
+    diamond_pickaxe: 4.0
+    netherite_pickaxe: 5.0
+  shovel:
+    wooden_shovel: 1.0
+    golden_shovel: 1.0
+    stone_shovel: 2.0
+    copper_shovel: 2.5
+    iron_shovel: 3.0
+    diamond_shovel: 4.0
+    netherite_shovel: 5.0
+  hoe:
+    wooden_hoe: 1.0
+    golden_hoe: 1.0
+    stone_hoe: 2.0
+    copper_hoe: 2.5
+    iron_hoe: 3.0
+    diamond_hoe: 4.0
+    netherite_hoe: 5.0
+  shears:
+    shears: 2.0
+  fishing_rod:
+    fishing_rod: 2.0
+
+# ---------------------------------------------------------------------------------------------------
+# Encantamientos: puntos por nivel y nivel máximo que se cuenta (Filo X puesto con comandos cuenta como Filo V).
+# Las maldiciones restan. Un encantamiento que no está acá no suma nada.
+# Los max-level de fábrica son los de vanilla; los puntos son un criterio de cuánto ayuda cada uno.
+# ---------------------------------------------------------------------------------------------------
+enchantments:
+  # Armadura
+  protection: { points-per-level: 1.5, max-level: 4 }
+  fire_protection: { points-per-level: 0.75, max-level: 4 }
+  blast_protection: { points-per-level: 0.75, max-level: 4 }
+  projectile_protection: { points-per-level: 0.75, max-level: 4 }
+  thorns: { points-per-level: 0.5, max-level: 3 }
+  respiration: { points-per-level: 0.5, max-level: 3 }
+  aqua_affinity: { points-per-level: 1.0, max-level: 1 }
+  swift_sneak: { points-per-level: 0.5, max-level: 3 }
+  feather_falling: { points-per-level: 0.5, max-level: 4 }
+  depth_strider: { points-per-level: 0.5, max-level: 3 }
+  frost_walker: { points-per-level: 0.5, max-level: 2 }
+  soul_speed: { points-per-level: 0.25, max-level: 3 }
+  # Armas
+  sharpness: { points-per-level: 1.0, max-level: 5 }
+  smite: { points-per-level: 0.6, max-level: 5 }
+  bane_of_arthropods: { points-per-level: 0.4, max-level: 5 }
+  fire_aspect: { points-per-level: 1.0, max-level: 2 }
+  knockback: { points-per-level: 0.5, max-level: 2 }
+  looting: { points-per-level: 0.5, max-level: 3 }
+  sweeping_edge: { points-per-level: 0.5, max-level: 3 }
+  lunge: { points-per-level: 1.0, max-level: 3 }
+  density: { points-per-level: 0.8, max-level: 5 }
+  breach: { points-per-level: 1.0, max-level: 4 }
+  wind_burst: { points-per-level: 1.0, max-level: 3 }
+  impaling: { points-per-level: 0.8, max-level: 5 }
+  loyalty: { points-per-level: 0.5, max-level: 3 }
+  riptide: { points-per-level: 0.85, max-level: 3 }
+  channeling: { points-per-level: 1.0, max-level: 1 }
+  # Herramientas
+  efficiency: { points-per-level: 0.6, max-level: 5 }
+  fortune: { points-per-level: 0.3, max-level: 3 }
+  silk_touch: { points-per-level: 0.9, max-level: 1 }
+  luck_of_the_sea: { points-per-level: 0.5, max-level: 3 }
+  lure: { points-per-level: 0.5, max-level: 3 }
+  # Todos
+  unbreaking: { points-per-level: 0.5, max-level: 3 }
+  mending: { points-per-level: 2.0, max-level: 1 }
+  binding_curse: { points-per-level: -2.0, max-level: 1 }
+  vanishing_curse: { points-per-level: -1.0, max-level: 1 }
+
+# ---------------------------------------------------------------------------------------------------
+# Objetos custom: ítems de BigC o de otros plugins que tienen que valer distinto que su material de base.
+# Cada uno:
+#   match:       cómo reconocerlo. Se tienen que cumplir TODAS las condiciones que pongas (al menos una):
+#                  bigcasares-item: <id>      id del catálogo de BigC (src/main/resources/content/items/<id>.yml)
+#                  item-model: <ns:modelo>    componente item_model del ítem (sirve para ítems de cualquier plugin)
+#                  persistent-data: <ns:clave>            el ítem tiene ese dato persistente (texto)
+#                  persistent-data: { key: <ns:clave>, value: "<texto>" }   ...y vale exactamente eso (entre comillas)
+#                  material: <material>       material de base (para acotar, por ejemplo iron_sword)
+#   category:    armor (cuenta puesto), weapon o tool (cuentan en la mano)
+#   family:      familia de weapons o tools a la que pertenece (no va en armor)
+#   slot:        solo armor, opcional: helmet, chestplate, leggings o boots (si no, se deduce de match.material)
+#   value:       valor sin encantar. Los encantamientos que tenga el ítem suman igual que en uno normal.
+# Si un ítem coincide con varios, gana el primero de la lista. En las referencias se escribe custom:<nombre>.
+# ---------------------------------------------------------------------------------------------------
+custom-items:
+  # Bate de Sahur (BigC): espada de hierro de 6 de daño, pero pega muchísimo más rápido.
+  sahurs_bat:
+    match:
+      bigcasares-item: sahurs_bat
+    category: weapon
+    family: sword
+    value: 9.0
+
+  # Ejemplos (sacales el # para usarlos):
+  # casco_de_otro_plugin:
+  #   match:
+  #     item-model: otroplugin:casco_dragon
+  #   category: armor
+  #   value: 9.0
+  # pico_magico:
+  #   match:
+  #     material: diamond_pickaxe
+  #     persistent-data: { key: "otroplugin:tipo", value: "magico" }
+  #   category: tool
+  #   family: pickaxe
+  #   value: 6.0

@@ -1,0 +1,163 @@
+# =====================================================================================================
+#  cosmicniv_lib: nivel de equipo de 0 a 200  (CÓMO se calcula)
+# =====================================================================================================
+#  Hay dos archivos, los dos en plugins/BigCasares/:
+#    cosmicniv_lib.yml      <- este: qué vale 0, qué vale 200, pesos, curva y salida.
+#    cosmicniv_valores.yml  <- cuánto vale cada armadura, arma, herramienta, encantamiento y objeto custom.
+#  Se copian la primera vez y nunca se pisan. Después de editarlos usá  /cosmicniv reload  (o /bigcasares reload).
+#  Si algo está mal escrito, la consola dice qué archivo y qué clave fallan. Al recargar se mantiene la última
+#  configuración que funcionó; si el error ya estaba al arrancar el servidor, se usan los valores de fábrica.
+#
+#  Cómo se calcula (explicado completo en docs/cosmicniv-lib/README.md):
+#    poder de un ítem   = valor del ítem + puntos de cada encantamiento        (los dos en cosmicniv_valores.yml)
+#    A (armadura, 0..1) = poder de las 4 piezas, ubicado entre la referencia "zero" y la "max"
+#    W (arma, 0..1)     = la mejor arma, comparada con la referencia de SU familia
+#    T (herram., 0..1)  = la mejor herramienta, comparada con la referencia de SU familia
+#    t                  = (armor·A + weapon·W + tool·T) / (armor + weapon + tool)          pesos de weights:
+#    nivel              = maximum · curva(t)
+#  La curva siempre deja la referencia zero en 0 y la max en 200: solo cambia los valores del medio.
+#  Las claves aceptan "netherite_sword" o "minecraft:netherite_sword". Los objetos custom se escriben
+#  "custom:<nombre>" (el nombre que tienen en custom-items: de cosmicniv_valores.yml).
+# =====================================================================================================
+
+output:
+  # Nivel que tiene la referencia "max".
+  maximum: 200.0
+  # Decimales del valor que reciben los otros módulos y el comando (0 = número entero).
+  decimals: 1
+
+# Cuánto pesa cada parte. No hace falta que sumen 1: se usan como proporción.
+# Con 0.6 / 0.4 / 0, la armadura máxima sin arma da 120, el arma máxima sin armadura da 80 y las herramientas no
+# cuentan. Para que cuenten, dales peso (por ejemplo armor 0.55, weapon 0.35, tool 0.1); entonces el 200 también
+# pide la herramienta de referencia.
+weights:
+  armor: 0.6
+  weapon: 0.4
+  tool: 0.0
+
+# Dónde se busca cada parte en un jugador. Siempre cuenta la MEJOR que se encuentre.
+#
+# armor-search (armadura), por cada lugar (casco, pechera, pantalones, botas):
+#   WORN       solo la pieza que tiene puesta
+#   INVENTORY  la puesta y las que lleve en el inventario: cuenta la mejor de cada lugar   <- por defecto
+#
+# weapon-search (armas) y tool-search (herramientas):
+#   MAIN_HAND  solo la mano principal (cambia apenas el jugador cambia de slot)
+#   HANDS      mano principal y secundaria
+#   HOTBAR     la barra rápida (9 slots) y la mano secundaria
+#   INVENTORY  todo el inventario y la mano secundaria
+# Los mobs siempre usan lo que tienen puesto y sus dos manos.
+armor-search: INVENTORY
+weapon-search: HOTBAR
+tool-search: INVENTORY
+
+# Memoria del equipo, para el "nivel real". Cada jugador tiene guardado, por lugar de armadura, su mejor arma y su
+# mejor herramienta, lo mejor que tuvo:
+#   - si se pone algo igual o mejor, eso pasa a ser lo recordado;
+#   - si se lo saca (deja el lugar vacío) o lo cambia por algo peor, se sigue recordando lo anterior.
+# El nivel real usa lo que tiene ahora más lo recordado; nunca es menor que el nivel actual. La durabilidad no cuenta.
+# Se guarda en plugins/BigCasares/data/cosmicniv-lib/players/<uuid>.yml, así que sobrevive a desconexiones y reinicios.
+memory:
+  # false: el nivel real es igual al actual y no se toca lo guardado.
+  enabled: true
+  # Minutos sin volver a tener una pieza recordada hasta que se olvida (cuenta tiempo real, también desconectado).
+  # 0 = no se olvida por tiempo.
+  forget-after-minutes: 60
+  # Al morir se olvida todo y se vuelve a empezar con lo que tenga después de morir.
+  forget-on-death: true
+  # Cada cuántos ticks se revisa el equipo de los jugadores conectados (20 ticks = 1 segundo).
+  # Este valor se aplica con /bigcasares reload; los demás también con /cosmicniv reload.
+  check-interval-ticks: 20
+
+# Curva que dobla el progreso t (0..1) antes de multiplicarlo por maximum.
+#   LINEAR       f(t) = t                                    (sin cambios)
+#   EXPONENTIAL  f(t) = (e^(k·t) - 1) / (e^k - 1)            usa strength (k). k > 0: sube lento al principio y
+#                                                            rápido al final. k < 0: al revés. |k| >= 0.000001.
+#   LOGARITHMIC  f(t) = ln(1 + k·t) / ln(1 + k)              usa strength (k > 0). Sube rápido al principio.
+#   POWER        f(t) = t^p                                  usa exponent (p > 0). p > 1 lento al principio,
+#                                                            p < 1 rápido al principio (0.5 = raíz cuadrada).
+#   SIGMOID      curva en S                                  usa strength (k > 0, más alto = más brusca) y
+#                                                            midpoint (mayor que 0 y menor que 1: donde está el salto).
+#   POINTS       puntos [t, f(t)] unidos con rectas          usa points. Tiene que empezar en [0, 0], terminar
+#                                                            en [1, 1], con t creciente y f(t) que nunca baje.
+# Los parámetros que no usa la curva elegida se ignoran.
+curve:
+  type: LINEAR
+  strength: 3.0
+  exponent: 2.0
+  midpoint: 0.5
+  points:
+    - [0.0, 0.0]
+    - [0.5, 0.3]
+    - [1.0, 1.0]
+
+# Las dos referencias. Cada ítem se escribe como
+#   item: netherite_sword
+#   enchantments: { sharpness: 5, unbreaking: 3 }
+# o, sin encantamientos, directamente:  sword: wooden_sword
+# Un objeto custom se escribe con su nombre:  item: custom:sahurs_bat
+references:
+  # Lo que vale 0. Vacío = un jugador sin absolutamente nada.
+  # Ejemplo para que la armadura de cuero completa valga 0:
+  #   armor:
+  #     helmet: leather_helmet
+  #     chestplate: leather_chestplate
+  #     leggings: leather_leggings
+  #     boots: leather_boots
+  zero:
+    armor: {}
+    weapons: {}
+    tools: {}
+
+  # Lo que vale 200: netherite completa con todos los encantamientos compatibles entre sí que suman puntos
+  # (datos de vanilla 26.2) y un arma full encantada de cualquiera de las familias. Como lleva todos los encantamientos
+  # que suman, ninguna combinación con piezas de menor material puede igualarla: el 200 exige este equipo.
+  max:
+    armor:
+      helmet:
+        item: netherite_helmet
+        enchantments: { protection: 4, thorns: 3, respiration: 3, aqua_affinity: 1, unbreaking: 3, mending: 1 }
+      chestplate:
+        item: netherite_chestplate
+        enchantments: { protection: 4, thorns: 3, unbreaking: 3, mending: 1 }
+      leggings:
+        item: netherite_leggings
+        enchantments: { protection: 4, thorns: 3, swift_sneak: 3, unbreaking: 3, mending: 1 }
+      boots:
+        item: netherite_boots
+        enchantments: { protection: 4, thorns: 3, feather_falling: 4, depth_strider: 3, soul_speed: 3, unbreaking: 3, mending: 1 }
+    # Una referencia por cada familia de "weapons:" de cosmicniv_valores.yml. Cada arma se compara contra la de su
+    # familia, así una maza full y una espada full valen lo mismo (W = 1).
+    weapons:
+      sword:
+        item: netherite_sword
+        enchantments: { sharpness: 5, fire_aspect: 2, knockback: 2, looting: 3, sweeping_edge: 3, unbreaking: 3, mending: 1 }
+      axe:
+        item: netherite_axe
+        enchantments: { sharpness: 5, efficiency: 5, fortune: 3, unbreaking: 3, mending: 1 }
+      mace:
+        item: mace
+        enchantments: { density: 5, wind_burst: 3, fire_aspect: 2, unbreaking: 3, mending: 1 }
+      spear:
+        item: netherite_spear
+        enchantments: { sharpness: 5, lunge: 3, fire_aspect: 2, knockback: 2, looting: 3, unbreaking: 3, mending: 1 }
+      trident:
+        item: trident
+        enchantments: { impaling: 5, loyalty: 3, channeling: 1, unbreaking: 3, mending: 1 }
+    # Una referencia por cada familia de "tools:". Solo se usan si weights.tool es mayor que 0.
+    tools:
+      pickaxe:
+        item: netherite_pickaxe
+        enchantments: { efficiency: 5, fortune: 3, unbreaking: 3, mending: 1 }
+      shovel:
+        item: netherite_shovel
+        enchantments: { efficiency: 5, fortune: 3, unbreaking: 3, mending: 1 }
+      hoe:
+        item: netherite_hoe
+        enchantments: { efficiency: 5, fortune: 3, unbreaking: 3, mending: 1 }
+      shears:
+        item: shears
+        enchantments: { efficiency: 5, unbreaking: 3, mending: 1 }
+      fishing_rod:
+        item: fishing_rod
+        enchantments: { luck_of_the_sea: 3, lure: 3, unbreaking: 3, mending: 1 }

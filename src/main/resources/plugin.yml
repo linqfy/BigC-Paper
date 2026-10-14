@@ -53,6 +53,10 @@ commands:
     description: Manage the Jeremy hunter
     usage: /<command> <status|start [player]|stop|cooldown reset>
     permission: bigcasares.jeremy.admin
+  cosmicniv:
+    description: Show the CosmicNiv equipment level (0-200), preview the curve or reload cosmicniv_lib.yml
+    usage: /<command> [jugador|curva|reload]
+    aliases: [ cniv ]
   celular:
     description: Give a Celular (the phone that plays videos)
     usage: /<command> give [player]
@@ -161,6 +165,7 @@ permissions:
       bigcasares.jeremy.admin: true
       bigcasares.jeremy.start: true
       bigcasares.jeremy.stop: true
+      bigcasares.cosmicniv.admin: true
       bigcasares.celular.admin: true
       bigcasares.glider.admin: true
       bigcasares.glider.give: true
@@ -300,6 +305,21 @@ permissions:
   bigcasares.jeremy.stop:
     description: Stop the active Jeremy hunt
     default: op
+
+  bigcasares.cosmicniv.check:
+    description: See your own CosmicNiv equipment level
+    default: true
+
+  bigcasares.cosmicniv.check.others:
+    description: See another player's CosmicNiv equipment level
+    default: op
+
+  bigcasares.cosmicniv.admin:
+    description: Reload cosmicniv_lib.yml and preview the curve
+    default: op
+    children:
+      bigcasares.cosmicniv.check: true
+      bigcasares.cosmicniv.check.others: true
 
   bigcasares.celular.admin:
     description: Give Celular phones with /celular give

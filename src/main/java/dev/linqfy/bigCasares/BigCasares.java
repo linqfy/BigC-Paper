@@ -12,6 +12,7 @@ import dev.linqfy.bigCasares.module.runtime.RuntimeCleanupReport;
 import dev.linqfy.bigCasares.module.runtime.RuntimeGeneration;
 import dev.linqfy.bigCasares.modules.bounties.BountyModule;
 import dev.linqfy.bigCasares.modules.copperapple.CopperAppleModule;
+import dev.linqfy.bigCasares.modules.cosmicniv.CosmicNivModule;
 import dev.linqfy.bigCasares.modules.customcrossbow.CustomCrossbowModule;
 import dev.linqfy.bigCasares.modules.inventorylimit.InventoryLimitModule;
 import dev.linqfy.bigCasares.modules.items.ItemCatalogModule;
@@ -85,6 +86,7 @@ public final class BigCasares extends JavaPlugin {
     private AcidRainModule acidRainModule;
     private BloodMoonModule bloodMoonModule;
     private JeremyModule jeremyModule;
+    private CosmicNivModule cosmicNivModule;
     private CelularModule celularModule;
     private GrapplingHookModule grapplingHookModule;
     private GliderModule gliderModule;
@@ -208,6 +210,10 @@ public final class BigCasares extends JavaPlugin {
         return jeremyModule;
     }
 
+    public CosmicNivModule getCosmicNivModule() {
+        return cosmicNivModule;
+    }
+
     public CelularModule getCelularModule() {
         return celularModule;
     }
@@ -316,6 +322,8 @@ public final class BigCasares extends JavaPlugin {
         this.customItemRegistry = new CustomItemRegistry();
         this.emojiAliasService = loadEmojiAliases();
         this.moduleManager = new ModuleManager(this, getConfig());
+        this.cosmicNivModule = new CosmicNivModule(this,
+            cosmicNivModule == null ? null : cosmicNivModule.lastValidSettings());
         this.missionModule = new MissionModule(this);
         this.bountyModule = new BountyModule(this);
         this.shopModule = new ShopModule(this);
@@ -365,6 +373,7 @@ public final class BigCasares extends JavaPlugin {
 
         moduleManager.register(resourcePackModule);
         moduleManager.register(itemCatalogModule);
+        moduleManager.register(cosmicNivModule);
         moduleManager.register(new CopperAppleModule(this));
         moduleManager.register(new SmokeBombModule(this));
         moduleManager.register(new CustomCrossbowModule(this));

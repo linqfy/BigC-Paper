@@ -12,6 +12,7 @@ guides explain how to navigate and operate it:
 | Geometry, textures and animation | [Geometry](blockbench/02-geometry-and-textures.md), [Bedrock](blockbench/03-bedrock-animations.md), [Java](blockbench/04-java-animations-and-registration.md) |
 | Placeable entities, bosses and players | [Placeables](blockbench/05-placeable-entity-workflow.md), [bosses](blockbench/06-boss-entity-workflow.md), [players](blockbench/07-player-animation-workflow.md) |
 | Phone assets and video conversion | [Celular](celular/README.md) |
+| Equipment level 0–200 (cosmicniv_lib): formula, config files, custom items, API | [cosmicniv_lib](cosmicniv-lib/README.md) |
 | Protocol test client | [Client](../tools/minecraft-test-client/README.md) |
 | Audit findings and cleanup proposals | [2026-10-14 audit](audits/2026-10-14.md) |
 

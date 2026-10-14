@@ -37,6 +37,8 @@ change the date or reset persistent event state without understanding its rules.
 | `content/pack/` | Editable resource-pack seed extracted if missing; existing files preserved |
 | `packs/artifacts/`, `packs/active-pack.json` | Published artifacts and active pack identity |
 | `packs/bigcasares-bedrock.mcpack` | Replaced from packaged output when the Geyser module extracts it |
+| `cosmicniv_lib.yml`, `cosmicniv_valores.yml` | Equipment level: how it is computed / what each item and enchantment is worth. Seeded if missing; existing files preserved ([guide](cosmicniv-lib/README.md)) |
+| `data/cosmicniv-lib/players/<uuid>.yml` | Equipment memory behind the cosmicniv "real level"; deleting a file resets that player's memory |
 | `data/` and feature-root YAML | Persistent gameplay/admin state; back up before upgrades |
 
 Repository assets feed builds; runtime reloads read the server's editable copies.
@@ -72,6 +74,7 @@ Required-pack plus `copy-only` is promoted to embedded HTTP by the settings load
 | `/bc pack info` | Active pack identity/URL; `bigcasares.pack.info` |
 | `/bc pack send <player\|all>` | Request the active stack; `bigcasares.pack.send` |
 | `/resourcepack` | Player-facing manual download links/update tracking |
+| `/cosmicniv reload` | Re-read both cosmicniv files; on errors keep the last working settings; `bigcasares.cosmicniv.admin` |
 
 Full reload stops the old runtime before validating/activating its replacement.
 It reports failures and cleans failed candidates; it does **not** restore the old
