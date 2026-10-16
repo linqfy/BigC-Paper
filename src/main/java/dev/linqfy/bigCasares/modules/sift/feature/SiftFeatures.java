@@ -24,6 +24,10 @@ public final class SiftFeatures {
         SiftTemplates templates = new SiftTemplates(data);
         Map<String, SiftFeature> features = new LinkedHashMap<>();
         features.put("the_sift:overgrown_willow_tree", new OvergrownWillowTreeFeature(templates));
+        features.put("the_sift:bare_monolith", new SiftMonolithFeature(false));
+        features.put("the_sift:lush_monolith", new SiftMonolithFeature(true));
+        features.put("the_sift:dry_sculk_spikes", new SiftDrySpikeFeature());
+        features.put("the_sift:cliff_arch", new SiftArchFeature());
         return new SiftFeatures(features);
     }
 
