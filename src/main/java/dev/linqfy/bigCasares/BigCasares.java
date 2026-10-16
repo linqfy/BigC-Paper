@@ -1,5 +1,8 @@
 package dev.linqfy.bigCasares;
 
+import dev.linqfy.bigCasares.blocks.CustomBlockRegistry;
+import dev.linqfy.bigCasares.content.ContentItemFactory;
+import dev.linqfy.bigCasares.content.ContentItemRegistry;
 import dev.linqfy.bigCasares.items.CustomItemRegistry;
 import dev.linqfy.bigCasares.communication.EmojiAliasService;
 import dev.linqfy.bigCasares.command.BigCasaresCommand;
@@ -17,7 +20,10 @@ import dev.linqfy.bigCasares.modules.inventorylimit.InventoryLimitModule;
 import dev.linqfy.bigCasares.modules.items.ItemCatalogModule;
 import dev.linqfy.bigCasares.modules.geyser.BedrockShopForm;
 import dev.linqfy.bigCasares.modules.geyser.GeyserIntegrationModule;
+import dev.linqfy.bigCasares.modules.content.CustomContentModule;
 import dev.linqfy.bigCasares.modules.danger.DangerModule;
+import dev.linqfy.bigCasares.modules.dimension.DimensionModule;
+import dev.linqfy.bigCasares.modules.sift.SiftModule;
 import dev.linqfy.bigCasares.modules.tombstone.TombstoneModule;
 import dev.linqfy.bigCasares.modules.specialitems.SpecialItemsModule;
 import dev.linqfy.bigCasares.modules.warp.WarpModule;
@@ -93,6 +99,11 @@ public final class BigCasares extends JavaPlugin {
     private ServerControlModule serverControlModule;
     private DiscordIntegrationModule discordIntegrationModule;
     private EndEventModule endEventModule;
+    private ContentItemFactory contentItems;
+    private CustomBlockRegistry customBlocks;
+    private DimensionModule dimensionModule;
+    private CustomContentModule customContentModule;
+    private SiftModule siftModule;
     private EmojiAliasService emojiAliasService;
     private final VanishSessionRegistry vanishSessionRegistry = new VanishSessionRegistry();
     private final ReloadCoordinator reloadCoordinator = new ReloadCoordinator();
@@ -232,6 +243,22 @@ public final class BigCasares extends JavaPlugin {
         return endEventModule;
     }
 
+    public DimensionModule getDimensionModule() {
+        return dimensionModule;
+    }
+
+    public SiftModule getSiftModule() {
+        return siftModule;
+    }
+
+    public ContentItemFactory getContentItems() {
+        return contentItems;
+    }
+
+    public CustomBlockRegistry getCustomBlocks() {
+        return customBlocks;
+    }
+
     public EmojiAliasService getEmojiAliasService() {
         return emojiAliasService;
     }
@@ -361,6 +388,12 @@ public final class BigCasares extends JavaPlugin {
         this.discordIntegrationModule = new DiscordIntegrationModule(
             this, moderationModule.audit(), serverControlModule, emojiAliasService
         );
+        this.contentItems = new ContentItemFactory(new ContentItemRegistry());
+        this.customBlocks = new CustomBlockRegistry();
+        this.dimensionModule = new DimensionModule(this, this::matchesItemId);
+        this.customContentModule = new CustomContentModule(this, customBlocks, contentItems);
+        DimensionModule dimensions = dimensionModule;
+        this.siftModule = new SiftModule(this, dimensions::platform, customBlocks, contentItems, javaModels);
         this.shopModule.configurePlatform(this::resolveClientPlatform, this::sendBedrockShopForm);
 
         moduleManager.register(resourcePackModule);
@@ -394,8 +427,28 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(moderationModule);
         moduleManager.register(serverControlModule);
         moduleManager.register(endEventModule);
+        moduleManager.register(dimensionModule);
+        moduleManager.register(customContentModule);
+        moduleManager.register(siftModule);
         moduleManager.register(discordIntegrationModule);
         return moduleManager.enableRegisteredModules(generation);
+    }
+
+    /** Matches an item against a vanilla id, a content id or a catalog id ({@code bigcasares:<id>}). */
+    private boolean matchesItemId(org.bukkit.inventory.ItemStack stack, String id) {
+        if (stack == null || stack.getType().isAir()) {
+            return false;
+        }
+        if (id.startsWith("minecraft:")) {
+            return stack.getType().getKey().asString().equals(id) && ContentItemFactory.idOf(stack).isEmpty();
+        }
+        var content = ContentItemFactory.idOf(stack);
+        if (content.isPresent()) {
+            return content.get().asString().equals(id);
+        }
+        String catalogId = id.startsWith("bigcasares:") ? id.substring("bigcasares:".length()) : id;
+        return customItemRegistry != null
+            && customItemRegistry.resolveItemId(stack).map(catalogId::equals).orElse(false);
     }
 
     private boolean acidRainEventActive() {
@@ -540,6 +593,11 @@ public final class BigCasares extends JavaPlugin {
         moderationModule = null;
         serverControlModule = null;
         endEventModule = null;
+        dimensionModule = null;
+        customContentModule = null;
+        siftModule = null;
+        contentItems = null;
+        customBlocks = null;
         discordIntegrationModule = null;
         emojiAliasService = null;
     }

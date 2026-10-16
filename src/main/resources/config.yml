@@ -41,6 +41,12 @@ modules:
     enabled: true
   discord-integration:
     enabled: true
+  dimension-framework:
+    enabled: true
+  custom-content:
+    enabled: true
+  the-sift:
+    enabled: true
 
 celular:
   # Receta: 8 lingotes de hierro alrededor y 1 vidrio en el medio.
@@ -1742,3 +1748,43 @@ glider:
         enabled: true
         power: 0.78
         cooldown: 35
+
+# Custom dimensions (see docs/dimensions/README.md). Dimensions, dimension types
+# and biomes are read by Minecraft only at server start: after the datapack is
+# installed or changed, restart the server.
+dimension-framework:
+  datapack:
+    # auto: write <level>/datapacks/<folder>; manual: only write
+    # plugins/BigCasares/dimensions/generated-datapack for an operator to copy.
+    install-mode: auto
+    folder: bigcasares-dimensions
+  autosave-minutes: 5
+
+# The Sift, ported from Mielon's The Sift (MIT). See docs/dimensions/the-sift.md.
+the-sift:
+  # Deterministic variation on top of the world seed (Minecraft shares one seed
+  # across dimensions). Changing it regenerates only chunks not generated yet.
+  seed-salt: 0
+  world-border-diameter: 60000
+  # Empty = anyone may enter.
+  entry-permission: ""
+  travel-cooldown-seconds: 5
+  # Original addition: a buildable portal so the Sift is reachable on any world.
+  crafted-portal:
+    enabled: true
+    frame-block: minecraft:crying_obsidian
+    activation-item: minecraft:echo_shard
+  # The mod's Ancient City ritual (goat horn, Sonorous Deepslate, note melody).
+  ancient-city-ritual:
+    enabled: true
+  # Shifting tides: Flow -> Endure -> Thrive (interpretation; see docs).
+  tides:
+    enabled: true
+    flow-ticks: 24120
+    endure-ticks: 24120
+    thrive-ticks: 24120
+  ichor:
+    regeneration: true
+    slowness: true
+  blubs:
+    enabled: true

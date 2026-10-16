@@ -1,0 +1,47 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "condition": "minecraft:tool/can_silk_touch",
+              "name": "the_sift:sift_rubble"
+            },
+            {
+              "type": "minecraft:alternatives",
+              "children": [
+                {
+                  "type": "minecraft:item",
+                  "condition": {
+                    "type": "minecraft:table_bonus",
+                    "chances": [
+                      0.1,
+                      0.14285715,
+                      0.25,
+                      1.0
+                    ],
+                    "enchantment": "minecraft:fortune"
+                  },
+                  "name": "the_sift:ichor_shard"
+                },
+                {
+                  "type": "minecraft:item",
+                  "name": "the_sift:sift_rubble"
+                }
+              ],
+              "condition": {
+                "type": "minecraft:survives_explosion"
+              }
+            }
+          ]
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "the_sift:blocks/sift_rubble"
+}

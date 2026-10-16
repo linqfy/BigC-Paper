@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:ore",
+  "discard_chance_on_air_exposure": 0.12,
+  "size": 52,
+  "targets": [
+    {
+      "target": {
+        "predicate_type": "minecraft:tag_match",
+        "tag": "the_sift:siftslate_ore_replaceables"
+      },
+      "state": {
+        "id": "the_sift:healthy_sculk"
+      }
+    },
+    {
+      "target": {
+        "predicate_type": "minecraft:block_match",
+        "block": "the_sift:sift_rubble"
+      },
+      "state": {
+        "id": "the_sift:healthy_sculk"
+      }
+    }
+  ]
+}

@@ -127,6 +127,16 @@ tasks.register("generateResourcePacks", JavaExec) {
     outputs.dir(generatedResourcePackDirectory)
 }
 
+tasks.register("generateSiftDatapack", JavaExec) {
+    group = "build"
+    description = "Compiles The Sift dimension (default settings) into build/generated-datapacks for inspection."
+    dependsOn(tasks.named("classes"))
+    mainClass = "dev.linqfy.bigCasares.modules.sift.SiftDatapackExportMain"
+    classpath = sourceSets.main.runtimeClasspath + sourceSets.main.compileClasspath
+    args = [layout.buildDirectory.dir("generated-datapacks").get().asFile.absolutePath]
+    outputs.dir(layout.buildDirectory.dir("generated-datapacks"))
+}
+
 tasks.named("jar") {
     dependsOn(tasks.named("generateResourcePacks"), tasks.named("generateResourcePackSeed"))
     from(generatedResourcePackDirectory) {
