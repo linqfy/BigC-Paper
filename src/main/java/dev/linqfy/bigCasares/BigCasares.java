@@ -28,6 +28,7 @@ import dev.linqfy.bigCasares.modules.acidrain.AcidRainModule;
 import dev.linqfy.bigCasares.modules.bloodmoon.BloodMoonModule;
 import dev.linqfy.bigCasares.modules.jeremy.JeremyModule;
 import dev.linqfy.bigCasares.modules.donpollos.DonPollosModule;
+import dev.linqfy.bigCasares.modules.mutango.MutangoModule;
 import dev.linqfy.bigCasares.modules.celular.CelularModule;
 import dev.linqfy.bigCasares.modules.mobscaling.MobScalingModule;
 import dev.linqfy.bigCasares.modules.grapplinghook.GrapplingHookModule;
@@ -87,6 +88,7 @@ public final class BigCasares extends JavaPlugin {
     private BloodMoonModule bloodMoonModule;
     private JeremyModule jeremyModule;
     private DonPollosModule donPollosModule;
+    private MutangoModule mutangoModule;
     private CelularModule celularModule;
     private GrapplingHookModule grapplingHookModule;
     private GliderModule gliderModule;
@@ -214,6 +216,10 @@ public final class BigCasares extends JavaPlugin {
         return donPollosModule;
     }
 
+    public MutangoModule getMutangoModule() {
+        return mutangoModule;
+    }
+
     public CelularModule getCelularModule() {
         return celularModule;
     }
@@ -339,6 +345,7 @@ public final class BigCasares extends JavaPlugin {
         this.bloodMoonModule = new BloodMoonModule(this, this::acidRainEventActive);
         this.jeremyModule = new JeremyModule(this);
         this.donPollosModule = new DonPollosModule(this);
+        this.mutangoModule = new MutangoModule(this);
         this.celularModule = new CelularModule(this);
         this.grapplingHookModule = new GrapplingHookModule(this, javaModels);
         this.gliderModule = new GliderModule(this);
@@ -395,6 +402,7 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(bloodMoonModule);
         moduleManager.register(jeremyModule);
         moduleManager.register(donPollosModule);
+        moduleManager.register(mutangoModule);
         moduleManager.register(celularModule);
         moduleManager.register(shopModule);
         moduleManager.register(pveBossModule);

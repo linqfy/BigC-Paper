@@ -4,7 +4,7 @@ main: dev.linqfy.bigCasares.BigCasares
 api-version: '26.2'
 load: POSTWORLD
 depend: [BetterModel]
-softdepend: [Vault, PlaceholderAPI, Geyser-Spigot, floodgate]
+softdepend: [Vault, PlaceholderAPI, Geyser-Spigot, floodgate, GeyserModelEngine]
 authors: [ linqfy ]
 description: BigCasares core plugin for server modules
 libraries:
@@ -54,6 +54,10 @@ commands:
     usage: /<command> <spawn <variante>|remove|list|give <item> [cantidad]|bailar <1-5|parar> [todos]|ciudad <aqui|cerca>|boss [quitar]>
     permission: bigcasares.donpollos.admin
     aliases: [ donpollos ]
+  mutango:
+    description: Mutango Boss (spawn, fases, ruinas, santuario y premios)
+    usage: /<command> [quitar|atacar|fase|ruinas|santuario|premios]
+    permission: bigcasares.mutango.admin
   jeremy:
     description: Manage the Jeremy hunter
     usage: /<command> <status|start [player]|stop|cooldown reset>
@@ -125,6 +129,9 @@ commands:
 
 
 permissions:
+  bigcasares.mutango.admin:
+    description: Manage Mutango Boss (spawn, phases, ruins, shrine and rewards)
+    default: op
   bigcasares.donpollos.admin:
     description: Manage Don Pollos (spawn, boss, cities, dances and items)
     default: op
@@ -168,6 +175,7 @@ permissions:
       bigcasares.bloodmoon.stop: true
       bigcasares.jeremy.admin: true
       bigcasares.donpollos.admin: true
+      bigcasares.mutango.admin: true
       bigcasares.jeremy.start: true
       bigcasares.jeremy.stop: true
       bigcasares.celular.admin: true
