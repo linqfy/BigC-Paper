@@ -13,12 +13,24 @@ import dev.linqfy.bigCasares.dimension.worldgen.BlockStateSpec;
  */
 public interface WorldRegion {
 
+    /** One stack for {@link #fillContainer}: a content id ({@code the_sift:charoite}) or a vanilla item id. */
+    record ItemSpec(String item, int count, int slot) {
+        public ItemSpec {
+            if (item == null || count < 1 || count > 99 || slot < 0) {
+                throw new IllegalArgumentException("Invalid item spec " + item + " x" + count + " @" + slot);
+            }
+        }
+    }
+
     /** Heightmaps used by the mod's features. */
     enum Heightmap {
         WORLD_SURFACE_WG, OCEAN_FLOOR_WG, MOTION_BLOCKING, MOTION_BLOCKING_NO_LEAVES
     }
 
     int minY();
+
+    /** World seed, for the mod's seed-derived landmark grids. */
+    long seed();
 
     /** Exclusive top of the build range. */
     int maxY();
@@ -40,6 +52,12 @@ public interface WorldRegion {
 
     /** Biome id at the position, e.g. {@code the_sift:overgrown_forest}. */
     String biome(int x, int y, int z);
+
+    /** Spawns a vanilla entity during generation (e.g. sniffers in sniffer caves). */
+    boolean spawn(String entityType, double x, double y, double z);
+
+    /** Fills the container (chest, barrel) at the position. False when there is no container. */
+    boolean fillContainer(int x, int y, int z, java.util.List<ItemSpec> items);
 
     /** True for blocks with a full solid collision shape (vine/plant supports). */
     boolean isSolid(int x, int y, int z);

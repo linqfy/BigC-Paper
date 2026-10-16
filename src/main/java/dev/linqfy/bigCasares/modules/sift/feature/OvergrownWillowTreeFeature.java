@@ -53,7 +53,7 @@ final class OvergrownWillowTreeFeature implements SiftFeature {
         this.ground = Set.of(remap("siftslate_growth", Map.of()), remap("healthy_sculk", Map.of()),
             remap("dry_healthy_sculk", Map.of()), remap("dry_healthy_sculk_growth", Map.of()));
         this.replaceableTypes = Set.of("minecraft:air", "minecraft:cave_air", "minecraft:vine", "minecraft:fern",
-            "minecraft:short_grass", "minecraft:tall_grass", "minecraft:crimson_roots", "minecraft:short_dry_grass");
+            "minecraft:short_grass", "minecraft:bush", "minecraft:crimson_roots", "minecraft:short_dry_grass");
     }
 
     private static BlockStateSpec remap(String path, Map<String, String> properties) {

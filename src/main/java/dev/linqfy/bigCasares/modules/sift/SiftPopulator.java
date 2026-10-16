@@ -1,5 +1,9 @@
 package dev.linqfy.bigCasares.modules.sift;
 
+import org.bukkit.inventory.ItemStack;
+import java.util.Optional;
+import java.util.function.BiFunction;
+
 import dev.linqfy.bigCasares.modules.sift.feature.PlacementInterpreter;
 import dev.linqfy.bigCasares.modules.sift.feature.SiftFeature;
 import dev.linqfy.bigCasares.modules.sift.feature.SiftFeatureRunner;
@@ -31,7 +35,11 @@ final class SiftPopulator extends BlockPopulator {
 
     private final List<Entry> entries = new ArrayList<>();
 
-    SiftPopulator(List<SiftWorldgen.CustomPlacement> placements, SiftFeatures features, Logger logger) {
+    private final BiFunction<String, Integer, Optional<ItemStack>> items;
+
+    SiftPopulator(List<SiftWorldgen.CustomPlacement> placements, SiftFeatures features,
+                  BiFunction<String, Integer, Optional<ItemStack>> items, Logger logger) {
+        this.items = items;
         Set<String> missing = new LinkedHashSet<>();
         for (SiftWorldgen.CustomPlacement placement : placements) {
             var feature = features.find(placement.featureType());
@@ -51,7 +59,7 @@ final class SiftPopulator extends BlockPopulator {
     @Override
     public void populate(WorldInfo worldInfo, Random random, int chunkX, int chunkZ, LimitedRegion limitedRegion) {
         var region = SiftFeatureRunner.region(org.bukkit.Bukkit.getServer(), limitedRegion,
-            worldInfo.getMinHeight(), worldInfo.getMaxHeight());
+            worldInfo.getMinHeight(), worldInfo.getMaxHeight(), worldInfo.getSeed(), items);
         long base = random.nextLong();
         for (Entry entry : entries) {
             Random featureRandom = new Random(base ^ entry.salt());

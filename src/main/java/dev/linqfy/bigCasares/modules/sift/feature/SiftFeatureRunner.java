@@ -1,5 +1,9 @@
 package dev.linqfy.bigCasares.modules.sift.feature;
 
+import org.bukkit.inventory.ItemStack;
+import java.util.Optional;
+import java.util.function.BiFunction;
+
 import org.bukkit.Server;
 import org.bukkit.generator.LimitedRegion;
 
@@ -9,7 +13,8 @@ public final class SiftFeatureRunner {
     private SiftFeatureRunner() {
     }
 
-    public static WorldRegion region(Server server, LimitedRegion region, int minY, int maxY) {
-        return new LimitedRegionAdapter(server, region, minY, maxY);
+    public static WorldRegion region(Server server, LimitedRegion region, int minY, int maxY, long seed,
+                                     BiFunction<String, Integer, Optional<ItemStack>> items) {
+        return new LimitedRegionAdapter(server, region, minY, maxY, seed, items);
     }
 }

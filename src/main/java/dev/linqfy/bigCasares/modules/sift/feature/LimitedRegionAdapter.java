@@ -1,5 +1,16 @@
 package dev.linqfy.bigCasares.modules.sift.feature;
 
+import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
+import org.bukkit.block.Container;
+import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.BiFunction;
+
 import dev.linqfy.bigCasares.dimension.worldgen.BlockStateSpec;
 import org.bukkit.HeightMap;
 import org.bukkit.Server;
@@ -19,12 +30,51 @@ final class LimitedRegionAdapter implements WorldRegion {
     private final LimitedRegion region;
     private final int minY;
     private final int maxY;
+    private final long seed;
+    private final BiFunction<String, Integer, Optional<ItemStack>> items;
 
-    LimitedRegionAdapter(Server server, LimitedRegion region, int minY, int maxY) {
+    LimitedRegionAdapter(Server server, LimitedRegion region, int minY, int maxY, long seed,
+                         BiFunction<String, Integer, Optional<ItemStack>> items) {
         this.server = server;
         this.region = region;
         this.minY = minY;
         this.maxY = maxY;
+        this.seed = seed;
+        this.items = items;
+    }
+
+    @Override
+    public long seed() {
+        return seed;
+    }
+
+    @Override
+    public boolean spawn(String entityType, double x, double y, double z) {
+        int blockX = (int) Math.floor(x);
+        int blockY = (int) Math.floor(y);
+        int blockZ = (int) Math.floor(z);
+        NamespacedKey key = NamespacedKey.fromString(entityType);
+        EntityType type = key == null ? null : Registry.ENTITY_TYPE.get(key);
+        if (type == null || !type.isSpawnable() || !isWritable(blockX, blockY, blockZ)) {
+            return false;
+        }
+        region.spawnEntity(new Location(null, x, y, z), type);
+        return true;
+    }
+
+    @Override
+    public boolean fillContainer(int x, int y, int z, List<ItemSpec> specs) {
+        if (!isWritable(x, y, z) || !(region.getBlockState(x, y, z) instanceof Container container)) {
+            return false;
+        }
+        Inventory inventory = container.getSnapshotInventory();
+        for (ItemSpec spec : specs) {
+            if (spec.slot() < inventory.getSize()) {
+                items.apply(spec.item(), spec.count()).ifPresent(stack -> inventory.setItem(spec.slot(), stack));
+            }
+        }
+        region.setBlockState(x, y, z, container);
+        return true;
     }
 
     @Override

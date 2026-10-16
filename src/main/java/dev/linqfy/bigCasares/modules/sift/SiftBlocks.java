@@ -102,8 +102,9 @@ public final class SiftBlocks {
         STAND_INS.put("siftslate_stalks", BlockStateSpec.of("minecraft:crimson_roots"));
         STAND_INS.put("overgrown_chard", BlockStateSpec.of("minecraft:fern"));
         STAND_INS.put("overgrown_fronds", BlockStateSpec.of("minecraft:short_grass"));
-        STAND_INS.put("overgrown_stalks", BlockStateSpec.of("minecraft:tall_grass", Map.of("half", "lower")));
-        STAND_INS.put("overgrown_lotus", BlockStateSpec.of("minecraft:lily_pad"));
+        // Single-block plants like the mod's (a double plant or a lily pad would break on land).
+        STAND_INS.put("overgrown_stalks", BlockStateSpec.of("minecraft:bush"));
+        STAND_INS.put("overgrown_lotus", BlockStateSpec.of("minecraft:cornflower"));
         STAND_INS.put("overgrown_hanging_roots", BlockStateSpec.of("minecraft:hanging_roots"));
         STAND_INS.put("siftslate_hanging_roots", BlockStateSpec.of("minecraft:weeping_vines_plant"));
         STAND_INS.put("sunburst_plant", BlockStateSpec.of("minecraft:torchflower"));

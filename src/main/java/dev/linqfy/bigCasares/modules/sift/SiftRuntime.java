@@ -48,12 +48,15 @@ final class SiftRuntime implements DimensionExtension, Listener {
     private final java.util.function.Supplier<List<SiftWorldgen.CustomPlacement>> customPlacements;
     private final dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures features;
     private final SiftCreatures creatures;
+    private final java.util.function.BiFunction<String, Integer, java.util.Optional<org.bukkit.inventory.ItemStack>> items;
     private final org.bukkit.NamespacedKey endureHealthKey;
     private volatile String tide = "flow";
     private ActiveDimension dimension;
 
     SiftRuntime(JavaPlugin plugin, SiftSettings settings, java.util.function.Supplier<List<SiftWorldgen.CustomPlacement>> customPlacements,
-                dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures features, SiftCreatures creatures) {
+                dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures features, SiftCreatures creatures,
+                java.util.function.BiFunction<String, Integer, java.util.Optional<org.bukkit.inventory.ItemStack>> items) {
+        this.items = items;
         this.plugin = plugin;
         this.settings = settings;
         this.customPlacements = customPlacements;
@@ -79,7 +82,7 @@ final class SiftRuntime implements DimensionExtension, Listener {
 
     @Override
     public List<BlockPopulator> populators(ActiveDimension active) {
-        return List.of(new SiftPopulator(customPlacements.get(), features, active.logger()));
+        return List.of(new SiftPopulator(customPlacements.get(), features, items, active.logger()));
     }
 
     @Override
