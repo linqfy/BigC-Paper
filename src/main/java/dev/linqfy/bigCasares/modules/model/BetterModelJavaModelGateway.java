@@ -53,6 +53,15 @@ final class BetterModelJavaModelGateway implements JavaModelGateway {
     }
 
     @Override
+    public boolean stopAnimation(JavaModelHandle handle, String animationKey) {
+        Objects.requireNonNull(handle, "handle");
+        Objects.requireNonNull(animationKey, "animationKey");
+
+        var session = sessions.get(handle);
+        return session != null && session.stopAnimation(animationKey);
+    }
+
+    @Override
     public boolean scale(JavaModelHandle handle, float factor) {
         Objects.requireNonNull(handle, "handle");
 
@@ -107,6 +116,11 @@ final class BetterModelTrackerPort implements TrackerPort {
         }
 
         @Override
+        public boolean stopAnimation(String animationKey) {
+            return tracker.stopAnimation(animationKey);
+        }
+
+        @Override
         public boolean scale(float factor) {
             tracker.scaler(ModelScaler.value(factor));
             return true;
@@ -132,6 +146,10 @@ interface TrackerSession {
     boolean animate(String animationKey);
 
     boolean animateOnce(String animationKey, Runnable onEnd);
+
+    default boolean stopAnimation(String animationKey) {
+        return false;
+    }
 
     boolean scale(float factor);
 

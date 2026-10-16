@@ -1,0 +1,1256 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minecraft:block/brown_mushroom_block"
+      },
+      "when": {
+        "OR": [
+          {
+            "north": "true",
+            "down": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/brown_mushroom_block",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "OR": [
+          {
+            "east": "true",
+            "down": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/brown_mushroom_block",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "OR": [
+          {
+            "south": "true",
+            "down": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/brown_mushroom_block",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "OR": [
+          {
+            "west": "true",
+            "down": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/brown_mushroom_block",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "OR": [
+          {
+            "up": "true",
+            "down": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/brown_mushroom_block",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "OR": [
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/mushroom_block_inside"
+      },
+      "when": {
+        "OR": [
+          {
+            "north": "false",
+            "down": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/mushroom_block_inside",
+        "y": 90
+      },
+      "when": {
+        "OR": [
+          {
+            "east": "false",
+            "down": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/mushroom_block_inside",
+        "y": 180
+      },
+      "when": {
+        "OR": [
+          {
+            "south": "false",
+            "down": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/mushroom_block_inside",
+        "y": 270
+      },
+      "when": {
+        "OR": [
+          {
+            "west": "false",
+            "down": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/mushroom_block_inside",
+        "x": 270
+      },
+      "when": {
+        "OR": [
+          {
+            "up": "false",
+            "down": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          }
+        ]
+      }
+    },
+    {
+      "apply": {
+        "model": "minecraft:block/mushroom_block_inside",
+        "x": 90
+      },
+      "when": {
+        "OR": [
+          {
+            "down": "false"
+          }
+        ]
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "the_sift:block/siftslate"
+        },
+        {
+          "model": "the_sift:block/siftslate_mirrored"
+        }
+      ],
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/cobbled_siftslate"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/chiseled_siftslate"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/siftslate_bricks"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "false",
+        "south": "true",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/reinforced_siftslate"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/sift_rubble"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/siftslate_coal_ore"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "true",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/siftslate_diamond_ore"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "true",
+        "south": "true",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/siftslate_emerald_ore"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "up": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/siftslate_charoite_ore"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "up": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/siftslate_siftite_ore"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "false",
+        "south": "true",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/sonorous_deepslate_horn"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "the_sift:block/sonorous_deepslate_note"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "false",
+        "south": "false",
+        "up": "true",
+        "west": "false"
+      }
+    }
+  ]
+}

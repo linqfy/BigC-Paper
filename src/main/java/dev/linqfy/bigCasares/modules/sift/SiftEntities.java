@@ -13,8 +13,9 @@ public final class SiftEntities {
     /** Mod entity id &rarr; vanilla entity spawned natively by the biome. */
     private static final Map<String, String> SPAWN_BACKINGS = Map.of(
         "minecraft:sniffer", "minecraft:sniffer",
-        // Rabbit-like and neutral in the mod; a rabbit gives the matching AI and hitbox.
-        "the_sift:blub", "minecraft:rabbit"
+        // A tamable companion in the mod (tempted and tamed with Soul Blocks, sits,
+        // follows and defends its owner, 0.8 x 0.9 hitbox): a wolf has that AI.
+        "the_sift:blub", "minecraft:wolf"
     );
 
     private SiftEntities() {

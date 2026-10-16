@@ -14,6 +14,14 @@ public interface JavaModelGateway {
      */
     boolean animateOnce(JavaModelHandle handle, String animationKey, Runnable onEnd);
 
+    /**
+     * Stops a playing animation (for example a held pose). Returns {@code false}
+     * when there is no live tracker or the gateway cannot stop animations.
+     */
+    default boolean stopAnimation(JavaModelHandle handle, String animationKey) {
+        return false;
+    }
+
     /** Scales the live tracker by a constant factor. Returns {@code false} when there is no live tracker. */
     boolean scale(JavaModelHandle handle, float factor);
 

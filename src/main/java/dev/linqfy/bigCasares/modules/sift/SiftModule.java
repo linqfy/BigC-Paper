@@ -9,9 +9,11 @@ import dev.linqfy.bigCasares.dimension.DimensionPlatform;
 import dev.linqfy.bigCasares.dimension.DimensionStatus;
 import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
+import dev.linqfy.bigCasares.modules.model.BetterModelAssetInstaller;
 import dev.linqfy.bigCasares.modules.model.JavaModelGateway;
 import dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
 import java.util.Optional;
@@ -70,9 +72,17 @@ public final class SiftModule implements PluginModule {
             return;
         }
         SiftData data = SiftData.fromClasspath();
-        SiftModelAssets.install(plugin);
         SiftWorldgen worldgen = new SiftWorldgen(data, plugin.getLogger());
-        SiftCreatures creatures = new SiftCreatures(plugin, models, items);
+        SiftCreatures creatures = new SiftCreatures(plugin, models);
+        installModels();
+        // BetterModel may still be initializing right after plugin enable; the
+        // delayed pass repairs the model registry like the other model modules do.
+        BukkitTask delayedModels = plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+            if (installModels()) {
+                creatures.redress();
+            }
+        }, 60L);
+        scope.register("sift-models-delayed-install", delayedModels::cancel);
         SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, SiftFeatures.create(data), creatures);
         try {
             DimensionDefinition definition = SiftDimension.create(settings, worldgen, List.of(runtime));
@@ -82,6 +92,16 @@ public final class SiftModule implements PluginModule {
             scope.register("sift-dimension", () -> dimensions.get().unregister(SiftDimension.KEY));
         } catch (RuntimeException failure) {
             plugin.getLogger().log(Level.SEVERE, "[TheSift] Could not register the Sift dimension", failure);
+        }
+    }
+
+    private boolean installModels() {
+        try {
+            BetterModelAssetInstaller.installSiftModels(plugin);
+            return true;
+        } catch (RuntimeException | LinkageError failure) {
+            plugin.getLogger().log(Level.WARNING, "[TheSift] Could not install creature models", failure);
+            return false;
         }
     }
 

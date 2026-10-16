@@ -127,6 +127,15 @@ tasks.register("generateResourcePacks", JavaExec) {
     outputs.dir(generatedResourcePackDirectory)
 }
 
+tasks.register("generateCustomBlockstates", JavaExec) {
+    group = "build"
+    description = "Regenerates the mushroom blockstate overrides that render built-in custom blocks."
+    dependsOn(tasks.named("classes"))
+    mainClass = "dev.linqfy.bigCasares.modules.content.CustomBlockstateExportMain"
+    classpath = sourceSets.main.runtimeClasspath + sourceSets.main.compileClasspath
+    args = [layout.projectDirectory.dir("resourcepack").asFile.absolutePath]
+}
+
 tasks.register("generateSiftDatapack", JavaExec) {
     group = "build"
     description = "Compiles The Sift dimension (default settings) into build/generated-datapacks for inspection."
