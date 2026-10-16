@@ -45,12 +45,16 @@ final class SoulCanyonTerrain {
      */
     private static final Set<String> ALWAYS_REPLACEABLE = replaceableTypes();
     /**
-     * Vanilla blocks with the {@code replaceable} property; only accepted without a fluid
-     * (the mod's {@code getFluidState().isEmpty() && canBeReplaced()}).
+     * Vanilla blocks with the {@code replaceable} property (26.2 {@code #minecraft:replaceable}),
+     * only accepted without a fluid (the mod's {@code getFluidState().isEmpty() && canBeReplaced()}).
+     * Water, lava, bubble columns and seagrass always hold a fluid and are left out.
      */
-    private static final Set<String> VANILLA_REPLACEABLE = Set.of("minecraft:tall_grass", "minecraft:large_fern",
-        "minecraft:dead_bush", "minecraft:vine", "minecraft:glow_lichen", "minecraft:tall_dry_grass",
-        "minecraft:nether_sprouts", "minecraft:warped_roots", "minecraft:fire", "minecraft:soul_fire");
+    private static final Set<String> VANILLA_REPLACEABLE = Set.of("minecraft:short_grass", "minecraft:fern",
+        "minecraft:dead_bush", "minecraft:bush", "minecraft:short_dry_grass", "minecraft:tall_dry_grass",
+        "minecraft:fire", "minecraft:soul_fire", "minecraft:snow", "minecraft:vine", "minecraft:glow_lichen",
+        "minecraft:resin_clump", "minecraft:light", "minecraft:tall_grass", "minecraft:large_fern",
+        "minecraft:structure_void", "minecraft:warped_roots", "minecraft:nether_sprouts", "minecraft:crimson_roots",
+        "minecraft:leaf_litter", "minecraft:hanging_roots");
 
     private SoulCanyonTerrain() {
     }
