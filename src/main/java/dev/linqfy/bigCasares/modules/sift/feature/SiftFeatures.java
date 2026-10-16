@@ -32,6 +32,10 @@ public final class SiftFeatures {
         features.put("the_sift:covered_growth_cleanup", new CoveredGrowthCleanupFeature());
         features.put("the_sift:sift_flower_patch", new SiftFlowerPatchFeature());
         features.put("the_sift:siftslate_plant_patch", new SiftslatePlantPatchFeature());
+        features.put("the_sift:sniffer_cave_overgrown", SnifferCaveFeature.overgrown());
+        features.put("the_sift:sniffer_cave_wastes", SnifferCaveFeature.wastes());
+        features.put("the_sift:sniffer_plant_patch", new SnifferPlantPatchFeature());
+        features.put("the_sift:surface_sculk_region", new SiftSurfaceSculkRegionFeature());
         return new SiftFeatures(features);
     }
 
