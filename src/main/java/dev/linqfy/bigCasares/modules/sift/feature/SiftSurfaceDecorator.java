@@ -11,9 +11,9 @@ import java.util.Random;
  * freshly exposed terrain (around monoliths, arches, lakes and ruins), with the
  * mod's per-soil chances and plant mixes.
  *
- * <p>Difference: the mod's pitcher-plant oasis species only survives on farmland,
- * which never occurs on lake shores, so it never places there; the port keeps that
- * outcome without simulating the check.</p>
+ * <p>Difference: the mod's pitcher oasis species is a pitcher crop kept alive on Sift soil
+ * by a mixin; the port places the grown {@code pitcher_plant}, which survives there
+ * without one (see {@link SiftSnifferPlantPlacement}).</p>
  */
 final class SiftSurfaceDecorator {
 
@@ -152,10 +152,20 @@ final class SiftSurfaceDecorator {
             case 1 -> SiftTerrain.block("sunburst_plant");
             case 2 -> SiftTerrain.block("whisperbloom");
             case 3 -> BlockStateSpec.of("minecraft:torchflower");
-            // Pitcher crops need farmland in the mod's canSurvive check as well.
             case 4 -> null;
             default -> SiftTerrain.wildflowers(random);
         };
+        if (species == 4) {
+            // DoublePlantBlock.placeAt with a pitcher crop aged 3-4 in the mod.
+            random.nextInt(2);
+            if (!region.isAir(plantPos.x(), plantPos.y() + 1, plantPos.z())
+                || !region.isWritable(plantPos.x(), plantPos.y() + 1, plantPos.z())
+                || !SiftTerrain.placePlant(region, plantPos.x(), plantPos.y(), plantPos.z(),
+                    SiftSnifferPlantPlacement.pitcher("lower"))) {
+                return false;
+            }
+            return region.set(plantPos.x(), plantPos.y() + 1, plantPos.z(), SiftSnifferPlantPlacement.pitcher("upper"));
+        }
         return flower != null && SiftTerrain.placePlant(region, plantPos.x(), plantPos.y(), plantPos.z(), flower);
     }
 

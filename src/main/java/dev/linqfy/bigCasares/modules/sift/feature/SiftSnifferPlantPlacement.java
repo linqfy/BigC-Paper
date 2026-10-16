@@ -7,7 +7,7 @@ import java.util.Random;
 
 /**
  * Port of the mod's {@code SiftSnifferPlantPlacement}: the two plants of the sniffer
- * patches and caves, a torchflower or a two-block pitcher-plant bulb (age 3 or 4).
+ * patches and caves, a torchflower or a two-block pitcher plant.
  * Each patch or cave picks one type for all its plants.
  *
  * <p>Both are vanilla blocks in the mod too, which only lets them survive on Sift soil
@@ -15,8 +15,11 @@ import java.util.Random;
  * keeps that exact rule instead of the "solid block below" stand-in used for mod
  * plants: the floor must be Sift terrain or the nest's willow foliage.</p>
  *
- * <p>Differences: none in outcome. The mod's mixin also skips the pitcher crop's light
- * requirement for generated bulbs, so no light check is needed here either.</p>
+ * <p>Difference: the mod places pitcher crops (age 3 or 4) and keeps them alive on Sift
+ * soil with a mixin. A plugin cannot change where a crop survives, so a generated crop
+ * would drop at the first neighbouring block update; the port places the grown
+ * {@code pitcher_plant} instead, which survives on Sift ground through the vegetation
+ * tags the datapack extends. The age roll is kept so the random stream matches.</p>
  */
 final class SiftSnifferPlantPlacement {
 
@@ -51,13 +54,13 @@ final class SiftSnifferPlantPlacement {
         if (!region.isAir(x, y + 1, z) || !region.isWritable(x, y + 1, z)) {
             return false;
         }
-        // The mod rolls the age before it checks the floor, so the random stream is kept in that order.
-        int age = 3 + random.nextInt(2);
+        // The mod rolls the crop age before it checks the floor; keep the draw so the stream matches.
+        random.nextInt(2);
         if (!canSurvive(region, x, y, z)) {
             return false;
         }
-        region.set(x, y, z, pitcher(age, "lower"));
-        region.set(x, y + 1, z, pitcher(age, "upper"));
+        region.set(x, y, z, pitcher("lower"));
+        region.set(x, y + 1, z, pitcher("upper"));
         return true;
     }
 
@@ -66,8 +69,8 @@ final class SiftSnifferPlantPlacement {
         return blockId.equals("minecraft:pitcher_crop") || blockId.equals("minecraft:pitcher_plant");
     }
 
-    private static BlockStateSpec pitcher(int age, String half) {
-        return BlockStateSpec.of("minecraft:pitcher_crop", Map.of("age", Integer.toString(age), "half", half));
+    static BlockStateSpec pitcher(String half) {
+        return BlockStateSpec.of("minecraft:pitcher_plant", Map.of("half", half));
     }
 
     /** The mixins' soil rule: Sift terrain or the willow foliage of a sniffer nest. */

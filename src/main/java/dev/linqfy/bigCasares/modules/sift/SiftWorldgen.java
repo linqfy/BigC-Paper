@@ -426,6 +426,8 @@ public final class SiftWorldgen {
         for (String support : List.of("supports_vegetation", "supports_crimson_roots", "supports_dry_vegetation")) {
             datapack.tag("block", NamespacedId.minecraft(support), mushrooms);
         }
+        // Sniffer nests plant on willow foliage, a mushroom stem state.
+        datapack.tag("block", NamespacedId.minecraft("supports_vegetation"), List.of("minecraft:mushroom_stem"));
         // Blubs are backed by wolves (see SiftEntities); let them spawn on Sift ground.
         datapack.tag("block", NamespacedId.minecraft("wolves_spawnable_on"), mushrooms);
     }

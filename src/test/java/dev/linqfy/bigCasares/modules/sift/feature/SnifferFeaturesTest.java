@@ -220,8 +220,7 @@ class SnifferFeaturesTest {
             }
             for (int[] lower : lowers) {
                 BlockStateSpec bulb = region.state(lower[0], lower[1], lower[2]);
-                int age = Integer.parseInt(bulb.properties().get("age"));
-                assertTrue(age == 3 || age == 4, "bulb age " + age);
+                assertEquals("lower", bulb.properties().get("half"));
                 assertEquals(bulb.with("half", "upper"), region.state(lower[0], lower[1] + 1, lower[2]), "missing upper half");
                 assertTrue(SiftTerrain.isGrowth(region.state(lower[0], lower[1] - 1, lower[2])));
                 // Within the 13 x 13 square around the chunk centre.
@@ -280,8 +279,8 @@ class SnifferFeaturesTest {
         assertFalse(SiftSnifferPlantPlacement.place(region, 8, SURFACE, 8, SiftSnifferPlantPlacement.PlantType.PITCHER_CROP, random));
         assertEquals("minecraft:air", region.blockId(8, SURFACE, 8));
         assertTrue(SiftSnifferPlantPlacement.place(region, 9, SURFACE, 9, SiftSnifferPlantPlacement.PlantType.PITCHER_CROP, random));
-        assertEquals("minecraft:pitcher_crop", region.blockId(9, SURFACE, 9));
-        assertEquals("minecraft:pitcher_crop", region.blockId(9, SURFACE + 1, 9));
+        assertEquals("minecraft:pitcher_plant", region.blockId(9, SURFACE, 9));
+        assertEquals("minecraft:pitcher_plant", region.blockId(9, SURFACE + 1, 9));
         // Nothing is placed outside the writable area.
         assertFalse(SiftSnifferPlantPlacement.place(region, 100, SURFACE, 100, SiftSnifferPlantPlacement.PlantType.TORCHFLOWER, random));
         assertEquals(0, region.rejectedWrites());
@@ -500,7 +499,7 @@ class SnifferFeaturesTest {
     }
 
     private static boolean isBulb(BlockStateSpec state) {
-        return state.block().asString().equals("minecraft:pitcher_crop");
+        return state.block().asString().equals("minecraft:pitcher_plant");
     }
 
     private static int count(InMemoryRegion region, int minY, int maxY, Predicate<BlockStateSpec> matches) {
