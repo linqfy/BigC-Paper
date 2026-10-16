@@ -1,5 +1,9 @@
 package dev.linqfy.bigCasares.modules.dimension;
 
+import org.bukkit.block.Block;
+
+import dev.linqfy.bigCasares.dimension.travel.PortalShape;
+
 import dev.linqfy.bigCasares.dimension.DimensionDefinition;
 import dev.linqfy.bigCasares.dimension.DimensionKey;
 import dev.linqfy.bigCasares.dimension.DimensionPlatform;
@@ -63,6 +67,7 @@ public final class DimensionRuntime implements DimensionPlatform {
     private final DatapackInstaller installer;
     private final TravelCooldowns cooldowns;
     private final Map<DimensionKey, Entry> entries = new LinkedHashMap<>();
+    private PortalService portals;
     private GeneratedDatapack lastPack;
     private boolean shutDown;
 
@@ -513,5 +518,34 @@ public final class DimensionRuntime implements DimensionPlatform {
 
     boolean datapackPresent() {
         return Files.isRegularFile(levelDatapacks().resolve("pack.mcmeta"));
+    }
+
+    /** Connects the module's portal service, which owns lit portals. */
+    void attachPortals(PortalService portals) {
+        this.portals = portals;
+    }
+
+    private PortalService portals() {
+        if (portals == null) {
+            throw new IllegalStateException("Portal service not attached");
+        }
+        return portals;
+    }
+
+    @Override
+    public Optional<PortalShape> findPortalFrame(DimensionKey key, String portalId, Block frameBlock) {
+        return definition(key).flatMap(definition -> definition.travel().portals().stream()
+                .filter(portal -> portal.id().equals(portalId)).findFirst())
+            .flatMap(portal -> portals().findFrame(portal, frameBlock));
+    }
+
+    @Override
+    public Optional<PortalShape> lightPortal(DimensionKey key, String portalId, Block frameBlock, Player cause) {
+        return portals().light(key, portalId, frameBlock, cause);
+    }
+
+    @Override
+    public boolean extinguishPortal(Block block) {
+        return portals().extinguish(block);
     }
 }

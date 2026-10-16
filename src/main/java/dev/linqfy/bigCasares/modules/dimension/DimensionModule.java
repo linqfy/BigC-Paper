@@ -63,6 +63,7 @@ public final class DimensionModule implements PluginModule {
         this.runtime = created;
         registrations.ownCleanup("dimension-runtime", created::shutdown);
         this.portals = new PortalService(plugin, created, store, itemMatcher);
+        created.attachPortals(portals);
         registrations.registerListener("dimension-listener",
             new DimensionListener(created, portals, () -> registrations.scheduleImmediate("phase-recheck", this::recheckCycles)));
         registrations.scheduleRepeating("dimension-autosave", () -> {
@@ -181,6 +182,25 @@ public final class DimensionModule implements PluginModule {
                 org.bukkit.entity.Player player
             ) {
                 return current.leave(player);
+            }
+
+            @Override
+            public Optional<dev.linqfy.bigCasares.dimension.travel.PortalShape> findPortalFrame(
+                DimensionKey key, String portalId, org.bukkit.block.Block frameBlock
+            ) {
+                return current.findPortalFrame(key, portalId, frameBlock);
+            }
+
+            @Override
+            public Optional<dev.linqfy.bigCasares.dimension.travel.PortalShape> lightPortal(
+                DimensionKey key, String portalId, org.bukkit.block.Block frameBlock, org.bukkit.entity.Player cause
+            ) {
+                return current.lightPortal(key, portalId, frameBlock, cause);
+            }
+
+            @Override
+            public boolean extinguishPortal(org.bukkit.block.Block block) {
+                return current.extinguishPortal(block);
             }
         };
     }

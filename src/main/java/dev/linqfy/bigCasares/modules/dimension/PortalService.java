@@ -144,7 +144,8 @@ final class PortalService {
                 continue;
             }
             for (PortalDefinition portal : definition.travel().portals()) {
-                if (!portal.frameBlocks().contains(clickedId) || !itemMatcher.test(held, portal.activationItem())) {
+                if (!portal.itemActivated() || !portal.frameBlocks().contains(clickedId)
+                    || !itemMatcher.test(held, portal.activationItem())) {
                     continue;
                 }
                 if (runtime.dimensionOf(clicked.getWorld()).isPresent()) {
@@ -171,6 +172,64 @@ final class PortalService {
                 }
                 clicked.getWorld().playSound(clicked.getLocation(), org.bukkit.Sound.BLOCK_END_PORTAL_SPAWN, 0.8F, 1.2F);
                 return true;
+            }
+        }
+        return false;
+    }
+
+    /** Detects the frame of {@code portal} around one of its frame blocks. */
+    Optional<PortalShape> findFrame(PortalDefinition portal, Block frameBlock) {
+        if (!portal.frameBlocks().contains(frameBlock.getType().getKey().asString())) {
+            return Optional.empty();
+        }
+        return portal.detector().detect(new BukkitBlockGrid(frameBlock.getWorld()),
+            frameBlock.getX(), frameBlock.getY(), frameBlock.getZ());
+    }
+
+    /** Scripted activation ({@code DimensionPlatform#lightPortal}). */
+    Optional<PortalShape> light(DimensionKey key, String portalId, Block frameBlock, Player cause) {
+        Optional<DimensionDefinition> definition = runtime.definition(key);
+        if (definition.isEmpty() || runtime.active(key).isEmpty()
+            || runtime.dimensionOf(frameBlock.getWorld()).isPresent()) {
+            return Optional.empty();
+        }
+        Optional<PortalDefinition> portal = definition.get().travel().portals().stream()
+            .filter(candidate -> candidate.id().equals(portalId)).findFirst();
+        if (portal.isEmpty()) {
+            return Optional.empty();
+        }
+        Optional<PortalShape> shape = findFrame(portal.get(), frameBlock);
+        if (shape.isEmpty()) {
+            return Optional.empty();
+        }
+        World world = frameBlock.getWorld();
+        if (portalAt(world, shape.get().minX(), shape.get().minY(), shape.get().minZ()).isPresent()) {
+            return shape;
+        }
+        DimensionPortalActivateEvent event = new DimensionPortalActivateEvent(cause, key, portalId, world, shape.get());
+        plugin.getServer().getPluginManager().callEvent(event);
+        if (event.isCancelled()) {
+            return Optional.empty();
+        }
+        build(world, shape.get(), portal.get(), key, "portal-" + UUID.randomUUID(), null);
+        return shape;
+    }
+
+    /** Removes the lit portal whose frame or interior contains the block. */
+    boolean extinguish(Block block) {
+        World world = block.getWorld();
+        if (!hasPortals(world)) {
+            return false;
+        }
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                for (int dz = -1; dz <= 1; dz++) {
+                    Optional<BuiltPortal> portal = portalAt(world, block.getX() + dx, block.getY() + dy, block.getZ() + dz);
+                    if (portal.isPresent() && isPartOf(portal.get(), block)) {
+                        deactivate(world, portal.get());
+                        return true;
+                    }
+                }
             }
         }
         return false;
@@ -242,21 +301,7 @@ final class PortalService {
 
     /** Called when a block changes; breaks portals whose frame or interior was disturbed. */
     void onBlockDisturbed(Block block) {
-        World world = block.getWorld();
-        if (!hasPortals(world)) {
-            return;
-        }
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
-                for (int dz = -1; dz <= 1; dz++) {
-                    Optional<BuiltPortal> portal = portalAt(world, block.getX() + dx, block.getY() + dy, block.getZ() + dz);
-                    if (portal.isPresent() && isPartOf(portal.get(), block)) {
-                        deactivate(world, portal.get());
-                        return;
-                    }
-                }
-            }
-        }
+        extinguish(block);
     }
 
     private static boolean isPartOf(BuiltPortal portal, Block block) {

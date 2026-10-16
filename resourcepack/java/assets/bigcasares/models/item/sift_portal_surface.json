@@ -1,0 +1,25 @@
+{
+  "textures": {
+    "mist": "the_sift:block/sift_portal_mist",
+    "particle": "the_sift:block/sift_portal_mist"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 8],
+      "to": [16, 16, 8],
+      "shade": false,
+      "light_emission": 15,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#mist"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#mist"}
+      }
+    }
+  ],
+  "display": {
+    "fixed": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [1, 1, 1]
+    }
+  }
+}

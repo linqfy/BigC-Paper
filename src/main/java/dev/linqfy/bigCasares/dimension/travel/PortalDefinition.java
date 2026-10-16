@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
  * @param id                 stable id stored with every built portal
  * @param frameBlocks        block ids (or custom block ids resolved by the runtime) that form the frame
  * @param activationItem     item used on the frame to light it: a vanilla material id
- *                           ({@code minecraft:echo_shard}) or a catalog id ({@code bigcasares:rift_key})
+ *                           ({@code minecraft:echo_shard}) or a catalog id ({@code bigcasares:rift_key});
+ *                           blank for portals lit only by code ({@code DimensionPlatform#lightPortal})
  * @param consumeActivationItem whether lighting consumes one item
  * @param minWidth           interior limits
  * @param createExitPortal   whether arriving through it builds a linked return frame in the dimension
@@ -56,9 +57,19 @@ public record PortalDefinition(
             minWidth, maxWidth, minHeight, maxHeight);
     }
 
-    /** Interior blocks a frame may enclose before lighting (air, light, cave air, snow layers excluded). */
+    /** Whether players can light the frame with an item (otherwise only code can). */
+    public boolean itemActivated() {
+        return !activationItem.isBlank();
+    }
+
+    /**
+     * Interior blocks a frame may enclose before lighting: air, light and thin
+     * coverings that grow over old frames (sculk veins, glow lichen), which lighting
+     * replaces.
+     */
     public static boolean isOpenInterior(String blockId) {
         return blockId.equals("minecraft:air") || blockId.equals("minecraft:cave_air")
-            || blockId.equals("minecraft:void_air") || blockId.equals("minecraft:light");
+            || blockId.equals("minecraft:void_air") || blockId.equals("minecraft:light")
+            || blockId.equals("minecraft:sculk_vein") || blockId.equals("minecraft:glow_lichen");
     }
 }

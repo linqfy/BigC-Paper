@@ -11,6 +11,8 @@ licence text is copied next to every imported tree.
 Outputs (overwritten on every run, so local edits belong in Java code):
   src/main/resources/the_sift/mielon/   worldgen/dimension data read by
                                           dev.linqfy.bigCasares.modules.sift
+                                          (minecraft/: vanilla templates the mod
+                                          overrides, e.g. Ancient City centres)
   resourcepack/java/assets/the_sift/     textures, models, item definitions,
                                           sounds and lang shipped to Java clients
 
@@ -48,6 +50,11 @@ DATA_PREFIXES = (
     "data/the_sift/structure/",
     "data/the_sift/tags/block/",
     "data/the_sift/loot_table/",
+)
+
+# Vanilla templates the mod overrides: Ancient City centres with Sonorous Deepslate.
+MINECRAFT_DATA_PREFIXES = (
+    "data/minecraft/structure/ancient_city/city_center/",
 )
 
 ASSET_PREFIXES = (
@@ -125,7 +132,12 @@ def main() -> int:
 
         copied_data = copied_assets = skipped = 0
         for name in sorted(names):
-            if name.startswith(DATA_PREFIXES):
+            if name.startswith(MINECRAFT_DATA_PREFIXES):
+                destination = DATA_OUT / "minecraft" / name[len("data/minecraft/"):]
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes(archive.read(name))
+                copied_data += 1
+            elif name.startswith(DATA_PREFIXES):
                 destination = DATA_OUT / name[len("data/the_sift/"):]
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 destination.write_bytes(archive.read(name))

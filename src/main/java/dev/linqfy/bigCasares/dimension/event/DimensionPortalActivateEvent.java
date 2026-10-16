@@ -6,14 +6,20 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerEvent;
+import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-/** A player is about to light a portal frame; cancel to keep it inactive. */
-public final class DimensionPortalActivateEvent extends PlayerEvent implements Cancellable {
+/**
+ * A portal frame is about to be lit, by a player with the activation item or by
+ * code ({@link dev.linqfy.bigCasares.dimension.DimensionPlatform#lightPortal}, e.g.
+ * a ritual). Cancel to keep it inactive.
+ */
+public final class DimensionPortalActivateEvent extends Event implements Cancellable {
 
     private static final HandlerList HANDLERS = new HandlerList();
 
+    private final Player player;
     private final DimensionKey dimension;
     private final String portalDefinition;
     private final World world;
@@ -23,11 +29,16 @@ public final class DimensionPortalActivateEvent extends PlayerEvent implements C
     public DimensionPortalActivateEvent(
         Player player, DimensionKey dimension, String portalDefinition, World world, PortalShape shape
     ) {
-        super(player);
+        this.player = player;
         this.dimension = dimension;
         this.portalDefinition = portalDefinition;
         this.world = world;
         this.shape = shape;
+    }
+
+    /** The player who lit the frame, or {@code null} for scripted activations. */
+    public @Nullable Player getPlayer() {
+        return player;
     }
 
     public DimensionKey dimension() {

@@ -6,9 +6,13 @@ Usage:
     python3 -I tools/convert_geckolib_bbmodel.py <mod.jar> <entity> <texture> <output-name>
         [--rename geckolib=bbmodel ...] [--loop name=seconds ...]
 
-Example (The Sift's Blub, see docs/dimensions/the-sift.md):
+Examples (The Sift, see docs/dimensions/the-sift.md):
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
         blub blub the_sift_blub --rename hopping=walk --rename flapping=idle --loop idle=3.0
+    python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
+        blub tamed_blub the_sift_blub_tamed --rename hopping=walk --rename flapping=idle --loop idle=3.0
+    python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
+        singer singer the_sift_singer
 
 The jar is read as a ZIP archive; no mod code is loaded. The conversion mirrors
 Blockbench's own Bedrock import: X is negated for cube bounds and pivots, bone
@@ -205,19 +209,20 @@ def main(arguments):
     geometry = geo["minecraft:geometry"][0]
     width, height = struct.unpack(">II", texture[16:24])
     description = geometry["description"]
-    if (width, height) != (description["texture_width"], description["texture_height"]):
-        raise ValueError(f"texture is {width}x{height}, geometry expects "
-                         f"{description['texture_width']}x{description['texture_height']}")
+    uv_width, uv_height = description["texture_width"], description["texture_height"]
+    # High-resolution textures keep the geometry's UV space (Blockbench uv_width/uv_height).
+    if width % uv_width or height % uv_height or width // uv_width != height // uv_height:
+        raise ValueError(f"texture is {width}x{height}, geometry expects a multiple of {uv_width}x{uv_height}")
     elements, groups, outliner = convert_geometry(model, geometry)
     bbmodel = {
         "meta": {"format_version": "5.0", "model_format": "free", "box_uv": False},
         "name": model, "model_identifier": model, "visible_box": [2, 2.5, 0.75],
-        "resolution": {"width": width, "height": height},
+        "resolution": {"width": uv_width, "height": uv_height},
         "elements": elements, "groups": list(groups.values()), "outliner": outliner,
         "animations": convert_animations(model, animations, groups, renames, loops),
         "textures": [{
             "name": model + ".png", "relative_path": model + ".png", "id": "0", "uuid": uid(model, "texture"),
-            "width": width, "height": height, "uv_width": width, "uv_height": height,
+            "width": width, "height": height, "uv_width": uv_width, "uv_height": uv_height,
             "internal": True, "saved": True, "frame_time": 1, "frame_interpolate": False,
             "visible": True, "render_mode": "default", "render_sides": "front",
             "source": "data:image/png;base64," + base64.b64encode(texture).decode("ascii"),

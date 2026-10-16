@@ -8,6 +8,7 @@ import dev.linqfy.bigCasares.dimension.DimensionDefinition;
 import dev.linqfy.bigCasares.dimension.DimensionPlatform;
 import dev.linqfy.bigCasares.dimension.DimensionStatus;
 import dev.linqfy.bigCasares.module.PluginModule;
+import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
 import dev.linqfy.bigCasares.modules.model.BetterModelAssetInstaller;
 import dev.linqfy.bigCasares.modules.model.JavaModelGateway;
@@ -91,6 +92,9 @@ public final class SiftModule implements PluginModule {
             plugin.getLogger().info("[TheSift] Registered " + SiftDimension.KEY + ": " + status.state()
                 + (status.message().isBlank() ? "" : " (" + status.message() + ")"));
             scope.register("sift-dimension", () -> dimensions.get().unregister(SiftDimension.KEY));
+            if (settings.ancientCityRitual()) {
+                new SiftRitual(plugin, new BukkitRuntimeRegistrations(plugin, scope), platform, models).start();
+            }
         } catch (RuntimeException failure) {
             plugin.getLogger().log(Level.SEVERE, "[TheSift] Could not register the Sift dimension", failure);
         }

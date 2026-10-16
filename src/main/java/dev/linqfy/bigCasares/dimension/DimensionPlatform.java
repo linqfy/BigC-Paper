@@ -1,10 +1,13 @@
 package dev.linqfy.bigCasares.dimension;
 
 import dev.linqfy.bigCasares.dimension.environment.EnvironmentCycle;
+import dev.linqfy.bigCasares.dimension.travel.PortalShape;
 import dev.linqfy.bigCasares.dimension.travel.TravelResult;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -56,4 +59,26 @@ public interface DimensionPlatform {
 
     /** Returns a player to their stored return point (or the main world spawn). */
     CompletableFuture<TravelResult> leave(Player player);
+
+    /**
+     * Detects a complete frame of a portal type around one of its frame blocks,
+     * without lighting it.
+     *
+     * @param portalId id of a {@link dev.linqfy.bigCasares.dimension.travel.PortalDefinition} of {@code key}
+     */
+    Optional<PortalShape> findPortalFrame(DimensionKey key, String portalId, Block frameBlock);
+
+    /**
+     * Lights the frame around {@code frameBlock} as a portal of the given type without
+     * an activation item, for scripted activations (rituals, quests, commands). Fires
+     * {@link dev.linqfy.bigCasares.dimension.event.DimensionPortalActivateEvent}. Returns
+     * the lit (or already lit) shape, or empty when the dimension is not active, the
+     * frame is incomplete or the event was cancelled.
+     *
+     * @param cause the player responsible, or {@code null}
+     */
+    Optional<PortalShape> lightPortal(DimensionKey key, String portalId, Block frameBlock, @Nullable Player cause);
+
+    /** Removes the lit portal whose frame or interior contains the block; true when one was removed. */
+    boolean extinguishPortal(Block block);
 }

@@ -32,6 +32,8 @@ public final class SiftDimension {
     public static final String TIDES = "tides";
     /** The mod's day/night period (two halves of 12 060 ticks). */
     public static final int DAY_NIGHT_PERIOD = 24_120;
+    /** Portal definition id of the Ancient City frame. */
+    public static final String ANCIENT_CITY_PORTAL = "ancient_city";
 
     private SiftDimension() {
     }
@@ -45,7 +47,12 @@ public final class SiftDimension {
             .terrain(worldgen::terrain)
             .biomes(worldgen::biomes)
             .cycle(dayNight(data))
-            .contributor((context, datapack) -> worldgen.contribute(datapack))
+            .contributor((context, datapack) -> {
+                worldgen.contribute(datapack);
+                if (settings.ancientCityRitual()) {
+                    SiftAncientCity.contribute(data, datapack);
+                }
+            })
             .rules(rules(settings))
             .travel(travel(settings));
         if (settings.tides().enabled()) {
@@ -167,7 +174,13 @@ public final class SiftDimension {
         if (settings.craftedPortal().enabled()) {
             portals.add(new PortalDefinition("rift_frame", Set.of(settings.craftedPortal().frameBlock()),
                 settings.craftedPortal().activationItem(), true, 2, 21, 3, 21, true, 11,
-                "the_sift:sift_portal_surface", "minecraft:reverse_portal"));
+                "bigcasares:sift_portal_surface", "minecraft:reverse_portal"));
+        }
+        if (settings.ancientCityRitual()) {
+            // The mod's entrance: the Ancient City frame, lit by the Sonorous Deepslate ritual
+            // (SiftRitual), never by an item.
+            portals.add(new PortalDefinition(ANCIENT_CITY_PORTAL, Set.of("minecraft:reinforced_deepslate"), "", false,
+                3, 21, 3, 21, true, 11, "bigcasares:sift_portal_surface", "minecraft:reverse_portal"));
         }
         // The mod keeps Overworld and Sift coordinates 1:1.
         return new TravelRules(CoordinateMapping.IDENTITY, settings.entryPermission(),
