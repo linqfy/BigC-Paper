@@ -36,6 +36,7 @@ public final class SiftFeatures {
         features.put("the_sift:sniffer_cave_wastes", SnifferCaveFeature.wastes());
         features.put("the_sift:sniffer_plant_patch", new SnifferPlantPatchFeature());
         features.put("the_sift:surface_sculk_region", new SiftSurfaceSculkRegionFeature());
+        features.put("the_sift:abandoned_main_portal", new AbandonedMainPortalFeature(templates));
         return new SiftFeatures(features);
     }
 

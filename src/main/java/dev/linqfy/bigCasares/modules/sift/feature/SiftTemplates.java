@@ -1,5 +1,6 @@
 package dev.linqfy.bigCasares.modules.sift.feature;
 
+import com.google.gson.JsonObject;
 import dev.linqfy.bigCasares.dimension.nbt.Nbt;
 import dev.linqfy.bigCasares.dimension.nbt.Nbt.CompoundTag;
 import dev.linqfy.bigCasares.dimension.nbt.Nbt.IntTag;
@@ -11,6 +12,7 @@ import dev.linqfy.bigCasares.modules.sift.SiftData;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -48,6 +50,7 @@ public final class SiftTemplates {
 
     private final SiftData data;
     private final Map<String, Template> cache = new ConcurrentHashMap<>();
+    private final Map<String, Map<Integer, String>> lootCache = new ConcurrentHashMap<>();
 
     public SiftTemplates(SiftData data) {
         this.data = data;
@@ -70,6 +73,52 @@ public final class SiftTemplates {
         } catch (IOException exception) {
             throw new UncheckedIOException("Corrupt Sift template " + path, exception);
         }
+    }
+
+    /**
+     * Loot tables named by the block entities of a template (the {@code LootTable} tag of
+     * chests and barrels), keyed by the index of the block in {@link Template#blocks()}.
+     * {@link #transform} keeps block order, so the same index addresses the placed block
+     * in the transformed list. Iteration is in ascending index order, so loot generation stays deterministic.
+     * Templates without loot (or unknown ones) give an empty map.
+     */
+    public Map<Integer, String> lootTables(String path) {
+        Map<Integer, String> cached = lootCache.get(path);
+        if (cached != null) {
+            return cached;
+        }
+        Optional<byte[]> bytes = data.bytes("structure/" + path + ".nbt");
+        if (bytes.isEmpty()) {
+            return Map.of();
+        }
+        try {
+            lootCache.putIfAbsent(path, parseLootTables(Nbt.readGzip(bytes.get())));
+            return lootCache.get(path);
+        } catch (IOException exception) {
+            throw new UncheckedIOException("Corrupt Sift template " + path, exception);
+        }
+    }
+
+    /** JSON of a loot table by id ({@code the_sift:chests/abandoned_portal}); only the mod's own namespace is bundled. */
+    public Optional<JsonObject> lootTableJson(String id) {
+        String prefix = "the_sift:";
+        if (!id.startsWith(prefix)) {
+            return Optional.empty();
+        }
+        return data.optionalJson("loot_table/" + id.substring(prefix.length()) + ".json");
+    }
+
+    static Map<Integer, String> parseLootTables(CompoundTag root) {
+        Map<Integer, String> loot = new TreeMap<>();
+        List<Tag> entries = root.getList("blocks").values();
+        for (int index = 0; index < entries.size(); index++) {
+            CompoundTag nbt = ((CompoundTag) entries.get(index)).getCompound("nbt");
+            String table = nbt == null ? null : nbt.getString("LootTable");
+            if (table != null) {
+                loot.put(index, table);
+            }
+        }
+        return Collections.unmodifiableMap(loot);
     }
 
     static Template parse(CompoundTag root) {
