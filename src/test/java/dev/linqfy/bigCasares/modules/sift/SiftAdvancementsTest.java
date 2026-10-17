@@ -69,7 +69,7 @@ class SiftAdvancementsTest {
         SiftSettings defaults = SiftSettings.defaults();
         SiftSettings noRitual = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(), defaults.entryPermission(),
             defaults.travelCooldownSeconds(), defaults.craftedPortal(), false, defaults.tides(), defaults.ichor(),
-            false, false, List.of());
+            false, false, defaults.sifters(), List.of());
         Map<String, JsonObject> reduced = translate(noRitual);
         assertFalse(reduced.containsKey(SiftAdvancements.SONG_OF_THE_PAST));
         assertFalse(reduced.containsKey(SiftAdvancements.BLUB));

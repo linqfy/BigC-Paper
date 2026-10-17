@@ -60,6 +60,7 @@ clients cannot show new content types, or original to this port.
 | Ichor | Adapted | Water inside the Sift. Touching it grants Regeneration I (and Slowness), and new sources do not form, as in the mod |
 | Day/night cycle | From the mod | The Sift's own clock with the mod's 24,120-tick day |
 | Blub | Adapted | A silent wolf with the mod's model, textures, sounds and stats; tempted and tamed (one in three) with Soul Blocks, heals with Soul Blocks or food, sits, follows and defends its owner |
+| Sifter | Adapted | A silent, scaled silverfish (hostile, melee, no daylight burning, no climbing; hitbox 0.9 x 0.675 against the mod's 0.9 x 0.95) with the mod's model, sounds and stats (40 health, 10 attack, 28 follow range). The spawner is the mod's: every 80 ticks near each player, never on Peaceful, in groups of up to five on Siftslate, growth and healthy-sculk floors, with the mod's biome chances and area caps. It bites after a 14-tick wind-up, drops raw Sifter meat (cooked when it dies on fire, plus Looting) and 7 experience. See `SiftSifters` for every difference |
 | Singer | Adapted | The converted model performs the ritual song; she does not roam or barter |
 | Sniffers | From the mod | Placed by sniffer caves and surface sculk regions (the mod's dark sniffers are ordinary sniffers). The biomes also list sniffers, but vanilla sniffer spawn rules need grass, so, as in the mod, they do not spawn naturally on Sift ground |
 | Ancient City ritual | From the mod | See above; console and replay state is not saved across restarts |
@@ -70,7 +71,7 @@ clients cannot show new content types, or original to this port.
 
 ### Not ported yet
 
-Echo Golem, Sifter and Dark Sniffer creatures; Siftite gear and smithing;
+Echo Golem and Dark Sniffer creatures; the Sifter spawn egg; Siftite gear and smithing;
 Charoite enchanting; the Sculkflower crop and seeds; Ichor snowballs, buckets,
 bottles and cauldrons; the Singer's roaming, bartering and soul events;
 advancements; the mod's `/locate` and weather commands. The two music discs are
@@ -105,6 +106,8 @@ the-sift:
     enabled: true
   rifts:
     enabled: true
+  sifters:
+    enabled: true               # the mod's Sifter spawner (the hostile creature)
 ```
 
 Changing `seed-salt`, toggling the ritual or editing worldgen changes the datapack:
@@ -139,6 +142,7 @@ python3 -I tools/convert_geckolib_bbmodel.py <jar> blub tamed_blub the_sift_blub
 python3 -I tools/convert_geckolib_bbmodel.py <jar> singer singer the_sift_singer
 python3 -I tools/convert_geckolib_bbmodel.py <jar> rift rift/sift the_sift_rift
 python3 -I tools/convert_geckolib_bbmodel.py <jar> rift rift/overworld the_sift_rift_overworld
+python3 -I tools/convert_geckolib_bbmodel.py <jar> sifter sifter the_sift_sifter --rename running=walk --speed walk=2.5
 bash gradlew generateCustomBlockstates   # after changing custom blocks
 bash gradlew generateSiftDatapack        # inspect build/generated-datapacks/
 ```
@@ -152,7 +156,7 @@ confirmed.
 ## Verification status
 
 Unit tests cover the datapack translation and determinism, the Ancient City
-templates, the ritual melody, rift placement, every ported feature (determinism, staying inside the
+templates, the ritual melody, rift placement, the Sifter spawner's search, loot and bite timeline and its converted model, every ported feature (determinism, staying inside the
 populator region, expected output on prepared terrain, thread safety for several
 families), the loot table, block rendering contracts and the framework. The
 generated datapack has been checked against Minecraft 26.2's registries and block

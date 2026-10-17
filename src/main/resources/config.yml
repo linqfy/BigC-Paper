@@ -1791,3 +1791,7 @@ the-sift:
   # The mod's rifts: temporary exits that open near players in the Sift.
   rifts:
     enabled: true
+  # The mod's Sifters: fast, hard-biting hostiles that spawn in groups near players
+  # (every 80 ticks, never on Peaceful). Drops raw Sifter meat.
+  sifters:
+    enabled: true

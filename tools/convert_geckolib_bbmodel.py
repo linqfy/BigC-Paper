@@ -4,7 +4,7 @@ into a Blockbench .bbmodel that BetterModel can load.
 
 Usage:
     python3 -I tools/convert_geckolib_bbmodel.py <mod.jar> <entity> <texture> <output-name>
-        [--rename geckolib=bbmodel ...] [--loop name=seconds ...]
+        [--rename geckolib=bbmodel ...] [--loop name=seconds ...] [--speed name=factor ...]
 
 Examples (The Sift, see docs/dimensions/the-sift.md):
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
@@ -17,6 +17,8 @@ Examples (The Sift, see docs/dimensions/the-sift.md):
         rift rift/sift the_sift_rift
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
         rift rift/overworld the_sift_rift_overworld
+    python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
+        sifter sifter the_sift_sifter --rename running=walk --speed walk=2.5
 
 The jar is read as a ZIP archive; no mod code is loaded. The conversion mirrors
 Blockbench's own Bedrock import: X is negated for cube bounds and pivots, bone
@@ -25,6 +27,11 @@ keyframe values are copied unchanged (Blockbench and BetterModel apply the
 Bedrock axis convention when playing them). GeckoLib easings have no bbmodel
 equivalent and become linear. UUIDs are derived from names, so output is
 reproducible.
+
+--speed bakes a playback speed into an animation, by the name it has after
+--rename: GeckoLib sets speeds in code (the Sifter runs at 2.5x), while a
+bbmodel stores only keyframe times, so keyframe times and length are divided
+by the factor.
 """
 import base64
 import json
@@ -158,11 +165,12 @@ def vector(value):
             for axis, component in zip("xyz", value)}
 
 
-def convert_animations(model, animations, groups, renames, loops):
+def convert_animations(model, animations, groups, renames, loops, speeds):
     converted = []
     for source_name, animation in animations.items():
         name = renames.get(source_name, source_name)
-        length = float(animation.get("animation_length", 0.0))
+        stretch = 1.0 / speeds.get(name, 1.0)
+        length = float(animation.get("animation_length", 0.0)) * stretch
         loop = LOOP_MODES.get(animation.get("loop"), "once")
         if name in loops:
             length, loop = max(length, loops[name]), "loop"
@@ -176,7 +184,7 @@ def convert_animations(model, animations, groups, renames, loops):
                     continue
                 for index, (time, value) in enumerate(keyframes(channels[channel])):
                     frames.append({
-                        "channel": channel, "time": number(time), "data_points": [vector(value)],
+                        "channel": channel, "time": number(time * stretch), "data_points": [vector(value)],
                         "uuid": uid(model, f"frame/{name}/{bone}/{channel}/{index}"),
                         "color": -1, "interpolation": "linear",
                     })
@@ -190,7 +198,7 @@ def convert_animations(model, animations, groups, renames, loops):
 
 
 def main(arguments):
-    renames, loops, positional = {}, {}, []
+    renames, loops, speeds, positional = {}, {}, {}, []
     iterator = iter(arguments)
     for argument in iterator:
         if argument == "--rename":
@@ -199,6 +207,9 @@ def main(arguments):
         elif argument == "--loop":
             name, seconds = next(iterator).split("=", 1)
             loops[name] = float(seconds)
+        elif argument == "--speed":
+            name, factor = next(iterator).split("=", 1)
+            speeds[name] = float(factor)
         else:
             positional.append(argument)
     if len(positional) != 4:
@@ -222,7 +233,7 @@ def main(arguments):
         "name": model, "model_identifier": model, "visible_box": [2, 2.5, 0.75],
         "resolution": {"width": uv_width, "height": uv_height},
         "elements": elements, "groups": list(groups.values()), "outliner": outliner,
-        "animations": convert_animations(model, animations, groups, renames, loops),
+        "animations": convert_animations(model, animations, groups, renames, loops, speeds),
         "textures": [{
             "name": model + ".png", "relative_path": model + ".png", "id": "0", "uuid": uid(model, "texture"),
             "width": width, "height": height, "uv_width": uv_width, "uv_height": uv_height,

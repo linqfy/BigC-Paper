@@ -77,17 +77,20 @@ public final class SiftModule implements PluginModule {
         SiftData data = SiftData.fromClasspath();
         SiftWorldgen worldgen = new SiftWorldgen(data, plugin.getLogger());
         SiftCreatures creatures = new SiftCreatures(plugin, models);
+        SiftSifters sifters = new SiftSifters(plugin, models, items::resolve,
+            SifterLoot.parse(data.json("loot_table/entities/sifter.json")));
         installModels();
         // BetterModel may still be initializing right after plugin enable; the
         // delayed pass repairs the model registry like the other model modules do.
         BukkitTask delayedModels = plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             if (installModels()) {
                 creatures.redress();
+                sifters.redress();
             }
         }, 60L);
         scope.register("sift-models-delayed-install", delayedModels::cancel);
         SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, SiftFeatures.create(data), creatures,
-            new SiftRifts(plugin, platform, models),
+            new SiftRifts(plugin, platform, models), sifters,
             items::resolve);
         try {
             DimensionDefinition definition = SiftDimension.create(settings, worldgen, List.of(runtime));

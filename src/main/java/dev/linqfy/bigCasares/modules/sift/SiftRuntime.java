@@ -49,6 +49,7 @@ final class SiftRuntime implements DimensionExtension, Listener {
     private final dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures features;
     private final SiftCreatures creatures;
     private final SiftRifts rifts;
+    private final SiftSifters sifters;
     private final java.util.function.BiFunction<String, Integer, java.util.Optional<org.bukkit.inventory.ItemStack>> items;
     private final org.bukkit.NamespacedKey endureHealthKey;
     private volatile String tide = "flow";
@@ -56,6 +57,7 @@ final class SiftRuntime implements DimensionExtension, Listener {
 
     SiftRuntime(JavaPlugin plugin, SiftSettings settings, java.util.function.Supplier<List<SiftWorldgen.CustomPlacement>> customPlacements,
                 dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures features, SiftCreatures creatures, SiftRifts rifts,
+                SiftSifters sifters,
                 java.util.function.BiFunction<String, Integer, java.util.Optional<org.bukkit.inventory.ItemStack>> items) {
         this.items = items;
         this.plugin = plugin;
@@ -64,6 +66,7 @@ final class SiftRuntime implements DimensionExtension, Listener {
         this.features = features;
         this.creatures = creatures;
         this.rifts = rifts;
+        this.sifters = sifters;
         this.endureHealthKey = new org.bukkit.NamespacedKey(plugin, "sift_endure_health");
     }
 
@@ -76,6 +79,9 @@ final class SiftRuntime implements DimensionExtension, Listener {
         }
         if (settings.rifts()) {
             rifts.activate(active);
+        }
+        if (settings.sifters()) {
+            sifters.activate(active);
         }
         active.snapshot(SiftDimension.TIDES).ifPresent(snapshot -> tide = snapshot.phase().id());
     }
