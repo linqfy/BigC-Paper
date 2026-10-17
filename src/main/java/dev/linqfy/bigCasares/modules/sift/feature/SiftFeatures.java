@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 
 /**
  * Java ports of the mod's custom feature types, keyed by mod feature type
@@ -43,6 +44,14 @@ public final class SiftFeatures {
         features.put("the_sift:ichor_snow", new SiftIchorSnowFeature());
         features.put("the_sift:lava_floor", new SiftLavaFloorFeature());
         return new SiftFeatures(features);
+    }
+
+    /**
+     * Grows an Overgrown Willow from a sapling whose position is {@code x, y, z} (the mod's
+     * {@code OvergrownWillowTreeFeature.growFromSapling}); false when it does not fit there.
+     */
+    public boolean growWillow(WorldRegion region, Random random, int x, int y, int z) {
+        return ((OvergrownWillowTreeFeature) features.get("the_sift:overgrown_willow_tree")).growFromSapling(region, random, x, y, z);
     }
 
     public Optional<SiftFeature> find(String type) {

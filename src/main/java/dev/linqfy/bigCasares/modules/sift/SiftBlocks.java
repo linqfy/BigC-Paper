@@ -94,9 +94,11 @@ public final class SiftBlocks {
         wood("stripped_overgrown_willow_wood", "stripped_overgrown_willow_wood", "stem:NSD",
             model("the_sift:block/stripped_overgrown_willow_wood"));
         wood("overgrown_willow_planks", "overgrown_willow_planks", "stem:NWD", model("the_sift:block/overgrown_willow_planks"));
+        // Leaves with the mod's hardness that drop themselves (saplings come from vines). The mod uses nether
+        // wart sounds, which have no place sound event to pair with a break sound; leaf sounds stand in.
         CUSTOM.put("overgrown_willow_foliage", block("overgrown_willow_foliage", "stem:NUD",
-            model("the_sift:block/overgrown_willow_foliage"), 0.2F, ToolType.HOE, ToolTier.HAND, false,
-            List.of(new Drop("the_sift:overgrown_willow_sapling", 0, 1, false)), "block.azalea_leaves"));
+            model("the_sift:block/overgrown_willow_foliage"), 0.7F, ToolType.HOE, ToolTier.HAND, false,
+            List.of(), "block.azalea_leaves"));
 
         // Vanilla stand-ins (unmodified clients cannot render new non-cube blocks).
         STAND_INS.put("healthy_sculk_sprouts", BlockStateSpec.of("minecraft:crimson_roots"));

@@ -88,6 +88,12 @@ final class OvergrownWillowTreeFeature implements SiftFeature {
         return grow(region, random, originX, originZ, rootX, rootY, rootZ, large ? BIG : SMALL);
     }
 
+    /** The mod's {@code growFromSapling}: a big willow in 38 % of cases, bounded by the sapling's chunk ring. */
+    boolean growFromSapling(WorldRegion region, Random random, int x, int y, int z) {
+        boolean large = random.nextFloat() < 0.38F;
+        return placeAt(region, random, x, z, x, y, z, large);
+    }
+
     private boolean grow(WorldRegion region, Random random, int x, int z, int rootX, int rootY, int rootZ, Choice choice) {
         Optional<SiftTemplates.Template> template = templates.template(choice.path());
         if (template.isEmpty()) {

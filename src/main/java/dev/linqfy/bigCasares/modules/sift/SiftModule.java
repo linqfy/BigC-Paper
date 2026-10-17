@@ -91,7 +91,8 @@ public final class SiftModule implements PluginModule {
             }
         }, 60L);
         scope.register("sift-models-delayed-install", delayedModels::cancel);
-        SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, SiftFeatures.create(data), creatures,
+        SiftFeatures features = SiftFeatures.create(data);
+        SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, features, creatures,
             new SiftRifts(plugin, platform, models), sifters,
             items::resolve);
         try {
@@ -103,6 +104,7 @@ public final class SiftModule implements PluginModule {
             BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(plugin, scope);
             registrations.registerListener("sift-advancements", new SiftAdvancementTriggers(platform, blocks));
             registrations.registerListener("sift-ichor-items", new SiftIchorItems(platform, items));
+            registrations.registerListener("sift-willow-saplings", new SiftWillowSaplings(plugin, platform, items, features));
             if (settings.ancientCityRitual()) {
                 new SiftRitual(plugin, registrations, platform, models).start();
             }

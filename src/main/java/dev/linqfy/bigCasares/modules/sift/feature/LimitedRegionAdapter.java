@@ -2,6 +2,7 @@ package dev.linqfy.bigCasares.modules.sift.feature;
 
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+import org.bukkit.RegionAccessor;
 import org.bukkit.Registry;
 import org.bukkit.block.Container;
 import org.bukkit.entity.EntityType;
@@ -20,14 +21,24 @@ import org.bukkit.generator.LimitedRegion;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/** {@link WorldRegion} over Bukkit's generation-time {@link LimitedRegion}. */
+/**
+ * {@link WorldRegion} over a Bukkit {@link RegionAccessor}: the generation-time
+ * {@link LimitedRegion}, or a loaded world when a feature runs at play time (a
+ * willow sapling growing).
+ */
 final class LimitedRegionAdapter implements WorldRegion {
+
+    /** The positions the adapter may read and write. */
+    interface Bounds {
+        boolean contains(int x, int y, int z);
+    }
 
     /** Parsed block data is immutable in practice; cache by state string. */
     private static final Map<String, BlockData> DATA_CACHE = new ConcurrentHashMap<>();
 
     private final Server server;
-    private final LimitedRegion region;
+    private final RegionAccessor region;
+    private final Bounds bounds;
     private final int minY;
     private final int maxY;
     private final long seed;
@@ -35,8 +46,14 @@ final class LimitedRegionAdapter implements WorldRegion {
 
     LimitedRegionAdapter(Server server, LimitedRegion region, int minY, int maxY, long seed,
                          BiFunction<String, Integer, Optional<ItemStack>> items) {
+        this(server, region, region::isInRegion, minY, maxY, seed, items);
+    }
+
+    LimitedRegionAdapter(Server server, RegionAccessor region, Bounds bounds, int minY, int maxY, long seed,
+                         BiFunction<String, Integer, Optional<ItemStack>> items) {
         this.server = server;
         this.region = region;
+        this.bounds = bounds;
         this.minY = minY;
         this.maxY = maxY;
         this.seed = seed;
@@ -73,7 +90,11 @@ final class LimitedRegionAdapter implements WorldRegion {
                 items.apply(spec.item(), spec.count()).ifPresent(stack -> inventory.setItem(spec.slot(), stack));
             }
         }
-        region.setBlockState(x, y, z, container);
+        if (region instanceof LimitedRegion limited) {
+            limited.setBlockState(x, y, z, container);
+        } else {
+            container.update(true, false);
+        }
         return true;
     }
 
@@ -89,7 +110,7 @@ final class LimitedRegionAdapter implements WorldRegion {
 
     @Override
     public boolean isWritable(int x, int y, int z) {
-        return y >= minY && y < maxY && region.isInRegion(x, y, z);
+        return y >= minY && y < maxY && bounds.contains(x, y, z);
     }
 
     @Override
@@ -131,7 +152,7 @@ final class LimitedRegionAdapter implements WorldRegion {
             case MOTION_BLOCKING -> HeightMap.MOTION_BLOCKING;
             case MOTION_BLOCKING_NO_LEAVES -> HeightMap.MOTION_BLOCKING_NO_LEAVES;
         };
-        if (!region.isInRegion(x, minY, z)) {
+        if (!bounds.contains(x, minY, z)) {
             return minY;
         }
         // Bukkit returns the highest block; vanilla placement uses the first free block above it.
@@ -140,7 +161,7 @@ final class LimitedRegionAdapter implements WorldRegion {
 
     @Override
     public String biome(int x, int y, int z) {
-        if (!region.isInRegion(x, Math.max(minY, Math.min(maxY - 1, y)), z)) {
+        if (!bounds.contains(x, Math.max(minY, Math.min(maxY - 1, y)), z)) {
             return "minecraft:plains";
         }
         return region.getBiome(x, Math.max(minY, Math.min(maxY - 1, y)), z).getKey().asString();
