@@ -4,6 +4,7 @@ import dev.linqfy.bigCasares.blocks.CustomBlockRegistry;
 import dev.linqfy.bigCasares.blocks.CustomBlockService;
 import dev.linqfy.bigCasares.content.ContentItem;
 import dev.linqfy.bigCasares.content.ContentItemFactory;
+import dev.linqfy.bigCasares.content.ContentRecipeGuard;
 import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
@@ -63,6 +64,7 @@ public final class CustomContentModule implements PluginModule {
         created.checkServerConfiguration();
         this.service = created;
         registrations.registerListener("custom-block-listener", created);
+        registrations.registerListener("content-recipe-guard", new ContentRecipeGuard());
         PluginCommand command = plugin.getCommand("content");
         if (command == null) {
             throw new IllegalStateException("Required command is not declared: content");
