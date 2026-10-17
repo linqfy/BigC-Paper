@@ -36,6 +36,13 @@ removable under `the-sift.crafted-portal`.
 Arriving builds a small return frame next to the arrival point; walking through
 it returns players to where they entered. Coordinates map 1:1, as in the mod.
 
+**Rifts (the mod's way out).** Every 270–330 seconds a rift opens 20–64 blocks from
+each player in the Sift and stays for five minutes. Walking into it leads to the
+player's Overworld respawn point (or the world spawn), next to an Overworld rift
+that stays open as long as the original; that rift leads back to where the player
+left the Sift. Players arriving through a rift are not sent back until they step
+out of it.
+
 ## What is ported
 
 Every item below is either carried over from the mod, adapted because vanilla
@@ -56,13 +63,14 @@ clients cannot show new content types, or original to this port.
 | Singer | Adapted | The converted model performs the ritual song; she does not roam or barter |
 | Sniffers | From the mod | Placed by sniffer caves and surface sculk regions (the mod's dark sniffers are ordinary sniffers). The biomes also list sniffers, but vanilla sniffer spawn rules need grass, so, as in the mod, they do not spawn naturally on Sift ground |
 | Ancient City ritual | From the mod | See above; console and replay state is not saved across restarts |
+| Rifts | From the mod | Timing, size, placement search and linking as in the mod; models converted from the mod; rifts are not saved across restarts and the exit search covers 48 blocks (the mod searches farther) |
 | Items | Partial | Block items, Charoite, Siftite nugget/ingot, Ichor shard, Sifter meat (food), Ichor bottle/bucket and willow sapling exist; the bottle, bucket and sapling have no Ichor- or tree-specific behaviour yet |
 | Shifting tides (Flow, Endure, Thrive) | Original | A three-day cycle: Endure hardens hostile mobs and stops natural regeneration; Thrive speeds regeneration and grants Haste |
 | Crafted portal | Original | See above |
 
 ### Not ported yet
 
-Rifts; Echo Golem, Sifter and Dark Sniffer creatures; Siftite gear and smithing;
+Echo Golem, Sifter and Dark Sniffer creatures; Siftite gear and smithing;
 Charoite enchanting; the Sculkflower crop and seeds; Ichor snowballs, buckets,
 bottles and cauldrons; the Singer's roaming, bartering and soul events;
 advancements; the mod's `/locate` and weather commands. The two music discs are
@@ -94,6 +102,8 @@ the-sift:
     regeneration: true
     slowness: true
   blubs:
+    enabled: true
+  rifts:
     enabled: true
 ```
 
@@ -127,6 +137,8 @@ python3 -I tools/port_mielon_sift.py path/to/mielons-the-sift-1.1.1-mc26.3-fabri
 python3 -I tools/convert_geckolib_bbmodel.py <jar> blub blub the_sift_blub --rename hopping=walk --rename flapping=idle --loop idle=3.0
 python3 -I tools/convert_geckolib_bbmodel.py <jar> blub tamed_blub the_sift_blub_tamed --rename hopping=walk --rename flapping=idle --loop idle=3.0
 python3 -I tools/convert_geckolib_bbmodel.py <jar> singer singer the_sift_singer
+python3 -I tools/convert_geckolib_bbmodel.py <jar> rift rift/sift the_sift_rift
+python3 -I tools/convert_geckolib_bbmodel.py <jar> rift rift/overworld the_sift_rift_overworld
 bash gradlew generateCustomBlockstates   # after changing custom blocks
 bash gradlew generateSiftDatapack        # inspect build/generated-datapacks/
 ```
@@ -140,7 +152,7 @@ confirmed.
 ## Verification status
 
 Unit tests cover the datapack translation and determinism, the Ancient City
-templates, the ritual melody, every ported feature (determinism, staying inside the
+templates, the ritual melody, rift placement, every ported feature (determinism, staying inside the
 populator region, expected output on prepared terrain, thread safety for several
 families), the loot table, block rendering contracts and the framework. The
 generated datapack has been checked against Minecraft 26.2's registries and block

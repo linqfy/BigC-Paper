@@ -20,6 +20,7 @@ public record SiftSettings(
     Tides tides,
     Ichor ichor,
     boolean blubs,
+    boolean rifts,
     List<String> warnings
 ) {
 
@@ -68,8 +69,9 @@ public record SiftSettings(
             ichorSection == null || ichorSection.getBoolean("regeneration", true),
             ichorSection == null || ichorSection.getBoolean("slowness", true));
         boolean blubs = section == null || section.getBoolean("blubs.enabled", true);
+        boolean rifts = section == null || section.getBoolean("rifts.enabled", true);
         return new SiftSettings(seedSalt, border, permission.isEmpty() ? null : permission, cooldown,
-            craftedPortal, ritual, tides, ichor, blubs, warnings);
+            craftedPortal, ritual, tides, ichor, blubs, rifts, warnings);
     }
 
     private static double number(ConfigurationSection section, String key, double fallback, double min, double max,

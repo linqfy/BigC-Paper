@@ -13,6 +13,10 @@ Examples (The Sift, see docs/dimensions/the-sift.md):
         blub tamed_blub the_sift_blub_tamed --rename hopping=walk --rename flapping=idle --loop idle=3.0
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
         singer singer the_sift_singer
+    python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
+        rift rift/sift the_sift_rift
+    python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
+        rift rift/overworld the_sift_rift_overworld
 
 The jar is read as a ZIP archive; no mod code is loaded. The conversion mirrors
 Blockbench's own Bedrock import: X is negated for cube bounds and pivots, bone
@@ -209,10 +213,9 @@ def main(arguments):
     geometry = geo["minecraft:geometry"][0]
     width, height = struct.unpack(">II", texture[16:24])
     description = geometry["description"]
+    # UVs stay in the geometry's UV space whatever the image size (Blockbench's
+    # uv_width/uv_height), as GeckoLib maps them: HD and non-square images both work.
     uv_width, uv_height = description["texture_width"], description["texture_height"]
-    # High-resolution textures keep the geometry's UV space (Blockbench uv_width/uv_height).
-    if width % uv_width or height % uv_height or width // uv_width != height // uv_height:
-        raise ValueError(f"texture is {width}x{height}, geometry expects a multiple of {uv_width}x{uv_height}")
     elements, groups, outliner = convert_geometry(model, geometry)
     bbmodel = {
         "meta": {"format_version": "5.0", "model_format": "free", "box_uv": False},

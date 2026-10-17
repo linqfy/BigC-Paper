@@ -85,6 +85,7 @@ public final class SiftModule implements PluginModule {
         }, 60L);
         scope.register("sift-models-delayed-install", delayedModels::cancel);
         SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, SiftFeatures.create(data), creatures,
+            new SiftRifts(plugin, platform, models),
             items::resolve);
         try {
             DimensionDefinition definition = SiftDimension.create(settings, worldgen, List.of(runtime));

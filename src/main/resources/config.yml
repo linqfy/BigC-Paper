@@ -1788,3 +1788,6 @@ the-sift:
     slowness: true
   blubs:
     enabled: true
+  # The mod's rifts: temporary exits that open near players in the Sift.
+  rifts:
+    enabled: true

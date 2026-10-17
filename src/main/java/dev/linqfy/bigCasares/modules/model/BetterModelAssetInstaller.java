@@ -42,10 +42,13 @@ public final class BetterModelAssetInstaller {
     private static final List<String> SIFT_ASSETS = List.of(
         "the_sift_blub.bbmodel",
         "the_sift_blub_tamed.bbmodel",
-        "the_sift_singer.bbmodel"
+        "the_sift_singer.bbmodel",
+        "the_sift_rift.bbmodel",
+        "the_sift_rift_overworld.bbmodel"
     );
 
-    private static final List<String> SIFT_MODEL_KEYS = List.of("the_sift_blub", "the_sift_blub_tamed", "the_sift_singer");
+    private static final List<String> SIFT_MODEL_KEYS = List.of("the_sift_blub", "the_sift_blub_tamed", "the_sift_singer",
+        "the_sift_rift", "the_sift_rift_overworld");
 
     private BetterModelAssetInstaller() { }
 
