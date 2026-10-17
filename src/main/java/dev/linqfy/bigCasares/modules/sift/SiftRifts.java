@@ -104,6 +104,11 @@ final class SiftRifts implements Listener {
 
     void activate(ActiveDimension active) {
         this.dimension = active;
+        active.registrations().ownCleanup("sift-rifts-dimension", () -> {
+            if (dimension == active) {
+                dimension = null;
+            }
+        });
         active.registrations().registerListener("sift-rifts", this);
         active.registrations().scheduleRepeating("sift-rifts", this::tick, 20L, 20L);
         active.registrations().ownCleanup("sift-rifts-close", () -> List.copyOf(rifts.values()).forEach(this::close));
@@ -282,8 +287,12 @@ final class SiftRifts implements Listener {
         }
         Location back = origin.center();
         long expiresAt = Math.max(now() + 20L, origin.expiresAt);
-        loadAround(overworld, anchor).thenRun(() -> dimension.registrations().scheduleImmediate("sift-rift-exit", () -> {
-            if (!player.isOnline()) {
+        ActiveDimension active = dimension;
+        if (active == null) {
+            return;
+        }
+        loadAround(overworld, anchor).thenRun(() -> active.registrations().scheduleImmediate("sift-rift-exit", () -> {
+            if (!player.isOnline() || dimension != active) {
                 return;
             }
             Optional<RiftPlacement.Spot> spot = RiftPlacement.findNear(new WorldTerrain(overworld), anchor.getBlockX(),
