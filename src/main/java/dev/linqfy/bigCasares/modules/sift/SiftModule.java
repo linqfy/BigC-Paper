@@ -13,6 +13,7 @@ import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
 import dev.linqfy.bigCasares.modules.model.BetterModelAssetInstaller;
 import dev.linqfy.bigCasares.modules.model.JavaModelGateway;
 import dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures;
+import dev.linqfy.bigCasares.modules.sift.recipe.SiftRecipeRegistrar;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -67,6 +68,7 @@ public final class SiftModule implements PluginModule {
         settings = SiftSettings.load(plugin.getConfig());
         settings.warnings().forEach(warning -> plugin.getLogger().warning("[TheSift] " + warning));
         registerContent();
+        registerRecipes(scope);
         Optional<DimensionPlatform> dimensions = platform.get();
         if (dimensions.isEmpty()) {
             plugin.getLogger().warning("[TheSift] dimension-framework is disabled; the Sift dimension is not registered.");
@@ -100,6 +102,15 @@ public final class SiftModule implements PluginModule {
             }
         } catch (RuntimeException failure) {
             plugin.getLogger().log(Level.SEVERE, "[TheSift] Could not register the Sift dimension", failure);
+        }
+    }
+
+    /** Registers the mod's recipes that the registered content makes possible; the scope removes them on disable. */
+    private void registerRecipes(RuntimeRegistrationScope scope) {
+        try {
+            new SiftRecipeRegistrar(plugin, items, new BukkitRuntimeRegistrations(plugin, scope)).register(SiftData.fromClasspath());
+        } catch (RuntimeException failure) {
+            plugin.getLogger().log(Level.WARNING, "[TheSift] Could not register the Sift recipes", failure);
         }
     }
 
