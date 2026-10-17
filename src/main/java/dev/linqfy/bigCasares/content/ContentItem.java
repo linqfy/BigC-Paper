@@ -1,9 +1,11 @@
 package dev.linqfy.bigCasares.content;
 
 import dev.linqfy.bigCasares.dimension.NamespacedId;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * A code-defined item belonging to a content module (e.g. the Sift).
@@ -22,6 +24,11 @@ import java.util.Objects;
  * @param maxStackSize 1..99
  * @param placesBlock custom block id this item places, or null
  * @param food        optional food values
+ * @param customizer  optional hook that {@link ContentItemFactory} runs on every freshly created stack, after the
+ *                    common properties and the content id are applied. It is how a content item carries data a
+ *                    base material does not give it (durability, attribute modifiers, tool rules, equipment
+ *                    assets...); it may use {@code ItemMeta} or the data component API. It runs on every
+ *                    {@code create}, so it must be idempotent and must not keep the stack.
  */
 public record ContentItem(
     NamespacedId id,
@@ -32,7 +39,8 @@ public record ContentItem(
     List<String> lore,
     int maxStackSize,
     NamespacedId placesBlock,
-    Food food
+    Food food,
+    Consumer<ItemStack> customizer
 ) {
 
     public record Food(int nutrition, float saturation, boolean canAlwaysEat) {
@@ -72,6 +80,7 @@ public record ContentItem(
         private int maxStackSize = 64;
         private NamespacedId placesBlock;
         private Food food;
+        private Consumer<ItemStack> customizer;
 
         private Builder(NamespacedId id, String material) {
             this.id = id;
@@ -86,10 +95,17 @@ public record ContentItem(
         public Builder places(NamespacedId block) { this.placesBlock = block; return this; }
         public Builder food(int nutrition, float saturation, boolean canAlwaysEat) { this.food = new Food(nutrition, saturation, canAlwaysEat); return this; }
 
+        /** Adds a hook run on every created stack (after any earlier hook); see {@link ContentItem#customizer()}. */
+        public Builder customize(Consumer<ItemStack> hook) {
+            Objects.requireNonNull(hook, "hook");
+            this.customizer = this.customizer == null ? hook : this.customizer.andThen(hook);
+            return this;
+        }
+
         public ContentItem build() {
             String key = nameKey == null ? "item." + id.namespace() + "." + id.path().replace('/', '.') : nameKey;
             String fallback = fallbackName == null ? id.path() : fallbackName;
-            return new ContentItem(id, material, itemModel, key, fallback, lore, maxStackSize, placesBlock, food);
+            return new ContentItem(id, material, itemModel, key, fallback, lore, maxStackSize, placesBlock, food, customizer);
         }
     }
 }

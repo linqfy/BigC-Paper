@@ -47,8 +47,8 @@ import java.util.concurrent.ConcurrentHashMap;
  *   <li>Chests are filled at generation time from the generation {@link Random}, not when first
  *       opened. The loot table is evaluated by {@link SiftLootTable} (all of this table's features
  *       are supported) and its items mapped by {@link SiftLootItems}: Sift plants become their
- *       vanilla stand-in items, {@code the_sift:music_disc_rift} a vanilla disc and
- *       {@code the_sift:siftite_upgrade_smithing_template} is dropped.</li>
+ *       vanilla stand-in items and {@code the_sift:music_disc_rift} a vanilla disc; the Siftite upgrade
+ *       template is a content item of the port.</li>
  *   <li>Template chests carry the mod's extra {@code ichorlogged} property; it is folded into
  *       {@code waterlogged} (Ichor is water here). Chest facing is rotated/mirrored from the
  *       template's own value.</li>

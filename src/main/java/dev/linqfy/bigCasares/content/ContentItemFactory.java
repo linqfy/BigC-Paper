@@ -56,6 +56,11 @@ public final class ContentItemFactory {
         }
         meta.getPersistentDataContainer().set(CONTENT_ID, PersistentDataType.STRING, item.id().asString());
         stack.setItemMeta(meta);
+        if (item.customizer() != null) {
+            // Last: setItemMeta replaces the stack's component patch, so components that the hook
+            // sets through the data component API would be lost if they were written before it.
+            item.customizer().accept(stack);
+        }
         return stack;
     }
 

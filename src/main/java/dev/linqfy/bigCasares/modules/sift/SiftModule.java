@@ -69,6 +69,7 @@ public final class SiftModule implements PluginModule {
         settings.warnings().forEach(warning -> plugin.getLogger().warning("[TheSift] " + warning));
         registerContent();
         registerRecipes(scope);
+        installSiftiteRecovery(scope);
         Optional<DimensionPlatform> dimensions = platform.get();
         if (dimensions.isEmpty()) {
             plugin.getLogger().warning("[TheSift] dimension-framework is disabled; the Sift dimension is not registered.");
@@ -115,6 +116,16 @@ public final class SiftModule implements PluginModule {
             new SiftRecipeRegistrar(plugin, items, new BukkitRuntimeRegistrations(plugin, scope)).register(SiftData.fromClasspath());
         } catch (RuntimeException failure) {
             plugin.getLogger().log(Level.WARNING, "[TheSift] Could not register the Sift recipes", failure);
+        }
+    }
+
+    /** The mod's Siftite death recovery; independent of the dimension, so it works even without the framework. */
+    private void installSiftiteRecovery(RuntimeRegistrationScope scope) {
+        try {
+            SiftiteRecovery.install(plugin, new BukkitRuntimeRegistrations(plugin, scope),
+                plugin.getDataFolder().toPath().resolve("data/the-sift/siftite-recovery"));
+        } catch (RuntimeException failure) {
+            plugin.getLogger().log(Level.SEVERE, "[TheSift] Could not enable the Siftite death recovery", failure);
         }
     }
 

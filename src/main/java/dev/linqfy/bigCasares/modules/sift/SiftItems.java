@@ -15,6 +15,13 @@ import java.util.Set;
  * as material so placement is a normal vanilla placement that the custom block
  * service rewrites to the exact backing state. Item models and names come from
  * the imported mod assets ({@code the_sift:<id>} item definitions and lang keys).
+ *
+ * <p>The Siftite gear ({@link SiftiteGear}) and the Siftite upgrade smithing template are based on their
+ * netherite counterparts. The gear gets its stats from {@link SiftiteGearComponents} each time a stack is
+ * created. Differences: the template is a netherite upgrade template with another name, model and content
+ * id, so the client still prints the netherite template's "Applies to" and "Ingredients" lines (Diamond
+ * Equipment, Netherite Ingot) and its smithing table slot hints, and vanilla's netherite upgrade recipe
+ * accepts it as a template. The Siftite smithing recipes themselves are not defined here.</p>
  */
 public final class SiftItems {
 
@@ -38,6 +45,9 @@ public final class SiftItems {
         items.add(simple("charoite", "AMETHYST_SHARD"));
         items.add(simple("siftite_nugget", "IRON_NUGGET"));
         items.add(simple("siftite_ingot", "NETHERITE_INGOT"));
+        items.addAll(gear());
+        items.add(ContentItem.builder(id("siftite_upgrade_smithing_template"), "NETHERITE_UPGRADE_SMITHING_TEMPLATE")
+            .name("item.the_sift.siftite_upgrade_smithing_template", "Siftite Upgrade").build());
         items.add(simple("ichor_shard", "PRISMARINE_SHARD"));
         items.add(ContentItem.builder(id("raw_sifter_meat"), "MUTTON").name("item.the_sift.raw_sifter_meat", "Raw Sifter Meat")
             .food(2, 1.2F, false).build());
@@ -49,6 +59,19 @@ public final class SiftItems {
             .maxStack(1).build());
         items.add(simple("overgrown_willow_sapling", "MANGROVE_PROPAGULE"));
         return items;
+    }
+
+    /** One item per piece of {@link SiftiteGear}: a single stack, with the stats applied on creation. */
+    static List<ContentItem> gear() {
+        List<ContentItem> gear = new ArrayList<>();
+        for (SiftiteGear piece : SiftiteGear.values()) {
+            gear.add(ContentItem.builder(id(piece.path()), piece.baseMaterial())
+                .name("item.the_sift." + piece.path(), pretty(piece.path()))
+                .maxStack(1)
+                .customize(stack -> SiftiteGearComponents.apply(piece, stack))
+                .build());
+        }
+        return gear;
     }
 
     /** Item that places a block: axis/state variants share their base block's item. */

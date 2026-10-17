@@ -66,12 +66,14 @@ clients cannot show new content types, or original to this port.
 | Ancient City ritual | From the mod | See above; console and replay state is not saved across restarts |
 | Rifts | From the mod | Timing, size, placement search and linking as in the mod; models converted from the mod; rifts are not saved across restarts and the exit search covers 48 blocks (the mod searches farther) |
 | Items | Partial | Block items, Charoite, Siftite nugget/ingot, Ichor shard, Sifter meat (food), Ichor bottle/bucket and willow sapling exist; the bottle, bucket and sapling have no Ichor- or tree-specific behaviour yet |
+| Siftite gear | Adapted | Sword, shovel, pickaxe, axe, hoe, spear, four armour pieces and the upgrade template are netherite items with the mod's stats (durability, damage, speed, mining speed, armour, knockback resistance, fire resistance), models and armour texture. See `SiftiteGear` for the numbers and the differences (netherite ingots also repair them; the template keeps the client's netherite template text) |
+| Siftite death recovery | Adapted | Siftite items are taken out of a player's death drops and returned through a small particle rift 2 seconds after the respawn (or join); the stacks are kept in `data/the-sift/siftite-recovery/<uuid>.bin` until they are in the inventory. |
 | Shifting tides (Flow, Endure, Thrive) | Original | A three-day cycle: Endure hardens hostile mobs and stops natural regeneration; Thrive speeds regeneration and grants Haste |
 | Crafted portal | Original | See above |
 
 ### Not ported yet
 
-Echo Golem and Dark Sniffer creatures; the Sifter spawn egg; Siftite gear and smithing;
+Echo Golem and Dark Sniffer creatures; the Sifter spawn egg;
 Charoite enchanting; the Sculkflower crop and seeds; Ichor snowballs, buckets,
 bottles and cauldrons; the Singer's roaming, bartering and soul events;
 advancements; the mod's `/locate` and weather commands. The two music discs are

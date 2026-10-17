@@ -218,7 +218,7 @@ class SiftLootTableTest {
                 assertNotNull(Material.matchMaterial(id), name + " -> " + id + " is not a vanilla item");
             }
         }
-        assertEquals(Set.of("the_sift:siftite_upgrade_smithing_template"), dropped);
+        assertEquals(Set.of(), dropped);
     }
 
     @Test
@@ -237,7 +237,8 @@ class SiftLootTableTest {
         assertEquals(Optional.of("minecraft:torchflower"), SiftLootItems.resolve("the_sift:sunburst_plant"));
         assertEquals(Optional.of("minecraft:lily_of_the_valley"), SiftLootItems.resolve("the_sift:whisperbloom"));
         assertEquals(Optional.of("minecraft:music_disc_otherside"), SiftLootItems.resolve("the_sift:music_disc_rift"));
-        assertEquals(Optional.empty(), SiftLootItems.resolve("the_sift:siftite_upgrade_smithing_template"));
+        assertEquals(Optional.of("the_sift:siftite_upgrade_smithing_template"),
+            SiftLootItems.resolve("the_sift:siftite_upgrade_smithing_template"));
         assertEquals(Optional.empty(), SiftLootItems.resolve("the_sift:not_a_real_item"));
     }
 
