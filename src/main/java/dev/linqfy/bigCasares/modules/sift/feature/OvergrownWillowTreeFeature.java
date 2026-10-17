@@ -72,6 +72,23 @@ final class OvergrownWillowTreeFeature implements SiftFeature {
             return false;
         }
         Choice choice = random.nextFloat() < 0.38F ? BIG : SMALL;
+        return grow(region, random, x, z, rootX, rootY, rootZ, choice);
+    }
+
+    /**
+     * The mod's {@code placeAt(level, random, root, bounds, large)}: grows a willow of the given size at an
+     * explicit root (used by the Ichor lake's willow islands). {@code originX/originZ} select the chunk
+     * whose neighbour ring bounds the tree, like the {@code bounds} argument of the mod.
+     */
+    boolean placeAt(WorldRegion region, Random random, int originX, int originZ, int rootX, int rootY, int rootZ,
+                    boolean large) {
+        if (!isGround(region, rootX, rootY - 1, rootZ)) {
+            return false;
+        }
+        return grow(region, random, originX, originZ, rootX, rootY, rootZ, large ? BIG : SMALL);
+    }
+
+    private boolean grow(WorldRegion region, Random random, int x, int z, int rootX, int rootY, int rootZ, Choice choice) {
         Optional<SiftTemplates.Template> template = templates.template(choice.path());
         if (template.isEmpty()) {
             return false;

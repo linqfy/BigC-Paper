@@ -23,7 +23,8 @@ public final class SiftFeatures {
     public static SiftFeatures create(SiftData data) {
         SiftTemplates templates = new SiftTemplates(data);
         Map<String, SiftFeature> features = new LinkedHashMap<>();
-        features.put("the_sift:overgrown_willow_tree", new OvergrownWillowTreeFeature(templates));
+        OvergrownWillowTreeFeature willow = new OvergrownWillowTreeFeature(templates);
+        features.put("the_sift:overgrown_willow_tree", willow);
         features.put("the_sift:bare_monolith", new SiftMonolithFeature(false));
         features.put("the_sift:lush_monolith", new SiftMonolithFeature(true));
         features.put("the_sift:dry_sculk_spikes", new SiftDrySpikeFeature());
@@ -37,6 +38,10 @@ public final class SiftFeatures {
         features.put("the_sift:sniffer_plant_patch", new SnifferPlantPatchFeature());
         features.put("the_sift:surface_sculk_region", new SiftSurfaceSculkRegionFeature());
         features.put("the_sift:abandoned_main_portal", new AbandonedMainPortalFeature(templates));
+        features.put("the_sift:ichor_lake", new IchorLakeFeature(willow));
+        features.put("the_sift:ichor_cave_spring", new SiftIchorCaveSpringFeature());
+        features.put("the_sift:ichor_snow", new SiftIchorSnowFeature());
+        features.put("the_sift:lava_floor", new SiftLavaFloorFeature());
         return new SiftFeatures(features);
     }
 
