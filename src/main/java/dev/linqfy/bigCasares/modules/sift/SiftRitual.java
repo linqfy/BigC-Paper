@@ -178,7 +178,7 @@ final class SiftRitual implements Listener {
                 glitch(block);
                 return;
             }
-            interrupt(console(below));
+            interrupt(console(below), block);
             NoteBlock data = (NoteBlock) block.getBlockData();
             int next = (data.getNote().getId() % 8 + 1) % 8;
             data.setNote(new Note(next));
@@ -187,7 +187,7 @@ final class SiftRitual implements Listener {
             player.incrementStatistic(Statistic.NOTEBLOCK_TUNED);
         } else if (action == Action.LEFT_CLICK_BLOCK && !horn) {
             Console console = console(below);
-            interrupt(console);
+            interrupt(console, block);
             int sound = ((NoteBlock) block.getBlockData()).getNote().getId() % 8 + 1;
             console.sequence.play(new NotePos(block.getX(), block.getY(), block.getZ()), sound)
                 .ifPresent(match -> ignite(block.getWorld(), console, match, player));
@@ -243,10 +243,13 @@ final class SiftRitual implements Listener {
             .compare(candidate, anchor) < 0;
     }
 
-    /** Touching a console cancels its pending ignition or replay (the mod's interrupt). */
-    private void interrupt(Console console) {
+    /** Touching a console cancels its pending ignition or replay; a broken-off replay crackles. */
+    private void interrupt(Console console, Block touched) {
         console.generation++;
-        console.autoplaying = false;
+        if (console.autoplaying) {
+            console.autoplaying = false;
+            glitch(touched);
+        }
     }
 
     // --- ignition and replay (SonorousIgnition, SonorousAutoplay) -------------------------
