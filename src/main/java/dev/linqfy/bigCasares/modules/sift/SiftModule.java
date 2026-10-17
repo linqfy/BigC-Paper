@@ -97,6 +97,7 @@ public final class SiftModule implements PluginModule {
             scope.register("sift-dimension", () -> dimensions.get().unregister(SiftDimension.KEY));
             BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(plugin, scope);
             registrations.registerListener("sift-advancements", new SiftAdvancementTriggers(platform, blocks));
+            registrations.registerListener("sift-ichor-items", new SiftIchorItems(platform, items));
             if (settings.ancientCityRitual()) {
                 new SiftRitual(plugin, registrations, platform, models).start();
             }
