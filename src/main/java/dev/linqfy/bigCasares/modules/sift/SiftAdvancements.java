@@ -41,10 +41,11 @@ public final class SiftAdvancements {
     public static final String KINDA_PURPLEISH = "the_sift/kinda_purpleish";
     public static final String SIFTED_NUGGET = "the_sift/sifted_nugget";
     public static final String SPICEWOOD = "the_sift/spicewood";
+    public static final String KEEP_INVENTORY = "the_sift/keep_inventory";
 
     /** Advancements with the mod's {@code impossible} criterion that the port awards from code. */
     static final Set<String> AWARDED_FROM_CODE = Set.of(SONG_OF_THE_PAST, BLUB, RIFTER, KINDA_PURPLEISH, SIFTED_NUGGET,
-        SPICEWOOD);
+        SPICEWOOD, KEEP_INVENTORY);
 
     /** Every advancement of the mod except recipe unlocks. */
     static final List<String> MOD_ADVANCEMENTS = List.of(
@@ -57,7 +58,7 @@ public final class SiftAdvancements {
         "the_sift/spicewood");
 
     /** Icons without a content item: vanilla item shown with the mod's item model. */
-    private static final Map<String, String> ICON_STAND_INS = Map.of("sift_rift", "minecraft:ender_eye", "siftite_boots", "minecraft:netherite_boots");
+    private static final Map<String, String> ICON_STAND_INS = Map.of("sift_rift", "minecraft:ender_eye");
 
     private static final String CUSTOM_DATA = "minecraft:custom_data";
     private static final String BUKKIT_VALUES = "PublicBukkitValues";
@@ -70,7 +71,7 @@ public final class SiftAdvancements {
         Set<String> granted = new LinkedHashSet<>(List.of(
             "story/fallen_civilization", "story/brave_the_unknown", "the_sift/root",
             "the_sift/blood_of_the_gods", "the_sift/certified_sifter", "the_sift/kinda_purpleish",
-            "the_sift/sifted_nugget", "the_sift/spicewood"));
+            "the_sift/sifted_nugget", "the_sift/spicewood", "the_sift/cover_me_in_siftite", KEEP_INVENTORY));
         if (settings.ancientCityRitual()) {
             granted.add(SONG_OF_THE_PAST);
         }

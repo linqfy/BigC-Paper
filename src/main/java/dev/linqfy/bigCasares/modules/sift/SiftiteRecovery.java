@@ -59,7 +59,8 @@ import java.util.logging.Level;
  * another dimension. The stacks are chosen from the death drops and the slots are emptied (see
  * {@link SiftiteKeep}), the tombstone module and other plugins that read the inventory see none of them.
  * A stack that cannot be read back is skipped with a warning and stays in the file. The
- * {@code the_sift/keep_inventory} advancement is not awarded here: {@link #recovered} marks where it goes.</p>
+ * {@code the_sift/keep_inventory} advancement is awarded when any part of a kept item first reaches the
+ * inventory, as in the mod.</p>
  */
 final class SiftiteRecovery implements Listener {
 
@@ -391,8 +392,8 @@ final class SiftiteRecovery implements Listener {
         return false;
     }
 
-    /** The place of the mod's {@code ModAdvancements.award(owner, "the_sift/keep_inventory")}. */
+    /** The mod's {@code ModAdvancements.award(owner, "the_sift/keep_inventory")}. */
     private void recovered(Player owner) {
-        // keep_inventory advancement: awarded when any part of a kept item first reaches the inventory.
+        SiftAdvancements.award(owner, SiftAdvancements.KEEP_INVENTORY);
     }
 }
