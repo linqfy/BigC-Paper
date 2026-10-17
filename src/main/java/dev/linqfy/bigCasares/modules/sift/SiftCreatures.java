@@ -278,6 +278,7 @@ final class SiftCreatures implements Listener {
         wolf.setSitting(false);
         wolf.getWorld().spawnParticle(Particle.HEART, wolf.getLocation().add(0, 0.7, 0), 7, 0.3, 0.3, 0.3);
         wolf.getWorld().playSound(wolf.getLocation(), "the_sift:entity.blub.idle_air", 0.95F, 1.08F);
+        SiftAdvancements.award(player, SiftAdvancements.BLUB);
         // The tamed Blub uses the mod's tamed texture.
         undress(wolf.getUniqueId());
         dress(wolf);

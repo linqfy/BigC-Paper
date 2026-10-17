@@ -12,7 +12,10 @@ Outputs (overwritten on every run, so local edits belong in Java code):
   src/main/resources/the_sift/mielon/   worldgen/dimension data read by
                                           dev.linqfy.bigCasares.modules.sift
                                           (minecraft/: vanilla templates the mod
-                                          overrides, e.g. Ancient City centres)
+                                          overrides, e.g. Ancient City centres;
+                                          lang/: English advancement texts used
+                                          as fallbacks for clients without the
+                                          resource pack)
   resourcepack/java/assets/the_sift/     textures, models, item definitions,
                                           sounds and lang shipped to Java clients
 
@@ -51,6 +54,8 @@ DATA_PREFIXES = (
     "data/the_sift/tags/block/",
     "data/the_sift/loot_table/",
     "data/the_sift/recipe/",
+    "data/the_sift/advancement/story/",
+    "data/the_sift/advancement/the_sift/",
 )
 
 # Vanilla templates the mod overrides: Ancient City centres with Sonorous Deepslate.
@@ -159,6 +164,12 @@ def main() -> int:
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 destination.write_bytes(raw)
                 copied_assets += 1
+                if name == "assets/the_sift/lang/en_us.json":
+                    texts = {key: value for key, value in json.loads(raw).items() if key.startswith("advancement.")}
+                    destination = DATA_OUT / "lang/advancements_en_us.json"
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    destination.write_text(json.dumps(texts, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+                    copied_data += 1
 
         credits = (
             "Imported from {name} {version} by {authors}.\n"

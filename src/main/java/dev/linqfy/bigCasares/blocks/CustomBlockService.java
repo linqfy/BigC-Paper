@@ -85,7 +85,7 @@ public final class CustomBlockService implements Listener {
         return stateOf(block.getBlockData()).flatMap(blocks::byState);
     }
 
-    static Optional<MushroomState> stateOf(BlockData data) {
+    public static Optional<MushroomState> stateOf(BlockData data) {
         MushroomState.Base base = switch (data.getMaterial()) {
             case BROWN_MUSHROOM_BLOCK -> MushroomState.Base.BROWN;
             case RED_MUSHROOM_BLOCK -> MushroomState.Base.RED;

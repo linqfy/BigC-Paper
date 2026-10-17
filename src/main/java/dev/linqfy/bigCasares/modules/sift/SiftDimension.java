@@ -52,6 +52,7 @@ public final class SiftDimension {
                 if (settings.ancientCityRitual()) {
                     SiftAncientCity.contribute(data, datapack);
                 }
+                SiftAdvancements.contribute(data, settings, datapack);
             })
             .rules(rules(settings))
             .travel(travel(settings));

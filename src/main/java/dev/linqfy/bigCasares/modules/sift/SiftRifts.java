@@ -1,6 +1,7 @@
 package dev.linqfy.bigCasares.modules.sift;
 
 import dev.linqfy.bigCasares.dimension.DimensionPlatform;
+import dev.linqfy.bigCasares.dimension.travel.TravelResult;
 import dev.linqfy.bigCasares.dimension.runtime.ActiveDimension;
 import dev.linqfy.bigCasares.modules.model.JavaModelGateway;
 import dev.linqfy.bigCasares.modules.model.JavaModelHandle;
@@ -316,11 +317,14 @@ final class SiftRifts implements Listener {
 
     private void go(Player player, Location target) {
         Optional<DimensionPlatform> dimensions = platform.get();
-        if (dimensions.isPresent()) {
-            dimensions.get().teleport(player, target);
-        } else {
-            player.teleportAsync(target);
-        }
+        CompletableFuture<Boolean> moved = dimensions.isPresent()
+            ? dimensions.get().teleport(player, target).thenApply(TravelResult::succeeded)
+            : player.teleportAsync(target);
+        moved.thenAccept(success -> {
+            if (success && plugin.isEnabled()) {
+                plugin.getServer().getScheduler().runTask(plugin, () -> SiftAdvancements.award(player, SiftAdvancements.RIFTER));
+            }
+        });
     }
 
     private static CompletableFuture<Void> loadAround(World world, Location anchor) {

@@ -93,8 +93,10 @@ public final class SiftModule implements PluginModule {
             plugin.getLogger().info("[TheSift] Registered " + SiftDimension.KEY + ": " + status.state()
                 + (status.message().isBlank() ? "" : " (" + status.message() + ")"));
             scope.register("sift-dimension", () -> dimensions.get().unregister(SiftDimension.KEY));
+            BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(plugin, scope);
+            registrations.registerListener("sift-advancements", new SiftAdvancementTriggers(platform, blocks));
             if (settings.ancientCityRitual()) {
-                new SiftRitual(plugin, new BukkitRuntimeRegistrations(plugin, scope), platform, models).start();
+                new SiftRitual(plugin, registrations, platform, models).start();
             }
         } catch (RuntimeException failure) {
             plugin.getLogger().log(Level.SEVERE, "[TheSift] Could not register the Sift dimension", failure);

@@ -404,6 +404,11 @@ final class SiftRitual implements Listener {
 
     private void hornBlown(Player player) {
         Location origin = player.getLocation().clone();
+        Optional<DimensionPlatform> dimensions = platform.get();
+        if (dimensions.isPresent() && dimensions.get().dimensionOf(player.getWorld()).isEmpty()
+            && nearestFrame(dimensions.get(), origin).isPresent()) {
+            SiftAdvancements.award(player, SiftAdvancements.SONG_OF_THE_PAST);
+        }
         registrations.scheduleDelayed("sift-singer-summon", () -> summon(origin), SUMMON_DELAY_TICKS);
     }
 
