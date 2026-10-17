@@ -4,6 +4,11 @@ import dev.linqfy.bigCasares.blocks.CustomBlockDefinition;
 import dev.linqfy.bigCasares.blocks.MushroomState;
 import dev.linqfy.bigCasares.content.ContentItem;
 import dev.linqfy.bigCasares.dimension.NamespacedId;
+import org.bukkit.Color;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -25,6 +30,8 @@ import java.util.Set;
  */
 public final class SiftItems {
 
+    static final int ICHOR_BOTTLE_COLOR = 5_909_123;
+
     private SiftItems() {
     }
 
@@ -42,7 +49,8 @@ public final class SiftItems {
                 .places(placed.id())
                 .build());
         }
-        items.add(simple("charoite", "AMETHYST_SHARD"));
+        // Lapis underneath: the enchanting table's lapis slot is where Charoite is used (see SiftCharoite).
+        items.add(simple("charoite", "LAPIS_LAZULI"));
         items.add(simple("siftite_nugget", "IRON_NUGGET"));
         items.add(simple("siftite_ingot", "NETHERITE_INGOT"));
         items.addAll(gear());
@@ -54,11 +62,19 @@ public final class SiftItems {
         items.add(ContentItem.builder(id("cooked_sifter_meat"), "COOKED_MUTTON").name("item.the_sift.cooked_sifter_meat",
             "Cooked Sifter Meat").food(7, 9.6F, false).build());
         items.add(ContentItem.builder(id("ichor_bottle"), "POTION").name("item.the_sift.ichor_bottle", "Ichor Bottle")
-            .maxStack(16).build());
+            .maxStack(1).customize(SiftItems::ichorBottle).build());
         items.add(ContentItem.builder(id("ichor_bucket"), "WATER_BUCKET").name("item.the_sift.ichor_bucket", "Ichor Bucket")
             .maxStack(1).build());
         items.add(simple("overgrown_willow_sapling", "MANGROVE_PROPAGULE"));
         return items;
+    }
+
+    /** The mod's Ichor bottle: a drink with its colour and three seconds of Regeneration. */
+    private static void ichorBottle(ItemStack stack) {
+        stack.editMeta(PotionMeta.class, meta -> {
+            meta.setColor(Color.fromRGB(ICHOR_BOTTLE_COLOR));
+            meta.addCustomEffect(new PotionEffect(PotionEffectType.REGENERATION, 60, 0), true);
+        });
     }
 
     /** One item per piece of {@link SiftiteGear}: a single stack, with the stats applied on creation. */

@@ -70,6 +70,7 @@ public final class SiftModule implements PluginModule {
         registerContent();
         registerRecipes(scope);
         installSiftiteRecovery(scope);
+        new BukkitRuntimeRegistrations(plugin, scope).registerListener("sift-charoite", new SiftCharoite());
         Optional<DimensionPlatform> dimensions = platform.get();
         if (dimensions.isEmpty()) {
             plugin.getLogger().warning("[TheSift] dimension-framework is disabled; the Sift dimension is not registered.");

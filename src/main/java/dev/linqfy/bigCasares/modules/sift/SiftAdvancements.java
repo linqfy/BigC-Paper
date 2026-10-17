@@ -45,7 +45,7 @@ public final class SiftAdvancements {
 
     /** Advancements with the mod's {@code impossible} criterion that the port awards from code. */
     static final Set<String> AWARDED_FROM_CODE = Set.of(SONG_OF_THE_PAST, BLUB, RIFTER, KINDA_PURPLEISH, SIFTED_NUGGET,
-        SPICEWOOD, KEEP_INVENTORY);
+        SPICEWOOD, KEEP_INVENTORY, SiftCharoite.BETTER_ENCHANTER);
 
     /** Every advancement of the mod except recipe unlocks. */
     static final List<String> MOD_ADVANCEMENTS = List.of(
@@ -71,7 +71,8 @@ public final class SiftAdvancements {
         Set<String> granted = new LinkedHashSet<>(List.of(
             "story/fallen_civilization", "story/brave_the_unknown", "the_sift/root",
             "the_sift/blood_of_the_gods", "the_sift/certified_sifter", "the_sift/kinda_purpleish",
-            "the_sift/sifted_nugget", "the_sift/spicewood", "the_sift/cover_me_in_siftite", KEEP_INVENTORY));
+            "the_sift/sifted_nugget", "the_sift/spicewood", "the_sift/cover_me_in_siftite", KEEP_INVENTORY,
+            SiftCharoite.BETTER_ENCHANTER));
         if (settings.ancientCityRitual()) {
             granted.add(SONG_OF_THE_PAST);
         }
