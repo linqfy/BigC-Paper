@@ -83,6 +83,7 @@ final class SiftRuntime implements DimensionExtension, Listener {
         if (settings.sifters()) {
             sifters.activate(active);
         }
+        new SiftIchorSnowfall().activate(active);
         active.snapshot(SiftDimension.TIDES).ifPresent(snapshot -> tide = snapshot.phase().id());
     }
 
