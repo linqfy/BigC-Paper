@@ -50,6 +50,7 @@ DATA_PREFIXES = (
     "data/the_sift/structure/",
     "data/the_sift/tags/block/",
     "data/the_sift/loot_table/",
+    "data/the_sift/recipe/",
 )
 
 # Vanilla templates the mod overrides: Ancient City centres with Sonorous Deepslate.
@@ -63,6 +64,8 @@ ASSET_PREFIXES = (
     "assets/the_sift/items/",
     "assets/the_sift/textures/block/",
     "assets/the_sift/textures/item/",
+    "assets/the_sift/textures/entity/equipment/",
+    "assets/the_sift/equipment/",
     "assets/the_sift/sounds/",
     "assets/the_sift/sounds.json",
     "assets/the_sift/lang/en_us.json",
