@@ -349,6 +349,10 @@ public final class DimensionRuntime implements DimensionPlatform {
     }
 
     CompletableFuture<TravelResult> enter(Player player, DimensionKey key, DimensionTravelEvent.Cause cause) {
+        return enter(player, key, cause, null);
+    }
+
+    CompletableFuture<TravelResult> enter(Player player, DimensionKey key, DimensionTravelEvent.Cause cause, String portal) {
         Optional<ActiveDimensionHandle> handle = active(key);
         if (handle.isEmpty()) {
             return done(TravelResult.of(TravelResult.Status.DIMENSION_UNAVAILABLE, status(key).message()));
@@ -364,7 +368,7 @@ public final class DimensionRuntime implements DimensionPlatform {
         double[] clamped = CoordinateMapping.clampToBorder(mapped[0], mapped[1],
             border.getCenter().getX(), border.getCenter().getZ(), border.getSize(), 16.0);
         Location target = new Location(world, clamped[0], source.getY(), clamped[1], source.getYaw(), source.getPitch());
-        return transfer(player, key, true, cause, target, rules);
+        return transfer(player, key, true, cause, target, rules, portal);
     }
 
     @Override
@@ -383,6 +387,10 @@ public final class DimensionRuntime implements DimensionPlatform {
     }
 
     CompletableFuture<TravelResult> leave(Player player, DimensionTravelEvent.Cause cause) {
+        return leave(player, cause, null);
+    }
+
+    CompletableFuture<TravelResult> leave(Player player, DimensionTravelEvent.Cause cause, String portal) {
         Optional<DimensionKey> key = dimensionOf(player.getWorld());
         if (key.isEmpty()) {
             return done(TravelResult.of(TravelResult.Status.FAILED, "Not inside a custom dimension"));
@@ -392,7 +400,7 @@ public final class DimensionRuntime implements DimensionPlatform {
             .flatMap(point -> Optional.ofNullable(plugin.getServer().getWorld(point.world()))
                 .map(world -> new Location(world, point.x(), point.y(), point.z(), point.yaw(), point.pitch())))
             .orElseGet(() -> mappedReturn(player, rules));
-        return transfer(player, key.get(), false, cause, target, rules);
+        return transfer(player, key.get(), false, cause, target, rules, portal);
     }
 
     private Location mappedReturn(Player player, TravelRules rules) {
@@ -409,6 +417,13 @@ public final class DimensionRuntime implements DimensionPlatform {
     CompletableFuture<TravelResult> transfer(
         Player player, DimensionKey key, boolean entering, DimensionTravelEvent.Cause cause,
         Location requested, TravelRules rules
+    ) {
+        return transfer(player, key, entering, cause, requested, rules, null);
+    }
+
+    CompletableFuture<TravelResult> transfer(
+        Player player, DimensionKey key, boolean entering, DimensionTravelEvent.Cause cause,
+        Location requested, TravelRules rules, String portal
     ) {
         if (entering && rules.entryPermission() != null && !player.hasPermission(rules.entryPermission())) {
             return done(TravelResult.of(TravelResult.Status.NO_PERMISSION, "Missing permission " + rules.entryPermission()));
@@ -444,7 +459,7 @@ public final class DimensionRuntime implements DimensionPlatform {
                     return;
                 }
                 Location arrival = findArrival(world, requested, Math.min(radius, chunkRadius * 16 + 8));
-                DimensionTravelEvent event = new DimensionTravelEvent(player, key, entering, cause, source, arrival);
+                DimensionTravelEvent event = new DimensionTravelEvent(player, key, entering, cause, source, arrival, portal);
                 plugin.getServer().getPluginManager().callEvent(event);
                 if (event.isCancelled()) {
                     result.complete(TravelResult.of(TravelResult.Status.CANCELLED, "Cancelled by a plugin"));

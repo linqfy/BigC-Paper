@@ -334,9 +334,10 @@ final class PortalService {
         BuiltPortal used = portal.get();
         boolean insideDimension = runtime.dimensionOf(to.getWorld()).isPresent();
         if (insideDimension) {
-            runtime.leave(player, DimensionTravelEvent.Cause.PORTAL).thenAccept(result -> report(player, result));
+            runtime.leave(player, DimensionTravelEvent.Cause.PORTAL, used.definition().id())
+                .thenAccept(result -> report(player, result));
         } else {
-            runtime.enter(player, used.dimension(), DimensionTravelEvent.Cause.PORTAL).thenAccept(result -> {
+            runtime.enter(player, used.dimension(), DimensionTravelEvent.Cause.PORTAL, used.definition().id()).thenAccept(result -> {
                 report(player, result);
                 if (result.succeeded() && used.definition().createExitPortal()) {
                     plugin.getServer().getScheduler().runTask(plugin, () -> ensureExitPortal(player, used));
