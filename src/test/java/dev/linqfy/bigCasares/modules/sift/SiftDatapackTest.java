@@ -47,6 +47,18 @@ class SiftDatapackTest {
     }
 
     @Test
+    void everyJavaPlacedFeatureTypeHasAPort() {
+        SiftWorldgen worldgen = new SiftWorldgen(SiftData.fromClasspath(), Logger.getLogger("test"));
+        compile(SiftDimension.create(SiftSettings.defaults(), worldgen, List.of()));
+        var features = dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures.create(SiftData.fromClasspath());
+        assertFalse(worldgen.customPlacements().isEmpty());
+        for (SiftWorldgen.CustomPlacement placement : worldgen.customPlacements()) {
+            assertTrue(features.find(placement.featureType()).isPresent(),
+                placement.placedId() + " uses unported feature type " + placement.featureType());
+        }
+    }
+
+    @Test
     void identicalInputsProduceIdenticalBytes() {
         assertEquals(compile(sift(SiftSettings.defaults())).contentHash(), compile(sift(SiftSettings.defaults())).contentHash());
     }
