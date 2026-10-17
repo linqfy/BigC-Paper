@@ -42,10 +42,11 @@ public final class SiftAdvancements {
     public static final String SIFTED_NUGGET = "the_sift/sifted_nugget";
     public static final String SPICEWOOD = "the_sift/spicewood";
     public static final String KEEP_INVENTORY = "the_sift/keep_inventory";
+    public static final String FALSE_ALARM = "the_sift/false_alarm";
 
     /** Advancements with the mod's {@code impossible} criterion that the port awards from code. */
     static final Set<String> AWARDED_FROM_CODE = Set.of(SONG_OF_THE_PAST, BLUB, RIFTER, KINDA_PURPLEISH, SIFTED_NUGGET,
-        SPICEWOOD, KEEP_INVENTORY, SiftCharoite.BETTER_ENCHANTER);
+        SPICEWOOD, KEEP_INVENTORY, SiftCharoite.BETTER_ENCHANTER, FALSE_ALARM);
 
     /** Every advancement of the mod except recipe unlocks. */
     static final List<String> MOD_ADVANCEMENTS = List.of(
@@ -72,7 +73,7 @@ public final class SiftAdvancements {
             "story/fallen_civilization", "story/brave_the_unknown", "the_sift/root",
             "the_sift/blood_of_the_gods", "the_sift/certified_sifter", "the_sift/kinda_purpleish",
             "the_sift/sifted_nugget", "the_sift/spicewood", "the_sift/cover_me_in_siftite", KEEP_INVENTORY,
-            SiftCharoite.BETTER_ENCHANTER));
+            SiftCharoite.BETTER_ENCHANTER, FALSE_ALARM));
         if (settings.ancientCityRitual()) {
             granted.add(SONG_OF_THE_PAST);
         }

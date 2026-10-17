@@ -73,7 +73,9 @@ public final class SiftBlocks {
         soil("dry_healthy_sculk_growth", "red:WD", rotated("the_sift:block/dry_healthy_sculk_growth"), 0.6F,
             ToolType.HOE, List.of(new Drop("the_sift:dry_healthy_sculk", 1, 1, false)));
         soil("soul_block", "red:UD", model("the_sift:block/soul_block"), 0.5F, ToolType.SHOVEL, List.of());
-        soil("ichor_snow_block", "red:NED", model("the_sift:block/ichor_snow_block"), 0.2F, ToolType.SHOVEL, List.of());
+        // A copy of the snow block: needs a shovel, drops four Ichor snowballs (itself with silk touch).
+        CUSTOM.put("ichor_snow_block", block("ichor_snow_block", "red:NED", model("the_sift:block/ichor_snow_block"), 0.2F,
+            ToolType.SHOVEL, ToolTier.WOOD, true, List.of(new Drop("the_sift:ichor_snowball", 4, 4, false)), "block.snow"));
 
         // Overgrown willow (mushroom stems).
         wood("overgrown_willow_log[axis=y]", "overgrown_willow_log", "stem:D",

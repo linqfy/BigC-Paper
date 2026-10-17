@@ -63,6 +63,8 @@ public final class SiftItems {
             "Cooked Sifter Meat").food(7, 9.6F, false).build());
         items.add(ContentItem.builder(id("ichor_bottle"), "POTION").name("item.the_sift.ichor_bottle", "Ichor Bottle")
             .maxStack(1).customize(SiftItems::ichorBottle).build());
+        items.add(ContentItem.builder(id("ichor_snowball"), "SNOWBALL").name("item.the_sift.ichor_snowball", "Ichor Snowball")
+            .maxStack(16).build());
         items.add(ContentItem.builder(id("ichor_bucket"), "WATER_BUCKET").name("item.the_sift.ichor_bucket", "Ichor Bucket")
             .maxStack(1).build());
         items.add(simple("overgrown_willow_sapling", "MANGROVE_PROPAGULE"));
