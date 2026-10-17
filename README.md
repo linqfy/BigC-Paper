@@ -41,6 +41,8 @@ del servidor. Los generadores Python son pasos manuales, separados del build.
 - [Índice](docs/README.md): guías actuales y documentos históricos.
 - [Desarrollo](docs/development.md): arquitectura, dependencias, tests y CI.
 - [Operación](docs/operations.md): instalación, configuración, packs y recargas.
+- [Dimensiones custom](docs/dimensions/README.md) y [The Sift](docs/dimensions/the-sift.md)
+  (port del mod de Mielon; requiere reiniciar una vez tras instalar).
 - [Contribución](GUIDELINES.MD) y [guía de agentes](AGENTS.md).
 - [Modelado](docs/blockbench/00-bettermodel-setup.md),
   [Celular](docs/celular/README.md) y

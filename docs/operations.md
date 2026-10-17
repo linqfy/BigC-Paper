@@ -80,3 +80,23 @@ Pack staging protects the BigCasares active artifact, but BetterModel reload occ
 first and outside that transaction. `/bc reload pack` does not rebuild/re-register
 the packaged Bedrock pack. Bedrock asset changes require a rebuilt JAR and a
 Geyser lifecycle/restart check. Tests do not establish live-client behavior.
+
+## Custom dimensions and The Sift
+
+Dimensions are delivered as a generated datapack; see the
+[dimension guide](dimensions/README.md) and [The Sift](dimensions/the-sift.md).
+
+- After the first install, and after any change that alters the datapack (worldgen,
+  `the-sift.seed-salt`, toggling the Ancient City ritual), the log asks for a
+  restart. Until then `/dimension list` shows `PENDING_RESTART`. `/bc reload` does
+  not add, remove or regenerate dimensions.
+- `dimension-framework.datapack.install-mode: auto` installs into
+  `<level>/datapacks/bigcasares-dimensions`; `manual` only writes
+  `plugins/BigCasares/dimensions/generated-datapack`. Previous versions are kept in
+  `plugins/BigCasares/dimensions/datapack-backups/`.
+- Set `block-updates.disable-mushroom-block-updates: true` in
+  `config/paper-global.yml` before players use Sift blocks; the custom-content
+  module warns when it is missing.
+- Back up `plugins/BigCasares/dimensions/state.yml` (return points, lit portals)
+  with the world. Removing the plugin leaves the dimension datapack and world in
+  place; remove the datapack folder deliberately if the dimension is retired.

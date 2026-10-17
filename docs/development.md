@@ -30,6 +30,8 @@ bash gradlew test
 bash gradlew test --tests 'dev.linqfy.bigCasares.modules.teams.*'
 bash gradlew --no-daemon clean build
 bash gradlew generateResourcePacks
+bash gradlew generateCustomBlockstates   # after changing custom blocks
+bash gradlew generateSiftDatapack        # writes build/generated-datapacks/ for inspection
 bash gradlew runServer
 ```
 
@@ -47,12 +49,15 @@ All Java packages are under `src/main/java/dev/linqfy/bigCasares/`.
 | `BigCasares.java`, `command/` | Bootstrap, dependency wiring and shared command routing |
 | `module/`, `module/runtime/`, `reload/` | Ordered lifecycle, resource ownership, reload results/generation guards |
 | `items/`, `items/catalog/`, `modules/items/` | Custom item identity, declarative catalog, recipes and reconciliation |
+| `dimension/`, `modules/dimension/` | [Dimension framework](dimensions/README.md): definitions, worldgen DSL, datapack compiler/installer, travel and portals |
+| `blocks/`, `content/`, `modules/content/` | Custom full-cube blocks on mushroom states and code-defined content items |
+| `modules/sift/` | [The Sift](dimensions/the-sift.md): imported mod data, feature ports, ritual and creatures |
 | `modules/resourcepack/`, `modules/model/`, `platform/`, `modules/geyser/` | Pack validation/publication, BetterModel, client platform/Bedrock bridge |
 | `modules/` | Economy, missions, teams/Nexus, bosses, items, events, moderation, server control and Discord |
 | `src/main/resources/` | Plugin descriptor, config/default stores, boss YAML, item catalog and packaged models/media |
 | `resourcepack/` | Java/Bedrock assets, shared registry and authoring sources |
 | `src/test/java/` | JUnit tests, fake gateways and asset/source contracts |
-| `tools/` | Manual Python generators and a separate Node protocol client |
+| `tools/` | Manual Python generators (including the Sift import and GeckoLib model converter) and a separate Node protocol client |
 
 `PluginModule` supports both `onEnable()` and `onEnable(RuntimeRegistrationScope)`.
 The manager enables in registration order, stops/cleans a failing activation,

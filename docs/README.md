@@ -11,6 +11,8 @@ guides explain how to navigate and operate it:
 | BetterModel setup and model workflows | [Setup](blockbench/00-bettermodel-setup.md), [model overview](blockbench/01-boss-models-overview.md) |
 | Geometry, textures and animation | [Geometry](blockbench/02-geometry-and-textures.md), [Bedrock](blockbench/03-bedrock-animations.md), [Java](blockbench/04-java-animations-and-registration.md) |
 | Placeable entities, bosses and players | [Placeables](blockbench/05-placeable-entity-workflow.md), [bosses](blockbench/06-boss-entity-workflow.md), [players](blockbench/07-player-animation-workflow.md) |
+| Custom dimensions: framework, API, building a new one | [Dimensions](dimensions/README.md) |
+| The Sift dimension (port of Mielon's mod) | [The Sift](dimensions/the-sift.md) |
 | Phone assets and video conversion | [Celular](celular/README.md) |
 | Protocol test client | [Client](../tools/minecraft-test-client/README.md) |
 | Audit findings and cleanup proposals | [2026-10-14 audit](audits/2026-10-14.md) |
