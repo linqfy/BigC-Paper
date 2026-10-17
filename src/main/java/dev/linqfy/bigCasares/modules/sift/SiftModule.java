@@ -104,6 +104,7 @@ public final class SiftModule implements PluginModule {
             BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(plugin, scope);
             registrations.registerListener("sift-advancements", new SiftAdvancementTriggers(platform, blocks));
             registrations.registerListener("sift-ichor-items", new SiftIchorItems(platform, items));
+            registrations.registerListener("sift-ichor-cauldrons", new SiftIchorCauldrons(platform, items));
             registrations.registerListener("sift-willow-saplings", new SiftWillowSaplings(plugin, platform, items, features));
             if (settings.ancientCityRitual()) {
                 new SiftRitual(plugin, registrations, platform, models).start();

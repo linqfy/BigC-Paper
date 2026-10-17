@@ -20,16 +20,12 @@ import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
-import java.util.stream.LongStream;
 
 /**
  * Overgrown Willow saplings ({@code OvergrownWillowSaplingBlock} and the vines'
@@ -53,7 +49,7 @@ final class SiftWillowSaplings implements Listener {
     private final Supplier<Optional<DimensionPlatform>> platform;
     private final ContentItemFactory items;
     private final SiftFeatures features;
-    private final NamespacedKey saplingsKey;
+    private final SiftChunkMarks saplings = new SiftChunkMarks(new NamespacedKey(SiftBlocks.NS, "willow_saplings"));
 
     SiftWillowSaplings(JavaPlugin plugin, Supplier<Optional<DimensionPlatform>> platform, ContentItemFactory items,
                        SiftFeatures features) {
@@ -61,24 +57,6 @@ final class SiftWillowSaplings implements Listener {
         this.platform = platform;
         this.items = items;
         this.features = features;
-        this.saplingsKey = new NamespacedKey(SiftBlocks.NS, "willow_saplings");
-    }
-
-    /** Block position in one long, as vanilla's {@code BlockPos.asLong}. */
-    static long pack(int x, int y, int z) {
-        return ((long) (x & 0x3FFFFFF) << 38) | ((long) (z & 0x3FFFFFF) << 12) | (y & 0xFFF);
-    }
-
-    static long[] with(long[] packed, long position) {
-        return contains(packed, position) ? packed : LongStream.concat(Arrays.stream(packed), LongStream.of(position)).toArray();
-    }
-
-    static long[] without(long[] packed, long position) {
-        return Arrays.stream(packed).filter(value -> value != position).toArray();
-    }
-
-    static boolean contains(long[] packed, long position) {
-        return Arrays.stream(packed).anyMatch(value -> value == position);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -152,20 +130,11 @@ final class SiftWillowSaplings implements Listener {
     }
 
     private boolean isTracked(Block block) {
-        long[] packed = block.getChunk().getPersistentDataContainer().get(saplingsKey, PersistentDataType.LONG_ARRAY);
-        return packed != null && contains(packed, pack(block.getX(), block.getY(), block.getZ()));
+        return saplings.isMarked(block);
     }
 
     private void track(Block block, boolean planted) {
-        PersistentDataContainer chunk = block.getChunk().getPersistentDataContainer();
-        long[] packed = chunk.getOrDefault(saplingsKey, PersistentDataType.LONG_ARRAY, new long[0]);
-        long position = pack(block.getX(), block.getY(), block.getZ());
-        long[] updated = planted ? with(packed, position) : without(packed, position);
-        if (updated.length == 0) {
-            chunk.remove(saplingsKey);
-        } else {
-            chunk.set(saplingsKey, PersistentDataType.LONG_ARRAY, updated);
-        }
+        saplings.mark(block, planted);
     }
 
     private boolean inSift(Block block) {
