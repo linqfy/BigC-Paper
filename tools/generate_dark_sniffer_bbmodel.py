@@ -88,13 +88,15 @@ def bedrock_geometry(description):
 
 
 def drop_degenerate_faces(elements):
-    """A cube with no thickness along an axis (the sniffer's belly and mouth planes) only has the two faces
-    across that axis; the others have no area and, in box UV layout, reach past the texture."""
+    """A cube with no thickness along an axis (the sniffer's belly and mouth planes) only shows the two faces
+    across that axis; the others have no area and, in box UV layout, reach past the texture. They stay in
+    the cube without a texture: BetterModel expects all six faces of a cube."""
     across = {0: ("east", "west"), 1: ("up", "down"), 2: ("north", "south")}
     for element in elements:
         for axis, faces in across.items():
             if element["from"][axis] == element["to"][axis]:
-                element["faces"] = {name: face for name, face in element["faces"].items() if name in faces}
+                element["faces"] = {name: (face if name in faces else {"uv": [0, 0, 0, 0], "texture": None})
+                                    for name, face in element["faces"].items()}
 
 
 def main(arguments):
