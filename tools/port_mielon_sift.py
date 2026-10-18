@@ -103,6 +103,23 @@ def without_music_events(raw: bytes) -> bytes:
     return (json.dumps(kept, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
 
 
+# Vanilla sound events the mod's 26.3 sounds.json names that 26.2 does not have, and the 26.2 event
+# for the same moment (a copper golem taking an item with empty hands).
+SOUND_EVENTS_26_2 = {
+    "minecraft:entity.copper_golem.item_get": "minecraft:entity.copper_golem.no_item_get",
+}
+
+
+def with_262_sound_events(raw: bytes) -> bytes:
+    """Points references to 26.3-only vanilla sound events at their 26.2 counterparts."""
+    sounds = json.loads(raw)
+    for definition in sounds.values():
+        for sound in definition.get("sounds", []):
+            if isinstance(sound, dict) and sound.get("type") == "event" and sound.get("name") in SOUND_EVENTS_26_2:
+                sound["name"] = SOUND_EVENTS_26_2[sound["name"]]
+    return (json.dumps(sounds, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
+
+
 def safe_name(name: str) -> bool:
     return not name.startswith("/") and ".." not in name.split("/") and "\\" not in name
 
@@ -155,8 +172,10 @@ def main() -> int:
                     skipped += 1
                     continue
                 raw = archive.read(name)
-                if name == "assets/the_sift/sounds.json" and not include_music:
-                    raw = without_music_events(raw)
+                if name == "assets/the_sift/sounds.json":
+                    if not include_music:
+                        raw = without_music_events(raw)
+                    raw = with_262_sound_events(raw)
                 if "/models/" in name and name.endswith(".json") and uses_unsupported_model_syntax(raw):
                     skipped += 1
                     continue

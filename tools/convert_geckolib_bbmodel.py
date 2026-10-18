@@ -5,7 +5,7 @@ into a Blockbench .bbmodel that BetterModel can load.
 Usage:
     python3 -I tools/convert_geckolib_bbmodel.py <mod.jar> <entity> <texture> <output-name>
         [--rename geckolib=bbmodel ...] [--loop name=seconds ...] [--speed name=factor ...]
-        [--skip geckolib-name ...]
+        [--skip geckolib-name ...] [--project-texture]
 
 Examples (The Sift, see docs/dimensions/the-sift.md):
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
@@ -15,9 +15,9 @@ Examples (The Sift, see docs/dimensions/the-sift.md):
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
         singer singer the_sift_singer --rename idle=stand --rename walk=stride
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
-        rift rift/sift the_sift_rift
+        rift rift/sift the_sift_rift --project-texture
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
-        rift rift/overworld the_sift_rift_overworld
+        rift rift/overworld the_sift_rift_overworld --project-texture
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
         sifter sifter the_sift_sifter --rename running=walk --speed walk=2.5
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
@@ -37,6 +37,11 @@ reproducible.
 --rename: GeckoLib sets speeds in code (the Sifter runs at 2.5x), while a
 bbmodel stores only keyframe times, so keyframe times and length are divided
 by the factor.
+
+--project-texture replaces the geometry's UVs with the image projected flat across the model's front
+and back (thin strips of it on the other faces). The mod draws its rifts with a screen-space render
+type and gives them placeholder UVs outside the texture, which BetterModel drops; the projection is the
+substitute.
 
 --skip leaves an animation out, by the name it has after --rename: animations that
 move nothing (a bare idle) or that GeckoLib's renderer drives from code. --rename
@@ -209,11 +214,42 @@ def convert_animations(model, animations, groups, renames, loops, speeds, skips=
     return converted
 
 
+def project_texture(elements, uv_width, uv_height):
+    """Maps the whole image onto the model's X/Y extent: south faces read left to right, north mirrored."""
+    min_x = min(element["from"][0] for element in elements)
+    max_x = max(element["to"][0] for element in elements)
+    min_y = min(element["from"][1] for element in elements)
+    max_y = max(element["to"][1] for element in elements)
+
+    def u(x):
+        return number((x - min_x) / (max_x - min_x) * uv_width)
+
+    def v(y):
+        return number((max_y - y) / (max_y - min_y) * uv_height)
+
+    for element in elements:
+        u0, u1 = u(element["from"][0]), u(element["to"][0])
+        v0, v1 = v(element["to"][1]), v(element["from"][1])
+        edge_u = min(0.25, u1 - u0)
+        edge_v = min(0.25, v1 - v0)
+        element["faces"] = {
+            "south": {"uv": [u0, v0, u1, v1], "texture": 0},
+            "north": {"uv": [u1, v0, u0, v1], "texture": 0},
+            "east": {"uv": [number(u1 - edge_u), v0, u1, v1], "texture": 0},
+            "west": {"uv": [u0, v0, number(u0 + edge_u), v1], "texture": 0},
+            "up": {"uv": [u0, v0, u1, number(v0 + edge_v)], "texture": 0},
+            "down": {"uv": [u0, number(v1 - edge_v), u1, v1], "texture": 0},
+        }
+
+
 def main(arguments):
     renames, loops, speeds, skips, positional = {}, {}, {}, set(), []
+    projected = False
     iterator = iter(arguments)
     for argument in iterator:
-        if argument == "--rename":
+        if argument == "--project-texture":
+            projected = True
+        elif argument == "--rename":
             source, target = next(iterator).split("=", 1)
             renames[source] = target
         elif argument == "--loop":
@@ -242,6 +278,8 @@ def main(arguments):
     # uv_width/uv_height), as GeckoLib maps them: HD and non-square images both work.
     uv_width, uv_height = description["texture_width"], description["texture_height"]
     elements, groups, outliner = convert_geometry(model, geometry)
+    if projected:
+        project_texture(elements, uv_width, uv_height)
     bbmodel = {
         "meta": {"format_version": "5.0", "model_format": "free", "box_uv": False},
         "name": model, "model_identifier": model, "visible_box": [2, 2.5, 0.75],
