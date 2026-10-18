@@ -130,8 +130,8 @@ Every class that ports mod code lists its own differences in its javadoc.
 ## Spawn eggs, music discs and locating ruins (stand-ins)
 
 These replace three things the mod does with entity types, sound events and a global tracker that a
-vanilla client and server cannot register. They are substitutes, not copies; none of this has run on a
-live server yet.
+vanilla client and server cannot register. They are substitutes, not copies. The eggs, the Rift disc and
+`/dimension locate` have been used on a live test server; see Verification status for what was not.
 
 ### Spawn eggs
 
@@ -400,11 +400,57 @@ terrain blending, template placement, clearing, planting and determinism over an
 terrain, the overlay region, the framework's frame detection on the built structure, the travel
 listener's decisions and the stored anchor. The
 generated datapack has been checked against Minecraft 26.2's registries and block
-states. **Nothing has been run on a live Paper server yet**: the sampler's real cost and rate, `Block#getLightLevel` as `getMaxLocalRawBrightness`, the `HIT_GROUND` fall distance, BetterModel's per-bone brightness on the converted models, light blocks moving with the Singer and the golem (and none left after a stop, a chunk unload or a kill -9), world creation,
-generation in game, client rendering, BetterModel animation playback, the
-ritual in an Ancient City, the Echo Golem's pathfinding through a real canyon,
-the Singer's appearance and the barter, and the main portal (asynchronous chunk generation, the
-snapshot-based plan and its tick-sliced application, lighting, the arrival and return
-through real portals, the exit rift when the entrance is gone, `/dimension locate`) still
-need a test server, as do the spawn eggs (creating the creatures, water, spawners, dispensers), the discs (the jukebox
-song, the hidden tooltip line, Rift Resonance) and the abandoned portal search (asynchronous generation and repeated answers).
+states.
+
+### Live test server (2026-10-18)
+
+Paper 26.2 build 134 with BetterModel 3.2.0, offline mode, a fresh world (seed 20261018), and the
+Vault-dependent modules switched off. A Mineflayer bot (26.1 protocol through ViaVersion and
+ViaBackwards 5.12.2, test server only) played through it in creative and survival mode. Verified:
+
+- **Install and world.** The datapack installs on the first start (`PENDING_RESTART`), and the Sift is
+  `ACTIVE` after the restart. All 22 advancements and 76 recipes load. Chunks generate without errors:
+  custom blocks as their mushroom-block states, plants as their vanilla look-alikes.
+- **Creatures.** Natural Sifters, Blubs, Echo Golems and plain sniffers spawn. Sifters, Blubs, Singers,
+  Echo Golems and Dark Sniffers wear their BetterModel models: the bot sees the model displays riding
+  each body. A Sifter attacks. An Echo Golem walks around without errors (about 40 blocks in 80 seconds).
+- **Spawn eggs.** All five create the real, dressed creature. The Echo Golem's egg refuses a spot where
+  the golem would collide.
+- **Main portal.** It is built in the background on the first activation: 323 chunks, 51,212 blocks,
+  about 30 seconds. `/dimension locate` finds it and an abandoned portal.
+- **Ancient City ritual.** A city generated after the install has its eight Sonorous Deepslate. The full
+  ritual works: the goat horn awards Song of the Past, the Singer rises and turns the blocks to note
+  mode, and the bot places and tunes note blocks. Striking 1 3 7 6 5 2 4 8 lights the frame, and the
+  reverse melody closes it. Fallen Civilization is awarded on arrival in the city.
+- **Travel.** Entering through the city portal puts the player at the main portal's anchor; walking
+  into the main portal leads back to the city portal.
+  - The crafted portal works both ways: an echo shard lights it, the return frame is built, and the
+    player comes back to the return point without bouncing.
+  - Natural rifts open 20–64 blocks away and lead to the Overworld.
+  - When there is no entrance to return to, the main portal opens an exit rift at the respawn point.
+    That rift leads back to the main portal's anchor. Rifter is awarded.
+- **Blocks and items.**
+  - Siftslate breaks into the Cobbled Siftslate content item.
+  - Fronds drop only with shears, and then as the content item.
+  - Siftslate Bricks craft from Cobbled Siftslate; the same recipe with vanilla mushroom blocks
+    crafts nothing.
+  - Siftite gear is kept through death and comes back after respawn (Keep Inventory).
+  - Sift water gives Ichor's slowness, regeneration and haste.
+  - The Rift disc in a jukebox near an open rift awards Rift Resonance.
+- **Lights.** A Singer carries one level-15 light block at her head and leaves none behind. A server
+  killed with lights placed removes them on the next start.
+
+The live run found and fixed six bugs, now covered by tests:
+
+- a Dark Sniffer model cube without all six faces broke every BetterModel reload;
+- location advancements used the mod's 26.3 condition form;
+- the main portal's state key was rejected by the dimension store;
+- Echo Golem navigation had no body;
+- the arrival search preferred a roof over a safe requested spot;
+- an entity on the best rift spot cancelled the exit rift.
+
+**Still unverified:** anything only a real client shows (rendering, BetterModel animations and
+brightness, sounds, the hidden disc tooltip line). Also the Singer's barter, the Sculkflower,
+Charoite enchanting, Dark Sniffers from the generator, an Echo Golem carrying a Soul Block (and its
+light), spawners and dispensers with the eggs, the random-tick sampler's cost on a busy server,
+Bedrock clients, and a server with players online for hours.

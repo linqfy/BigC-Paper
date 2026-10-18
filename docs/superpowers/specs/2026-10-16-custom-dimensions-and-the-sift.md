@@ -53,6 +53,11 @@ creatures' Bukkit-free brains, spawners and timings, the main portal's site sear
 build plan, recipes (all 76 translate), advancements (all 22 written) and the
 substitutes; the generated pack was checked against 26.2 registries and block states.
 Final state: clean build passes; the full suite runs 1574 tests with only the 33
-environment failures that also fail on the untouched baseline. No live
-server was available in the development sandbox (Paper and Mojang hosts blocked);
-live verification is still outstanding.
+environment failures that also fail on the untouched baseline.
+
+The Sift was then played on a live Paper 26.2 test server by a bot. Install, generation, creatures
+and models, the ritual, all travel paths, rifts, look-alike blocks, a recipe, Ichor, Siftite
+recovery and moving lights all worked. That run found six bugs, all fixed with tests: a broken
+Dark Sniffer model cube, 26.3-only advancement conditions, the main portal's state key, Echo
+Golem navigation, roof-preferring arrivals, and occupied rift spots. What was and was not
+verified is listed under Verification status in `docs/dimensions/the-sift.md`.
