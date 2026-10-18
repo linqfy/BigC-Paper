@@ -136,24 +136,24 @@ No modificar `BigCasares.initializeRuntime()` ni `config.yml`.
   versión 1; rechaza otras versiones. `close()` es idempotente y espera el cierre
   de una transacción activa antes de liberar la conexión.
 
-- [ ] Añadir SQLite JDBC 3.50.3.0 a Gradle y `plugin.yml`, sin actualizar otras
+- [x] Añadir SQLite JDBC 3.50.3.0 a Gradle y `plugin.yml`, sin actualizar otras
   dependencias. Crear pruebas sobre archivos temporales reales.
-- [ ] Escribir pruebas de partidas balanceadas por activo, débito sin saldo,
+- [x] Escribir pruebas de partidas balanceadas por activo, débito sin saldo,
   control no gastable, overflow de cuenta destino y contrapartida, y emisión única.
-- [ ] Probar commit de un crédito y replay con el mismo UUID; otra huella debe
+- [x] Probar commit de un crédito y replay con el mismo UUID; otra huella debe
   rechazarse. Cerrar/reabrir y exigir el mismo recibo y las mismas partidas.
-- [ ] Forzar una excepción dentro del callback después de una transferencia:
+- [x] Forzar una excepción dentro del callback después de una transferencia:
   saldo, partidas, cuentas nuevas y operación deben quedar como antes.
-- [ ] Probar `user_version` futuro sin borrar tablas, configuración PRAGMA,
+- [x] Probar `user_version` futuro sin borrar tablas, configuración PRAGMA,
   claves foráneas y rechazo de operaciones después de `close()`.
-- [ ] Ejecutar `bash gradlew test --tests '*finance.SqliteExchangeLedgerTest'`
+- [x] Ejecutar `bash gradlew test --tests '*finance.SqliteExchangeLedgerTest'`
   y registrar los fallos iniciales.
-- [ ] Implementar esquema con claves únicas, `CHECK` de rango/tipo de saldo,
+- [x] Implementar esquema con claves únicas, `CHECK` de rango/tipo de saldo,
   prepared statements y `BEGIN IMMEDIATE`. Acumular partidas con overflow exacto,
   exigir suma cero por activo antes del commit y persistir el recibo con la huella.
   Una reserva del pool siempre se corresponde con su cuenta contable.
-- [ ] Repetir la prueba enfocada y exigir cero fallos.
-- [ ] Commit: `feat(finance): persist balanced and idempotent exchange transactions`.
+- [x] Repetir la prueba enfocada y exigir cero fallos.
+- [x] Commit: `feat(finance): persist balanced and idempotent exchange transactions`.
 
 ### Task 3: Lanzamientos, trading y retiro de LP
 

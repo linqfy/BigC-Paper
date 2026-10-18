@@ -9,6 +9,7 @@ authors: [ linqfy ]
 description: BigCasares core plugin for server modules
 libraries:
   - com.pocketcombats:openskill:1.1
+  - org.xerial:sqlite-jdbc:3.50.3.0
   - net.dv8tion:JDA:6.4.1
 
 commands:
