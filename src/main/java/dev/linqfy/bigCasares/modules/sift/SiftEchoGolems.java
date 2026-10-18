@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 import java.util.function.BiFunction;
 import java.util.logging.Level;
@@ -101,9 +102,12 @@ import java.util.logging.Level;
  *       The mod's legacy scan of canyons without records is not ported, nor the spawn table entry in the biomes
  *       (the spawner replaces it).</li>
  *   <li>The golem looks where it walks; the mod's looking at players within six blocks and looking around, and the
- *       head following the head rotation, are not ported, nor are the dynamic light at the Soul Block, the emissive
- *       texture ({@code echo_golem_emissive.png}) and the glowing outline layer, which are client-side features of
- *       the mod. The golem has no drops (the mod's table does not exist) and anything the wolf would drop is removed.</li>
+ *       head following the head rotation, are not ported, nor is the glowing outline layer. The Soul Block's glow
+ *       and dynamic light are client-side features of the mod and have substitutes: the {@code soul_block} bone (which
+ *       the mod's {@code EchoGolemSoulGlowLayer} draws at full brightness, and which is hidden unless the golem
+ *       carries one) is drawn at full brightness through BetterModel's per-bone brightness, and
+ *       {@link SiftDynamicLights} moves a level-14 light block 2.125 blocks above the golem while it carries a Soul Block.
+ *       The golem has no drops (the mod's table does not exist) and anything the wolf would drop is removed.</li>
  *   <li>Step sounds are played when the golem has covered a stride of about 1.7 blocks on the ground (Bukkit has no
  *       step hook). It is kept out of the biome spawn tables and out of the wolf conversion of {@link SiftCreatures}.</li>
  *   <li>The spawn egg is a content item (a wolf spawn egg that spawns a golem instead) that works in the Sift only.</li>
@@ -132,6 +136,12 @@ final class SiftEchoGolems implements Listener {
     private static final double STRIDE = 1.0 / 0.6;
     private static final String SEARCH_WALK = "search_walk";
     private static final String SOUL_HIDDEN = "soul_hidden";
+    /** The model's {@code soul_block} bone, which the mod's {@code EchoGolemSoulGlowLayer} draws at full brightness. */
+    private static final Set<String> SOUL_BONES = Set.of("soul_block");
+    /** The mod's {@code EchoLightBehavior.LUMINANCE}. */
+    static final int SOUL_LIGHT_LEVEL = 14;
+    /** The {@code soul_light} locator: 34 pixels up, in a model at scale one. */
+    static final double SOUL_LIGHT_HEIGHT = 34.0 / 16.0;
 
     private final JavaPlugin plugin;
     private final JavaModelGateway models;
@@ -387,6 +397,21 @@ final class SiftEchoGolems implements Listener {
         shared.clear();
     }
 
+    /**
+     * The light of every golem that carries a Soul Block: level 14 at the mod's {@code soul_light} locator, 2.125
+     * blocks above the golem, as the mod's {@code EchoLightBehavior}.
+     */
+    List<SiftDynamicLights.Source> lightSources() {
+        List<SiftDynamicLights.Source> sources = new ArrayList<>();
+        for (Runtime runtime : golems.values()) {
+            if (runtime.body.isValid() && runtime.body.isTicking() && runtime.brain.hasSoulBlock()) {
+                sources.add(new SiftDynamicLights.Source(runtime.body.getUniqueId(),
+                    runtime.body.getLocation().add(0.0, SOUL_LIGHT_HEIGHT, 0.0), SOUL_LIGHT_LEVEL));
+            }
+        }
+        return sources;
+    }
+
     // --- spawn egg ---------------------------------------------------------------------------------------
 
     /** The spawn egg content item: right-clicking a block puts a golem on top of it. */
@@ -590,6 +615,7 @@ final class SiftEchoGolems implements Listener {
                 handle = models.attach(body, MODEL);
                 // The body is scaled to get its hitbox; the model must keep the mod's size.
                 models.scale(handle, 1.0F);
+                models.brighten(handle, 15, 15, SOUL_BONES);
                 poses = new ModelPoses(models, handle);
                 soulPoses = new ModelPoses(models, handle);
                 updateModel();

@@ -84,8 +84,8 @@ clients cannot show new content types, or original to this port.
 | Day/night cycle | From the mod | The Sift's own clock with the mod's 24,120-tick day |
 | Blub | Adapted | A silent wolf with the mod's model, textures, sounds and stats; tempted and tamed (one in three) with Soul Blocks, heals with Soul Blocks or food, sits, follows and defends its owner |
 | Sifter | Adapted | A silent, scaled silverfish (hostile, melee, no daylight burning, no climbing; hitbox 0.9 x 0.675 against the mod's 0.9 x 0.95) with the mod's model, sounds and stats (40 health, 10 attack, 28 follow range). The spawner is the mod's: every 80 ticks near each player, never on Peaceful, in groups of up to five on Siftslate, growth and healthy-sculk floors, with the mod's biome chances and area caps. It bites after a 14-tick wind-up, drops raw Sifter meat (cooked when it dies on fire, plus Looting) and 7 experience. See `SiftSifters` for every difference |
-| Singer | Adapted | At the Ancient City, the converted model performs the ritual song. In the Sift she is a silent wandering trader (1.48 x 4.8) with the mod's model, sounds and stats that rises from the ground when an Echo Golem brings a Soul Block, roams for 30 seconds, receives the golem's soul and trades: right-click or drop a Soul Block and she throws a gift (the mod's table; her Music Disc Wellspring is the stand-in disc, see Music discs). A name tag or the spawn egg makes her stay. See `SiftSingers` for every difference |
-| Echo Golem | Adapted | A silent wolf scaled to the mod's 1.15 x 1.65 with the mod's model, sounds and stats (34 health, 0.23 speed). One spawns at every Soul Canyon and one near each player where none is within 165 blocks. It explores, walks into a canyon, picks up a Soul Block, carries it out and delivers it to a Singer (calling one if none is near) or, once given an Echo Shard, to that player; it bows, sits for 30 seconds if hurt or right-clicked while carrying, and keeps its state in the entity data. Canyons carved before this version are not known to the golems. See `SiftEchoGolems` and `EchoGolemBrain` for every difference |
+| Singer | Adapted | At the Ancient City, the converted model performs the ritual song. In the Sift she is a silent wandering trader (1.48 x 4.8) with the mod's model, sounds and stats that rises from the ground when an Echo Golem brings a Soul Block, roams for 30 seconds, receives the golem's soul and trades: right-click or drop a Soul Block and she throws a gift (the mod's table; her Music Disc Wellspring is the stand-in disc, see Music discs). A name tag or the spawn egg makes her stay. Her glowmask and the light at her head are substituted (head, antlers, arms, hands and torso drawn at full brightness; a level-15 light block that follows her head). See `SiftSingers` for every difference |
+| Echo Golem | Adapted | A silent wolf scaled to the mod's 1.15 x 1.65 with the mod's model, sounds and stats (34 health, 0.23 speed). One spawns at every Soul Canyon and one near each player where none is within 165 blocks. It explores, walks into a canyon, picks up a Soul Block, carries it out and delivers it to a Singer (calling one if none is near) or, once given an Echo Shard, to that player; it bows, sits for 30 seconds if hurt or right-clicked while carrying, and keeps its state in the entity data. The carried Soul Block is drawn at full brightness and lit by a level-14 light block that follows the golem. Canyons carved before this version are not known to the golems. See `SiftEchoGolems` and `EchoGolemBrain` for every difference |
 | Sniffers | From the mod | Placed by sniffer caves and surface sculk regions. The biomes also list sniffers, but vanilla sniffer spawn rules need grass, so, as in the mod, they do not spawn naturally on Sift ground. Sniffers dig sculk (the datapack adds it to `#minecraft:sniffer_diggable_block`, in every world) and are infected by it, see Dark Sniffer |
 | Dark Sniffer | Adapted | The surface sculk regions place one or two. A real, vanilla sniffer (the mod's hitbox, brain, digging and sounds) hidden under a BetterModel model of the vanilla sniffer with the mod's `dark_sniffer.png` (a vanilla client has no second sniffer texture). The mod's `DarkSnifferEntity#tick` is ported whole: 40 health, 7 attack, it hunts players (not in Creative or Spectator, never on Peaceful) and ordinary sniffers within 32 blocks, bites every 24 ticks, and from 5 blocks away in sight pulls its prey in with a sonic sniff (10-tick wind-up, a wave at 1.5 blocks per tick led by the prey's velocity, 100-tick cooldown); otherwise it wanders around its home. It digs Sculkflower Seeds out of sculk, drops one sculk, cannot be fed or bred, and is never targeted or angered by Wardens, which pet it now and then. Sniffers that dig sculk are infected, shake for 600 ticks and become Dark Sniffers; ordinary sniffers within 20 blocks of one run away. A tamed Blub that kills one awards Food Chain. See `SiftDarkSniffers` for every difference (Sift world only, no sound-wave particle or Warden petting animation; the spawn egg is a stand-in item, see Spawn eggs) |
 | Sculkflower | Adapted | Seeds (torchflower seeds underneath) are planted on sculk, healthy sculk, dry healthy sculk or farmland; the crop is a torchflower crop whose two stages grow with the mod's rules (light 9, growth speed with healthy sculk as moist farmland, one age per bone meal) into the Sculkflower (a warped fungus), which drops itself, makes light blue dye and is compostable at the mod's chances. Placed ones are remembered per chunk; the datapack lets crops and fungi stand on sculk and red mushroom blocks. See `SiftSculkflowers` |
@@ -102,7 +102,10 @@ clients cannot show new content types, or original to this port.
 | Ichor snow and snowballs | From the mod / adapted | Snow layers are the Sift's Ichor snow and drop Ichor snowballs; the Ichor snow block drops four. While it rains in the Sift, Ichor snow settles on Ichor Snowy Peaks only (block light below 10, at most two layers), as the mod's weather mixin does; Paper already keeps weather per world. An Ichor snowball landing within 16 blocks of a Warden awards False Alarm |
 | Charoite enchanting | From the mod | Charoite in the enchanting table's lapis slot (it is a lapis lazuli underneath) adds 20 levels to each requirement and one level beyond the vanilla maximum to multi-level enchantments; the item is marked and can no longer go in an anvil. Paper rolls from the displayed cost, so the port rolls again from the base cost with the table's seed (`SiftCharoite`). The anvil repairs Siftite gear only with Siftite ingots |
 | Willow saplings | From the mod / adapted | A mangrove propagule on the client, remembered per chunk; where vanilla would grow a mangrove the mod's willow grows (same feature code as the world generator), or the sapling stays when it does not fit. Saplings come from willow vines broken with Fortune III (no shears, no silk touch); willow foliage drops itself |
-| Soils and bone meal | From the mod / adapted | Siftslate growth turns into siftslate, dry sculk growth into dry healthy sculk, under full blocks or fluids; siftslate growth turns snowy under Ichor snow. Bone meal spreads growth onto siftslate next to it, grows patches of overgrown plants on growth and spreads Sift plants (their stand-ins, in the Sift). Custom blocks have no random ticks, so darkness alone does not kill growth |
+| Soils and bone meal | From the mod / adapted | Siftslate growth turns into siftslate, dry sculk growth into dry healthy sculk, under full blocks or fluids; siftslate growth turns snowy under Ichor snow. Bone meal spreads growth onto siftslate next to it, grows patches of overgrown plants on growth and spreads Sift plants (their stand-ins, in the Sift). Growth also dies where the light above it is below 4, through the random-tick sampler below |
+| Random ticks | Substitute | Custom blocks are mushroom-block states and get no random ticks, so a bounded sampler draws them (see Server-side substitutes): growth dying in the dark and willow foliage decaying |
+| Willow foliage decay | Substitute | Foliage that no player placed and that has no willow log or wood (or vanilla log) within six steps through leaves breaks on a sampled tick and drops the foliage itself, as the mod's loot table says. Foliage a player places is persistent |
+| Healthy Sculk trampling | Substitute | A player landing from a fall of more than half a block on Healthy Sculk or Dry Healthy Sculk destroys the crop, stem or Sculkflower on it, with drops |
 | Siftite gear | Adapted | Sword, shovel, pickaxe, axe, hoe, spear, four armour pieces and the upgrade template are netherite items with the mod's stats (durability, damage, speed, mining speed, armour, knockback resistance, fire resistance), models and armour texture. See `SiftiteGear` for the numbers and the differences (netherite ingots also repair them; the template keeps the client's netherite template text) |
 | Siftite death recovery | Adapted | Siftite items are taken out of a player's death drops and returned through a small particle rift 2 seconds after the respawn (or join); the stacks are kept in `data/the-sift/siftite-recovery/<uuid>.bin` until they are in the inventory. |
 | Shifting tides (Flow, Endure, Thrive) | Original | A three-day cycle: Endure hardens hostile mobs and stops natural regeneration; Thrive speeds regeneration and grants Haste |
@@ -110,9 +113,10 @@ clients cannot show new content types, or original to this port.
 
 ### Not ported
 
-- Client-side features of the mod: the Singer's glowmask and the Echo Golem's emissive
-  layer, dynamic lights, custom particles (vanilla particles stand in), the procedural
-  sky, the Ichor fluid texture and the weather texture swap.
+- Client-side features of the mod that have no substitute: custom particles (vanilla particles stand
+  in), the procedural sky, the Ichor fluid texture, the weather texture swap and the glowing outline layer.
+  The Singer's glowmask and dynamic light and the Echo Golem's emissive Soul Block and dynamic light are
+  substituted, see Server-side substitutes.
 - The look of the non-cube blocks: they are vanilla look-alikes (see above). Ichor is
   water with the Sift's tint, not its own fluid with the mod's texture and glow.
 - The mod's two music recordings ("Rift" and the "Wellspring" remix are third-party works,
@@ -120,9 +124,6 @@ clients cannot show new content types, or original to this port.
 - Vanilla `/locate structure the_sift:abandoned_main_portal` (the command cannot name a
   structure that is not in a datapack registry); `/dimension locate` answers it instead.
 - Changing a spawner with a spawn egg of the mod's creatures (see Spawn eggs).
-- Smaller block behaviours that need random ticks or fall callbacks on custom blocks:
-  growth dying in the dark, willow foliage decaying like leaves, healthy sculk trampling
-  crops on it.
 
 Every class that ports mod code lists its own differences in its javadoc.
 
@@ -179,6 +180,59 @@ when the command is repeated (the mod blocks the server while it generates and a
 generated before this registry existed are not recorded (their chunks already exist), so in an old world the
 answer may be a farther ruin or "not yet"; candidates outside the world border are skipped.
 
+## Server-side substitutes
+
+The mod relies on random ticks and fall callbacks of its own block classes and on client rendering. A vanilla
+client and a custom block that is a mushroom state cannot do these, so the port fakes them on the server. Each
+can be switched off under `the-sift` (see Configuration), and none of them changes the world file format.
+
+**Random-tick sampler** (`SiftRandomTicks`, `RandomTickSampler`). Every 5 ticks, for the chunks within the world's
+simulation distance (at most 10 chunks) of a player, it draws 8 random blocks per 16x16x16 section per second
+(`samples-per-section-per-second`; two a run). Vanilla ticks 60 per section per second, so a block is
+ticked about once in 8.5 minutes instead of once in 68 seconds. The cost is capped: a run takes at most 8000 samples
+(1600 a tick on average, each a material lookup in a loaded chunk), 256 soil checks and 24 foliage searches; with more
+chunks than the budget covers the sampler rotates through them and each section is sampled less often, so the
+server never does more work. Sampled red mushroom blocks go to `SiftSoils`, sampled mushroom stems to `SiftFoliage`.
+
+- *Siftslate Growth, Dry Healthy Sculk Growth.* The mod's `randomTick`: they turn into Siftslate and Dry Healthy Sculk
+  when the light at the block above (`getMaxLocalRawBrightness`, which Bukkit's `Block#getLightLevel` returns) is below
+  4, or a full block or fluid covers them; snow above keeps the snowy face. The cover rules also run on block changes, as before.
+- *Willow foliage decay.* The foliage is an oak-leaves copy in the mod. A sampled foliage block that is not marked as
+  placed searches (`LeafDecay`, at most 377 reads) for a willow log, willow wood, stripped variant or vanilla log within six steps
+  through leaves, as vanilla's leaf distance does; with none it breaks (a `LeavesDecayEvent` is called first) and drops
+  its loot table's entry, the foliage itself. Foliage placed by a player is persistent: its position is marked in the chunk's
+  persistent data and the mark goes when the player breaks it and, if the block is gone, when the chunk loads.
+  Foliage placed by world generation, grown from a sapling or put in a structure is not persistent, like the mod's.
+  Foliage put in by commands or world-editing tools raises no placement event, so it is not marked and decays like
+  generated foliage.
+  A search that would read an unloaded chunk keeps the foliage.
+
+**Crop trampling** (`SiftTrampling`). The mod's `HealthySculkSoilBlock#fallOn`. Paper's `GenericGameEvent` for
+`HIT_GROUND` is emitted by the server right after `fallOn` and before the fall distance is reset, so the handler reads
+the player's fall distance, and if it is above 0.5 and the block under the feet is Healthy Sculk or Dry Healthy Sculk,
+it breaks the crop, stem, attached stem, pitcher crop or tracked Sculkflower above with its drops (the mod's loot for the
+Sculkflower). An `EntityChangeBlockEvent` by the player is called first, so protection plugins can veto it.
+Vanilla gives `fallOn` the supporting block; the event has a position only, so the block under the feet's centre is used.
+
+**Glow and dynamic light for the Singer and the Echo Golem.**
+
+- *Glow.* BetterModel offers a brightness per bone (`TrackerUpdateAction.brightness(block, sky)`, applied to the bones
+  chosen by a predicate); it cannot mask pixels, so a bone glows whole or not at all. The Singer's glowmask covers the whole
+  head and both antlers, 84 percent of the arms, 58 percent of the hands, 59 percent of the torso and
+  38 percent of the legs: head, antlers, arms, hands and torso are drawn at brightness 15/15, the legs are not. The golem's
+  `soul_block` bone (drawn at full brightness by the mod's `EchoGolemSoulGlowLayer`; hidden unless the golem carries a
+  Soul Block) is drawn at 15/15. The Soul Block the Singer holds was already a block display at full brightness.
+- *Light.* The mod's LambDynamicLights behaviours give the Singer's head a luminance of 15 at her `head_light` locator and
+  a carried Soul Block 14 at the golem's `soul_light` locator (2.125 blocks up). `SiftDynamicLights` places a single
+  `minecraft:light` block of that level in the cell of the point, or in the next free cell below, above or two below it,
+  every 2 ticks, and moves it when the cell changes (the new block first, then the old one removed). Only air is replaced and
+  only a light block is removed. Lights are removed when the source despawns, unloads, dies, stops carrying, is more than 64
+  blocks from every player or is not one of the 24 nearest; before a chunk saves (`ChunkUnloadEvent`); and when the dimension
+  deactivates or the plugin is disabled. The only thing persisted is a mark of each placed light in its chunk's data, so that
+  if the server dies with lights placed, the next load of that chunk (or the next activation) removes the leftover blocks. The
+  light blocks light the server too (growth survives near the Singer, snow does not settle in her light), and a player holding
+  a light item sees the marker. A Singer rising out of the ground lights nothing until her head is in the open.
+
 ## Configuration
 
 ```yaml
@@ -220,6 +274,13 @@ the-sift:
     enabled: true               # Sculkflower growth, harvest and bone meal
   main-portal:
     enabled: true               # build the main portal; Ancient City portals lead to it
+  random-ticks:
+    enabled: true               # sampler behind growth dying in the dark and willow foliage decay
+    samples-per-section-per-second: 8   # 1-60; vanilla's random tick speed is 60
+  crop-trampling:
+    enabled: true               # Healthy Sculk destroys the crop a player lands on
+  dynamic-lights:
+    enabled: true               # light blocks that follow the Singer and a carried Soul Block
 ```
 
 Echo Golems and Singers can be switched off separately. Without Singers a golem
@@ -331,7 +392,7 @@ confirmed.
 ## Verification status
 
 Unit tests cover the datapack translation and determinism, the Ancient City
-templates, the ritual melody, rift placement, the Sifter spawner's search, loot and bite timeline and its converted model, the Singer's soul event, barter table and the Echo Golem's mission and route state machine, spawner and landmark registry, the Dark Sniffer's brain, sonic sniff, Warden petting and infection (all against small fakes), the converted Singer, Echo Golem and generated Dark Sniffer models, the Sculkflower's growth rules, saved positions and loot tables, the spawn eggs' use decisions and the stand-in discs' items, the abandoned portal ruins' reports and locate candidates, every ported feature (determinism, staying inside the
+templates, the ritual melody, rift placement, the Sifter spawner's search, loot and bite timeline and its converted model, the Singer's soul event, barter table and the Echo Golem's mission and route state machine, spawner and landmark registry, the Dark Sniffer's brain, sonic sniff, Warden petting and infection (all against small fakes), the converted Singer, Echo Golem and generated Dark Sniffer models, the Sculkflower's growth rules, saved positions and loot tables, the spawn eggs' use decisions and the stand-in discs' items, the abandoned portal ruins' reports and locate candidates, the random-tick sampler (budget, rate, rotation), the leaf-decay distance search over a fake grid, the soil darkness rule, the trampling conditions, the moving-light ledger (placement, movement, restoration, release over a fake world) and the BetterModel brightness gateway, every ported feature (determinism, staying inside the
 populator region, expected output on prepared terrain, thread safety for several
 families), the loot table, block rendering contracts and the framework. The main portal
 is tested without a server: the site search and scoring over fake height fields, the
@@ -339,7 +400,7 @@ terrain blending, template placement, clearing, planting and determinism over an
 terrain, the overlay region, the framework's frame detection on the built structure, the travel
 listener's decisions and the stored anchor. The
 generated datapack has been checked against Minecraft 26.2's registries and block
-states. **Nothing has been run on a live Paper server yet**: world creation,
+states. **Nothing has been run on a live Paper server yet**: the sampler's real cost and rate, `Block#getLightLevel` as `getMaxLocalRawBrightness`, the `HIT_GROUND` fall distance, BetterModel's per-bone brightness on the converted models, light blocks moving with the Singer and the golem (and none left after a stop, a chunk unload or a kill -9), world creation,
 generation in game, client rendering, BetterModel animation playback, the
 ritual in an Ancient City, the Echo Golem's pathfinding through a real canyon,
 the Singer's appearance and the barter, and the main portal (asynchronous chunk generation, the

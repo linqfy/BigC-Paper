@@ -39,11 +39,13 @@ import java.util.function.Supplier;
  * siftslate next to growth into growth, grows patches of overgrown plants on growth
  * and spreads a Sift plant around itself.
  *
- * <p>Differences: custom blocks have no random ticks, so growth only reacts to
- * changes above it (a block placed or broken, a fluid flowing in, snow falling) and
- * not to darkness. Plants are their vanilla stand-ins, so in the Sift bone meal on a
- * stand-in (short grass for Overgrown Fronds, a fern for Overgrown Chard, ...)
- * spreads that stand-in instead of growing the vanilla plant.</p>
+ * <p>Differences: custom blocks have no random ticks, so growth reacts to changes
+ * above it (a block placed or broken, a fluid flowing in, snow falling) and, for the
+ * mod's {@code randomTick}, to the samples of {@link SiftRandomTicks}: the same rule
+ * with the darkness test ({@code getMaxLocalRawBrightness(above) < 4}), at the sampler's
+ * rate instead of vanilla's random tick speed. Plants are their vanilla stand-ins, so in
+ * the Sift bone meal on a stand-in (short grass for Overgrown Fronds, a fern for
+ * Overgrown Chard, ...) spreads that stand-in instead of growing the vanilla plant.</p>
  */
 final class SiftSoils implements Listener {
 
@@ -52,6 +54,8 @@ final class SiftSoils implements Listener {
     static final String GROWTH_SNOWY = "siftslate_growth_snowy";
     static final String DRY_GROWTH = "dry_healthy_sculk_growth";
     static final String DRY_SCULK = "dry_healthy_sculk";
+    /** Light below this, above a growth block, kills it on a random tick. */
+    static final int DARK_BELOW = 4;
     /** The mod's {@code GROWTH_PLANTS}: fronds three times, chard twice, stalks once. */
     static final List<Material> GROWTH_PLANTS = List.of(Material.SHORT_GRASS, Material.SHORT_GRASS, Material.SHORT_GRASS,
         Material.FERN, Material.FERN, Material.BUSH);
@@ -73,19 +77,33 @@ final class SiftSoils implements Listener {
 
     /** What a soil becomes with this cover above it, or empty when it stays. */
     static Optional<String> covered(String soil, boolean fullBlock, boolean fluid, boolean snow) {
+        return covered(soil, fullBlock, fluid, snow, false);
+    }
+
+    /**
+     * The same with the darkness test of the mod's {@code randomTick}s: growth under light below
+     * {@value #DARK_BELOW} dies like growth under a full block. Snow above stays growth's "snowy"
+     * face in any light, as in the mod.
+     */
+    static Optional<String> covered(String soil, boolean fullBlock, boolean fluid, boolean snow, boolean dark) {
         return switch (soil) {
             case GROWTH, GROWTH_SNOWY -> {
                 if (snow) {
                     yield soil.equals(GROWTH_SNOWY) ? Optional.empty() : Optional.of(GROWTH_SNOWY);
                 }
-                if (fullBlock || fluid) {
+                if (fullBlock || fluid || dark) {
                     yield Optional.of(SIFTSLATE);
                 }
                 yield soil.equals(GROWTH) ? Optional.empty() : Optional.of(GROWTH);
             }
-            case DRY_GROWTH -> fullBlock || fluid ? Optional.of(DRY_SCULK) : Optional.empty();
+            case DRY_GROWTH -> fullBlock || fluid || dark ? Optional.of(DRY_SCULK) : Optional.empty();
             default -> Optional.empty();
         };
+    }
+
+    /** The mod's {@code getMaxLocalRawBrightness(above) < 4}. */
+    static boolean tooDark(int rawBrightness) {
+        return rawBrightness < DARK_BELOW;
     }
 
     /** Both states of the mod's Siftslate Growth. */
@@ -112,6 +130,21 @@ final class SiftSoils implements Listener {
 
     /** Re-checks a soil after the block above it changed (also called by the Ichor snowfall). */
     void update(Block soil) {
+        update(soil, false);
+    }
+
+    /**
+     * The mod's {@code randomTick} of Siftslate Growth and Dry Healthy Sculk Growth, called by the sampler: the
+     * cover rules of {@link #update(Block)} and the darkness test. Other blocks are ignored.
+     */
+    void randomTick(Block soil) {
+        Optional<String> id = sift(soil);
+        if (id.filter(path -> isGrowth(path) || path.equals(DRY_GROWTH)).isPresent()) {
+            update(soil, true);
+        }
+    }
+
+    private void update(Block soil, boolean checkDarkness) {
         Optional<String> id = sift(soil);
         if (id.isEmpty()) {
             return;
@@ -120,7 +153,9 @@ final class SiftSoils implements Listener {
         boolean fullBlock = above.getType().isOccluding();
         boolean fluid = above.isLiquid() || above.getBlockData() instanceof Waterlogged waterlogged
             && waterlogged.isWaterlogged();
-        covered(id.get(), fullBlock, fluid, above.getType() == Material.SNOW).ifPresent(next -> set(soil, next));
+        // CraftBukkit answers getLightLevel with getMaxLocalRawBrightness, the call the mod makes.
+        boolean dark = checkDarkness && tooDark(above.getLightLevel());
+        covered(id.get(), fullBlock, fluid, above.getType() == Material.SNOW, dark).ifPresent(next -> set(soil, next));
     }
 
     @EventHandler(priority = EventPriority.HIGH)

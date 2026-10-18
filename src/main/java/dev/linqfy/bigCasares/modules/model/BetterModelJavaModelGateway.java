@@ -5,11 +5,14 @@ import kr.toxicity.model.api.animation.AnimationModifier;
 import kr.toxicity.model.api.bukkit.platform.BukkitAdapter;
 import kr.toxicity.model.api.tracker.EntityTracker;
 import kr.toxicity.model.api.tracker.ModelScaler;
+import kr.toxicity.model.api.tracker.TrackerUpdateAction;
 import org.bukkit.entity.Entity;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 final class BetterModelJavaModelGateway implements JavaModelGateway {
     private final TrackerPort trackerPort;
@@ -70,6 +73,15 @@ final class BetterModelJavaModelGateway implements JavaModelGateway {
     }
 
     @Override
+    public boolean brighten(JavaModelHandle handle, int block, int sky, Collection<String> bones) {
+        Objects.requireNonNull(handle, "handle");
+        Objects.requireNonNull(bones, "bones");
+
+        var session = sessions.get(handle);
+        return session != null && session.brighten(block, sky, bones);
+    }
+
+    @Override
     public void close(JavaModelHandle handle) {
         Objects.requireNonNull(handle, "handle");
 
@@ -127,6 +139,19 @@ final class BetterModelTrackerPort implements TrackerPort {
         }
 
         @Override
+        public boolean brighten(int block, int sky, Collection<String> bones) {
+            var names = Set.copyOf(bones);
+            try {
+                tracker.update(TrackerUpdateAction.brightness(block, sky),
+                    bone -> names.contains(bone.name().name()) || names.contains(bone.name().rawName()));
+                return true;
+            } catch (RuntimeException | LinkageError unsupported) {
+                // A glow is cosmetic: a BetterModel without per-bone brightness must not stop the model from showing.
+                return false;
+            }
+        }
+
+        @Override
         public void close() {
             tracker.close();
         }
@@ -152,6 +177,10 @@ interface TrackerSession {
     }
 
     boolean scale(float factor);
+
+    default boolean brighten(int block, int sky, Collection<String> bones) {
+        return false;
+    }
 
     void close();
 }

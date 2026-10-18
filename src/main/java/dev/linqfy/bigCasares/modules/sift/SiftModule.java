@@ -7,6 +7,7 @@ import dev.linqfy.bigCasares.content.ContentItemFactory;
 import dev.linqfy.bigCasares.dimension.DimensionDefinition;
 import dev.linqfy.bigCasares.dimension.DimensionPlatform;
 import dev.linqfy.bigCasares.dimension.DimensionStatus;
+import dev.linqfy.bigCasares.dimension.runtime.DimensionExtension;
 import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -123,8 +125,19 @@ public final class SiftModule implements PluginModule {
         SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, features, creatures,
             rifts, sifters, singers, golems, darkSniffers, mainPortal, abandonedPortals,
             items::resolve, new SiftIchorSnowfall(soils::update));
+        // Server-side substitutes for random ticks and the mod's client-only dynamic lights.
+        SiftTickSettings tickSettings = SiftTickSettings.load(plugin.getConfig());
+        tickSettings.warnings().forEach(warning -> plugin.getLogger().warning("[TheSift] " + warning));
+        SiftFoliage foliage = new SiftFoliage(plugin, blocks, items::resolve);
+        List<DimensionExtension> extensions = new ArrayList<>(List.of(runtime));
+        if (tickSettings.randomTicks()) {
+            extensions.add(new SiftRandomTicks(soils, foliage, tickSettings.samplesPerSectionPerSecond()));
+        }
+        if (tickSettings.dynamicLights()) {
+            extensions.add(new SiftDynamicLights(plugin, List.of(singers::lightSources, golems::lightSources)));
+        }
         try {
-            DimensionDefinition definition = SiftDimension.create(settings, worldgen, List.of(runtime));
+            DimensionDefinition definition = SiftDimension.create(settings, worldgen, extensions);
             DimensionStatus status = dimensions.get().register(definition);
             plugin.getLogger().info("[TheSift] Registered " + SiftDimension.KEY + ": " + status.state()
                 + (status.message().isBlank() ? "" : " (" + status.message() + ")"));
@@ -139,9 +152,15 @@ public final class SiftModule implements PluginModule {
             registrations.registerListener("sift-stand-ins", new SiftStandIns(platform, items, blocks));
             new SiftIchorPools(plugin, platform, items, settings.ichor()).start(registrations);
             registrations.registerListener("sift-willow-saplings", new SiftWillowSaplings(plugin, platform, items, features));
-            if (settings.sculkflowers()) {
-                new SiftSculkflowers(plugin, items::resolve, blocks, data).activate(registrations);
+            SiftSculkflowers sculkflowers = settings.sculkflowers() ? new SiftSculkflowers(plugin, items::resolve, blocks, data) : null;
+            if (sculkflowers != null) {
+                sculkflowers.activate(registrations);
             }
+            if (tickSettings.cropTrampling()) {
+                registrations.registerListener("sift-crop-trampling", new SiftTrampling(blocks, sculkflowers));
+            }
+            // Placed foliage is remembered even while decay is off, so switching it on does not rot players' builds.
+            registrations.registerListener("sift-foliage", foliage);
             if (settings.ancientCityRitual()) {
                 new SiftRitual(plugin, registrations, platform, models).start();
             }

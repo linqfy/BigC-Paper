@@ -1816,3 +1816,16 @@ the-sift:
   # portals keep 1:1 coordinates and build a small return frame.
   main-portal:
     enabled: true
+  # Server-side substitutes for what the mod gets from random ticks, fall callbacks and its client.
+  # Random ticks for Siftslate Growth / Dry Healthy Sculk Growth (die in the dark) and willow foliage
+  # (decays without logs): a bounded sampler, this many samples per 16x16x16 section per second
+  # (vanilla's random tick speed is 60). At most 8000 samples every 5 ticks whatever the player count.
+  random-ticks:
+    enabled: true
+    samples-per-section-per-second: 8
+  # Healthy Sculk destroys the crop a player lands on (falls of more than half a block).
+  crop-trampling:
+    enabled: true
+  # Moving light blocks for the Singer (level 15) and an Echo Golem carrying a Soul Block (level 14).
+  dynamic-lights:
+    enabled: true

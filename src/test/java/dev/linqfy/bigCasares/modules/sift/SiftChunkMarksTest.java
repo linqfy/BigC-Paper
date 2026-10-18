@@ -29,4 +29,13 @@ class SiftChunkMarksTest {
         assertFalse(SiftChunkMarks.contains(grown, a));
         assertTrue(SiftChunkMarks.contains(grown, b));
     }
+
+    @Test
+    void packedPositionsUnpackWithSiftPosIncludingNegativeCoordinates() {
+        int[][] samples = {{0, 0, 0}, {1, 2, 3}, {-1, -64, -1}, {-30000000, 319, 29999999}, {15, -63, -16}};
+        for (int[] at : samples) {
+            assertEquals(new SiftPos(at[0], at[1], at[2]), SiftPos.of(SiftChunkMarks.pack(at[0], at[1], at[2])),
+                java.util.Arrays.toString(at));
+        }
+    }
 }

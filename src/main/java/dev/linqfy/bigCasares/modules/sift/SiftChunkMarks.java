@@ -1,5 +1,6 @@
 package dev.linqfy.bigCasares.modules.sift;
 
+import org.bukkit.Chunk;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -11,7 +12,9 @@ import java.util.stream.LongStream;
 /**
  * Block positions remembered in their chunk's persistent data, for stand-in blocks
  * that are a mod block only at some positions (a mangrove propagule that is a
- * willow sapling, a water cauldron that holds Ichor).
+ * willow sapling, a water cauldron that holds Ichor), for the foliage a player placed
+ * (which never decays) and for the light blocks of a moving light that a crash could
+ * leave behind.
  */
 final class SiftChunkMarks {
 
@@ -36,6 +39,17 @@ final class SiftChunkMarks {
         } else if (updated != packed) {
             chunk.set(key, PersistentDataType.LONG_ARRAY, updated);
         }
+    }
+
+    /** Every position marked in the chunk, as packed by {@link #pack}; empty when there are none. */
+    long[] positions(Chunk chunk) {
+        long[] packed = chunk.getPersistentDataContainer().get(key, PersistentDataType.LONG_ARRAY);
+        return packed == null ? new long[0] : packed;
+    }
+
+    /** Forgets every mark of the chunk. */
+    void clear(Chunk chunk) {
+        chunk.getPersistentDataContainer().remove(key);
     }
 
     /** Block position in one long, as vanilla's {@code BlockPos.asLong}. */

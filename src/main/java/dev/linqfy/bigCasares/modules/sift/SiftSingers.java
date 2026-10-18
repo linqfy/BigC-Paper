@@ -45,6 +45,7 @@ import org.bukkit.util.Vector;
 import org.joml.AxisAngle4f;
 import org.joml.Vector3f;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -87,8 +88,11 @@ import java.util.logging.Level;
  *       converted model renames the mod's idle and walk animations ({@code stand}, {@code stride}) so the poses of
  *       {@link ModelPoses} are the only animations playing.</li>
  *   <li>The Soul Block she holds is a block display in front of her chest (the mod draws it in the model's
- *       {@code held_soul} bone); the glowmask texture ({@code singer_glowmask.png}) and the dynamic light at her
- *       head are client-side features of the mod and are not ported.</li>
+ *       {@code held_soul} bone). The glowmask ({@code singer_glowmask.png}) and the dynamic light at her head are
+ *       client-side features of the mod and have substitutes: the bones whose faces the glowmask mostly covers (the
+ *       head, antlers, arms, hands and torso; the legs are a third covered) are drawn at full brightness through
+ *       BetterModel's per-bone brightness, so the unlit pixels of those bones glow too, and
+ *       {@link SiftDynamicLights} moves a level-15 light block with her head.</li>
  *   <li>Digging particles of the appear and disappear phases are block particles sent by the server (30 a tick for
  *       the first 90 ticks, as the client does in the mod). While she is intangible (rising, sinking) she has no
  *       physics, as in the mod.</li>
@@ -121,6 +125,16 @@ final class SiftSingers implements Listener {
     private static final int DIGGING_PARTICLES = 30;
     private static final double CANYON_AVOID_DISTANCE = 36.0;
     private static final long SAVE_INTERVAL_TICKS = 100L;
+    /**
+     * The bones the glowmask covers by half or more of their pixels (head and antlers whole, arms and hands about
+     * 58 to 84 percent, torso 59, legs 38): BetterModel can only brighten whole bones, not the mask's pixels.
+     */
+    static final Set<String> GLOWING_BONES = Set.of("head", "left_antler", "right_antler", "left_arm",
+        "right_arm", "left_hand", "right_hand", "torso");
+    /** The mod's {@code SingerHeadLightBehavior.LUMINANCE}. */
+    static final int HEAD_LIGHT_LEVEL = 15;
+    /** The {@code head_light} locator: 34 pixels up, in the model scaled by {@link #MODEL_SCALE}. */
+    static final double HEAD_LIGHT_HEIGHT = 34.0 / 16.0 * MODEL_SCALE;
 
     private final JavaPlugin plugin;
     private final JavaModelGateway models;
@@ -163,6 +177,21 @@ final class SiftSingers implements Listener {
             }
         }
         active.registrations().scheduleRepeating("singer-tick", this::tickAll, 1L, 1L);
+    }
+
+    /**
+     * The light of every Singer that is out: level 15 at the mod's {@code head_light} locator (34 pixels up in a model
+     * scaled {@value #MODEL_SCALE}), always, as the mod's {@code SingerHeadLightBehavior}.
+     */
+    List<SiftDynamicLights.Source> lightSources() {
+        List<SiftDynamicLights.Source> sources = new ArrayList<>();
+        for (Runtime runtime : singers.values()) {
+            if (runtime.body.isValid() && runtime.body.isTicking()) {
+                sources.add(new SiftDynamicLights.Source(runtime.body.getUniqueId(),
+                    runtime.body.getLocation().add(0.0, HEAD_LIGHT_HEIGHT, 0.0), HEAD_LIGHT_LEVEL));
+            }
+        }
+        return sources;
     }
 
     /** Dresses loaded Singers that have no model yet, e.g. after BetterModel finished loading. */
@@ -544,6 +573,7 @@ final class SiftSingers implements Listener {
             try {
                 handle = models.attach(body, MODEL);
                 models.scale(handle, MODEL_SCALE);
+                models.brighten(handle, 15, 15, GLOWING_BONES);
                 poses = new ModelPoses(models, handle);
                 updatePose();
             } catch (RuntimeException unavailable) {

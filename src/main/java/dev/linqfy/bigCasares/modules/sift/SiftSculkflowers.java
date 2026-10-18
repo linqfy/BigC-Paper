@@ -394,6 +394,26 @@ final class SiftSculkflowers implements Listener {
         stacks.forEach(stack -> block.getWorld().dropItemNaturally(block.getLocation().add(0.5, 0.25, 0.5), stack));
     }
 
+    /** True when the block is one of the Sculkflower crops or flowers this class tracks. */
+    boolean isPlant(Block block) {
+        return registered(block) && stillThere(block);
+    }
+
+    /**
+     * A player's fall trampled it ({@link SiftTrampling}): the block breaks and drops the mod's loot, as a
+     * destroyed block without a tool does. False when the block is not one of ours.
+     */
+    boolean trample(Block block) {
+        if (!isPlant(block)) {
+            return false;
+        }
+        List<ItemStack> stacks = drops(block, null);
+        block.setType(Material.AIR);
+        dropAll(block, stacks);
+        unregister(block);
+        return true;
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBreak(BlockBreakEvent event) {
         Block block = event.getBlock();

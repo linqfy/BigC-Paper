@@ -109,6 +109,53 @@ class BetterModelJavaModelGatewayTest {
     }
 
     @Test
+    void brightenForwardsTheLevelsAndBonesToTheAttachedTracker() {
+        var port = new RecordingTrackerPort();
+        JavaModelGateway gateway = new BetterModelJavaModelGateway(port);
+        JavaModelHandle handle = gateway.attach(anchor, JavaModelKeys.NEXUS);
+
+        assertTrue(gateway.brighten(handle, 15, 14, List.of("head")));
+
+        assertEquals(List.of("attach:bigcasares_nexus", "brighten:15/14:[head]"), port.events());
+    }
+
+    @Test
+    void brightenOnUnknownClosedOrUnsupportedHandleReturnsFalse() {
+        var port = new RecordingTrackerPort();
+        JavaModelGateway gateway = new BetterModelJavaModelGateway(port);
+        JavaModelHandle unknown = new JavaModelHandle(UUID.fromString("00000000-0000-0000-0000-000000000001"),
+                JavaModelKeys.NEXUS);
+        assertFalse(gateway.brighten(unknown, 15, 15, List.of("head")));
+
+        JavaModelHandle attached = gateway.attach(anchor, JavaModelKeys.NEXUS);
+        gateway.close(attached);
+        assertFalse(gateway.brighten(attached, 15, 15, List.of("head")));
+
+        // A tracker session that does not override brighten (the interface default) cannot brighten.
+        TrackerSession plain = new TrackerSession() {
+            @Override
+            public boolean animate(String animationKey) {
+                return true;
+            }
+
+            @Override
+            public boolean animateOnce(String animationKey, Runnable onEnd) {
+                return true;
+            }
+
+            @Override
+            public boolean scale(float factor) {
+                return true;
+            }
+
+            @Override
+            public void close() {
+            }
+        };
+        assertFalse(plain.brighten(15, 15, List.of("head")));
+    }
+
+    @Test
     void duplicateAttachReusesOneTrackerSession() {
         var port = new RecordingTrackerPort();
         JavaModelGateway gateway = new BetterModelJavaModelGateway(port);
@@ -239,6 +286,12 @@ class BetterModelJavaModelGatewayTest {
                 @Override
                 public boolean scale(float factor) {
                     events.add("scale:" + factor);
+                    return true;
+                }
+
+                @Override
+                public boolean brighten(int block, int sky, java.util.Collection<String> bones) {
+                    events.add("brighten:" + block + "/" + sky + ":" + new java.util.TreeSet<>(bones));
                     return true;
                 }
 
