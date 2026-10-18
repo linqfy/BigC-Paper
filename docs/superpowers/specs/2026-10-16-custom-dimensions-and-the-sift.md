@@ -52,12 +52,14 @@ terrain), the loot tables, the ritual melody, the block rendering contract, the
 creatures' Bukkit-free brains, spawners and timings, the main portal's site search and
 build plan, recipes (all 76 translate), advancements (all 22 written) and the
 substitutes; the generated pack was checked against 26.2 registries and block states.
-Final state: clean build passes; the full suite runs 1574 tests with only the 33
-environment failures that also fail on the untouched baseline.
+Before the live runs, the suite ran offline with substituted dependencies (33 failures from the
+substitution itself).
 
 The Sift was then played on a live Paper 26.2 test server by a bot. Install, generation, creatures
 and models, the ritual, all travel paths, rifts, look-alike blocks, a recipe, Ichor, Siftite
-recovery and moving lights all worked. That run found six bugs, all fixed with tests: a broken
-Dark Sniffer model cube, 26.3-only advancement conditions, the main portal's state key, Echo
-Golem navigation, roof-preferring arrivals, and occupied rift spots. What was and was not
-verified is listed under Verification status in `docs/dimensions/the-sift.md`.
+recovery and moving lights all worked. The live runs found eleven bugs, all fixed: a broken Dark Sniffer
+model cube, 26.3-only advancement conditions, the main portal's state key, Echo Golem
+navigation, roof-preferring arrivals, occupied rift spots, sculk regions and Ichor snow
+reading a stale populator heightmap, 2x2 crafts in the recipe guard, and APIs newer than the
+pinned Paper API. The project's own `clean build` passes with every test green. What was and
+was not verified is listed under Verification status in `docs/dimensions/the-sift.md`.

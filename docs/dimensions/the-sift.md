@@ -439,18 +439,51 @@ ViaBackwards 5.12.2, test server only) played through it in creative and surviva
   - The Rift disc in a jukebox near an open rift awards Rift Resonance.
 - **Lights.** A Singer carries one level-15 light block at her head and leaves none behind. A server
   killed with lights placed removes them on the next start.
+- **Echo Golems and Singers.** In natural terrain a golem finds a Soul Block in a canyon, picks it up and
+  carries it out with a level-14 light block above it. It delivers the block to a Singer (Like Father and
+  Son), bows and searches again. Right-clicking a roaming Singer with a Soul Block takes the block and
+  throws a gift from her table (Pitch Perfect).
+- **Sculkflower.** Seeds plant on sculk. Each bone meal advances one stage, from the torchflower crop
+  look-alikes to the Sculkflower (Planting the Dark), which drops its content item.
+- **Charoite.** In the enchanting table's lapis slot it raises the costs from 2/5/8 to 22/25/28 levels
+  and the offered levels by one (1/2/1 to 2/3/2). The enchanted item carries the Charoite mark, and Better
+  Enchanter is awarded.
+- **Generated sculk, snow and Dark Sniffers.** Surface sculk regions (sculk, veins, sensors) and the
+  Ichor snow on Ichor Snowy Peaks generate. A sculk region places a dressed Dark Sniffer.
+- **Spawn eggs on blocks with their own use.** An egg used on a spawner leaves its spawn data unchanged.
+  A powered dispenser with a Sift egg spawns nothing and keeps the egg.
+- **Client inputs.** The resource pack the server sends was checked file by file:
+  - every content item resolves to a defined model (166 models) with existing textures;
+  - the 50 Sift block-state models exist;
+  - all 47 sound events have their files, and every Sift sound name the code plays is defined;
+  - the BetterModel pack is built from the loaded models.
 
-The live run found and fixed six bugs, now covered by tests:
+  The models animate: a Sifter's 18 bone displays got 621 transform updates in 10 seconds.
+- **Cost.** Average tick times stayed between 1.6 and 10 ms. A `/tp` into unexplored terrain stalls one
+  tick while chunks generate synchronously: 1.2 s in the Sift against 2.2 s for the same jumps in the
+  Overworld. A 30-minute soak (the bot moving to a new spot every 20 seconds) kept the
+  average tick at 2.1–2.6 ms, with no tick over 40 ms. The Sift's entity count held at 23–28, heap use
+  rose and fell with garbage collection, and there were no Sift errors and no stray light blocks.
+
+The live runs found and fixed eleven bugs. Every one except the golem navigation has a test; that one
+was confirmed on the server.
 
 - a Dark Sniffer model cube without all six faces broke every BetterModel reload;
 - location advancements used the mod's 26.3 condition form;
 - the main portal's state key was rejected by the dimension store;
 - Echo Golem navigation had no body;
 - the arrival search preferred a roof over a safe requested spot;
-- an entity on the best rift spot cancelled the exit rift.
+- an entity on the best rift spot cancelled the exit rift;
+- surface sculk regions (and so generated Dark Sniffers) and the Ichor snow read a populator heightmap
+  that decoration does not update, so none of them generated;
+- a 2x2 inventory craft made the recipe guard throw;
+- two Sift calls were newer than the pinned `paper-api 26.2.build.56-alpha`, one was Paper-only, and the
+  Spigot test classpath lacked Adventure. The project's own `clean build` now passes with every test green.
 
-**Still unverified:** anything only a real client shows (rendering, BetterModel animations and
-brightness, sounds, the hidden disc tooltip line). Also the Singer's barter, the Sculkflower,
-Charoite enchanting, Dark Sniffers from the generator, an Echo Golem carrying a Soul Block (and its
-light), spawners and dispensers with the eggs, the random-tick sampler's cost on a busy server,
-Bedrock clients, and a server with players online for hours.
+**Not verified, and not verifiable without a real client or more players:**
+
+- What a player sees and hears: rendering, model brightness, sounds, the hidden disc tooltip line.
+- Real players over hours.
+
+**Out of scope:** the Sift has no Bedrock support. The Geyser integration covers other modules, so
+Bedrock players get no Sift models or textures.
