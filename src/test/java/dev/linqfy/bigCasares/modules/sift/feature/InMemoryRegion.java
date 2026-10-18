@@ -18,7 +18,10 @@ import java.util.function.Function;
  */
 final class InMemoryRegion implements WorldRegion {
 
-    record Spawn(String type, double x, double y, double z) {
+    record Spawn(String type, double x, double y, double z, String marker) {
+        Spawn(String type, double x, double y, double z) {
+            this(type, x, y, z, null);
+        }
     }
 
     private static final Set<String> NON_SOLID = Set.of("minecraft:air", "minecraft:cave_air", "minecraft:void_air",
@@ -202,6 +205,15 @@ final class InMemoryRegion implements WorldRegion {
             return false;
         }
         spawns.add(new Spawn(entityType, x, y, z));
+        return true;
+    }
+
+    @Override
+    public boolean spawn(String entityType, double x, double y, double z, String marker) {
+        if (!isWritable((int) Math.floor(x), (int) Math.floor(y), (int) Math.floor(z))) {
+            return false;
+        }
+        spawns.add(new Spawn(entityType, x, y, z, marker));
         return true;
     }
 

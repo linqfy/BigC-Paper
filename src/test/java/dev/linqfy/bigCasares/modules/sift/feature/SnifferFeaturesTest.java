@@ -82,6 +82,7 @@ class SnifferFeaturesTest {
                 Set<List<Integer>> blocks = new HashSet<>();
                 for (InMemoryRegion.Spawn spawn : spawns) {
                     assertEquals("minecraft:sniffer", spawn.type());
+                    assertEquals(null, spawn.marker(), "cave sniffers are ordinary sniffers");
                     int x = (int) Math.floor(spawn.x());
                     int y = (int) Math.floor(spawn.y());
                     int z = (int) Math.floor(spawn.z());
@@ -420,7 +421,8 @@ class SnifferFeaturesTest {
                     int y = (int) Math.floor(spawn.y());
                     int z = (int) Math.floor(spawn.z());
                     run.sniffers++;
-                    if (!spawn.type().equals("minecraft:sniffer") || !region.state(x, y - 1, z).equals(SCULK)
+                    if (!spawn.type().equals("minecraft:sniffer") || !WorldRegion.DARK_SNIFFER_MARKER.equals(spawn.marker())
+                        || !region.state(x, y - 1, z).equals(SCULK)
                         || !region.isAir(x, y, z) || !region.isAir(x, y + 1, z)) {
                         run.misplacedSniffers++;
                     }

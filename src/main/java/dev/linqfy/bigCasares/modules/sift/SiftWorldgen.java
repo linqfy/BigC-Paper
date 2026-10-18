@@ -428,6 +428,14 @@ public final class SiftWorldgen {
         }
         // Sniffer nests plant on willow foliage, a mushroom stem state.
         datapack.tag("block", NamespacedId.minecraft("supports_vegetation"), List.of("minecraft:mushroom_stem"));
+        // Sculkflower stand-ins (torchflower crop, warped fungus) and Dark Sniffer digging; these tags are
+        // global, so crops and fungi also stand on vanilla sculk and huge red mushroom blocks elsewhere,
+        // and every sniffer digs sculk (and gets infected) in any world.
+        List<String> sculkflowerSoils = List.of("minecraft:sculk", "minecraft:red_mushroom_block");
+        datapack.tag("block", NamespacedId.minecraft("supports_crops"), sculkflowerSoils);
+        datapack.tag("block", NamespacedId.minecraft("supports_warped_fungus"), sculkflowerSoils);
+        datapack.tag("block", NamespacedId.minecraft("supports_warped_fungus"), List.of("minecraft:farmland"));
+        datapack.tag("block", NamespacedId.minecraft("sniffer_diggable_block"), List.of("minecraft:sculk"));
         // Blubs are backed by wolves (see SiftEntities); let them spawn on Sift ground.
         datapack.tag("block", NamespacedId.minecraft("wolves_spawnable_on"), mushrooms);
     }

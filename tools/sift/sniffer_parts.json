@@ -1,0 +1,46 @@
+{
+  "_comment": "The vanilla sniffer's model parts, in the numbers of SnifferModel.createBodyLayer (192 x 192 texture): every part has an offset from its parent's pivot, and every cube a texOffs and an addBox(x, y, z, width, height, depth) with an optional deformation. Java model space: y points down and the front is -z. tools/generate_dark_sniffer_bbmodel.py turns it into Blockbench space.",
+  "texture": {"width": 192, "height": 192},
+  "parts": [
+    {"name": "bone", "offset": [0, 5, 0]},
+    {"name": "body", "parent": "bone", "offset": [0, 0, 0], "cubes": [
+      {"texOffs": [62, 68], "box": [-12.5, -14, -20, 25, 29, 40]},
+      {"texOffs": [62, 0], "box": [-12.5, -14, -20, 25, 24, 40], "deform": 0.5},
+      {"texOffs": [87, 68], "box": [-12.5, 12, -20, 25, 0, 40]}
+    ]},
+    {"name": "right_front_leg", "parent": "bone", "offset": [-7.5, 10, -15], "cubes": [
+      {"texOffs": [32, 87], "box": [-3.5, -1, -4, 7, 10, 8]}
+    ]},
+    {"name": "right_mid_leg", "parent": "bone", "offset": [-7.5, 10, 0], "cubes": [
+      {"texOffs": [32, 105], "box": [-3.5, -1, -4, 7, 10, 8]}
+    ]},
+    {"name": "right_hind_leg", "parent": "bone", "offset": [-7.5, 10, 15], "cubes": [
+      {"texOffs": [32, 123], "box": [-3.5, -1, -4, 7, 10, 8]}
+    ]},
+    {"name": "left_front_leg", "parent": "bone", "offset": [7.5, 10, -15], "cubes": [
+      {"texOffs": [0, 87], "box": [-3.5, -1, -4, 7, 10, 8]}
+    ]},
+    {"name": "left_mid_leg", "parent": "bone", "offset": [7.5, 10, 0], "cubes": [
+      {"texOffs": [0, 105], "box": [-3.5, -1, -4, 7, 10, 8]}
+    ]},
+    {"name": "left_hind_leg", "parent": "bone", "offset": [7.5, 10, 15], "cubes": [
+      {"texOffs": [0, 123], "box": [-3.5, -1, -4, 7, 10, 8]}
+    ]},
+    {"name": "head", "parent": "bone", "offset": [0, 6.5, -19.48], "cubes": [
+      {"texOffs": [8, 15], "box": [-6.5, -7.5, -11.5, 13, 18, 11]},
+      {"texOffs": [8, 4], "box": [-6.5, 7.5, -11.5, 13, 0, 11]}
+    ]},
+    {"name": "left_ear", "parent": "head", "offset": [6.51, -7.5, -4.51], "cubes": [
+      {"texOffs": [2, 0], "box": [0, 0, -3, 1, 19, 7]}
+    ]},
+    {"name": "right_ear", "parent": "head", "offset": [-6.51, -7.5, -4.51], "cubes": [
+      {"texOffs": [48, 0], "box": [-1, 0, -3, 1, 19, 7]}
+    ]},
+    {"name": "nose", "parent": "head", "offset": [0, -4.5, -11.5], "cubes": [
+      {"texOffs": [10, 45], "box": [-6.5, -2, -9, 13, 2, 9]}
+    ]},
+    {"name": "lower_beak", "parent": "head", "offset": [0, 2.5, -12.5], "cubes": [
+      {"texOffs": [10, 57], "box": [-6.5, -7, -8, 13, 12, 9]}
+    ]}
+  ]
+}

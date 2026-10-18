@@ -22,10 +22,12 @@ import java.util.Set;
  *       are no retries, so a request with no free site simply spawns nothing.</li>
  *   <li>The cave family's baby (33%) spawns as an adult sniffer: {@code WorldRegion.spawn}
  *       cannot set an age. Sniffers of one family never share a block.</li>
- *   <li>The mod's {@code DARK_SNIFFER} (surface sculk regions) is not ported, so the
- *       region's one or two dark sniffers are ordinary sniffers.</li>
- *   <li>The mod's random yaw, {@code finalizeSpawn} and {@code setPersistenceRequired}
- *       have no equivalent in {@code WorldRegion}.</li>
+ *   <li>The mod's {@code DARK_SNIFFER} (surface sculk regions) is a sniffer carrying the
+ *       {@link WorldRegion#DARK_SNIFFER_MARKER} persistent-data mark, set before it joins the
+ *       world; {@code SiftDarkSniffers} makes it a Dark Sniffer (model, stats, persistence)
+ *       when it loads.</li>
+ *   <li>The mod's random yaw and {@code finalizeSpawn} have no equivalent in
+ *       {@code WorldRegion} ({@code setPersistenceRequired} is part of becoming a Dark Sniffer).</li>
  * </ul>
  */
 final class SiftSnifferSpawner {
@@ -51,16 +53,16 @@ final class SiftSnifferSpawner {
         }
         long familySeed = region.seed() ^ pack(nest.get(0)) ^ FAMILY_SALT;
         Set<Pos> taken = new HashSet<>();
-        int spawned = spawnOne(region, nest, mix(familySeed), taken) ? 1 : 0;
-        spawned += spawnOne(region, nest, mix(familySeed + 1L), taken) ? 1 : 0;
+        int spawned = spawnOne(region, nest, mix(familySeed), taken, null) ? 1 : 0;
+        spawned += spawnOne(region, nest, mix(familySeed + 1L), taken, null) ? 1 : 0;
         if (random.nextFloat() < 0.33F) {
-            spawned += spawnOne(region, nest, mix(familySeed + 2L), taken) ? 1 : 0;
+            spawned += spawnOne(region, nest, mix(familySeed + 2L), taken, null) ? 1 : 0;
         }
         return spawned;
     }
 
     /**
-     * {@code enqueueDark}: one sniffer on the surface sites (sculk floors) of a sculk-region blob.
+     * {@code enqueueDark}: one Dark Sniffer (a marked sniffer) on the surface sites (sculk floors) of a sculk-region blob.
      *
      * @return whether a sniffer was spawned
      */
@@ -68,11 +70,11 @@ final class SiftSnifferSpawner {
         if (sites.isEmpty()) {
             return false;
         }
-        return spawnOne(region, sites, mix(region.seed() ^ blobSeed ^ DARK_SALT), new HashSet<>());
+        return spawnOne(region, sites, mix(region.seed() ^ blobSeed ^ DARK_SALT), new HashSet<>(), WorldRegion.DARK_SNIFFER_MARKER);
     }
 
     /** {@code spawnOne}: walks the floors from a seeded start and spawns on the first free one. */
-    private static boolean spawnOne(WorldRegion region, List<Pos> floors, long seed, Set<Pos> taken) {
+    private static boolean spawnOne(WorldRegion region, List<Pos> floors, long seed, Set<Pos> taken, String marker) {
         Random random = new Random(seed);
         int start = random.nextInt(floors.size());
         for (int offset = 0; offset < floors.size(); offset++) {
@@ -83,7 +85,7 @@ final class SiftSnifferSpawner {
                 || isIchor(region, feet.x(), feet.y(), feet.z()) || isIchor(region, feet.x(), feet.y() - 1, feet.z())) {
                 continue;
             }
-            if (region.spawn(SNIFFER, feet.x() + 0.5, feet.y(), feet.z() + 0.5)) {
+            if (region.spawn(SNIFFER, feet.x() + 0.5, feet.y(), feet.z() + 0.5, marker)) {
                 taken.add(feet);
                 return true;
             }

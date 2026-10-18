@@ -46,11 +46,14 @@ public final class SiftAdvancements {
     public static final String LIKE_FATHER_AND_SON = "the_sift/like_father_and_son";
     public static final String FRIEND_OF_THE_SIFT = "the_sift/friend_of_the_sift";
     public static final String PITCH_PERFECT = "the_sift/pitch_perfect";
+    public static final String PLANTING_THE_DARK = "the_sift/planting_the_dark";
+    public static final String FOOD_CHAIN = "the_sift/food_chain";
+    public static final String SMELLS_CREEPY = "the_sift/smells_creepy";
 
     /** Advancements with the mod's {@code impossible} criterion that the port awards from code. */
     static final Set<String> AWARDED_FROM_CODE = Set.of(SONG_OF_THE_PAST, BLUB, RIFTER, KINDA_PURPLEISH, SIFTED_NUGGET,
         SPICEWOOD, KEEP_INVENTORY, SiftCharoite.BETTER_ENCHANTER, FALSE_ALARM, LIKE_FATHER_AND_SON, FRIEND_OF_THE_SIFT,
-        PITCH_PERFECT);
+        PITCH_PERFECT, PLANTING_THE_DARK, FOOD_CHAIN);
 
     /** Every advancement of the mod except recipe unlocks. */
     static final List<String> MOD_ADVANCEMENTS = List.of(
@@ -63,7 +66,8 @@ public final class SiftAdvancements {
         "the_sift/spicewood");
 
     /** Icons without a content item: vanilla item shown with the mod's item model. */
-    private static final Map<String, String> ICON_STAND_INS = Map.of("sift_rift", "minecraft:ender_eye");
+    private static final Map<String, String> ICON_STAND_INS = Map.of("sift_rift", "minecraft:ender_eye",
+        "dark_sniffer_spawn_egg", "minecraft:sniffer_spawn_egg");
 
     private static final String CUSTOM_DATA = "minecraft:custom_data";
     private static final String BUKKIT_VALUES = "PublicBukkitValues";
@@ -96,6 +100,16 @@ public final class SiftAdvancements {
         }
         if (settings.singers()) {
             granted.add(PITCH_PERFECT);
+        }
+        // The Dark Sniffer is the only source of Sculkflower Seeds in survival.
+        if (settings.darkSniffers()) {
+            granted.add(SMELLS_CREEPY);
+            if (settings.sculkflowers()) {
+                granted.add(PLANTING_THE_DARK);
+            }
+            if (settings.blubs()) {
+                granted.add(FOOD_CHAIN);
+            }
         }
         return granted;
     }

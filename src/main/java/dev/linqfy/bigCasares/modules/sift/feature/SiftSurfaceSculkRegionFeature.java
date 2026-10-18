@@ -16,7 +16,7 @@ import java.util.Set;
  * only gets veins. The regions are pure functions of the world seed, so every chunk agrees on
  * them without any shared state, and the feature only writes its own chunk.
  *
- * <p>Each region marks one or two of its blobs for a dark sniffer, which the owning chunk (the
+ * <p>Each region marks one or two of its blobs for a Dark Sniffer, which the owning chunk (the
  * one holding the blob's centre) spawns on up to 64 undecorated sculk surface columns of the blob.</p>
  *
  * <p>Differences:</p>
@@ -25,8 +25,8 @@ import java.util.Set;
  *       {@code RandomSource}, so a seed gives a different (but equally shaped and
  *       deterministic) layout than the mod. The position hashes are the mod's.</li>
  *   <li>The dark sniffers (the mod's {@code DARK_SNIFFER} entity, queued in
- *       {@code SiftDeferredSnifferSpawner} for a later tick) are spawned directly as ordinary
- *       sniffers at generation time; see {@link SiftSnifferSpawner}.</li>
+ *       {@code SiftDeferredSnifferSpawner} for a later tick) are spawned directly at generation
+ *       time as sniffers marked to become Dark Sniffers when they load; see {@link SiftSnifferSpawner}.</li>
  *   <li>The mod's plants are the single-block vanilla stand-ins of {@code SiftBlocks}, and
  *       {@code Math.sin}/{@code Math.cos} are their {@code StrictMath} versions so that
  *       neighbouring chunks agree on region borders on every JVM.</li>

@@ -53,8 +53,20 @@ public interface WorldRegion {
     /** Biome id at the position, e.g. {@code the_sift:overgrown_forest}. */
     String biome(int x, int y, int z);
 
+    /** Persistent-data key (a byte) that marks a sniffer spawned during generation as a Dark Sniffer. */
+    String DARK_SNIFFER_MARKER = "bigcasares:sift_dark_sniffer";
+
     /** Spawns a vanilla entity during generation (e.g. sniffers in sniffer caves). */
     boolean spawn(String entityType, double x, double y, double z);
+
+    /**
+     * Spawns a vanilla entity that carries a persistent-data byte under the key {@code marker}, set before
+     * it joins the world; the Sift runtime turns marked entities into its creatures when they load.
+     * Without server support (the default) the entity is spawned unmarked.
+     */
+    default boolean spawn(String entityType, double x, double y, double z, String marker) {
+        return spawn(entityType, x, y, z);
+    }
 
     /** Fills the container (chest, barrel) at the position. False when there is no container. */
     boolean fillContainer(int x, int y, int z, java.util.List<ItemSpec> items);

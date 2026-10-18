@@ -46,11 +46,12 @@ public final class BetterModelAssetInstaller {
         "the_sift_rift.bbmodel",
         "the_sift_rift_overworld.bbmodel",
         "the_sift_sifter.bbmodel",
-        "the_sift_echo_golem.bbmodel"
+        "the_sift_echo_golem.bbmodel",
+        "the_sift_dark_sniffer.bbmodel"
     );
 
     private static final List<String> SIFT_MODEL_KEYS = List.of("the_sift_blub", "the_sift_blub_tamed", "the_sift_singer",
-        "the_sift_rift", "the_sift_rift_overworld", "the_sift_sifter", "the_sift_echo_golem");
+        "the_sift_rift", "the_sift_rift_overworld", "the_sift_sifter", "the_sift_echo_golem", "the_sift_dark_sniffer");
 
     private BetterModelAssetInstaller() { }
 
@@ -72,7 +73,8 @@ public final class BetterModelAssetInstaller {
 
     /**
      * Installs The Sift creature models converted from Mielon's The Sift by
-     * {@code tools/convert_geckolib_bbmodel.py}.
+     * {@code tools/convert_geckolib_bbmodel.py} (the Dark Sniffer's, a vanilla sniffer model with the mod's
+     * texture, comes from {@code tools/generate_dark_sniffer_bbmodel.py}).
      */
     public static void installSiftModels(JavaPlugin plugin) {
         install(plugin, SIFT_ASSETS, SIFT_MODEL_KEYS, "The Sift");

@@ -96,6 +96,7 @@ public final class SiftModule implements PluginModule {
         if (settings.singers()) {
             golems.setSingers(singers);
         }
+        SiftDarkSniffers darkSniffers = new SiftDarkSniffers(plugin, models, items::resolve, data, creatures);
         installModels();
         // BetterModel may still be initializing right after plugin enable; the
         // delayed pass repairs the model registry like the other model modules do.
@@ -105,13 +106,14 @@ public final class SiftModule implements PluginModule {
                 sifters.redress();
                 singers.redress();
                 golems.redress();
+                darkSniffers.redress();
             }
         }, 60L);
         scope.register("sift-models-delayed-install", delayedModels::cancel);
         SiftFeatures features = SiftFeatures.create(data, canyonLandmarks(landmarks));
         SiftSoils soils = new SiftSoils(plugin, platform, blocks);
         SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, features, creatures,
-            new SiftRifts(plugin, platform, models), sifters, singers, golems,
+            new SiftRifts(plugin, platform, models), sifters, singers, golems, darkSniffers,
             items::resolve, new SiftIchorSnowfall(soils::update));
         try {
             DimensionDefinition definition = SiftDimension.create(settings, worldgen, List.of(runtime));
@@ -127,6 +129,9 @@ public final class SiftModule implements PluginModule {
             registrations.registerListener("sift-ichor-cauldrons", new SiftIchorCauldrons(platform, items));
             registrations.registerListener("sift-soils", soils);
             registrations.registerListener("sift-willow-saplings", new SiftWillowSaplings(plugin, platform, items, features));
+            if (settings.sculkflowers()) {
+                new SiftSculkflowers(plugin, items::resolve, blocks, data).activate(registrations);
+            }
             if (settings.ancientCityRitual()) {
                 new SiftRitual(plugin, registrations, platform, models).start();
             }

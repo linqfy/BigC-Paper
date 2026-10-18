@@ -5,9 +5,11 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.RegionAccessor;
 import org.bukkit.Registry;
 import org.bukkit.block.Container;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -67,6 +69,11 @@ final class LimitedRegionAdapter implements WorldRegion {
 
     @Override
     public boolean spawn(String entityType, double x, double y, double z) {
+        return spawn(entityType, x, y, z, null);
+    }
+
+    @Override
+    public boolean spawn(String entityType, double x, double y, double z, String marker) {
         int blockX = (int) Math.floor(x);
         int blockY = (int) Math.floor(y);
         int blockZ = (int) Math.floor(z);
@@ -75,8 +82,19 @@ final class LimitedRegionAdapter implements WorldRegion {
         if (type == null || !type.isSpawnable() || !isWritable(blockX, blockY, blockZ)) {
             return false;
         }
-        region.spawnEntity(new Location(null, x, y, z), type);
+        Location at = new Location(null, x, y, z);
+        NamespacedKey markerKey = marker == null ? null : NamespacedKey.fromString(marker);
+        if (markerKey == null) {
+            region.spawnEntity(at, type);
+        } else {
+            // The consumer runs before the entity joins the world, so the mark is there when it loads.
+            spawnMarked(at, type.getEntityClass(), markerKey);
+        }
         return true;
+    }
+
+    private <T extends Entity> void spawnMarked(Location at, Class<T> type, NamespacedKey marker) {
+        region.spawn(at, type, entity -> entity.getPersistentDataContainer().set(marker, PersistentDataType.BYTE, (byte) 1));
     }
 
     @Override

@@ -75,6 +75,10 @@ public final class SiftItems {
             .name("item.the_sift.singer_spawn_egg", "Singer Spawn Egg").build());
         items.add(ContentItem.builder(ECHO_GOLEM_SPAWN_EGG, "WOLF_SPAWN_EGG")
             .name("item.the_sift.echo_golem_spawn_egg", "Echo Golem Spawn Egg").build());
+        // Planted by vanilla's own placement (see SiftSculkflowers): torchflower seeds place a torchflower crop,
+        // a warped fungus a warped fungus, and the datapack lets both stand on sculk.
+        items.add(simple("sculkflower_seeds", "TORCHFLOWER_SEEDS"));
+        items.add(simple("sculkflower", "WARPED_FUNGUS"));
         return items;
     }
 

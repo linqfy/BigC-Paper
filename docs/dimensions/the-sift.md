@@ -63,10 +63,12 @@ clients cannot show new content types, or original to this port.
 | Sifter | Adapted | A silent, scaled silverfish (hostile, melee, no daylight burning, no climbing; hitbox 0.9 x 0.675 against the mod's 0.9 x 0.95) with the mod's model, sounds and stats (40 health, 10 attack, 28 follow range). The spawner is the mod's: every 80 ticks near each player, never on Peaceful, in groups of up to five on Siftslate, growth and healthy-sculk floors, with the mod's biome chances and area caps. It bites after a 14-tick wind-up, drops raw Sifter meat (cooked when it dies on fire, plus Looting) and 7 experience. See `SiftSifters` for every difference |
 | Singer | Adapted | At the Ancient City, the converted model performs the ritual song. In the Sift she is a silent wandering trader (1.48 x 4.8) with the mod's model, sounds and stats that rises from the ground when an Echo Golem brings a Soul Block, roams for 30 seconds, receives the golem's soul and trades: right-click or drop a Soul Block and she throws a gift (the mod's table; the Music Disc Wellspring is re-rolled because the discs are not imported). A name tag or the spawn egg makes her stay. See `SiftSingers` for every difference |
 | Echo Golem | Adapted | A silent wolf scaled to the mod's 1.15 x 1.65 with the mod's model, sounds and stats (34 health, 0.23 speed). One spawns at every Soul Canyon and one near each player where none is within 165 blocks. It explores, walks into a canyon, picks up a Soul Block, carries it out and delivers it to a Singer (calling one if none is near) or, once given an Echo Shard, to that player; it bows, sits for 30 seconds if hurt or right-clicked while carrying, and keeps its state in the entity data. Canyons carved before this version are not known to the golems. See `SiftEchoGolems` and `EchoGolemBrain` for every difference |
-| Sniffers | From the mod | Placed by sniffer caves and surface sculk regions (the mod's dark sniffers are ordinary sniffers). The biomes also list sniffers, but vanilla sniffer spawn rules need grass, so, as in the mod, they do not spawn naturally on Sift ground |
+| Sniffers | From the mod | Placed by sniffer caves and surface sculk regions. The biomes also list sniffers, but vanilla sniffer spawn rules need grass, so, as in the mod, they do not spawn naturally on Sift ground. Sniffers dig sculk (the datapack adds it to `#minecraft:sniffer_diggable_block`, in every world) and are infected by it, see Dark Sniffer |
+| Dark Sniffer | Adapted | The surface sculk regions place one or two. A real, vanilla sniffer (the mod's hitbox, brain, digging and sounds) hidden under a BetterModel model of the vanilla sniffer with the mod's `dark_sniffer.png` (a vanilla client has no second sniffer texture). The mod's `DarkSnifferEntity#tick` is ported whole: 40 health, 7 attack, it hunts players (not in Creative or Spectator, never on Peaceful) and ordinary sniffers within 32 blocks, bites every 24 ticks, and from 5 blocks away in sight pulls its prey in with a sonic sniff (10-tick wind-up, a wave at 1.5 blocks per tick led by the prey's velocity, 100-tick cooldown); otherwise it wanders around its home. It digs Sculkflower Seeds out of sculk, drops one sculk, cannot be fed or bred, and is never targeted or angered by Wardens, which pet it now and then. Sniffers that dig sculk are infected, shake for 600 ticks and become Dark Sniffers; ordinary sniffers within 20 blocks of one run away. A tamed Blub that kills one awards Food Chain. See `SiftDarkSniffers` for every difference (Sift world only, no spawn egg, no sound-wave particle or Warden petting animation) |
+| Sculkflower | Adapted | Seeds (torchflower seeds underneath) are planted on sculk, healthy sculk, dry healthy sculk or farmland; the crop is a torchflower crop whose two stages grow with the mod's rules (light 9, growth speed with healthy sculk as moist farmland, one age per bone meal) into the Sculkflower (a warped fungus), which drops itself, makes light blue dye and is compostable at the mod's chances. Placed ones are remembered per chunk; the datapack lets crops and fungi stand on sculk and red mushroom blocks. See `SiftSculkflowers` |
 | Ancient City ritual | From the mod | See above; console and replay state is not saved across restarts |
 | Rifts | From the mod | Timing, size, placement search and linking as in the mod; models converted from the mod; rifts are not saved across restarts and the exit search covers 48 blocks (the mod searches farther) |
-| Items | Partial | Block items, Charoite, Siftite nugget/ingot, Ichor shard, Sifter meat (food), Ichor bottle/bucket, willow sapling and the Singer and Echo Golem spawn eggs exist; the bottle, bucket and sapling have no Ichor- or tree-specific behaviour yet |
+| Items | Partial | See the item rows below |
 | Siftite gear | Adapted | Sword, shovel, pickaxe, axe, hoe, spear, four armour pieces and the upgrade template are netherite items with the mod's stats (durability, damage, speed, mining speed, armour, knockback resistance, fire resistance), models and armour texture. See `SiftiteGear` for the numbers and the differences (netherite ingots also repair them; the template keeps the client's netherite template text) |
 | Siftite death recovery | Adapted | Siftite items are taken out of a player's death drops and returned through a small particle rift 2 seconds after the respawn (or join); the stacks are kept in `data/the-sift/siftite-recovery/<uuid>.bin` until they are in the inventory. |
 | Shifting tides (Flow, Endure, Thrive) | Original | A three-day cycle: Endure hardens hostile mobs and stops natural regeneration; Thrive speeds regeneration and grants Haste |
@@ -74,11 +76,7 @@ clients cannot show new content types, or original to this port.
 
 ### Not ported yet
 
-Dark Sniffer creatures; the Blub, Sifter and Dark Sniffer spawn eggs;
-Charoite enchanting; the Sculkflower crop and seeds; Ichor snowballs, buckets,
-bottles and cauldrons; the glowmasks and dynamic lights of the Singer and Echo
-Golem (client-side in the mod); the mod's `/locate` and weather commands. The
-two music discs are not imported (see below).
+Not ported: see the list below.
 
 ## Configuration
 
@@ -115,6 +113,10 @@ the-sift:
     enabled: true               # the Singer's soul event, roaming and bartering
   echo-golems:
     enabled: true               # Echo Golem spawner and behaviour
+  dark-sniffers:
+    enabled: true               # Dark Sniffers: hunting, sonic sniff, digging, infection (needs BetterModel)
+  sculkflowers:
+    enabled: true               # Sculkflower growth, harvest and bone meal
 ```
 
 Echo Golems and Singers can be switched off separately. Without Singers a golem
@@ -142,7 +144,11 @@ restart once, and only chunks generated afterwards change.
 The ritual's template override changes Ancient City generation in every world that
 generates new Ancient Cities. The datapack also lets vegetation and wolves treat
 mushroom blocks as ground (`#minecraft:supports_vegetation` and related tags,
-`#minecraft:wolves_spawnable_on`), which also applies to vanilla huge mushrooms.
+`#minecraft:wolves_spawnable_on`), which also applies to vanilla huge mushrooms. For the Sculkflower and
+the Dark Sniffer it also adds sculk and red mushroom blocks to `#minecraft:supports_crops` and
+`#minecraft:supports_warped_fungus` (plus farmland for the fungus) and sculk to
+`#minecraft:sniffer_diggable_block`: in every world, crops and warped fungi can stand on sculk and huge red
+mushroom blocks and sniffers dig sculk.
 
 ## Updating the imported content
 
@@ -158,12 +164,18 @@ python3 -I tools/convert_geckolib_bbmodel.py <jar> echo_golem echo_golem the_sif
 python3 -I tools/convert_geckolib_bbmodel.py <jar> rift rift/sift the_sift_rift
 python3 -I tools/convert_geckolib_bbmodel.py <jar> rift rift/overworld the_sift_rift_overworld
 python3 -I tools/convert_geckolib_bbmodel.py <jar> sifter sifter the_sift_sifter --rename running=walk --speed walk=2.5
+python3 -I tools/generate_dark_sniffer_bbmodel.py <jar>   # vanilla sniffer parts + the mod's texture
 bash gradlew generateCustomBlockstates   # after changing custom blocks
 bash gradlew generateSiftDatapack        # inspect build/generated-datapacks/
 ```
 
 The Singer and Echo Golem models rename the mod's idle and walk animations so that
 BetterModel's own idle/walk handling does not compete with the poses the plugin plays.
+
+The Dark Sniffer model is not a GeckoLib model: `tools/generate_dark_sniffer_bbmodel.py` builds it from
+`tools/sift/sniffer_parts.json` (the vanilla sniffer's parts and texture offsets) and
+`tools/sift/dark_sniffer_animations.json` (animations written for this port), reusing the converter's functions.
+
 The import writes `src/main/resources/the_sift/mielon/` (worldgen data, templates,
 loot tables) and `resourcepack/java/assets/the_sift/`, replacing both. The music
 disc tracks are third-party works credited by the mod; they are left out unless
@@ -173,7 +185,7 @@ confirmed.
 ## Verification status
 
 Unit tests cover the datapack translation and determinism, the Ancient City
-templates, the ritual melody, rift placement, the Sifter spawner's search, loot and bite timeline and its converted model, the Singer's soul event, barter table and the Echo Golem's mission and route state machine, spawner and landmark registry (all against small fakes) and the converted Singer and Echo Golem models, every ported feature (determinism, staying inside the
+templates, the ritual melody, rift placement, the Sifter spawner's search, loot and bite timeline and its converted model, the Singer's soul event, barter table and the Echo Golem's mission and route state machine, spawner and landmark registry, the Dark Sniffer's brain, sonic sniff, Warden petting and infection (all against small fakes), the converted Singer, Echo Golem and generated Dark Sniffer models, the Sculkflower's growth rules, saved positions and loot tables, every ported feature (determinism, staying inside the
 populator region, expected output on prepared terrain, thread safety for several
 families), the loot table, block rendering contracts and the framework. The
 generated datapack has been checked against Minecraft 26.2's registries and block

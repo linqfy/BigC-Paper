@@ -1,0 +1,66 @@
+{
+  "_comment": "Animations authored for the Dark Sniffer model (this port's own, not Mojang's keyframes), in the Bedrock/GeckoLib animation format that convert_geckolib_bbmodel.py reads: rotations in degrees (positive x tips the front down, on a leg it swings the foot back), positions in model pixels. walk and idle are played by BetterModel by themselves; the others follow the sniffer's state (see SiftDarkSniffers). walk only moves the legs and the body, the head animations only move the head, so they can play together.",
+  "format_version": "1.8.0",
+  "animations": {
+    "walk": {
+      "loop": true,
+      "animation_length": 1.0,
+      "bones": {
+        "right_front_leg": {"rotation": {"0.0": [-22.5, 0, 0], "0.5": [22.5, 0, 0], "1.0": [-22.5, 0, 0]}},
+        "left_mid_leg": {"rotation": {"0.0": [-22.5, 0, 0], "0.5": [22.5, 0, 0], "1.0": [-22.5, 0, 0]}},
+        "right_hind_leg": {"rotation": {"0.0": [-22.5, 0, 0], "0.5": [22.5, 0, 0], "1.0": [-22.5, 0, 0]}},
+        "left_front_leg": {"rotation": {"0.0": [22.5, 0, 0], "0.5": [-22.5, 0, 0], "1.0": [22.5, 0, 0]}},
+        "right_mid_leg": {"rotation": {"0.0": [22.5, 0, 0], "0.5": [-22.5, 0, 0], "1.0": [22.5, 0, 0]}},
+        "left_hind_leg": {"rotation": {"0.0": [22.5, 0, 0], "0.5": [-22.5, 0, 0], "1.0": [22.5, 0, 0]}},
+        "bone": {
+          "position": {"0.0": [0, 0, 0], "0.25": [0, 0.8, 0], "0.5": [0, 0, 0], "0.75": [0, 0.8, 0], "1.0": [0, 0, 0]},
+          "rotation": {"0.0": [0, 0, -1.5], "0.5": [0, 0, 1.5], "1.0": [0, 0, -1.5]}
+        }
+      }
+    },
+    "idle": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "bone": {"position": {"0.0": [0, 0, 0], "2.0": [0, 0.4, 0], "4.0": [0, 0, 0]}},
+        "left_ear": {"rotation": {"0.0": [0, 0, 0], "1.5": [0, 0, 3], "3.0": [0, 0, 0], "4.0": [0, 0, 0]}},
+        "right_ear": {"rotation": {"0.0": [0, 0, 0], "1.5": [0, 0, -3], "3.0": [0, 0, 0], "4.0": [0, 0, 0]}}
+      }
+    },
+    "sniff": {
+      "loop": true,
+      "animation_length": 1.2,
+      "bones": {
+        "head": {"rotation": {"0.0": [5, 0, 0], "0.3": [16, 0, 0], "0.6": [6, 0, 0], "0.9": [16, 0, 0], "1.2": [5, 0, 0]}},
+        "lower_beak": {"rotation": {"0.0": [0, 0, 0], "0.3": [-5, 0, 0], "0.6": [0, 0, 0], "0.9": [-5, 0, 0], "1.2": [0, 0, 0]}},
+        "nose": {"position": {"0.0": [0, 0, 0], "0.15": [0, 0, -0.5], "0.3": [0, 0, 0], "0.45": [0, 0, -0.5], "0.6": [0, 0, 0], "0.75": [0, 0, -0.5], "0.9": [0, 0, 0], "1.05": [0, 0, -0.5], "1.2": [0, 0, 0]}}
+      }
+    },
+    "search": {
+      "loop": true,
+      "animation_length": 1.6,
+      "bones": {
+        "head": {"rotation": {"0.0": [24, 0, 0], "0.4": [28, 0, 0], "0.8": [24, 0, 0], "1.2": [28, 0, 0], "1.6": [24, 0, 0]}},
+        "nose": {"position": {"0.0": [0, 0, 0], "0.2": [0, 0, -0.5], "0.4": [0, 0, 0], "0.6": [0, 0, -0.5], "0.8": [0, 0, 0], "1.0": [0, 0, -0.5], "1.2": [0, 0, 0], "1.4": [0, 0, -0.5], "1.6": [0, 0, 0]}}
+      }
+    },
+    "dig": {
+      "loop": true,
+      "animation_length": 2.0,
+      "bones": {
+        "head": {"rotation": {"0.0": [16, 0, 0], "0.5": [20, 0, 0], "1.0": [16, 0, 0], "1.5": [20, 0, 0], "2.0": [16, 0, 0]}},
+        "lower_beak": {"rotation": {"0.0": [0, 0, 0], "0.5": [-9, 0, 0], "1.0": [0, 0, 0], "1.5": [-9, 0, 0], "2.0": [0, 0, 0]}},
+        "bone": {"rotation": {"0.0": [3, 0, 0], "2.0": [3, 0, 0]}}
+      }
+    },
+    "rise": {
+      "loop": false,
+      "animation_length": 2.0,
+      "bones": {
+        "head": {"rotation": {"0.0": [16, 0, 0], "1.5": [2, 0, 0], "2.0": [0, 0, 0]}},
+        "lower_beak": {"rotation": {"0.0": [-9, 0, 0], "0.5": [0, 0, 0], "2.0": [0, 0, 0]}},
+        "bone": {"rotation": {"0.0": [3, 0, 0], "2.0": [0, 0, 0]}}
+      }
+    }
+  }
+}

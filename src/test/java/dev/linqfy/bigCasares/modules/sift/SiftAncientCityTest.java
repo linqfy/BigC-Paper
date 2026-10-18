@@ -64,7 +64,8 @@ class SiftAncientCityTest {
         SiftSettings defaults = SiftSettings.defaults();
         SiftSettings noRitual = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(), defaults.entryPermission(),
             defaults.travelCooldownSeconds(), defaults.craftedPortal(), false, defaults.tides(), defaults.ichor(),
-            defaults.blubs(), defaults.rifts(), defaults.sifters(), defaults.singers(), defaults.echoGolems(), List.of());
+            defaults.blubs(), defaults.rifts(), defaults.sifters(), defaults.singers(), defaults.echoGolems(),
+            defaults.darkSniffers(), defaults.sculkflowers(), List.of());
         GeneratedDatapack without = new DatapackCompiler().compile(List.of(SiftDimension.create(noRitual,
             new SiftWorldgen(SiftData.fromClasspath(), Logger.getLogger("test")), List.of()))).datapack();
         assertNull(without.file("data/minecraft/structure/ancient_city/city_center/city_center_1.nbt"));

@@ -50,7 +50,8 @@ class SiftRecipeCatalogTest {
         "the_sift:siftslate", "the_sift:cobbled_siftslate", "the_sift:chiseled_siftslate", "the_sift:siftslate_bricks",
         "the_sift:overgrown_willow_log", "the_sift:overgrown_willow_wood", "the_sift:stripped_overgrown_willow_log",
         "the_sift:stripped_overgrown_willow_wood", "the_sift:overgrown_willow_planks", "the_sift:siftite_nugget",
-        "the_sift:siftite_ingot", "the_sift:ichor_shard", "the_sift:raw_sifter_meat", "the_sift:cooked_sifter_meat");
+        "the_sift:siftite_ingot", "the_sift:ichor_shard", "the_sift:raw_sifter_meat", "the_sift:cooked_sifter_meat",
+        "the_sift:sculkflower");
 
     private static final Set<String> SIFTITE_GEAR = Set.of(
         "the_sift:siftite_sword", "the_sift:siftite_pickaxe", "the_sift:siftite_axe", "the_sift:siftite_shovel",
@@ -66,7 +67,7 @@ class SiftRecipeCatalogTest {
         "dispenser_from_cobbled_siftslate", "dropper_from_cobbled_siftslate", "lever_from_cobbled_siftslate",
         "observer_from_cobbled_siftslate", "piston_from_cobbled_siftslate",
         "overgrown_willow_planks", "overgrown_willow_wood", "stripped_overgrown_willow_wood",
-        "siftite_ingot", "siftite_nugget_from_siftite_ingot",
+        "siftite_ingot", "siftite_nugget_from_siftite_ingot", "light_blue_dye_from_sculkflower",
         "sifter_meat_smelting", "sifter_meat_smoking", "sifter_meat_campfire");
 
     private static Predicate<String> available(Set<String> contentItems) {
@@ -231,6 +232,15 @@ class SiftRecipeCatalogTest {
 
     private static Set<String> smithingRecipeNames() {
         return SiftRecipeCatalog.RECIPE_NAMES.stream().filter(name -> name.endsWith("_smithing")).collect(Collectors.toSet());
+    }
+
+    @Test
+    void theSculkflowerMakesLightBlueDye() {
+        RecipeSpec.Shapeless dye = assertInstanceOf(RecipeSpec.Shapeless.class,
+            byId(translate(SIFT_ITEMS)).get("light_blue_dye_from_sculkflower"));
+        assertEquals(List.of(Ingredient.of("the_sift:sculkflower")), dye.ingredients());
+        assertEquals(new RecipeSpec.Result("minecraft:light_blue_dye", 1), dye.result());
+        assertTrue(translate(Set.of()).skippedIds().contains("light_blue_dye_from_sculkflower"), "needs the item");
     }
 
     @Test

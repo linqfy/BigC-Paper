@@ -24,6 +24,8 @@ public record SiftSettings(
     boolean sifters,
     boolean singers,
     boolean echoGolems,
+    boolean darkSniffers,
+    boolean sculkflowers,
     List<String> warnings
 ) {
 
@@ -76,8 +78,11 @@ public record SiftSettings(
         boolean sifters = section == null || section.getBoolean("sifters.enabled", true);
         boolean singers = section == null || section.getBoolean("singers.enabled", true);
         boolean echoGolems = section == null || section.getBoolean("echo-golems.enabled", true);
+        boolean darkSniffers = section == null || section.getBoolean("dark-sniffers.enabled", true);
+        boolean sculkflowers = section == null || section.getBoolean("sculkflowers.enabled", true);
         return new SiftSettings(seedSalt, border, permission.isEmpty() ? null : permission, cooldown,
-            craftedPortal, ritual, tides, ichor, blubs, rifts, sifters, singers, echoGolems, warnings);
+            craftedPortal, ritual, tides, ichor, blubs, rifts, sifters, singers, echoGolems, darkSniffers, sculkflowers,
+            warnings);
     }
 
     private static double number(ConfigurationSection section, String key, double fallback, double min, double max,

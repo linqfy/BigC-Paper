@@ -113,8 +113,9 @@ public final class SiftBlocks {
         STAND_INS.put("siftslate_hanging_roots", BlockStateSpec.of("minecraft:weeping_vines_plant"));
         STAND_INS.put("sunburst_plant", BlockStateSpec.of("minecraft:torchflower"));
         STAND_INS.put("whisperbloom", BlockStateSpec.of("minecraft:lily_of_the_valley"));
-        STAND_INS.put("sculkflower", BlockStateSpec.of("minecraft:blue_orchid"));
-        STAND_INS.put("sculkflower_crop", BlockStateSpec.of("minecraft:blue_orchid"));
+        // The Sculkflower and its crop are warped fungus and torchflower crop (ages 0 and 1); see SiftSculkflowers.
+        STAND_INS.put("sculkflower", BlockStateSpec.of("minecraft:warped_fungus"));
+        STAND_INS.put("sculkflower_crop", BlockStateSpec.of("minecraft:torchflower_crop", Map.of("age", "0")));
         STAND_INS.put("overgrown_willow_sapling", BlockStateSpec.of("minecraft:mangrove_propagule"));
         // Willow vines are VineBlock-like in the mod; vanilla vines keep the faces and take the
         // biome foliage tint (set to the willow cyan in Sift biomes).
@@ -156,6 +157,11 @@ public final class SiftBlocks {
         }
         if (path.equals("ichor_snow") && properties.containsKey("layers")) {
             return Optional.of(standIn.with("layers", properties.get("layers")));
+        }
+        if (path.equals("sculkflower_crop") && properties.containsKey("age")) {
+            // Ages 0 and 1 are growing stages; the mod's age 2 is already the flower.
+            String age = properties.get("age");
+            return Optional.of(age.equals("2") ? STAND_INS.get("sculkflower") : standIn.with("age", age));
         }
         if (standIn.block().path().equals("vine")) {
             BlockStateSpec vine = standIn;

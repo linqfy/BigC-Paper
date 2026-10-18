@@ -1803,3 +1803,11 @@ the-sift:
   # Blocks out of the canyons to a Singer, or to a player it was given an Echo Shard by.
   echo-golems:
     enabled: true
+  # The mod's Dark Sniffers: sculk-region sniffers that hunt players and ordinary sniffers (sonic
+  # sniff pulls the prey in), dig Sculkflower Seeds on sculk, are petted by calm Wardens and
+  # infect sniffers that dig sculk. Needs BetterModel for their model.
+  dark-sniffers:
+    enabled: true
+  # The mod's Sculkflower: seeds planted on sculk, healthy sculk or farmland grow into the flower.
+  sculkflowers:
+    enabled: true
