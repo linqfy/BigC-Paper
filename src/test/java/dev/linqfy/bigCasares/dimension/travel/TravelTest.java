@@ -109,6 +109,19 @@ class TravelTest {
         assertThrows(IllegalArgumentException.class, () -> new SafeLocationFinder(1000));
     }
 
+    /** Found on a live server: a rift aimed into the main portal put players on the structure's roof. */
+    @Test
+    void aSafeRequestedSpotIsKeptUnderARoof() {
+        GridFixture grid = new GridFixture(0, 128)
+            .fill(-5, 0, -5, 5, 63, 5, "minecraft:stone")
+            .fill(-5, 79, -5, 5, 79, 5, "minecraft:stone")
+            .fill(0, 64, 0, 0, 69, 0, "minecraft:light");
+
+        assertEquals(Optional.of(new SafeLocationFinder.Spot(0, 64, 0)), new SafeLocationFinder(4).find(grid, 0, 0, 64));
+        assertEquals(80, new SafeLocationFinder(4).find(grid.set(0, 65, 0, "minecraft:stone"), 0, 0, 64).orElseThrow().y(),
+            "an unsafe request still searches the column from above");
+    }
+
     @Test
     void cooldownsExpire() {
         AtomicReference<Instant> now = new AtomicReference<>(Instant.parse("2026-10-16T12:00:00Z"));

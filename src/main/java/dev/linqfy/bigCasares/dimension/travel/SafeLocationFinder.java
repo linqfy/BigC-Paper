@@ -4,7 +4,8 @@ import java.util.Optional;
 
 /**
  * Finds a safe standing position near a target column: a solid, non-hazardous
- * floor with two passable blocks above and no hazard next to the feet. Columns
+ * floor with two passable blocks above and no hazard next to the feet. The
+ * requested position itself wins when it is safe. Otherwise columns
  * are scanned in square rings of increasing radius so the closest spot wins and
  * the result is deterministic for the same terrain.
  */
@@ -28,6 +29,10 @@ public final class SafeLocationFinder {
      *     the column is scanned downward from {@code preferredY + 32}, then upward.
      */
     public Optional<Spot> find(BlockGrid grid, int x, int z, int preferredY) {
+        // A safe requested spot is kept; the column scan below would prefer a roof above it.
+        if (isSafe(grid, x, preferredY, z)) {
+            return Optional.of(new Spot(x, preferredY, z));
+        }
         for (int radius = 0; radius <= maxRadius; radius++) {
             for (int dx = -radius; dx <= radius; dx++) {
                 for (int dz = -radius; dz <= radius; dz++) {
