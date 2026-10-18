@@ -213,7 +213,7 @@ public final class SiftRecipeRegistrar {
                     materials(entry).forEach(material -> stacks.add(new ItemStack(material)));
                 }
             }
-            return RecipeChoice.exactChoice(stacks);
+            return new RecipeChoice.ExactChoice(stacks);
         }
         if (entries.size() == 1 && Ingredient.isTag(entries.get(0))) {
             return new RecipeChoice.MaterialChoice(requireTag(entries.get(0)));

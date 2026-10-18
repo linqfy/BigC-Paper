@@ -50,6 +50,10 @@ dependencies {
     // requires a live RegistryAccess implementation. Paper-specific behavior is
     // exercised by run-paper against the real 26.2 server below.
     testImplementation("org.spigotmc:spigot-api:26.2-R0.1-SNAPSHOT")
+    // Spigot does not ship Adventure, which Paper bundles and the Sift's classes use;
+    // the version follows the Adventure BOM of the paper-api above.
+    testImplementation(platform("net.kyori:adventure-bom:5.2.0"))
+    testImplementation("net.kyori:adventure-api")
     testImplementation("com.github.MilkBowl:VaultAPI:1.7") {
         exclude group: "org.bukkit", module: "bukkit"
     }

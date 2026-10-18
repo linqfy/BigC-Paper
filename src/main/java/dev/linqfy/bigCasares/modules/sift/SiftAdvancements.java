@@ -250,7 +250,7 @@ public final class SiftAdvancements {
             throw new IllegalStateException("Advancement " + path + " needs item " + id + ", which is not a content item");
         }
         // SNBT: the custom_data predicate parses a string on every 26.x version.
-        String customData = "{" + BUKKIT_VALUES + ":{\"" + ContentItemFactory.CONTENT_ID.asString() + "\":\""
+        String customData = "{" + BUKKIT_VALUES + ":{\"" + ContentItemFactory.CONTENT_ID.toString() + "\":\""
             + id.asString() + "\"}}";
         JsonObject subPredicates = new JsonObject();
         subPredicates.addProperty(CUSTOM_DATA, customData);

@@ -68,9 +68,9 @@ class SiftSculkflowerContentTest {
 
     @Test
     void theStandInsMatchTheMaterialsTheRuntimeLooksFor() {
-        assertEquals(org.bukkit.Material.TORCHFLOWER_CROP.getKey().asString(),
+        assertEquals(org.bukkit.Material.TORCHFLOWER_CROP.getKey().toString(),
             SiftBlocks.remapType("sculkflower_crop").orElseThrow());
-        assertEquals(org.bukkit.Material.WARPED_FUNGUS.getKey().asString(), SiftBlocks.remapType("sculkflower").orElseThrow());
+        assertEquals(org.bukkit.Material.WARPED_FUNGUS.getKey().toString(), SiftBlocks.remapType("sculkflower").orElseThrow());
     }
 
     @Test

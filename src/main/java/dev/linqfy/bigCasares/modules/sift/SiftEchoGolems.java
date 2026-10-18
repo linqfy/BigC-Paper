@@ -48,6 +48,9 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -1049,6 +1052,8 @@ final class SiftEchoGolems implements Listener {
     /** The golem's {@link EchoGolemBrain.Navigation} over Paper's pathfinder. */
     private static final class Walker implements EchoGolemBrain.Navigation {
 
+        private static final MethodHandle FIND_PATH_WITH_REACH = findPathWithReach();
+
         /** At most this many goals of a set are searched, nearest first. */
         private static final int GOALS_TRIED = 2;
 
@@ -1068,7 +1073,28 @@ final class SiftEchoGolems implements Listener {
         @Override
         public EchoGolemBrain.Path createPath(SiftPos target, int reach) {
             Location at = new Location(body.getWorld(), target.x() + 0.5, target.y(), target.z() + 0.5);
-            return wrap(body.getPathfinder().findPath(at, reach));
+            return wrap(findPath(body.getPathfinder(), at, reach));
+        }
+
+        /**
+         * {@code Pathfinder#findPath(Location, int)} (the mod's {@code createPath(pos, reach)}) exists on current
+         * 26.2 servers but not in the API this plugin compiles against; without it the reach is 0.
+         */
+        private static Pathfinder.PathResult findPath(Pathfinder pathfinder, Location at, int reach) {
+            if (FIND_PATH_WITH_REACH != null) {
+                try {
+                    return (Pathfinder.PathResult) FIND_PATH_WITH_REACH.invoke(pathfinder, at, reach);
+                } catch (Throwable failure) {
+                    if (failure instanceof RuntimeException runtime) {
+                        throw runtime;
+                    }
+                    if (failure instanceof Error error) {
+                        throw error;
+                    }
+                    throw new IllegalStateException(failure);
+                }
+            }
+            return pathfinder.findPath(at);
         }
 
         @Override
@@ -1087,6 +1113,15 @@ final class SiftEchoGolems implements Listener {
                 }
             }
             return partial;
+        }
+
+        private static MethodHandle findPathWithReach() {
+            try {
+                return MethodHandles.publicLookup().findVirtual(Pathfinder.class, "findPath",
+                    MethodType.methodType(Pathfinder.PathResult.class, Location.class, int.class));
+            } catch (NoSuchMethodException | IllegalAccessException missing) {
+                return null;
+            }
         }
 
         private static EchoGolemBrain.Path wrap(Pathfinder.PathResult result) {
