@@ -182,26 +182,26 @@ No modificar `BigCasares.initializeRuntime()` ni `config.yml`.
   límites cambiantes. El recibo conserva las cantidades y comisiones originales;
   un cambio posterior de configuración no invalida un replay idéntico.
 
-- [ ] Escribir pruebas de crédito externo idempotente y lanzamiento: creador
+- [x] Escribir pruebas de crédito externo idempotente y lanzamiento: creador
   financiado con `150_000` unidades BC$ paga `50_000` de comisión y aporta
   `100_000` al pool. Verificar emisión total, tokens retenidos y LP inicial.
-- [ ] Probar nombres/tickers inválidos, normalización con `Locale.ROOT`, BC/ORO
+- [x] Probar nombres/tickers inválidos, normalización con `Locale.ROOT`, BC/ORO
   reservados, duplicados, límite global y por creador, supply overflow, saldo
   insuficiente y duración de bloqueo fuera de rango; ningún rechazo debe mover fondos.
-- [ ] Probar compra/venta con comisión segregada, dev dump limitado al saldo,
+- [x] Probar compra/venta con comisión segregada, dev dump limitado al saldo,
   ventas ajenas rechazadas, reservas actualizadas y mínimo de salida incumplido.
-- [ ] Probar retiro parcial y total por el dueño: ambas reservas vuelven a su
+- [x] Probar retiro parcial y total por el dueño: ambas reservas vuelven a su
   billetera; el retiro total cierra el mercado y conserva tokens de terceros.
   Rechazar tercero, exceso de shares, salida cero y operaciones en un pool cerrado.
-- [ ] Probar bloqueo un instante antes del vencimiento y en el instante exacto
+- [x] Probar bloqueo un instante antes del vencimiento y en el instante exacto
   mediante `Clock.fixed`; probar replay posterior al vencimiento y al cierre.
-- [ ] Ejecutar `bash gradlew test --tests '*finance.ExchangeServiceTest'` y
+- [x] Ejecutar `bash gradlew test --tests '*finance.ExchangeServiceTest'` y
   registrar los fallos iniciales.
-- [ ] Implementar las reglas dentro de `transact`; recalcular swaps sobre las
+- [x] Implementar las reglas dentro de `transact`; recalcular swaps sobre las
   reservas leídas después del bloqueo SQLite y persistir movimientos y snapshots
   conjuntamente. El servicio no consulta proveedores externos.
-- [ ] Repetir las pruebas enfocadas y exigir cero fallos.
-- [ ] Commit: `feat(finance): add token launches trading and liquidity rugs`.
+- [x] Repetir las pruebas enfocadas y exigir cero fallos.
+- [x] Commit: `feat(finance): add token launches trading and liquidity rugs`.
 
 ### Task 4: Concurrencia, recuperación y documentación de integración
 
