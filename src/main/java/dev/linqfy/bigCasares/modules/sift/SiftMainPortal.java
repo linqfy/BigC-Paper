@@ -66,7 +66,7 @@ import java.util.logging.Level;
 final class SiftMainPortal implements Listener {
 
     static final String LANDMARK = "main_portal";
-    static final String ANCHOR_VALUE = "main_portal.anchor";
+    static final String ANCHOR_VALUE = "main_portal_anchor";
     private static final String PREFIX = "[TheSift] ";
     private static final long START_DELAY_TICKS = 200L;
     private static final int SNAPSHOTS_PER_TICK = 24;

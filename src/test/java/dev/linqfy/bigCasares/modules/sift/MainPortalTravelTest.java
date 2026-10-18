@@ -5,12 +5,16 @@ import dev.linqfy.bigCasares.dimension.event.DimensionTravelEvent;
 import dev.linqfy.bigCasares.dimension.event.DimensionTravelEvent.Cause;
 import dev.linqfy.bigCasares.modules.sift.MainPortalTravel.Exit;
 import dev.linqfy.bigCasares.modules.sift.feature.SiftMainPortalSite.Anchor;
+import dev.linqfy.bigCasares.dimension.persistence.DimensionDataStore;
 import org.bukkit.Location;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -111,5 +115,15 @@ class MainPortalTravelTest {
         assertEquals(Optional.empty(), SiftMainPortal.decode("1,2,three"));
         assertEquals(Optional.empty(), SiftMainPortal.decode("1,2,3,4"));
         assertEquals(Optional.of(new Anchor(1, 2, 3)), SiftMainPortal.decode(" 1, 2 ,3 "));
+    }
+
+    /** Found on a live server: the store only takes plain keys, and a rejected key stopped the portal's activation. */
+    @Test
+    void theAnchorIsSavedUnderAKeyTheDimensionStoreAccepts(@TempDir Path folder) {
+        DimensionDataStore store = new DimensionDataStore(folder.resolve("dimensions.yml"), Logger.getLogger("test"));
+        store.putValue(SiftDimension.KEY.asString(), SiftMainPortal.ANCHOR_VALUE, SiftMainPortal.encode(ANCHOR));
+
+        assertEquals(Optional.of(ANCHOR), store.value(SiftDimension.KEY.asString(), SiftMainPortal.ANCHOR_VALUE)
+            .flatMap(SiftMainPortal::decode));
     }
 }

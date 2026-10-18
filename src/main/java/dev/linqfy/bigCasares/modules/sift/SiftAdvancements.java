@@ -31,7 +31,8 @@ import java.util.Set;
  * structure location) work unchanged because the port keeps the mod's ids; item
  * criteria match the content id stored on content items; the mod's
  * {@code minecraft:impossible} criteria are awarded from code with
- * {@link #award(Player, String)}, at the same moments as in the mod.</p>
+ * {@link #award(Player, String)}, at the same moments as in the mod. Entity
+ * conditions are rewritten from the mod's 26.3 form to the list form 26.2 parses.</p>
  */
 public final class SiftAdvancements {
 
@@ -200,7 +201,15 @@ public final class SiftAdvancements {
         for (Map.Entry<String, JsonElement> entry : criteria.entrySet()) {
             JsonObject criterion = entry.getValue().getAsJsonObject();
             JsonObject conditions = criterion.getAsJsonObject("conditions");
-            if (conditions == null || !conditions.has("items")) {
+            if (conditions == null) {
+                continue;
+            }
+            for (Map.Entry<String, JsonElement> condition : conditions.entrySet()) {
+                if (isSingleLootCondition(condition.getValue())) {
+                    condition.setValue(lootConditions(condition.getValue().getAsJsonObject()));
+                }
+            }
+            if (!conditions.has("items")) {
                 continue;
             }
             JsonArray predicates = new JsonArray();
@@ -210,6 +219,23 @@ public final class SiftAdvancements {
             conditions.add("items", predicates);
         }
         return criteria;
+    }
+
+    /** A 26.3 entity condition: one loot condition object whose kind is under {@code type}. */
+    private static boolean isSingleLootCondition(JsonElement value) {
+        return value.isJsonObject() && value.getAsJsonObject().has("type") && value.getAsJsonObject().has("entity")
+            && !value.getAsJsonObject().has("condition");
+    }
+
+    /** 26.2 reads entity conditions as a list of loot conditions whose kind is under {@code condition}. */
+    static JsonArray lootConditions(JsonObject single) {
+        JsonObject condition = new JsonObject();
+        condition.add("condition", single.get("type").deepCopy());
+        single.entrySet().stream().filter(entry -> !entry.getKey().equals("type"))
+            .forEach(entry -> condition.add(entry.getKey(), entry.getValue().deepCopy()));
+        JsonArray list = new JsonArray();
+        list.add(condition);
+        return list;
     }
 
     /** {@code {"items": "the_sift:x"}} matches content item x by its stored content id. */

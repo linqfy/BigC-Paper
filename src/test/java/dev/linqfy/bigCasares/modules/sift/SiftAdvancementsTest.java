@@ -207,6 +207,22 @@ class SiftAdvancementsTest {
         assertEquals("Kinda Purpleish", title.get("fallback").getAsString());
     }
 
+    @Test
+    void locationCriteriaUseTheListOfLootConditionsThat26Point2Reads() {
+        Map<String, JsonObject> translated = translate(SiftSettings.defaults());
+        for (String path : List.of("story/fallen_civilization", "the_sift/certified_sifter")) {
+            for (Map.Entry<String, JsonElement> criterion : translated.get(path).getAsJsonObject("criteria").entrySet()) {
+                JsonElement player = criterion.getValue().getAsJsonObject().getAsJsonObject("conditions").get("player");
+                assertTrue(player.isJsonArray(), path + " " + criterion.getKey());
+                JsonObject condition = player.getAsJsonArray().get(0).getAsJsonObject();
+                assertEquals("minecraft:entity_properties", condition.get("condition").getAsString());
+                assertEquals("this", condition.get("entity").getAsString());
+                assertFalse(condition.has("type"));
+                assertTrue(condition.getAsJsonObject("predicate").has("minecraft:location"));
+            }
+        }
+    }
+
     private static Map<String, JsonObject> translate(SiftSettings settings) {
         return SiftAdvancements.translate(DATA, SiftAdvancements.granted(settings), SiftItems.items());
     }

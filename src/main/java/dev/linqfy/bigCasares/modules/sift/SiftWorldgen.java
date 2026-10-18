@@ -182,7 +182,7 @@ public final class SiftWorldgen {
             biomes.add(biome(name, placements.getOrDefault(name, List.of())));
         }
         if (!droppedSpawns.isEmpty()) {
-            logger.info("[TheSift] Spawns without a server-side port yet (left out of biomes): " + droppedSpawns);
+            logger.info("[TheSift] Left out of biome spawn lists (the Echo Golem has its own spawner): " + droppedSpawns);
         }
         return biomes;
     }
