@@ -553,7 +553,7 @@ final class SiftEchoGolems implements Listener {
     final class Runtime {
 
         final Wolf body;
-        final GolemEnv env = new GolemEnv(this);
+        final GolemEnv env;
         final EchoGolemBrain brain;
         private JavaModelHandle handle;
         private ModelPoses poses;
@@ -566,6 +566,8 @@ final class SiftEchoGolems implements Listener {
 
         Runtime(Wolf body) {
             this.body = body;
+            // After the body: the environment's walker keeps the body it is given.
+            this.env = new GolemEnv(this);
             this.brain = new EchoGolemBrain(env, random);
             this.lastLocation = body.getLocation();
         }
