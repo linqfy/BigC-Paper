@@ -30,12 +30,12 @@ final class SiftLootItems {
         "whisperbloom");
 
     /**
-     * Mod items without a counterpart in the port. {@code the_sift:music_disc_rift} (a custom disc and
-     * sound) becomes a rare vanilla disc. An empty value means "drop". The Siftite upgrade template is a
-     * content item of the port ({@link SiftItems}) and needs no entry.
+     * Mod items without a counterpart in the port, mapped to another id; an empty value means "drop".
+     * None are left: the Siftite upgrade template and the stand-in music discs
+     * ({@code the_sift:music_disc_rift}, a vanilla disc and song in the mod's clothes) are content items of the
+     * port ({@link SiftItems}) and need no entry.
      */
-    static final Map<String, String> REPLACEMENTS = Map.of(
-        "the_sift:music_disc_rift", "minecraft:music_disc_otherside");
+    static final Map<String, String> REPLACEMENTS = Map.of();
 
     private static final Set<String> CONTENT = SiftItems.items().stream()
         .map(ContentItem::id)

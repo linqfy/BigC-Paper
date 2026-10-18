@@ -35,20 +35,23 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * <p>Differences:</p>
  * <ul>
- *   <li>{@code SiftFeaturePlacementGuard} and {@code SiftLandmarkTracker} are not ported. The guard is global
+ *   <li>{@code SiftFeaturePlacementGuard} is not ported. It is global
  *       state filled in generation order, so the ruin's presence depended on which chunks happened to generate
  *       first: it kept the ruin 28 blocks away from the dimension's arrival portal ({@code SiftPortalStructure},
  *       reserved at run time) and reserved the ruin's 46x46 footprint so that monoliths, dry spikes, lakes and
- *       canyons generated before or after it do not overlap. The tracker is a persistent registry of landmark
- *       positions (to locate them); the positions are a pure function of the world seed here
- *       ({@link SiftLandmarkPlacement}). Selected chunks of neighbouring cells are at least 13 chunks apart, so
- *       two ruins never collide, but overlaps with the arrival portal and with other solid features are
- *       possible.</li>
+ *       canyons generated before or after it do not overlap. The candidate positions are a pure function of the
+ *       world seed here ({@link SiftLandmarkPlacement}). Selected chunks of neighbouring cells are at least 13
+ *       chunks apart, so two ruins never collide, but overlaps with the arrival portal and with other solid
+ *       features are possible.</li>
+ *   <li>The mod's {@code SiftLandmarkTracker} records each ruin's centre column and lowest terrain block for
+ *       {@code /locate}; here each ruin is reported through {@link AbandonedPortalLandmarks} after it is
+ *       placed (the sink only receives the position and cannot change generation) and the registry that keeps
+ *       them lives in the Sift module.</li>
  *   <li>Chests are filled at generation time from the generation {@link Random}, not when first
  *       opened. The loot table is evaluated by {@link SiftLootTable} (all of this table's features
  *       are supported) and its items mapped by {@link SiftLootItems}: Sift plants become their
- *       vanilla stand-in items and {@code the_sift:music_disc_rift} a vanilla disc; the Siftite upgrade
- *       template is a content item of the port.</li>
+ *       vanilla stand-in items; {@code the_sift:music_disc_rift} (a stand-in disc, see {@code SiftItems}) and the Siftite
+ *       upgrade template are content items of the port.</li>
  *   <li>Template chests carry the mod's extra {@code ichorlogged} property; it is folded into
  *       {@code waterlogged} (Ichor is water here). Chest facing is rotated/mirrored from the
  *       template's own value.</li>
@@ -84,10 +87,17 @@ final class AbandonedMainPortalFeature implements SiftFeature {
     }
 
     private final SiftTemplates templates;
+    private final AbandonedPortalLandmarks landmarks;
     private final Map<String, Optional<SiftLootTable>> lootTables = new ConcurrentHashMap<>();
 
     AbandonedMainPortalFeature(SiftTemplates templates) {
+        this(templates, AbandonedPortalLandmarks.NONE);
+    }
+
+    /** Every ruin raised is reported to {@code landmarks}. */
+    AbandonedMainPortalFeature(SiftTemplates templates, AbandonedPortalLandmarks landmarks) {
         this.templates = templates;
+        this.landmarks = landmarks;
     }
 
     @Override
@@ -133,6 +143,8 @@ final class AbandonedMainPortalFeature implements SiftFeature {
             SiftSurfaceDecorator.decorate(region, random, surface, 2.85F);
         }
         fillChests(region, random, templates.lootTables(path), plan.blocks());
+        // After the last use of the generation random, so reporting cannot change what is generated.
+        landmarks.abandonedPortal(centerX, plan.naturalBlocks().getFirst().y(), centerZ);
         return true;
     }
 

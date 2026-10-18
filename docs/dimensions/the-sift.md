@@ -84,19 +84,20 @@ clients cannot show new content types, or original to this port.
 | Day/night cycle | From the mod | The Sift's own clock with the mod's 24,120-tick day |
 | Blub | Adapted | A silent wolf with the mod's model, textures, sounds and stats; tempted and tamed (one in three) with Soul Blocks, heals with Soul Blocks or food, sits, follows and defends its owner |
 | Sifter | Adapted | A silent, scaled silverfish (hostile, melee, no daylight burning, no climbing; hitbox 0.9 x 0.675 against the mod's 0.9 x 0.95) with the mod's model, sounds and stats (40 health, 10 attack, 28 follow range). The spawner is the mod's: every 80 ticks near each player, never on Peaceful, in groups of up to five on Siftslate, growth and healthy-sculk floors, with the mod's biome chances and area caps. It bites after a 14-tick wind-up, drops raw Sifter meat (cooked when it dies on fire, plus Looting) and 7 experience. See `SiftSifters` for every difference |
-| Singer | Adapted | At the Ancient City, the converted model performs the ritual song. In the Sift she is a silent wandering trader (1.48 x 4.8) with the mod's model, sounds and stats that rises from the ground when an Echo Golem brings a Soul Block, roams for 30 seconds, receives the golem's soul and trades: right-click or drop a Soul Block and she throws a gift (the mod's table; the Music Disc Wellspring is re-rolled because the discs are not imported). A name tag or the spawn egg makes her stay. See `SiftSingers` for every difference |
+| Singer | Adapted | At the Ancient City, the converted model performs the ritual song. In the Sift she is a silent wandering trader (1.48 x 4.8) with the mod's model, sounds and stats that rises from the ground when an Echo Golem brings a Soul Block, roams for 30 seconds, receives the golem's soul and trades: right-click or drop a Soul Block and she throws a gift (the mod's table; her Music Disc Wellspring is the stand-in disc, see Music discs). A name tag or the spawn egg makes her stay. See `SiftSingers` for every difference |
 | Echo Golem | Adapted | A silent wolf scaled to the mod's 1.15 x 1.65 with the mod's model, sounds and stats (34 health, 0.23 speed). One spawns at every Soul Canyon and one near each player where none is within 165 blocks. It explores, walks into a canyon, picks up a Soul Block, carries it out and delivers it to a Singer (calling one if none is near) or, once given an Echo Shard, to that player; it bows, sits for 30 seconds if hurt or right-clicked while carrying, and keeps its state in the entity data. Canyons carved before this version are not known to the golems. See `SiftEchoGolems` and `EchoGolemBrain` for every difference |
 | Sniffers | From the mod | Placed by sniffer caves and surface sculk regions. The biomes also list sniffers, but vanilla sniffer spawn rules need grass, so, as in the mod, they do not spawn naturally on Sift ground. Sniffers dig sculk (the datapack adds it to `#minecraft:sniffer_diggable_block`, in every world) and are infected by it, see Dark Sniffer |
-| Dark Sniffer | Adapted | The surface sculk regions place one or two. A real, vanilla sniffer (the mod's hitbox, brain, digging and sounds) hidden under a BetterModel model of the vanilla sniffer with the mod's `dark_sniffer.png` (a vanilla client has no second sniffer texture). The mod's `DarkSnifferEntity#tick` is ported whole: 40 health, 7 attack, it hunts players (not in Creative or Spectator, never on Peaceful) and ordinary sniffers within 32 blocks, bites every 24 ticks, and from 5 blocks away in sight pulls its prey in with a sonic sniff (10-tick wind-up, a wave at 1.5 blocks per tick led by the prey's velocity, 100-tick cooldown); otherwise it wanders around its home. It digs Sculkflower Seeds out of sculk, drops one sculk, cannot be fed or bred, and is never targeted or angered by Wardens, which pet it now and then. Sniffers that dig sculk are infected, shake for 600 ticks and become Dark Sniffers; ordinary sniffers within 20 blocks of one run away. A tamed Blub that kills one awards Food Chain. See `SiftDarkSniffers` for every difference (Sift world only, no spawn egg, no sound-wave particle or Warden petting animation) |
+| Dark Sniffer | Adapted | The surface sculk regions place one or two. A real, vanilla sniffer (the mod's hitbox, brain, digging and sounds) hidden under a BetterModel model of the vanilla sniffer with the mod's `dark_sniffer.png` (a vanilla client has no second sniffer texture). The mod's `DarkSnifferEntity#tick` is ported whole: 40 health, 7 attack, it hunts players (not in Creative or Spectator, never on Peaceful) and ordinary sniffers within 32 blocks, bites every 24 ticks, and from 5 blocks away in sight pulls its prey in with a sonic sniff (10-tick wind-up, a wave at 1.5 blocks per tick led by the prey's velocity, 100-tick cooldown); otherwise it wanders around its home. It digs Sculkflower Seeds out of sculk, drops one sculk, cannot be fed or bred, and is never targeted or angered by Wardens, which pet it now and then. Sniffers that dig sculk are infected, shake for 600 ticks and become Dark Sniffers; ordinary sniffers within 20 blocks of one run away. A tamed Blub that kills one awards Food Chain. See `SiftDarkSniffers` for every difference (Sift world only, no sound-wave particle or Warden petting animation; the spawn egg is a stand-in item, see Spawn eggs) |
 | Sculkflower | Adapted | Seeds (torchflower seeds underneath) are planted on sculk, healthy sculk, dry healthy sculk or farmland; the crop is a torchflower crop whose two stages grow with the mod's rules (light 9, growth speed with healthy sculk as moist farmland, one age per bone meal) into the Sculkflower (a warped fungus), which drops itself, makes light blue dye and is compostable at the mod's chances. Placed ones are remembered per chunk; the datapack lets crops and fungi stand on sculk and red mushroom blocks. See `SiftSculkflowers` |
 | Ancient City ritual | From the mod | See above; console and replay state is not saved across restarts |
 | Rifts | From the mod | Timing, size, placement search and linking as in the mod; models converted from the mod; rifts are not saved across restarts and the exit search covers 48 blocks (the mod searches farther) |
 | Main portal | From the mod | The `main_portal` template (9 x 19 x 40) placed once at the flattest site near 0, 0 with the mod's terrain blending, foundation, covered-growth clean-up and planting; every Ancient City portal arrives at its anchor and its portal returns players. Differences below |
-| `/locate structure the_sift:main_portal` | Adapted | `/dimension locate the_sift:the_sift main_portal` (vanilla `/locate` cannot name structures that are not in a datapack registry). `the_sift:abandoned_main_portal` is not ported: the mod answers it from a global landmark tracker that the port dropped, see `AbandonedMainPortalFeature` |
-| Items | From the mod / adapted | Block items, Charoite, Siftite nugget/ingot/gear/template, Ichor shard, bottle, bucket and snowball, Sifter meat, willow sapling, Sculkflower and seeds, Singer and Echo Golem spawn eggs: content items on vanilla materials with the mod's models and names. Recipes, anvils, crafters, smithing tables and cooking blocks take a content item only where a recipe names it exactly (`ContentRecipeGuard`), so a Siftite nugget never crafts an iron ingot and a Siftite ingot never upgrades gear to netherite |
+| `/locate structure the_sift:main_portal` | Adapted | `/dimension locate the_sift:the_sift main_portal` (vanilla `/locate` cannot name structures that are not in a datapack registry) |
+| `/locate structure the_sift:abandoned_main_portal` | Adapted | `/dimension locate the_sift:the_sift abandoned_main_portal`: the nearest ruin the generator has recorded in `landmarks.bin`, plus the mod's search for nearer ones, see Locating abandoned portals |
+| Items | From the mod / adapted | Block items, Charoite, Siftite nugget/ingot/gear/template, Ichor shard, bottle, bucket and snowball, Sifter meat, willow sapling, Sculkflower and seeds, the five spawn eggs and the two music discs (the last seven are stand-ins, see below): content items on vanilla materials with the mod's models and names. Recipes, anvils, crafters, smithing tables and cooking blocks take a content item only where a recipe names it exactly (`ContentRecipeGuard`), so a Siftite nugget never crafts an iron ingot and a Siftite ingot never upgrades gear to netherite |
 | Recipes | From the mod | All 76 of the mod's recipes, with content items as exact ingredients and results (`recipe/SiftRecipeCatalog`, `SiftRecipeRegistrar`); a test checks that the registered items cover every recipe |
 | Slabs, stairs, walls, doors, trapdoors, fences, gates, buttons, pressure plates, signs, shelves, boats, Ichor glass and panes, Ichor snow layers, plant items | Substitute | Vanilla clients cannot show new non-cube blocks, so these are content items with the mod's icons and names that place close vanilla look-alikes: cobbled deepslate and deepslate brick shapes for Siftslate, warped wood for Overgrown Willow (the nearest colour), oak boats, light blue glass, and the world generator's plant stand-ins. Vanilla places and connects them; their positions are remembered per chunk so they drop the mod's item again (vanilla's tool, silk-touch and double-slab rules, which the mod's tables copy), plants in the Sift drop the mod's plant items (shears or silk touch where the mod asks for them) and willow boats break into willow boats. Broken by water or a piston, a look-alike drops the vanilla item (`SiftStandIns`) |
-| Advancements | From the mod | The mod's story and Sift tabs: 21 of its 22 advancements, with native criteria where the mod has them and the code-awarded ones granted at the mod's moments (horn near an Ancient City frame, taming a Blub, rift travel, ore mining, setting wood on fire, Siftite recovery, Charoite enchanting, an Ichor snowball near a Warden, Echo Golem and Singer events, Sculkflower planting, a Blub killing a Dark Sniffer). Rift Resonance needs the music disc that is not imported, so it is left out; an advancement whose feature is switched off is left out and its children move up |
+| Advancements | From the mod | The mod's story and Sift tabs: all 22 of its advancements, with native criteria where the mod has them and the code-awarded ones granted at the mod's moments (horn near an Ancient City frame, taming a Blub, rift travel, ore mining, setting wood on fire, Siftite recovery, Charoite enchanting, an Ichor snowball near a Warden, Echo Golem and Singer events, Sculkflower planting, a Blub killing a Dark Sniffer). Rift Resonance is awarded for the stand-in Rift disc (see Music discs); an advancement whose feature is switched off is left out and its children move up |
 | Ichor items | From the mod / adapted | A bucket or glass bottle filled from Ichor in the Sift holds Ichor; an Ichor bucket poured in another world leaves an Ichor source there (remembered per chunk) that gives the Ichor effects and fills an Ichor bucket again, though the water it spreads is plain water; the bottle is a drink with the mod's colour and three seconds of Regeneration, the bucket empties as water (Ichor in the Sift). Cauldrons filled with Ichor (remembered per chunk; every water cauldron in the Sift) give Ichor bottles and buckets and take Ichor bottles back, with the mod's sounds |
 | Ichor snow and snowballs | From the mod / adapted | Snow layers are the Sift's Ichor snow and drop Ichor snowballs; the Ichor snow block drops four. While it rains in the Sift, Ichor snow settles on Ichor Snowy Peaks only (block light below 10, at most two layers), as the mod's weather mixin does; Paper already keeps weather per world. An Ichor snowball landing within 16 blocks of a Warden awards False Alarm |
 | Charoite enchanting | From the mod | Charoite in the enchanting table's lapis slot (it is a lapis lazuli underneath) adds 20 levels to each requirement and one level beyond the vanilla maximum to multi-level enchantments; the item is marked and can no longer go in an anvil. Paper rolls from the displayed cost, so the port rolls again from the base cost with the table's seed (`SiftCharoite`). The anvil repairs Siftite gear only with Siftite ingots |
@@ -114,16 +115,69 @@ clients cannot show new content types, or original to this port.
   sky, the Ichor fluid texture and the weather texture swap.
 - The look of the non-cube blocks: they are vanilla look-alikes (see above). Ichor is
   water with the Sift's tint, not its own fluid with the mod's texture and glow.
-- The Blub, Sifter and Dark Sniffer spawn eggs (the Singer's and Echo Golem's exist).
-- The two music discs ("Rift" and the "Wellspring" remix are third-party works, see below)
-  and with them the Rift Resonance advancement.
-- `/locate structure the_sift:abandoned_main_portal` (it needs the mod's global landmark
-  tracker, which the port dropped).
+- The mod's two music recordings ("Rift" and the "Wellspring" remix are third-party works,
+  see below); vanilla songs stand in for them, see Music discs.
+- Vanilla `/locate structure the_sift:abandoned_main_portal` (the command cannot name a
+  structure that is not in a datapack registry); `/dimension locate` answers it instead.
+- Changing a spawner with a spawn egg of the mod's creatures (see Spawn eggs).
 - Smaller block behaviours that need random ticks or fall callbacks on custom blocks:
   growth dying in the dark, willow foliage decaying like leaves, healthy sculk trampling
   crops on it.
 
 Every class that ports mod code lists its own differences in its javadoc.
+
+## Spawn eggs, music discs and locating ruins (stand-ins)
+
+These replace three things the mod does with entity types, sound events and a global tracker that a
+vanilla client and server cannot register. They are substitutes, not copies; none of this has run on a
+live server yet.
+
+### Spawn eggs
+
+`the_sift:blub_spawn_egg` (a wolf egg), `the_sift:sifter_spawn_egg` (a silverfish egg) and
+`the_sift:dark_sniffer_spawn_egg` (a sniffer egg) are content items with the mod's item models and names,
+beside the Singer's and Echo Golem's. `SiftSpawnEggs` handles every use of them and always cancels the
+vanilla spawn:
+
+- Right-clicking a block puts the real creature on the clicked face; right-clicking water (Ichor) spawns it on
+  the surface; survival players spend the egg. A Blub is spawned like a natural one (a marked, dressed wolf), a
+  Sifter with the spawner's own stats and marks, a Dark Sniffer marked as the generator marks its sniffers.
+- **Spawners are not changed.** A vanilla egg on a spawner makes it spawn the egg's mob, but the base mobs here
+  are plain wolves, silverfish and sniffers, so a spawner set that way would spawn the wrong thing. The
+  egg is refused with a message and kept.
+- Only in the Sift world, and only while the creature's switch (`blubs`, `sifters`, `dark-sniffers`) is on; elsewhere the egg
+  is refused with a message, never turned into the base mob. Using the egg on a mob (vanilla spawns a baby) and
+  dispensers (vanilla spawns the base mob) do nothing.
+- The `food_chain` advancement icon is now the real Dark Sniffer egg content item.
+
+### Music discs
+
+`the_sift:music_disc_rift` and `the_sift:music_disc_wellspring` are content items on **vanilla discs**: the
+Rift disc on Music Disc 5 (Warden and ancient city, about as long) and the Wellspring disc on Music Disc
+Otherside (cave ambience). The jukebox plays the vanilla song; the mod's recordings are not imported. The
+items have the mod's model, the name "Music Disc" and the lore line "The Sift - Rift" or "The Sift - Wellspring"
+(no artist is invented); the base disc's own "artist - title" tooltip line is hidden so the vanilla song is not
+credited to them. What the client shows that this does not change: the "Now playing" text above the hotbar and the
+jukebox subtitle still name the vanilla song. Where the mod gives the discs, the stand-ins are given: the
+abandoned portal chests (the Rift disc, as the mod's loot table says; it used to be Otherside) and the Singer's
+barter (the Wellspring disc, which is no longer re-rolled).
+
+Rift Resonance (`the_sift/rift_resonance`) is awarded as in the mod: a player puts the Rift disc into an empty
+jukebox within 16 blocks of an open rift (`SiftRifts#isNearOpenRift`). It is written with the other
+advancements when rifts are enabled.
+
+### Locating abandoned portals
+
+The generator reports every ruin it raises (centre column and base height) to `SiftLandmarks`, which keeps
+them in `landmarks.bin` with the Soul Canyon landmarks (older files still load). Reporting happens after the
+ruin is placed and cannot change generation. `/dimension locate the_sift:the_sift abandoned_main_portal`
+answers with the nearest recorded ruin and, as the mod does, looks at the candidate chunks of the 15 x 15
+cells (20 chunks each, seed salt 4702392765337521733) around the sender: the nearest ones that are closer than the
+recorded ruin, or all when none is recorded, up to 32 per call, are generated one after the other so their ruins
+get recorded. Differences from the mod: the command answers at once, so the ruins that generation finds show up
+when the command is repeated (the mod blocks the server while it generates and answers once); ruins
+generated before this registry existed are not recorded (their chunks already exist), so in an old world the
+answer may be a farther ruin or "not yet"; candidates outside the world border are skipped.
 
 ## Configuration
 
@@ -171,7 +225,7 @@ the-sift:
 Echo Golems and Singers can be switched off separately. Without Singers a golem
 still collects Soul Blocks and delivers them to a player it is bonded to; without
 golems Singers appear only from their spawn egg. Soul Canyon landmarks (entrance,
-midpoint, soul cluster, Soul Blocks and canyons still waiting for their golem) are kept in
+midpoint, soul cluster, Soul Blocks and canyons still waiting for their golem) and abandoned portal ruins are kept in
 `plugins/BigCasares/data/the-sift/landmarks.bin`; deleting it makes golems forget
 the canyons of already generated chunks.
 
@@ -269,14 +323,15 @@ The Dark Sniffer model is not a GeckoLib model: `tools/generate_dark_sniffer_bbm
 
 The import writes `src/main/resources/the_sift/mielon/` (worldgen data, templates,
 loot tables) and `resourcepack/java/assets/the_sift/`, replacing both. The music
-disc tracks are third-party works credited by the mod; they are left out unless
+disc tracks are third-party works credited by the mod; they are left out (vanilla songs stand in,
+see above) unless
 `--include-music` is passed, after their authors' permission for this server is
 confirmed.
 
 ## Verification status
 
 Unit tests cover the datapack translation and determinism, the Ancient City
-templates, the ritual melody, rift placement, the Sifter spawner's search, loot and bite timeline and its converted model, the Singer's soul event, barter table and the Echo Golem's mission and route state machine, spawner and landmark registry, the Dark Sniffer's brain, sonic sniff, Warden petting and infection (all against small fakes), the converted Singer, Echo Golem and generated Dark Sniffer models, the Sculkflower's growth rules, saved positions and loot tables, every ported feature (determinism, staying inside the
+templates, the ritual melody, rift placement, the Sifter spawner's search, loot and bite timeline and its converted model, the Singer's soul event, barter table and the Echo Golem's mission and route state machine, spawner and landmark registry, the Dark Sniffer's brain, sonic sniff, Warden petting and infection (all against small fakes), the converted Singer, Echo Golem and generated Dark Sniffer models, the Sculkflower's growth rules, saved positions and loot tables, the spawn eggs' use decisions and the stand-in discs' items, the abandoned portal ruins' reports and locate candidates, every ported feature (determinism, staying inside the
 populator region, expected output on prepared terrain, thread safety for several
 families), the loot table, block rendering contracts and the framework. The main portal
 is tested without a server: the site search and scoring over fake height fields, the
@@ -290,4 +345,5 @@ ritual in an Ancient City, the Echo Golem's pathfinding through a real canyon,
 the Singer's appearance and the barter, and the main portal (asynchronous chunk generation, the
 snapshot-based plan and its tick-sliced application, lighting, the arrival and return
 through real portals, the exit rift when the entrance is gone, `/dimension locate`) still
-need a test server.
+need a test server, as do the spawn eggs (creating the creatures, water, spawners, dispensers), the discs (the jukebox
+song, the hidden tooltip line, Rift Resonance) and the abandoned portal search (asynchronous generation and repeated answers).

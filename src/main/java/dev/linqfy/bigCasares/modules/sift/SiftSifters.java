@@ -126,8 +126,9 @@ import java.util.stream.Collectors;
  *       0.95 box. {@code checkSifterSpawnRules}, only used for the mod's natural spawning
  *       (which has no entry in any biome), is not ported. The mod's cooldown is global,
  *       here the task belongs to the Sift dimension.</li>
- *   <li>Not ported: the Sifter spawn egg item and the {@code certified_sifter} advancement
- *       (it only asks for visiting biomes).</li>
+ *   <li>The Sifter spawn egg is a content item on a silverfish egg ({@link SiftSpawnEggs}) that calls
+ *       {@link #spawnFromEgg}. Not ported: the {@code certified_sifter} advancement (it only asks for
+ *       visiting biomes).</li>
  *   <li>GeckoLib's easings between keyframes become linear in the converted model (see
  *       {@code tools/convert_geckolib_bbmodel.py}).</li>
  * </ul>
@@ -258,15 +259,28 @@ final class SiftSifters implements Listener {
         if (world.hasCollisionsIn(box)) {
             return false;
         }
+        return spawn(at, CreatureSpawnEvent.SpawnReason.NATURAL);
+    }
+
+    /**
+     * The Sifter spawn egg: the same Sifter the spawner makes, with the egg's spawn reason. There is no
+     * collision check; like a vanilla egg it spawns where the player points. False when the Sift is not active
+     * here or the spawn was refused.
+     */
+    boolean spawnFromEgg(Location at) {
+        return inSift(at.getWorld()) && spawn(at, CreatureSpawnEvent.SpawnReason.SPAWNER_EGG);
+    }
+
+    private boolean spawn(Location at, CreatureSpawnEvent.SpawnReason reason) {
         try {
-            Silverfish sifter = world.spawn(at, Silverfish.class, CreatureSpawnEvent.SpawnReason.NATURAL, this::configure);
+            Silverfish sifter = at.getWorld().spawn(at, Silverfish.class, reason, this::configure);
             if (!sifter.isValid()) {
                 return false;
             }
             prepare(sifter);
             return true;
         } catch (RuntimeException failure) {
-            plugin.getLogger().log(Level.WARNING, "[TheSift] Could not spawn a Sifter at " + feet, failure);
+            plugin.getLogger().log(Level.WARNING, "[TheSift] Could not spawn a Sifter at " + at, failure);
             return false;
         }
     }

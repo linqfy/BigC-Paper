@@ -37,6 +37,16 @@ class RiftPlacementTest {
     }
 
     @Test
+    void distanceToARiftIsMeasuredFromItsBaseCentre() {
+        RiftPlacement.Spot spot = new RiftPlacement.Spot(10, 64, -20, true);
+        assertEquals(0.0, spot.distanceSquaredTo(10.5, 64.0, -19.5), 1.0E-9);
+        // 3-4-12 triangle: 13 blocks away, inside the jukebox radius of 16 but not of 12.
+        assertEquals(169.0, spot.distanceSquaredTo(13.5, 76.0, -15.5), 1.0E-9);
+        assertTrue(spot.distanceSquaredTo(13.5, 76.0, -15.5) <= 16.0 * 16.0);
+        assertFalse(spot.distanceSquaredTo(13.5, 76.0, -15.5) <= 12.0 * 12.0);
+    }
+
+    @Test
     void opensOnOpenGroundAboveTheSurface() {
         Optional<RiftPlacement.Spot> spot = RiftPlacement.column(new Flat(63, 1000), 10, 10, true);
         assertEquals(Optional.of(new RiftPlacement.Spot(10, 64, 10, true)), spot);

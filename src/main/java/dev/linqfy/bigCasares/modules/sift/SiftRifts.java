@@ -142,6 +142,22 @@ final class SiftRifts implements Listener {
         riftArrivals.remove(player);
     }
 
+    /**
+     * Whether a rift that is still open (either side of a pair) is within {@code radius} blocks of the point: the
+     * mod's {@code ModAdvancements.isNearOpenRift}, which asks for a rift of the same level that is neither
+     * removed nor closing. A rift past its time is closing.
+     */
+    boolean isNearOpenRift(World world, double x, double y, double z, double radius) {
+        long now = now();
+        double limit = radius * radius;
+        for (Rift rift : rifts.values()) {
+            if (rift.world.equals(world) && now < rift.expiresAt && rift.spot.distanceSquaredTo(x, y, z) <= limit) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static long now() {
         return Bukkit.getCurrentTick();
     }

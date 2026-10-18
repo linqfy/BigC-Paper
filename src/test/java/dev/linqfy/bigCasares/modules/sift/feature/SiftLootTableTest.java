@@ -236,7 +236,9 @@ class SiftLootTableTest {
         assertEquals(Optional.of("the_sift:overgrown_lotus"), SiftLootItems.resolve("the_sift:overgrown_lotus"));
         assertEquals(Optional.of("the_sift:sunburst_plant"), SiftLootItems.resolve("the_sift:sunburst_plant"));
         assertEquals(Optional.of("the_sift:whisperbloom"), SiftLootItems.resolve("the_sift:whisperbloom"));
-        assertEquals(Optional.of("minecraft:music_disc_otherside"), SiftLootItems.resolve("the_sift:music_disc_rift"));
+        // The stand-in disc is a content item now, so it keeps its id.
+        assertEquals(Optional.of("the_sift:music_disc_rift"), SiftLootItems.resolve("the_sift:music_disc_rift"));
+        assertTrue(SiftLootItems.REPLACEMENTS.isEmpty(), "every mod item of the loot tables is a content item or a plant");
         assertEquals(Optional.of("the_sift:siftite_upgrade_smithing_template"),
             SiftLootItems.resolve("the_sift:siftite_upgrade_smithing_template"));
         assertEquals(Optional.empty(), SiftLootItems.resolve("the_sift:not_a_real_item"));

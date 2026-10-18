@@ -3,6 +3,7 @@ package dev.linqfy.bigCasares.modules.sift;
 import dev.linqfy.bigCasares.blocks.CustomBlockDefinition;
 import dev.linqfy.bigCasares.blocks.CustomBlockRegistry;
 import dev.linqfy.bigCasares.blocks.CustomBlockService;
+import dev.linqfy.bigCasares.content.ContentItemFactory;
 import dev.linqfy.bigCasares.dimension.DimensionKey;
 import dev.linqfy.bigCasares.dimension.DimensionPlatform;
 import dev.linqfy.bigCasares.dimension.NamespacedId;
@@ -10,6 +11,8 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Jukebox;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -27,12 +30,13 @@ import java.util.regex.Pattern;
 /**
  * Awards the mod's code-granted advancements that are not tied to a creature or
  * the ritual ({@code ModAdvancements} in the mod): mining Charoite and Siftite
- * ore, and setting wood on fire in the Sift.
+ * ore, setting wood on fire in the Sift, and putting the Rift disc into an empty jukebox near an open rift.
  */
 final class SiftAdvancementTriggers implements Listener {
 
     private static final NamespacedId CHAROITE_ORE = NamespacedId.of(SiftBlocks.NS, "siftslate_charoite_ore");
     private static final NamespacedId SIFTITE_ORE = NamespacedId.of(SiftBlocks.NS, "siftslate_siftite_ore");
+    private static final double RIFT_RESONANCE_RADIUS = 16.0;
     /** Willow logs, wood and planks, including the axis variants. */
     private static final Pattern WILLOW_WOOD = Pattern.compile("(stripped_)?overgrown_willow_(log|wood|planks)(_[xz])?");
     private static final List<Tag<Material>> WOOD_TAGS = List.of(Tag.LOGS, Tag.PLANKS, Tag.WOODEN_STAIRS,
@@ -41,10 +45,12 @@ final class SiftAdvancementTriggers implements Listener {
 
     private final Supplier<Optional<DimensionPlatform>> platform;
     private final CustomBlockRegistry blocks;
+    private final SiftRifts rifts;
 
-    SiftAdvancementTriggers(Supplier<Optional<DimensionPlatform>> platform, CustomBlockRegistry blocks) {
+    SiftAdvancementTriggers(Supplier<Optional<DimensionPlatform>> platform, CustomBlockRegistry blocks, SiftRifts rifts) {
         this.platform = platform;
         this.blocks = blocks;
+        this.rifts = rifts;
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -76,6 +82,24 @@ final class SiftAdvancementTriggers implements Listener {
         boolean supported = clicked.getType().isFlammable() || fire.getRelative(BlockFace.DOWN).getType().isSolid();
         if (replaceable && supported) {
             SiftAdvancements.award(event.getPlayer(), SiftAdvancements.SPICEWOOD);
+        }
+    }
+
+    /** {@code rift_resonance}: the Rift disc inserted into an empty jukebox within 16 blocks of an open rift. */
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onDisc(PlayerInteractEvent event) {
+        Block clicked = event.getClickedBlock();
+        Player player = event.getPlayer();
+        // A sneaking player with an item in hand does not use the block, so nothing is inserted.
+        if (event.getAction() != Action.RIGHT_CLICK_BLOCK || clicked == null || clicked.getType() != Material.JUKEBOX
+            || event.useInteractedBlock() == Event.Result.DENY || player.isSneaking()
+            || ContentItemFactory.idOf(event.getItem()).filter(SiftItems.MUSIC_DISC_RIFT::equals).isEmpty()
+            || !(clicked.getState() instanceof Jukebox jukebox) || jukebox.hasRecord()) {
+            return;
+        }
+        if (rifts.isNearOpenRift(clicked.getWorld(), clicked.getX() + 0.5, clicked.getY() + 0.5, clicked.getZ() + 0.5,
+            RIFT_RESONANCE_RADIUS)) {
+            SiftAdvancements.award(player, SiftAdvancements.RIFT_RESONANCE);
         }
     }
 

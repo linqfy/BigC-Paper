@@ -21,7 +21,8 @@ import java.util.function.Predicate;
  * midpoint and soul cluster of every Soul Canyon, the canyons still waiting for their golem, and the Soul
  * Blocks. Canyon landmarks are recorded when the canyon is generated (see {@code SoulCanyonLandmarks}); Soul
  * Blocks are recorded when they are generated, placed or found in a loaded chunk. Records are hints: the
- * reader checks the world, so a Soul Block that was mined is simply skipped.
+ * reader checks the world, so a Soul Block that was mined is simply skipped. The ruins of abandoned portals,
+ * which {@code /dimension locate} reads, are recorded when they are generated.
  *
  * <p>Generation runs on world-generation threads, so recording is thread-safe. Everything else is meant for
  * the main thread. The registry persists in a small binary file ({@link #save}, {@link #load}).</p>
@@ -34,11 +35,14 @@ final class SiftLandmarks {
         CANYON_ENTRANCE,
         CANYON_CLUSTER,
         CANYON_MIDPOINT,
-        GOLEM_PENDING
+        GOLEM_PENDING,
+        ABANDONED_PORTAL
     }
 
     private static final int MAGIC = 0x5346544C;
-    private static final int VERSION = 1;
+    /** Version 2 added {@link Kind#ABANDONED_PORTAL}; version 1 files hold the first {@value #KINDS_IN_VERSION_1} kinds. */
+    private static final int VERSION = 2;
+    private static final int KINDS_IN_VERSION_1 = 5;
 
     private final Map<Kind, Set<Long>> positions = new EnumMap<>(Kind.class);
     /** Soul Blocks by chunk: golems ask for the ones near them, many times a second. */
@@ -209,10 +213,17 @@ final class SiftLandmarks {
             return landmarks;
         }
         try (DataInputStream in = new DataInputStream(Files.newInputStream(file))) {
-            if (in.readInt() != MAGIC || in.readInt() != VERSION) {
+            if (in.readInt() != MAGIC) {
+                throw new IOException("Not a Sift landmark file: " + file);
+            }
+            int version = in.readInt();
+            if (version != VERSION && version != 1) {
                 throw new IOException("Not a Sift landmark file: " + file);
             }
             for (Kind kind : Kind.values()) {
+                if (version == 1 && kind.ordinal() >= KINDS_IN_VERSION_1) {
+                    break;
+                }
                 int count = in.readInt();
                 if (count < 0 || count > 50_000_000) {
                     throw new IOException("Corrupt Sift landmark file: " + file);

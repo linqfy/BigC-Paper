@@ -86,12 +86,31 @@ class SiftAdvancementsTest {
             predicate.getAsJsonObject("predicates").get("minecraft:custom_data").getAsString());
         assertEquals("minecraft:warped_fungus", translated.get(SiftAdvancements.PLANTING_THE_DARK)
             .getAsJsonObject("display").getAsJsonObject("icon").get("id").getAsString());
-        // The spawn egg is not ported: the icon is a vanilla egg wearing the mod's item model.
+        // The spawn egg is a content item on the sniffer egg: the icon is that egg wearing the mod's item model.
         JsonObject egg = translated.get(SiftAdvancements.FOOD_CHAIN).getAsJsonObject("display").getAsJsonObject("icon");
         assertEquals("minecraft:sniffer_spawn_egg", egg.get("id").getAsString());
         assertEquals("the_sift:dark_sniffer_spawn_egg", egg.getAsJsonObject("components").get("minecraft:item_model").getAsString());
         assertEquals("the_sift:the_sift/blub", parent(translated, SiftAdvancements.FOOD_CHAIN));
         assertEquals("the_sift:the_sift/smells_creepy", parent(translated, SiftAdvancements.PLANTING_THE_DARK));
+    }
+
+    @Test
+    void riftResonanceNeedsRiftsAndUsesTheStandInDiscAsItsIcon() {
+        Map<String, JsonObject> translated = translate(SiftSettings.defaults());
+        assertTrue(translated.containsKey(SiftAdvancements.RIFT_RESONANCE));
+        assertTrue(SiftAdvancements.AWARDED_FROM_CODE.contains(SiftAdvancements.RIFT_RESONANCE));
+        assertEquals("the_sift:the_sift/rifter", parent(translated, SiftAdvancements.RIFT_RESONANCE));
+        JsonObject icon = translated.get(SiftAdvancements.RIFT_RESONANCE).getAsJsonObject("display").getAsJsonObject("icon");
+        assertEquals("minecraft:" + SiftItems.RIFT_DISC_BASE.toLowerCase(java.util.Locale.ROOT), icon.get("id").getAsString());
+        assertEquals("the_sift:music_disc_rift", icon.getAsJsonObject("components").get("minecraft:item_model").getAsString());
+
+        SiftSettings defaults = SiftSettings.defaults();
+        SiftSettings noRifts = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(), defaults.entryPermission(),
+            defaults.travelCooldownSeconds(), defaults.craftedPortal(), defaults.ancientCityRitual(), defaults.tides(),
+            defaults.ichor(), defaults.blubs(), false, defaults.sifters(), defaults.singers(), defaults.echoGolems(),
+            defaults.darkSniffers(), defaults.sculkflowers(), defaults.mainPortal(), List.of());
+        assertFalse(SiftAdvancements.granted(noRifts).contains(SiftAdvancements.RIFT_RESONANCE));
+        assertFalse(SiftAdvancements.granted(noRifts).contains(SiftAdvancements.RIFTER));
     }
 
     @Test

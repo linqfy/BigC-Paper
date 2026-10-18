@@ -31,6 +31,14 @@ final class RiftPlacement {
     /** Base block of the rift (bottom centre) and its long axis. */
     record Spot(int x, int y, int z, boolean alongX) {
 
+        /** Squared distance from the base centre, where the mod's rift entity stands ({@code RiftEntity.position()}). */
+        double distanceSquaredTo(double pointX, double pointY, double pointZ) {
+            double dx = x + 0.5 - pointX;
+            double dy = y - pointY;
+            double dz = z + 0.5 - pointZ;
+            return dx * dx + dy * dy + dz * dz;
+        }
+
         /** {@code RiftEntity.getPortalBounds()} around the base centre. */
         boolean touches(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
             double centerX = x + 0.5;

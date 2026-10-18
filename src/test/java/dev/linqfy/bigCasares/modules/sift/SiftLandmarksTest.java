@@ -107,6 +107,63 @@ class SiftLandmarksTest {
     }
 
     @Test
+    void abandonedPortalsArePersistedAndFoundByTheNearestQuery(@TempDir Path directory) throws IOException {
+        Path file = directory.resolve("landmarks.bin");
+        SiftLandmarks landmarks = new SiftLandmarks();
+        SiftPos near = new SiftPos(300, 70, -40);
+        SiftPos far = new SiftPos(-4000, 65, 2500);
+        landmarks.record(Kind.ABANDONED_PORTAL, far);
+        landmarks.record(Kind.ABANDONED_PORTAL, near);
+        landmarks.save(file);
+        SiftLandmarks loaded = SiftLandmarks.load(file);
+        assertEquals(Set.of(near, far), Set.copyOf(loaded.snapshot(Kind.ABANDONED_PORTAL)));
+        assertEquals(near, loaded.nearestOther(Kind.ABANDONED_PORTAL, new SiftPos(0, 0, 0), Double.POSITIVE_INFINITY, null).orElseThrow());
+        assertEquals(far, loaded.nearestOther(Kind.ABANDONED_PORTAL, new SiftPos(-3000, 0, 2000), Double.POSITIVE_INFINITY, null).orElseThrow());
+        assertEquals(0, loaded.count(Kind.SOUL_BLOCK), "other kinds are separate");
+    }
+
+    @Test
+    void aFileWrittenBeforeAbandonedPortalsWereRecordedStillLoads(@TempDir Path directory) throws IOException {
+        Path file = directory.resolve("landmarks.bin");
+        // Version 1: magic, version, then the five kinds of that time (soul block .. golem pending).
+        try (java.io.DataOutputStream out = new java.io.DataOutputStream(Files.newOutputStream(file))) {
+            out.writeInt(0x5346544C);
+            out.writeInt(1);
+            out.writeInt(1);
+            out.writeLong(new SiftPos(5, 6, 7).asLong());
+            out.writeInt(0);
+            out.writeInt(0);
+            out.writeInt(1);
+            out.writeLong(new SiftPos(-9, 10, 11).asLong());
+            out.writeInt(0);
+        }
+        SiftLandmarks loaded = SiftLandmarks.load(file);
+        assertEquals(List.of(new SiftPos(5, 6, 7)), loaded.snapshot(Kind.SOUL_BLOCK));
+        assertEquals(List.of(new SiftPos(-9, 10, 11)), loaded.snapshot(Kind.CANYON_MIDPOINT));
+        assertEquals(0, loaded.count(Kind.ABANDONED_PORTAL));
+        assertFalse(loaded.isDirty());
+    }
+
+    @Test
+    void theGeneratorsReportsLandOnTheAbandonedPortalKind() {
+        SiftLandmarks landmarks = new SiftLandmarks();
+        SiftAbandonedPortals portals = new SiftAbandonedPortals(null, landmarks);
+        portals.sink().abandonedPortal(1000, 71, -2000);
+        portals.sink().abandonedPortal(1000, 71, -2000);
+        assertEquals(List.of(new SiftPos(1000, 71, -2000)), landmarks.snapshot(Kind.ABANDONED_PORTAL));
+    }
+
+    @Test
+    void aFileOfAnUnknownVersionIsAnError(@TempDir Path directory) throws IOException {
+        Path file = directory.resolve("landmarks.bin");
+        try (java.io.DataOutputStream out = new java.io.DataOutputStream(Files.newOutputStream(file))) {
+            out.writeInt(0x5346544C);
+            out.writeInt(3);
+        }
+        assertThrows(IOException.class, () -> SiftLandmarks.load(file));
+    }
+
+    @Test
     void aMissingFileIsEmptyAndAForeignFileIsAnError(@TempDir Path directory) throws IOException {
         assertEquals(0, SiftLandmarks.load(directory.resolve("none.bin")).count(Kind.SOUL_BLOCK));
         Path foreign = directory.resolve("foreign.bin");

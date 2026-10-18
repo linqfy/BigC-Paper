@@ -93,8 +93,10 @@ import java.util.logging.Level;
  *       the first 90 ticks, as the client does in the mod). While she is intangible (rising, sinking) she has no
  *       physics, as in the mod.</li>
  *   <li>Roaming picks spots with {@link LandSpots}, which stands in for {@code DefaultRandomPos}. Ambient sounds
- *       use vanilla's roll (one in a thousand times the ticks since the last, from -80). Barter rewards roll again if
- *       the Music Disc Wellspring comes up, because that disc is not imported.</li>
+ *       use vanilla's roll (one in a thousand times the ticks since the last, from -80). The Music Disc Wellspring
+ *       she can give is the port's stand-in disc ({@link SiftItems#MUSIC_DISC_WELLSPRING}: a vanilla disc and song
+ *       under the mod's name and model; the real recording is not imported). Rewards roll again only if an outcome's
+ *       item does not exist on the server.</li>
  *   <li>The spawn egg is a content item (a wandering trader spawn egg that makes a roaming Singer) that works in the Sift only.</li>
  *   <li>Players cannot trade with her: every right-click is cancelled except the name tag, which names her. She is
  *       not part of the biome spawn tables and appears only for Echo Golems and the spawn egg. Her state is written to the entity data when the phase changes, when the chunk

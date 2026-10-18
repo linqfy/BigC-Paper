@@ -38,6 +38,7 @@ public final class SiftAdvancements {
     public static final String SONG_OF_THE_PAST = "story/song_of_the_past";
     public static final String BLUB = "the_sift/blub";
     public static final String RIFTER = "the_sift/rifter";
+    public static final String RIFT_RESONANCE = "the_sift/rift_resonance";
     public static final String KINDA_PURPLEISH = "the_sift/kinda_purpleish";
     public static final String SIFTED_NUGGET = "the_sift/sifted_nugget";
     public static final String SPICEWOOD = "the_sift/spicewood";
@@ -51,7 +52,7 @@ public final class SiftAdvancements {
     public static final String SMELLS_CREEPY = "the_sift/smells_creepy";
 
     /** Advancements with the mod's {@code impossible} criterion that the port awards from code. */
-    static final Set<String> AWARDED_FROM_CODE = Set.of(SONG_OF_THE_PAST, BLUB, RIFTER, KINDA_PURPLEISH, SIFTED_NUGGET,
+    static final Set<String> AWARDED_FROM_CODE = Set.of(SONG_OF_THE_PAST, BLUB, RIFTER, RIFT_RESONANCE, KINDA_PURPLEISH, SIFTED_NUGGET,
         SPICEWOOD, KEEP_INVENTORY, SiftCharoite.BETTER_ENCHANTER, FALSE_ALARM, LIKE_FATHER_AND_SON, FRIEND_OF_THE_SIFT,
         PITCH_PERFECT, PLANTING_THE_DARK, FOOD_CHAIN);
 
@@ -66,8 +67,7 @@ public final class SiftAdvancements {
         "the_sift/spicewood");
 
     /** Icons without a content item: vanilla item shown with the mod's item model. */
-    private static final Map<String, String> ICON_STAND_INS = Map.of("sift_rift", "minecraft:ender_eye",
-        "dark_sniffer_spawn_egg", "minecraft:sniffer_spawn_egg");
+    private static final Map<String, String> ICON_STAND_INS = Map.of("sift_rift", "minecraft:ender_eye");
 
     private static final String CUSTOM_DATA = "minecraft:custom_data";
     private static final String BUKKIT_VALUES = "PublicBukkitValues";
@@ -90,6 +90,8 @@ public final class SiftAdvancements {
         }
         if (settings.rifts()) {
             granted.add(RIFTER);
+            // The Rift disc (a vanilla disc in the mod's clothes, see SiftItems) played near an open rift.
+            granted.add(RIFT_RESONANCE);
         }
         // An Echo Golem hands its Soul Block to a Singer (father and son) or to the player it likes (friend).
         if (settings.echoGolems() && settings.singers()) {

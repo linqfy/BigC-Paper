@@ -27,6 +27,11 @@ public final class SiftFeatures {
 
     /** As {@link #create(SiftData)}; Soul Canyons report their landmarks to {@code canyons}. */
     public static SiftFeatures create(SiftData data, SoulCanyonLandmarks canyons) {
+        return create(data, canyons, AbandonedPortalLandmarks.NONE);
+    }
+
+    /** As {@link #create(SiftData, SoulCanyonLandmarks)}; abandoned portal ruins report their position to {@code portals}. */
+    public static SiftFeatures create(SiftData data, SoulCanyonLandmarks canyons, AbandonedPortalLandmarks portals) {
         SiftTemplates templates = new SiftTemplates(data);
         Map<String, SiftFeature> features = new LinkedHashMap<>();
         OvergrownWillowTreeFeature willow = new OvergrownWillowTreeFeature(templates);
@@ -43,7 +48,7 @@ public final class SiftFeatures {
         features.put("the_sift:sniffer_cave_wastes", SnifferCaveFeature.wastes());
         features.put("the_sift:sniffer_plant_patch", new SnifferPlantPatchFeature());
         features.put("the_sift:surface_sculk_region", new SiftSurfaceSculkRegionFeature());
-        features.put("the_sift:abandoned_main_portal", new AbandonedMainPortalFeature(templates));
+        features.put("the_sift:abandoned_main_portal", new AbandonedMainPortalFeature(templates, portals));
         features.put("the_sift:ichor_lake", new IchorLakeFeature(willow));
         features.put("the_sift:ichor_cave_spring", new SiftIchorCaveSpringFeature());
         features.put("the_sift:ichor_snow", new SiftIchorSnowFeature());

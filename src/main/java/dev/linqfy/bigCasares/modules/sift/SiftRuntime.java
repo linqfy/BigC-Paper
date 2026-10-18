@@ -55,6 +55,7 @@ final class SiftRuntime implements DimensionExtension, Listener {
     private final SiftEchoGolems golems;
     private final SiftDarkSniffers darkSniffers;
     private final SiftMainPortal mainPortal;
+    private final SiftAbandonedPortals abandonedPortals;
     private final java.util.function.BiFunction<String, Integer, java.util.Optional<org.bukkit.inventory.ItemStack>> items;
     private final org.bukkit.NamespacedKey endureHealthKey;
     private volatile String tide = "flow";
@@ -63,12 +64,13 @@ final class SiftRuntime implements DimensionExtension, Listener {
     SiftRuntime(JavaPlugin plugin, SiftSettings settings, java.util.function.Supplier<List<SiftWorldgen.CustomPlacement>> customPlacements,
                 dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures features, SiftCreatures creatures, SiftRifts rifts,
                 SiftSifters sifters, SiftSingers singers, SiftEchoGolems golems, SiftDarkSniffers darkSniffers,
-                SiftMainPortal mainPortal,
+                SiftMainPortal mainPortal, SiftAbandonedPortals abandonedPortals,
                 java.util.function.BiFunction<String, Integer, java.util.Optional<org.bukkit.inventory.ItemStack>> items,
                 SiftIchorSnowfall snowfall) {
         this.items = items;
         this.snowfall = snowfall;
         this.mainPortal = mainPortal;
+        this.abandonedPortals = abandonedPortals;
         this.plugin = plugin;
         this.settings = settings;
         this.customPlacements = customPlacements;
@@ -104,6 +106,12 @@ final class SiftRuntime implements DimensionExtension, Listener {
         if (settings.echoGolems()) {
             golems.activate(active);
         }
+        // Always registered: an egg of a switched-off creature is refused rather than spawning its base mob.
+        active.registrations().registerListener("sift-spawn-eggs", new SiftSpawnEggs(this::inSift, List.of(
+            new SiftSpawnEggs.Egg(SiftItems.BLUB_SPAWN_EGG, "Blub", settings.blubs() ? creatures::spawnBlub : null),
+            new SiftSpawnEggs.Egg(SiftItems.SIFTER_SPAWN_EGG, "Sifter", settings.sifters() ? sifters::spawnFromEgg : null),
+            new SiftSpawnEggs.Egg(SiftItems.DARK_SNIFFER_SPAWN_EGG, "Dark Sniffer",
+                settings.darkSniffers() ? darkSniffers::spawnFromEgg : null))));
         snowfall.activate(active);
         if (mainPortal != null) {
             mainPortal.activate(active);
@@ -118,11 +126,15 @@ final class SiftRuntime implements DimensionExtension, Listener {
 
     @Override
     public List<String> landmarks() {
-        return mainPortal == null ? List.of() : List.of(SiftMainPortal.LANDMARK);
+        return mainPortal == null ? List.of(SiftAbandonedPortals.LANDMARK)
+            : List.of(SiftMainPortal.LANDMARK, SiftAbandonedPortals.LANDMARK);
     }
 
     @Override
     public Optional<org.bukkit.Location> locate(ActiveDimension active, String landmark, org.bukkit.Location from) {
+        if (landmark.equals(SiftAbandonedPortals.LANDMARK)) {
+            return abandonedPortals.locate(active, from);
+        }
         return mainPortal != null && landmark.equals(SiftMainPortal.LANDMARK) ? mainPortal.locate() : Optional.empty();
     }
 

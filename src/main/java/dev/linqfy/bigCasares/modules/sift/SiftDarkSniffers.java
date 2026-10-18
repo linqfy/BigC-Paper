@@ -35,6 +35,7 @@ import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityBreedEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -103,8 +104,9 @@ import java.util.logging.Level;
  *   <li>Fleeing ordinary sniffers pick a new spot every 10 ticks, or when their path ends, instead of every
  *       tick, and a spot is accepted when it has solid ground and room to stand within the 8 blocks
  *       of the random height.</li>
- *   <li>Spawn egg not ported. The Dark Sniffer keeps the vanilla sniffer's sounds (the hostile category,
- *       the mod's, is used only for the sonic sniff).</li>
+ *   <li>The spawn egg is a content item on the sniffer egg ({@link SiftSpawnEggs}) that calls {@link #spawnFromEgg}.
+ *       The Dark Sniffer keeps the vanilla sniffer's sounds (the hostile category, the mod's, is used only for
+ *       the sonic sniff).</li>
  * </ul>
  */
 final class SiftDarkSniffers implements Listener {
@@ -217,6 +219,25 @@ final class SiftDarkSniffers implements Listener {
             }
         } else if (entity instanceof Warden warden) {
             wardens.put(warden.getUniqueId(), new WardenState(warden));
+        }
+    }
+
+    /**
+     * The Dark Sniffer spawn egg: a sniffer marked before it joins the world, exactly as the generator marks the
+     * ones it places, so the add event above configures and dresses it. False when the Sift is not active here or
+     * the spawn was refused.
+     */
+    boolean spawnFromEgg(Location at) {
+        if (dimension == null || !inSift(at.getWorld())) {
+            return false;
+        }
+        try {
+            Sniffer sniffer = at.getWorld().spawn(at, Sniffer.class, CreatureSpawnEvent.SpawnReason.SPAWNER_EGG,
+                body -> body.getPersistentDataContainer().set(markerKey, PersistentDataType.BYTE, MARKED));
+            return sniffer.isValid();
+        } catch (RuntimeException failure) {
+            plugin.getLogger().log(Level.WARNING, "[TheSift] Could not spawn a Dark Sniffer at " + at, failure);
+            return false;
         }
     }
 

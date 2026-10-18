@@ -102,6 +102,47 @@ class AbandonedPortalFeatureTest {
         }
     }
 
+    @Test
+    void reportingTheRuinDoesNotChangeGenerationAndNamesItsCentreAndBase() {
+        int reported = 0;
+        for (long seed = 1; seed <= 12; seed++) {
+            SiftLandmarkPlacement.ChunkPos chunk = selectedChunk(seed);
+            InMemoryRegion plain = flatAt(chunk, seed);
+            InMemoryRegion watched = flatAt(chunk, seed);
+            List<int[]> reports = new ArrayList<>();
+            AbandonedPortalLandmarks sink = (x, y, z) -> reports.add(new int[]{x, y, z});
+            boolean first = placeAt(plain, chunk, seed);
+            boolean second = new AbandonedMainPortalFeature(TEMPLATES, sink)
+                .place(watched, new Random(seed), chunk.x() << 4, SURFACE_Y, chunk.z() << 4);
+            assertEquals(first, second);
+            assertEquals(0, plain.countDifferences(watched), "reporting must not change generation, seed " + seed);
+            assertEquals(first ? 1 : 0, reports.size(), "one report per ruin, seed " + seed);
+            if (!first) {
+                continue;
+            }
+            reported++;
+            int[] report = reports.get(0);
+            assertEquals((chunk.x() << 4) + 8, report[0]);
+            assertEquals((chunk.z() << 4) + 8, report[2]);
+            // The base is the ruin's lowest terrain block: on the flat ground, never above the surface layer.
+            assertTrue(report[1] >= SURFACE_Y - 10 && report[1] <= SURFACE_Y + 10, "base " + report[1] + ", seed " + seed);
+            assertFalse(watched.isAir(report[0], report[1], report[2]) && watched.isAir(report[0], report[1] - 1, report[2]),
+                "something stands at the reported column, seed " + seed);
+        }
+        assertTrue(reported >= 10, "reported " + reported);
+    }
+
+    @Test
+    void aRuinThatCannotBePlacedReportsNothing() {
+        List<int[]> reports = new ArrayList<>();
+        AbandonedMainPortalFeature feature = new AbandonedMainPortalFeature(TEMPLATES, (x, y, z) -> reports.add(new int[]{x, y, z}));
+        SiftLandmarkPlacement.ChunkPos chunk = selectedChunk(3);
+        // Any chunk but the selected one of the cell places nothing.
+        InMemoryRegion region = InMemoryRegion.flat(chunk.x() + 1, chunk.z(), SURFACE_Y, 3);
+        assertFalse(feature.place(region, new Random(3), (chunk.x() + 1) << 4, SURFACE_Y, chunk.z() << 4));
+        assertEquals(0, reports.size());
+    }
+
     private static void assertValidItem(String id) {
         if (id.startsWith("the_sift:")) {
             assertTrue(SiftLootItems.isContentItem(id), id + " is not a content item of the port");
@@ -376,7 +417,8 @@ class AbandonedPortalFeatureTest {
         assertTrue(seen.contains("the_sift:siftslate"));
         assertTrue(seen.contains("minecraft:diamond"));
         assertTrue(seen.contains("the_sift:overgrown_fronds"), "Sift plants arrive as their look-alike content items");
-        assertTrue(seen.contains("minecraft:music_disc_otherside"));
+        assertTrue(seen.contains("the_sift:music_disc_rift"), "the stand-in Rift disc is a content item");
+        assertFalse(seen.contains("minecraft:music_disc_otherside"), "no vanilla disc replaces it any more");
         assertTrue(seen.contains("the_sift:siftite_upgrade_smithing_template"), "the Siftite template is a content item");
         assertFalse(seen.contains("minecraft:short_grass"));
         assertEquals(List.of(), FEATURE.rollLoot("the_sift:chests/does_not_exist", new Random(1)));

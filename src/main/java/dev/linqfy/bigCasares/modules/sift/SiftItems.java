@@ -4,6 +4,8 @@ import dev.linqfy.bigCasares.blocks.CustomBlockDefinition;
 import dev.linqfy.bigCasares.blocks.MushroomState;
 import dev.linqfy.bigCasares.content.ContentItem;
 import dev.linqfy.bigCasares.dimension.NamespacedId;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.TooltipDisplay;
 import org.bukkit.Color;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -27,12 +29,28 @@ import java.util.Set;
  * id, so the client still prints the netherite template's "Applies to" and "Ingredients" lines (Diamond
  * Equipment, Netherite Ingot) and its smithing table slot hints, and vanilla's netherite upgrade recipe
  * accepts it as a template. The Siftite smithing recipes themselves are not defined here.</p>
+ *
+ * <p>Spawn eggs of the mod's creatures sit on a vanilla egg of a similar mob. The vanilla spawn is always
+ * cancelled and the real creature is spawned instead ({@link SiftSpawnEggs}). The two music discs are
+ * stand-ins: the mod's recordings are third-party works and are not imported, so each disc sits on a vanilla
+ * disc and plays that disc's song. The name is the mod's ("Music Disc") and one lore line names the mod's
+ * track; the base disc's own tooltip line (its vanilla artist and title) is hidden because it would
+ * misattribute the song. The client's "Now playing" text, which comes from the vanilla song, still shows the
+ * vanilla title.</p>
  */
 public final class SiftItems {
 
     static final int ICHOR_BOTTLE_COLOR = 5_909_123;
     static final NamespacedId SINGER_SPAWN_EGG = NamespacedId.of(SiftBlocks.NS, "singer_spawn_egg");
     static final NamespacedId ECHO_GOLEM_SPAWN_EGG = NamespacedId.of(SiftBlocks.NS, "echo_golem_spawn_egg");
+    static final NamespacedId BLUB_SPAWN_EGG = NamespacedId.of(SiftBlocks.NS, "blub_spawn_egg");
+    static final NamespacedId SIFTER_SPAWN_EGG = NamespacedId.of(SiftBlocks.NS, "sifter_spawn_egg");
+    static final NamespacedId DARK_SNIFFER_SPAWN_EGG = NamespacedId.of(SiftBlocks.NS, "dark_sniffer_spawn_egg");
+    static final NamespacedId MUSIC_DISC_RIFT = NamespacedId.of(SiftBlocks.NS, "music_disc_rift");
+    static final NamespacedId MUSIC_DISC_WELLSPRING = NamespacedId.of(SiftBlocks.NS, "music_disc_wellspring");
+    /** The vanilla discs that stand in for the mod's: the 5 (Warden, ancient city) and Otherside (caves), of similar length. */
+    static final String RIFT_DISC_BASE = "MUSIC_DISC_5";
+    static final String WELLSPRING_DISC_BASE = "MUSIC_DISC_OTHERSIDE";
 
     private SiftItems() {
     }
@@ -75,6 +93,15 @@ public final class SiftItems {
             .name("item.the_sift.singer_spawn_egg", "Singer Spawn Egg").build());
         items.add(ContentItem.builder(ECHO_GOLEM_SPAWN_EGG, "WOLF_SPAWN_EGG")
             .name("item.the_sift.echo_golem_spawn_egg", "Echo Golem Spawn Egg").build());
+        // Spawn eggs of the Blub (a wolf), the Sifter (a silverfish) and the Dark Sniffer (a sniffer): see SiftSpawnEggs.
+        items.add(ContentItem.builder(BLUB_SPAWN_EGG, "WOLF_SPAWN_EGG")
+            .name("item.the_sift.blub_spawn_egg", "Blub Spawn Egg").build());
+        items.add(ContentItem.builder(SIFTER_SPAWN_EGG, "SILVERFISH_SPAWN_EGG")
+            .name("item.the_sift.sifter_spawn_egg", "Sifter Spawn Egg").build());
+        items.add(ContentItem.builder(DARK_SNIFFER_SPAWN_EGG, "SNIFFER_SPAWN_EGG")
+            .name("item.the_sift.dark_sniffer_spawn_egg", "Dark Sniffer Spawn Egg").build());
+        items.add(musicDisc(MUSIC_DISC_RIFT, RIFT_DISC_BASE, "Rift"));
+        items.add(musicDisc(MUSIC_DISC_WELLSPRING, WELLSPRING_DISC_BASE, "Wellspring"));
         // Planted by vanilla's own placement (see SiftSculkflowers): torchflower seeds place a torchflower crop,
         // a warped fungus a warped fungus, and the datapack lets both stand on sculk.
         items.add(simple("sculkflower_seeds", "TORCHFLOWER_SEEDS"));
@@ -84,6 +111,22 @@ public final class SiftItems {
         items.forEach(item -> present.add(item.id()));
         SiftStandIns.items().stream().filter(item -> present.add(item.id())).forEach(items::add);
         return items;
+    }
+
+    /** A stand-in for one of the mod's discs: a vanilla disc under the mod's name, model and one track line. */
+    private static ContentItem musicDisc(NamespacedId id, String baseDisc, String track) {
+        return ContentItem.builder(id, baseDisc)
+            .name("item." + SiftBlocks.NS + "." + id.path(), "Music Disc")
+            .lore(List.of("The Sift - " + track))
+            .maxStack(1)
+            .customize(SiftItems::hideSongLine)
+            .build();
+    }
+
+    /** Hides the vanilla song's "artist - title" line, which would credit the base disc's song to the mod's disc. */
+    private static void hideSongLine(ItemStack stack) {
+        stack.setData(DataComponentTypes.TOOLTIP_DISPLAY,
+            TooltipDisplay.tooltipDisplay().addHiddenComponents(DataComponentTypes.JUKEBOX_PLAYABLE).build());
     }
 
     /** The mod's Ichor bottle: a drink with its colour and three seconds of Regeneration. */

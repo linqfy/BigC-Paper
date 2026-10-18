@@ -111,7 +111,8 @@ public final class SiftModule implements PluginModule {
             }
         }, 60L);
         scope.register("sift-models-delayed-install", delayedModels::cancel);
-        SiftFeatures features = SiftFeatures.create(data, canyonLandmarks(landmarks));
+        SiftAbandonedPortals abandonedPortals = new SiftAbandonedPortals(plugin, landmarks);
+        SiftFeatures features = SiftFeatures.create(data, canyonLandmarks(landmarks), abandonedPortals.sink());
         SiftSoils soils = new SiftSoils(plugin, platform, blocks);
         SiftRifts rifts = new SiftRifts(plugin, platform, models);
         SiftMainPortal mainPortal = settings.mainPortal()
@@ -120,7 +121,7 @@ public final class SiftModule implements PluginModule {
             rifts.mainPortal(mainPortal::arrival);
         }
         SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, features, creatures,
-            rifts, sifters, singers, golems, darkSniffers, mainPortal,
+            rifts, sifters, singers, golems, darkSniffers, mainPortal, abandonedPortals,
             items::resolve, new SiftIchorSnowfall(soils::update));
         try {
             DimensionDefinition definition = SiftDimension.create(settings, worldgen, List.of(runtime));
@@ -131,7 +132,7 @@ public final class SiftModule implements PluginModule {
             BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(plugin, scope);
             registrations.scheduleRepeating("sift-landmarks-save", () -> saveLandmarks(landmarks, landmarksFile), 600L, 600L);
             scope.register("sift-landmarks-flush", () -> saveLandmarks(landmarks, landmarksFile));
-            registrations.registerListener("sift-advancements", new SiftAdvancementTriggers(platform, blocks));
+            registrations.registerListener("sift-advancements", new SiftAdvancementTriggers(platform, blocks, rifts));
             registrations.registerListener("sift-ichor-items", new SiftIchorItems(platform, items));
             registrations.registerListener("sift-ichor-cauldrons", new SiftIchorCauldrons(platform, items));
             registrations.registerListener("sift-soils", soils);

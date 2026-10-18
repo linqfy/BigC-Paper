@@ -14,6 +14,7 @@ import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.FoodProperties;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
@@ -61,7 +62,8 @@ import java.util.logging.Level;
  * fleeing llamas, pouncing, bone taming) is removed.</p>
  *
  * <p>Not ported: the mod's swimming behaviour and ear droop by health; the
- * {@code the_sift/blub} advancement.</p>
+ * {@code the_sift/blub} advancement. The spawn egg is a content item ({@link SiftSpawnEggs}) that
+ * calls {@link #spawnBlub}.</p>
  */
 final class SiftCreatures implements Listener {
 
@@ -130,13 +132,36 @@ final class SiftCreatures implements Listener {
      */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onSpawn(CreatureSpawnEvent event) {
-        if (!(event.getEntity() instanceof Wolf wolf) || !inSift(wolf.getWorld())) {
+        if (!(event.getEntity() instanceof Wolf wolf) || !inSift(wolf.getWorld()) || isBlub(wolf)) {
             return;
         }
         if (event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL) {
             convert(wolf);
         } else {
             wolf.getPersistentDataContainer().set(plainWolfKey, PersistentDataType.BYTE, (byte) 1);
+        }
+    }
+
+    /**
+     * The Blub spawn egg: a wolf that is marked a Blub before it joins the world (so the spawn event above
+     * leaves it alone) and is then made one like a natural spawn. False when the Sift is not active here or
+     * the spawn was refused.
+     */
+    boolean spawnBlub(Location at) {
+        if (dimension == null || !inSift(at.getWorld())) {
+            return false;
+        }
+        try {
+            Wolf wolf = at.getWorld().spawn(at, Wolf.class, CreatureSpawnEvent.SpawnReason.SPAWNER_EGG,
+                body -> body.getPersistentDataContainer().set(blubKey, PersistentDataType.BYTE, (byte) 1));
+            if (!wolf.isValid()) {
+                return false;
+            }
+            convert(wolf);
+            return true;
+        } catch (RuntimeException failure) {
+            plugin.getLogger().log(Level.WARNING, "[TheSift] Could not spawn a Blub at " + at, failure);
+            return false;
         }
     }
 

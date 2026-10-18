@@ -7,11 +7,12 @@ import java.util.function.Predicate;
 /**
  * What a Singer gives for a Soul Block: the port of the roll in the mod's {@code SingerBarter.reward}. The
  * table adds up to 200; the last entry, taken by every roll that no other entry caught, is a random wool.
- * Items are given as ids (vanilla ones as {@code minecraft:*}) so the roll runs without a server.
+ * Items are given as ids (vanilla ones as {@code minecraft:*}) so the roll runs without a server. The Music Disc
+ * Wellspring is the port's stand-in content item ({@link SiftItems#MUSIC_DISC_WELLSPRING}).
  */
 final class SingerBarter {
 
-    static final String MUSIC_DISC_WELLSPRING = "the_sift:music_disc_wellspring";
+    static final String MUSIC_DISC_WELLSPRING = SiftItems.MUSIC_DISC_WELLSPRING.asString();
 
     /** The mod's {@code Blocks.WOOL.asList()} order. */
     static final List<String> WOOL = List.of("white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
@@ -68,8 +69,8 @@ final class SingerBarter {
     }
 
     /**
-     * As {@link #roll}, but an outcome whose item the server does not have (the Music Disc Wellspring, which is
-     * not imported) is rolled again, up to {@value #REROLLS} times, then gives a white wool.
+     * As {@link #roll}, but an outcome whose item the server does not have (for example a content item that is not
+     * registered) is rolled again, up to {@value #REROLLS} times, then gives a white wool.
      */
     static Reward rollAvailable(Random random, Predicate<String> available) {
         for (int attempt = 0; attempt < REROLLS; attempt++) {
