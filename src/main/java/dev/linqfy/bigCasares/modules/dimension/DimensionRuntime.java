@@ -478,6 +478,9 @@ public final class DimensionRuntime implements DimensionPlatform {
                         result.complete(TravelResult.of(TravelResult.Status.FAILED,
                             error == null ? "Teleport was refused" : error.getMessage()));
                     } else {
+                        if (portals != null) {
+                            portals.suppressIfInside(player, destination);
+                        }
                         result.complete(TravelResult.of(TravelResult.Status.TELEPORTED, destination.getWorld().getName()));
                     }
                 });

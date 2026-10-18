@@ -33,8 +33,31 @@ crafted portal there, or place Sonorous Deepslate by hand (`/content give`).
 (interior 2–21 wide, 3–21 tall) lit with an echo shard. Configurable or
 removable under `the-sift.crafted-portal`.
 
-Arriving builds a small return frame next to the arrival point; walking through
-it returns players to where they entered. Coordinates map 1:1, as in the mod.
+Arriving through the crafted portal builds a small return frame next to the arrival
+point (unless a lit portal is within 24 blocks); walking through it returns players to
+where they entered. Its coordinates map 1:1.
+
+**The main portal (where every Ancient City portal leads).** The mod sends every
+Ancient City portal to one structure in the Sift, not to the same coordinates. The port
+does the same. Entering through the Ancient City portal puts the player at the main
+portal's arrival point, in the middle of its portal facing the way they faced; no return
+frame is built. Walking into the main portal returns the player to where they entered. If
+that portal no longer stands, or the player came in through a rift, an exit rift opens at
+their respawn point instead (five minutes, leading back to the main portal) and the
+player is told when the portal was closed. `/dimension locate the_sift:the_sift
+main_portal` gives its coordinates. If a player enters before the main portal is ready
+(it is built in the background the first time the dimension is active, which takes
+a few minutes) they arrive like through the crafted portal: same coordinates, a return
+frame; the next entries use the main portal.
+
+The site is chosen like the mod does: the flattest spot within 96 blocks of 0, 0 (a
+coarse search every 16 blocks, then every 4 blocks around the best), nearer the centre
+preferred; the terrain is blended into the structure and its foundation sealed. The
+chunks involved (about 400) are generated in the background, the plan is computed on
+an asynchronous thread over snapshots and the blocks (tens of thousands) are placed two
+thousand per tick, so the server does not stall; the coordinates are saved in `state.yml` and the
+structure is never rebuilt or moved. It can be switched off with
+`the-sift.main-portal.enabled: false`.
 
 **Rifts (the mod's way out).** Every 270–330 seconds a rift opens 20–64 blocks from
 each player in the Sift and stays for five minutes. Walking into it leads to the
@@ -68,6 +91,8 @@ clients cannot show new content types, or original to this port.
 | Sculkflower | Adapted | Seeds (torchflower seeds underneath) are planted on sculk, healthy sculk, dry healthy sculk or farmland; the crop is a torchflower crop whose two stages grow with the mod's rules (light 9, growth speed with healthy sculk as moist farmland, one age per bone meal) into the Sculkflower (a warped fungus), which drops itself, makes light blue dye and is compostable at the mod's chances. Placed ones are remembered per chunk; the datapack lets crops and fungi stand on sculk and red mushroom blocks. See `SiftSculkflowers` |
 | Ancient City ritual | From the mod | See above; console and replay state is not saved across restarts |
 | Rifts | From the mod | Timing, size, placement search and linking as in the mod; models converted from the mod; rifts are not saved across restarts and the exit search covers 48 blocks (the mod searches farther) |
+| Main portal | From the mod | The `main_portal` template (9 x 19 x 40) placed once at the flattest site near 0, 0 with the mod's terrain blending, foundation, covered-growth clean-up and planting; every Ancient City portal arrives at its anchor and its portal returns players. Differences below |
+| `/locate structure the_sift:main_portal` | Adapted | `/dimension locate the_sift:the_sift main_portal` (vanilla `/locate` cannot name structures that are not in a datapack registry). `the_sift:abandoned_main_portal` is not ported: the mod answers it from a global landmark tracker that the port dropped, see `AbandonedMainPortalFeature` |
 | Items | Partial | See the item rows below |
 | Siftite gear | Adapted | Sword, shovel, pickaxe, axe, hoe, spear, four armour pieces and the upgrade template are netherite items with the mod's stats (durability, damage, speed, mining speed, armour, knockback resistance, fire resistance), models and armour texture. See `SiftiteGear` for the numbers and the differences (netherite ingots also repair them; the template keeps the client's netherite template text) |
 | Siftite death recovery | Adapted | Siftite items are taken out of a player's death drops and returned through a small particle rift 2 seconds after the respawn (or join); the stacks are kept in `data/the-sift/siftite-recovery/<uuid>.bin` until they are in the inventory. |
@@ -117,6 +142,8 @@ the-sift:
     enabled: true               # Dark Sniffers: hunting, sonic sniff, digging, infection (needs BetterModel)
   sculkflowers:
     enabled: true               # Sculkflower growth, harvest and bone meal
+  main-portal:
+    enabled: true               # build the main portal; Ancient City portals lead to it
 ```
 
 Echo Golems and Singers can be switched off separately. Without Singers a golem
@@ -149,6 +176,48 @@ the Dark Sniffer it also adds sculk and red mushroom blocks to `#minecraft:suppo
 `#minecraft:supports_warped_fungus` (plus farmland for the fungus) and sculk to
 `#minecraft:sniffer_diggable_block`: in every world, crops and warped fungi can stand on sculk and huge red
 mushroom blocks and sniffers dig sculk.
+
+## Main portal: differences from the mod
+
+- **Generated surface.** The mod asks the chunk generator for the height of the untouched
+  noise terrain. Paper cannot do that without generating the chunk, so the chunks are
+  generated and the surface is the top Sift terrain block of each column, found by scanning
+  down past plants, trees and water. Monoliths, arches and spikes are made of terrain
+  blocks, so they count as ground: the roughness score steers the search away from them,
+  and the blending cuts or buries them where they stand next to the portal, instead of
+  removing them first. Ichor lakes read as their lake bed.
+- **When.** The mod builds on the first visit, synchronously. The port builds when the
+  dimension first activates (ten seconds after start-up), in the background; visitors who
+  arrive before it is ready get the crafted portal's behaviour once. Stopping the server
+  mid-build builds again on the next start. If the build fails it is logged and retried
+  every five minutes (the next entry through the portal also retries once that has passed).
+- **Where it is stored.** The dimension's persistent values (`state.yml`), not the world's
+  saved data. Deleting the entry makes the portal be built again, over the old one.
+- **Portal.** The mod's `sift_portal` block is the light block that stands in for it
+  everywhere in the port (level 12 here, the mod's; the template's stand-in says 13 until the
+  framework lights the portal). The framework's portal service lights it, so breaking its frame
+  or interior extinguishes it for good (the mod's portal is unbreakable); a restart relights
+  an intact one. Explosions destroy the frame's custom blocks without extinguishing the portal,
+  which keeps working while its light blocks stand.
+- **Entrance check.** The mod stores the portal block it entered through and sends players
+  to an exit rift if that block is no longer a Sift portal. The port stores the entry
+  location (the framework's return point) and looks for a lit portal's light block within
+  two blocks of it. The exit rift is the same exit as a rift's: it opens at the player's
+  respawn point (the mod's `returnFromPortal`). It needs `the-sift.rifts.enabled`; without
+  rifts the framework returns the player to the stored point whether or not the entrance stands.
+- **Rift arrivals.** Players who entered through a rift have no entrance to return to (the
+  mod clears their return point); the port remembers them in memory until they leave or
+  enter another way, so a server restart forgets it.
+- **Ruins.** An abandoned portal ruin generated near the chosen site is not avoided (see
+  `AbandonedMainPortalFeature`); its rough ground counts against a site in the search, and what
+  the build overlaps is cut or built over like any terrain.
+- **Not ported:** the mod's feature placement guard (the chunks around the site are
+  generated before it is built, so nothing is placed over it afterwards), the random
+  source of the planting (the exact plants differ), and the mod's block update flags (Paper offers
+  none; blocks are set without physics).
+- **Arrival search.** The framework loads and searches around the 1:1 coordinates of the
+  entry before the main portal replaces the destination, so entering generates up to 25
+  chunks of the Sift there even though the player does not arrive.
 
 ## Updating the imported content
 
@@ -187,9 +256,16 @@ confirmed.
 Unit tests cover the datapack translation and determinism, the Ancient City
 templates, the ritual melody, rift placement, the Sifter spawner's search, loot and bite timeline and its converted model, the Singer's soul event, barter table and the Echo Golem's mission and route state machine, spawner and landmark registry, the Dark Sniffer's brain, sonic sniff, Warden petting and infection (all against small fakes), the converted Singer, Echo Golem and generated Dark Sniffer models, the Sculkflower's growth rules, saved positions and loot tables, every ported feature (determinism, staying inside the
 populator region, expected output on prepared terrain, thread safety for several
-families), the loot table, block rendering contracts and the framework. The
+families), the loot table, block rendering contracts and the framework. The main portal
+is tested without a server: the site search and scoring over fake height fields, the
+terrain blending, template placement, clearing, planting and determinism over an in-memory
+terrain, the overlay region, the framework's frame detection on the built structure, the travel
+listener's decisions and the stored anchor. The
 generated datapack has been checked against Minecraft 26.2's registries and block
 states. **Nothing has been run on a live Paper server yet**: world creation,
 generation in game, client rendering, BetterModel animation playback, the
 ritual in an Ancient City, the Echo Golem's pathfinding through a real canyon,
-the Singer's appearance and the barter still need a test server.
+the Singer's appearance and the barter, and the main portal (asynchronous chunk generation, the
+snapshot-based plan and its tick-sliced application, lighting, the arrival and return
+through real portals, the exit rift when the entrance is gone, `/dimension locate`) still
+need a test server.

@@ -54,7 +54,7 @@ class SiftAdvancementsTest {
         SiftSettings defaults = SiftSettings.defaults();
         SiftSettings noDarkSniffers = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(),
             defaults.entryPermission(), defaults.travelCooldownSeconds(), defaults.craftedPortal(),
-            defaults.ancientCityRitual(), defaults.tides(), defaults.ichor(), true, true, true, true, true, false, true, List.of());
+            defaults.ancientCityRitual(), defaults.tides(), defaults.ichor(), true, true, true, true, true, false, true, true, List.of());
         Set<String> without = SiftAdvancements.granted(noDarkSniffers);
         assertFalse(without.contains(SiftAdvancements.SMELLS_CREEPY), "no source of seeds");
         assertFalse(without.contains(SiftAdvancements.FOOD_CHAIN));
@@ -62,7 +62,7 @@ class SiftAdvancementsTest {
 
         SiftSettings noCrop = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(),
             defaults.entryPermission(), defaults.travelCooldownSeconds(), defaults.craftedPortal(),
-            defaults.ancientCityRitual(), defaults.tides(), defaults.ichor(), true, true, true, true, true, true, false, List.of());
+            defaults.ancientCityRitual(), defaults.tides(), defaults.ichor(), true, true, true, true, true, true, false, true, List.of());
         Set<String> noPlanting = SiftAdvancements.granted(noCrop);
         assertTrue(noPlanting.contains(SiftAdvancements.SMELLS_CREEPY));
         assertTrue(noPlanting.contains(SiftAdvancements.FOOD_CHAIN));
@@ -70,7 +70,7 @@ class SiftAdvancementsTest {
 
         SiftSettings noBlubs = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(),
             defaults.entryPermission(), defaults.travelCooldownSeconds(), defaults.craftedPortal(),
-            defaults.ancientCityRitual(), defaults.tides(), defaults.ichor(), false, true, true, true, true, true, true, List.of());
+            defaults.ancientCityRitual(), defaults.tides(), defaults.ichor(), false, true, true, true, true, true, true, true, List.of());
         assertFalse(SiftAdvancements.granted(noBlubs).contains(SiftAdvancements.FOOD_CHAIN), "a tamed Blub kills the sniffer");
     }
 
@@ -119,7 +119,8 @@ class SiftAdvancementsTest {
         SiftSettings defaults = SiftSettings.defaults();
         SiftSettings noRitual = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(), defaults.entryPermission(),
             defaults.travelCooldownSeconds(), defaults.craftedPortal(), false, defaults.tides(), defaults.ichor(),
-            false, false, defaults.sifters(), false, false, defaults.darkSniffers(), defaults.sculkflowers(), List.of());
+            false, false, defaults.sifters(), false, false, defaults.darkSniffers(), defaults.sculkflowers(),
+            defaults.mainPortal(), List.of());
         Map<String, JsonObject> reduced = translate(noRitual);
         assertFalse(reduced.containsKey(SiftAdvancements.SONG_OF_THE_PAST));
         assertFalse(reduced.containsKey(SiftAdvancements.BLUB));
@@ -135,7 +136,7 @@ class SiftAdvancementsTest {
         SiftSettings defaults = SiftSettings.defaults();
         SiftSettings golemsOnly = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(), defaults.entryPermission(),
             defaults.travelCooldownSeconds(), defaults.craftedPortal(), true, defaults.tides(), defaults.ichor(), false, false,
-            false, false, true, true, true, List.of());
+            false, false, true, true, true, true, List.of());
         Set<String> golems = SiftAdvancements.granted(golemsOnly);
         assertTrue(golems.contains(SiftAdvancements.FRIEND_OF_THE_SIFT));
         assertFalse(golems.contains(SiftAdvancements.LIKE_FATHER_AND_SON), "needs a Singer to hand the soul to");
@@ -145,7 +146,7 @@ class SiftAdvancementsTest {
 
         SiftSettings singersOnly = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(), defaults.entryPermission(),
             defaults.travelCooldownSeconds(), defaults.craftedPortal(), true, defaults.tides(), defaults.ichor(), false, false,
-            false, true, false, true, true, List.of());
+            false, true, false, true, true, true, List.of());
         Set<String> singers = SiftAdvancements.granted(singersOnly);
         assertTrue(singers.contains(SiftAdvancements.PITCH_PERFECT));
         assertFalse(singers.contains(SiftAdvancements.FRIEND_OF_THE_SIFT));

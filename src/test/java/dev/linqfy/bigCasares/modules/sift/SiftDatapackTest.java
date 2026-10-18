@@ -69,7 +69,7 @@ class SiftDatapackTest {
         SiftSettings salted = new SiftSettings(42L, defaults.worldBorderDiameter(), defaults.entryPermission(),
             defaults.travelCooldownSeconds(), defaults.craftedPortal(), defaults.ancientCityRitual(), defaults.tides(),
             defaults.ichor(), defaults.blubs(), defaults.rifts(), defaults.sifters(), defaults.singers(), defaults.echoGolems(),
-            defaults.darkSniffers(), defaults.sculkflowers(), List.of());
+            defaults.darkSniffers(), defaults.sculkflowers(), defaults.mainPortal(), List.of());
         GeneratedDatapack base = compile(sift(defaults));
         GeneratedDatapack other = compile(sift(salted));
         assertNotEquals(base.contentHash(), other.contentHash());

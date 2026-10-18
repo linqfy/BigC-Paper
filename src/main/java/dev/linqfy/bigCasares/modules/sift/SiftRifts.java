@@ -48,6 +48,10 @@ import java.util.logging.Level;
  * that lives as long as the original one; walking into that rift leads back to
  * where the player left the Sift. Rifts reuse an open exit near the same anchor.
  *
+ * <p>The main portal's way out ({@code RiftManager.returnFromPortal}) reuses the same exit: when the
+ * portal a player entered through no longer stands, {@link #returnFromPortal} opens an Overworld rift at their
+ * respawn point that lives five minutes and leads back to the main portal.</p>
+ *
  * <p>Differences: rifts are BetterModel models on marker armour stands and are not
  * saved across restarts; the exit search covers 48 blocks around the anchor (the mod
  * searches up to 256), falling back to the anchor itself; rifts place no light
@@ -94,6 +98,9 @@ final class SiftRifts implements Listener {
     private final Map<UUID, Long> nextSpawn = new HashMap<>();
     private final Map<UUID, Long> latches = new HashMap<>();
     private final Random random = new Random();
+    /** Players an Overworld rift sent into the Sift: they have no entrance portal to go back to (the mod clears their return point). */
+    private final Set<UUID> riftArrivals = new HashSet<>();
+    private Supplier<Optional<Location>> mainPortal = Optional::empty;
     private ActiveDimension dimension;
     private boolean warnedMissingModel;
 
@@ -113,6 +120,26 @@ final class SiftRifts implements Listener {
         active.registrations().registerListener("sift-rifts", this);
         active.registrations().scheduleRepeating("sift-rifts", this::tick, 20L, 20L);
         active.registrations().ownCleanup("sift-rifts-close", () -> List.copyOf(rifts.values()).forEach(this::close));
+    }
+
+    /** Where an Overworld rift without a link leads: the main portal (the mod's {@code ensurePortal} fallback). */
+    void mainPortal(Supplier<Optional<Location>> mainPortal) {
+        this.mainPortal = mainPortal;
+    }
+
+    /** Whether exits can be opened (the Sift is active and rifts are enabled). */
+    boolean available() {
+        return dimension != null;
+    }
+
+    /** Whether the player came into the Sift through a rift and has not left it since; consumes the mark. */
+    boolean arrivedByRift(UUID player) {
+        return riftArrivals.remove(player);
+    }
+
+    /** The player entered the Sift another way (a portal, a command): their entrance is their return point again. */
+    void forgetRiftArrival(UUID player) {
+        riftArrivals.remove(player);
     }
 
     private static long now() {
@@ -260,6 +287,7 @@ final class SiftRifts implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onQuit(PlayerQuitEvent event) {
         latches.remove(event.getPlayer().getUniqueId());
+        riftArrivals.remove(event.getPlayer().getUniqueId());
     }
 
     /** The player's box swept from the previous position (the mod's {@code expandTowards}). */
@@ -271,6 +299,27 @@ final class SiftRifts implements Listener {
 
     /** Out of the Sift: to the Overworld anchor through a linked exit rift. */
     private void exit(Player player, Rift origin) {
+        exitTo(player, origin.expiresAt, origin.center(), true, null);
+    }
+
+    /**
+     * {@code RiftManager.returnFromPortal}: out of the Sift without a Sift rift, through an exit rift at the
+     * respawn point that stays open for five minutes and is not linked back to a place in the Sift (it leads
+     * to the main portal). {@code closed} tells the player that the portal they entered through is gone.
+     */
+    void returnFromPortal(Player player, boolean closed) {
+        Component notice = closed ? Component.translatable("message.the_sift.portal_closed",
+            "El portal por el que entraste a la Sift se cerró durante tu exploración") : null;
+        exitTo(player, now() + LIFETIME_TICKS, null, false, notice);
+    }
+
+    /**
+     * @param back    where the exit rift leads back to, or null for the main portal
+     * @param reward  whether using the rift counts for the Rifter advancement
+     * @param notice  sent after the player arrived, or null
+     */
+    private void exitTo(Player player, long expiresAtTicks, Location back, boolean reward, Component notice) {
+        riftArrivals.remove(player.getUniqueId());
         World overworld = Bukkit.getWorlds().getFirst();
         Location respawn = player.getRespawnLocation();
         Location anchor = respawn != null && overworld.equals(respawn.getWorld()) ? respawn : overworld.getSpawnLocation();
@@ -282,12 +331,11 @@ final class SiftRifts implements Listener {
             }
         }
         if (reused != null) {
-            reused.expiresAt = Math.max(reused.expiresAt, origin.expiresAt);
-            go(player, reused.center());
+            reused.expiresAt = Math.max(reused.expiresAt, expiresAtTicks);
+            go(player, reused.center(), reward).thenAccept(success -> notify(player, success, notice));
             return;
         }
-        Location back = origin.center();
-        long expiresAt = Math.max(now() + 20L, origin.expiresAt);
+        long expiresAt = Math.max(now() + 20L, expiresAtTicks);
         ActiveDimension active = dimension;
         if (active == null) {
             return;
@@ -299,32 +347,54 @@ final class SiftRifts implements Listener {
             Optional<RiftPlacement.Spot> spot = RiftPlacement.findNear(new WorldTerrain(overworld), anchor.getBlockX(),
                 anchor.getBlockZ(), EXIT_SEARCH_RADIUS).filter(candidate -> unoccupied(overworld, candidate));
             if (spot.isPresent()) {
-                go(player, open(overworld, spot.get(), false, expiresAt, back).center());
+                go(player, open(overworld, spot.get(), false, expiresAt, back).center(), reward)
+                    .thenAccept(success -> notify(player, success, notice));
             } else {
                 player.sendMessage(Component.translatable("message.the_sift.rift_no_exit",
                     "La grieta no pudo abrirse cerca de tu punto de reaparición", NamedTextColor.RED));
-                go(player, anchor);
+                go(player, anchor, reward).thenAccept(success -> notify(player, success, notice));
             }
         }));
     }
 
-    /** Back into the Sift, where the player left it. */
+    /** Back into the Sift, where the player left it (the main portal for a rift that was opened without a link). */
     private void enter(Player player, Rift rift) {
-        if (rift.linked != null) {
-            go(player, rift.linked);
+        Location target = rift.linked != null ? rift.linked : mainPortal.get().map(portal -> {
+            Location facing = player.getLocation();
+            portal.setYaw(facing.getYaw());
+            portal.setPitch(facing.getPitch());
+            return portal;
+        }).orElse(null);
+        if (target != null) {
+            go(player, target, true).thenAccept(success -> {
+                if (success) {
+                    riftArrivals.add(player.getUniqueId());
+                }
+            });
         }
     }
 
-    private void go(Player player, Location target) {
-        Optional<DimensionPlatform> dimensions = platform.get();
+    private static void notify(Player player, boolean success, Component notice) {
+        if (success && notice != null && player.isOnline()) {
+            player.sendMessage(notice);
+        }
+    }
+
+    /**
+     * The framework teleports into its dimensions (return point, arrival search); anything else, such as
+     * the Overworld, is a plain teleport.
+     */
+    private CompletableFuture<Boolean> go(Player player, Location target, boolean reward) {
+        Optional<DimensionPlatform> dimensions = platform.get().filter(candidate -> candidate.dimensionOf(target.getWorld()).isPresent());
         CompletableFuture<Boolean> moved = dimensions.isPresent()
             ? dimensions.get().teleport(player, target).thenApply(TravelResult::succeeded)
             : player.teleportAsync(target);
         moved.thenAccept(success -> {
-            if (success && plugin.isEnabled()) {
+            if (success && reward && plugin.isEnabled()) {
                 plugin.getServer().getScheduler().runTask(plugin, () -> SiftAdvancements.award(player, SiftAdvancements.RIFTER));
             }
         });
+        return moved;
     }
 
     private static CompletableFuture<Void> loadAround(World world, Location anchor) {

@@ -189,8 +189,10 @@ final class PortalService {
     /** Scripted activation ({@code DimensionPlatform#lightPortal}). */
     Optional<PortalShape> light(DimensionKey key, String portalId, Block frameBlock, Player cause) {
         Optional<DimensionDefinition> definition = runtime.definition(key);
+        // A portal may be lit in the Overworld or inside its own dimension (where it leads out, like
+        // the Sift's main portal), but not inside another custom dimension.
         if (definition.isEmpty() || runtime.active(key).isEmpty()
-            || runtime.dimensionOf(frameBlock.getWorld()).isPresent()) {
+            || runtime.dimensionOf(frameBlock.getWorld()).filter(inside -> !inside.equals(key)).isPresent()) {
             return Optional.empty();
         }
         Optional<PortalDefinition> portal = definition.get().travel().portals().stream()
@@ -347,9 +349,21 @@ final class PortalService {
     }
 
     private void report(Player player, TravelResult result) {
-        if (!result.succeeded() && player.isOnline()) {
+        // A plugin that cancels a transfer (a listener redirecting it elsewhere) tells the player itself.
+        if (!result.succeeded() && result.status() != TravelResult.Status.CANCELLED && player.isOnline()) {
             player.sendMessage("§cEl portal no responde: " + result.status().name().toLowerCase()
                 + (result.message().isBlank() ? "" : " (" + result.message() + ")"));
+        }
+    }
+
+    /**
+     * Keeps a player who was teleported into a lit portal (a destination inside one, like the Sift's main
+     * portal) from being sent straight back: the portal only triggers again after they have stepped out.
+     * Without it the player would bounce whenever they left the departure portal while the chunks loaded.
+     */
+    void suppressIfInside(Player player, Location destination) {
+        if (portalAt(destination.getWorld(), destination.getBlockX(), destination.getBlockY(), destination.getBlockZ()).isPresent()) {
+            suppressed.add(player.getUniqueId());
         }
     }
 

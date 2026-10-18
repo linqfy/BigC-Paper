@@ -64,7 +64,7 @@ platform.register(MyDimension.create());
 | `EnvironmentCycle` | Named phases on the dimension's world clock, with timeline tracks for client visuals and time markers |
 | `DimensionRules` | Game rules, world border, spawn search radius, weather |
 | `TravelRules`, `PortalDefinition`, `CoordinateMapping` | Entry permission, cooldown, return points, arrival search radius, portal frames |
-| `DimensionExtension` | `onActivate`, `onDeactivate`, `populators`, `onPlayerEnter`/`Exit`, `onPhaseChange`, `onPulse` |
+| `DimensionExtension` | `onActivate`, `onDeactivate`, `populators`, `onPlayerEnter`/`Exit`, `onPhaseChange`, `onPulse`, `landmarks`/`locate` (for `/dimension locate`) |
 | Events | `DimensionLifecycleEvent`, `DimensionTravelEvent` (cancellable), `DimensionEnterEvent`, `DimensionExitEvent`, `DimensionPhaseChangeEvent`, `DimensionPortalActivateEvent` (cancellable) |
 
 ### Determinism and seeds
@@ -95,8 +95,10 @@ activation item (or none for scripted portals), whether arriving builds a return
 frame, the interior light level, an optional surface item model and an ambient
 particle. Players light item portals by using the item on the frame. Scripted
 portals (rituals, quests) are lit with `DimensionPlatform#lightPortal`, which fires
-the same cancellable activation event. Lit portals are persisted and re-indexed on
-start; breaking any frame or interior block extinguishes them.
+the same cancellable activation event. A frame may stand in the main world or inside
+the portal's own dimension (where the portal leads out, like the Sift's main portal).
+Lit portals are persisted and re-indexed on start; breaking any frame or interior
+block extinguishes them.
 
 Entering through a portal or `enter` maps coordinates with the definition's
 `CoordinateMapping`, clamps them inside the target border, loads chunks
@@ -104,7 +106,11 @@ asynchronously, and searches for a safe spot (solid floor, two free blocks, no
 hazards nearby). If none exists within the search radius, a small platform is
 built. The departure location is stored as the player's return point. Travel is
 denied during the cooldown, without the entry permission, or when the
-`DimensionTravelEvent` is cancelled.
+`DimensionTravelEvent` is cancelled. A listener can also replace the destination
+(`setTo`), which is then used as given, and `DimensionTravelEvent#portal()` names the
+portal definition of portal transfers, so one dimension can send one kind of portal to
+a fixed arrival and keep the coordinate mapping for the others. A player teleported
+into a lit portal is not sent back until they step out of it.
 
 ## Building another dimension
 
@@ -175,6 +181,7 @@ dimension-framework:
 | `/dimension list`, `info <key>` | `bigcasares.dimension.admin` | Status, world, active phases |
 | `/dimension tp <key> [player]` | `bigcasares.dimension.admin` | Send a player in |
 | `/dimension leave` | `bigcasares.dimension.leave` | Return to the stored return point |
+| `/dimension locate <key> <landmark>` | `bigcasares.dimension.admin` | Coordinates of a landmark a dimension offers (the Sift: `main_portal`) |
 | `/dimension phase <key> <cycle> <phase>` | `bigcasares.dimension.admin` | Move a dimension's clock to a phase |
 | `/dimension pack`, `export` | `bigcasares.dimension.admin` | Show the installed pack hash / write the pack for manual install |
 

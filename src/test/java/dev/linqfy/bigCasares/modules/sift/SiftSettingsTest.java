@@ -82,4 +82,20 @@ class SiftSettingsTest {
         assertTrue(config.isBoolean("the-sift.sculkflowers.enabled"));
         assertTrue(config.getBoolean("the-sift.sculkflowers.enabled"));
     }
+
+    @Test
+    void theMainPortalIsOnByDefaultAndCanBeSwitchedOff() throws Exception {
+        assertTrue(SiftSettings.defaults().mainPortal());
+        YamlConfiguration config = new YamlConfiguration();
+        config.loadFromString("the-sift:\n  main-portal:\n    enabled: false\n");
+        assertFalse(SiftSettings.load(config).mainPortal());
+        assertTrue(SiftSettings.load(config).sifters(), "other switches are independent");
+    }
+
+    @Test
+    void shippedConfigEnablesTheMainPortal() {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/config.yml"));
+        assertTrue(config.isBoolean("the-sift.main-portal.enabled"));
+        assertTrue(SiftSettings.load(config).mainPortal());
+    }
 }

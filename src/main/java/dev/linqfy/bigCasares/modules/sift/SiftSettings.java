@@ -26,6 +26,7 @@ public record SiftSettings(
     boolean echoGolems,
     boolean darkSniffers,
     boolean sculkflowers,
+    boolean mainPortal,
     List<String> warnings
 ) {
 
@@ -80,9 +81,10 @@ public record SiftSettings(
         boolean echoGolems = section == null || section.getBoolean("echo-golems.enabled", true);
         boolean darkSniffers = section == null || section.getBoolean("dark-sniffers.enabled", true);
         boolean sculkflowers = section == null || section.getBoolean("sculkflowers.enabled", true);
+        boolean mainPortal = section == null || section.getBoolean("main-portal.enabled", true);
         return new SiftSettings(seedSalt, border, permission.isEmpty() ? null : permission, cooldown,
             craftedPortal, ritual, tides, ichor, blubs, rifts, sifters, singers, echoGolems, darkSniffers, sculkflowers,
-            warnings);
+            mainPortal, warnings);
     }
 
     private static double number(ConfigurationSection section, String key, double fallback, double min, double max,

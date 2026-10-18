@@ -119,7 +119,7 @@ commands:
     aliases: [ warps ]
   dimension:
     description: Inspect and travel between BigCasares custom dimensions
-    usage: /<command> <list|info|tp|leave|phase|pack|export>
+    usage: /<command> <list|info|tp|leave|locate|phase|pack|export>
     aliases: [ dim ]
   content:
     description: List and give code-defined content items (e.g. The Sift)

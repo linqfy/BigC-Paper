@@ -14,6 +14,7 @@ import dev.linqfy.bigCasares.modules.model.BetterModelAssetInstaller;
 import dev.linqfy.bigCasares.modules.model.JavaModelGateway;
 import dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures;
 import dev.linqfy.bigCasares.modules.sift.feature.SoulCanyonLandmarks;
+import dev.linqfy.bigCasares.modules.sift.feature.SiftTemplates;
 import dev.linqfy.bigCasares.modules.sift.recipe.SiftRecipeRegistrar;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -112,8 +113,14 @@ public final class SiftModule implements PluginModule {
         scope.register("sift-models-delayed-install", delayedModels::cancel);
         SiftFeatures features = SiftFeatures.create(data, canyonLandmarks(landmarks));
         SiftSoils soils = new SiftSoils(plugin, platform, blocks);
+        SiftRifts rifts = new SiftRifts(plugin, platform, models);
+        SiftMainPortal mainPortal = settings.mainPortal()
+            ? new SiftMainPortal(plugin, platform, new SiftTemplates(data), rifts) : null;
+        if (mainPortal != null) {
+            rifts.mainPortal(mainPortal::arrival);
+        }
         SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, features, creatures,
-            new SiftRifts(plugin, platform, models), sifters, singers, golems, darkSniffers,
+            rifts, sifters, singers, golems, darkSniffers, mainPortal,
             items::resolve, new SiftIchorSnowfall(soils::update));
         try {
             DimensionDefinition definition = SiftDimension.create(settings, worldgen, List.of(runtime));

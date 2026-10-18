@@ -1811,3 +1811,8 @@ the-sift:
   # The mod's Sculkflower: seeds planted on sculk, healthy sculk or farmland grow into the flower.
   sculkflowers:
     enabled: true
+  # The mod's main portal: every Ancient City portal leads to one structure in the Sift,
+  # built once (asynchronously, ~400 chunks) when the dimension first activates. Disabled:
+  # portals keep 1:1 coordinates and build a small return frame.
+  main-portal:
+    enabled: true

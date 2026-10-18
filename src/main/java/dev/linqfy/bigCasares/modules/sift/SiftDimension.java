@@ -34,6 +34,8 @@ public final class SiftDimension {
     public static final int DAY_NIGHT_PERIOD = 24_120;
     /** Portal definition id of the Ancient City frame. */
     public static final String ANCIENT_CITY_PORTAL = "ancient_city";
+    /** Portal definition id of the portal inside the Sift's main portal structure, which leads out of the dimension. */
+    public static final String MAIN_PORTAL = "main_portal";
 
     private SiftDimension() {
     }
@@ -183,7 +185,17 @@ public final class SiftDimension {
             portals.add(new PortalDefinition(ANCIENT_CITY_PORTAL, Set.of("minecraft:reinforced_deepslate"), "", false,
                 3, 21, 3, 21, true, 11, "bigcasares:sift_portal_surface", "minecraft:reverse_portal"));
         }
-        // The mod keeps Overworld and Sift coordinates 1:1.
+        if (settings.mainPortal()) {
+            // The portal of the main portal structure (SiftMainPortal): lit by code once the structure is built,
+            // inside the Sift, so walking into it leaves through the framework (return point). Its frame is
+            // reinforced siftslate, which shares its mushroom block with other Sift stone: the detector only
+            // matches the block type, which is enough because nothing but code lights this definition.
+            String frame = SiftBlocks.remapType("reinforced_siftslate").orElseThrow();
+            portals.add(new PortalDefinition(MAIN_PORTAL, Set.of(frame), "", false, 3, 21, 3, 21, false, 12,
+                "bigcasares:sift_portal_surface", "minecraft:reverse_portal"));
+        }
+        // The mod keeps Overworld and Sift coordinates 1:1 for portals other than the main portal's entrance
+        // (SiftMainPortal sends the Ancient City portal to the main portal instead).
         return new TravelRules(CoordinateMapping.IDENTITY, settings.entryPermission(),
             Duration.ofSeconds(settings.travelCooldownSeconds()), true, 48, portals);
     }

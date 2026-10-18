@@ -5,8 +5,13 @@ import dev.linqfy.bigCasares.dimension.DimensionKey;
 import dev.linqfy.bigCasares.dimension.DimensionStatus;
 import dev.linqfy.bigCasares.dimension.environment.EnvironmentCycle;
 import dev.linqfy.bigCasares.dimension.event.DimensionTravelEvent;
+import dev.linqfy.bigCasares.dimension.runtime.DimensionExtension;
 import dev.linqfy.bigCasares.dimension.travel.TravelResult;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,7 +30,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * {@code /dimension <list|info|tp|leave|phase|pack|export>} — operator tooling for
+ * {@code /dimension <list|info|tp|leave|locate|phase|pack|export>} — operator tooling for
  * the dimension framework.
  */
 final class DimensionCommand implements CommandExecutor, TabCompleter {
@@ -56,9 +61,10 @@ final class DimensionCommand implements CommandExecutor, TabCompleter {
             case "info" -> withKey(sender, args, 1, key -> info(sender, key));
             case "tp" -> withKey(sender, args, 1, key -> teleport(sender, key, args));
             case "phase" -> withKey(sender, args, 1, key -> phase(sender, key, args));
+            case "locate" -> locate(sender, args);
             case "pack" -> pack(sender);
             case "export" -> export(sender);
-            default -> sender.sendMessage("§eUso: /" + label + " <list|info|tp|leave|phase|pack|export>");
+            default -> sender.sendMessage("§eUso: /" + label + " <list|info|tp|leave|locate|phase|pack|export>");
         }
         return true;
     }
@@ -120,6 +126,49 @@ final class DimensionCommand implements CommandExecutor, TabCompleter {
         }
         runtime.leave(target, DimensionTravelEvent.Cause.COMMAND).thenAccept(result -> report(sender, result));
         return true;
+    }
+
+    /** {@code /dimension locate <dimension> <landmark>}: the dimension extensions' landmarks (the Sift's main portal). */
+    private void locate(CommandSender sender, String[] args) {
+        if (args.length < 3) {
+            sender.sendMessage("§eUso: /dimension locate <dimensión> <hito>");
+            return;
+        }
+        withKey(sender, args, 1, key -> {
+            Optional<DimensionDefinition> definition = runtime.definition(key);
+            Optional<ActiveDimensionHandle> active = runtime.active(key);
+            if (definition.isEmpty() || active.isEmpty()) {
+                sender.sendMessage("§cDimensión desconocida o inactiva: " + key);
+                return;
+            }
+            Location from = sender instanceof Player player ? player.getLocation() : active.get().world().getSpawnLocation();
+            for (DimensionExtension extension : definition.get().extensions()) {
+                if (!extension.landmarks().contains(args[2])) {
+                    continue;
+                }
+                Optional<Location> found = extension.locate(active.get(), args[2], from);
+                if (found.isEmpty()) {
+                    sender.sendMessage("§e" + args[2] + " todavía no existe en " + key
+                        + " (se está generando o no pudo generarse); volvé a probar en unos minutos.");
+                    return;
+                }
+                sender.sendMessage(located(args[2], found.get(), from));
+                return;
+            }
+            sender.sendMessage("§cHito desconocido en " + key + ": " + args[2]);
+        });
+    }
+
+    private static Component located(String landmark, Location at, Location from) {
+        String teleport = "/tp @s " + at.getBlockX() + " " + at.getBlockY() + " " + at.getBlockZ();
+        Component coordinates = Component.text("[" + at.getBlockX() + ", " + at.getBlockY() + ", " + at.getBlockZ() + "]",
+            NamedTextColor.GREEN).clickEvent(ClickEvent.suggestCommand(teleport));
+        Component message = Component.text(landmark + " está en ", NamedTextColor.GRAY).append(coordinates);
+        if (from.getWorld() != null && from.getWorld().equals(at.getWorld())) {
+            long distance = Math.round(Math.hypot(at.getX() - from.getX(), at.getZ() - from.getZ()));
+            message = message.append(Component.text(" (a " + distance + " bloques)", NamedTextColor.GRAY));
+        }
+        return message;
     }
 
     private void phase(CommandSender sender, DimensionKey key, String[] args) {
@@ -206,9 +255,16 @@ final class DimensionCommand implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> options = new ArrayList<>();
         if (args.length == 1) {
-            options.addAll(List.of("list", "info", "tp", "leave", "phase", "pack", "export"));
-        } else if (args.length == 2 && List.of("info", "tp", "phase").contains(args[0].toLowerCase(Locale.ROOT))) {
+            options.addAll(List.of("list", "info", "tp", "leave", "locate", "phase", "pack", "export"));
+        } else if (args.length == 2 && List.of("info", "tp", "phase", "locate").contains(args[0].toLowerCase(Locale.ROOT))) {
             runtime.definitions().forEach(definition -> options.add(definition.key().asString()));
+        } else if (args.length == 3 && args[0].equalsIgnoreCase("locate")) {
+            try {
+                runtime.definition(DimensionKey.parse(args[1]))
+                    .ifPresent(def -> def.extensions().forEach(extension -> options.addAll(extension.landmarks())));
+            } catch (IllegalArgumentException ignored) {
+                // Invalid key: no suggestions.
+            }
         } else if (args.length == 3 && args[0].equalsIgnoreCase("phase")) {
             try {
                 runtime.definition(DimensionKey.parse(args[1]))

@@ -54,6 +54,7 @@ final class SiftRuntime implements DimensionExtension, Listener {
     private final SiftSingers singers;
     private final SiftEchoGolems golems;
     private final SiftDarkSniffers darkSniffers;
+    private final SiftMainPortal mainPortal;
     private final java.util.function.BiFunction<String, Integer, java.util.Optional<org.bukkit.inventory.ItemStack>> items;
     private final org.bukkit.NamespacedKey endureHealthKey;
     private volatile String tide = "flow";
@@ -62,10 +63,12 @@ final class SiftRuntime implements DimensionExtension, Listener {
     SiftRuntime(JavaPlugin plugin, SiftSettings settings, java.util.function.Supplier<List<SiftWorldgen.CustomPlacement>> customPlacements,
                 dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures features, SiftCreatures creatures, SiftRifts rifts,
                 SiftSifters sifters, SiftSingers singers, SiftEchoGolems golems, SiftDarkSniffers darkSniffers,
+                SiftMainPortal mainPortal,
                 java.util.function.BiFunction<String, Integer, java.util.Optional<org.bukkit.inventory.ItemStack>> items,
                 SiftIchorSnowfall snowfall) {
         this.items = items;
         this.snowfall = snowfall;
+        this.mainPortal = mainPortal;
         this.plugin = plugin;
         this.settings = settings;
         this.customPlacements = customPlacements;
@@ -102,12 +105,25 @@ final class SiftRuntime implements DimensionExtension, Listener {
             golems.activate(active);
         }
         snowfall.activate(active);
+        if (mainPortal != null) {
+            mainPortal.activate(active);
+        }
         active.snapshot(SiftDimension.TIDES).ifPresent(snapshot -> tide = snapshot.phase().id());
     }
 
     @Override
     public void onDeactivate(ActiveDimension active) {
         this.dimension = null;
+    }
+
+    @Override
+    public List<String> landmarks() {
+        return mainPortal == null ? List.of() : List.of(SiftMainPortal.LANDMARK);
+    }
+
+    @Override
+    public Optional<org.bukkit.Location> locate(ActiveDimension active, String landmark, org.bukkit.Location from) {
+        return mainPortal != null && landmark.equals(SiftMainPortal.LANDMARK) ? mainPortal.locate() : Optional.empty();
     }
 
     @Override

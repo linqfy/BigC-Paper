@@ -73,7 +73,8 @@ public interface DimensionPlatform {
      * an activation item, for scripted activations (rituals, quests, commands). Fires
      * {@link dev.linqfy.bigCasares.dimension.event.DimensionPortalActivateEvent}. Returns
      * the lit (or already lit) shape, or empty when the dimension is not active, the
-     * frame is incomplete or the event was cancelled.
+     * frame is incomplete or the event was cancelled. The frame may stand in the main world or in the
+     * dimension's own world (such a portal leads out); other custom dimensions are refused.
      *
      * @param cause the player responsible, or {@code null}
      */
