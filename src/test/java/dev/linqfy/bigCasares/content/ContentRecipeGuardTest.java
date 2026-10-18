@@ -1,5 +1,7 @@
 package dev.linqfy.bigCasares.content;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -7,7 +9,9 @@ import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ContentRecipeGuardTest {
@@ -46,5 +50,19 @@ class ContentRecipeGuardTest {
         assertFalse(ContentRecipeGuard.accepts(List.of("the_sift:siftite_sword", "the_sift:siftite_sword"), CONTENT,
             List.<String>of(), EXACTLY));
         assertTrue(ContentRecipeGuard.accepts(List.of("minecraft:diamond_sword"), CONTENT, List.<String>of(), EXACTLY));
+    }
+
+    /** Found on a live server: a 2x2 inventory craft made the server's recipe lookup throw. */
+    @Test
+    void theInventoryGridIsLookedUpAsTheTopLeftOfAThreeByThreeGrid() {
+        ItemStack a = new ItemStack(Material.STICK);
+        ItemStack b = new ItemStack(Material.COAL);
+        ItemStack c = new ItemStack(Material.DIRT);
+        ItemStack d = new ItemStack(Material.STONE);
+        ItemStack[] grid = ContentRecipeGuard.craftingGrid(new ItemStack[] {a, b, c, d});
+
+        assertArrayEquals(new ItemStack[] {a, b, null, c, d, null, null, null, null}, grid);
+        ItemStack[] table = new ItemStack[9];
+        assertSame(table, ContentRecipeGuard.craftingGrid(table));
     }
 }

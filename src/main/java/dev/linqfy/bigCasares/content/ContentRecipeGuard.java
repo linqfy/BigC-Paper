@@ -143,8 +143,24 @@ public final class ContentRecipeGuard implements Listener {
 
     /** The crafting recipe a fresh lookup finds, when it names every content input. */
     private static Optional<ItemStack> replacement(ItemStack[] matrix, World world) {
-        Recipe recipe = Bukkit.getCraftingRecipe(matrix, world);
+        Recipe recipe = Bukkit.getCraftingRecipe(craftingGrid(matrix), world);
         return recipe != null && accepts(recipe, matrix) ? Optional.of(recipe.getResult().clone()) : Optional.empty();
+    }
+
+    /**
+     * The nine slots {@link Bukkit#getCraftingRecipe} takes: the inventory's 2x2 grid becomes the top-left corner
+     * of a 3x3 one (the server refuses any other length).
+     */
+    static ItemStack[] craftingGrid(ItemStack[] matrix) {
+        if (matrix.length != 4) {
+            return matrix;
+        }
+        ItemStack[] grid = new ItemStack[9];
+        grid[0] = matrix[0];
+        grid[1] = matrix[1];
+        grid[3] = matrix[2];
+        grid[4] = matrix[3];
+        return grid;
     }
 
     /** The Bukkit recipe type of the block that cooks (furnace, smoker, blast furnace, campfire). */
