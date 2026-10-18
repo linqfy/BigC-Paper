@@ -34,11 +34,25 @@ and [The Sift](../../dimensions/the-sift.md); verify claims against source/tests
    line by line. Creatures are vanilla mobs with matching AI (the Blub is a wolf).
    The Ancient City ritual reuses the mod's centre templates via the datapack.
 
+8. **Substitutes where a port is impossible.** At the user's request, mod features that a
+   vanilla client or server cannot show are faked rather than left out: non-cube blocks are
+   content items placing vanilla look-alikes (positions remembered per chunk so they drop the
+   mod's items), the mod's music discs are vanilla discs with the mod's icons, custom block
+   random ticks are sampled by a bounded task, and client glows are BetterModel bone
+   brightness plus moving light blocks. Each substitute is labelled as such in the guide.
+9. **Content items stay out of vanilla recipes.** Content items reuse vanilla materials, so a
+   guard lets recipes, anvils, crafters, smithing tables and cooking blocks take them only
+   through exact choices.
+
 ## Validation performed
 
 JUnit tests for the compiler, installer, store, cycles, travel and portal
 detection, every ported feature (determinism, region bounds, output on prepared
-terrain), the loot table, the ritual melody and the block rendering contract; the
-generated pack was checked against 26.2 registries and block states. No live
+terrain), the loot tables, the ritual melody, the block rendering contract, the
+creatures' Bukkit-free brains, spawners and timings, the main portal's site search and
+build plan, recipes (all 76 translate), advancements (all 22 written) and the
+substitutes; the generated pack was checked against 26.2 registries and block states.
+Final state: clean build passes; the full suite runs 1574 tests with only the 33
+environment failures that also fail on the untouched baseline. No live
 server was available in the development sandbox (Paper and Mojang hosts blocked);
 live verification is still outstanding.
