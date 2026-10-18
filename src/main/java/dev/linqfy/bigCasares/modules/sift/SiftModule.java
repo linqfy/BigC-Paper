@@ -13,10 +13,15 @@ import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
 import dev.linqfy.bigCasares.modules.model.BetterModelAssetInstaller;
 import dev.linqfy.bigCasares.modules.model.JavaModelGateway;
 import dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures;
+import dev.linqfy.bigCasares.modules.sift.feature.SoulCanyonLandmarks;
 import dev.linqfy.bigCasares.modules.sift.recipe.SiftRecipeRegistrar;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -81,6 +86,16 @@ public final class SiftModule implements PluginModule {
         SiftCreatures creatures = new SiftCreatures(plugin, models);
         SiftSifters sifters = new SiftSifters(plugin, models, items::resolve,
             SifterLoot.parse(data.json("loot_table/entities/sifter.json")));
+        Path landmarksFile = plugin.getDataFolder().toPath().resolve("data/the-sift/landmarks.bin");
+        SiftLandmarks landmarks = loadLandmarks(landmarksFile);
+        SiftSingers singers = new SiftSingers(plugin, models, items::resolve, landmarks);
+        SiftEchoGolems golems = new SiftEchoGolems(plugin, models, items::resolve, landmarks);
+        if (settings.echoGolems()) {
+            singers.setGolems(golems);
+        }
+        if (settings.singers()) {
+            golems.setSingers(singers);
+        }
         installModels();
         // BetterModel may still be initializing right after plugin enable; the
         // delayed pass repairs the model registry like the other model modules do.
@@ -88,13 +103,15 @@ public final class SiftModule implements PluginModule {
             if (installModels()) {
                 creatures.redress();
                 sifters.redress();
+                singers.redress();
+                golems.redress();
             }
         }, 60L);
         scope.register("sift-models-delayed-install", delayedModels::cancel);
-        SiftFeatures features = SiftFeatures.create(data);
+        SiftFeatures features = SiftFeatures.create(data, canyonLandmarks(landmarks));
         SiftSoils soils = new SiftSoils(plugin, platform, blocks);
         SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, features, creatures,
-            new SiftRifts(plugin, platform, models), sifters,
+            new SiftRifts(plugin, platform, models), sifters, singers, golems,
             items::resolve, new SiftIchorSnowfall(soils::update));
         try {
             DimensionDefinition definition = SiftDimension.create(settings, worldgen, List.of(runtime));
@@ -103,6 +120,8 @@ public final class SiftModule implements PluginModule {
                 + (status.message().isBlank() ? "" : " (" + status.message() + ")"));
             scope.register("sift-dimension", () -> dimensions.get().unregister(SiftDimension.KEY));
             BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(plugin, scope);
+            registrations.scheduleRepeating("sift-landmarks-save", () -> saveLandmarks(landmarks, landmarksFile), 600L, 600L);
+            scope.register("sift-landmarks-flush", () -> saveLandmarks(landmarks, landmarksFile));
             registrations.registerListener("sift-advancements", new SiftAdvancementTriggers(platform, blocks));
             registrations.registerListener("sift-ichor-items", new SiftIchorItems(platform, items));
             registrations.registerListener("sift-ichor-cauldrons", new SiftIchorCauldrons(platform, items));
@@ -133,6 +152,44 @@ public final class SiftModule implements PluginModule {
         } catch (RuntimeException failure) {
             plugin.getLogger().log(Level.SEVERE, "[TheSift] Could not enable the Siftite death recovery", failure);
         }
+    }
+
+    /** The Soul Canyon landmarks saved by an earlier run; a file that cannot be read is kept aside and the registry starts empty. */
+    private SiftLandmarks loadLandmarks(Path file) {
+        try {
+            return SiftLandmarks.load(file);
+        } catch (IOException | RuntimeException failure) {
+            plugin.getLogger().log(Level.WARNING, "[TheSift] Could not read " + file + "; Echo Golems start without known canyons", failure);
+            try {
+                Files.move(file, file.resolveSibling(file.getFileName() + ".unreadable"), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ignored) {
+                // The next save replaces it.
+            }
+            return new SiftLandmarks();
+        }
+    }
+
+    private void saveLandmarks(SiftLandmarks landmarks, Path file) {
+        try {
+            landmarks.saveIfDirty(file);
+        } catch (IOException | RuntimeException failure) {
+            plugin.getLogger().log(Level.WARNING, "[TheSift] Could not save " + file, failure);
+        }
+    }
+
+    /** Hands the landmarks of every canyon the generator carves to the registry the Echo Golems read. */
+    private static SoulCanyonLandmarks canyonLandmarks(SiftLandmarks landmarks) {
+        return (entrance, midpoint, cluster, soulBlocks) -> {
+            landmarks.record(SiftLandmarks.Kind.CANYON_ENTRANCE, pos(entrance));
+            landmarks.record(SiftLandmarks.Kind.CANYON_MIDPOINT, pos(midpoint));
+            landmarks.record(SiftLandmarks.Kind.CANYON_CLUSTER, pos(cluster));
+            landmarks.record(SiftLandmarks.Kind.GOLEM_PENDING, pos(entrance));
+            soulBlocks.forEach(soul -> landmarks.record(SiftLandmarks.Kind.SOUL_BLOCK, pos(soul)));
+        };
+    }
+
+    private static SiftPos pos(SoulCanyonLandmarks.Position position) {
+        return new SiftPos(position.x(), position.y(), position.z());
     }
 
     private boolean installModels() {

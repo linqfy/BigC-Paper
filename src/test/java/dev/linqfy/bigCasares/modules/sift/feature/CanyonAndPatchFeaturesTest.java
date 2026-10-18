@@ -95,6 +95,51 @@ class CanyonAndPatchFeaturesTest {
         assertTrue(carved >= 20, "a canyon should fit on flat Sift ground for nearly every seed, carved " + carved);
     }
 
+    @Test
+    void soulCanyonReportsItsLandmarksWithoutChangingTheResult() {
+        int reported = 0;
+        for (long seed = 1; seed <= 24; seed++) {
+            ChunkPos chunk = selectedCanyonChunk(seed);
+            InMemoryRegion plain = InMemoryRegion.flat(chunk.x(), chunk.z(), SURFACE, seed);
+            InMemoryRegion watched = InMemoryRegion.flat(chunk.x(), chunk.z(), SURFACE, seed);
+            List<List<SoulCanyonLandmarks.Position>> entrances = new ArrayList<>();
+            List<List<SoulCanyonLandmarks.Position>> souls = new ArrayList<>();
+            List<SoulCanyonLandmarks.Position> clusters = new ArrayList<>();
+            SoulCanyonLandmarks sink = (entrance, midpoint, cluster, soulBlocks) -> {
+                entrances.add(List.of(entrance, midpoint));
+                clusters.add(cluster);
+                souls.add(soulBlocks);
+            };
+            boolean first = place("the_sift:soul_canyon", plain, seed, chunk.x(), chunk.z());
+            boolean second = SiftFeatures.create(SiftData.fromClasspath(), sink).find("the_sift:soul_canyon").orElseThrow()
+                .place(watched, new Random(seed), chunk.x() << 4, 0, chunk.z() << 4);
+            assertEquals(first, second);
+            assertEquals(0, plain.countDifferences(watched), "reporting must not change generation, seed " + seed);
+            assertEquals(first ? 1 : 0, entrances.size(), "one report per canyon, seed " + seed);
+            if (!first) {
+                continue;
+            }
+            reported++;
+            SoulCanyonLandmarks.Position entrance = entrances.get(0).get(0);
+            SoulCanyonLandmarks.Position midpoint = entrances.get(0).get(1);
+            assertTrue(watched.isAir(entrance.x(), entrance.y(), entrance.z()), "the entrance is a walkable spot, seed " + seed);
+            assertTrue(watched.isAir(midpoint.x(), midpoint.y(), midpoint.z()), "so is the midpoint, seed " + seed);
+            assertTrue(souls.get(0).size() >= 8);
+            long x = 0;
+            long y = 0;
+            long z = 0;
+            for (SoulCanyonLandmarks.Position soul : souls.get(0)) {
+                assertEquals(SiftTerrain.SOUL_BLOCK, watched.state(soul.x(), soul.y(), soul.z()), "every reported block was placed");
+                x += soul.x();
+                y += soul.y();
+                z += soul.z();
+            }
+            int count = souls.get(0).size();
+            assertEquals(new SoulCanyonLandmarks.Position((int) (x / count), (int) (y / count), (int) (z / count)), clusters.get(0));
+        }
+        assertTrue(reported >= 20, "reported " + reported);
+    }
+
     private static void assertCanyon(InMemoryRegion region, InMemoryRegion untouched, long seed) {
         List<Change> changes = changes(untouched, region);
         int soulBlocks = 0;

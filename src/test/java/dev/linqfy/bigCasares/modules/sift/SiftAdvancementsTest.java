@@ -43,7 +43,7 @@ class SiftAdvancementsTest {
     void onlyGrantableAdvancementsAreWritten() {
         Map<String, JsonObject> translated = translate(SiftSettings.defaults());
         assertEquals(SiftAdvancements.granted(SiftSettings.defaults()), translated.keySet());
-        assertFalse(translated.containsKey("the_sift/friend_of_the_sift"), "the Echo Golem is not ported");
+        assertTrue(translated.containsKey("the_sift/friend_of_the_sift"), "the Echo Golem is ported");
         assertFalse(translated.containsKey("the_sift/planting_the_dark"), "the Sculkflower is not ported");
     }
 
@@ -60,8 +60,11 @@ class SiftAdvancementsTest {
     @Test
     void childrenOfLeftOutAdvancementsHangFromTheNearestWrittenAncestor() {
         Map<String, JsonObject> translated = translate(SiftSettings.defaults());
-        // blub -> friend_of_the_sift -> like_father_and_son (Echo Golem, not ported) -> root
-        assertEquals("the_sift:the_sift/root", parent(translated, "the_sift/blub"));
+        // root -> like_father_and_son -> friend_of_the_sift -> blub, pitch_perfect
+        assertEquals("the_sift:the_sift/friend_of_the_sift", parent(translated, "the_sift/blub"));
+        assertEquals("the_sift:the_sift/friend_of_the_sift", parent(translated, "the_sift/pitch_perfect"));
+        assertEquals("the_sift:the_sift/like_father_and_son", parent(translated, "the_sift/friend_of_the_sift"));
+        assertEquals("the_sift:the_sift/root", parent(translated, "the_sift/like_father_and_son"));
         assertEquals("minecraft:story/smelt_iron", parent(translated, "story/fallen_civilization"));
         assertEquals("the_sift:story/song_of_the_past", parent(translated, "story/brave_the_unknown"));
         assertFalse(translated.get("the_sift/root").has("parent"));
@@ -69,12 +72,37 @@ class SiftAdvancementsTest {
         SiftSettings defaults = SiftSettings.defaults();
         SiftSettings noRitual = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(), defaults.entryPermission(),
             defaults.travelCooldownSeconds(), defaults.craftedPortal(), false, defaults.tides(), defaults.ichor(),
-            false, false, defaults.sifters(), List.of());
+            false, false, defaults.sifters(), false, false, List.of());
         Map<String, JsonObject> reduced = translate(noRitual);
         assertFalse(reduced.containsKey(SiftAdvancements.SONG_OF_THE_PAST));
         assertFalse(reduced.containsKey(SiftAdvancements.BLUB));
         assertFalse(reduced.containsKey(SiftAdvancements.RIFTER));
+        assertFalse(reduced.containsKey(SiftAdvancements.FRIEND_OF_THE_SIFT));
+        assertFalse(reduced.containsKey(SiftAdvancements.LIKE_FATHER_AND_SON));
+        assertFalse(reduced.containsKey(SiftAdvancements.PITCH_PERFECT));
         assertEquals("the_sift:story/fallen_civilization", parent(reduced, "story/brave_the_unknown"));
+    }
+
+    @Test
+    void creatureAdvancementsFollowTheirSwitches() {
+        SiftSettings defaults = SiftSettings.defaults();
+        SiftSettings golemsOnly = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(), defaults.entryPermission(),
+            defaults.travelCooldownSeconds(), defaults.craftedPortal(), true, defaults.tides(), defaults.ichor(), false, false,
+            false, false, true, List.of());
+        Set<String> golems = SiftAdvancements.granted(golemsOnly);
+        assertTrue(golems.contains(SiftAdvancements.FRIEND_OF_THE_SIFT));
+        assertFalse(golems.contains(SiftAdvancements.LIKE_FATHER_AND_SON), "needs a Singer to hand the soul to");
+        assertFalse(golems.contains(SiftAdvancements.PITCH_PERFECT));
+        // With no Singer the chain skips the missing step.
+        assertEquals("the_sift:the_sift/root", parent(translate(golemsOnly), SiftAdvancements.FRIEND_OF_THE_SIFT));
+
+        SiftSettings singersOnly = new SiftSettings(defaults.seedSalt(), defaults.worldBorderDiameter(), defaults.entryPermission(),
+            defaults.travelCooldownSeconds(), defaults.craftedPortal(), true, defaults.tides(), defaults.ichor(), false, false,
+            false, true, false, List.of());
+        Set<String> singers = SiftAdvancements.granted(singersOnly);
+        assertTrue(singers.contains(SiftAdvancements.PITCH_PERFECT));
+        assertFalse(singers.contains(SiftAdvancements.FRIEND_OF_THE_SIFT));
+        assertFalse(singers.contains(SiftAdvancements.LIKE_FATHER_AND_SON));
     }
 
     @Test

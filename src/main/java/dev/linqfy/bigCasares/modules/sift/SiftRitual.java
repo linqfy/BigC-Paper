@@ -71,7 +71,7 @@ import java.util.logging.Level;
  * </ol>
  *
  * <p>Differences: the Singer is a BetterModel model on a marker armour stand (no
- * hitbox, no AI; the mod's roaming/bartering Singer is not ported); sound waves and
+ * hitbox, no AI; the mod's roaming and bartering Singer is {@link SiftSingers}); sound waves and
  * beams are vanilla particles; a console is the set of note-mode blocks within 16
  * blocks horizontally and 8 vertically of the struck one (the mod chains groups);
  * console and autoplay state is not saved across restarts; the portal fills

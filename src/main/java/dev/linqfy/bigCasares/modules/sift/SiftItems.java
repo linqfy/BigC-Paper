@@ -31,6 +31,8 @@ import java.util.Set;
 public final class SiftItems {
 
     static final int ICHOR_BOTTLE_COLOR = 5_909_123;
+    static final NamespacedId SINGER_SPAWN_EGG = NamespacedId.of(SiftBlocks.NS, "singer_spawn_egg");
+    static final NamespacedId ECHO_GOLEM_SPAWN_EGG = NamespacedId.of(SiftBlocks.NS, "echo_golem_spawn_egg");
 
     private SiftItems() {
     }
@@ -68,6 +70,11 @@ public final class SiftItems {
         items.add(ContentItem.builder(id("ichor_bucket"), "WATER_BUCKET").name("item.the_sift.ichor_bucket", "Ichor Bucket")
             .maxStack(1).build());
         items.add(simple("overgrown_willow_sapling", "MANGROVE_PROPAGULE"));
+        // Spawn eggs of the mod's Singer and Echo Golem; the use is in SiftSingers and SiftEchoGolems.
+        items.add(ContentItem.builder(SINGER_SPAWN_EGG, "WANDERING_TRADER_SPAWN_EGG")
+            .name("item.the_sift.singer_spawn_egg", "Singer Spawn Egg").build());
+        items.add(ContentItem.builder(ECHO_GOLEM_SPAWN_EGG, "WOLF_SPAWN_EGG")
+            .name("item.the_sift.echo_golem_spawn_egg", "Echo Golem Spawn Egg").build());
         return items;
     }
 

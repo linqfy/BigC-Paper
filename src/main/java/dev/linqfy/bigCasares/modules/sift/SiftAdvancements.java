@@ -25,7 +25,7 @@ import java.util.Set;
  * translated for vanilla clients and written into the dimension datapack.
  *
  * <p>Only advancements the port can grant are written: an advancement whose
- * mechanic is not ported (Echo Golem, Sculkflower, Charoite enchanting, ...)
+ * mechanic is not ported (Sculkflower, Charoite enchanting, ...)
  * would sit in the tab forever. Children of a left-out advancement hang from its
  * nearest written ancestor instead. Native criteria (dimension change, biome and
  * structure location) work unchanged because the port keeps the mod's ids; item
@@ -43,10 +43,14 @@ public final class SiftAdvancements {
     public static final String SPICEWOOD = "the_sift/spicewood";
     public static final String KEEP_INVENTORY = "the_sift/keep_inventory";
     public static final String FALSE_ALARM = "the_sift/false_alarm";
+    public static final String LIKE_FATHER_AND_SON = "the_sift/like_father_and_son";
+    public static final String FRIEND_OF_THE_SIFT = "the_sift/friend_of_the_sift";
+    public static final String PITCH_PERFECT = "the_sift/pitch_perfect";
 
     /** Advancements with the mod's {@code impossible} criterion that the port awards from code. */
     static final Set<String> AWARDED_FROM_CODE = Set.of(SONG_OF_THE_PAST, BLUB, RIFTER, KINDA_PURPLEISH, SIFTED_NUGGET,
-        SPICEWOOD, KEEP_INVENTORY, SiftCharoite.BETTER_ENCHANTER, FALSE_ALARM);
+        SPICEWOOD, KEEP_INVENTORY, SiftCharoite.BETTER_ENCHANTER, FALSE_ALARM, LIKE_FATHER_AND_SON, FRIEND_OF_THE_SIFT,
+        PITCH_PERFECT);
 
     /** Every advancement of the mod except recipe unlocks. */
     static final List<String> MOD_ADVANCEMENTS = List.of(
@@ -82,6 +86,16 @@ public final class SiftAdvancements {
         }
         if (settings.rifts()) {
             granted.add(RIFTER);
+        }
+        // An Echo Golem hands its Soul Block to a Singer (father and son) or to the player it likes (friend).
+        if (settings.echoGolems() && settings.singers()) {
+            granted.add(LIKE_FATHER_AND_SON);
+        }
+        if (settings.echoGolems()) {
+            granted.add(FRIEND_OF_THE_SIFT);
+        }
+        if (settings.singers()) {
+            granted.add(PITCH_PERFECT);
         }
         return granted;
     }

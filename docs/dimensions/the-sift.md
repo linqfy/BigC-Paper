@@ -61,11 +61,12 @@ clients cannot show new content types, or original to this port.
 | Day/night cycle | From the mod | The Sift's own clock with the mod's 24,120-tick day |
 | Blub | Adapted | A silent wolf with the mod's model, textures, sounds and stats; tempted and tamed (one in three) with Soul Blocks, heals with Soul Blocks or food, sits, follows and defends its owner |
 | Sifter | Adapted | A silent, scaled silverfish (hostile, melee, no daylight burning, no climbing; hitbox 0.9 x 0.675 against the mod's 0.9 x 0.95) with the mod's model, sounds and stats (40 health, 10 attack, 28 follow range). The spawner is the mod's: every 80 ticks near each player, never on Peaceful, in groups of up to five on Siftslate, growth and healthy-sculk floors, with the mod's biome chances and area caps. It bites after a 14-tick wind-up, drops raw Sifter meat (cooked when it dies on fire, plus Looting) and 7 experience. See `SiftSifters` for every difference |
-| Singer | Adapted | The converted model performs the ritual song; she does not roam or barter |
+| Singer | Adapted | At the Ancient City, the converted model performs the ritual song. In the Sift she is a silent wandering trader (1.48 x 4.8) with the mod's model, sounds and stats that rises from the ground when an Echo Golem brings a Soul Block, roams for 30 seconds, receives the golem's soul and trades: right-click or drop a Soul Block and she throws a gift (the mod's table; the Music Disc Wellspring is re-rolled because the discs are not imported). A name tag or the spawn egg makes her stay. See `SiftSingers` for every difference |
+| Echo Golem | Adapted | A silent wolf scaled to the mod's 1.15 x 1.65 with the mod's model, sounds and stats (34 health, 0.23 speed). One spawns at every Soul Canyon and one near each player where none is within 165 blocks. It explores, walks into a canyon, picks up a Soul Block, carries it out and delivers it to a Singer (calling one if none is near) or, once given an Echo Shard, to that player; it bows, sits for 30 seconds if hurt or right-clicked while carrying, and keeps its state in the entity data. Canyons carved before this version are not known to the golems. See `SiftEchoGolems` and `EchoGolemBrain` for every difference |
 | Sniffers | From the mod | Placed by sniffer caves and surface sculk regions (the mod's dark sniffers are ordinary sniffers). The biomes also list sniffers, but vanilla sniffer spawn rules need grass, so, as in the mod, they do not spawn naturally on Sift ground |
 | Ancient City ritual | From the mod | See above; console and replay state is not saved across restarts |
 | Rifts | From the mod | Timing, size, placement search and linking as in the mod; models converted from the mod; rifts are not saved across restarts and the exit search covers 48 blocks (the mod searches farther) |
-| Items | Partial | Block items, Charoite, Siftite nugget/ingot, Ichor shard, Sifter meat (food), Ichor bottle/bucket and willow sapling exist; the bottle, bucket and sapling have no Ichor- or tree-specific behaviour yet |
+| Items | Partial | Block items, Charoite, Siftite nugget/ingot, Ichor shard, Sifter meat (food), Ichor bottle/bucket, willow sapling and the Singer and Echo Golem spawn eggs exist; the bottle, bucket and sapling have no Ichor- or tree-specific behaviour yet |
 | Siftite gear | Adapted | Sword, shovel, pickaxe, axe, hoe, spear, four armour pieces and the upgrade template are netherite items with the mod's stats (durability, damage, speed, mining speed, armour, knockback resistance, fire resistance), models and armour texture. See `SiftiteGear` for the numbers and the differences (netherite ingots also repair them; the template keeps the client's netherite template text) |
 | Siftite death recovery | Adapted | Siftite items are taken out of a player's death drops and returned through a small particle rift 2 seconds after the respawn (or join); the stacks are kept in `data/the-sift/siftite-recovery/<uuid>.bin` until they are in the inventory. |
 | Shifting tides (Flow, Endure, Thrive) | Original | A three-day cycle: Endure hardens hostile mobs and stops natural regeneration; Thrive speeds regeneration and grants Haste |
@@ -73,11 +74,11 @@ clients cannot show new content types, or original to this port.
 
 ### Not ported yet
 
-Echo Golem and Dark Sniffer creatures; the Sifter spawn egg;
+Dark Sniffer creatures; the Blub, Sifter and Dark Sniffer spawn eggs;
 Charoite enchanting; the Sculkflower crop and seeds; Ichor snowballs, buckets,
-bottles and cauldrons; the Singer's roaming, bartering and soul events;
-advancements; the mod's `/locate` and weather commands. The two music discs are
-not imported (see below).
+bottles and cauldrons; the glowmasks and dynamic lights of the Singer and Echo
+Golem (client-side in the mod); the mod's `/locate` and weather commands. The
+two music discs are not imported (see below).
 
 ## Configuration
 
@@ -110,7 +111,18 @@ the-sift:
     enabled: true
   sifters:
     enabled: true               # the mod's Sifter spawner (the hostile creature)
+  singers:
+    enabled: true               # the Singer's soul event, roaming and bartering
+  echo-golems:
+    enabled: true               # Echo Golem spawner and behaviour
 ```
+
+Echo Golems and Singers can be switched off separately. Without Singers a golem
+still collects Soul Blocks and delivers them to a player it is bonded to; without
+golems Singers appear only from their spawn egg. Soul Canyon landmarks (entrance,
+midpoint, soul cluster, Soul Blocks and canyons still waiting for their golem) are kept in
+`plugins/BigCasares/data/the-sift/landmarks.bin`; deleting it makes golems forget
+the canyons of already generated chunks.
 
 Changing `seed-salt`, toggling the ritual or editing worldgen changes the datapack:
 restart once, and only chunks generated afterwards change.
@@ -141,7 +153,8 @@ hand:
 python3 -I tools/port_mielon_sift.py path/to/mielons-the-sift-1.1.1-mc26.3-fabric.jar
 python3 -I tools/convert_geckolib_bbmodel.py <jar> blub blub the_sift_blub --rename hopping=walk --rename flapping=idle --loop idle=3.0
 python3 -I tools/convert_geckolib_bbmodel.py <jar> blub tamed_blub the_sift_blub_tamed --rename hopping=walk --rename flapping=idle --loop idle=3.0
-python3 -I tools/convert_geckolib_bbmodel.py <jar> singer singer the_sift_singer
+python3 -I tools/convert_geckolib_bbmodel.py <jar> singer singer the_sift_singer --rename idle=stand --rename walk=stride
+python3 -I tools/convert_geckolib_bbmodel.py <jar> echo_golem echo_golem the_sift_echo_golem --rename idle=search_idle --rename walk=search_walk --skip search_idle --skip carry_idle --skip soul_visible --skip look_left --skip look_left_far --skip look_right --skip look_right_far --loop soul_hidden=0.05
 python3 -I tools/convert_geckolib_bbmodel.py <jar> rift rift/sift the_sift_rift
 python3 -I tools/convert_geckolib_bbmodel.py <jar> rift rift/overworld the_sift_rift_overworld
 python3 -I tools/convert_geckolib_bbmodel.py <jar> sifter sifter the_sift_sifter --rename running=walk --speed walk=2.5
@@ -149,6 +162,8 @@ bash gradlew generateCustomBlockstates   # after changing custom blocks
 bash gradlew generateSiftDatapack        # inspect build/generated-datapacks/
 ```
 
+The Singer and Echo Golem models rename the mod's idle and walk animations so that
+BetterModel's own idle/walk handling does not compete with the poses the plugin plays.
 The import writes `src/main/resources/the_sift/mielon/` (worldgen data, templates,
 loot tables) and `resourcepack/java/assets/the_sift/`, replacing both. The music
 disc tracks are third-party works credited by the mod; they are left out unless
@@ -158,10 +173,11 @@ confirmed.
 ## Verification status
 
 Unit tests cover the datapack translation and determinism, the Ancient City
-templates, the ritual melody, rift placement, the Sifter spawner's search, loot and bite timeline and its converted model, every ported feature (determinism, staying inside the
+templates, the ritual melody, rift placement, the Sifter spawner's search, loot and bite timeline and its converted model, the Singer's soul event, barter table and the Echo Golem's mission and route state machine, spawner and landmark registry (all against small fakes) and the converted Singer and Echo Golem models, every ported feature (determinism, staying inside the
 populator region, expected output on prepared terrain, thread safety for several
 families), the loot table, block rendering contracts and the framework. The
 generated datapack has been checked against Minecraft 26.2's registries and block
 states. **Nothing has been run on a live Paper server yet**: world creation,
-generation in game, client rendering, BetterModel animation playback and the
-ritual in an Ancient City still need a test server.
+generation in game, client rendering, BetterModel animation playback, the
+ritual in an Ancient City, the Echo Golem's pathfinding through a real canyon,
+the Singer's appearance and the barter still need a test server.

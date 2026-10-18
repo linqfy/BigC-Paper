@@ -22,10 +22,11 @@ import java.util.Set;
  *
  * <p>Differences: the mod's global reservations are not ported because they depend
  * on generation order and would make output non-deterministic: the "no canyon near
- * a portal" check ({@code SiftFeaturePlacementGuard.intersectsPortal}), the carver
- * reservation, and the {@code SiftLandmarkTracker} records of the entrance, midpoint,
- * soul cluster and pending echo golem. Ground and replaceable blocks are matched
- * through the stand-in rules of {@link SoulCanyonTerrain}.</p>
+ * a portal" check ({@code SiftFeaturePlacementGuard.intersectsPortal}) and the carver
+ * reservation. The {@code SiftLandmarkTracker} records of the entrance, midpoint, soul
+ * cluster, Soul Blocks and pending Echo Golem are handed to a {@link SoulCanyonLandmarks}
+ * once the canyon is written; they do not influence generation. Ground and replaceable
+ * blocks are matched through the stand-in rules of {@link SoulCanyonTerrain}.</p>
  */
 final class SoulCanyonFeature implements SiftFeature {
 
@@ -33,6 +34,16 @@ final class SoulCanyonFeature implements SiftFeature {
     private static final int ATTEMPTS = 8;
     private static final int MINIMUM_SOUL_BLOCKS = 8;
     private static final double DIAGONAL = 0.7071067811865476;
+
+    private final SoulCanyonLandmarks landmarks;
+
+    SoulCanyonFeature() {
+        this(SoulCanyonLandmarks.NONE);
+    }
+
+    SoulCanyonFeature(SoulCanyonLandmarks landmarks) {
+        this.landmarks = landmarks;
+    }
 
     private record CanyonPlan(Map<Long, CanyonColumn> columns, Pos entrance, Pos midpoint, int length, int baseRadius) {
     }
@@ -90,7 +101,27 @@ final class SoulCanyonFeature implements SiftFeature {
         for (Pos soul : soulBlocks) {
             region.set(soul.x(), soul.y(), soul.z(), SiftTerrain.SOUL_BLOCK);
         }
+        landmarks.soulCanyon(position(plan.entrance()), position(plan.midpoint()), position(clusterCenter(soulBlocks)),
+            soulBlocks.stream().map(SoulCanyonFeature::position).toList());
         return true;
+    }
+
+    private static SoulCanyonLandmarks.Position position(Pos pos) {
+        return new SoulCanyonLandmarks.Position(pos.x(), pos.y(), pos.z());
+    }
+
+    /** {@code clusterCenter}: the average of the positions, each axis rounded toward zero. */
+    private static Pos clusterCenter(List<Pos> positions) {
+        long x = 0L;
+        long y = 0L;
+        long z = 0L;
+        for (Pos pos : positions) {
+            x += pos.x();
+            y += pos.y();
+            z += pos.z();
+        }
+        int size = positions.size();
+        return new Pos((int) (x / size), (int) (y / size), (int) (z / size));
     }
 
     private static CanyonPlan buildPlan(WorldRegion region, SiftWorldgenBounds bounds, int centerX, int centerZ,

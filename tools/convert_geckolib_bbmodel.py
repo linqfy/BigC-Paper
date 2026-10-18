@@ -5,6 +5,7 @@ into a Blockbench .bbmodel that BetterModel can load.
 Usage:
     python3 -I tools/convert_geckolib_bbmodel.py <mod.jar> <entity> <texture> <output-name>
         [--rename geckolib=bbmodel ...] [--loop name=seconds ...] [--speed name=factor ...]
+        [--skip geckolib-name ...]
 
 Examples (The Sift, see docs/dimensions/the-sift.md):
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
@@ -12,13 +13,17 @@ Examples (The Sift, see docs/dimensions/the-sift.md):
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
         blub tamed_blub the_sift_blub_tamed --rename hopping=walk --rename flapping=idle --loop idle=3.0
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
-        singer singer the_sift_singer
+        singer singer the_sift_singer --rename idle=stand --rename walk=stride
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
         rift rift/sift the_sift_rift
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
         rift rift/overworld the_sift_rift_overworld
     python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
         sifter sifter the_sift_sifter --rename running=walk --speed walk=2.5
+    python3 -I tools/convert_geckolib_bbmodel.py mielons-the-sift-1.1.1-mc26.3-fabric.jar \\
+        echo_golem echo_golem the_sift_echo_golem --rename idle=search_idle --rename walk=search_walk \\
+        --skip search_idle --skip carry_idle --skip soul_visible --skip look_left --skip look_left_far \\
+        --skip look_right --skip look_right_far --loop soul_hidden=0.05
 
 The jar is read as a ZIP archive; no mod code is loaded. The conversion mirrors
 Blockbench's own Bedrock import: X is negated for cube bounds and pivots, bone
@@ -32,6 +37,11 @@ reproducible.
 --rename: GeckoLib sets speeds in code (the Sifter runs at 2.5x), while a
 bbmodel stores only keyframe times, so keyframe times and length are divided
 by the factor.
+
+--skip leaves an animation out, by the name it has after --rename: animations that
+move nothing (a bare idle) or that GeckoLib's renderer drives from code. --rename
+also decides what BetterModel plays by itself: it starts animations called idle and
+walk on its own, so a creature whose poses are chosen by the plugin renames them.
 """
 import base64
 import json
@@ -165,10 +175,12 @@ def vector(value):
             for axis, component in zip("xyz", value)}
 
 
-def convert_animations(model, animations, groups, renames, loops, speeds):
+def convert_animations(model, animations, groups, renames, loops, speeds, skips=()):
     converted = []
     for source_name, animation in animations.items():
         name = renames.get(source_name, source_name)
+        if name in skips:
+            continue
         stretch = 1.0 / speeds.get(name, 1.0)
         length = float(animation.get("animation_length", 0.0)) * stretch
         loop = LOOP_MODES.get(animation.get("loop"), "once")
@@ -198,7 +210,7 @@ def convert_animations(model, animations, groups, renames, loops, speeds):
 
 
 def main(arguments):
-    renames, loops, speeds, positional = {}, {}, {}, []
+    renames, loops, speeds, skips, positional = {}, {}, {}, set(), []
     iterator = iter(arguments)
     for argument in iterator:
         if argument == "--rename":
@@ -207,6 +219,8 @@ def main(arguments):
         elif argument == "--loop":
             name, seconds = next(iterator).split("=", 1)
             loops[name] = float(seconds)
+        elif argument == "--skip":
+            skips.add(next(iterator))
         elif argument == "--speed":
             name, factor = next(iterator).split("=", 1)
             speeds[name] = float(factor)
@@ -233,7 +247,7 @@ def main(arguments):
         "name": model, "model_identifier": model, "visible_box": [2, 2.5, 0.75],
         "resolution": {"width": uv_width, "height": uv_height},
         "elements": elements, "groups": list(groups.values()), "outliner": outliner,
-        "animations": convert_animations(model, animations, groups, renames, loops, speeds),
+        "animations": convert_animations(model, animations, groups, renames, loops, speeds, skips),
         "textures": [{
             "name": model + ".png", "relative_path": model + ".png", "id": "0", "uuid": uid(model, "texture"),
             "width": width, "height": height, "uv_width": uv_width, "uv_height": uv_height,

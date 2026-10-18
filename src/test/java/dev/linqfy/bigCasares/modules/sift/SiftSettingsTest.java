@@ -33,4 +33,29 @@ class SiftSettingsTest {
         assertTrue(config.getBoolean("the-sift.sifters.enabled"));
         assertTrue(SiftSettings.load(config).sifters());
     }
+
+    @Test
+    void singersAndEchoGolemsAreOnByDefaultAndSwitchIndependently() throws Exception {
+        assertTrue(SiftSettings.defaults().singers());
+        assertTrue(SiftSettings.defaults().echoGolems());
+        YamlConfiguration config = new YamlConfiguration();
+        config.loadFromString("the-sift:\n  singers:\n    enabled: false\n");
+        SiftSettings settings = SiftSettings.load(config);
+        assertFalse(settings.singers());
+        assertTrue(settings.echoGolems());
+        config.loadFromString("the-sift:\n  echo-golems:\n    enabled: false\n");
+        settings = SiftSettings.load(config);
+        assertTrue(settings.singers());
+        assertFalse(settings.echoGolems());
+    }
+
+    @Test
+    void shippedConfigEnablesSingersAndEchoGolems() {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/config.yml"));
+        assertTrue(config.isBoolean("the-sift.singers.enabled"));
+        assertTrue(config.isBoolean("the-sift.echo-golems.enabled"));
+        SiftSettings settings = SiftSettings.load(config);
+        assertTrue(settings.singers());
+        assertTrue(settings.echoGolems());
+    }
 }

@@ -51,6 +51,8 @@ final class SiftRuntime implements DimensionExtension, Listener {
     private final SiftRifts rifts;
     private final SiftSifters sifters;
     private final SiftIchorSnowfall snowfall;
+    private final SiftSingers singers;
+    private final SiftEchoGolems golems;
     private final java.util.function.BiFunction<String, Integer, java.util.Optional<org.bukkit.inventory.ItemStack>> items;
     private final org.bukkit.NamespacedKey endureHealthKey;
     private volatile String tide = "flow";
@@ -58,7 +60,7 @@ final class SiftRuntime implements DimensionExtension, Listener {
 
     SiftRuntime(JavaPlugin plugin, SiftSettings settings, java.util.function.Supplier<List<SiftWorldgen.CustomPlacement>> customPlacements,
                 dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures features, SiftCreatures creatures, SiftRifts rifts,
-                SiftSifters sifters,
+                SiftSifters sifters, SiftSingers singers, SiftEchoGolems golems,
                 java.util.function.BiFunction<String, Integer, java.util.Optional<org.bukkit.inventory.ItemStack>> items,
                 SiftIchorSnowfall snowfall) {
         this.items = items;
@@ -70,6 +72,8 @@ final class SiftRuntime implements DimensionExtension, Listener {
         this.creatures = creatures;
         this.rifts = rifts;
         this.sifters = sifters;
+        this.singers = singers;
+        this.golems = golems;
         this.endureHealthKey = new org.bukkit.NamespacedKey(plugin, "sift_endure_health");
     }
 
@@ -85,6 +89,12 @@ final class SiftRuntime implements DimensionExtension, Listener {
         }
         if (settings.sifters()) {
             sifters.activate(active);
+        }
+        if (settings.singers()) {
+            singers.activate(active);
+        }
+        if (settings.echoGolems()) {
+            golems.activate(active);
         }
         snowfall.activate(active);
         active.snapshot(SiftDimension.TIDES).ifPresent(snapshot -> tide = snapshot.phase().id());

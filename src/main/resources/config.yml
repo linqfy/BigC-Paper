@@ -1795,3 +1795,11 @@ the-sift:
   # (every 80 ticks, never on Peaceful). Drops raw Sifter meat.
   sifters:
     enabled: true
+  # The mod's Singer: comes out of the ground when an Echo Golem brings a Soul
+  # Block, roams for 30 seconds and gives gifts for Soul Blocks.
+  singers:
+    enabled: true
+  # The mod's Echo Golem: spawns near Soul Canyons and near players, carries Soul
+  # Blocks out of the canyons to a Singer, or to a player it was given an Echo Shard by.
+  echo-golems:
+    enabled: true

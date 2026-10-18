@@ -22,6 +22,11 @@ public final class SiftFeatures {
     }
 
     public static SiftFeatures create(SiftData data) {
+        return create(data, SoulCanyonLandmarks.NONE);
+    }
+
+    /** As {@link #create(SiftData)}; Soul Canyons report their landmarks to {@code canyons}. */
+    public static SiftFeatures create(SiftData data, SoulCanyonLandmarks canyons) {
         SiftTemplates templates = new SiftTemplates(data);
         Map<String, SiftFeature> features = new LinkedHashMap<>();
         OvergrownWillowTreeFeature willow = new OvergrownWillowTreeFeature(templates);
@@ -30,7 +35,7 @@ public final class SiftFeatures {
         features.put("the_sift:lush_monolith", new SiftMonolithFeature(true));
         features.put("the_sift:dry_sculk_spikes", new SiftDrySpikeFeature());
         features.put("the_sift:cliff_arch", new SiftArchFeature());
-        features.put("the_sift:soul_canyon", new SoulCanyonFeature());
+        features.put("the_sift:soul_canyon", new SoulCanyonFeature(canyons));
         features.put("the_sift:covered_growth_cleanup", new CoveredGrowthCleanupFeature());
         features.put("the_sift:sift_flower_patch", new SiftFlowerPatchFeature());
         features.put("the_sift:siftslate_plant_patch", new SiftslatePlantPatchFeature());
