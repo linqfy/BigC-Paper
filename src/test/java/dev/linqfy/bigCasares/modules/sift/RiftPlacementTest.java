@@ -99,6 +99,20 @@ class RiftPlacementTest {
         assertTrue(RiftPlacement.findNear(new Flat(63, 2), 0, 0, 64).isEmpty(), "nothing usable");
     }
 
+    /** Found on a live server: mobs at the world spawn made every exit rift fail. */
+    @Test
+    void anOccupiedSpotIsSkippedNotTheWholeSearch() {
+        Flat terrain = new Flat(63, 1000);
+        RiftPlacement.Spot free = RiftPlacement.findNear(terrain, 0, 0, 64,
+            spot -> spot.x() != 0 || spot.z() != 0).orElseThrow();
+        assertEquals(16, Math.round(Math.hypot(free.x(), free.z())), 1.0);
+
+        RiftPlacement.Spot natural = RiftPlacement.findNatural(terrain, 0, 0, new Random(5)).orElseThrow();
+        RiftPlacement.Spot other = RiftPlacement.findNatural(terrain, 0, 0, new Random(5), spot -> !spot.equals(natural))
+            .orElseThrow();
+        assertFalse(other.equals(natural));
+    }
+
     @Test
     void touchUsesThePortalBounds() {
         RiftPlacement.Spot spot = new RiftPlacement.Spot(0, 64, 0, true);

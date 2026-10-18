@@ -2,6 +2,7 @@ package dev.linqfy.bigCasares.modules.sift;
 
 import java.util.Optional;
 import java.util.Random;
+import java.util.function.Predicate;
 
 /**
  * Where a rift may open: the mod's {@code RiftManager.space}, {@code column},
@@ -101,11 +102,16 @@ final class RiftPlacement {
 
     /** A natural rift 20-64 blocks from a player in the Sift (48 attempts). */
     static Optional<Spot> findNatural(Terrain terrain, int centerX, int centerZ, Random random) {
+        return findNatural(terrain, centerX, centerZ, random, spot -> true);
+    }
+
+    /** As above, skipping spots {@code accept} refuses (taken by entities) instead of giving up on them. */
+    static Optional<Spot> findNatural(Terrain terrain, int centerX, int centerZ, Random random, Predicate<Spot> accept) {
         for (int attempt = 0; attempt < 48; attempt++) {
             double angle = random.nextDouble() * Math.PI * 2.0;
             int distance = 20 + random.nextInt(45);
             Optional<Spot> found = column(terrain, centerX + (int) (Math.cos(angle) * distance),
-                centerZ + (int) (Math.sin(angle) * distance), random.nextBoolean());
+                centerZ + (int) (Math.sin(angle) * distance), random.nextBoolean()).filter(accept);
             if (found.isPresent()) {
                 return found;
             }
@@ -115,7 +121,12 @@ final class RiftPlacement {
 
     /** The exit rift nearest an Overworld anchor: the anchor itself, then rings every 16 blocks. */
     static Optional<Spot> findNear(Terrain terrain, int anchorX, int anchorZ, int maxRadius) {
-        Optional<Spot> first = column(terrain, anchorX, anchorZ, true);
+        return findNear(terrain, anchorX, anchorZ, maxRadius, spot -> true);
+    }
+
+    /** As above, skipping spots {@code accept} refuses (taken by entities) instead of giving up on them. */
+    static Optional<Spot> findNear(Terrain terrain, int anchorX, int anchorZ, int maxRadius, Predicate<Spot> accept) {
+        Optional<Spot> first = column(terrain, anchorX, anchorZ, true).filter(accept);
         if (first.isPresent()) {
             return first;
         }
@@ -124,7 +135,7 @@ final class RiftPlacement {
                 double angle = (index + radius * 0.017) * Math.PI / 8.0;
                 int x = anchorX + (int) Math.round(Math.cos(angle) * radius);
                 int z = anchorZ + (int) Math.round(Math.sin(angle) * radius);
-                Optional<Spot> found = column(terrain, x, z, (index & 1) == 0);
+                Optional<Spot> found = column(terrain, x, z, (index & 1) == 0).filter(accept);
                 if (found.isPresent()) {
                     return found;
                 }

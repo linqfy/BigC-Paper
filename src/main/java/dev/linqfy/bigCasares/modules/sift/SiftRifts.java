@@ -184,7 +184,7 @@ final class SiftRifts implements Listener {
             }
             Location at = player.getLocation();
             Optional<RiftPlacement.Spot> spot = RiftPlacement.findNatural(new WorldTerrain(sift), at.getBlockX(),
-                at.getBlockZ(), random).filter(candidate -> unoccupied(sift, candidate));
+                at.getBlockZ(), random, candidate -> unoccupied(sift, candidate));
             spot.ifPresent(found -> open(sift, found, true, now + LIFETIME_TICKS, null));
             nextSpawn.put(player.getUniqueId(), now + (spot.isPresent() ? INTERVAL_TICKS + random.nextInt(INTERVAL_JITTER)
                 : RETRY_TICKS));
@@ -360,8 +360,9 @@ final class SiftRifts implements Listener {
             if (!player.isOnline() || dimension != active) {
                 return;
             }
+            // A mob standing on the nearest spot must not cost the player their exit rift.
             Optional<RiftPlacement.Spot> spot = RiftPlacement.findNear(new WorldTerrain(overworld), anchor.getBlockX(),
-                anchor.getBlockZ(), EXIT_SEARCH_RADIUS).filter(candidate -> unoccupied(overworld, candidate));
+                anchor.getBlockZ(), EXIT_SEARCH_RADIUS, candidate -> unoccupied(overworld, candidate));
             if (spot.isPresent()) {
                 go(player, open(overworld, spot.get(), false, expiresAt, back).center(), reward)
                     .thenAccept(success -> notify(player, success, notice));
