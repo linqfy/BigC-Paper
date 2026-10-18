@@ -80,7 +80,7 @@ clients cannot show new content types, or original to this port.
 | Abandoned portal ruins | From the mod | The mod's ten templates and chest loot table, filled at generation time |
 | 30 full-cube blocks (Siftslate family, ores, soils, Soul Block, Ichor Snow Block, Sonorous Deepslate, willow logs/wood/planks/foliage) | Adapted | Real blocks with the mod's textures, backed by mushroom-block states; hardness, tools, drops and sounds emulated |
 | Plants, hanging roots, vines, Ichor Snow layers, portal mist | Adapted | Vanilla stand-ins (for example Overgrown Fronds as short grass, Overgrown Lotus as a cornflower, pitcher bulbs as pitcher plants), tinted by the biomes |
-| Ichor | Adapted | Water inside the Sift. Touching it grants Regeneration I (and Slowness), and new sources do not form, as in the mod |
+| Ichor | Adapted | Water inside the Sift. Touching it grants Regeneration I (and Slowness), and new sources do not form, as in the mod. See Ichor items below |
 | Day/night cycle | From the mod | The Sift's own clock with the mod's 24,120-tick day |
 | Blub | Adapted | A silent wolf with the mod's model, textures, sounds and stats; tempted and tamed (one in three) with Soul Blocks, heals with Soul Blocks or food, sits, follows and defends its owner |
 | Sifter | Adapted | A silent, scaled silverfish (hostile, melee, no daylight burning, no climbing; hitbox 0.9 x 0.675 against the mod's 0.9 x 0.95) with the mod's model, sounds and stats (40 health, 10 attack, 28 follow range). The spawner is the mod's: every 80 ticks near each player, never on Peaceful, in groups of up to five on Siftslate, growth and healthy-sculk floors, with the mod's biome chances and area caps. It bites after a 14-tick wind-up, drops raw Sifter meat (cooked when it dies on fire, plus Looting) and 7 experience. See `SiftSifters` for every difference |
@@ -93,15 +93,37 @@ clients cannot show new content types, or original to this port.
 | Rifts | From the mod | Timing, size, placement search and linking as in the mod; models converted from the mod; rifts are not saved across restarts and the exit search covers 48 blocks (the mod searches farther) |
 | Main portal | From the mod | The `main_portal` template (9 x 19 x 40) placed once at the flattest site near 0, 0 with the mod's terrain blending, foundation, covered-growth clean-up and planting; every Ancient City portal arrives at its anchor and its portal returns players. Differences below |
 | `/locate structure the_sift:main_portal` | Adapted | `/dimension locate the_sift:the_sift main_portal` (vanilla `/locate` cannot name structures that are not in a datapack registry). `the_sift:abandoned_main_portal` is not ported: the mod answers it from a global landmark tracker that the port dropped, see `AbandonedMainPortalFeature` |
-| Items | Partial | See the item rows below |
+| Items | From the mod / adapted | Block items, Charoite, Siftite nugget/ingot/gear/template, Ichor shard, bottle, bucket and snowball, Sifter meat, willow sapling, Sculkflower and seeds, Singer and Echo Golem spawn eggs: content items on vanilla materials with the mod's models and names. Recipes, anvils, crafters, smithing tables and cooking blocks take a content item only where a recipe names it exactly (`ContentRecipeGuard`), so a Siftite nugget never crafts an iron ingot and a Siftite ingot never upgrades gear to netherite |
+| Recipes | Partial | 33 of the mod's 76 recipes: stonecutting and bricks, willow planks and wood, the vanilla redstone parts from cobbled siftslate, Siftite ingot/nuggets, the eleven Siftite smithing recipes, Sifter meat cooking, the Ichor snow block and light blue dye. The other 43 make or use items that cannot exist on vanilla clients (slabs, stairs, walls, doors, trapdoors, boats, signs, Ichor glass, plant items that are vanilla stand-ins); they are skipped and logged, never faked |
+| Advancements | From the mod | The mod's story and Sift tabs: 21 of its 22 advancements, with native criteria where the mod has them and the code-awarded ones granted at the mod's moments (horn near an Ancient City frame, taming a Blub, rift travel, ore mining, setting wood on fire, Siftite recovery, Charoite enchanting, an Ichor snowball near a Warden, Echo Golem and Singer events, Sculkflower planting, a Blub killing a Dark Sniffer). Rift Resonance needs the music disc that is not imported, so it is left out; an advancement whose feature is switched off is left out and its children move up |
+| Ichor items | From the mod / adapted | A bucket or glass bottle filled from Ichor in the Sift holds Ichor; the bottle is a drink with the mod's colour and three seconds of Regeneration, the bucket empties as water (Ichor in the Sift). Cauldrons filled with Ichor (remembered per chunk; every water cauldron in the Sift) give Ichor bottles and buckets and take Ichor bottles back, with the mod's sounds |
+| Ichor snow and snowballs | From the mod / adapted | Snow layers are the Sift's Ichor snow and drop Ichor snowballs; the Ichor snow block drops four. While it rains in the Sift, Ichor snow settles on Ichor Snowy Peaks only (block light below 10, at most two layers), as the mod's weather mixin does; Paper already keeps weather per world. An Ichor snowball landing within 16 blocks of a Warden awards False Alarm |
+| Charoite enchanting | From the mod | Charoite in the enchanting table's lapis slot (it is a lapis lazuli underneath) adds 20 levels to each requirement and one level beyond the vanilla maximum to multi-level enchantments; the item is marked and can no longer go in an anvil. Paper rolls from the displayed cost, so the port rolls again from the base cost with the table's seed (`SiftCharoite`). The anvil repairs Siftite gear only with Siftite ingots |
+| Willow saplings | From the mod / adapted | A mangrove propagule on the client, remembered per chunk; where vanilla would grow a mangrove the mod's willow grows (same feature code as the world generator), or the sapling stays when it does not fit. Saplings come from willow vines broken with Fortune III (no shears, no silk touch); willow foliage drops itself |
+| Soils and bone meal | From the mod / adapted | Siftslate growth turns into siftslate, dry sculk growth into dry healthy sculk, under full blocks or fluids; siftslate growth turns snowy under Ichor snow. Bone meal spreads growth onto siftslate next to it, grows patches of overgrown plants on growth and spreads Sift plants (their stand-ins, in the Sift). Custom blocks have no random ticks, so darkness alone does not kill growth |
 | Siftite gear | Adapted | Sword, shovel, pickaxe, axe, hoe, spear, four armour pieces and the upgrade template are netherite items with the mod's stats (durability, damage, speed, mining speed, armour, knockback resistance, fire resistance), models and armour texture. See `SiftiteGear` for the numbers and the differences (netherite ingots also repair them; the template keeps the client's netherite template text) |
 | Siftite death recovery | Adapted | Siftite items are taken out of a player's death drops and returned through a small particle rift 2 seconds after the respawn (or join); the stacks are kept in `data/the-sift/siftite-recovery/<uuid>.bin` until they are in the inventory. |
 | Shifting tides (Flow, Endure, Thrive) | Original | A three-day cycle: Endure hardens hostile mobs and stops natural regeneration; Thrive speeds regeneration and grants Haste |
 | Crafted portal | Original | See above |
 
-### Not ported yet
+### Not ported
 
-Not ported: see the list below.
+- Client-side features of the mod: the Singer's glowmask and the Echo Golem's emissive
+  layer, dynamic lights, custom particles (vanilla particles stand in), the procedural
+  sky, the Ichor fluid texture and the weather texture swap.
+- Blocks without a full-cube or vanilla equivalent (slabs, stairs, walls, doors,
+  trapdoors, fences, buttons, pressure plates, signs, shelves, boats, Ichor glass) and
+  therefore their recipes; Ichor as its own fluid outside the Sift (it is water there).
+- The Blub, Sifter and Dark Sniffer spawn eggs (the Singer's and Echo Golem's exist).
+- The two music discs ("Rift" and the "Wellspring" remix are third-party works, see below)
+  and with them the Rift Resonance advancement.
+- `/locate structure the_sift:abandoned_main_portal` (it needs the mod's global landmark
+  tracker, which the port dropped).
+- Smaller block behaviours that need random ticks or fall callbacks on custom blocks:
+  growth dying in the dark, willow foliage decaying like leaves, healthy sculk trampling
+  crops on it.
+
+Every class that ports mod code lists its own differences in its javadoc.
 
 ## Configuration
 
