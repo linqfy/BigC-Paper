@@ -94,6 +94,68 @@ class SqliteExchangeLedgerTest {
     }
 
     @Test
+    void cannotCommitAfterTheCallbackCatchesAnEntryWriteFailure() throws Exception {
+        Path file = directory.resolve("exchange.db");
+        try (var ledger = new SqliteExchangeLedger(file)) {
+            UUID source = UUID.randomUUID();
+            UUID destination = UUID.randomUUID();
+            UUID other = UUID.randomUUID();
+            credit(ledger, UUID.randomUUID(), source, 100);
+            try (var connection = DriverManager.getConnection("jdbc:sqlite:" + file);
+                 var sql = connection.createStatement()) {
+                sql.execute("""
+                    CREATE TRIGGER fail_debit_entry BEFORE INSERT ON entries
+                    WHEN NEW.delta=-100 AND NEW.account_id LIKE 'wallet:%'
+                    BEGIN SELECT RAISE(FAIL, 'injected entry-write failure'); END
+                    """);
+            }
+            UUID operation = UUID.randomUUID();
+            assertThrows(ExchangeException.class, () -> ledger.transact(operation, "caught-write-failure", NOW, tx -> {
+                ExchangeException failure = assertThrows(ExchangeException.class,
+                    () -> tx.transfer(LedgerAccount.wallet(source), LedgerAccount.wallet(destination), "BC", 100));
+                assertEquals(ExchangeException.Code.STORAGE, failure.code());
+                tx.creditConfirmed(other, 50);
+                return receipt(operation, 50);
+            }));
+            assertEquals(100, ledger.balance(LedgerAccount.wallet(source), "BC"));
+            assertEquals(0, ledger.balance(LedgerAccount.wallet(destination), "BC"));
+            assertEquals(0, ledger.balance(LedgerAccount.wallet(other), "BC"));
+            assertEquals(-100, ledger.balance(LedgerAccount.external(), "BC"));
+            assertTrue(ledger.operation(operation).isEmpty());
+            assertTrue(ledger.entries(operation).isEmpty());
+        }
+    }
+
+    @Test
+    void rejectsCommitEvenWhenNoFurtherAccessFollowsACaughtWriteFailure() throws Exception {
+        Path file = directory.resolve("exchange.db");
+        try (var ledger = new SqliteExchangeLedger(file)) {
+            UUID source = UUID.randomUUID();
+            UUID destination = UUID.randomUUID();
+            credit(ledger, UUID.randomUUID(), source, 200);
+            try (var connection = DriverManager.getConnection("jdbc:sqlite:" + file);
+                 var sql = connection.createStatement()) {
+                sql.execute("""
+                    CREATE TRIGGER fail_debit_entry BEFORE INSERT ON entries
+                    WHEN NEW.delta=-100 AND NEW.account_id LIKE 'wallet:%'
+                    BEGIN SELECT RAISE(ABORT, 'injected entry-write failure'); END
+                    """);
+            }
+            UUID operation = UUID.randomUUID();
+            assertThrows(ExchangeException.class, () -> ledger.transact(operation, "caught-then-returned", NOW, tx -> {
+                tx.transfer(LedgerAccount.wallet(source), LedgerAccount.wallet(destination), "BC", 20);
+                assertThrows(ExchangeException.class,
+                    () -> tx.transfer(LedgerAccount.wallet(source), LedgerAccount.wallet(destination), "BC", 100));
+                return receipt(operation, 20);
+            }));
+            assertEquals(200, ledger.balance(LedgerAccount.wallet(source), "BC"));
+            assertEquals(0, ledger.balance(LedgerAccount.wallet(destination), "BC"));
+            assertTrue(ledger.operation(operation).isEmpty());
+            assertTrue(ledger.entries(operation).isEmpty());
+        }
+    }
+
+    @Test
     void rejectsSpendingControlAccountsAndForgingTheirIdentities() {
         try (var ledger = open()) {
             UUID player = UUID.randomUUID();

@@ -21,6 +21,7 @@ final class SqliteExchangeTransaction implements ExchangeTransaction {
     private final Map<String, BigInteger> deltas = new HashMap<>();
     private final Set<UUID> touchedMarkets = new LinkedHashSet<>();
     private volatile boolean active = true;
+    private SQLException storageFailure;
 
     SqliteExchangeTransaction(Connection connection, UUID operationId) {
         this.connection = connection;
@@ -246,6 +247,9 @@ final class SqliteExchangeTransaction implements ExchangeTransaction {
         if (!active || Thread.currentThread() != owner) {
             throw new ExchangeException(ExchangeException.Code.CLOSED, "Transaction handle is expired or on another thread");
         }
+        if (storageFailure != null) {
+            throw SqliteExchangeLedger.storage(storageFailure);
+        }
     }
 
     private <T> T access(SqlWork<T> work) {
@@ -253,6 +257,9 @@ final class SqliteExchangeTransaction implements ExchangeTransaction {
         try {
             return work.run();
         } catch (SQLException failure) {
+            // A statement may fail after earlier statements changed balances. Even a callback
+            // that catches the exception must not use or commit the incomplete transaction.
+            storageFailure = failure;
             throw SqliteExchangeLedger.storage(failure);
         }
     }

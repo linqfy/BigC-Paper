@@ -98,6 +98,10 @@ permanently unique; BC and ORO are reserved. Names use 1–32 visible Unicode co
 points and reject control/format characters and legacy color codes. Supply is
 the exact sum of pool and creator allocations and cannot be minted again.
 
+Known metadata limitation: a name containing only nonbreaking spaces (U+00A0)
+is currently accepted. Rejecting names made entirely of Unicode separators is
+deferred from this delivery; tickers remain mandatory ASCII identifiers.
+
 The creator owns 1,000,000 initial LP shares. This version has one nontransferable
 LP position, with no additional liquidity contributions. `Duration.ZERO` leaves
 it unlocked; other lock durations must be between 1 and 48 hours. All shares
@@ -120,6 +124,8 @@ Each write acquires `BEGIN IMMEDIATE` before inspecting receipts, balances,
 limits or reserves. It commits operation metadata, paired entries, balances,
 market state and LP state together. Pool balances and immutable supply are checked
 against the snapshots before commit. Failure rolls back the whole transaction.
+Any JDBC error invalidates the transaction even if its callback catches the
+original exception; later access and commit are rejected.
 Two ledger instances on the same file share SQLite's writer lock.
 
 An operation UUID and SHA-256 fingerprint identify the request. Replaying the same

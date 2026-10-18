@@ -258,4 +258,38 @@ revisión. No se han implementado las clases ni modificado dependencias.
 - Existing compilation deprecation notices and SQLite JDBC's Java 25 native-access
   warning remain; they did not prevent the build.
 - No live Paper, Vault, authentication or Java/Bedrock client checks were run.
-- Fresh whole-change review is the remaining verification step.
+- Fresh whole-change review completed; its outcome and fix evidence follow.
+
+
+### Final review and correction
+
+- An independent reviewer inspected `d47cd07..53b204e` and independently passed
+  the original 39 finance tests.
+- Important/P2 fixed: a caller could catch a JDBC entry-write failure and later
+  commit a balance change missing from the entries. Any JDBC failure now
+  invalidates the transaction, including subsequent access and final validation.
+- Two trigger-based regressions failed before the fix and passed afterward:
+  `cannotCommitAfterTheCallbackCatchesAnEntryWriteFailure` and
+  `rejectsCommitEvenWhenNoFurtherAccessFollowsACaughtWriteFailure`.
+- The final Java 25 `bash gradlew --no-daemon clean build` passed: 1,319 tests,
+  zero failures/errors/skipped, including 41 finance tests. The regenerated JAR
+  contains the finance classes and matching SQLite library declaration.
+- Minor/P3 deferred: a name made only of U+00A0 nonbreaking spaces is accepted.
+  This metadata validation edge does not affect account/ticker identity and is
+  documented in the current finance guide.
+
+### Execution decisions
+
+- Kept the dedicated managed cloud checkout on branch `work`, rather than nesting
+  another worktree. There were no pre-existing user modifications. Cost if this
+  assumption is wrong: additional branch isolation is needed before unrelated work.
+- Maintained task briefs and the execution ledger directly because cloud-packaged
+  helper scripts had no executor filesystem root. Cost if this assumption is wrong:
+  bookkeeping may need conversion to the helper-script format; code and commits
+  remain independently reviewable.
+- Live Paper loading, runtime registration, authentication, Vault reconciliation,
+  commands, UI, ORO, staking and events remain outside this approved delivery.
+  Cost if the scope interpretation is wrong: the complete gameplay integration
+  still needs implementation and live validation.
+
+The implementation is committed on `work`; no remote push or merge was performed.
