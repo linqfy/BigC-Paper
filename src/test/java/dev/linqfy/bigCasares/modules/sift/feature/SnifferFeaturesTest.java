@@ -331,6 +331,19 @@ class SnifferFeaturesTest {
         assertEquals(0, run.rejectedWrites);
     }
 
+    /** Found on a live server: no region generated, the populator's heightmap pointed at plants and air. */
+    @Test
+    void sculkRegionsFindTheGroundUnderAStaleHeightmap() {
+        for (int stale : new int[]{1, 3}) {
+            SculkRun run = runRegion(2, true, stale);
+            assertTrue(run.sculkColumns > 500, "stale by " + stale + ": only " + run.sculkColumns + " sculk columns");
+            assertEquals(0, run.badDepthColumns, "stale by " + stale);
+            assertEquals(0, run.plantsOnSculk, "stale by " + stale);
+            assertTrue(run.sniffers >= 1 && run.sniffers <= 2, "stale by " + stale);
+            assertEquals(0, run.misplacedSniffers, "stale by " + stale);
+        }
+    }
+
     @Test
     void sculkRegionsLeaveChunksOutsideAnyRegionAlone() {
         SiftFeature feature = FEATURES.find("the_sift:surface_sculk_region").orElseThrow();
@@ -388,13 +401,17 @@ class SnifferFeaturesTest {
 
     /** Runs the feature over all chunks around the (0, 0)-cell region of the seed on flat ground. */
     private static SculkRun runRegion(long seed, boolean withPlants) {
+        return runRegion(seed, withPlants, 0);
+    }
+
+    private static SculkRun runRegion(long seed, boolean withPlants, int staleHeight) {
         SiftFeature feature = FEATURES.find("the_sift:surface_sculk_region").orElseThrow();
         SculkRegion sculk = SiftSurfaceSculkRegionFeature.createRegion(seed, 0, 0);
         int reach = (int) Math.ceil(sculk.majorRadius()) + 3;
         SculkRun run = new SculkRun();
         for (int chunkX = Math.floorDiv((int) sculk.centerX() - reach, 16); chunkX <= Math.floorDiv((int) sculk.centerX() + reach, 16); chunkX++) {
             for (int chunkZ = Math.floorDiv((int) sculk.centerZ() - reach, 16); chunkZ <= Math.floorDiv((int) sculk.centerZ() + reach, 16); chunkZ++) {
-                InMemoryRegion region = InMemoryRegion.flat(chunkX, chunkZ, SURFACE, seed);
+                InMemoryRegion region = InMemoryRegion.flat(chunkX, chunkZ, SURFACE, seed).withStaleMotionHeight(staleHeight);
                 InMemoryRegion untouched = InMemoryRegion.flat(chunkX, chunkZ, SURFACE, seed);
                 if (withPlants) {
                     for (int x = region.minX(); x <= region.maxX(); x++) {

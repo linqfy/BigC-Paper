@@ -41,6 +41,7 @@ final class InMemoryRegion implements WorldRegion {
     private final Map<String, List<ItemSpec>> containers = new TreeMap<>();
     private Function<int[], String> biomes = position -> "the_sift:overgrown_forest";
     private int rejectedWrites;
+    private int staleHeight;
 
     InMemoryRegion(int chunkX, int chunkZ, int minY, int maxY, long seed) {
         this.chunkX = chunkX;
@@ -174,8 +175,23 @@ final class InMemoryRegion implements WorldRegion {
         return true;
     }
 
+    /**
+     * Makes the motion-blocking heightmaps report {@code blocks} more than the terrain, like the heightmaps a Paper
+     * populator sees: primed before decoration and not updated by the writes of the decoration step.
+     */
+    InMemoryRegion withStaleMotionHeight(int blocks) {
+        staleHeight = blocks;
+        return this;
+    }
+
     @Override
     public int height(Heightmap heightmap, int x, int z) {
+        int height = liveHeight(heightmap, x, z);
+        boolean motion = heightmap == Heightmap.MOTION_BLOCKING || heightmap == Heightmap.MOTION_BLOCKING_NO_LEAVES;
+        return motion && height > minY ? Math.min(maxY, height + staleHeight) : height;
+    }
+
+    private int liveHeight(Heightmap heightmap, int x, int z) {
         if (!isWritable(x, minY, z)) {
             return minY;
         }

@@ -27,6 +27,7 @@ import java.util.Set;
  *   <li>The dark sniffers (the mod's {@code DARK_SNIFFER} entity, queued in
  *       {@code SiftDeferredSnifferSpawner} for a later tick) are spawned directly at generation
  *       time as sniffers marked to become Dark Sniffers when they load; see {@link SiftSnifferSpawner}.</li>
+ *   <li>The surface is found below the heightmap's top when that is air or a plant (see {@link #surfaceY}).</li>
  *   <li>The mod's plants are the single-block vanilla stand-ins of {@code SiftBlocks}, and
  *       {@code Math.sin}/{@code Math.cos} are their {@code StrictMath} versions so that
  *       neighbouring chunks agree on region borders on every JVM.</li>
@@ -42,6 +43,8 @@ final class SiftSurfaceSculkRegionFeature implements SiftFeature {
     private static final int MIN_SCULK_DEPTH = 6;
     private static final int SCULK_DEPTH_VARIATION = 4;
     private static final int MAX_DARK_SITES = 64;
+    /** How far below a stale heightmap the ground is looked for. */
+    private static final int STALE_HEIGHT_SEARCH = 16;
     private static final long DARK_SNIFFER_SALT = 0x4441524B534E4946L;
 
     private static final BlockStateSpec SCULK = BlockStateSpec.of("minecraft:sculk");
@@ -152,7 +155,7 @@ final class SiftSurfaceSculkRegionFeature implements SiftFeature {
                         if (!core && !fringe) {
                             continue;
                         }
-                        int surfaceY = region.height(WorldRegion.Heightmap.MOTION_BLOCKING_NO_LEAVES, columnX, columnZ) - 1;
+                        int surfaceY = surfaceY(region, columnX, columnZ);
                         if (surfaceY < region.minY() || surfaceY >= topY - 2
                             || !isNaturalSiftTerrain(region.state(columnX, surfaceY, columnZ))) {
                             continue;
@@ -223,6 +226,20 @@ final class SiftSurfaceSculkRegionFeature implements SiftFeature {
     }
 
     /** Turns the top 6 to 9 blocks of natural Sift terrain of the column into sculk. */
+    /**
+     * The mod's {@code getHeight(MOTION_BLOCKING_NO_LEAVES) - 1}. A Paper populator reads heightmaps primed before
+     * decoration that the decoration's own writes do not update, so the reported top can be air or a plant the
+     * earlier Sift features left there; the ground is the first solid block or fluid below it.
+     */
+    static int surfaceY(WorldRegion region, int x, int z) {
+        int y = region.height(WorldRegion.Heightmap.MOTION_BLOCKING_NO_LEAVES, x, z) - 1;
+        int lowest = Math.max(region.minY(), y - STALE_HEIGHT_SEARCH);
+        while (y > lowest && !region.isSolid(x, y, z) && !SiftTerrain.isFluid(region, x, y, z)) {
+            y--;
+        }
+        return y;
+    }
+
     private static boolean replaceSurface(WorldRegion region, int x, int surfaceY, int z, long regionSeed) {
         int depth = MIN_SCULK_DEPTH + Math.floorMod(mix(regionSeed ^ positionSalt(x, z)), SCULK_DEPTH_VARIATION);
         boolean changed = false;
