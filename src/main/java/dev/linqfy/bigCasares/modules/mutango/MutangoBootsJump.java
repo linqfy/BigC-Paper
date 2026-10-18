@@ -12,6 +12,14 @@ final class MutangoBootsJump {
 
     private boolean jumped;
 
+    MutangoBootsJump() {
+    }
+
+    /** Con lo que se guardo en el jugador: si ya habia gastado el salto en el aire antes de salir o de una recarga. */
+    MutangoBootsJump(boolean jumped) {
+        this.jumped = jumped;
+    }
+
     /** Toco el piso: se recarga el doble salto. Devuelve true si venia de un doble salto. */
     boolean land() {
         boolean was = jumped;

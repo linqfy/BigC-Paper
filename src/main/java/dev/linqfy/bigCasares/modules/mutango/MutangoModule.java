@@ -38,6 +38,13 @@ public final class MutangoModule implements PluginModule {
 
     public static final String MODULE_ID = "mutango";
     static final String CONFIG_FILE = "mutango.yml";
+    /**
+     * La marca que BigC reconoce como "entidad propia de un sistema" (mob-scaling no la escala y Jeremy no la toma: solo
+     * distingue el valor "jeremy"). Va en cada entidad que crea el modulo, adentro del consumer de spawn, antes de que
+     * salga el CreatureSpawnEvent.
+     */
+    public static final String SYSTEM_MOB_KEY = "custom_entity";
+    public static final String SYSTEM_MOB_VALUE = "mutango";
 
     private final BigCasares plugin;
     private RuntimeRegistrationScope compatibilityScope;
@@ -45,6 +52,7 @@ public final class MutangoModule implements PluginModule {
     private MutangoFights fights;
     private MutangoShrine shrine;
     private MutangoRelics relics;
+    private MutangoRewards rewards;
     private MutangoBedrockItems bedrockItems;
     private MutangoRuins ruins;
 
@@ -107,7 +115,7 @@ public final class MutangoModule implements PluginModule {
         shrine = new MutangoShrine(shrineHost(fights), new NamespacedKey(plugin, "santuario"),
             new NamespacedKey(plugin, "santuario_izq"), new NamespacedKey(plugin, "santuario_cerrado"));
         relics = new MutangoRelics(plugin, new MutangoModeration(this::moderationSink, plugin.getLogger()), tasks);
-        MutangoRewards rewards = new MutangoRewards(plugin, keys, pending, relics, tasks);
+        rewards = new MutangoRewards(plugin, keys, pending, relics, tasks);
         fights.wire(shrine, rewards, modelsReady);
 
         registrations.registerListener("mutango-fights", fights);
@@ -168,6 +176,7 @@ public final class MutangoModule implements PluginModule {
         if (relics != null) {
             relics.shutdown();
             relics = null;
+        rewards = null;
         }
         flushJournal();
         journal = null;
@@ -188,8 +197,12 @@ public final class MutangoModule implements PluginModule {
         fights.tick();
         relics.tick();
         shrine.tick();
-        if (plugin.getServer().getCurrentTick() % 10 == 0) {
+        int now = plugin.getServer().getCurrentTick();
+        if (now % 10 == 0) {
             flushJournal();
+        }
+        if (now % 100 == 0) {
+            rewards.retryOnline(); // a quien le faltaba lugar en el inventario
         }
     }
 

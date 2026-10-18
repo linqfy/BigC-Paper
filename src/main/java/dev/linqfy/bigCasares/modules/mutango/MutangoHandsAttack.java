@@ -23,7 +23,9 @@ import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -63,7 +65,6 @@ final class MutangoHandsAttack {
     private static final double WAVE_MAX = 9.0;
     private static final double WAVE_BAND = 0.6;
     /** Si tenes los pies a mas de esto del piso (saltando), la onda te pasa por abajo. */
-    private static final double WAVE_JUMP_CLEARANCE = 0.45;
     private static final double WAVE_DAMAGE = 3.0;
     private static final double WAVE_PUSH = 0.4;
     private static final double WAVE_LIFT = 1.15;
@@ -326,15 +327,30 @@ final class MutangoHandsAttack {
         // arranca los bloques del piso por donde pasa: el bloque sale volando desde su lugar y deja el hueco; a los
         // RESTORE_TICKS vuelve a estar como antes (no se rompe el mapa)
         NamespacedKey debrisKey = host.debrisKey();
+        // primero se eligen los bloques de este tick (sin tocar el mundo): se anotan todos juntos en el diario y se
+        // guardan, y recien si quedaron guardados se arrancan
+        Map<Block, BlockData> lifted = new LinkedHashMap<>();
+        Map<Block, Double> angles = new LinkedHashMap<>();
         for (int k = 0; k < DEBRIS_PER_TICK; k++) {
             double angle = rng.nextDouble(Math.PI * 2);
             Location point = hand.wave.clone().add(Math.cos(angle) * r, 0, Math.sin(angle) * r);
             Block top = MutangoGround.block(point);
-            if (!liftable(top) || !allowed.test(top)) {
+            if (!liftable(top) || !allowed.test(top) || lifted.containsKey(top)) {
                 continue;
             }
-            BlockData data = top.getBlockData();
-            host.journal().record(world.getUID(), top.getX(), top.getY(), top.getZ(), data.getAsString());
+            lifted.put(top, top.getBlockData());
+            angles.put(top, angle);
+        }
+        List<MutangoBlockJournal.Entry> batch = new ArrayList<>();
+        lifted.forEach((top, data) -> batch.add(new MutangoBlockJournal.Entry(world.getUID(), top.getX(), top.getY(),
+            top.getZ(), data.getAsString())));
+        if (!host.journal().commit(batch)) {
+            lifted.clear(); // no se pudo guardar el diario: este tick no arranca ningun bloque
+        }
+        for (Map.Entry<Block, BlockData> pick : lifted.entrySet()) {
+            Block top = pick.getKey();
+            BlockData data = pick.getValue();
+            double angle = angles.get(top);
             removed.add(new Removed(top, data, clock + RESTORE_TICKS));
             top.setBlockData(Material.AIR.createBlockData(), false);
             FallingBlock debris = world.spawn(top.getLocation().add(0.5, 0.05, 0.5), FallingBlock.class,
@@ -359,7 +375,7 @@ final class MutangoHandsAttack {
             Location feet = player.getLocation();
             double d = Math.hypot(feet.getX() - hand.wave.getX(), feet.getZ() - hand.wave.getZ());
             double floor = MutangoGround.y(feet) + 1;
-            if (d >= before - WAVE_BAND && d <= r + WAVE_BAND && feet.getY() - floor < WAVE_JUMP_CLEARANCE) {
+            if (d >= before - WAVE_BAND && d <= r + WAVE_BAND && MutangoWaveRules.reaches(feet.getY() - floor)) {
                 hand.launched.add(player.getUniqueId());
                 Entity attacker = hand.id == null ? null : Bukkit.getEntity(hand.id);
                 if (attacker == null && neguechen != null) {
@@ -408,7 +424,7 @@ final class MutangoHandsAttack {
             entry.block().setBlockData(entry.data(), false);
         }
         Block block = entry.block();
-        host.journal().release(block.getWorld().getUID(), block.getX(), block.getY(), block.getZ());
+        host.journal().restored(block.getWorld().getUID(), block.getX(), block.getY(), block.getZ());
     }
 
     private static BlockData groundData(Block top) {

@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.world.WorldSaveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -51,7 +52,8 @@ final class MutangoRecovery implements Listener {
             } catch (IllegalArgumentException invalid) {
                 plugin.getLogger().warning("Bloque por devolver ilegible: " + entry);
             }
-            journal.release(entry.world(), entry.x(), entry.y(), entry.z());
+            // ya devuelto (o ya estaba): sigue anotado hasta que el mundo se guarde con el bloque devuelto
+            journal.restored(entry.world(), entry.x(), entry.y(), entry.z());
         }
         try {
             journal.flush();
@@ -83,6 +85,12 @@ final class MutangoRecovery implements Listener {
         player.teleport(up);
         player.setFallDistance(0);
         player.sendMessage("§7Habías quedado dentro de unos bloques: te subí a la superficie.");
+    }
+
+    /** El mundo se guardo: los bloques devueltos hasta ahora ya estan guardados y se tachan del diario. */
+    @EventHandler
+    public void onWorldSave(WorldSaveEvent event) {
+        journal.worldSaved(event.getWorld().getUID());
     }
 
     @EventHandler

@@ -177,6 +177,7 @@ final class MutangoFights implements Listener {
             Location spot = spots.get(i);
             String model = MutangoModels.MODELS.get(i);
             Cow cow = spot.getWorld().spawn(spot, Cow.class, entity -> {
+                keys.markSystem(entity);
                 entity.getPersistentDataContainer().set(keys.model, PersistentDataType.STRING, model);
                 entity.getPersistentDataContainer().set(keys.fight, PersistentDataType.STRING, fight.id.toString());
                 entity.getPersistentDataContainer().set(keys.level, PersistentDataType.INTEGER, level);
@@ -204,11 +205,13 @@ final class MutangoFights implements Listener {
             });
             attachIfMutango(cow);
         }
+        saveRoster(fight);
     }
 
     /** Una vaca sin IA, silenciosa y persistente con ese modelo (Neguechen, el Sol o la Luna) de esa pelea. */
     private Mob spawnModel(MutangoFight fight, String model, Location location, double maxHealth) {
         Cow cow = location.getWorld().spawn(location, Cow.class, entity -> {
+            keys.markSystem(entity);
             entity.getPersistentDataContainer().set(keys.model, PersistentDataType.STRING, model);
             entity.getPersistentDataContainer().set(keys.fight, PersistentDataType.STRING, fight.id.toString());
             entity.getPersistentDataContainer().set(keys.level, PersistentDataType.INTEGER,
@@ -243,6 +246,7 @@ final class MutangoFights implements Listener {
     /** Una pieza del santuario: quieta, sin IA, sin gravedad e invulnerable (el modelo lo pone attach). */
     Mob spawnShrinePart(String model, Location location) {
         Cow cow = location.getWorld().spawn(location, Cow.class, entity -> {
+            keys.markSystem(entity);
             entity.getPersistentDataContainer().set(keys.model, PersistentDataType.STRING, model);
             entity.setSilent(true);
             entity.setGravity(false);
@@ -282,7 +286,7 @@ final class MutangoFights implements Listener {
                     if (tracker != null) {
                         tracker.close();
                     }
-                    forget(mutango.getUniqueId());
+                    confirmDeath(mutango.getUniqueId());
                     bossBars.remove(mutango.getUniqueId());
                     mutango.remove();
                     removed++;
@@ -293,11 +297,25 @@ final class MutangoFights implements Listener {
         return removed;
     }
 
-    /** Saca a ese Mutango de la cuenta de todas las peleas. */
-    void forget(UUID id) {
+    /**
+     * Murio de verdad (o la entidad ya no existe): sale de la cuenta de todas las peleas. Que su chunk se descargue NO es
+     * una muerte: ahi solo se suelta el modelo y se conserva el lugar en la pelea.
+     */
+    void confirmDeath(UUID id) {
         for (MutangoFight fight : fights.values()) {
             fight.battle.forget(id);
-            fight.members.remove(id);
+            if (fight.members.contains(id)) {
+                fight.roster.confirmDeath(id);
+                saveRoster(fight);
+            }
+        }
+    }
+
+    /** Guarda en cada Mutango cargado quienes forman su pelea (para saber quienes faltan cargar despues de un reinicio). */
+    private void saveRoster(MutangoFight fight) {
+        String saved = fight.roster.serialize();
+        for (Mob mutango : aliveOf(fight)) {
+            mutango.getPersistentDataContainer().set(keys.roster, PersistentDataType.STRING, saved);
         }
     }
 
@@ -476,7 +494,8 @@ final class MutangoFights implements Listener {
         // en cada pelea hay un solo Lef, un solo Lihuen y un solo Lican: se borran los repetidos y los de antes
         // (eran aldeanos)
         boolean repeated = aliveOf(fight).stream().anyMatch(other ->
-            model.equals(other.getPersistentDataContainer().get(keys.model, PersistentDataType.STRING)));
+            !other.getUniqueId().equals(mutango.getUniqueId())
+                && model.equals(other.getPersistentDataContainer().get(keys.model, PersistentDataType.STRING)));
         if (!(mutango instanceof Cow) || repeated) {
             plugin.getLogger().info("Borrado un Mutango " + (repeated ? "repetido" : "viejo (aldeano)") + ": " + model);
             mutango.remove();
@@ -505,7 +524,10 @@ final class MutangoFights implements Listener {
             renderer -> track(mutango, renderer),
             () -> plugin.getLogger().warning("BetterModel no tiene cargado el modelo " + shown));
         if (MutangoModels.MODELS.contains(model)) {
-            fight.members.add(mutango.getUniqueId());
+            fight.roster.add(mutango.getUniqueId());
+            // los que todavia no cargaron (otro chunk, despues de un reinicio) tambien forman la pelea
+            fight.roster.adopt(MutangoRoster.parse(
+                mutango.getPersistentDataContainer().get(keys.roster, PersistentDataType.STRING)));
         }
         if (!spawned) {
             restoreState(fight, mutango, model, resume);
@@ -568,7 +590,12 @@ final class MutangoFights implements Listener {
         }
     }
 
-    /** Cada tick: saca los que ya no existen y le da un paso a cada pelea (de forma independiente). */
+    /**
+     * Cada tick: suelta el modelo y la barra de los que ya no estan cargados y le da un paso a cada pelea (de forma
+     * independiente). Que una entidad no este cargada NO es que murio: conserva su lugar en la pelea y vuelve a enlazarse
+     * (EntitiesLoadEvent) cuando carga otra vez. Solo una entidad que existe pero ya no es valida (murio o la sacaron)
+     * se da por muerta.
+     */
     void tick() {
         trackers.keySet().removeIf(id -> {
             Entity entity = plugin.getServer().getEntity(id);
@@ -577,7 +604,9 @@ final class MutangoFights implements Listener {
                 if (tracker != null) {
                     tracker.close();
                 }
-                forget(id);
+                if (entity != null) {
+                    confirmDeath(id);
+                }
                 bossBars.remove(id);
                 return true;
             }

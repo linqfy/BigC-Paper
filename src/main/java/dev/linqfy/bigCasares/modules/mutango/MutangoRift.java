@@ -170,10 +170,12 @@ final class MutangoRift {
         if (!list.isEmpty()) {
             return;
         }
+        // primero se junta todo lo que se va a sacar (sin tocar el mundo) y despues se aplica el lote entero
+        List<Planned> plan = new ArrayList<>();
         // lo que crece arriba del piso (pasto, flores) tambien se va
         Block above = column.surface().getRelative(0, 1, 0);
         if (!above.getType().isAir() && !above.getType().isSolid() && carvable(above)) {
-            change(list, above, Material.AIR.createBlockData());
+            plan.add(new Planned(above, Material.AIR.createBlockData(), false));
         }
         int depth = column.cell().depth();
         for (int down = 0; down < depth; down++) {
@@ -181,23 +183,52 @@ final class MutangoRift {
             if (!carvable(block)) {
                 break;
             }
-            world.spawnParticle(Particle.BLOCK, block.getLocation().add(0.5, 0.9, 0.5), 8, 0.3, 0.2, 0.3, 0,
-                block.getBlockData());
-            change(list, block, Material.AIR.createBlockData());
+            plan.add(new Planned(block, Material.AIR.createBlockData(), true));
         }
         Block bottom = column.surface().getRelative(0, -depth, 0);
         if (column.cell().light() && carvable(bottom)) {
-            change(list, bottom, Material.VERDANT_FROGLIGHT.createBlockData());
+            plan.add(new Planned(bottom, Material.VERDANT_FROGLIGHT.createBlockData(), false));
+        }
+        if (!apply(list, plan)) {
+            return; // no se pudo guardar el diario: esta columna no se abre
+        }
+        for (Planned planned : plan) {
+            if (planned.dig()) {
+                world.spawnParticle(Particle.BLOCK, planned.block().getLocation().add(0.5, 0.9, 0.5), 8, 0.3, 0.2, 0.3,
+                    0, planned.original());
+            }
         }
         world.spawnParticle(Particle.DUST, column.surface().getLocation().add(0.5, 1, 0.5), 4, 0.3, 0.2, 0.3, 0,
             DARK_GREEN);
     }
 
-    /** Cambia un bloque: primero lo anota en el diario (con como era), despues lo toca. */
-    private void change(List<Changed> list, Block block, BlockData replacement) {
-        journal.record(world.getUID(), block.getX(), block.getY(), block.getZ(), block.getBlockData().getAsString());
-        list.add(new Changed(block, block.getBlockData()));
-        block.setBlockData(replacement, false);
+    /** Un cambio planeado: ese bloque pasa a ser replacement (todavia no se toco el mundo). */
+    private record Planned(Block block, BlockData replacement, BlockData original, boolean dig) {
+        Planned(Block block, BlockData replacement, boolean dig) {
+            this(block, replacement, block.getBlockData(), dig);
+        }
+    }
+
+    /**
+     * Aplica un lote de cambios: primero anota TODOS los originales en el diario y los guarda en el archivo, y recien si
+     * quedaron guardados cambia el mundo (si no se pudo guardar, no se toca ningun bloque de este lote). Devuelve false
+     * si se aborto.
+     */
+    private boolean apply(List<Changed> list, List<Planned> plan) {
+        List<MutangoBlockJournal.Entry> entries = new ArrayList<>();
+        for (Planned planned : plan) {
+            Block block = planned.block();
+            entries.add(new MutangoBlockJournal.Entry(world.getUID(), block.getX(), block.getY(), block.getZ(),
+                block.getBlockData().getAsString()));
+        }
+        if (!journal.commit(entries)) {
+            return false;
+        }
+        for (Planned planned : plan) {
+            list.add(new Changed(planned.block(), planned.block().getBlockData()));
+            planned.block().setBlockData(planned.replacement(), false);
+        }
+        return true;
     }
 
     /** Cierra una columna: vuelve a poner los bloques (y saca a quien este adentro). */
@@ -223,7 +254,7 @@ final class MutangoRift {
             if (now.isAir() || now == Material.VERDANT_FROGLIGHT) {
                 entry.block().setBlockData(entry.original(), false);
             }
-            journal.release(world.getUID(), entry.block().getX(), entry.block().getY(), entry.block().getZ());
+            journal.restored(world.getUID(), entry.block().getX(), entry.block().getY(), entry.block().getZ());
         }
         list.clear();
         world.spawnParticle(Particle.BLOCK, surface.getLocation().add(0.5, 1.1, 0.5), 6, 0.3, 0.1, 0.3, 0,

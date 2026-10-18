@@ -7,9 +7,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -34,6 +37,8 @@ final class MutangoBlockJournal {
 
     private final File file;
     private final Map<String, Entry> entries = new LinkedHashMap<>();
+    /** Devueltos al mundo pero todavia anotados: se tachan cuando el mundo se guarda (worldSaved). */
+    private final Set<String> awaitingSave = new HashSet<>();
     private boolean dirty;
 
     MutangoBlockJournal(File file) {
@@ -46,8 +51,72 @@ final class MutangoBlockJournal {
      * original.
      */
     void record(UUID world, int x, int y, int z, String originalData) {
-        if (entries.putIfAbsent(key(world, x, y, z), new Entry(world, x, y, z, originalData)) == null) {
+        String key = key(world, x, y, z);
+        awaitingSave.remove(key); // se vuelve a tocar: ya no se tacha cuando se guarde el mundo
+        if (entries.putIfAbsent(key, new Entry(world, x, y, z, originalData)) == null) {
             dirty = true;
+        }
+    }
+
+    /**
+     * Anota todo un lote de bloques ANTES de cambiar el mundo y lo guarda en el archivo ahora (un solo guardado por lote,
+     * no uno por bloque). Devuelve true si quedo guardado y se puede tocar el mundo; si no se pudo guardar, deshace las
+     * anotaciones nuevas del lote y devuelve false: el que llama no cambia ningun bloque de ese lote.
+     */
+    boolean commit(Collection<Entry> batch) {
+        if (batch.isEmpty()) {
+            return true;
+        }
+        List<String> added = new ArrayList<>();
+        for (Entry entry : batch) {
+            String key = entry.id();
+            awaitingSave.remove(key);
+            if (entries.putIfAbsent(key, entry) == null) {
+                added.add(key);
+                dirty = true;
+            }
+        }
+        try {
+            flush();
+            return true;
+        } catch (IllegalStateException failed) {
+            added.forEach(entries::remove);
+            dirty = true; // el archivo puede haber quedado distinto de la memoria: se reescribe en el proximo flush
+            return false;
+        }
+    }
+
+    /**
+     * El bloque ya se devolvio al mundo, pero el mundo todavia no se guardo con el bloque devuelto: sigue anotado hasta
+     * worldSaved. Si el servidor se cae antes de guardar, al arrancar se vuelve a devolver.
+     */
+    void restored(UUID world, int x, int y, int z) {
+        String key = key(world, x, y, z);
+        if (entries.containsKey(key)) {
+            awaitingSave.add(key);
+        }
+    }
+
+    /** El mundo se guardo: los bloques devueltos hasta ahora ya estan guardados, se tachan. */
+    void worldSaved(UUID world) {
+        boolean any = false;
+        for (String key : new ArrayList<>(awaitingSave)) {
+            Entry entry = entries.get(key);
+            if (entry == null) {
+                awaitingSave.remove(key);
+            } else if (entry.world().equals(world)) {
+                entries.remove(key);
+                awaitingSave.remove(key);
+                dirty = true;
+                any = true;
+            }
+        }
+        if (any) {
+            try {
+                flush();
+            } catch (IllegalStateException failed) {
+                // se reintenta en el proximo flush
+            }
         }
     }
 

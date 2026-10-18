@@ -9,7 +9,7 @@ y soporte completo para Bedrock. Nacio como un plugin aparte y se integro a BigC
 - **Modulo:** `modules.mutango.enabled` en `config.yml` (id `mutango`). Comando `/mutango` (permiso
   `bigcasares.mutango.admin`, hijo de `bigcasares.*`).
 - **Configuracion:** `plugins/BigCasares/mutango.yml` (se copia la primera vez; solo tiene la seccion `bedrock`).
-- **Datos que persisten:** `plugins/BigCasares/data/mutango/` (`pendientes.yml`: victorias y premios por entregar,
+- **Datos que persisten:** `plugins/BigCasares/data/mutango/` (`pendientes.yml`: la cola de adjudicaciones (victorias y premios) con version,
   `bloques-por-devolver.yml`: el diario de bloques, `ruinas.yml`: que ruinas se hicieron, con version).
 - **Modelos 3D:** `src/main/resources/bettermodel/models/` (28 `.bbmodel`); `MutangoModelInstaller` los copia a BetterModel
   y lo recarga. Los `.bbmodel` se editan en Blockbench.
@@ -20,6 +20,9 @@ y soporte completo para Bedrock. Nacio como un plugin aparte y se integro a BigC
   iconos de las botas y la cruz en `src/main/resources/mutango/relics-bedrock/` (ver mas abajo).
 - **Moderacion:** los intentos de cheat con las botas van directo a `ModerationModule.acceptSignal` (ver mas abajo).
 - **Datos de las entidades:** las marcas (PDC) usan el espacio de nombres `bigcasares` (como todo BigC).
+- **mob-scaling:** todo lo que crea el modulo (Mutangos, Neguechen, el Sol, la Luna, las manos, las estatuas, el cubo y los
+  animales que invoca) lleva la marca `custom_entity: mutango` desde el spawn, asi `mob-scaling` no les vuelve a escalar la
+  vida ni les agrega mutaciones y Jeremy no las toma (solo reconoce el valor `jeremy`).
 
 ## Probarlo
 
@@ -140,6 +143,11 @@ Los numeros estan arriba de todo en `MutangoPhaseThree.java` (primer ataque), `M
 - Neguechen peleando se retoma donde estaba, con la vida que tenia y el Sol y la Luna girando de nuevo (los ataques en
   curso, como las manos, los animales o el Sol y la Luna en vuelo, se pierden). Si la estaban venciendo (diciendo sus
   ultimas palabras) no se retoma: la victoria y los premios ya estan guardados (ver "El final y los premios").
+- **Descargar un chunk no mata a nadie.** Los tres Mutangos siguen formando la pelea aunque alguno este en un chunk
+  descargado: la fase 1 no se cierra, la fase 2 no se da por terminada y no aparece Neguechen mientras falte alguno por
+  cargar. Cada Mutango guarda en su ficha quienes forman su pelea (`equipo`), asi despues de un reinicio los que todavia no
+  cargaron tambien cuentan. Solo una muerte confirmada saca a alguien de la pelea; si un chunk vuelve a cargar, se lo
+  vuelve a enlazar pero no se lo revive.
 - Lo que no se guarda: cuanto daño llevan para la proxima pila de la fase 2.
 
 ## Dano y mensajes de muerte
@@ -243,13 +251,16 @@ alguno; lo que no entra cae al piso a sus pies, brilla, no desaparece y es solo 
 - **Aviso global.** En el momento en que le sacas la ultima vida, todo el servidor ve en el chat "(Jugador) le ha
   ganado a la diosa mapuche Neguechen" (si ganaron varios: "A, B y C le han ganado..."; si son mas de 4, nombra a 4 y
   cuenta el resto). Es el unico aviso de la pelea que ve todo el mundo; el resto lo ven los que estan cerca.
-- **La victoria y los premios no se pierden.** La victoria se guarda en el momento en que le sacas la ultima vida y los
-  premios quedan anotados en `plugins/BigCasares/data/mutango/pendientes.yml`. Si sacan la pelea con `/mutango quitar` antes de que
-  se entreguen, se dan en el momento. Si se apaga el servidor, o estabas desconectado, o muerto, los recibis al entrar,
-  al revivir o cuando el servidor vuelve a arrancar.
+- **La victoria y los premios no se pierden ni se duplican.** Al ganar, la victoria y los premios se anotan como
+  adjudicaciones (cada una con su id) en `plugins/BigCasares/data/mutango/pendientes.yml` ANTES de tocar al jugador. Al
+  entregarlas se aplican la victoria y los items, se anota un recibo en el propio jugador, se guarda al jugador y recien
+  ahi se borra la adjudicacion de la cola. Un corte antes del recibo la reintenta; despues del recibo no se repite. Si no
+  te entran los items (necesitan 2 casilleros libres por juego) quedan pendientes (no se tiran al piso) y los recibis solos
+  cuando hagas lugar. Si estabas desconectado o muerto los recibis al entrar o al revivir.
 
 - **Botas de Neguechen** (botas de cuero, Proteccion IV, Caida de pluma IV, irrompibles). Puestas, en supervivencia o
-  aventura: apreta saltar en el aire y saltas otra vez (una vez por salto, se recarga al tocar el piso). El doble salto
+  aventura: apreta saltar en el aire y saltas otra vez (una vez por salto, se recarga **solo al tocar el piso**: sacarte las
+  botas en el aire, desconectarte o recargar no lo renuevan; lo gastado queda en el jugador). El doble salto
   pone la caida en cero (y las botas tienen Caida de pluma IV). No flotan: se saco porque dependia de la velocidad
   vertical del jugador, que no es confiable.
 - **Cruz Andina** (un totem con brillo). Te salva como un totem, pero te deja con la mitad de la vida (el totem, con
@@ -310,8 +321,10 @@ usa contra los mobs que rompen bloques) con Neguechen como autora. Si alguien lo
 
 ## Si el servidor se cae con la grieta o las ondas abiertas
 
-Cada bloque que la grieta o las ondas de las manos sacan se anota antes en `plugins/BigCasares/data/mutango/bloques-por-devolver.yml`
-(como era) y se tacha cuando se devuelve. Si el servidor se cae o se cuelga en medio, **al arrancar devuelve los bloques
+Los bloques que la grieta (por columna) o las ondas de las manos (por tick) van a sacar se anotan **como un lote, con
+como eran, y se guardan en** `plugins/BigCasares/data/mutango/bloques-por-devolver.yml` **antes de tocar el mundo**: si el
+lote no se pudo guardar, no se saca ningun bloque de ese lote. Cuando se devuelven siguen anotados hasta que el mundo se
+guarda (`WorldSaveEvent`) con el bloque devuelto, recien ahi se tachan. Si el servidor se cae o se cuelga en medio, **al arrancar devuelve los bloques
 que faltaban** (los que siguen siendo aire o la luz verde de la grieta; si alguien puso algo ahi, se respeta) y avisa en
 la consola. Con un apagado normal ya se cierra todo antes.
 

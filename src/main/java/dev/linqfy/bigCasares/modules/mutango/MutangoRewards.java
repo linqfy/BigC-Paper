@@ -1,29 +1,42 @@
 package dev.linqfy.bigCasares.modules.mutango;
 
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
 
 /**
- * Las victorias contra Neguechen y los premios (Botas de Neguechen y Cruz Andina): se anotan al ganar (MutangoPending), se
- * entregan en el inventario cuando termina la pelea y, si no se pudo (desconectado, muerto, servidor apagado), al volver.
+ * Las victorias contra Neguechen y los premios (Botas de Neguechen y Cruz Andina). Cada una es una adjudicacion
+ * (MutangoPending): se anota en el archivo al ganar y se entrega con MutangoAwardClaim, que aplica victoria, items y recibo
+ * en el jugador, lo guarda y recien ahi la saca de la cola. Si el jugador esta desconectado, muerto o no le entran los
+ * premios, sigue pendiente y se reintenta al entrar, al revivir y (si faltaba lugar) cada tanto.
  */
 final class MutangoRewards implements Listener {
+
+    /** Los recibos que se recuerdan por jugador (los mas nuevos). */
+    private static final int MAX_RECEIPTS = 64;
 
     private final JavaPlugin plugin;
     private final MutangoKeys keys;
     private final MutangoPending pending;
     private final MutangoRelics relics;
-
     private final MutangoTasks tasks;
+    /** Conectados a quienes les falto lugar en el inventario: se les reintenta cada tanto hasta que entren. */
+    private final Set<UUID> waitingForRoom = new HashSet<>();
 
     MutangoRewards(JavaPlugin plugin, MutangoKeys keys, MutangoPending pending, MutangoRelics relics,
                    MutangoTasks tasks) {
@@ -40,20 +53,24 @@ final class MutangoRewards implements Listener {
     }
 
     /**
-     * Vencieron a Neguechen: a cada uno que peleo en esa pelea (el que la empezo y los que le pegaron a alguno) le suma
-     * una victoria (los que miraban de lejos no) y le anota los premios como pendientes. Todo se guarda ya mismo: si el
-     * servidor se apaga o sacan la pelea antes de que se entreguen los premios, no se pierde nada. A quien no esta
-     * conectado le queda anotado para cuando vuelva.
+     * Vencieron a Neguechen: a cada uno que peleo en esa pelea (el que la empezo y los que le pegaron a alguno) le anota
+     * una victoria y un juego de premios (los que miraban de lejos no). Las dos cosas se guardan en el archivo antes de
+     * tocar a nadie; la victoria se aplica ya mismo a los conectados y los premios se entregan al cerrarse la grieta
+     * (deliverRewards) o, a quien no esta, cuando vuelva.
      */
     void registerVictory(MutangoFight fight) {
         for (UUID id : fight.fighters) {
+            try {
+                pending.add(id, 1, 0);
+                pending.add(id, 0, 1);
+            } catch (IllegalStateException unsaved) {
+                // quedan en la cola de esta corrida igual; se avisa que no se pudo guardar el archivo
+                plugin.getLogger().log(Level.SEVERE, "[Mutango] No se pudo guardar la adjudicacion", unsaved);
+            }
             Player player = plugin.getServer().getPlayer(id);
             if (player != null) {
-                addWin(player, 1);
-            } else {
-                pending.addWin(id);
+                claim(player, false, false);
             }
-            pending.addReward(id);
         }
         fight.rewardsPending = true;
         announceVictory(fight);
@@ -68,7 +85,7 @@ final class MutangoRewards implements Listener {
                 names.add(name);
             }
         }
-        var legacy = net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection();
+        var legacy = LegacyComponentSerializer.legacySection();
         plugin.getServer().broadcast(legacy.deserialize("§6§l" + MutangoVictoryMessage.of(names)));
     }
 
@@ -86,26 +103,127 @@ final class MutangoRewards implements Listener {
         }
     }
 
-    /**
-     * Le da a este jugador lo que le falta recibir: victorias que ganaron mientras no estaba y premios (en el inventario;
-     * lo que no entra, al piso). Si esta muerto espera a que reviva.
-     */
+    /** Entrega todo lo que le falta a este jugador (con aviso si algo no entra en el inventario). */
     void claimPending(Player player) {
+        claim(player, true, true);
+    }
+
+    /** Reintenta a los conectados a quienes les falto lugar (sin avisar de nuevo cada vez). */
+    void retryOnline() {
+        for (UUID id : new ArrayList<>(waitingForRoom)) {
+            Player player = plugin.getServer().getPlayer(id);
+            if (player == null) {
+                waitingForRoom.remove(id);
+            } else {
+                claim(player, false, true);
+            }
+        }
+    }
+
+    /**
+     * Entrega las adjudicaciones de ese jugador. includeRewards: tambien las de premios (si no, solo las victorias).
+     * notify: avisa cuando los premios no entran. Si esta muerto o desconectado espera.
+     */
+    private void claim(Player player, boolean notify, boolean includeRewards) {
         if (!player.isOnline() || player.isDead() || !pending.has(player.getUniqueId())) {
+            waitingForRoom.remove(player.getUniqueId());
             return;
         }
-        MutangoPending.Entry entry = pending.take(player.getUniqueId());
-        if (entry.wins() > 0) {
-            addWin(player, entry.wins());
+        boolean gave = false;
+        boolean noRoom = false;
+        for (MutangoPending.Award award : pending.of(player.getUniqueId())) {
+            if (!includeRewards && award.rewards() > 0) {
+                continue;
+            }
+            MutangoAwardClaim.Result result;
+            try {
+                result = MutangoAwardClaim.claim(award, receiptsOf(player), targetOf(player), this::confirm);
+            } catch (RuntimeException failure) {
+                // algo fallo a mitad: la adjudicacion sigue en la cola y se reintenta (el recibo evita repetirla)
+                plugin.getLogger().log(Level.WARNING, "[Mutango] No se pudo entregar una adjudicacion de "
+                    + player.getName() + ", se reintenta", failure);
+                return;
+            }
+            gave |= result == MutangoAwardClaim.Result.CLAIMED && award.rewards() > 0;
+            noRoom |= result == MutangoAwardClaim.Result.NO_ROOM;
         }
-        boolean overflow = false;
-        for (int i = 0; i < entry.rewards(); i++) {
-            overflow |= relics.give(player);
+        if (noRoom) {
+            waitingForRoom.add(player.getUniqueId());
+        } else {
+            waitingForRoom.remove(player.getUniqueId());
         }
-        if (entry.rewards() > 0) {
-            player.sendMessage("§6Recibiste las Botas de Neguechen y la Cruz Andina."
-                + (overflow ? " §7(No te entraban en el inventario: lo que sobro quedo en el piso, a tus pies.)" : ""));
+        if (gave) {
+            player.sendMessage("§6Recibiste las Botas de Neguechen y la Cruz Andina.");
         }
+        if (noRoom && notify) {
+            player.sendMessage("§eTenés premios de Neguechen esperando: liberá lugar en el inventario "
+                + "(2 casilleros libres por juego) y los recibís solos.");
+        }
+    }
+
+    private void confirm(UUID awardId) {
+        try {
+            pending.confirm(awardId);
+        } catch (IllegalStateException unsaved) {
+            // ya esta aplicada y con recibo en el jugador: si la cola no se pudo guardar, al reiniciar solo se reconfirma
+            plugin.getLogger().log(Level.WARNING, "[Mutango] No se pudo guardar la cola de premios", unsaved);
+        }
+    }
+
+    private MutangoAwardClaim.Receipts receiptsOf(Player player) {
+        PersistentDataContainer data = player.getPersistentDataContainer();
+        return new MutangoAwardClaim.Receipts() {
+            @Override
+            public boolean has(UUID award) {
+                return read().contains(award.toString());
+            }
+
+            @Override
+            public void add(UUID award) {
+                Set<String> all = read();
+                all.add(award.toString());
+                List<String> list = new ArrayList<>(all);
+                if (list.size() > MAX_RECEIPTS) {
+                    list = list.subList(list.size() - MAX_RECEIPTS, list.size());
+                }
+                data.set(keys.receipts, PersistentDataType.STRING, String.join(",", list));
+            }
+
+            private Set<String> read() {
+                String raw = data.get(keys.receipts, PersistentDataType.STRING);
+                Set<String> set = new LinkedHashSet<>();
+                if (raw != null && !raw.isBlank()) {
+                    set.addAll(Arrays.asList(raw.split(",")));
+                }
+                return set;
+            }
+        };
+    }
+
+    private MutangoAwardClaim.Target targetOf(Player player) {
+        return new MutangoAwardClaim.Target() {
+            @Override
+            public boolean hasRoom(int rewards) {
+                return relics.hasRoomFor(player, rewards);
+            }
+
+            @Override
+            public void addWins(int amount) {
+                addWin(player, amount);
+            }
+
+            @Override
+            public void giveRewards(int rewards) {
+                for (int i = 0; i < rewards; i++) {
+                    relics.giveToInventory(player);
+                }
+            }
+
+            @Override
+            public void persist() {
+                player.saveData();
+            }
+        };
     }
 
     private void addWin(Player player, int amount) {

@@ -224,7 +224,7 @@ final class MutangoCombat implements Listener {
         UUID id = mutango.getUniqueId();
         MutangoFight fight = fights.fightOf(mutango);
         fights.bossBars().remove(id);
-        fights.forget(id);
+        fights.confirmDeath(id);
         fights.releaseTracker(id);
         if (id.equals(fight.phaseThree.neguechen())) {
             if (fight.phaseThree.dying()) {
@@ -248,7 +248,8 @@ final class MutangoCombat implements Listener {
         mutango.getWorld().playSound(mutango.getLocation(), Sound.BLOCK_STONE_BREAK, 2f, 0.5f);
         mutango.getWorld().playSound(mutango.getLocation(), Sound.ENTITY_GOAT_SCREAMING_DEATH, 1.5f, 0.6f);
         String name = mutango.getCustomName() == null ? "Mutango" : mutango.getCustomName();
-        boolean lastOne = fights.aliveOf(fight).isEmpty();
+        // el ultimo es cuando ya no queda ninguno en la lista, tambien de los que no estan cargados
+        boolean lastOne = fight.roster.isEmpty();
         // solo a los que estan cerca de la pelea (en un servidor publico no se avisa a todo el mundo)
         for (Player player : MutangoTargets.near(mutango.getLocation(), MutangoBattle.MESSAGE_RADIUS)) {
             player.sendMessage("§6" + name + " §7fue derrotado.");

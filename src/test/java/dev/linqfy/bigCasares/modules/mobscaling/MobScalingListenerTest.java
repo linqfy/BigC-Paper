@@ -1,5 +1,6 @@
 package dev.linqfy.bigCasares.modules.mobscaling;
 
+import dev.linqfy.bigCasares.modules.mutango.MutangoModule;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Zombie;
@@ -41,6 +42,30 @@ class MobScalingListenerTest {
     void vanillaMobIsNotAnEventMob() {
         TestEntity mob = new TestEntity();
         assertFalse(listener.isEventOrSystemMob(mob.proxy()));
+    }
+
+    @Test
+    void mutangoEntitiesAreSystemMobsSoTheirHealthIsNotScaledAgain() {
+        // la marca que pone el modulo mutango en todo lo que crea (peleadores, Neguechen, estatuas, animales)
+        TestEntity mob = new TestEntity();
+        mob.pdc.put("bigcasares:" + MutangoModule.SYSTEM_MOB_KEY, MutangoModule.SYSTEM_MOB_VALUE);
+        assertTrue(listener.isEventOrSystemMob(mob.proxy()));
+    }
+
+    @Test
+    void aSpawnedMutangoEntityIsNotScaledOrMutated() {
+        TestEntity mutango = new TestEntity();
+        mutango.pdc.put("bigcasares:" + MutangoModule.SYSTEM_MOB_KEY, MutangoModule.SYSTEM_MOB_VALUE);
+
+        listener.onCreatureSpawn(new CreatureSpawnEvent(mutango.proxy(), CreatureSpawnEvent.SpawnReason.CUSTOM));
+
+        assertFalse(mutango.pdc.containsKey("bigcasares:mob_scaled"), "Mutango entities must keep their own health");
+    }
+
+    @Test
+    void theMutangoMarkIsNotJeremysValue() {
+        // Jeremy solo toma como suyo el valor "jeremy"
+        assertFalse("jeremy".equals(MutangoModule.SYSTEM_MOB_VALUE));
     }
 
     @Test

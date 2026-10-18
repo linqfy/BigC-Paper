@@ -33,6 +33,8 @@ final class MutangoBattle {
     private final MutangoCinematic cinematic;
     private final Set<UUID> downed = new HashSet<>();
     private int phase = 1;
+    /** Los tres de la pelea, tambien los que no estan cargados: la fase 1 no se cierra con uno que falta. */
+    private final MutangoRoster roster;
 
     /** Guarda el estado de la pelea en cada Mutango (lo implementa el plugin con la ficha de la entidad). */
     interface Store {
@@ -42,7 +44,8 @@ final class MutangoBattle {
     }
 
     MutangoBattle(MutangoPhaseOne phaseOne, MutangoPhaseTwo phaseTwo, MutangoAnimations animations,
-                  MutangoCinematic cinematic, Store store) {
+                  MutangoCinematic cinematic, Store store, MutangoRoster roster) {
+        this.roster = roster;
         this.store = store;
         this.cinematic = cinematic;
         this.phaseOne = phaseOne;
@@ -64,7 +67,7 @@ final class MutangoBattle {
                     phaseOne.tick(mutango);
                 }
             }
-            if (alive.stream().allMatch(mutango -> downed.contains(mutango.getUniqueId()))) {
+            if (roster.allDowned(downed)) {
                 cinematic.endOfPhaseOne(alive.get(0).getLocation());
                 setPhase(2, alive);
             }

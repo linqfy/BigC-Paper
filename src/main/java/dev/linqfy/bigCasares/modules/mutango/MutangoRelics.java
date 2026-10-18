@@ -69,7 +69,9 @@ final class MutangoRelics implements Listener {
     private final NamespacedKey relicKey;
     /** En el jugador: el permiso de volar se lo dieron las botas (asi se le saca aunque se reinicie el servidor). */
     private final NamespacedKey flightKey;
-    private final Map<UUID, MutangoBootsJump> jumps = new HashMap<>();
+    private final MutangoJumpLedger jumps = new MutangoJumpLedger();
+    /** En el jugador: gasto el doble salto y todavia no aterrizo (sobrevive a desconectarse y a recargar). */
+    private final NamespacedKey jumpSpentKey;
 
     private final MutangoTasks tasks;
 
@@ -79,6 +81,7 @@ final class MutangoRelics implements Listener {
         this.moderation = moderation;
         this.relicKey = new NamespacedKey(plugin, "premio");
         this.flightKey = new NamespacedKey(plugin, "vuelo_botas");
+        this.jumpSpentKey = new NamespacedKey(plugin, "salto_gastado");
     }
 
     // ---------------------------------------------------------------- los items
@@ -157,6 +160,27 @@ final class MutangoRelics implements Listener {
         return overflow;
     }
 
+    /** Le entran los premios (las botas y la cruz, cada uno en un casillero libre del inventario) sin dejar nada en el piso. */
+    boolean hasRoomFor(Player player, int sets) {
+        int free = 0;
+        for (ItemStack slot : player.getInventory().getStorageContents()) {
+            if (slot == null || slot.getType().isAir()) {
+                free++;
+            }
+        }
+        return free >= 2 * sets;
+    }
+
+    /** Pone los premios en el inventario (hay que haber comprobado hasRoomFor: no deja nada en el piso). */
+    void giveToInventory(Player player) {
+        player.getInventory().addItem(boots(), cross());
+        Location body = player.getLocation().add(0, 1, 0);
+        player.getWorld().spawnParticle(Particle.DUST, body, 60, 0.8, 1.0, 0.8, 0, GOLD);
+        player.getWorld().spawnParticle(Particle.TOTEM_OF_UNDYING, body, 80, 0.6, 1.0, 0.6, 0.3);
+        player.getWorld().playSound(body, Sound.ENTITY_PLAYER_LEVELUP, 1.5f, 0.6f);
+        player.getWorld().playSound(body, Sound.BLOCK_AMETHYST_BLOCK_CHIME, 1.5f, 0.8f);
+    }
+
     // ---------------------------------------------------------------- las botas
 
     /** Cada tick: a quien tiene las botas puestas le deja saltar en el aire (y se recarga al tocar el piso). */
@@ -168,12 +192,15 @@ final class MutangoRelics implements Listener {
                 if (granted) {
                     revokeFlight(player);
                 }
-                jumps.remove(player.getUniqueId());
+                // sin botas el salto gastado no se renueva: recien se olvida al aterrizar
+                if (jumps.tick(player.getUniqueId(), false, player.isOnGround())) {
+                    player.getPersistentDataContainer().remove(jumpSpentKey);
+                }
                 continue;
             }
-            MutangoBootsJump jump = jumps.computeIfAbsent(player.getUniqueId(), id -> new MutangoBootsJump());
-            if (player.isOnGround()) {
-                jump.land();
+            jumpOf(player);
+            if (jumps.tick(player.getUniqueId(), true, player.isOnGround())) {
+                player.getPersistentDataContainer().remove(jumpSpentKey);
             }
             // con las botas siempre "puede volar": apretar saltar en el aire llega como intento de volar, que se
             // cancela y se cambia por el doble salto (onToggleFlight).
@@ -186,6 +213,11 @@ final class MutangoRelics implements Listener {
                 reportFlight(player, "Volando con las Botas de Neguechen puestas");
             }
         }
+    }
+
+    private MutangoBootsJump jumpOf(Player player) {
+        return jumps.of(player.getUniqueId(),
+            player.getPersistentDataContainer().has(jumpSpentKey, PersistentDataType.BYTE));
     }
 
     /** Un intento de volar con las botas que se cancelo: si son muchos seguidos, se le avisa a moderacion. */
@@ -211,11 +243,12 @@ final class MutangoRelics implements Listener {
         }
         event.setCancelled(true);
         player.setFlying(false);
-        MutangoBootsJump jump = jumps.computeIfAbsent(player.getUniqueId(), id -> new MutangoBootsJump());
+        MutangoBootsJump jump = jumpOf(player);
         if (player.isOnGround() || !jump.doubleJump()) {
             flightAttempt(player); // no dio un doble salto: cuenta como intento de volar
             return;
         }
+        player.getPersistentDataContainer().set(jumpSpentKey, PersistentDataType.BYTE, (byte) 1);
         Vector forward = player.getLocation().getDirection().setY(0);
         if (forward.lengthSquared() > 1e-4) {
             forward.normalize().multiply(MutangoBootsJump.JUMP_FORWARD);
@@ -230,7 +263,8 @@ final class MutangoRelics implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        jumps.remove(event.getPlayer().getUniqueId());
+        // el salto gastado queda en el jugador (jumpSpentKey): solo se suelta la memoria
+        jumps.forget(event.getPlayer().getUniqueId());
         flightWatch.forget(event.getPlayer().getUniqueId());
     }
 

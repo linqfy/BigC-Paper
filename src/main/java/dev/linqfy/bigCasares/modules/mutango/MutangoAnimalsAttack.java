@@ -92,6 +92,9 @@ final class MutangoAnimalsAttack {
                 Location at = home.clone().add(Math.cos(angle) * SPAWN_RADIUS, 0, Math.sin(angle) * SPAWN_RADIUS);
                 at.setY(MutangoGround.y(at) + 1);
                 Mob animal = world.spawn(at, kind.type(), mob -> {
+                    // antes del CreatureSpawnEvent: mob-scaling no los escala ni les agrega mutaciones
+                    mob.getPersistentDataContainer().set(new NamespacedKey(key.getNamespace(),
+                        MutangoModule.SYSTEM_MOB_KEY), PersistentDataType.STRING, MutangoModule.SYSTEM_MOB_VALUE);
                     mob.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
                     mob.setPersistent(false);
                     mob.setRemoveWhenFarAway(false);

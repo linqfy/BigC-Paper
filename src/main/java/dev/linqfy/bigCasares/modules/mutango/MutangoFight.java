@@ -1,7 +1,6 @@
 package dev.linqfy.bigCasares.modules.mutango;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.BiConsumer;
@@ -20,7 +19,9 @@ final class MutangoFight {
     /** Quienes estan peleando (el que la empezo y los que le pegaron a alguno): a ellos se les suma la victoria. */
     final Set<UUID> fighters = new HashSet<>();
     /** Lef, Lihuen y Lican de esta pelea (en el orden en que aparecieron). */
-    final Set<UUID> members = new LinkedHashSet<>();
+    final MutangoRoster roster = new MutangoRoster();
+    /** La lista viva del roster: incluye a los que no estan cargados (los saca solo una muerte confirmada). */
+    final Set<UUID> members = roster.members();
     final MutangoCinematic cinematic;
     final MutangoBattle battle;
     final MutangoPhaseThree phaseThree;
@@ -38,7 +39,7 @@ final class MutangoFight {
         this.cinematic = new MutangoCinematic(display);
         this.difficulty = new MutangoDifficulty(level);
         this.battle = new MutangoBattle(new MutangoPhaseOne(playOnce, difficulty),
-            new MutangoPhaseTwo(animations, difficulty), animations, cinematic, store);
+            new MutangoPhaseTwo(animations, difficulty), animations, cinematic, store, roster);
         this.phaseThree = new MutangoPhaseThree(hostFactory.apply(this), difficulty);
     }
 
