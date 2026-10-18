@@ -62,7 +62,11 @@ final class MutangoHandsAttack {
 
     // la onda expansiva
     private static final double WAVE_SPEED = 0.45;
+    /** Hasta que altura (arriba y abajo) se buscan jugadores alrededor de la onda; el limite fino es MutangoWaveRules. */
+    private static final double WAVE_SEARCH_HEIGHT = 16.0;
     private static final double WAVE_MAX = 9.0;
+    /** Separacion entre las particulas del anillo (antes 0.6: un tercio mas de llamadas por tick). */
+    private static final double WAVE_POINT_SPACING = 0.9;
     private static final double WAVE_BAND = 0.6;
     /** Si tenes los pies a mas de esto del piso (saltando), la onda te pasa por abajo. */
     private static final double WAVE_DAMAGE = 3.0;
@@ -313,7 +317,7 @@ final class MutangoHandsAttack {
         double r = hand.radius;
         World world = hand.wave.getWorld();
         ThreadLocalRandom rng = ThreadLocalRandom.current();
-        int points = Math.max(8, (int) (2 * Math.PI * r / 0.6));
+        int points = Math.max(8, (int) (2 * Math.PI * r / WAVE_POINT_SPACING));
         for (int k = 0; k < points; k++) {
             double angle = 2 * Math.PI * k / points;
             Location point = hand.wave.clone().add(Math.cos(angle) * r, 0, Math.sin(angle) * r);
@@ -368,14 +372,18 @@ final class MutangoHandsAttack {
             world.playSound(hand.wave, Sound.BLOCK_ROOTED_DIRT_BREAK, 1.5f, 0.6f);
         }
         // te agarra si estas parado en el piso justo donde pasa el anillo
-        for (Player player : world.getPlayers()) {
+        double outer = r + WAVE_BAND;
+        for (Player player : world.getNearbyPlayers(hand.wave, outer, WAVE_SEARCH_HEIGHT, outer)) {
             if (!MutangoTargets.targetable(player) || hand.launched.contains(player.getUniqueId())) {
                 continue;
             }
             Location feet = player.getLocation();
             double d = Math.hypot(feet.getX() - hand.wave.getX(), feet.getZ() - hand.wave.getZ());
+            if (d < before - WAVE_BAND || d > outer) {
+                continue; // fuera del anillo: ni se calcula el piso
+            }
             double floor = MutangoGround.y(feet) + 1;
-            if (d >= before - WAVE_BAND && d <= r + WAVE_BAND && MutangoWaveRules.reaches(feet.getY() - floor)) {
+            if (MutangoWaveRules.reaches(feet.getY() - floor)) {
                 hand.launched.add(player.getUniqueId());
                 Entity attacker = hand.id == null ? null : Bukkit.getEntity(hand.id);
                 if (attacker == null && neguechen != null) {

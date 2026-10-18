@@ -69,6 +69,8 @@ final class MutangoPhaseOne {
     private static final double HIT_BOTTOM = 0.33;
     private static final double HIT_TOP = 1.71;
     private static final double HIT_MARGIN = 0.2;
+    /** Radio donde se buscan jugadores para el golpe de cabeza (la caja llega a ~1.5 bloques del Mutango). */
+    private static final double HEAD_BOX_SEARCH = 4.0;
 
     private enum State { CHASE, RAM_WINDUP, RAM_CHARGE, HEADBUTT, RECOVER }
 
@@ -242,7 +244,7 @@ final class MutangoPhaseOne {
     private static Player playerInHeadBox(Mob mutango, Vector direction) {
         Location origin = mutango.getLocation();
         Vector right = new Vector(-direction.getZ(), 0, direction.getX());
-        for (Player player : mutango.getWorld().getPlayers()) {
+        for (Player player : mutango.getWorld().getNearbyPlayers(origin, HEAD_BOX_SEARCH)) {
             if (!MutangoTargets.targetable(player)) {
                 continue;
             }

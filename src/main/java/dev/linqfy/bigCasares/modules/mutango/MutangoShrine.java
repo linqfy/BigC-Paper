@@ -275,7 +275,9 @@ final class MutangoShrine {
         // 2) del agujero sube una esferita de particulas y queda flotando
         if (t > SLIDE_TICKS && t <= SPLIT_AT) {
             Location center = lerp(bottom, top, MutangoShrineTimeline.rise(t));
-            sphere(world, center, 0.45, t);
+            if (t % 2 == 0) {
+                sphere(world, center, 0.45, t);
+            }
             if (t % 10 == 0) {
                 world.playSound(center, Sound.BLOCK_AMETHYST_BLOCK_RESONATE, 1.2f, 1.2f);
             }
@@ -294,7 +296,9 @@ final class MutangoShrine {
             double s = MutangoShrineTimeline.travel(t);
             for (Location target : run.targets) {
                 Location center = lerp(top, target, s).add(0, Math.sin(Math.PI * s) * 1.2, 0);
-                sphere(world, center, 0.25, t);
+                if (t % 2 == 0) {
+                    sphere(world, center, 0.25, t);
+                }
             }
         }
         // 4) las toca: las estatuas brillan y el cubo se vuelve a cerrar

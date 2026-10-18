@@ -30,10 +30,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * Los premios de vencer a Neguechen:
@@ -193,13 +190,15 @@ final class MutangoRelics implements Listener {
                     revokeFlight(player);
                 }
                 // sin botas el salto gastado no se renueva: recien se olvida al aterrizar
-                if (jumps.tick(player.getUniqueId(), false, player.isOnGround())) {
+                if (jumps.tick(player.getUniqueId(), false, player.isOnGround())
+                    && player.getPersistentDataContainer().has(jumpSpentKey, PersistentDataType.BYTE)) {
                     player.getPersistentDataContainer().remove(jumpSpentKey);
                 }
                 continue;
             }
             jumpOf(player);
-            if (jumps.tick(player.getUniqueId(), true, player.isOnGround())) {
+            if (jumps.tick(player.getUniqueId(), true, player.isOnGround())
+                && player.getPersistentDataContainer().has(jumpSpentKey, PersistentDataType.BYTE)) {
                 player.getPersistentDataContainer().remove(jumpSpentKey);
             }
             // con las botas siempre "puede volar": apretar saltar en el aire llega como intento de volar, que se
@@ -290,7 +289,9 @@ final class MutangoRelics implements Listener {
     }
 
     private boolean wearingBoots(Player player) {
-        return is(player.getInventory().getBoots(), BOOTS);
+        ItemStack worn = player.getInventory().getBoots();
+        // el material primero: getItemMeta clona el meta y esto corre por cada jugador en cada tick
+        return worn != null && worn.getType() == Material.LEATHER_BOOTS && is(worn, BOOTS);
     }
 
     private static boolean survival(Player player) {

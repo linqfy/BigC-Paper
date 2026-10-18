@@ -92,6 +92,8 @@ final class MutangoPhaseTwo {
     private static final double FALL_GRAVITY = 0.08;
     private static final int FLIGHT_MAX_TICKS = 60;
     private static final double FLIGHT_HIT_HALF = 0.75;
+    /** Radio donde se buscan jugadores alrededor de un Mutango que vuela (la caja de golpe es de 0.75). */
+    private static final double FLIGHT_HIT_SEARCH = 3.0;
     private static final double THROWN_KNOCKBACK = 0.6;
     private static final double THROWN_LIFT = 0.8;
 
@@ -466,7 +468,7 @@ final class MutangoPhaseTwo {
                 Vector center = next.toVector().add(forward.clone().multiply(0.3)).add(new Vector(0, 0.6, 0));
                 BoundingBox body = BoundingBox.of(center, FLIGHT_HIT_HALF, FLIGHT_HIT_HALF, FLIGHT_HIT_HALF);
                 Player victim = null;
-                for (Player player : flight.mutango.getWorld().getPlayers()) {
+                for (Player player : flight.mutango.getWorld().getNearbyPlayers(next, FLIGHT_HIT_SEARCH)) {
                     if (MutangoTargets.targetable(player) && player.getBoundingBox().overlaps(body)) {
                         victim = player;
                         break;

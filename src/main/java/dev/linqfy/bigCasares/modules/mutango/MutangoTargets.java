@@ -24,7 +24,8 @@ final class MutangoTargets {
     static Player nearest(Location location) {
         Player nearest = null;
         double best = TARGET_RADIUS * TARGET_RADIUS;
-        for (Player player : location.getWorld().getPlayers()) {
+        // solo los jugadores cerca (el servidor los busca por chunks): no se recorre todo el mundo por cada Mutango
+        for (Player player : location.getWorld().getNearbyPlayers(location, TARGET_RADIUS)) {
             if (!targetable(player)) {
                 continue;
             }
@@ -40,7 +41,7 @@ final class MutangoTargets {
     /** Los jugadores del mundo de location a menos de radius bloques. */
     static List<Player> near(Location location, double radius) {
         List<Player> out = new ArrayList<>();
-        for (Player player : location.getWorld().getPlayers()) {
+        for (Player player : location.getWorld().getNearbyPlayers(location, radius)) {
             if (player.getLocation().distanceSquared(location) <= radius * radius) {
                 out.add(player);
             }

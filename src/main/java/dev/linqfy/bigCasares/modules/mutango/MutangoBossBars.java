@@ -49,8 +49,22 @@ final class MutangoBossBars {
 
     private static final double VIEW_RADIUS = 64.0;
 
-    /** La barra y quienes la estan viendo (se lleva la cuenta aca: BossBar.getPlayers() arma una copia en cada llamada). */
-    private record Entry(BossBar bar, Set<UUID> viewers) {
+    /** Cada cuantas llamadas (una por tick) se vuelve a ver quien esta cerca de la barra. */
+    private static final int VIEWERS_EVERY = 10;
+
+    /**
+     * La barra y quienes la estan viendo (se lleva la cuenta aca: BossBar.getPlayers() arma una copia en cada llamada) y
+     * cuantas llamadas faltan para volver a revisar quien la ve.
+     */
+    private static final class Entry {
+        final BossBar bar;
+        final Set<UUID> viewers;
+        int untilViewers;
+
+        Entry(BossBar bar, Set<UUID> viewers) {
+            this.bar = bar;
+            this.viewers = viewers;
+        }
     }
 
     private final Map<UUID, Entry> bars = new HashMap<>();
@@ -62,39 +76,55 @@ final class MutangoBossBars {
         update(mutango, false);
     }
 
-    /** Vida actual (vacia si esta caido) y quienes la ven (los jugadores a menos de 64 bloques). */
+    /**
+     * Vida actual (vacia si esta caido) y quienes la ven (los jugadores a menos de 64 bloques). La vida se actualiza en
+     * cada llamada; quien la ve se recalcula cada VIEWERS_EVERY llamadas y solo entre los jugadores cercanos.
+     */
     void update(LivingEntity mutango, boolean downed) {
         Entry entry = bars.get(mutango.getUniqueId());
         if (entry == null) {
             return;
         }
-        BossBar bar = entry.bar();
-        Set<UUID> viewers = entry.viewers();
+        BossBar bar = entry.bar;
         var maxHealth = mutango.getAttribute(Attribute.MAX_HEALTH);
         double max = maxHealth == null ? 20.0 : maxHealth.getValue();
         bar.setProgress(downed ? 0.0 : Math.max(0.0, Math.min(1.0, mutango.getHealth() / max)));
-        // los que se desconectaron ya no estan en la barra (el servidor los saco): se los olvida
-        viewers.removeIf(id -> Bukkit.getPlayer(id) == null);
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            boolean near = player.getWorld() == mutango.getWorld()
-                && player.getLocation().distanceSquared(mutango.getLocation()) <= VIEW_RADIUS * VIEW_RADIUS;
-            if (near && viewers.add(player.getUniqueId())) {
-                bar.addPlayer(player);
-            } else if (!near && viewers.remove(player.getUniqueId())) {
-                bar.removePlayer(player);
+        if (entry.untilViewers-- > 0) {
+            return;
+        }
+        entry.untilViewers = VIEWERS_EVERY - 1;
+        Set<UUID> near = new HashSet<>();
+        double radiusSquared = VIEW_RADIUS * VIEW_RADIUS;
+        for (Player player : mutango.getWorld().getNearbyPlayers(mutango.getLocation(), VIEW_RADIUS)) {
+            if (player.getLocation().distanceSquared(mutango.getLocation()) <= radiusSquared) {
+                near.add(player.getUniqueId());
+                if (entry.viewers.add(player.getUniqueId())) {
+                    bar.addPlayer(player);
+                }
             }
         }
+        // los que ya no estan cerca (o se fueron del servidor) dejan de verla
+        entry.viewers.removeIf(id -> {
+            if (near.contains(id)) {
+                return false;
+            }
+            Player player = Bukkit.getPlayer(id);
+            if (player != null) {
+                bar.removePlayer(player);
+            }
+            return true;
+        });
     }
 
     void remove(UUID id) {
         Entry entry = bars.remove(id);
         if (entry != null) {
-            entry.bar().removeAll();
+            entry.bar.removeAll();
         }
     }
 
     void removeAll() {
-        bars.values().forEach(entry -> entry.bar().removeAll());
+        bars.values().forEach(entry -> entry.bar.removeAll());
         bars.clear();
     }
 }

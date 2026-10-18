@@ -12,7 +12,9 @@ import java.time.Duration;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -30,6 +32,7 @@ final class MutangoCinematic {
 
     private static final double RADIUS = 64.0;
     private static final int CARD_TICKS = 70;
+    private static final int VIEWERS_EVERY = 10;
 
     private sealed interface Card permits Verse, Banner, Action {
     }
@@ -65,6 +68,15 @@ final class MutangoCinematic {
     private final Deque<Card> queue = new ArrayDeque<>();
     private Card current;
     private int ticks;
+    /** Los que ven lo que se muestra: se vuelven a buscar cada VIEWERS_EVERY ticks o al cambiar de verso o cartel. */
+    private List<Player> viewersCache = List.of();
+    private Card viewersCard;
+    private int sinceViewers = Integer.MAX_VALUE;
+    /** Quien es de Bedrock (no cambia durante la sesion): se pregunta una vez por jugador, no en cada tick. */
+    private final Map<UUID, Boolean> bedrockCache = new HashMap<>();
+    /** El ultimo texto convertido (la espera del verso lo manda varias veces igual). */
+    private String lastLine;
+    private Component lastComponent;
 
     MutangoCinematic(Display display) {
         this.display = display;
@@ -100,9 +112,15 @@ final class MutangoCinematic {
     void clear() {
         queue.clear();
         current = null;
+        viewersCache = List.of();
+        viewersCard = null;
+        bedrockCache.clear();
     }
 
     void tick() {
+        if (sinceViewers < Integer.MAX_VALUE) {
+            sinceViewers++;
+        }
         if (current == null) {
             current = queue.poll();
             ticks = 0;
@@ -165,7 +183,7 @@ final class MutangoCinematic {
         // el titulo de Java (subtitulo con el titulo vacio) solo se arma si hay alguien de Java mirando
         Title javaTitle = null;
         for (Player player : viewers(where)) {
-            if (!display.isBedrock().test(player.getUniqueId())) {
+            if (!bedrock(player)) {
                 if (javaTitle == null) {
                     javaTitle = Title.title(Component.empty(), component, times);
                 }
@@ -181,18 +199,37 @@ final class MutangoCinematic {
         }
     }
 
-    private static List<Player> viewers(Location where) {
-        List<Player> out = new ArrayList<>();
-        for (Player player : where.getWorld().getPlayers()) {
-            if (player.getLocation().distanceSquared(where) <= RADIUS * RADIUS) {
-                out.add(player);
+    /**
+     * Los jugadores a menos de RADIUS bloques. La lista se arma con los cercanos (no con todo el mundo) y se reusa unos
+     * ticks mientras sea el mismo verso o cartel; los que se desconectaron entre medio se saltean.
+     */
+    private List<Player> viewers(Location where) {
+        if (current != viewersCard || sinceViewers >= VIEWERS_EVERY || viewersCache.isEmpty() && sinceViewers > 0) {
+            List<Player> out = new ArrayList<>();
+            for (Player player : where.getWorld().getNearbyPlayers(where, RADIUS)) {
+                if (player.getLocation().distanceSquared(where) <= RADIUS * RADIUS) {
+                    out.add(player);
+                }
             }
+            viewersCache = out;
+            viewersCard = current;
+            sinceViewers = 0;
+            return out;
         }
-        return out;
+        return viewersCache.stream().filter(Player::isOnline).toList();
     }
 
-    private static Component text(String legacy) {
-        return LegacyComponentSerializer.legacySection().deserialize(legacy);
+    private boolean bedrock(Player player) {
+        return bedrockCache.computeIfAbsent(player.getUniqueId(), id -> display.isBedrock().test(id));
+    }
+
+    private Component text(String legacy) {
+        if (legacy.equals(lastLine)) {
+            return lastComponent;
+        }
+        lastComponent = LegacyComponentSerializer.legacySection().deserialize(legacy);
+        lastLine = legacy;
+        return lastComponent;
     }
 
     private static Title.Times times(int in, int stay, int out) {

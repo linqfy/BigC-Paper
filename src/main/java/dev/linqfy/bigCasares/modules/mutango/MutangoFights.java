@@ -24,7 +24,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -442,9 +441,29 @@ final class MutangoFights implements Listener {
                 alive.add(mutango);
             }
         }
-        alive.sort(Comparator.comparingInt(mutango -> MutangoModels.MODELS.indexOf(
-            mutango.getPersistentDataContainer().get(keys.model, PersistentDataType.STRING))));
-        return alive;
+        if (alive.size() < 2) {
+            return alive;
+        }
+        // en el orden Lef, Lihuen, Lican: cada uno se lee una sola vez (antes el PDC se leia en cada comparacion)
+        Mob[] ordered = new Mob[MutangoModels.MODELS.size()];
+        List<Mob> others = new ArrayList<>();
+        for (Mob mutango : alive) {
+            int index = MutangoModels.MODELS.indexOf(
+                mutango.getPersistentDataContainer().get(keys.model, PersistentDataType.STRING));
+            if (index >= 0 && ordered[index] == null) {
+                ordered[index] = mutango;
+            } else {
+                others.add(mutango);
+            }
+        }
+        List<Mob> sorted = new ArrayList<>(alive.size());
+        for (Mob mutango : ordered) {
+            if (mutango != null) {
+                sorted.add(mutango);
+            }
+        }
+        sorted.addAll(others);
+        return sorted;
     }
 
     void playOnce(UUID id, String animation) {

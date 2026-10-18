@@ -7,6 +7,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.damage.DamageType;
+import org.bukkit.entity.Cow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Horse;
@@ -337,7 +338,9 @@ final class MutangoCombat implements Listener {
     }
 
     private boolean isMutango(Entity entity) {
-        return entity.getPersistentDataContainer().has(keys.model, PersistentDataType.STRING);
+        // todo lo del modulo con modelo es una vaca: no se lee el PDC de jugadores, items ni otros mobs
+        return entity instanceof Cow
+            && entity.getPersistentDataContainer().has(keys.model, PersistentDataType.STRING);
     }
 
     private static boolean fromPlayer(Entity damager) {
@@ -358,6 +361,9 @@ final class MutangoCombat implements Listener {
     /** Sin ordenarlos, alimentarlos ni nada de lo que se le hace a una vaca. */
     @EventHandler(ignoreCancelled = true)
     public void onInteract(PlayerInteractEntityEvent event) {
+        if (!(event.getRightClicked() instanceof Mob)) {
+            return; // los Mutangos y los animales invocados son Mob
+        }
         var data = event.getRightClicked().getPersistentDataContainer();
         if (data.has(keys.model, PersistentDataType.STRING) || data.has(keys.summon, PersistentDataType.BYTE)) {
             event.setCancelled(true);

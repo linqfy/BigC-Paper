@@ -422,6 +422,18 @@ Igual que Don Pollos en BigC (`docs/don-pollos/compatibilidad-bedrock.md`):
 - Sin probar con un cliente de Bedrock: no se sabe si GeyserModelEngine respeta la escala (Neguechen 1.6, las manos
   que crecen), el brillo `glow_` ni las animaciones de una sola vez.
 
+## Rendimiento (servidor con mucha gente)
+
+- **Jugadores cercanos, no todos:** el objetivo de cada Mutango (`MutangoTargets`), los golpes de cabeza y de vuelo y la onda de
+  las manos buscan solo a los jugadores de alrededor (`World#getNearbyPlayers`) en vez de recorrer todo el mundo.
+- **Barras de jefe:** la vida se actualiza cada tick pero quien la ve se recalcula cada 10 ticks, solo entre los cercanos.
+- **Cinematica:** la lista de espectadores se reusa 10 ticks y se pregunta una vez por jugador si es de Bedrock.
+- **Ruinas:** la construccion tiene un presupuesto de tiempo por tick (2 ms), no de cantidad de bloques; al apagar no se
+  construye lo que quedo en la cola (se rehace al arrancar); la comprobacion de cuevas muestrea una columna de cada dos.
+- **Arranque:** los bloques por devolver que estan en chunks sin cargar se devuelven cuando carga cada chunk, sin cargarlos
+  de forma sincrona.
+- La onda de las manos dibuja menos particulas (separacion de 0.9) y la esferita del santuario se dibuja cada 2 ticks.
+
 ## Cambiar los modelos
 
 Los `.bbmodel` estan en `src/main/resources/bettermodel/models/`. Al reiniciar el servidor el modulo los copia a

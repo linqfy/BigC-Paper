@@ -53,11 +53,14 @@ final class MutangoRuins implements Listener {
     /** De cada celda, que parte tiene ruinas. */
     private static final double CHANCE = 0.7;
     private static final int MIN_DISTANCE_FROM_SPAWN = 250;
-    private static final int BLOCKS_PER_TICK = 4000;
+    /** Lo que se le deja a la construccion en cada tick (milisegundos de reloj, no cantidad de bloques). */
+    private static final long BUILD_NANOS_PER_TICK = 2_000_000L;
     /** Del relleno, que parte es piedra (el resto, piedra musgosa). */
     private static final int STONE_OUT_OF_10 = 6;
     /** Lo mas que se rellena debajo de una columna: si abajo hay mas vacio que esto (cueva o barranco), no se construye. */
     private static final int MAX_FILL_DEPTH = 12;
+    /** De las columnas de las ruinas, se mira una de cada tantas (por eje) al buscar cuevas o barrancos debajo. */
+    private static final int HOLLOW_SAMPLE = 2;
 
     private static final StructureRotation[] ROTATIONS = {
         StructureRotation.NONE, StructureRotation.CLOCKWISE_90,
@@ -273,8 +276,9 @@ final class MutangoRuins implements Listener {
 
     /** Alguna columna de las ruinas necesitaria mas relleno que MAX_FILL_DEPTH para llegar a suelo firme. */
     private boolean hollowBelow(World world, MutangoRuinsLayout.Plan plan, int ground) {
-        for (int x = plan.x(); x < plan.x() + plan.sizeX(); x++) {
-            for (int z = plan.z(); z < plan.z() + plan.sizeZ(); z++) {
+        // se muestrea una de cada HOLLOW_SAMPLE columnas por eje: una cueva o un barranco que importa es mas ancho
+        for (int x = plan.x(); x < plan.x() + plan.sizeX(); x += HOLLOW_SAMPLE) {
+            for (int z = plan.z(); z < plan.z() + plan.sizeZ(); z += HOLLOW_SAMPLE) {
                 int cx = x;
                 int cz = z;
                 if (MutangoRuinsLayout.fillDepth(ground, world.getMinHeight(), MAX_FILL_DEPTH,
@@ -297,10 +301,13 @@ final class MutangoRuins implements Listener {
     // ------------------------------------------------------------ construccion por tandas
 
     private void work() {
-        int budget = BLOCKS_PER_TICK;
-        while (budget > 0 && !queue.isEmpty()) {
+        if (queue.isEmpty()) {
+            return;
+        }
+        MutangoWorkBudget budget = new MutangoWorkBudget(BUILD_NANOS_PER_TICK, System::nanoTime);
+        while (!budget.exhausted() && !queue.isEmpty()) {
             Job job = queue.peek();
-            budget = job.step(budget);
+            job.step(budget);
             if (job.done()) {
                 queue.poll();
                 finish(job);
@@ -401,13 +408,13 @@ final class MutangoRuins implements Listener {
             return index >= template.width() * template.height() * template.length();
         }
 
-        /** Hace hasta budget operaciones; devuelve el presupuesto que sobra. */
-        int step(int budget) {
+        /** Construye hasta que se acabe el tiempo del tick (budget). */
+        void step(MutangoWorkBudget budget) {
             int columns = plan.sizeX() * plan.sizeZ();
             // 1) relleno: cada columna, desde el piso para abajo hasta tocar suelo firme, con piedra y piedra
             //    musgosa (hasta MAX_FILL_DEPTH; si hay mas vacio, hollowBelow ya las descarto). Si arriba va una planta, el
             //    bloque de arriba es pasto para que no se rompa.
-            while (budget > 0 && column < columns) {
+            while (!budget.exhausted() && column < columns) {
                 int dx = column % plan.sizeX();
                 int dz = column / plan.sizeX();
                 int x = plan.x() + dx;
@@ -424,16 +431,16 @@ final class MutangoRuins implements Listener {
                         break;
                     }
                     block.setType(y == ground && plant ? Material.GRASS_BLOCK : filler(x, y, z), false);
-                    budget--;
+                    budget.charge(1);
                 }
                 column++;
-                budget--;
+                budget.charge(1);
             }
             // 2) las ruinas, incluido el aire (asi limpia arboles y lomas que queden adentro)
             int w = template.width();
             int l = template.length();
             int total = w * template.height() * l;
-            while (budget > 0 && index < total) {
+            while (!budget.exhausted() && index < total) {
                 int tx = index % w;
                 int tz = (index / w) % l;
                 int ty = index / (w * l);
@@ -442,13 +449,12 @@ final class MutangoRuins implements Listener {
                 Block block = world.getBlockAt(plan.x() + off[0], ground + 1 + ty, plan.z() + off[1]);
                 if (!(template.isAir(state) && block.getType().isAir())) {
                     block.setBlockData(data(plan.rotation(), state), false);
-                    budget -= 2;
+                    budget.charge(2);
                 } else {
-                    budget--;
+                    budget.charge(1);
                 }
                 index++;
             }
-            return budget;
         }
     }
 
@@ -510,18 +516,18 @@ final class MutangoRuins implements Listener {
         }
     }
 
-    /** Al apagar: termina de una lo que se estaba construyendo para no dejar ruinas por la mitad. */
+    /**
+     * Al apagar: no se construye todo de golpe en el hilo principal. Las ruinas que quedaron en la cola siguen anotadas
+     * como "pendiente" y start() las vuelve a armar de cero en el proximo arranque (poner los mismos bloques da lo mismo).
+     */
     void shutdown() {
         stopped = true;
         if (task != null) {
             task.cancel();
         }
-        while (!queue.isEmpty()) {
-            Job job = queue.poll();
-            while (!job.done()) {
-                job.step(Integer.MAX_VALUE / 4);
-            }
-            finish(job);
+        for (Job job : queue) {
+            job.chunks.forEach(chunk -> chunk.removePluginChunkTicket(plugin));
         }
+        queue.clear();
     }
 }
