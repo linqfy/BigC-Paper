@@ -1,6 +1,6 @@
 # Shitcoin Exchange Core Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Implementar el núcleo persistente del exchange: cantidades exactas,
 AMM, libro contable, lanzamientos y retiros de liquidez verificables.
@@ -84,23 +84,23 @@ No modificar `BigCasares.initializeRuntime()` ni `config.yml`.
   long tokenReserveAfter)` y `LiquidityQuote(long bcOut, long tokensOut,
   long sharesAfter)`.
 
-- [ ] Escribir `FixedAmountTest` y `AmmMathTest` antes del código: rechazar cero,
+- [x] Escribir `FixedAmountTest` y `AmmMathTest` antes del código: rechazar cero,
   signos, exponente, precisión excesiva y overflow al parsear; formatear cero y
   límites sin pérdida. Usar punto decimal independiente del locale.
-- [ ] Verificar el ejemplo: `buy(100_000, 1_000_000_000_000L, 50_000, 0, 1)`
+- [x] Verificar el ejemplo: `buy(100_000, 1_000_000_000_000L, 50_000, 0, 1)`
   entrega `333_333_333_333L` tokens, con reservas `150_000` y
   `666_666_666_667L`.
-- [ ] Probar compra con 150 bps: de `50_000` unidades BC$, comisión `750`;
+- [x] Probar compra con 150 bps: de `50_000` unidades BC$, comisión `750`;
   comprobar venta con comisión en BC$, slippage, salida cero, reserva cero,
   comisión fuera de `[0, 9999]` y desbordamiento de reserva posterior.
-- [ ] Probar compras y ventas repetidas con semilla fija y comprobar el producto
+- [x] Probar compras y ventas repetidas con semilla fija y comprobar el producto
   de reservas con `BigInteger`; probar productos mayores que `Long.MAX_VALUE`.
-- [ ] Ejecutar `bash gradlew test --tests '*finance.FixedAmountTest' --tests
+- [x] Ejecutar `bash gradlew test --tests '*finance.FixedAmountTest' --tests
   '*finance.AmmMathTest'` y registrar el fallo por clases ausentes.
-- [ ] Implementar las firmas usando división entera: techo para comisión, piso
+- [x] Implementar las firmas usando división entera: techo para comisión, piso
   para salida y retiro; rechazar entrada/salida consumida por comisiones.
-- [ ] Repetir las pruebas anteriores y exigir cero fallos.
-- [ ] Commit: `feat(finance): add exact amounts and constant-product quotes`.
+- [x] Repetir las pruebas anteriores y exigir cero fallos.
+- [x] Commit: `feat(finance): add exact amounts and constant-product quotes`.
 
 ### Task 2: Ledger SQLite atómico y resultados idempotentes
 
