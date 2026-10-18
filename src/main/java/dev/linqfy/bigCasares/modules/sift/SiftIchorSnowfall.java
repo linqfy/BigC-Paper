@@ -6,6 +6,7 @@ import org.bukkit.HeightMap;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.Snow;
 import org.bukkit.entity.Player;
@@ -19,6 +20,7 @@ import java.util.HashSet;
 import java.util.OptionalInt;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Consumer;
 
 /**
  * Ichor snowfall (the mod's {@code ServerLevelWeatherMixin}). While it rains in the
@@ -39,7 +41,13 @@ final class SiftIchorSnowfall implements Listener {
     static final int MAX_BLOCK_LIGHT = 9;
     static final long INTERVAL_TICKS = 16L;
 
+    private final Consumer<Block> settled;
     private World world;
+
+    /** {@code settled} is told about the block under each new snow layer (Siftslate Growth turns snowy). */
+    SiftIchorSnowfall(Consumer<Block> settled) {
+        this.settled = settled;
+    }
 
     void activate(ActiveDimension active) {
         this.world = active.world();
@@ -96,7 +104,7 @@ final class SiftIchorSnowfall implements Listener {
         }
     }
 
-    private static void attempt(World sift, int chunkX, int chunkZ) {
+    private void attempt(World sift, int chunkX, int chunkZ) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         int x = (chunkX << 4) + random.nextInt(16);
         int z = (chunkZ << 4) + random.nextInt(16);
@@ -114,6 +122,7 @@ final class SiftIchorSnowfall implements Listener {
         if (layers.isPresent()) {
             layer.setLayers(layers.getAsInt());
             block.setBlockData(layer);
+            settled.accept(block.getRelative(BlockFace.DOWN));
         }
     }
 }

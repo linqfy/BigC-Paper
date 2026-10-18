@@ -92,9 +92,10 @@ public final class SiftModule implements PluginModule {
         }, 60L);
         scope.register("sift-models-delayed-install", delayedModels::cancel);
         SiftFeatures features = SiftFeatures.create(data);
+        SiftSoils soils = new SiftSoils(plugin, platform, blocks);
         SiftRuntime runtime = new SiftRuntime(plugin, settings, worldgen::customPlacements, features, creatures,
             new SiftRifts(plugin, platform, models), sifters,
-            items::resolve);
+            items::resolve, new SiftIchorSnowfall(soils::update));
         try {
             DimensionDefinition definition = SiftDimension.create(settings, worldgen, List.of(runtime));
             DimensionStatus status = dimensions.get().register(definition);
@@ -105,6 +106,7 @@ public final class SiftModule implements PluginModule {
             registrations.registerListener("sift-advancements", new SiftAdvancementTriggers(platform, blocks));
             registrations.registerListener("sift-ichor-items", new SiftIchorItems(platform, items));
             registrations.registerListener("sift-ichor-cauldrons", new SiftIchorCauldrons(platform, items));
+            registrations.registerListener("sift-soils", soils);
             registrations.registerListener("sift-willow-saplings", new SiftWillowSaplings(plugin, platform, items, features));
             if (settings.ancientCityRitual()) {
                 new SiftRitual(plugin, registrations, platform, models).start();
