@@ -427,6 +427,21 @@ class IchorFeaturesTest {
         }
     }
 
+    /** Found on a live server: the populator's heightmap pointed above the peaks, so none got snow. */
+    @Test
+    void snowFindsTheGroundUnderAStaleHeightmap() {
+        SiftFeature snow = feature("the_sift:ichor_snow");
+        for (int stale : new int[]{1, 4}) {
+            InMemoryRegion region = snowyPeaks(3, 90).withStaleMotionHeight(stale);
+            assertTrue(snow.place(region, new Random(3), 0, 0, 0), "stale by " + stale);
+            for (int x = 0; x < 16; x++) {
+                for (int z = 0; z < 16; z++) {
+                    assertTrue(isSnowLayer(region.state(x, 90, z)), "stale by " + stale + ": no snow at " + x + "," + z);
+                }
+            }
+        }
+    }
+
     @Test
     void snowDependsOnlyOnTheWorldSeedAndColumn() {
         SiftFeature snow = feature("the_sift:ichor_snow");

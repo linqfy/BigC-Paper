@@ -18,7 +18,8 @@ import java.util.Set;
  *
  * <p>Differences: the mod's {@code MOTION_BLOCKING_NO_LEAVES} heightmap ignores willow foliage
  * (it is a leaves block there), but the server's heightmap sees the port's foliage as a full
- * block, so the ground is found by skipping foliage below the heightmap. Plants are matched by
+ * block, so the ground is found by skipping foliage below the heightmap (and the air and plants a populator's
+ * stale heightmap reports, see {@link SiftTerrain#motionBlockingTop}). Plants are matched by
  * their vanilla stand-ins. The random generator argument is unused: the noise depends only on the
  * world seed and the column, like the mod's.</p>
  */
@@ -62,7 +63,7 @@ final class SiftIchorSnowFeature implements SiftFeature {
                 if (isNaturalMountainSurface(region, blockX, groundY, blockZ) && !SiftTerrain.isFluid(region, blockX, groundY, blockZ)) {
                     changed |= placeSnowLayer(region, new Pos(blockX, groundY, blockZ), seed, SNOW_SALT, true);
                 }
-                int canopyY = region.height(WorldRegion.Heightmap.MOTION_BLOCKING, blockX, blockZ) - 1;
+                int canopyY = SiftTerrain.motionBlockingTop(region, WorldRegion.Heightmap.MOTION_BLOCKING, blockX, blockZ);
                 if (canopyY < region.minY() || canopyY >= topY - 1
                     || !ICHOR_SNOWY_PEAKS.equals(region.biome(blockX, canopyY, blockZ))
                     || !WILLOW_SUPPORT.contains(region.state(blockX, canopyY, blockZ))) {
@@ -80,8 +81,9 @@ final class SiftIchorSnowFeature implements SiftFeature {
 
     /** The mod's {@code getHeight(MOTION_BLOCKING_NO_LEAVES) - 1}: foliage counts as leaves and is skipped. */
     private static int groundY(WorldRegion region, int x, int z) {
-        int groundY = region.height(WorldRegion.Heightmap.MOTION_BLOCKING_NO_LEAVES, x, z) - 1;
-        while (groundY >= region.minY() && region.is(x, groundY, z, WILLOW_FOLIAGE)) {
+        int groundY = SiftTerrain.motionBlockingTop(region, WorldRegion.Heightmap.MOTION_BLOCKING_NO_LEAVES, x, z);
+        while (groundY >= region.minY() && (region.is(x, groundY, z, WILLOW_FOLIAGE)
+            || !region.isSolid(x, groundY, z) && !SiftTerrain.isFluid(region, x, groundY, z))) {
             groundY--;
         }
         return groundY;

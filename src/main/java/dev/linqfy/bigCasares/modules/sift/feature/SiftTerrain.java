@@ -73,6 +73,23 @@ final class SiftTerrain {
         return region.isAir(x, y, z) || isTerrain(region, x, y, z) || PLANT_TYPES.contains(region.blockId(x, y, z));
     }
 
+    /** How far below a stale heightmap the ground is looked for. */
+    static final int STALE_HEIGHT_SEARCH = 16;
+
+    /**
+     * The top motion-blocking block of a column. A Paper populator reads heightmaps primed before decoration
+     * that the decoration's own writes do not update, so the reported top can be air or a plant that earlier Sift
+     * features left there; the top is the first solid block or fluid at or below it.
+     */
+    static int motionBlockingTop(WorldRegion region, WorldRegion.Heightmap heightmap, int x, int z) {
+        int y = region.height(heightmap, x, z) - 1;
+        int lowest = Math.max(region.minY(), y - STALE_HEIGHT_SEARCH);
+        while (y > lowest && !region.isSolid(x, y, z) && !isFluid(region, x, y, z)) {
+            y--;
+        }
+        return y;
+    }
+
     static boolean isFluid(WorldRegion region, int x, int y, int z) {
         String id = region.blockId(x, y, z);
         return id.equals("minecraft:water") || id.equals("minecraft:lava") || id.equals("minecraft:bubble_column")
