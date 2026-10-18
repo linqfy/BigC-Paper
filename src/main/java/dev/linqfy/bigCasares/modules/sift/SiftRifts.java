@@ -8,6 +8,7 @@ import dev.linqfy.bigCasares.modules.model.JavaModelHandle;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.GameMode;
 import org.bukkit.HeightMap;
 import org.bukkit.Location;
@@ -356,20 +357,24 @@ final class SiftRifts implements Listener {
         if (active == null) {
             return;
         }
-        loadAround(overworld, anchor).thenRun(() -> active.registrations().scheduleImmediate("sift-rift-exit", () -> {
-            if (!player.isOnline() || dimension != active) {
-                return;
-            }
-            // A mob standing on the nearest spot must not cost the player their exit rift.
-            Optional<RiftPlacement.Spot> spot = RiftPlacement.findNear(new WorldTerrain(overworld), anchor.getBlockX(),
-                anchor.getBlockZ(), EXIT_SEARCH_RADIUS, candidate -> unoccupied(overworld, candidate));
-            if (spot.isPresent()) {
-                go(player, open(overworld, spot.get(), false, expiresAt, back).center(), reward)
-                    .thenAccept(success -> notify(player, success, notice));
-            } else {
-                player.sendMessage(Component.translatable("message.the_sift.rift_no_exit",
-                    "La grieta no pudo abrirse cerca de tu punto de reaparición", NamedTextColor.RED));
-                go(player, anchor, reward).thenAccept(success -> notify(player, success, notice));
+        holdAround(overworld, anchor).thenAccept(release -> active.registrations().scheduleImmediate("sift-rift-exit", () -> {
+            try {
+                if (!player.isOnline() || dimension != active) {
+                    return;
+                }
+                // A mob standing on the nearest spot must not cost the player their exit rift.
+                Optional<RiftPlacement.Spot> spot = RiftPlacement.findNear(new WorldTerrain(overworld), anchor.getBlockX(),
+                    anchor.getBlockZ(), EXIT_SEARCH_RADIUS, candidate -> unoccupied(overworld, candidate));
+                if (spot.isPresent()) {
+                    go(player, open(overworld, spot.get(), false, expiresAt, back).center(), reward)
+                        .thenAccept(success -> notify(player, success, notice));
+                } else {
+                    player.sendMessage(Component.translatable("message.the_sift.rift_no_exit",
+                        "La grieta no pudo abrirse cerca de tu punto de reaparición", NamedTextColor.RED));
+                    go(player, anchor, reward).thenAccept(success -> notify(player, success, notice));
+                }
+            } finally {
+                release.run();
             }
         }));
     }
@@ -414,15 +419,27 @@ final class SiftRifts implements Listener {
         return moved;
     }
 
-    private static CompletableFuture<Void> loadAround(World world, Location anchor) {
+    /**
+     * Loads the chunks the exit search reads and holds them with plugin tickets until the returned release runs.
+     * Without the tickets, chunks nobody stands in (the world spawn on 26.x) can unload again before the search
+     * runs, which on a live server left every exit without a spot. Paper completes the futures on the main thread,
+     * where the ticket is added as each chunk arrives.
+     */
+    private CompletableFuture<Runnable> holdAround(World world, Location anchor) {
         int reach = EXIT_SEARCH_RADIUS + 5;
+        List<Chunk> held = new ArrayList<>();
         List<CompletableFuture<?>> loads = new ArrayList<>();
         for (int cx = (anchor.getBlockX() - reach) >> 4; cx <= (anchor.getBlockX() + reach) >> 4; cx++) {
             for (int cz = (anchor.getBlockZ() - reach) >> 4; cz <= (anchor.getBlockZ() + reach) >> 4; cz++) {
-                loads.add(world.getChunkAtAsync(cx, cz));
+                loads.add(world.getChunkAtAsync(cx, cz).thenAccept(chunk -> {
+                    if (chunk.addPluginChunkTicket(plugin)) {
+                        held.add(chunk);
+                    }
+                }));
             }
         }
-        return CompletableFuture.allOf(loads.toArray(CompletableFuture[]::new));
+        return CompletableFuture.allOf(loads.toArray(CompletableFuture[]::new))
+            .thenApply(ignored -> () -> held.forEach(chunk -> chunk.removePluginChunkTicket(plugin)));
     }
 
     private static double horizontalDistance(Location a, Location b) {
