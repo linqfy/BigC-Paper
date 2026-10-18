@@ -175,6 +175,14 @@ class SiftRecipeCatalogTest {
     }
 
     @Test
+    void theItemsThePortRegistersMakeEveryRecipeOfTheMod() {
+        Set<String> registered = SiftItems.items().stream().map(item -> item.id().asString()).collect(Collectors.toSet());
+        Translation translation = translate(registered);
+        assertEquals(List.of(), translation.skipped(), "look-alike items (SiftStandIns) cover every recipe");
+        assertEquals(SiftRecipeCatalog.RECIPE_NAMES.size(), translation.recipes().size());
+    }
+
+    @Test
     void keepsExactlyThePortableRecipesForTheCurrentItems() {
         Translation translation = translate(SIFT_ITEMS);
 

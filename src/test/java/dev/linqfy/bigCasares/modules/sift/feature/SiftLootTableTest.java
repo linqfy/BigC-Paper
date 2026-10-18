@@ -227,15 +227,15 @@ class SiftLootTableTest {
         assertEquals(Optional.of("the_sift:charoite"), SiftLootItems.resolve("the_sift:charoite"));
         assertEquals(Optional.of("the_sift:siftslate_growth"), SiftLootItems.resolve("the_sift:siftslate_growth"));
         assertEquals(Optional.of("the_sift:overgrown_willow_log"), SiftLootItems.resolve("the_sift:overgrown_willow_log"));
-        assertEquals(Optional.of("minecraft:short_grass"), SiftLootItems.resolve("the_sift:overgrown_fronds"));
-        assertEquals(Optional.of("minecraft:fern"), SiftLootItems.resolve("the_sift:overgrown_chard"));
-        assertEquals(Optional.of("minecraft:bush"), SiftLootItems.resolve("the_sift:overgrown_stalks"));
-        assertEquals(Optional.of("minecraft:crimson_roots"), SiftLootItems.resolve("the_sift:siftslate_stalks"));
-        assertEquals(Optional.of("minecraft:crimson_roots"), SiftLootItems.resolve("the_sift:healthy_sculk_sprouts"));
-        assertEquals(Optional.of("minecraft:short_dry_grass"), SiftLootItems.resolve("the_sift:dry_healthy_sculk_sprouts"));
-        assertEquals(Optional.of("minecraft:cornflower"), SiftLootItems.resolve("the_sift:overgrown_lotus"));
-        assertEquals(Optional.of("minecraft:torchflower"), SiftLootItems.resolve("the_sift:sunburst_plant"));
-        assertEquals(Optional.of("minecraft:lily_of_the_valley"), SiftLootItems.resolve("the_sift:whisperbloom"));
+        assertEquals(Optional.of("the_sift:overgrown_fronds"), SiftLootItems.resolve("the_sift:overgrown_fronds"));
+        assertEquals(Optional.of("the_sift:overgrown_chard"), SiftLootItems.resolve("the_sift:overgrown_chard"));
+        assertEquals(Optional.of("the_sift:overgrown_stalks"), SiftLootItems.resolve("the_sift:overgrown_stalks"));
+        assertEquals(Optional.of("the_sift:siftslate_stalks"), SiftLootItems.resolve("the_sift:siftslate_stalks"));
+        assertEquals(Optional.of("the_sift:healthy_sculk_sprouts"), SiftLootItems.resolve("the_sift:healthy_sculk_sprouts"));
+        assertEquals(Optional.of("the_sift:dry_healthy_sculk_sprouts"), SiftLootItems.resolve("the_sift:dry_healthy_sculk_sprouts"));
+        assertEquals(Optional.of("the_sift:overgrown_lotus"), SiftLootItems.resolve("the_sift:overgrown_lotus"));
+        assertEquals(Optional.of("the_sift:sunburst_plant"), SiftLootItems.resolve("the_sift:sunburst_plant"));
+        assertEquals(Optional.of("the_sift:whisperbloom"), SiftLootItems.resolve("the_sift:whisperbloom"));
         assertEquals(Optional.of("minecraft:music_disc_otherside"), SiftLootItems.resolve("the_sift:music_disc_rift"));
         assertEquals(Optional.of("the_sift:siftite_upgrade_smithing_template"),
             SiftLootItems.resolve("the_sift:siftite_upgrade_smithing_template"));

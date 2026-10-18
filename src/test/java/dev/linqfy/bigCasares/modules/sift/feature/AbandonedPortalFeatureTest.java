@@ -375,10 +375,10 @@ class AbandonedPortalFeatureTest {
         assertTrue(seen.contains("the_sift:charoite"));
         assertTrue(seen.contains("the_sift:siftslate"));
         assertTrue(seen.contains("minecraft:diamond"));
-        assertTrue(seen.contains("minecraft:short_grass"), "Sift plants arrive as their stand-in items");
+        assertTrue(seen.contains("the_sift:overgrown_fronds"), "Sift plants arrive as their look-alike content items");
         assertTrue(seen.contains("minecraft:music_disc_otherside"));
         assertTrue(seen.contains("the_sift:siftite_upgrade_smithing_template"), "the Siftite template is a content item");
-        assertFalse(seen.contains("the_sift:overgrown_fronds"));
+        assertFalse(seen.contains("minecraft:short_grass"));
         assertEquals(List.of(), FEATURE.rollLoot("the_sift:chests/does_not_exist", new Random(1)));
         assertEquals(List.of(), FEATURE.rollLoot("minecraft:chests/simple_dungeon", new Random(1)));
     }

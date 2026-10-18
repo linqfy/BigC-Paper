@@ -79,6 +79,10 @@ public final class SiftItems {
         // a warped fungus a warped fungus, and the datapack lets both stand on sculk.
         items.add(simple("sculkflower_seeds", "TORCHFLOWER_SEEDS"));
         items.add(simple("sculkflower", "WARPED_FUNGUS"));
+        // Slabs, stairs, doors, signs, boats, glass and plants: vanilla look-alikes (see SiftStandIns).
+        Set<NamespacedId> present = new LinkedHashSet<>();
+        items.forEach(item -> present.add(item.id()));
+        SiftStandIns.items().stream().filter(item -> present.add(item.id())).forEach(items::add);
         return items;
     }
 

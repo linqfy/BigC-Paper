@@ -135,6 +135,7 @@ public final class SiftModule implements PluginModule {
             registrations.registerListener("sift-ichor-items", new SiftIchorItems(platform, items));
             registrations.registerListener("sift-ichor-cauldrons", new SiftIchorCauldrons(platform, items));
             registrations.registerListener("sift-soils", soils);
+            registrations.registerListener("sift-stand-ins", new SiftStandIns(platform, items, blocks));
             registrations.registerListener("sift-willow-saplings", new SiftWillowSaplings(plugin, platform, items, features));
             if (settings.sculkflowers()) {
                 new SiftSculkflowers(plugin, items::resolve, blocks, data).activate(registrations);
