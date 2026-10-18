@@ -17,6 +17,7 @@ and [Paper requirements](https://docs.papermc.io/paper/getting-started/).
 | PlaceholderAPI | 2.12.3 | Optional server plugin |
 | Geyser API | `2.11.0-SNAPSHOT` | Optional bridge loaded reflectively |
 | OpenSkill / JDA | 1.1 / 6.4.1 | Implementation dependencies, also declared in `plugin.yml` libraries |
+| SQLite JDBC | 3.50.3.0 | Finance core persistence; also declared in `plugin.yml` libraries |
 | Spigot test API / JUnit BOM | `26.2-R0.1-SNAPSHOT` / 5.11.4 | Unit-test classpath and JUnit 5 |
 
 The plugin uses the ordinary Gradle JAR, not a shaded JAR. Paper loads OpenSkill
@@ -69,6 +70,9 @@ differ from IDs. Consult each module's settings loader rather than inventing key
 Persistence is feature-specific: missions/bounties/ratings use player files;
 teams, Nexus, tombstones and warps use shared YAML; Jeremy and boss rewards have
 plugin-root files. Preserve layouts and migration behavior.
+
+The [finance core](finance.md) uses a caller-supplied SQLite file. It is an internal
+API and has no runtime module, commands or automatic access to the server economy.
 
 ## Verification and automation
 

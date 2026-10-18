@@ -211,28 +211,28 @@ No modificar `BigCasares.initializeRuntime()` ni `config.yml`.
 **Interfaces:** consume las APIs públicas de las tareas anteriores. No añade
 acceso a saldos ni módulos en el runtime.
 
-- [ ] Escribir una prueba con dos ledgers sobre el mismo archivo y una barrera de
+- [x] Escribir una prueba con dos ledgers sobre el mismo archivo y una barrera de
   inicio: dos compras que juntas exceden el saldo deben producir un solo éxito,
   sin sobregiro ni partidas de la compra rechazada.
-- [ ] Probar dos compradores financiados: ambas operaciones pueden confirmar y
+- [x] Probar dos compradores financiados: ambas operaciones pueden confirmar y
   sus recibos deben corresponder a dos swaps secuenciales, nunca al mismo estado
   inicial. Probar también el mismo UUID ejecutado concurrentemente.
-- [ ] Ejecutar un proceso hijo que abra SQLite, escriba dentro de una transacción
+- [x] Ejecutar un proceso hijo que abra SQLite, escriba dentro de una transacción
   y termine sin commit; reabrir desde el proceso padre y verificar fondos,
   reservas y ausencia de la operación interrumpida. Usar límites de tiempo y
   `ProcessBuilder`, sin añadir herramientas de producción para simular fallos.
-- [ ] Probar que un error en una transacción no inutiliza la conexión para la
+- [x] Probar que un error en una transacción no inutiliza la conexión para la
   siguiente operación válida, y que `close()` concurrente no deja un commit parcial.
-- [ ] Ejecutar `bash gradlew test --tests '*finance.*'`; exigir cero fallos y
+- [x] Ejecutar `bash gradlew test --tests '*finance.*'`; exigir cero fallos y
   corregir cualquier problema identificado por las nuevas pruebas.
-- [ ] Documentar unidades, comisiones, APIs, idempotencia, ruta futura de datos y
+- [x] Documentar unidades, comisiones, APIs, idempotencia, ruta futura de datos y
   restricciones del contrato `recordConfirmedDeposit`. Explicar que un recibo
   interno no verifica cobro en Vault y que `/bolsa` todavía no existe.
-- [ ] Ejecutar `bash gradlew --no-daemon clean build` con Java 25, revisar el
+- [x] Ejecutar `bash gradlew --no-daemon clean build` con Java 25, revisar el
   resultado completo y comprobar que el JAR declara la dependencia SQLite.
-- [ ] Revisar el diff contra la especificación, registrar evidencia y límites
+- [x] Revisar el diff contra la especificación, registrar evidencia y límites
   reales de verificación en este plan, y ejecutar `git diff --check`.
-- [ ] Commit: `test(finance): verify concurrency recovery and core contracts`.
+- [x] Commit: `test(finance): verify concurrency recovery and core contracts`.
 
 ## Execution and Completion
 
@@ -242,3 +242,20 @@ La revisión de este plan precede a la escritura de código del subsistema.
 
 Estado al redactar: especificación aprobada por el usuario; plan preparado para
 revisión. No se han implementado las clases ni modificado dependencias.
+
+
+### Completion evidence
+
+- User approved the plan and selected native execution.
+- Tasks 1–3 followed observed RED→GREEN test cycles (8, 11 and 13 tests).
+- Task 4 added seven integration tests for the existing transaction contracts;
+  they passed without further production changes.
+- Java 25: `bash gradlew --no-daemon clean build` passed: 1317 tests,
+  zero failures/errors, 0 skipped; finance accounts for 39 tests.
+- The generated JAR contains the finance API and SQLite JDBC 3.50.3.0 library
+  declaration. Pack generation completed with asset identity `702cd31b83d6`.
+- `git diff --check` and finance documentation references passed.
+- Existing compilation deprecation notices and SQLite JDBC's Java 25 native-access
+  warning remain; they did not prevent the build.
+- No live Paper, Vault, authentication or Java/Bedrock client checks were run.
+- Fresh whole-change review is the remaining verification step.

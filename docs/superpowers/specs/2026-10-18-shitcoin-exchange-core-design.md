@@ -1,6 +1,6 @@
 # Shitcoin Exchange: núcleo contable y AMM
 
-Fecha: 2026-10-18. Estado: propuesta concreta para revisión, sin implementación.
+Fecha: 2026-10-18. Estado: especificación aprobada por el usuario para la primera entrega.
 Base inspeccionada: `d47cd07`, rama `work`.
 
 ## Intención y alcance
@@ -16,8 +16,7 @@ AMM, siguiendo el orden de implementación recomendado al final de la propuesta.
 Debe producir una biblioteca interna persistente, con pruebas que permitan
 integrarla después sin exponer todavía dinero de los jugadores.
 
-**Suposición de alcance para revisar:** la autorización para implementar se
-interpreta como empezar por esta primera entrega. El mercado jugable completo
+**Alcance aprobado:** la implementación empieza por esta primera entrega. El mercado jugable completo
 requiere las etapas posteriores descritas al final; esta entrega no se presenta
 como un exchange listo para habilitar en producción.
 
