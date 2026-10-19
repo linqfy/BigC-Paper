@@ -470,7 +470,12 @@ ViaBackwards 5.12.2, test server only) played through it in creative and surviva
     mushroom blocks underneath);
   - the main portal with its surface;
   - all five creature models (Blub, Sifter, Dark Sniffer, Singer and Echo Golem);
-  - an exit rift with its view of the other side.
+  - an exit rift with its view of the other side;
+  - at night, the Singers bright against the Dark Sniffer and Echo Golem, with the pool of light from
+    their light block on the floor;
+  - the Rift disc's tooltip, driven with real mouse input: the mod's icon, "Music Disc" and "The Sift -
+    Rift", with the vanilla "C418 - 5" line hidden;
+  - a generated surface sculk region and Ichor snow on the Ichor Snowy Peaks.
 
   After the fixes below, its log has no model, texture or sound errors for the Sift. All 47 Sift
   sound events played; only a deliberately unknown control event was reported. OpenAL wrote the
@@ -514,9 +519,6 @@ navigation and the exit rift's chunk hold, which were confirmed on the server:
 
 Servers that already installed the editable pack keep their copies of `pack.mcmeta` and the Sift's
 `sounds.json` (a new jar does not overwrite them); copy the two files from `resourcepack/` over.
-
-**Not inspected:** the Singer's per-bone brightness and the hidden disc tooltip line, which need a person
-looking at a screen and hovering over the item.
 
 **Out of scope:** the Sift has no Bedrock support. The Geyser integration covers other modules, so
 Bedrock players get no Sift models or textures.
