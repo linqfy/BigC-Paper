@@ -582,6 +582,16 @@ Servers that already installed the editable pack keep their copies of `pack.mcme
   - Sift sounds under their own names.
 
   It stayed online with the required Java pack switched on.
+
+  Then 8 Java bots and 2 Bedrock bots jumped to random Sift spots every 20 seconds for 30 minutes:
+  - Five-second tick averages stayed between 25 and 38 ms, with no drift.
+  - The new Bedrock code appeared in none of 80 server-thread samples.
+  - BetterModel's threads ran the model filter in 1 of 40 thread dumps.
+  - Both Bedrock bots stayed online. The second received 753 Sift entities: Blubs, Sifters, Singers,
+    Echo Golems, Dark Sniffers and 7 rifts.
+  - The only bodies that reached it as vanilla mobs were plain sniffers and wolves, which the Sift
+    also spawns.
+  - The only errors were the offline key fetch.
   Tests check that every Sift block, item, creature and sound has its textures, icon, model parts and
   files in the pack, and that block names are unique.
   **Not verified:** what a real Bedrock client draws. No Bedrock client runs here, so how the geometry,
