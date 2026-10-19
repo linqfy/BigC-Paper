@@ -67,9 +67,9 @@ import java.util.logging.Level;
  */
 final class SiftCreatures implements Listener {
 
-    static final String BLUB_MODEL = "the_sift_blub";
-    static final String BLUB_TAMED_MODEL = "the_sift_blub_tamed";
-    static final String SINGER_MODEL = "the_sift_singer";
+    static final String BLUB_MODEL = SiftModels.BLUB;
+    static final String BLUB_TAMED_MODEL = SiftModels.BLUB_TAMED;
+    static final String SINGER_MODEL = SiftModels.SINGER;
     static final NamespacedId SOUL_BLOCK = NamespacedId.of(SiftBlocks.NS, "soul_block");
     private static final double TEMPT_RANGE = 10.0;
     private static final String SITTING = "sitting";

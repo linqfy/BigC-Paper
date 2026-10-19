@@ -120,7 +120,7 @@ import java.util.logging.Level;
  */
 final class SiftEchoGolems implements Listener {
 
-    static final String MODEL = "the_sift_echo_golem";
+    static final String MODEL = SiftModels.ECHO_GOLEM;
     static final String ENTITY_ID = "the_sift:echo_golem";
 
     private static final double BODY_SCALE = 1.94;

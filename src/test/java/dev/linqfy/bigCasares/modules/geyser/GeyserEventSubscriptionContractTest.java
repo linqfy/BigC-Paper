@@ -28,10 +28,14 @@ class GeyserEventSubscriptionContractTest {
             "eventBus().register(...) relies on @Subscribe, which Geyser ignores when Floodgate is installed");
         assertFalse(bridge.mentionsType("org.geysermc.event.subscribe.Subscribe"), "no method may be annotated");
         assertTrue(bridge.callsAnyOwner("unregisterAll", EVENT_BUSES), "closing has to drop every subscription");
+        // Geyser overrides every mushroom-block state itself, from a handler subscribed after this plugin's.
+        assertTrue(bridge.referencedClasses().contains("org/geysermc/event/PostOrder"),
+            "content blocks have to subscribe with an order so they come after Geyser's own mushroom blocks");
         for (String event : new String[]{
             "org/geysermc/geyser/api/event/lifecycle/GeyserDefineResourcePacksEvent",
             "org/geysermc/geyser/api/event/lifecycle/GeyserDefineEntitiesEvent",
             "org/geysermc/geyser/api/event/lifecycle/GeyserDefineCustomItemsEvent",
+            "org/geysermc/geyser/api/event/lifecycle/GeyserDefineCustomBlocksEvent",
             "org/geysermc/geyser/api/event/java/ServerSpawnEntityEvent"}) {
             assertTrue(bridge.referencedClasses().contains(event), event + " has to be subscribed");
         }

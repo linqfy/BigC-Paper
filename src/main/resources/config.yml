@@ -1610,6 +1610,8 @@ geyser-integration:
   bedrock-forms: true
   bedrock-resource-pack: true
   custom-items: true
+  # Bedrock blocks for the content blocks drawn with mushroom-block states (the Sift's terrain).
+  custom-blocks: true
   safe-fallbacks: true
 
 team-system:

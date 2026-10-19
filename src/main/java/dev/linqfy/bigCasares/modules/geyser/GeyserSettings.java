@@ -8,12 +8,13 @@ public record GeyserSettings(
     boolean bedrockForms,
     boolean bedrockResourcePack,
     boolean customItems,
-    boolean safeFallbacks
+    boolean safeFallbacks,
+    boolean customBlocks
 ) {
     public static GeyserSettings load(ConfigurationSection root) {
         ConfigurationSection section = root.getConfigurationSection("geyser-integration");
         if (section == null) {
-            return new GeyserSettings(true, true, true, true, true, true);
+            return new GeyserSettings(true, true, true, true, true, true, true);
         }
         return new GeyserSettings(
             section.getBoolean("enabled", true),
@@ -21,7 +22,8 @@ public record GeyserSettings(
             section.getBoolean("bedrock-forms", true),
             section.getBoolean("bedrock-resource-pack", true),
             section.getBoolean("custom-items", true),
-            section.getBoolean("safe-fallbacks", true)
+            section.getBoolean("safe-fallbacks", true),
+            section.getBoolean("custom-blocks", true)
         );
     }
 }

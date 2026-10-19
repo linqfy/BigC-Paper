@@ -1,0 +1,101 @@
+{
+  "resource_pack_name": "bigcasares",
+  "texture_name": "atlas.terrain",
+  "padding": 8,
+  "num_mip_levels": 4,
+  "texture_data": {
+    "the_sift_chiseled_siftslate": {
+      "textures": "textures/the_sift/blocks/chiseled_siftslate"
+    },
+    "the_sift_cobbled_siftslate": {
+      "textures": "textures/the_sift/blocks/cobbled_siftslate"
+    },
+    "the_sift_dry_healthy_sculk": {
+      "textures": "textures/the_sift/blocks/dry_healthy_sculk"
+    },
+    "the_sift_dry_healthy_sculk_growth_side": {
+      "textures": "textures/the_sift/blocks/dry_healthy_sculk_growth_side"
+    },
+    "the_sift_healthy_sculk": {
+      "textures": "textures/the_sift/blocks/healthy_sculk"
+    },
+    "the_sift_ichor_snow": {
+      "textures": "textures/the_sift/blocks/ichor_snow"
+    },
+    "the_sift_overgrown_willow_foliage": {
+      "textures": "textures/the_sift/blocks/overgrown_willow_foliage"
+    },
+    "the_sift_overgrown_willow_log": {
+      "textures": "textures/the_sift/blocks/overgrown_willow_log"
+    },
+    "the_sift_overgrown_willow_log_top": {
+      "textures": "textures/the_sift/blocks/overgrown_willow_log_top"
+    },
+    "the_sift_overgrown_willow_planks": {
+      "textures": "textures/the_sift/blocks/overgrown_willow_planks"
+    },
+    "the_sift_reinforced_siftslate_bottom": {
+      "textures": "textures/the_sift/blocks/reinforced_siftslate_bottom"
+    },
+    "the_sift_reinforced_siftslate_side": {
+      "textures": "textures/the_sift/blocks/reinforced_siftslate_side"
+    },
+    "the_sift_reinforced_siftslate_top": {
+      "textures": "textures/the_sift/blocks/reinforced_siftslate_top"
+    },
+    "the_sift_sift_rubble": {
+      "textures": "textures/the_sift/blocks/sift_rubble"
+    },
+    "the_sift_siftslate": {
+      "textures": "textures/the_sift/blocks/siftslate"
+    },
+    "the_sift_siftslate_bricks": {
+      "textures": "textures/the_sift/blocks/siftslate_bricks"
+    },
+    "the_sift_siftslate_charoite_ore": {
+      "textures": "textures/the_sift/blocks/siftslate_charoite_ore"
+    },
+    "the_sift_siftslate_coal_ore": {
+      "textures": "textures/the_sift/blocks/siftslate_coal_ore"
+    },
+    "the_sift_siftslate_diamond_ore": {
+      "textures": "textures/the_sift/blocks/siftslate_diamond_ore"
+    },
+    "the_sift_siftslate_emerald_ore": {
+      "textures": "textures/the_sift/blocks/siftslate_emerald_ore"
+    },
+    "the_sift_siftslate_growth_side": {
+      "textures": "textures/the_sift/blocks/siftslate_growth_side"
+    },
+    "the_sift_siftslate_growth_side_ichor_snowy": {
+      "textures": "textures/the_sift/blocks/siftslate_growth_side_ichor_snowy"
+    },
+    "the_sift_siftslate_growth_top": {
+      "textures": "textures/the_sift/blocks/siftslate_growth_top"
+    },
+    "the_sift_siftslate_siftite_ore": {
+      "textures": "textures/the_sift/blocks/siftslate_siftite_ore"
+    },
+    "the_sift_sonorous_deepslate_bottom": {
+      "textures": "textures/the_sift/blocks/sonorous_deepslate_bottom"
+    },
+    "the_sift_sonorous_deepslate_side_horn": {
+      "textures": "textures/the_sift/blocks/sonorous_deepslate_side_horn"
+    },
+    "the_sift_sonorous_deepslate_side_note": {
+      "textures": "textures/the_sift/blocks/sonorous_deepslate_side_note"
+    },
+    "the_sift_sonorous_deepslate_top": {
+      "textures": "textures/the_sift/blocks/sonorous_deepslate_top"
+    },
+    "the_sift_soul_block": {
+      "textures": "textures/the_sift/blocks/soul_block"
+    },
+    "the_sift_stripped_overgrown_willow_log": {
+      "textures": "textures/the_sift/blocks/stripped_overgrown_willow_log"
+    },
+    "the_sift_stripped_overgrown_willow_log_top": {
+      "textures": "textures/the_sift/blocks/stripped_overgrown_willow_log_top"
+    }
+  }
+}

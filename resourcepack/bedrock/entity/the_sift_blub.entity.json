@@ -1,0 +1,32 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "the_sift:blub",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/the_sift/entity/blub",
+        "tamed": "textures/the_sift/entity/blub_tamed"
+      },
+      "geometry": {
+        "default": "geometry.the_sift.blub"
+      },
+      "animations": {
+        "idle": "animation.the_sift.blub.idle",
+        "walk": "animation.the_sift.blub.walk",
+        "sitting": "animation.the_sift.blub.sitting",
+        "move": "controller.animation.the_sift.blub.move"
+      },
+      "render_controllers": [
+        "controller.render.the_sift.tamed"
+      ],
+      "scripts": {
+        "animate": [
+          "move"
+        ]
+      }
+    }
+  }
+}

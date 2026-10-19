@@ -60,8 +60,8 @@ import java.util.logging.Level;
  */
 final class SiftRifts implements Listener {
 
-    static final String RIFT_MODEL = "the_sift_rift";
-    static final String RIFT_OVERWORLD_MODEL = "the_sift_rift_overworld";
+    static final String RIFT_MODEL = SiftModels.RIFT;
+    static final String RIFT_OVERWORLD_MODEL = SiftModels.RIFT_OVERWORLD;
     private static final int LIFETIME_TICKS = 6000;
     private static final int INTERVAL_TICKS = 5400;
     private static final int INTERVAL_JITTER = 1201;

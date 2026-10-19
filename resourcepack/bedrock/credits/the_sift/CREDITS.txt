@@ -1,0 +1,3 @@
+Imported from Mielon's The Sift 1.1.1 by Mielon.
+Contributors credited by the mod: ImpSteve — Dark Sniffer texture; Fuzja Jądrowa — Rift music disc; StrawberrySushi_ — Korean localization; Echo_Dev — Wellspring remix.
+Licence: MIT. See LICENSE_the_sift in this directory.

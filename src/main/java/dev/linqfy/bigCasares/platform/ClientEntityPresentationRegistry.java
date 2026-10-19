@@ -40,6 +40,18 @@ public final class ClientEntityPresentationRegistry {
         }
     }
 
+    /** Drops one marker and keeps the others, e.g. when a body swaps one model for another. */
+    public static void unregister(UUID entityId, String markerKey) {
+        if (entityId == null || markerKey == null) {
+            return;
+        }
+        PRESENTATIONS.computeIfPresent(entityId, (ignored, current) -> {
+            LinkedHashSet<String> markers = new LinkedHashSet<>(current.markerKeys());
+            markers.remove(markerKey.strip());
+            return markers.isEmpty() ? null : new Presentation(current.javaEntityType(), Set.copyOf(markers));
+        });
+    }
+
     public record Presentation(String javaEntityType, Set<String> markerKeys) {
         public Presentation {
             markerKeys = Set.copyOf(markerKeys);

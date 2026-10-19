@@ -111,7 +111,7 @@ import java.util.logging.Level;
  */
 final class SiftDarkSniffers implements Listener {
 
-    static final String MODEL = "the_sift_dark_sniffer";
+    static final String MODEL = SiftModels.DARK_SNIFFER;
     static final String SNIFF_SOUND = "the_sift:entity.dark_sniffer.sniff";
     static final String BLOOM_SOUND = "the_sift:block.dark_sniffer.bloom";
     static final double MAX_HEALTH = 40.0;

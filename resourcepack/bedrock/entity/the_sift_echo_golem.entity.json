@@ -1,0 +1,31 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "the_sift:echo_golem",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/the_sift/entity/echo_golem"
+      },
+      "geometry": {
+        "default": "geometry.the_sift.echo_golem"
+      },
+      "animations": {
+        "walk": "animation.the_sift.echo_golem.search_walk",
+        "soul_hidden": "animation.the_sift.echo_golem.soul_hidden",
+        "move": "controller.animation.the_sift.echo_golem.move"
+      },
+      "render_controllers": [
+        "controller.render.the_sift.default"
+      ],
+      "scripts": {
+        "animate": [
+          "move",
+          "soul_hidden"
+        ]
+      }
+    }
+  }
+}

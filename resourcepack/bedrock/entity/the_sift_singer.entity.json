@@ -1,0 +1,30 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "the_sift:singer",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/the_sift/entity/singer"
+      },
+      "geometry": {
+        "default": "geometry.the_sift.singer"
+      },
+      "animations": {
+        "idle": "animation.the_sift.singer.stand",
+        "walk": "animation.the_sift.singer.stride",
+        "move": "controller.animation.the_sift.singer.move"
+      },
+      "render_controllers": [
+        "controller.render.the_sift.default"
+      ],
+      "scripts": {
+        "animate": [
+          "move"
+        ]
+      }
+    }
+  }
+}

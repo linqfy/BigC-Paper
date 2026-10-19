@@ -1,0 +1,148 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.the_sift.blub.move": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [
+            "idle"
+          ],
+          "transitions": [
+            {
+              "sitting": "query.is_sitting"
+            },
+            {
+              "moving": "query.modified_move_speed > 0.05"
+            }
+          ]
+        },
+        "moving": {
+          "animations": [
+            "walk"
+          ],
+          "transitions": [
+            {
+              "sitting": "query.is_sitting"
+            },
+            {
+              "default": "query.modified_move_speed <= 0.05"
+            }
+          ],
+          "blend_transition": 0.2
+        },
+        "sitting": {
+          "animations": [
+            "sitting"
+          ],
+          "transitions": [
+            {
+              "default": "!query.is_sitting"
+            }
+          ],
+          "blend_transition": 0.2
+        }
+      }
+    },
+    "controller.animation.the_sift.sifter.move": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [],
+          "transitions": [
+            {
+              "moving": "query.modified_move_speed > 0.05"
+            }
+          ]
+        },
+        "moving": {
+          "animations": [
+            "walk"
+          ],
+          "transitions": [
+            {
+              "default": "query.modified_move_speed <= 0.05"
+            }
+          ],
+          "blend_transition": 0.2
+        }
+      }
+    },
+    "controller.animation.the_sift.singer.move": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [
+            "idle"
+          ],
+          "transitions": [
+            {
+              "moving": "query.modified_move_speed > 0.05"
+            }
+          ]
+        },
+        "moving": {
+          "animations": [
+            "walk"
+          ],
+          "transitions": [
+            {
+              "default": "query.modified_move_speed <= 0.05"
+            }
+          ],
+          "blend_transition": 0.2
+        }
+      }
+    },
+    "controller.animation.the_sift.echo_golem.move": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [],
+          "transitions": [
+            {
+              "moving": "query.modified_move_speed > 0.05"
+            }
+          ]
+        },
+        "moving": {
+          "animations": [
+            "walk"
+          ],
+          "transitions": [
+            {
+              "default": "query.modified_move_speed <= 0.05"
+            }
+          ],
+          "blend_transition": 0.2
+        }
+      }
+    },
+    "controller.animation.the_sift.dark_sniffer.move": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [
+            "idle"
+          ],
+          "transitions": [
+            {
+              "moving": "query.modified_move_speed > 0.05"
+            }
+          ]
+        },
+        "moving": {
+          "animations": [
+            "walk"
+          ],
+          "transitions": [
+            {
+              "default": "query.modified_move_speed <= 0.05"
+            }
+          ],
+          "blend_transition": 0.2
+        }
+      }
+    }
+  }
+}

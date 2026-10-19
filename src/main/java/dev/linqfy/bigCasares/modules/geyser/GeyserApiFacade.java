@@ -24,6 +24,10 @@ public interface GeyserApiFacade extends AutoCloseable {
         return false;
     }
 
+    default boolean registerCustomBlock(GeyserCustomBlockDefinition definition) {
+        return false;
+    }
+
     @Override
     default void close() {
     }

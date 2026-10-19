@@ -393,7 +393,8 @@ public final class BigCasares extends JavaPlugin {
         this.dimensionModule = new DimensionModule(this, this::matchesItemId);
         this.customContentModule = new CustomContentModule(this, customBlocks, contentItems);
         DimensionModule dimensions = dimensionModule;
-        this.siftModule = new SiftModule(this, dimensions::platform, customBlocks, contentItems, javaModels);
+        this.siftModule = new SiftModule(this, dimensions::platform, customBlocks, contentItems, javaModels,
+            this::resolveClientPlatform);
         this.shopModule.configurePlatform(this::resolveClientPlatform, this::sendBedrockShopForm);
 
         moduleManager.register(resourcePackModule);

@@ -4,7 +4,636 @@
     "bigcasares.music.abyss_guardian": {
       "category": "music",
       "sounds": [
-        {"name": "sounds/music/abyss_guardian", "stream": true, "load_on_low_memory": true}
+        {
+          "name": "sounds/music/abyss_guardian",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "the_sift:block.dark_sniffer.bloom": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/particle/soulspeed1"
+        },
+        {
+          "name": "sounds/particle/soulspeed2"
+        },
+        {
+          "name": "sounds/particle/soulspeed3"
+        },
+        {
+          "name": "sounds/particle/soulspeed4"
+        },
+        {
+          "name": "sounds/particle/soulspeed5"
+        },
+        {
+          "name": "sounds/particle/soulspeed6"
+        },
+        {
+          "name": "sounds/particle/soulspeed7"
+        },
+        {
+          "name": "sounds/particle/soulspeed8"
+        },
+        {
+          "name": "sounds/particle/soulspeed9"
+        },
+        {
+          "name": "sounds/particle/soulspeed10"
+        },
+        {
+          "name": "sounds/particle/soulspeed11"
+        },
+        {
+          "name": "sounds/particle/soulspeed12"
+        },
+        {
+          "name": "sounds/particle/soulspeed13"
+        }
+      ]
+    },
+    "the_sift:block.sift_portal.ambient": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/portal/portal"
+        }
+      ]
+    },
+    "the_sift:block.sift_portal.trigger": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/portal/trigger"
+        }
+      ]
+    },
+    "the_sift:block.sonorous_deepslate.sound_1": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sonorous/sonorous_deepslate_sound_1"
+        }
+      ]
+    },
+    "the_sift:block.sonorous_deepslate.sound_2": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sonorous/sonorous_deepslate_sound_2"
+        }
+      ]
+    },
+    "the_sift:block.sonorous_deepslate.sound_3": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sonorous/sonorous_deepslate_sound_3"
+        }
+      ]
+    },
+    "the_sift:block.sonorous_deepslate.sound_4": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sonorous/sonorous_deepslate_sound_4"
+        }
+      ]
+    },
+    "the_sift:block.sonorous_deepslate.sound_5": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sonorous/sonorous_deepslate_sound_5"
+        }
+      ]
+    },
+    "the_sift:block.sonorous_deepslate.sound_6": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sonorous/sonorous_deepslate_sound_6"
+        }
+      ]
+    },
+    "the_sift:block.sonorous_deepslate.sound_7": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sonorous/sonorous_deepslate_sound_7"
+        }
+      ]
+    },
+    "the_sift:block.sonorous_deepslate.sound_8": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sonorous/sonorous_deepslate_sound_8"
+        }
+      ]
+    },
+    "the_sift:entity.blub.attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/axolotl/attack1"
+        },
+        {
+          "name": "sounds/mob/axolotl/attack2"
+        },
+        {
+          "name": "sounds/mob/axolotl/attack3"
+        },
+        {
+          "name": "sounds/mob/axolotl/attack4"
+        }
+      ]
+    },
+    "the_sift:entity.blub.death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/axolotl/death1"
+        },
+        {
+          "name": "sounds/mob/axolotl/death2"
+        }
+      ]
+    },
+    "the_sift:entity.blub.hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/axolotl/hurt1"
+        },
+        {
+          "name": "sounds/mob/axolotl/hurt2"
+        },
+        {
+          "name": "sounds/mob/axolotl/hurt3"
+        },
+        {
+          "name": "sounds/mob/axolotl/hurt4"
+        }
+      ]
+    },
+    "the_sift:entity.blub.idle_air": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/axolotl/idle_air1"
+        },
+        {
+          "name": "sounds/mob/axolotl/idle_air2"
+        },
+        {
+          "name": "sounds/mob/axolotl/idle_air3"
+        },
+        {
+          "name": "sounds/mob/axolotl/idle_air4"
+        },
+        {
+          "name": "sounds/mob/axolotl/idle_air5"
+        }
+      ]
+    },
+    "the_sift:entity.blub.idle_water": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/axolotl/idle1"
+        },
+        {
+          "name": "sounds/mob/axolotl/idle2"
+        },
+        {
+          "name": "sounds/mob/axolotl/idle3"
+        },
+        {
+          "name": "sounds/mob/axolotl/idle4"
+        },
+        {
+          "name": "sounds/mob/axolotl/idle5"
+        }
+      ]
+    },
+    "the_sift:entity.blub.splash": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/axolotl/splash1",
+          "pitch": 1.2,
+          "volume": 0.9
+        },
+        {
+          "name": "sounds/mob/axolotl/splash2",
+          "pitch": 1.2,
+          "volume": 0.9
+        },
+        {
+          "name": "sounds/mob/axolotl/splash3",
+          "pitch": 1.2,
+          "volume": 0.9
+        }
+      ]
+    },
+    "the_sift:entity.blub.swim": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/axolotl/swim1"
+        },
+        {
+          "name": "sounds/mob/axolotl/swim2"
+        },
+        {
+          "name": "sounds/mob/axolotl/swim3"
+        },
+        {
+          "name": "sounds/mob/axolotl/swim4"
+        },
+        {
+          "name": "sounds/mob/axolotl/swim5"
+        },
+        {
+          "name": "sounds/mob/axolotl/swim6"
+        },
+        {
+          "name": "sounds/mob/axolotl/swim7"
+        }
+      ]
+    },
+    "the_sift:entity.dark_sniffer.sniff": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/sniffer/sniffing1"
+        },
+        {
+          "name": "sounds/mob/sniffer/sniffing2"
+        },
+        {
+          "name": "sounds/mob/sniffer/sniffing3"
+        }
+      ]
+    },
+    "the_sift:entity.echo_golem.death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/copper_golem/regular/death"
+        }
+      ]
+    },
+    "the_sift:entity.echo_golem.hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/copper_golem/regular/hurt1"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/hurt2"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/hurt3"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/hurt4"
+        }
+      ]
+    },
+    "the_sift:entity.echo_golem.item_drop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/copper_golem/chest_interaction/put_item"
+        }
+      ]
+    },
+    "the_sift:entity.echo_golem.item_get": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/copper_golem/chest_interaction/take_item"
+        }
+      ]
+    },
+    "the_sift:entity.echo_golem.spawn": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/copper_golem/regular/spawn"
+        }
+      ]
+    },
+    "the_sift:entity.echo_golem.step": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/copper_golem/regular/step1"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/step2"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/step3"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/step4"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/step5"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/step6"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/step7"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/step8"
+        },
+        {
+          "name": "sounds/mob/copper_golem/regular/step9"
+        }
+      ]
+    },
+    "the_sift:entity.rift.appear": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/entity/rift/appear"
+        }
+      ]
+    },
+    "the_sift:entity.sifter.ambient": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/mob/parrot/idle1",
+          "volume": 0.2
+        },
+        {
+          "name": "sounds/mob/parrot/idle2",
+          "volume": 0.2
+        },
+        {
+          "name": "sounds/mob/parrot/idle3",
+          "volume": 0.2
+        },
+        {
+          "name": "sounds/mob/parrot/idle4",
+          "volume": 0.2
+        },
+        {
+          "name": "sounds/mob/parrot/idle5",
+          "volume": 0.2
+        },
+        {
+          "name": "sounds/mob/parrot/idle6",
+          "volume": 0.2
+        }
+      ]
+    },
+    "the_sift:entity.sifter.attack": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/mob/evocation_illager/fangs"
+        }
+      ]
+    },
+    "the_sift:entity.sifter.death": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/mob/parrot/death1"
+        },
+        {
+          "name": "sounds/mob/parrot/death2"
+        },
+        {
+          "name": "sounds/mob/parrot/death3"
+        },
+        {
+          "name": "sounds/mob/parrot/death4"
+        }
+      ]
+    },
+    "the_sift:entity.sifter.hurt": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/mob/parrot/hurt1"
+        },
+        {
+          "name": "sounds/mob/parrot/hurt2"
+        }
+      ]
+    },
+    "the_sift:entity.sifter.step": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/mob/parrot/step1"
+        },
+        {
+          "name": "sounds/mob/parrot/step2"
+        },
+        {
+          "name": "sounds/mob/parrot/step3"
+        },
+        {
+          "name": "sounds/mob/parrot/step4"
+        },
+        {
+          "name": "sounds/mob/parrot/step5"
+        }
+      ]
+    },
+    "the_sift:entity.singer.death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/entity/singer/death_0"
+        },
+        {
+          "name": "sounds/the_sift/entity/singer/death_1"
+        }
+      ]
+    },
+    "the_sift:entity.singer.dig": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/warden/dig"
+        }
+      ]
+    },
+    "the_sift:entity.singer.emerge": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/mob/warden/emerge"
+        }
+      ]
+    },
+    "the_sift:entity.singer.happy": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/entity/singer/happy_0"
+        }
+      ]
+    },
+    "the_sift:entity.singer.hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/entity/singer/hurt_0"
+        },
+        {
+          "name": "sounds/the_sift/entity/singer/hurt_1"
+        },
+        {
+          "name": "sounds/the_sift/entity/singer/hurt_2"
+        },
+        {
+          "name": "sounds/the_sift/entity/singer/hurt_3"
+        }
+      ]
+    },
+    "the_sift:entity.singer.idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/entity/singer/idle_0"
+        },
+        {
+          "name": "sounds/the_sift/entity/singer/idle_1"
+        },
+        {
+          "name": "sounds/the_sift/entity/singer/idle_2"
+        }
+      ]
+    },
+    "the_sift:entity.singer.sing": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/entity/singer/sing"
+        }
+      ]
+    },
+    "the_sift:item.ichor_bottle.empty": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/bottle/empty1"
+        },
+        {
+          "name": "sounds/bottle/empty2"
+        }
+      ]
+    },
+    "the_sift:item.ichor_bottle.fill": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/bottle/fill1"
+        },
+        {
+          "name": "sounds/bottle/fill2"
+        },
+        {
+          "name": "sounds/bottle/fill3"
+        },
+        {
+          "name": "sounds/bottle/fill4"
+        }
+      ]
+    },
+    "the_sift:item.ichor_bucket.empty": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/bucket/empty1"
+        },
+        {
+          "name": "sounds/bucket/empty2"
+        },
+        {
+          "load_on_low_memory": true,
+          "name": "sounds/bucket/empty3"
+        }
+      ]
+    },
+    "the_sift:item.ichor_bucket.fill": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/bucket/fill1"
+        },
+        {
+          "load_on_low_memory": true,
+          "name": "sounds/bucket/fill2"
+        },
+        {
+          "name": "sounds/bucket/fill3"
+        }
+      ]
+    },
+    "the_sift:item.siftite_armor.equip": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/armor/equip_netherite1"
+        },
+        {
+          "name": "sounds/armor/equip_netherite2"
+        },
+        {
+          "name": "sounds/armor/equip_netherite3"
+        },
+        {
+          "name": "sounds/armor/equip_netherite4"
+        }
+      ]
+    },
+    "the_sift:sift_intro": {
+      "category": "ambient",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/ambient/sift_intro",
+          "stream": true
+        }
+      ]
+    },
+    "the_sift:sonorous_autoplay_glitch": {
+      "category": "ambient",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sonorous/autoplay_glitch"
+        }
+      ]
+    },
+    "the_sift:the_sift_portal_close": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sift_portal/close"
+        }
+      ]
+    },
+    "the_sift:the_sift_portal_open": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/the_sift/block/sift_portal/open"
+        }
       ]
     }
   }

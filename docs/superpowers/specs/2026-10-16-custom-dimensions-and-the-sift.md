@@ -72,5 +72,16 @@ below vanilla terrain. The live runs and the client found these bugs, all fixed:
 - invisible rifts;
 - a 26.3-only sound event;
 - the pack's missing format range;
-- APIs newer than the pinned Paper API. The project's own `clean build` passes with every test green. What was and
-was not verified is listed under Verification status in `docs/dimensions/the-sift.md`.
+- APIs newer than the pinned Paper API.
+
+Bedrock support was added afterwards through the existing Geyser integration: custom blocks, items,
+creature and rift entities and sounds, generated from the Java assets. A Bedrock protocol client
+joined through Geyser 2.12 and received all of them; what a real Bedrock client draws was not seen.
+That run found these bugs, all fixed:
+- Bedrock players kicked by the required Java pack's timeout;
+- Geyser's own mushroom blocks replacing the Sift's;
+- creatures sent before their model was recorded;
+- BetterModel hiding the bodies.
+
+The project's own `clean build` passes with every test green. What was and was not verified is listed under
+Verification status in `docs/dimensions/the-sift.md`.

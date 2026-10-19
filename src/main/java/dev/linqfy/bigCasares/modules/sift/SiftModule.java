@@ -12,11 +12,16 @@ import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
 import dev.linqfy.bigCasares.modules.model.BetterModelAssetInstaller;
+import dev.linqfy.bigCasares.modules.model.BetterModelViewerFilter;
+import dev.linqfy.bigCasares.modules.model.ClientPresentedModelGateway;
 import dev.linqfy.bigCasares.modules.model.JavaModelGateway;
 import dev.linqfy.bigCasares.modules.sift.feature.SiftFeatures;
 import dev.linqfy.bigCasares.modules.sift.feature.SoulCanyonLandmarks;
 import dev.linqfy.bigCasares.modules.sift.feature.SiftTemplates;
 import dev.linqfy.bigCasares.modules.sift.recipe.SiftRecipeRegistrar;
+import dev.linqfy.bigCasares.platform.ClientEntityPresentationRegistry;
+import dev.linqfy.bigCasares.platform.ClientPlatform;
+import dev.linqfy.bigCasares.platform.ClientPlatformGateway;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -45,18 +50,23 @@ public final class SiftModule implements PluginModule {
     private final CustomBlockRegistry blocks;
     private final ContentItemFactory items;
     private final JavaModelGateway models;
+    private final SiftBedrockStandIns bedrockStandIns;
+    private final ClientPlatformGateway clientPlatforms;
     private RuntimeRegistrationScope compatibilityScope;
     private SiftSettings settings;
 
     public SiftModule(
         JavaPlugin plugin, Supplier<Optional<DimensionPlatform>> platform, CustomBlockRegistry blocks,
-        ContentItemFactory items, JavaModelGateway models
+        ContentItemFactory items, JavaModelGateway models, ClientPlatformGateway clientPlatforms
     ) {
         this.plugin = plugin;
         this.platform = platform;
         this.blocks = blocks;
         this.items = items;
-        this.models = models;
+        // Every Sift model is also recorded for Geyser, which gives Bedrock players the matching entity.
+        this.clientPlatforms = clientPlatforms;
+        this.bedrockStandIns = new SiftBedrockStandIns(plugin, clientPlatforms);
+        this.models = new ClientPresentedModelGateway(models, bedrockStandIns);
     }
 
     @Override
@@ -79,6 +89,8 @@ public final class SiftModule implements PluginModule {
         registerRecipes(scope);
         installSiftiteRecovery(scope);
         new BukkitRuntimeRegistrations(plugin, scope).registerListener("sift-charoite", new SiftCharoite());
+        new BukkitRuntimeRegistrations(plugin, scope).registerListener("sift-bedrock-stand-ins", bedrockStandIns);
+        installBedrockModelFilter(scope);
         Optional<DimensionPlatform> dimensions = platform.get();
         if (dimensions.isEmpty()) {
             plugin.getLogger().warning("[TheSift] dimension-framework is disabled; the Sift dimension is not registered.");
@@ -224,6 +236,24 @@ public final class SiftModule implements PluginModule {
 
     private static SiftPos pos(SoulCanyonLandmarks.Position position) {
         return new SiftPos(position.x(), position.y(), position.z());
+    }
+
+    /**
+     * A Bedrock player sees a Sift body as the Bedrock entity Geyser makes of it, which BetterModel would turn
+     * invisible for every player it shows the model to; so BetterModel does not show Sift models to Bedrock players.
+     */
+    private void installBedrockModelFilter(RuntimeRegistrationScope scope) {
+        try {
+            Runnable uninstall = BetterModelViewerFilter.install(plugin, (entityId, playerId) ->
+                ClientEntityPresentationRegistry.find(entityId)
+                    .filter(presentation -> presentation.markerKeys().stream().anyMatch(SiftModels::isSift))
+                    .isPresent()
+                    && clientPlatforms.resolvePlatform(playerId) == ClientPlatform.BEDROCK);
+            scope.register("sift-bedrock-model-filter", uninstall::run);
+        } catch (RuntimeException | LinkageError unavailable) {
+            plugin.getLogger().log(Level.WARNING, "[TheSift] BetterModel event bus unavailable; Bedrock players may not see "
+                + "Sift creatures", unavailable);
+        }
     }
 
     private boolean installModels() {

@@ -135,7 +135,7 @@ import java.util.stream.Collectors;
  */
 final class SiftSifters implements Listener {
 
-    static final String MODEL = "the_sift_sifter";
+    static final String MODEL = SiftModels.SIFTER;
     static final String ENTITY_ID = "the_sift:sifter";
 
     private static final double SCALE = 2.25;
