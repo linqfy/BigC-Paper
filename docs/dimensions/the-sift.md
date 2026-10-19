@@ -461,12 +461,38 @@ ViaBackwards 5.12.2, test server only) played through it in creative and surviva
   The models animate: a Sifter's 18 bone displays got 621 transform updates in 10 seconds.
 - **Cost.** Average tick times stayed between 1.6 and 10 ms. A `/tp` into unexplored terrain stalls one
   tick while chunks generate synchronously: 1.2 s in the Sift against 2.2 s for the same jumps in the
-  Overworld. A 30-minute soak (the bot moving to a new spot every 20 seconds) kept the
-  average tick at 2.1–2.6 ms, with no tick over 40 ms. The Sift's entity count held at 23–28, heap use
-  rose and fell with garbage collection, and there were no Sift errors and no stray light blocks.
+  Overworld.
 
-The live runs found and fixed eleven bugs. Every one except the golem navigation has a test; that one
-was confirmed on the server.
+- **A real 26.2 client.** The official 26.2 Java client ran on a virtual display (Xvfb with Mesa
+  software rendering, offline account) and joined the test server, accepting its resource packs. It
+  showed:
+  - the Sift terrain with the mod's textures (Siftslate and growth match the mod's images, not the
+    mushroom blocks underneath);
+  - the main portal with its surface;
+  - all five creature models (Blub, Sifter, Dark Sniffer, Singer and Echo Golem);
+  - an exit rift with its view of the other side.
+
+  After the fixes below, its log has no model, texture or sound errors for the Sift. All 47 Sift
+  sound events played; only a deliberately unknown control event was reported. OpenAL wrote the
+  output to a file: with every other sound category muted, the Sift sounds rise from silence (the
+  Singer, Sifter, Echo Golem pickup and a Sonorous note). The real client also found the remaining
+  bugs in the list below.
+- **Many players.** Eight bots stayed in the Sift for about 85 minutes, each jumping to a random spot
+  every 20 seconds. That is far harsher than walking players, because every jump makes the server
+  generate fresh terrain at once. (The real client also ran on the same 4 CPUs during this run.)
+  - Five-second tick averages stayed between 6 and 26 ms, and heap use rose and fell with garbage
+    collection.
+  - The loaded Sift population went up and down with the area loaded around the bots (Sifters,
+    sniffers, Blubs, golems, Singers, rifts), with no growth that stayed.
+  - The only exceptions were the offline-mode key fetch; there were no Sift errors.
+
+  A paired run without the client compared the same 12-minute pattern in the Sift and in the
+  Overworld. The one-minute tick average was 18.9 ms in the Sift and 89.7 ms in the Overworld, where
+  ticks stalled for several seconds. Sift code appeared in 8% of the server-thread samples, mostly
+  Echo Golem path searches (the mod's 128-block follow range, under a shared per-tick budget).
+
+The live runs and the real client found and fixed these bugs. Each has a test, except the golem
+navigation and the exit rift's chunk hold, which were confirmed on the server:
 
 - a Dark Sniffer model cube without all six faces broke every BetterModel reload;
 - location advancements used the mod's 26.3 condition form;
@@ -474,16 +500,23 @@ was confirmed on the server.
 - Echo Golem navigation had no body;
 - the arrival search preferred a roof over a safe requested spot;
 - an entity on the best rift spot cancelled the exit rift;
+- exit rifts at a world spawn nobody stands in failed, because the searched chunks unloaded first (they
+  are now held with plugin tickets);
 - surface sculk regions (and so generated Dark Sniffers) and the Ichor snow read a populator heightmap
   that decoration does not update, so none of them generated;
 - a 2x2 inventory craft made the recipe guard throw;
+- rifts were invisible on clients: the mod's placeholder UVs left their cubes without faces (the
+  rift image is now projected across the model, see `--project-texture`);
+- the Echo Golem's pickup sound named a 26.3-only vanilla event;
+- the resource pack metadata lacked the `min_format`/`max_format` 26.x requires;
 - two Sift calls were newer than the pinned `paper-api 26.2.build.56-alpha`, one was Paper-only, and the
   Spigot test classpath lacked Adventure. The project's own `clean build` now passes with every test green.
 
-**Not verified, and not verifiable without a real client or more players:**
+Servers that already installed the editable pack keep their copies of `pack.mcmeta` and the Sift's
+`sounds.json` (a new jar does not overwrite them); copy the two files from `resourcepack/` over.
 
-- What a player sees and hears: rendering, model brightness, sounds, the hidden disc tooltip line.
-- Real players over hours.
+**Not inspected:** the Singer's per-bone brightness and the hidden disc tooltip line, which need a person
+looking at a screen and hovering over the item.
 
 **Out of scope:** the Sift has no Bedrock support. The Geyser integration covers other modules, so
 Bedrock players get no Sift models or textures.

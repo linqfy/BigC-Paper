@@ -57,9 +57,20 @@ substitution itself).
 
 The Sift was then played on a live Paper 26.2 test server by a bot. Install, generation, creatures
 and models, the ritual, all travel paths, rifts, look-alike blocks, a recipe, Ichor, Siftite
-recovery and moving lights all worked. The live runs found eleven bugs, all fixed: a broken Dark Sniffer
-model cube, 26.3-only advancement conditions, the main portal's state key, Echo Golem
-navigation, roof-preferring arrivals, occupied rift spots, sculk regions and Ichor snow
-reading a stale populator heightmap, 2x2 crafts in the recipe guard, and APIs newer than the
-pinned Paper API. The project's own `clean build` passes with every test green. What was and
+recovery and moving lights all worked. The official 26.2 client then joined on a virtual display. It showed the terrain, portals,
+creatures and rifts, and played the Sift sounds (captured to a file). Eight bots in the Sift
+for 85 minutes, and a paired comparison with the Overworld, showed the Sift's cost to be well
+below vanilla terrain. The live runs and the client found these bugs, all fixed:
+- a broken Dark Sniffer model cube;
+- 26.3-only advancement conditions;
+- the main portal's state key;
+- Echo Golem navigation;
+- roof-preferring arrivals;
+- occupied rift spots and unheld chunks in the exit-rift search;
+- sculk regions and Ichor snow reading a stale populator heightmap;
+- 2x2 crafts in the recipe guard;
+- invisible rifts;
+- a 26.3-only sound event;
+- the pack's missing format range;
+- APIs newer than the pinned Paper API. The project's own `clean build` passes with every test green. What was and
 was not verified is listed under Verification status in `docs/dimensions/the-sift.md`.
