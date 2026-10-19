@@ -1,6 +1,7 @@
 package dev.linqfy.bigCasares.modules.resourcepack;
 
 import dev.linqfy.bigCasares.platform.ClientPlatform;
+import dev.linqfy.bigCasares.platform.ClientPlatformGateway;
 import org.junit.jupiter.api.Test;
 
 import java.net.URI;
@@ -44,6 +45,24 @@ class ResourcePackServiceTest {
         assertEquals(manifest.javaUuid(), requestedPackId.get());
         assertTrue(service.isBigCasaresPack(manifest.javaUuid()));
         assertFalse(service.isBigCasaresPack(UUID.fromString("00000000-0000-0000-0000-000000000099")));
+    }
+
+    @Test
+    void aBedrockPlayerNeverOwesTheRequiredJavaPack() {
+        ResourcePackManifest manifest = manifest("075a3f4dec4b");
+        AtomicInteger requests = new AtomicInteger();
+        ResourcePackGateway gateway = (playerId, packId, uri, sha1, prompt, required) -> requests.incrementAndGet();
+        ResourcePackService bedrock = service(manifest, gateway, true, true, ignored -> ClientPlatform.BEDROCK);
+        ResourcePackService java = service(manifest, gateway, true, true, ignored -> ClientPlatform.JAVA);
+
+        assertFalse(bedrock.forceRequestFor(PLAYER_ID));
+        assertFalse(bedrock.owesRequiredPack(PLAYER_ID));
+        assertTrue(java.forceRequestFor(PLAYER_ID));
+        assertTrue(java.owesRequiredPack(PLAYER_ID));
+        java.updateState(manifest.javaUuid(), PLAYER_ID, ResourcePackPlayerState.LOADED);
+        assertFalse(java.owesRequiredPack(PLAYER_ID));
+        assertEquals(1, requests.get());
+        assertFalse(service(manifest, gateway, false, true, ignored -> ClientPlatform.JAVA).owesRequiredPack(PLAYER_ID));
     }
 
     @Test
@@ -194,9 +213,19 @@ class ResourcePackServiceTest {
         ResourcePackGateway gateway,
         boolean resendOnVersionChange
     ) {
+        return service(manifest, gateway, false, resendOnVersionChange, ignored -> ClientPlatform.JAVA);
+    }
+
+    private static ResourcePackService service(
+        ResourcePackManifest manifest,
+        ResourcePackGateway gateway,
+        boolean required,
+        boolean resendOnVersionChange,
+        ClientPlatformGateway platforms
+    ) {
         return new ResourcePackService(
             new ResourcePackSettings(
-                false,
+                required,
                 resendOnVersionChange,
                 "BigCasares pack",
                 new ResourcePackPublisher(ResourcePackPublisher.Mode.EXTERNAL_URL,
@@ -204,7 +233,7 @@ class ResourcePackServiceTest {
             ),
             manifest,
             gateway,
-            ignored -> ClientPlatform.JAVA
+            platforms
         );
     }
 

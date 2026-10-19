@@ -48,11 +48,7 @@ public final class ResourcePackStatusListener implements Listener {
 
             if (service.isRequired()) {
                 registrations.scheduleDelayed("required-pack-timeout", () -> {
-                    if (!player.isOnline()) {
-                        return;
-                    }
-                    ResourcePackPlayerState state = service.state(playerId);
-                    if (state == ResourcePackPlayerState.SENT || state == ResourcePackPlayerState.NOT_REQUESTED) {
+                    if (player.isOnline() && service.owesRequiredPack(playerId)) {
                         player.kick(Component.text("Necesitas cargar el resource pack de BigCasares para jugar."));
                     }
                 }, 400L);

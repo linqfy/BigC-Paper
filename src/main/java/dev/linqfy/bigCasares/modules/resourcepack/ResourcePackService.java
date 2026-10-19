@@ -120,6 +120,19 @@ public final class ResourcePackService {
         return settings.required();
     }
 
+    /**
+     * Whether a required Java pack is still missing for the player, so the join timeout may kick them. A Bedrock
+     * player is never sent the Java pack (Geyser gives them the Bedrock pack), so they never owe it; before this
+     * check every Geyser player was kicked about 20 seconds after joining a server with a required pack.
+     */
+    public boolean owesRequiredPack(UUID playerId) {
+        if (!settings.required() || platformGateway.resolvePlatform(playerId) == ClientPlatform.BEDROCK) {
+            return false;
+        }
+        ResourcePackPlayerState state = state(playerId);
+        return state == ResourcePackPlayerState.SENT || state == ResourcePackPlayerState.NOT_REQUESTED;
+    }
+
     public boolean isBigCasaresPack(UUID packId) {
         return delivery.get().packs().stream().anyMatch(pack -> pack.id().equals(packId)) || previousPackIds.contains(packId);
     }
