@@ -10,7 +10,7 @@ y soporte completo para Bedrock. Nacio como un plugin aparte y se integro a BigC
   `bigcasares.mutango.admin`, hijo de `bigcasares.*`).
 - **Configuracion:** `plugins/BigCasares/mutango.yml` (se copia la primera vez; solo tiene la seccion `bedrock`).
 - **Datos que persisten:** `plugins/BigCasares/data/mutango/` (`pendientes.yml`: la cola de adjudicaciones (victorias y premios) con version,
-  `bloques-por-devolver.yml`: el diario de bloques, `ruinas.yml`: que ruinas se hicieron, con version).
+  `bloques-por-devolver.log`: el diario de bloques, `ruinas.yml`: que ruinas se hicieron, con version).
 - **Modelos 3D:** `src/main/resources/bettermodel/models/` (28 `.bbmodel`); `MutangoModelInstaller` los copia a BetterModel
   y lo recarga. Los `.bbmodel` se editan en Blockbench.
 - **Pack de recursos (Java):** el de BigC ya manda el pack de BetterModel mezclado con el suyo, asi que los modelos llegan
@@ -322,9 +322,13 @@ usa contra los mobs que rompen bloques) con Neguechen como autora. Si alguien lo
 ## Si el servidor se cae con la grieta o las ondas abiertas
 
 Los bloques que la grieta (por columna) o las ondas de las manos (por tick) van a sacar se anotan **como un lote, con
-como eran, y se guardan en** `plugins/BigCasares/data/mutango/bloques-por-devolver.yml` **antes de tocar el mundo**: si el
+como eran, y se guardan en** `plugins/BigCasares/data/mutango/bloques-por-devolver.log` **antes de tocar el mundo**: si el
 lote no se pudo guardar, no se saca ningun bloque de ese lote. Cuando se devuelven siguen anotados hasta que el mundo se
-guarda (`WorldSaveEvent`) con el bloque devuelto, recien ahi se tachan. Si el servidor se cae o se cuelga en medio, **al arrancar devuelve los bloques
+guarda (`WorldSaveEvent`) con el bloque devuelto, recien ahi se tachan.
+El archivo es un **log de solo agregar** (una linea por operacion, `A` anota y `R` tacha, con encabezado de version): cada
+lote se agrega al final en vez de reescribir todo el diario, una linea cortada por un corte de luz se ignora, y cuando el log
+creció mas de 4 veces lo que sigue vivo (y pasa de 2000 lineas) se compacta a un temporal que se mueve al destino. El formato
+anterior (YAML) se sigue leyendo y se pasa al nuevo en el primer guardado. Si el servidor se cae o se cuelga en medio, **al arrancar devuelve los bloques
 que faltaban** (los que siguen siendo aire o la luz verde de la grieta; si alguien puso algo ahi, se respeta) y avisa en
 la consola. Con un apagado normal ya se cierra todo antes.
 

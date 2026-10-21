@@ -63,6 +63,29 @@ class MutangoAwardClaimTest {
         }
 
         @Override
+        public void remove(UUID award) {
+            receipts.remove(award);
+        }
+
+        private int winsBefore;
+        private int rewardsBefore;
+        private int slotsBefore;
+
+        @Override
+        public void begin() {
+            winsBefore = wins;
+            rewardsBefore = rewards;
+            slotsBefore = freeSlots;
+        }
+
+        @Override
+        public void rollback() {
+            wins = winsBefore;
+            rewards = rewardsBefore;
+            freeSlots = slotsBefore;
+        }
+
+        @Override
         public boolean hasRoom(int sets) {
             return freeSlots >= 2 * sets;
         }
@@ -198,5 +221,59 @@ class MutangoAwardClaimTest {
             MutangoAwardClaim.claim(award, fake, fake, queue::confirm));
         assertEquals(1, fake.savedWins);
         assertEquals(1, fake.savedRewards);
+    }
+
+    @Test
+    void aFailureInTheMiddleAndARetryInTheSameSessionAppliesItOnlyOnce() {
+        MutangoPending queue = new MutangoPending(file());
+        MutangoPending.Award award = queue.add(player, 1, 1);
+        FakePlayer fake = new FakePlayer();
+        fake.crashAt = "items"; // las victorias ya se aplicaron en memoria cuando falla la entrega de items
+
+        assertThrows(IllegalStateException.class, () -> MutangoAwardClaim.claim(award, fake, fake, queue::confirm));
+        fake.crashAt = null; // sin reinicio: el mismo jugador, la misma sesion
+        MutangoAwardClaim.claim(award, fake, fake, queue::confirm);
+
+        assertEquals(1, fake.wins, "una victoria, no dos (la primera vuelta ya la habia sumado en memoria)");
+        assertEquals(1, fake.rewards);
+        assertEquals(1, fake.savedWins);
+        assertEquals(1, fake.savedRewards);
+    }
+
+    @Test
+    void aFailureWhileSavingThePlayerUndoesTheReceiptSoTheRetryDoesNotJustReconfirm() {
+        MutangoPending queue = new MutangoPending(file());
+        MutangoPending.Award award = queue.add(player, 1, 1);
+        FakePlayer fake = new FakePlayer();
+        fake.crashAt = "persist";
+
+        assertThrows(IllegalStateException.class, () -> MutangoAwardClaim.claim(award, fake, fake, queue::confirm));
+        assertFalse(fake.receipts.contains(award.id()), "sin guardar, el recibo no queda en memoria");
+        assertTrue(new MutangoPending(file()).has(player), "sigue en la cola");
+
+        fake.crashAt = null;
+        assertEquals(MutangoAwardClaim.Result.CLAIMED, MutangoAwardClaim.claim(award, fake, fake, queue::confirm));
+        assertEquals(1, fake.savedWins);
+        assertEquals(1, fake.savedRewards);
+    }
+
+    @Test
+    void aCutAtEveryStepInTheSameSessionAlsoAppliesItOnlyOnce() {
+        for (String step : new String[] {"wins", "items", "receipt", "persist"}) {
+            MutangoPending queue = new MutangoPending(new File(folder, "cola-" + step + ".yml"));
+            MutangoPending.Award award = queue.add(player, 1, 1);
+            FakePlayer fake = new FakePlayer();
+            fake.crashAt = step;
+
+            assertThrows(IllegalStateException.class,
+                () -> MutangoAwardClaim.claim(award, fake, fake, queue::confirm), step);
+            fake.crashAt = null; // reintento sin reiniciar
+            MutangoAwardClaim.claim(award, fake, fake, queue::confirm);
+
+            assertEquals(1, fake.wins, "victoria unica en memoria (corte en " + step + ")");
+            assertEquals(1, fake.rewards, "premios unicos en memoria (corte en " + step + ")");
+            assertEquals(1, fake.savedWins, step);
+            assertEquals(1, fake.savedRewards, step);
+        }
     }
 }

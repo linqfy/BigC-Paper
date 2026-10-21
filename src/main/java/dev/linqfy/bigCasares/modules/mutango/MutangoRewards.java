@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -189,6 +190,14 @@ final class MutangoRewards implements Listener {
                 data.set(keys.receipts, PersistentDataType.STRING, String.join(",", list));
             }
 
+            @Override
+            public void remove(UUID award) {
+                Set<String> all = read();
+                if (all.remove(award.toString())) {
+                    data.set(keys.receipts, PersistentDataType.STRING, String.join(",", all));
+                }
+            }
+
             private Set<String> read() {
                 String raw = data.get(keys.receipts, PersistentDataType.STRING);
                 Set<String> set = new LinkedHashSet<>();
@@ -202,6 +211,26 @@ final class MutangoRewards implements Listener {
 
     private MutangoAwardClaim.Target targetOf(Player player) {
         return new MutangoAwardClaim.Target() {
+            /** Como estaba el jugador al empezar la entrega (para deshacerla si falla antes de guardar). */
+            private int winsBefore;
+            private ItemStack[] storageBefore = new ItemStack[0];
+
+            @Override
+            public void begin() {
+                winsBefore = wins(player);
+                ItemStack[] contents = player.getInventory().getStorageContents();
+                storageBefore = new ItemStack[contents.length];
+                for (int i = 0; i < contents.length; i++) {
+                    storageBefore[i] = contents[i] == null ? null : contents[i].clone();
+                }
+            }
+
+            @Override
+            public void rollback() {
+                player.getPersistentDataContainer().set(keys.wins, PersistentDataType.INTEGER, winsBefore);
+                player.getInventory().setStorageContents(storageBefore);
+            }
+
             @Override
             public boolean hasRoom(int rewards) {
                 return relics.hasRoomFor(player, rewards);

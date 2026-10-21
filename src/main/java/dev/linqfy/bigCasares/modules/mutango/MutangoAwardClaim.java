@@ -12,6 +12,9 @@ import java.util.function.Consumer;
  *   <li>se aplican las victorias y los items, se anota el recibo y se guarda el jugador;</li>
  *   <li>recien ahi se confirma (se borra de la cola).</li>
  * </ol>
+ * Si cualquier paso falla a mitad, se <b>deshace todo lo aplicado en memoria</b> (victorias, items y recibo) antes de
+ * relanzar el error: un reintento en la misma sesion (sin reinicio) no puede sumar dos veces lo que la primera vuelta ya
+ * habia puesto en el jugador sin guardar.
  * Las victorias, los items y el recibo viven en los datos del mismo jugador y se guardan juntos, asi que un corte antes de
  * guardar deja la adjudicacion sin aplicar (se reintenta) y un corte despues la deja con recibo (no se repite).
  */
@@ -24,6 +27,9 @@ final class MutangoAwardClaim {
         boolean has(UUID award);
 
         void add(UUID award);
+
+        /** Deshace add (la entrega fallo antes de guardar al jugador). */
+        void remove(UUID award);
     }
 
     /** El jugador que recibe. */
@@ -37,6 +43,12 @@ final class MutangoAwardClaim {
 
         /** Guarda al jugador (victorias, items y recibo juntos). */
         void persist();
+
+        /** Empieza una entrega: recuerda como estaba el jugador (victorias e inventario) para poder deshacerla. */
+        void begin();
+
+        /** La entrega fallo: el jugador vuelve a como estaba en begin (lo que no se llego a guardar no cuenta). */
+        void rollback();
     }
 
     private MutangoAwardClaim() {
@@ -50,14 +62,21 @@ final class MutangoAwardClaim {
         if (award.rewards() > 0 && !target.hasRoom(award.rewards())) {
             return Result.NO_ROOM;
         }
-        if (award.wins() > 0) {
-            target.addWins(award.wins());
+        target.begin();
+        try {
+            if (award.wins() > 0) {
+                target.addWins(award.wins());
+            }
+            if (award.rewards() > 0) {
+                target.giveRewards(award.rewards());
+            }
+            receipts.add(award.id());
+            target.persist();
+        } catch (RuntimeException failure) {
+            receipts.remove(award.id());
+            target.rollback();
+            throw failure;
         }
-        if (award.rewards() > 0) {
-            target.giveRewards(award.rewards());
-        }
-        receipts.add(award.id());
-        target.persist();
         confirm.accept(award.id());
         return Result.CLAIMED;
     }

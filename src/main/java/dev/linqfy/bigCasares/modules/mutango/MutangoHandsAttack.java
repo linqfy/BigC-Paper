@@ -404,7 +404,8 @@ final class MutangoHandsAttack {
     /** Bloques del piso que se pueden arrancar: solidos, sin contenido (cofres, carteles...) y no irrompibles. */
     private static boolean liftable(Block top) {
         Material type = top.getType();
-        return type.isSolid() && !(top.getState() instanceof TileState)
+        // getState(false): sin copiar el estado (es un snapshot caro y esto corre por cada candidato en cada tick)
+        return type.isSolid() && !(top.getState(false) instanceof TileState)
             && type.getHardness() >= 0 && type.getHardness() < 50;
     }
 

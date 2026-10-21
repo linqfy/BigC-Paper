@@ -111,8 +111,8 @@ class MutangoBlockJournalTest {
     @Test
     void siElLoteNoSePuedeGuardarNoQuedaAnotadoNiSeAutorizaTocarElMundo() throws Exception {
         File file = file();
-        // un directorio donde va el archivo temporal: guardar falla
-        Files.createDirectories(new File(file.getPath() + ".tmp").toPath());
+        // un directorio donde va el archivo: agregar al final falla
+        Files.createDirectories(file.toPath());
         MutangoBlockJournal journal = new MutangoBlockJournal(file);
 
         boolean saved = journal.commit(List.of(new MutangoBlockJournal.Entry(world, 1, 2, 3, "minecraft:stone")));
@@ -125,7 +125,8 @@ class MutangoBlockJournalTest {
     void unLoteFallidoNoDeshaceLoQueYaEstabaAnotado() throws Exception {
         MutangoBlockJournal journal = new MutangoBlockJournal(file());
         assertTrue(journal.commit(List.of(new MutangoBlockJournal.Entry(world, 1, 2, 3, "minecraft:stone"))));
-        Files.createDirectories(new File(file().getPath() + ".tmp").toPath());
+        Files.delete(file().toPath());
+        Files.createDirectories(file().toPath()); // el archivo pasa a ser un directorio: agregar falla
 
         assertFalse(journal.commit(List.of(
             new MutangoBlockJournal.Entry(world, 1, 2, 3, "minecraft:air"),
@@ -191,5 +192,106 @@ class MutangoBlockJournalTest {
         journal.restored(world, 1, 2, 3);
         journal.worldSaved(world);
         assertTrue(journal.isEmpty());
+    }
+
+    // ---- log de solo agregar ----
+
+    @Test
+    void cadaLoteSeAgregaAlFinalSinReescribirLoAnterior() throws Exception {
+        MutangoBlockJournal journal = new MutangoBlockJournal(file());
+        journal.commit(List.of(new MutangoBlockJournal.Entry(world, 1, 2, 3, "minecraft:stone")));
+        String first = Files.readString(file().toPath());
+
+        journal.commit(List.of(new MutangoBlockJournal.Entry(world, 4, 5, 6, "minecraft:dirt")));
+        String second = Files.readString(file().toPath());
+
+        assertTrue(second.startsWith(first), "lo que ya estaba queda igual: el lote nuevo se agrega al final");
+        assertEquals(3, Files.readAllLines(file().toPath()).size(), "encabezado y una linea por bloque");
+    }
+
+    @Test
+    void elLogTachadoSeRepiteAlCargar() {
+        MutangoBlockJournal journal = new MutangoBlockJournal(file());
+        journal.commit(List.of(new MutangoBlockJournal.Entry(world, 1, 2, 3, "minecraft:stone"),
+            new MutangoBlockJournal.Entry(world, 4, 5, 6, "minecraft:dirt")));
+        journal.release(world, 1, 2, 3);
+        journal.flush();
+
+        List<MutangoBlockJournal.Entry> loaded = new MutangoBlockJournal(file()).entries();
+        assertEquals(1, loaded.size());
+        assertEquals(4, loaded.get(0).x());
+    }
+
+    @Test
+    void unaLineaCortadaALaMitadDeEscribirseNoSeLee() throws Exception {
+        MutangoBlockJournal journal = new MutangoBlockJournal(file());
+        journal.commit(List.of(new MutangoBlockJournal.Entry(world, 1, 2, 3, "minecraft:stone")));
+        // un corte a mitad de agregar la linea siguiente: sin salto de linea al final
+        Files.writeString(file().toPath(), "A\t" + world + "\t9\t9\t9\tminecraft:grass_block[sno",
+            java.nio.file.StandardOpenOption.APPEND);
+
+        MutangoBlockJournal afterCrash = new MutangoBlockJournal(file());
+        assertEquals(1, afterCrash.entries().size());
+        assertEquals(1, afterCrash.entries().get(0).x());
+
+        // y seguir agregando despues no deja basura pegada a la linea cortada
+        afterCrash.commit(List.of(new MutangoBlockJournal.Entry(world, 7, 7, 7, "minecraft:dirt")));
+        assertEquals(2, new MutangoBlockJournal(file()).entries().size());
+    }
+
+    @Test
+    void cuandoElLogCrecioMuchoMasQueLoVivoSeCompacta() throws Exception {
+        MutangoBlockJournal journal = new MutangoBlockJournal(file(), 10);
+        for (int i = 0; i < 12; i++) {
+            journal.commit(List.of(new MutangoBlockJournal.Entry(world, i, 0, 0, "minecraft:stone")));
+            journal.restored(world, i, 0, 0);
+        }
+        journal.worldSaved(world); // se tachan los 12 y el log tiene 24 lineas para 0 vivas
+
+        assertEquals(1, Files.readAllLines(file().toPath()).size(), "solo el encabezado: se compacto");
+        assertTrue(new MutangoBlockJournal(file()).isEmpty());
+    }
+
+    @Test
+    void laCompactacionConservaLoQueSigueVivo() throws Exception {
+        MutangoBlockJournal journal = new MutangoBlockJournal(file(), 4);
+        for (int i = 0; i < 6; i++) {
+            journal.commit(List.of(new MutangoBlockJournal.Entry(world, i, 0, 0, "minecraft:stone")));
+        }
+        for (int i = 0; i < 5; i++) {
+            journal.restored(world, i, 0, 0);
+        }
+        journal.worldSaved(world);
+
+        List<MutangoBlockJournal.Entry> left = new MutangoBlockJournal(file()).entries();
+        assertEquals(1, left.size());
+        assertEquals(5, left.get(0).x());
+    }
+
+    @Test
+    void elFormatoViejoEnYamlSeLeeYSePasaAlNuevoEnElPrimerGuardado() throws Exception {
+        File file = file();
+        Files.createDirectories(file.getParentFile().toPath());
+        Files.writeString(file.toPath(), "bloques:\n- " + world + "|7|8|9|minecraft:oak_log[axis=y]\n");
+
+        MutangoBlockJournal journal = new MutangoBlockJournal(file);
+        assertEquals(1, journal.entries().size());
+
+        journal.commit(List.of(new MutangoBlockJournal.Entry(world, 1, 1, 1, "minecraft:stone")));
+
+        assertTrue(Files.readString(file.toPath()).startsWith(MutangoBlockJournal.HEADER));
+        assertEquals(2, new MutangoBlockJournal(file).entries().size());
+    }
+
+    @Test
+    void unArchivoViejoVacioRecibeElEncabezadoYNoQuedaMezclado() throws Exception {
+        File file = file();
+        Files.createDirectories(file.getParentFile().toPath());
+        Files.writeString(file.toPath(), "bloques: []\n");
+
+        MutangoBlockJournal journal = new MutangoBlockJournal(file);
+        journal.commit(List.of(new MutangoBlockJournal.Entry(world, 1, 1, 1, "minecraft:stone")));
+
+        assertEquals(1, new MutangoBlockJournal(file).entries().size());
     }
 }

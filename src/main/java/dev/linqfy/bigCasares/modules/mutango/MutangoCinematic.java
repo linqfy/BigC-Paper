@@ -144,6 +144,9 @@ final class MutangoCinematic {
         int count = letters.size();
         if (ticks == 1 && verse.start()) {
             for (Player player : viewers(verse.where())) {
+                if (!player.isOnline()) {
+                    continue;
+                }
                 player.playSound(player.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_CHIME, 0.8f, 0.6f);
             }
         }
@@ -168,6 +171,9 @@ final class MutangoCinematic {
         if (ticks == 1) {
             Title title = Title.title(text(banner.title()), text(banner.subtitle()), times(6, 50, 14));
             for (Player player : viewers(banner.where())) {
+                if (!player.isOnline()) {
+                    continue;
+                }
                 player.showTitle(title);
                 player.playSound(player.getLocation(), banner.sound(), 1.0f, 0.5f);
             }
@@ -183,6 +189,9 @@ final class MutangoCinematic {
         // el titulo de Java (subtitulo con el titulo vacio) solo se arma si hay alguien de Java mirando
         Title javaTitle = null;
         for (Player player : viewers(where)) {
+            if (!player.isOnline()) {
+                continue;
+            }
             if (!bedrock(player)) {
                 if (javaTitle == null) {
                     javaTitle = Title.title(Component.empty(), component, times);
@@ -201,7 +210,8 @@ final class MutangoCinematic {
 
     /**
      * Los jugadores a menos de RADIUS bloques. La lista se arma con los cercanos (no con todo el mundo) y se reusa unos
-     * ticks mientras sea el mismo verso o cartel; los que se desconectaron entre medio se saltean.
+     * ticks mientras sea el mismo verso o cartel. La lista puede traer a alguien que se desconecto en esos ticks: quien
+     * la recorre lo saltea con isOnline.
      */
     private List<Player> viewers(Location where) {
         if (current != viewersCard || sinceViewers >= VIEWERS_EVERY || viewersCache.isEmpty() && sinceViewers > 0) {
@@ -216,7 +226,7 @@ final class MutangoCinematic {
             sinceViewers = 0;
             return out;
         }
-        return viewersCache.stream().filter(Player::isOnline).toList();
+        return viewersCache; // sin copiar: quien la usa saltea a los que ya se desconectaron (isOnline)
     }
 
     private boolean bedrock(Player player) {

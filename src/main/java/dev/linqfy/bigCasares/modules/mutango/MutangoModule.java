@@ -89,7 +89,7 @@ public final class MutangoModule implements PluginModule {
 
         MutangoKeys keys = new MutangoKeys(plugin);
         MutangoPending pending = new MutangoPending(new File(plugin.getDataFolder(), "data/mutango/pendientes.yml"));
-        journal = new MutangoBlockJournal(new File(plugin.getDataFolder(), "data/mutango/bloques-por-devolver.yml"));
+        journal = new MutangoBlockJournal(new File(plugin.getDataFolder(), "data/mutango/bloques-por-devolver.log"));
 
         MutangoBedrock bedrock = new MutangoBedrock();
         boolean bedrockModels = MutangoBedrock.bedrockModels(config.getString(MutangoBedrock.MODELS_SETTING, "auto"),
