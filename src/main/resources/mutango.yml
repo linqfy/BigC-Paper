@@ -1,0 +1,14 @@
+# Jugadores de Bedrock (Geyser + Floodgate).
+bedrock:
+  # Si los de Bedrock ven los modelos 3D del Mutango, Neguechen, el Sol y la Luna:
+  #   auto  -> si esta instalado GeyserModelEngine (si no, ven las vacas de abajo)
+  #   true  -> siempre (solo sirve con GeyserModelEngine)
+  #   false -> nunca: ven las vacas de abajo
+  modelos-3d: auto
+  # Iconos propios (textura) de las Botas de Neguechen y la Cruz Andina para los de Bedrock, con items personalizados
+  # de Geyser. Si las botas puestas se ven mal en Bedrock, ponelo en false (ven las botas de cuero y el totem comunes).
+  items-personalizados: true
+  # Como ven los de Bedrock los versos del poema en pantalla:
+  #   titulo -> titulo grande en el medio (Bedrock lo achica solo si no entra)
+  #   barra  -> en la barra de abajo (por si el titulo se ve mal)
+  texto-en-pantalla: titulo

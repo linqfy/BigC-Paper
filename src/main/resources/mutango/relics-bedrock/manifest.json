@@ -1,0 +1,17 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Premios de Neguechen",
+    "description": "Iconos de las Botas de Neguechen y la Cruz Andina",
+    "uuid": "4b0f8a52-6d1c-4e57-9a37-2c7d1e5b8f01",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "9c2e6d14-3a8b-4f70-b5e9-7d41a0c63e22",
+      "version": [1, 0, 0]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "resource_pack_name": "mutango",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "mutango.botas_neguechen": {"textures": "textures/item/botas_neguechen"},
+    "mutango.cruz_andina": {"textures": "textures/item/cruz_andina"}
+  }
+}
