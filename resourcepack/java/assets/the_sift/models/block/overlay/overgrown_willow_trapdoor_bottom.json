@@ -1,0 +1,81 @@
+{
+  "textures": {
+    "particle": "#texture",
+    "texture": "the_sift:block/overgrown_willow_trapdoor"
+  },
+  "elements": [
+    {
+      "from": [
+        -0.04,
+        -0.04,
+        -0.04
+      ],
+      "to": [
+        16.04,
+        3.04,
+        16.04
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#texture",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#texture"
+        },
+        "north": {
+          "uv": [
+            0,
+            16,
+            16,
+            13
+          ],
+          "texture": "#texture",
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [
+            0,
+            16,
+            16,
+            13
+          ],
+          "texture": "#texture",
+          "cullface": "south"
+        },
+        "west": {
+          "uv": [
+            0,
+            16,
+            16,
+            13
+          ],
+          "texture": "#texture",
+          "cullface": "west"
+        },
+        "east": {
+          "uv": [
+            0,
+            16,
+            16,
+            13
+          ],
+          "texture": "#texture",
+          "cullface": "east"
+        }
+      }
+    }
+  ]
+}

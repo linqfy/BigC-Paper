@@ -1,0 +1,31 @@
+{
+  "textures": {
+    "particle": "the_sift:block/stripped_overgrown_willow_log",
+    "all": "the_sift:block/overgrown_willow_shelf"
+  },
+  "elements": [
+    {
+      "from": [
+        -0.04,
+        3.96,
+        12.96
+      ],
+      "to": [
+        16.04,
+        12.04,
+        13.04
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            8,
+            12
+          ],
+          "texture": "#all"
+        }
+      }
+    }
+  ]
+}

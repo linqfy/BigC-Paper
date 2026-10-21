@@ -1,0 +1,77 @@
+{
+  "textures": {
+    "particle": "#texture",
+    "texture": "the_sift:block/overgrown_willow_planks"
+  },
+  "elements": [
+    {
+      "from": [
+        0.96,
+        -0.04,
+        0.96
+      ],
+      "to": [
+        15.04,
+        1.04,
+        15.04
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": "#texture",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": "#texture"
+        },
+        "north": {
+          "uv": [
+            1,
+            15,
+            15,
+            16
+          ],
+          "texture": "#texture"
+        },
+        "south": {
+          "uv": [
+            1,
+            15,
+            15,
+            16
+          ],
+          "texture": "#texture"
+        },
+        "west": {
+          "uv": [
+            1,
+            15,
+            15,
+            16
+          ],
+          "texture": "#texture"
+        },
+        "east": {
+          "uv": [
+            1,
+            15,
+            15,
+            16
+          ],
+          "texture": "#texture"
+        }
+      }
+    }
+  ]
+}

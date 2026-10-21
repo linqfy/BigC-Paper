@@ -1,0 +1,41 @@
+{
+  "textures": {
+    "particle": "#pane",
+    "pane": "the_sift:block/ichor_glass",
+    "edge": "the_sift:block/ichor_glass_pane_top"
+  },
+  "elements": [
+    {
+      "from": [
+        6.96,
+        -0.04,
+        6.96
+      ],
+      "to": [
+        9.04,
+        16.04,
+        9.04
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": "#edge"
+        },
+        "up": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": "#edge"
+        }
+      }
+    }
+  ]
+}

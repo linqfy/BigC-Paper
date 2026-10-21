@@ -1,0 +1,73 @@
+{
+  "textures": {
+    "particle": "#top",
+    "bottom": "the_sift:block/overgrown_willow_door_bottom",
+    "top": "the_sift:block/overgrown_willow_door_top"
+  },
+  "elements": [
+    {
+      "from": [
+        -0.04,
+        -0.04,
+        -0.04
+      ],
+      "to": [
+        3.04,
+        16.04,
+        16.04
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ],
+          "texture": "#top",
+          "cullface": "up",
+          "rotation": 90
+        },
+        "north": {
+          "uv": [
+            3,
+            0,
+            0,
+            16
+          ],
+          "texture": "#top",
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [
+            3,
+            0,
+            0,
+            16
+          ],
+          "texture": "#top",
+          "cullface": "south"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#top",
+          "cullface": "west"
+        },
+        "east": {
+          "uv": [
+            16,
+            0,
+            0,
+            16
+          ],
+          "texture": "#top"
+        }
+      }
+    }
+  ]
+}

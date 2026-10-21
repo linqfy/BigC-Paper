@@ -1,0 +1,43 @@
+{
+  "textures": {
+    "particle": "#wall",
+    "wall": "the_sift:block/siftslate_bricks"
+  },
+  "elements": [
+    {
+      "from": [
+        3.96,
+        -0.04,
+        3.96
+      ],
+      "to": [
+        12.04,
+        16.04,
+        12.04
+      ],
+      "faces": {
+        "down": {
+          "texture": "#wall",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#wall",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#wall"
+        },
+        "south": {
+          "texture": "#wall"
+        },
+        "west": {
+          "texture": "#wall"
+        },
+        "east": {
+          "texture": "#wall"
+        }
+      },
+      "__comment": "Center post"
+    }
+  ]
+}

@@ -121,6 +121,9 @@ commands:
     description: Inspect and travel between BigCasares custom dimensions
     usage: /<command> <list|info|tp|leave|locate|phase|pack|export>
     aliases: [ dim ]
+  siftmodels:
+    description: Turns The Sift's block models over placed slabs, stairs and plants on or off for yourself
+    usage: /<command> [on|off] [player]
   content:
     description: List and give code-defined content items (e.g. The Sift)
     usage: /<command> <list [namespace]|give <id> [player] [amount]>
@@ -128,6 +131,9 @@ commands:
 
 
 permissions:
+  bigcasares.sift.models.others:
+    description: Switch The Sift's block models on or off for another player
+    default: op
   bigcasares.*:
     description: Full access to BigCasares commands
     default: op

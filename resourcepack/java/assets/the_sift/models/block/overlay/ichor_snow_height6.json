@@ -1,0 +1,81 @@
+{
+  "textures": {
+    "particle": "the_sift:block/ichor_snow",
+    "texture": "the_sift:block/ichor_snow"
+  },
+  "elements": [
+    {
+      "from": [
+        -0.04,
+        -0.04,
+        -0.04
+      ],
+      "to": [
+        16.04,
+        6.04,
+        16.04
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#texture",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#texture"
+        },
+        "north": {
+          "uv": [
+            0,
+            10,
+            16,
+            16
+          ],
+          "texture": "#texture",
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [
+            0,
+            10,
+            16,
+            16
+          ],
+          "texture": "#texture",
+          "cullface": "south"
+        },
+        "west": {
+          "uv": [
+            0,
+            10,
+            16,
+            16
+          ],
+          "texture": "#texture",
+          "cullface": "west"
+        },
+        "east": {
+          "uv": [
+            0,
+            10,
+            16,
+            16
+          ],
+          "texture": "#texture",
+          "cullface": "east"
+        }
+      }
+    }
+  ]
+}

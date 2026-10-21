@@ -7,6 +7,7 @@ import dev.linqfy.bigCasares.content.ContentItem;
 import dev.linqfy.bigCasares.content.ContentItemFactory;
 import dev.linqfy.bigCasares.dimension.DimensionPlatform;
 import dev.linqfy.bigCasares.dimension.NamespacedId;
+import org.bukkit.Chunk;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -41,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 /**
@@ -311,6 +313,16 @@ final class SiftStandIns implements Listener {
         }
         vehicle.eject();
         vehicle.remove();
+    }
+
+    /** Calls {@code action} with every placed look-alike remembered in the chunk and its packed position. */
+    void forEachPlaced(Chunk chunk, BiConsumer<StandIn, Long> action) {
+        for (StandIn standIn : ALL) {
+            SiftChunkMarks standInMarks = marks.get(standIn.path());
+            for (long position : standInMarks.positions(chunk)) {
+                action.accept(standIn, position);
+            }
+        }
     }
 
     private Optional<StandIn> marked(Block block) {

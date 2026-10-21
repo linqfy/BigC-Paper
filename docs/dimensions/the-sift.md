@@ -96,7 +96,7 @@ clients cannot show new content types, or original to this port.
 | `/locate structure the_sift:abandoned_main_portal` | Adapted | `/dimension locate the_sift:the_sift abandoned_main_portal`: the nearest ruin the generator has recorded in `landmarks.bin`, plus the mod's search for nearer ones, see Locating abandoned portals |
 | Items | From the mod / adapted | Block items, Charoite, Siftite nugget/ingot/gear/template, Ichor shard, bottle, bucket and snowball, Sifter meat, willow sapling, Sculkflower and seeds, the five spawn eggs and the two music discs (the last seven are stand-ins, see below): content items on vanilla materials with the mod's models and names. Recipes, anvils, crafters, smithing tables and cooking blocks take a content item only where a recipe names it exactly (`ContentRecipeGuard`), so a Siftite nugget never crafts an iron ingot and a Siftite ingot never upgrades gear to netherite |
 | Recipes | From the mod | All 76 of the mod's recipes, with content items as exact ingredients and results (`recipe/SiftRecipeCatalog`, `SiftRecipeRegistrar`); a test checks that the registered items cover every recipe |
-| Slabs, stairs, walls, doors, trapdoors, fences, gates, buttons, pressure plates, signs, shelves, boats, Ichor glass and panes, Ichor snow layers, plant items | Substitute | Vanilla clients cannot show new non-cube blocks, so these are content items with the mod's icons and names that place close vanilla look-alikes: cobbled deepslate and deepslate brick shapes for Siftslate, warped wood for Overgrown Willow (the nearest colour), oak boats, light blue glass, and the world generator's plant stand-ins. Vanilla places and connects them; their positions are remembered per chunk so they drop the mod's item again (vanilla's tool, silk-touch and double-slab rules, which the mod's tables copy), plants in the Sift drop the mod's plant items (shears or silk touch where the mod asks for them) and willow boats break into willow boats. Broken by water or a piston, a look-alike drops the vanilla item (`SiftStandIns`) |
+| Slabs, stairs, walls, doors, trapdoors, fences, gates, buttons, pressure plates, signs, shelves, boats, Ichor glass and panes, Ichor snow layers, plant items | Substitute | Vanilla clients cannot show new non-cube blocks, so these are content items with the mod's icons and names that place close vanilla look-alikes: cobbled deepslate and deepslate brick shapes for Siftslate, warped wood for Overgrown Willow (the nearest colour), oak boats, light blue glass, and the world generator's plant stand-ins. Vanilla places and connects them; their positions are remembered per chunk so they drop the mod's item again (vanilla's tool, silk-touch and double-slab rules, which the mod's tables copy), plants in the Sift drop the mod's plant items (shears or silk touch where the mod asks for them) and willow boats break into willow boats. Broken by water or a piston, a look-alike drops the vanilla item (`SiftStandIns`). Java players near a placed look-alike see the mod's model over it (see Block models below) |
 | Advancements | From the mod | The mod's story and Sift tabs: all 22 of its advancements, with native criteria where the mod has them and the code-awarded ones granted at the mod's moments (horn near an Ancient City frame, taming a Blub, rift travel, ore mining, setting wood on fire, Siftite recovery, Charoite enchanting, an Ichor snowball near a Warden, Echo Golem and Singer events, Sculkflower planting, a Blub killing a Dark Sniffer). Rift Resonance is awarded for the stand-in Rift disc (see Music discs); an advancement whose feature is switched off is left out and its children move up |
 | Ichor items | From the mod / adapted | A bucket or glass bottle filled from Ichor in the Sift holds Ichor; an Ichor bucket poured in another world leaves an Ichor source there (remembered per chunk) that gives the Ichor effects and fills an Ichor bucket again, though the water it spreads is plain water; the bottle is a drink with the mod's colour and three seconds of Regeneration, the bucket empties as water (Ichor in the Sift). Cauldrons filled with Ichor (remembered per chunk; every water cauldron in the Sift) give Ichor bottles and buckets and take Ichor bottles back, with the mod's sounds |
 | Ichor snow and snowballs | From the mod / adapted | Snow layers are the Sift's Ichor snow and drop Ichor snowballs; the Ichor snow block drops four. While it rains in the Sift, Ichor snow settles on Ichor Snowy Peaks only (block light below 10, at most two layers), as the mod's weather mixin does; Paper already keeps weather per world. An Ichor snowball landing within 16 blocks of a Warden awards False Alarm |
@@ -117,7 +117,8 @@ clients cannot show new content types, or original to this port.
   in), the procedural sky, the Ichor fluid texture, the weather texture swap and the glowing outline layer.
   The Singer's glowmask and dynamic light and the Echo Golem's emissive Soul Block and dynamic light are
   substituted, see Server-side substitutes.
-- The look of the non-cube blocks: they are vanilla look-alikes (see above). Ichor is
+- The look of the non-cube blocks when nobody is near: they are vanilla look-alikes (see above), and the mod's
+  model is drawn over them only for nearby players who have it on. Ichor is
   water with the Sift's tint, not its own fluid with the mod's texture and glow.
 - The mod's two music recordings ("Rift" and the "Wellspring" remix are third-party works,
   see below); vanilla songs stand in for them, see Music discs.
@@ -233,6 +234,36 @@ Vanilla gives `fallOn` the supporting block; the event has a position only, so t
   light blocks light the server too (growth survives near the Singer, snow does not settle in her light), and a player holding
   a light item sees the marker. A Singer rising out of the ground lights nothing until her head is in the open.
 
+## Block models over the look-alikes
+
+`SiftBlockModels` draws the mod's own block model over every placed look-alike. Java players within
+`the-sift.block-models.radius` blocks (24 by default) see it, so a placed willow slab looks like the
+mod's slab and not a warped slab.
+
+- **How it is drawn.** Each model of the block's state is an item display at the block. The look-alike
+  has the same properties as the mod's block (facing, half, shape, open...), so its state picks the mod's
+  variant or multipart pieces.
+  - The models are copies of the mod's, grown by 0.0025 blocks, so their faces cover the look-alike's
+    instead of flickering with them.
+  - A state change (a door opening, stairs connecting) redraws within 2 ticks.
+- **Who sees it.** Only players near the block, at most the 600 nearest look-alikes each.
+  - A player turns the models off or on for themselves with `/siftmodels [on|off]`; the setting is kept
+    with the player.
+  - Staff with `bigcasares.sift.models.others` set it for someone else with
+    `/siftmodels <on|off> <player>`.
+  - Bedrock players never get the models: Geyser does not show display entities, and Bedrock players see
+    the Sift's custom blocks and items instead.
+- **What is drawn.** Slabs, stairs, walls, fences, gates, doors, trapdoors, buttons, pressure plates,
+  shelves, standing signs, Ichor glass and panes, Ichor snow layers and plants that players place.
+  - Not drawn: world-generated Sift plants (their positions are not remembered, and there are too many
+    to cover), wall and hanging signs on walls (the mod has no model for those states), and boats.
+  - Where the mod's model is smaller than the look-alike (a plant), the look-alike shows around it.
+  - The mod's Ichor glass models need 26.3, so the glass and panes use 26.2's glass templates with the
+    mod's textures.
+- **Cost.** Every 10 ticks the remembered positions within the radius of each player are read. Every 2
+  ticks each drawn block's state is compared. The displays are not saved; switch them off with
+  `the-sift.block-models.enabled: false`.
+
 ## Bedrock players (Geyser)
 
 Bedrock players join through Geyser, which translates the Java game for them. Without help they would
@@ -328,6 +359,9 @@ the-sift:
     enabled: true               # Healthy Sculk destroys the crop a player lands on
   dynamic-lights:
     enabled: true               # light blocks that follow the Singer and a carried Soul Block
+  block-models:
+    enabled: true               # the mod's models over placed look-alikes, for Java players nearby
+    radius: 24                  # blocks, 4-96
 ```
 
 Echo Golems and Singers can be switched off separately. Without Singers a golem
@@ -418,6 +452,8 @@ python3 -I tools/convert_geckolib_bbmodel.py <jar> rift rift/sift the_sift_rift
 python3 -I tools/convert_geckolib_bbmodel.py <jar> rift rift/overworld the_sift_rift_overworld
 python3 -I tools/convert_geckolib_bbmodel.py <jar> sifter sifter the_sift_sifter --rename running=walk --speed walk=2.5
 python3 -I tools/generate_dark_sniffer_bbmodel.py <jar>   # vanilla sniffer parts + the mod's texture
+# the mod's blockstates and block models for the look-alikes (see "Block models over the look-alikes")
+python3 -I tools/export_sift_block_models.py <jar> <Minecraft 26.2 client jar>
 # Bedrock: blocks, item icons, creatures and sounds from the files above (see "Bedrock players")
 python3 -I tools/export_sift_bedrock.py <Geyser jar's mappings/sounds.json> <bedrock-samples sound_definitions.json>
 bash gradlew generateCustomBlockstates   # after changing custom blocks
@@ -569,6 +605,16 @@ navigation and the exit rift's chunk hold, which were confirmed on the server:
 Servers that already installed the editable pack keep their copies of `pack.mcmeta` and the Sift's
 `sounds.json` (a new jar does not overwrite them); copy the two files from `resourcepack/` over.
 
+- **Block models over look-alikes (2026-10-21).** A bot placed one of each look-alike on the test server
+  (slabs, stairs and walls of both stones, the willow pieces, the shelf, a standing sign, Ichor glass,
+  pane and snow, and plants). The real 26.2 client then showed:
+  - the mod's models over them, turned like the blocks: a door's window, stairs facing their way;
+  - the vanilla deepslate and warped blocks after `/siftmodels off <player>`, and the models again after
+    `on`;
+  - the vanilla blocks from about 35 blocks away and the models again from 15.
+
+  It also found three bugs, all fixed: models turned half a turn (item displays turn their item),
+  faces flickering on the block's centre plane (now grown copies), and the command not reaching a player.
 - **Bedrock, through Geyser (2026-10-19).** Geyser-Spigot 2.12.0 (build 1265) ran on the test server.
   A Bedrock protocol client (`bedrock-protocol` 3.60.1, Bedrock 1.26.51, offline login with Geyser's
   login check off on the test server) joined and logged what Geyser sent. It received:

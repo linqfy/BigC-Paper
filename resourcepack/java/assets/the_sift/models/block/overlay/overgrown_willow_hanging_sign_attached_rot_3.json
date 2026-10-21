@@ -1,0 +1,127 @@
+{
+  "textures": {
+    "all": "the_sift:block/overgrown_willow_hanging_sign",
+    "particle": "the_sift:block/stripped_overgrown_willow_log"
+  },
+  "elements": [
+    {
+      "from": [
+        0.96,
+        -0.04,
+        6.96
+      ],
+      "to": [
+        15.04,
+        10.04,
+        9.04
+      ],
+      "rotation": {
+        "angle": -67.5,
+        "axis": "y",
+        "origin": [
+          8,
+          0,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            9,
+            8,
+            16,
+            13
+          ],
+          "texture": "#all"
+        },
+        "east": {
+          "uv": [
+            8,
+            8,
+            9,
+            13
+          ],
+          "texture": "#all"
+        },
+        "south": {
+          "uv": [
+            1,
+            8,
+            8,
+            13
+          ],
+          "texture": "#all"
+        },
+        "west": {
+          "uv": [
+            0,
+            8,
+            1,
+            13
+          ],
+          "texture": "#all"
+        },
+        "up": {
+          "uv": [
+            1,
+            7,
+            8,
+            8
+          ],
+          "texture": "#all"
+        },
+        "down": {
+          "uv": [
+            1,
+            13,
+            8,
+            14
+          ],
+          "texture": "#all",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        1.96,
+        9.96,
+        7.96
+      ],
+      "to": [
+        14.04,
+        16.04,
+        8.04
+      ],
+      "rotation": {
+        "angle": -67.5,
+        "axis": "y",
+        "origin": [
+          8,
+          0,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            16,
+            0,
+            10,
+            3
+          ],
+          "texture": "#all"
+        },
+        "south": {
+          "uv": [
+            10,
+            0,
+            16,
+            3
+          ],
+          "texture": "#all"
+        }
+      }
+    }
+  ]
+}

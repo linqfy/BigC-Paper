@@ -22,10 +22,12 @@ import dev.linqfy.bigCasares.modules.sift.recipe.SiftRecipeRegistrar;
 import dev.linqfy.bigCasares.platform.ClientEntityPresentationRegistry;
 import dev.linqfy.bigCasares.platform.ClientPlatform;
 import dev.linqfy.bigCasares.platform.ClientPlatformGateway;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -161,7 +163,8 @@ public final class SiftModule implements PluginModule {
             registrations.registerListener("sift-ichor-items", new SiftIchorItems(platform, items));
             registrations.registerListener("sift-ichor-cauldrons", new SiftIchorCauldrons(platform, items));
             registrations.registerListener("sift-soils", soils);
-            registrations.registerListener("sift-stand-ins", new SiftStandIns(platform, items, blocks));
+            SiftStandIns standIns = registrations.registerListener("sift-stand-ins", new SiftStandIns(platform, items, blocks));
+            installBlockModels(registrations, scope, standIns);
             new SiftIchorPools(plugin, platform, items, settings.ichor()).start(registrations);
             registrations.registerListener("sift-willow-saplings", new SiftWillowSaplings(plugin, platform, items, features));
             SiftSculkflowers sculkflowers = settings.sculkflowers() ? new SiftSculkflowers(plugin, items::resolve, blocks, data) : null;
@@ -236,6 +239,37 @@ public final class SiftModule implements PluginModule {
 
     private static SiftPos pos(SoulCanyonLandmarks.Position position) {
         return new SiftPos(position.x(), position.y(), position.z());
+    }
+
+    /** The mod's block models drawn over placed look-alikes for players close by (see {@link SiftBlockModels}). */
+    private void installBlockModels(BukkitRuntimeRegistrations registrations, RuntimeRegistrationScope scope,
+                                    SiftStandIns standIns) {
+        SiftBlockModels.Settings modelSettings = SiftBlockModels.Settings.load(plugin.getConfig());
+        if (!modelSettings.enabled()) {
+            return;
+        }
+        SiftBlockModelStates states;
+        try (InputStream input = plugin.getResource(SiftBlockModelStates.RESOURCE)) {
+            if (input == null) {
+                plugin.getLogger().warning("[TheSift] " + SiftBlockModelStates.RESOURCE + " is missing; placed slabs, "
+                    + "stairs and plants show only their vanilla look-alikes");
+                return;
+            }
+            states = SiftBlockModelStates.read(input);
+        } catch (IOException ex) {
+            plugin.getLogger().log(Level.WARNING, "[TheSift] Could not read the block models", ex);
+            return;
+        }
+        SiftBlockModels models = new SiftBlockModels(plugin, standIns, states, clientPlatforms, modelSettings.radius());
+        registrations.scheduleRepeating("sift-block-models-scan", models::scan, SiftBlockModels.SCAN_TICKS,
+            SiftBlockModels.SCAN_TICKS);
+        registrations.scheduleRepeating("sift-block-models-states", models::checkStates, SiftBlockModels.STATE_CHECK_TICKS,
+            SiftBlockModels.STATE_CHECK_TICKS);
+        scope.register("sift-block-models", models::removeAll);
+        PluginCommand command = plugin.getCommand("siftmodels");
+        if (command != null) {
+            registrations.bindCommand("sift-block-models-command", command, models, models);
+        }
     }
 
     /**

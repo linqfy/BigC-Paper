@@ -1,0 +1,154 @@
+{
+  "textures": {
+    "all": "the_sift:block/overgrown_willow_sign",
+    "particle": "the_sift:block/overgrown_willow_planks"
+  },
+  "elements": [
+    {
+      "from": [
+        7.2933,
+        -0.04,
+        7.2933
+      ],
+      "to": [
+        8.7067,
+        9.3733,
+        8.7067
+      ],
+      "rotation": {
+        "angle": -22.5,
+        "axis": "y",
+        "origin": [
+          8,
+          0,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            14,
+            8,
+            15,
+            15
+          ],
+          "texture": "#all"
+        },
+        "east": {
+          "uv": [
+            15,
+            0,
+            16,
+            7
+          ],
+          "texture": "#all"
+        },
+        "south": {
+          "uv": [
+            14,
+            0,
+            15,
+            7
+          ],
+          "texture": "#all"
+        },
+        "west": {
+          "uv": [
+            15,
+            8,
+            16,
+            15
+          ],
+          "texture": "#all"
+        },
+        "down": {
+          "uv": [
+            14,
+            15,
+            15,
+            16
+          ],
+          "texture": "#all",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        -0.04,
+        9.2933,
+        7.2933
+      ],
+      "to": [
+        16.04,
+        17.3733,
+        8.7067
+      ],
+      "rotation": {
+        "angle": -22.5,
+        "axis": "y",
+        "origin": [
+          8,
+          0,
+          8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            12,
+            14
+          ],
+          "texture": "#all"
+        },
+        "east": {
+          "uv": [
+            12,
+            1,
+            13,
+            7
+          ],
+          "texture": "#all"
+        },
+        "south": {
+          "uv": [
+            0,
+            1,
+            12,
+            7
+          ],
+          "texture": "#all"
+        },
+        "west": {
+          "uv": [
+            12,
+            8,
+            13,
+            14
+          ],
+          "texture": "#all"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            12,
+            1
+          ],
+          "texture": "#all"
+        },
+        "down": {
+          "uv": [
+            0,
+            14,
+            12,
+            15
+          ],
+          "texture": "#all"
+        }
+      }
+    }
+  ]
+}

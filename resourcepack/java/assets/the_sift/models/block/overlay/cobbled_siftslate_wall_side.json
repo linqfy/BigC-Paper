@@ -1,0 +1,40 @@
+{
+  "textures": {
+    "particle": "#wall",
+    "wall": "the_sift:block/cobbled_siftslate"
+  },
+  "elements": [
+    {
+      "from": [
+        4.96,
+        -0.04,
+        -0.04
+      ],
+      "to": [
+        11.04,
+        14.04,
+        8.04
+      ],
+      "faces": {
+        "down": {
+          "texture": "#wall",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#wall"
+        },
+        "north": {
+          "texture": "#wall",
+          "cullface": "north"
+        },
+        "west": {
+          "texture": "#wall"
+        },
+        "east": {
+          "texture": "#wall"
+        }
+      },
+      "__comment": "wall"
+    }
+  ]
+}

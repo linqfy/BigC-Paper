@@ -1831,3 +1831,8 @@ the-sift:
   # Moving light blocks for the Singer (level 15) and an Echo Golem carrying a Soul Block (level 14).
   dynamic-lights:
     enabled: true
+  # The mod's models drawn over placed slabs, stairs, walls, doors, plants... (vanilla look-alikes) for Java
+  # players within radius blocks. Players turn them off for themselves with /siftmodels off.
+  block-models:
+    enabled: true
+    radius: 24

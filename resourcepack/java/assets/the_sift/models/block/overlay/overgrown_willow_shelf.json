@@ -1,0 +1,199 @@
+{
+  "textures": {
+    "particle": "the_sift:block/stripped_overgrown_willow_log",
+    "all": "the_sift:block/overgrown_willow_shelf"
+  },
+  "elements": [
+    {
+      "name": "shelf_body",
+      "from": [
+        -0.04,
+        -0.04,
+        12.96
+      ],
+      "to": [
+        16.04,
+        16.04,
+        16.04
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            8,
+            0,
+            9.5,
+            8
+          ],
+          "texture": "#all",
+          "cullface": "east"
+        },
+        "south": {
+          "uv": [
+            8,
+            0,
+            16,
+            8
+          ],
+          "texture": "#all",
+          "cullface": "south"
+        },
+        "west": {
+          "uv": [
+            14.5,
+            0,
+            16,
+            8
+          ],
+          "texture": "#all",
+          "cullface": "west"
+        },
+        "up": {
+          "uv": [
+            16,
+            5,
+            8,
+            3.5
+          ],
+          "texture": "#all",
+          "cullface": "up"
+        },
+        "down": {
+          "uv": [
+            16,
+            6,
+            8,
+            4.5
+          ],
+          "texture": "#all",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "name": "shelf_bottom",
+      "from": [
+        -0.04,
+        -0.04,
+        10.96
+      ],
+      "to": [
+        16.04,
+        4.04,
+        13.04
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            6,
+            8,
+            8
+          ],
+          "texture": "#all"
+        },
+        "east": {
+          "uv": [
+            1.5,
+            6,
+            2.5,
+            8
+          ],
+          "texture": "#all",
+          "cullface": "east"
+        },
+        "west": {
+          "uv": [
+            5.5,
+            6,
+            6.5,
+            8
+          ],
+          "texture": "#all",
+          "cullface": "west"
+        },
+        "up": {
+          "uv": [
+            8,
+            3.5,
+            16,
+            4.5
+          ],
+          "texture": "#all"
+        },
+        "down": {
+          "uv": [
+            16,
+            4.5,
+            8,
+            3.5
+          ],
+          "texture": "#all",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "name": "shelf_top",
+      "from": [
+        -0.04,
+        11.96,
+        10.96
+      ],
+      "to": [
+        16.04,
+        16.04,
+        13.04
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            8,
+            2
+          ],
+          "texture": "#all"
+        },
+        "east": {
+          "uv": [
+            1.5,
+            0,
+            2.5,
+            2
+          ],
+          "texture": "#all",
+          "cullface": "east"
+        },
+        "west": {
+          "uv": [
+            5.5,
+            0,
+            6.5,
+            2
+          ],
+          "texture": "#all",
+          "cullface": "west"
+        },
+        "up": {
+          "uv": [
+            16,
+            6,
+            8,
+            5
+          ],
+          "texture": "#all",
+          "cullface": "up"
+        },
+        "down": {
+          "uv": [
+            8,
+            5,
+            16,
+            6
+          ],
+          "texture": "#all"
+        }
+      }
+    }
+  ]
+}

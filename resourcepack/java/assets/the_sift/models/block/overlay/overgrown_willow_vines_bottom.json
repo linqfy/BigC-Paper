@@ -1,0 +1,41 @@
+{
+  "textures": {
+    "particle": "the_sift:block/overgrown_willow_vines_bottom",
+    "vine": "the_sift:block/overgrown_willow_vines_bottom"
+  },
+  "elements": [
+    {
+      "from": [
+        -0.04,
+        -0.04,
+        0.76
+      ],
+      "to": [
+        16.04,
+        16.04,
+        0.84
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            16,
+            0,
+            0,
+            16
+          ],
+          "texture": "#vine"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#vine"
+        }
+      },
+      "shade_direction_override": "up"
+    }
+  ]
+}
