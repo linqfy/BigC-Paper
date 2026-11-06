@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "id": "menu",
+  "title": "TIDEFRAME",
+  "elements": [
+    {
+      "id": "heading",
+      "text": "TIDEFRAME",
+      "x": 0,
+      "y": 0.55,
+      "width": 1.4,
+      "height": 0.18,
+      "kind": "label",
+      "action": ""
+    },
+    {
+      "id": "start",
+      "text": "START",
+      "x": 0,
+      "y": 0.05,
+      "width": 0.9,
+      "height": 0.22,
+      "kind": "button",
+      "action": "message:Welcome to Tideframe."
+    },
+    {
+      "id": "close",
+      "text": "CLOSE",
+      "x": 0,
+      "y": -0.35,
+      "width": 0.9,
+      "height": 0.22,
+      "kind": "button",
+      "action": "close"
+    },
+    {
+      "id": "accept",
+      "text": "ACCEPT",
+      "x": 0.25,
+      "y": -0.3,
+      "width": 0.8,
+      "height": 0.18,
+      "kind": "button",
+      "action": "message:Accepted."
+    }
+  ]
+}

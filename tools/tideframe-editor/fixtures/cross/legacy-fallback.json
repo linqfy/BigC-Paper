@@ -1,0 +1,80 @@
+{
+  "name": "legacy-fallback",
+  "about": "An element with an empty action list falls back to its schema 1-8 action; a cooldown applies to it too.",
+  "pages": [
+    {
+      "version": 9,
+      "id": "old",
+      "title": "OLD",
+      "quality": {
+        "preset": "low",
+        "width": 512,
+        "height": 288
+      },
+      "elements": [
+        {
+          "id": "hi",
+          "text": "HI",
+          "x": 0,
+          "y": 0.75,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "button",
+          "action": "message:hi",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null,
+          "logic": {
+            "actions": [],
+            "cooldown": "1s"
+          }
+        }
+      ],
+      "presentation": {
+        "mode": "menu",
+        "scale": 1,
+        "cursor": "cross"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "click": "hi"
+    },
+    {
+      "click": "hi"
+    }
+  ],
+  "expect": {
+    "events": [
+      "legacy message:hi"
+    ],
+    "page": "old",
+    "closed": false
+  }
+}

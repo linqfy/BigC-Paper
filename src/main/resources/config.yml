@@ -43,12 +43,218 @@ modules:
     enabled: true
   discord-integration:
     enabled: true
+  tideframe-ui:
+    enabled: true
   dimension-framework:
     enabled: true
   custom-content:
     enabled: true
   the-sift:
     enabled: true
+
+# Tideframe integrado en este JAR: solo para jugadores de Java con su pack cargado.
+# Con el modulo apagado, en Bedrock o si la pantalla falla, se usan los menus de siempre.
+# Pantallas del motor: plugins/BigCasares/tideframe/engine/screens. No requiere Tideframe.jar.
+tideframe-ui:
+  # Misiones diarias y semanales (solo para ver; reclamar sigue en el menu de inventario).
+  missions: true
+  # Tienda: categorias y productos (clic izquierdo compra, derecho vende).
+  shop: true
+  # Motor de interfaz. Guardar este archivo aplica los cambios de esta seccion solo (editor.auto-reload),
+  # o con /tideframe reload. Los textos que ven los jugadores en estas opciones estan en ingles.
+  motor:
+    # Serve generated packs on loopback by default. For remote players, configure
+    # public-url with the reachable HTTPS reverse-proxy URL, including /packs/.
+    pack:
+      bind: 127.0.0.1
+      port: 8136
+      public-url: http://127.0.0.1:8136/packs/
+      required: false
+      # Copy the generated assets into other packs after every build, e.g.
+      # ["plugins/ItemsAdder/contents/tideframe/resourcepack", "plugins/Nexo/pack/external_packs/tideframe"].
+      export-to: []
+      # false: Tideframe does not send its own pack (another plugin distributes the exported assets).
+      send: true
+    # Menus are a 256x144 canvas (coordinates -1..1) drawn at the native resolution of each size.
+    # Menu size per player: /tideframe size (clickable list) or /tideframe size 2,
+    # or /tideframe fit WINDOW_WIDTH WINDOW_HEIGHT GUI_SCALE (0 = Auto). Saved on the player.
+    # Keep text and buttons inside the safe area (x 12..244, y 8..133): a few edge pixels fall off.
+    display:
+      # Menu sizes offered (1 to 4, steps of 0.25). Menus fill the screen edge to edge:
+      # 2 = 1920x1080 at GUI Auto, 1.75 = 1280x720, 2560x1440 and 4K at Auto,
+      # 2.75 = 1080p at GUI 3 (and 1440p GUI 4). Players run /tideframe fit WIDTH HEIGHT GUI once.
+      sizes: [1, 1.75, 2, 2.75]
+      # Size for players who have not chosen one yet.
+      default-size: 2
+      # Mouse cursor size inside menus (0.25 to 1.5 of the original design).
+      cursor-size: 0.4
+      # EXPERIMENTAL. true: the pack carries a text shader that scales every menu and HUD page to the player's window
+      # (any size, any GUI scale, and it follows if they change it), so /tideframe size and fit are not needed.
+      # Off by default: a shader mistake would break ALL text on the client, and it clashes with other packs or mods
+      # that replace the text shader (Iris, OptiFine). If a client breaks, set false and run /tideframe reload.
+      # Minecraft 26.2 clients ONLY: the shader is delivered for that version alone. Players on another version
+      # (26.3 and later) get menus at a fixed size and cannot choose another while this is on: leave it false
+      # if they play here. Pages laid out at presentation scale 2 or 3, the action-bar balance and the boss bar keep their size.
+      auto-fit: false
+    # Feedback sounds while a menu is open (vanilla ids or your own resource-pack sounds).
+    sounds:
+      enabled: true
+      hover: minecraft:block.note_block.hat
+      click: minecraft:ui.button.click
+      volume: 0.6
+    # Web editor workflow: saving a screen JSON in plugins/BigCasares/tideframe/engine/screens (for example with
+    # the editor's Publish button) rebuilds the pack automatically after a short quiet period.
+    # Players then accept the new pack. Turn off on production servers if you prefer /tideframe reload.
+    editor:
+      auto-reload: true
+      auto-reload-delay-ms: 1500
+      # After a reload (a command, or publishing from the web editor) each player gets the menu they had open back as soon
+      # as they load the new pack. Boss prompts are not reopened.
+      reopen-after-reload: true
+    cursor:
+      # Legacy world-renderer setting retained for old configs; ignored by screen HUD.
+      distance: 2.5
+      prediction-ms: 35
+      # This is a maximum extrapolation horizon. Ping adds at most 16ms lead;
+      # visual displacement is limited to .05 normalized units. Real RTT UX is unverified.
+      snap-radius: 0.08
+    # Restrict how many compiled HUD elements one player may open.
+    limits:
+      elements: 128
+    # Built-in demo games (/tideframe sequence, roulette, the overlay and image demos) are about 95 MB of the
+    # resource pack at the default sizes. Turn them off on a real server and the pack drops to a few MB.
+    demos:
+      games: true
+    # Menus are read-only in the game: they are files in plugins/BigCasares/tideframe/engine/screens (see MENUS.md, which Tideframe
+    # rewrites on every load) and change only by editing those files or publishing from the web editor. Set
+    # in-game: true to bring back /tideframe edit (create, move, delete, save, load) and /tideframe import for players.
+    editing:
+      in-game: false
+    # Proof of concept (Minecraft 26.2): /tideframe modeltest [spin] [profile:NAME] opens a menu with a hole in the
+    # middle and the game's real player model (a client-only Mannequin) inside. Nothing is added to the world. Off by
+    # default; with false the pack and every menu stay exactly as they are.
+    experimental:
+      mannequin-test: false
+    # Screen logic (schema 9): what page actions may do.
+    # console-commands: root commands that "console" actions may run, e.g. [give, eco, lp]. "*" allows any
+    # (like Ultimate UI). Player "command" actions always run with the player's own permissions.
+    # The "charge" and "pay" actions use Vault (with an economy plugin); "server" needs BungeeCord or Velocity.
+    actions:
+      console-commands: ["*"]
+    # Global variables (declared with * or $ in a page, e.g. "*coins": "0") that stay with each player across menus,
+    # logouts and restarts. List their names, e.g. [coins, level], or ["*"] for every global variable. They are kept in
+    # the player's own data; a saved value wins over the page's declared default. Empty: nothing is saved (as before).
+    variables:
+      saved: []
+    # Opening menus without a command. Everything here is off until you fill it in.
+    #   keys:  F outside a menu opens a screen instead of swapping hands, e.g. {F: menu}. SHIFT_F works for HUD screens
+    #          (a menu needs the player standing, and Shift crouches).
+    #   items: an item that opens a screen with right click, e.g.
+    #          menu: {material: COMPASS, name: "<aqua>Menu", slot: 4, give-on-join: true}
+    #          /tideframe item ID gives it; give-on-join puts it in the slot (0-8) when the player does not have it.
+    #   zones: walking into a box of blocks opens a screen once per visit, e.g.
+    #          plaza: {world: world, from: [0, 60, 0], to: [10, 70, 10], screen: menu, cooldown-seconds: 30}
+    #   signs: true lets a sign with [Tideframe] on its first line and a screen ID on the second open that screen.
+    # Citizens NPCs need nothing here: /npc command add -p tideframe ID
+    open:
+      keys: {}
+      items: {}
+      zones: {}
+      signs: false
+    # HUD pages each world shows by itself. They are added over any other HUD page and go away when the player moves to
+    # a world that does not list them. Empty: none. Example:
+    #   worlds:
+    #     world: [hud_vida, hud_coordenadas]
+    #     world_nether: [hud_vida]
+    hud:
+      worlds: {}
+
+    # The boss health bar of TideframeApi.setBoss (/tideframe boss shows a demo; /tideframe boss hit takes 10 health): its frame design and what it does when
+    # the boss loses health. style: rose (rose crystal and gold), frost (ice and silver) or ember (embers in dark iron);
+    # a new style rebuilds the resource pack. flash: true lights the health fill up white for a moment when the boss
+    # loses health; shake: true makes the bar shake. Both are off unless you turn them on.
+    boss-bar:
+      style: rose
+      flash: false
+      shake: false
+
+    # Boss fight key prompts (/tideframe challenge, or TideframeApi.startBossChallenge from your boss plugin).
+    # A key appears over the world; press it before the white bar runs out. Save config.yml and the server
+    # applies the changes by itself (tideframe-ui.motor.editor.auto-reload) or run /tideframe reload.
+    boss-fight:
+      # Keys that can appear: W, A, S, D, SPACE, CLICK (at least one).
+      keys: [W, A, S, D, SPACE, CLICK]
+      # Misses allowed before the fight is lost.
+      lives: 5
+      # Seconds to press the first key, and the fastest it gets as hits land.
+      time-start: 2.0
+      time-min: 0.7
+      # Boss health % at which it becomes enraged (prompts get faster). 0 = never.
+      enrage-at: 30
+      # Damage per hit in % of the boss's max health (+2 per combo step, up to +10).
+      hit-damage: 6
+      # Health a miss costs the player when fighting a real mob (2 = one heart).
+      miss-damage: 2.0
+      # Colours (#RRGGBB). key / key-gradient: top and bottom of the keycap face.
+      colors:
+        boss-name: "#ffffff"
+        key: "#ffffff"
+        key-gradient: "#d9d9d9"
+        key-letter: "#111111"
+        key-edge: "#000000"
+        key-depth: "#5c5c5c"
+        timer: "#ffffff"
+        timer-track: "#000000"
+        text: "#ffffff"
+        outline: "#000000"
+        victory: "#ffffff"
+        victory-gradient: "#ffd84a"
+        defeat: "#ffffff"
+        defeat-gradient: "#ff5a5a"
+      # Positions: -1 = bottom, 0 = centre, 1 = top. key-size 0.6-1.6.
+      layout:
+        boss-y: 0.76
+        key-y: -0.3
+        key-size: 0.8
+      # What to show.
+      show:
+        lives: true
+        combo: true
+        countdown: true
+        text-shadow: false
+      # Every text (plain ASCII; shown in capitals). {boss_name} is replaced by the boss's name.
+      texts:
+        boss-name: THE TIDE KING
+        get-ready: GET READY
+        go: GO!
+        perfect: PERFECT!
+        great: GREAT!
+        good: GOOD!
+        final-blow: FINAL BLOW!
+        enraged: HE IS ENRAGED!
+        wrong-key: WRONG KEY!
+        too-slow: TOO SLOW!
+        you-fall: YOU FALL...
+        victory: VICTORY!
+        defeated: DEFEATED
+        victory-line: "{boss_name} FALLS"
+        defeat-line: "{boss_name} WINS THIS TIME"
+        lives: LIVES
+        combo: COMBO x
+        score: SCORE
+        best-combo: BEST COMBO
+        hits: HITS
+        misses: MISSES
+      # Sounds (vanilla ids, resource-pack sounds, or none).
+      sounds:
+        hit: minecraft:entity.player.attack.strong
+        final-hit: minecraft:entity.player.attack.crit
+        miss: minecraft:entity.player.hurt
+        prompt: minecraft:block.note_block.pling
+        countdown: minecraft:block.note_block.hat
+        go: minecraft:block.bell.use
+        win: minecraft:ui.toast.challenge_complete
+        lose: minecraft:entity.wither.spawn
 
 celular:
   # Receta: 8 lingotes de hierro alrededor y 1 vidrio en el medio.
@@ -676,6 +882,11 @@ mission-system:
     daily-hour: 8
     weekly-day: MONDAY
     weekly-hour: 8
+  # Bono por racha (dias seguidos cobrando todas las diarias). Apagado por defecto. bono-por-dia hasta 0.2, maximo hasta 1.
+  racha:
+    enabled: false
+    bono-por-dia: 0.05
+    maximo: 0.5
   missions:
     daily-bed-5:
       scope: daily
@@ -1752,6 +1963,17 @@ glider:
         enabled: true
         power: 0.78
         cooldown: 35
+
+# Hora feliz: misiones pagan mas y la tienda baja sus precios de compra (nunca los de venta). Apagada por defecto.
+# dias: MONDAY..SUNDAY; desde/hasta HH:mm (si hasta es menor, cruza la medianoche); premio-misiones 1 a 5; descuento-tienda 0 a 0.5.
+eventos:
+  hora-feliz:
+    enabled: false
+    dias: [SATURDAY]
+    desde: "20:00"
+    hasta: "22:00"
+    premio-misiones: 2.0
+    descuento-tienda: 0.1
 
 # Custom dimensions (see docs/dimensions/README.md). Dimensions, dimension types
 # and biomes are read by Minecraft only at server start: after the datapack is

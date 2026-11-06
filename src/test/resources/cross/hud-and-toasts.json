@@ -1,0 +1,167 @@
+{
+  "name": "hud-and-toasts",
+  "about": "hud adds or takes HUD pages and toast shows one for a while (tokens resolved); both still run while the page closes.",
+  "pages": [
+    {
+      "version": 9,
+      "id": "base",
+      "title": "BASE",
+      "quality": {
+        "preset": "low",
+        "width": 512,
+        "height": 288
+      },
+      "elements": [
+        {
+          "id": "show",
+          "text": "SHOW",
+          "x": 0,
+          "y": 0.75,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "button",
+          "action": "",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null,
+          "logic": {
+            "actions": [
+              {
+                "type": "hud",
+                "value": "hud_{which}"
+              },
+              {
+                "type": "toast",
+                "value": "aviso",
+                "seconds": "90",
+                "values": {
+                  "titulo": "Hi {player}"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "hide",
+          "text": "HIDE",
+          "x": 0,
+          "y": 0.5700000000000001,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "button",
+          "action": "",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null,
+          "logic": {
+            "actions": [
+              {
+                "type": "hud",
+                "page": "hud_vida",
+                "mode": "remove"
+              },
+              {
+                "type": "close"
+              },
+              {
+                "type": "message",
+                "value": "not after close"
+              }
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "mode": "menu",
+        "scale": 1,
+        "cursor": "cross"
+      },
+      "logic": {
+        "variables": {
+          "which": "vida"
+        },
+        "on-close": [
+          {
+            "type": "toast",
+            "value": "bye",
+            "seconds": "abc"
+          },
+          {
+            "type": "message",
+            "value": "closed"
+          }
+        ]
+      }
+    }
+  ],
+  "steps": [
+    {
+      "click": "show"
+    },
+    {
+      "click": "hide"
+    }
+  ],
+  "expect": {
+    "events": [
+      "hud add hud_vida",
+      "toast aviso",
+      "hud remove hud_vida",
+      "close",
+      "toast bye",
+      "message closed"
+    ],
+    "page": "base",
+    "closed": true
+  }
+}

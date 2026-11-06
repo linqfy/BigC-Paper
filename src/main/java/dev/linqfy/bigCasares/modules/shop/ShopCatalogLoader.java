@@ -59,7 +59,8 @@ public final class ShopCatalogLoader {
             section.getDouble("buy-price"),
             section.getDouble("sell-price"),
             section.getString("display-name"),
-            section.getStringList("lore")
+            section.getStringList("lore"),
+            Math.max(0, section.getInt("limite-diario", 0))
         );
     }
 

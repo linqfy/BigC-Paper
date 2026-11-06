@@ -1,0 +1,55 @@
+{
+  "about": "Text that shrinks to fit its box (TextFit.java, editor/textfit.mjs): the same answers on both sides. Sizes are quarters of the text size.",
+  "maxChars": [
+    { "width": 100, "textScale": 1, "size": 4, "chars": 16 },
+    { "width": 100, "textScale": 1, "size": 3, "chars": 22 },
+    { "width": 100, "textScale": 1, "size": 2, "chars": 33 },
+    { "width": 64, "textScale": 2, "size": 4, "chars": 5 },
+    { "width": 64, "textScale": 2, "size": 3, "chars": 7 },
+    { "width": 64, "textScale": 2, "size": 2, "chars": 10 },
+    { "width": 1, "textScale": 1, "size": 2, "chars": 0 }
+  ],
+  "sizes": [
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "length": 16, "size": 4 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "length": 17, "size": 3 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "length": 20, "size": 3 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "length": 22, "size": 3 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "length": 23, "size": 2 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "length": 34, "size": 2 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "length": 20, "available": [4, 2], "size": 2 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "length": 20, "available": [4], "size": 4 }
+  ],
+  "cut": [
+    { "line": "LOCOBESTIAPARDA", "max": 10, "shown": "LOCOBESTI…" },
+    { "line": "ABC", "max": 3, "shown": "ABC" },
+    { "line": "ABCD", "max": 1, "shown": "…" },
+    { "line": "ABCD", "max": 0, "shown": "" }
+  ],
+  "longest": [
+    { "text": "Hola <aqua>{player}</aqua>", "chars": 21 },
+    { "text": "Saldo: {balance}", "chars": 256 },
+    { "text": "$ {balance_short}", "chars": 10 },
+    { "text": "{health}/{max_health}", "chars": 9 },
+    { "text": "X {x} Y {y} Z {z}", "chars": 31 },
+    { "text": "21 × 2 = {21 * 2}", "chars": 256 },
+    { "text": "%vault_eco_balance%", "chars": 256 },
+    { "text": "${coins} monedas", "chars": 256 },
+    { "text": "Hola", "chars": 4 }
+  ],
+  "liveSizes": [
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center", "text": "Hola {player}" }, "sizes": [3] },
+    { "element": { "x": -0.48, "y": 0.14, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center", "text": "Saldo: {balance}" }, "sizes": [3, 2] },
+    { "element": { "x": 0, "y": 0, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center", "text": "{health}" }, "sizes": [] }
+  ],
+  "lineTop": [
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "size": 4, "quarters": 196 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "size": 3, "quarters": 200 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "size": 2, "quarters": 203 }
+  ],
+  "lineLeft": [
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "length": 16, "size": 4, "quarters": 80 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "center" }, "length": 20, "size": 3, "quarters": 90 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "left" }, "length": 20, "size": 3, "quarters": 68 },
+    { "element": { "x": -0.48, "y": 0.265, "width": 0.78, "height": 0.12, "textScale": 1, "textAlign": "right" }, "length": 20, "size": 3, "quarters": 111 }
+  ]
+}

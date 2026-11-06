@@ -1,0 +1,110 @@
+{
+  "name": "on-change",
+  "about": "on-change sees {old} and {new} and never sets itself off again.",
+  "pages": [
+    {
+      "version": 9,
+      "id": "bank",
+      "title": "BANK",
+      "quality": {
+        "preset": "low",
+        "width": 512,
+        "height": 288
+      },
+      "elements": [
+        {
+          "id": "add",
+          "text": "ADD",
+          "x": 0,
+          "y": 0.75,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "button",
+          "action": "",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null,
+          "logic": {
+            "actions": [
+              {
+                "type": "variable",
+                "variable": "coins",
+                "operation": "add",
+                "value": "5"
+              },
+              {
+                "type": "message",
+                "value": "now {coins}"
+              }
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "mode": "menu",
+        "scale": 1,
+        "cursor": "cross"
+      },
+      "logic": {
+        "variables": {
+          "coins": "10"
+        },
+        "on-change": {
+          "coins": [
+            {
+              "type": "message",
+              "value": "{old} -> {new}"
+            },
+            {
+              "type": "variable",
+              "variable": "coins",
+              "operation": "add",
+              "value": "1"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "steps": [
+    {
+      "click": "add"
+    }
+  ],
+  "expect": {
+    "events": [
+      "message 10 -> 15",
+      "message now 16"
+    ],
+    "variables": {
+      "coins": "16"
+    },
+    "page": "bank",
+    "closed": false
+  }
+}

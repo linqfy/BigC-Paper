@@ -37,6 +37,27 @@ public final class ShopCatalog {
             .findFirst());
     }
 
+    /**
+     * The {@code category/entry} key of an entry of this catalog (a favourites copy already carries it as its id), or
+     * empty for an entry it does not have. Offers and daily limits are kept by this key.
+     */
+    public Optional<String> keyOf(ShopEntry entry) {
+        if (entry == null) {
+            return Optional.empty();
+        }
+        if (entry.id().contains("/")) {
+            return Optional.of(entry.id());
+        }
+        for (ShopCategory category : categories) {
+            for (ShopEntry candidate : category.entries()) {
+                if (candidate == entry || candidate.equals(entry)) {
+                    return Optional.of(category.id() + "/" + candidate.id());
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
     private String normalize(String id) {
         return id.toLowerCase(Locale.ROOT).trim();
     }

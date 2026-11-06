@@ -1,0 +1,138 @@
+{
+  "name": "calculated-text",
+  "about": "Calculated tokens, six-decimal arithmetic, built-in values before variables, ${name} skipping the scope.",
+  "pages": [
+    {
+      "version": 9,
+      "id": "calc",
+      "title": "CALC",
+      "quality": {
+        "preset": "low",
+        "width": 512,
+        "height": 288
+      },
+      "elements": [
+        {
+          "id": "calc",
+          "text": "CALC",
+          "x": 0,
+          "y": 0.75,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "button",
+          "action": "",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null,
+          "logic": {
+            "actions": [
+              {
+                "type": "message",
+                "value": "{coins * rate} / {round(coins / rate, 2)} / {coins >= 5 ? \"many\" : \"few\"} / {player + \"!\"} / {coins / 0}"
+              },
+              {
+                "type": "variable",
+                "variable": "ratio",
+                "operation": "set",
+                "value": "10"
+              },
+              {
+                "type": "variable",
+                "variable": "ratio",
+                "operation": "divide",
+                "value": "3"
+              },
+              {
+                "type": "message",
+                "value": "{ratio} {level} {balance}"
+              },
+              {
+                "type": "variable",
+                "variable": "ratio",
+                "operation": "multiply",
+                "value": "abc"
+              },
+              {
+                "type": "message",
+                "value": "still {ratio}"
+              },
+              {
+                "type": "function",
+                "function": "show"
+              }
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "mode": "menu",
+        "scale": 1,
+        "cursor": "cross"
+      },
+      "logic": {
+        "variables": {
+          "coins": "7",
+          "rate": "3",
+          "level": "99"
+        },
+        "functions": {
+          "show": {
+            "params": {
+              "coins": "scoped"
+            },
+            "actions": [
+              {
+                "type": "message",
+                "value": "{coins} ${coins}"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "steps": [
+    {
+      "click": "calc"
+    }
+  ],
+  "expect": {
+    "events": [
+      "message 21 / 2.33 / many / Steve! / {coins / 0}",
+      "message 3.333333 12 1250",
+      "message still 3.333333",
+      "message scoped 7"
+    ],
+    "variables": {
+      "ratio": "3.333333",
+      "level": "99"
+    },
+    "page": "calc",
+    "closed": false
+  }
+}

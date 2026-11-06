@@ -1,0 +1,12 @@
+{
+  "source": "PackGenerator.java and Glyphs.java handwritten strokes -> tools/GlyphSheet.java -> glyphs.json",
+  "glyphSheetSha256": "b5a50e99e0547c9e5cfeb2f571da779fd0871ff07161b7cc097d6429c92f2870",
+  "license": "MIT",
+  "glyphs": 167,
+  "fontToolsBuildVersion": "4.65.0",
+  "containsSystemFontData": false,
+  "files": {
+    "tideframe.ttf": "0be685a40516d77213167e0eaa75f278d1d71c3f805179a6d47ae0097dc51c5d",
+    "tideframe.woff": "dfedf0b0668fa2b656eb838b56787f1eca03dc4b0f5cf3e51e9f78aa9048b416"
+  }
+}

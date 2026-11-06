@@ -28,6 +28,7 @@ import dev.linqfy.bigCasares.modules.tombstone.TombstoneModule;
 import dev.linqfy.bigCasares.modules.specialitems.SpecialItemsModule;
 import dev.linqfy.bigCasares.modules.warp.WarpModule;
 
+import dev.linqfy.bigCasares.modules.missions.MissionBedrockForms;
 import dev.linqfy.bigCasares.modules.missions.MissionModule;
 import dev.linqfy.bigCasares.modules.airdrop.AirdropModule;
 import dev.linqfy.bigCasares.modules.acidrain.AcidRainModule;
@@ -47,6 +48,7 @@ import dev.linqfy.bigCasares.modules.shop.ShopModule;
 import dev.linqfy.bigCasares.modules.skillrating.SkillRatingModule;
 import dev.linqfy.bigCasares.modules.smokebomb.SmokeBombModule;
 import dev.linqfy.bigCasares.modules.teams.TeamModule;
+import dev.linqfy.bigCasares.modules.tideframe.TideframeUiModule;
 import dev.linqfy.bigCasares.modules.discord.DiscordIntegrationModule;
 import dev.linqfy.bigCasares.modules.endevent.EndEventModule;
 import dev.linqfy.bigCasares.modules.moderation.ModerationModule;
@@ -66,8 +68,14 @@ import java.util.UUID;
 
 public final class BigCasares extends JavaPlugin {
 
-    private static final List<String> ROOT_COMMAND_NAMES = List.of(
-        "bigcasares", "shop", "rating", "team", "teammanage", "nexus", "boss"
+    /**
+     * Commands of plugin.yml that BigCasaresCommand answers by name. A declared command left out of this list has no
+     * executor, and Bukkit only echoes its usage (that is how /misiones, /peligro, /tumba, /baltop and /resourcepack
+     * did nothing).
+     */
+    static final List<String> ROOT_COMMAND_NAMES = List.of(
+        "bigcasares", "shop", "rating", "team", "teammanage", "nexus", "boss",
+        "misiones", "peligro", "tumba", "baltop", "resourcepack"
     );
 
     private ModuleManager moduleManager;
@@ -84,6 +92,7 @@ public final class BigCasares extends JavaPlugin {
 
     private ResourcePackModule resourcePackModule;
     private ItemCatalogModule itemCatalogModule;
+    private TideframeUiModule tideframeUiModule;
     private TeamModule teamModule;
     private NexusModule nexusModule;
     private PveBossModule pveBossModule;
@@ -403,9 +412,31 @@ public final class BigCasares extends JavaPlugin {
         this.siftModule = new SiftModule(this, dimensions::platform, customBlocks, contentItems, javaModels,
             this::resolveClientPlatform);
         this.shopModule.configurePlatform(this::resolveClientPlatform, this::sendBedrockShopForm);
+        this.missionModule.configureBedrock(this::resolveClientPlatform, new MissionBedrockForms() {
+            @Override
+            public boolean send(UUID playerId, String title, String content, List<String> buttons,
+                                java.util.function.IntConsumer clicked) {
+                return sendBedrockForm(playerId, new BedrockShopForm(title, content,
+                    buttons.stream().map(text -> new BedrockShopForm.Button(text, null)).toList(),
+                    (ignored, index) -> clicked.accept(index)));
+            }
+
+            @Override
+            public boolean glyphs() {
+                return bedrockPackSent();
+            }
+        });
+        // Optional Tideframe screens (Java): missions and shop keep their services; without Tideframe nothing changes.
+        TideframeUiModule tideframeUi = new TideframeUiModule(this, this::resolveClientPlatform);
+        this.tideframeUiModule = tideframeUi;
+        this.missionModule.configureTideframe(tideframeUi::missions);
+        this.shopModule.configureTideframe(tideframeUi::shop);
+        this.missionModule.configureTideframeNavigation(tideframeUi::navigation);
+        this.shopModule.configureTideframeNavigation(tideframeUi::navigation);
 
         moduleManager.register(resourcePackModule);
         moduleManager.register(itemCatalogModule);
+        moduleManager.register(tideframeUi);
         moduleManager.register(new CopperAppleModule(this));
         moduleManager.register(new SmokeBombModule(this));
         moduleManager.register(new CustomCrossbowModule(this));
@@ -468,6 +499,12 @@ public final class BigCasares extends JavaPlugin {
         }
     }
 
+    /** The embedded Tideframe engine's state, for operators; off while the module is not running. */
+    public dev.linqfy.bigCasares.modules.tideframe.TideframeStatus tideframeStatus() {
+        TideframeUiModule module = tideframeUiModule;
+        return module == null ? dev.linqfy.bigCasares.modules.tideframe.TideframeStatus.off() : module.status();
+    }
+
     public ClientPlatform resolvePlayerPlatform(UUID playerId) {
         return resolveClientPlatform(playerId);
     }
@@ -499,16 +536,19 @@ public final class BigCasares extends JavaPlugin {
             return false;
         }
         return geyserIntegrationModule.shopForms()
-            .map(forms -> forms.show(playerId, new BedrockShopForm(
-                view.title(),
-                view.description() + "\n\n§fSaldo: §a" + view.balance(),
-                view.items().stream().map(item -> new BedrockShopForm.Button(
-                    item.name() + (item.price().isBlank() ? "" : "\n§7" + item.price()),
-                    item.iconUrl()
-                )).toList(),
-                (ignored, index) -> responseHandler.accept(index)
-            )))
+            .map(forms -> forms.show(playerId, BedrockShopForm.of(view, responseHandler)))
             .orElse(false);
+    }
+
+    /** A plain Bedrock form (missions): false when Geyser, its forms or the player's Bedrock client are not there. */
+    private boolean sendBedrockForm(UUID playerId, BedrockShopForm form) {
+        return geyserIntegrationModule != null
+            && geyserIntegrationModule.shopForms().map(forms -> forms.show(playerId, form)).orElse(false);
+    }
+
+    /** Whether Bedrock clients get the BigCasares pack, which carries the progress-bar glyphs. */
+    private boolean bedrockPackSent() {
+        return geyserIntegrationModule != null && geyserIntegrationModule.bedrockPackSent();
     }
 
     private void registerCommands() {
@@ -591,6 +631,7 @@ public final class BigCasares extends JavaPlugin {
 
         resourcePackModule = null;
         itemCatalogModule = null;
+        tideframeUiModule = null;
         teamModule = null;
         nexusModule = null;
         pveBossModule = null;

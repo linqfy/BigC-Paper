@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Tideframe / Editor de pantallas</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div><p class="eyebrow">TIDEFRAME / INTERFAZ PROPIA</p><h1>Editor de pantallas</h1></div>
+<div class="file-actions"><details class="command-menu"><summary>Archivo</summary><div class="command-popover"><button id="new-project" type="button">Proyecto nuevo</button><button id="open-project" type="button">Abrir proyecto</button><button id="save-project" type="button">Guardar en el navegador</button><button id="save-as-project" type="button">Guardar como archivo</button><button id="download-project" type="button">Descargar proyecto</button><button id="import" type="button">Importar pantalla JSON</button><button id="export-all" type="button">Exportar todas las páginas</button><button id="recover-project" type="button">Recuperar guardado</button></div></details><input id="project-file" type="file" accept=".json,application/json" hidden><input id="import-file" type="file" accept=".json,application/json" hidden><button id="undo" class="secondary" type="button" title="Ctrl+Z">Deshacer</button><button id="redo" class="secondary" type="button" title="Ctrl+Y">Rehacer</button><button id="review" class="secondary" type="button" title="Busca textos que no entran, botones sin acción, páginas sueltas y animaciones que faltan">Revisar</button><button id="export" type="button" title="Descarga esta pantalla como JSON para plugins/BigCasares/tideframe/engine/screens">Exportar JSON</button><button id="publish" type="button" hidden title="Guarda esta pantalla en la carpeta de pantallas del servidor; Tideframe la recarga solo">Publicar en el servidor</button><button id="open-in-game" class="secondary" type="button" hidden title="Abre en el juego la versión publicada de esta página, para el jugador conectado">Abrir en el juego</button></div>
+  </header>
+  <div class="workspace-status"><output id="history-state">Historial listo</output><output id="advanced-draft-state" aria-live="polite" hidden></output><output id="autosave-state" aria-live="polite">Guardado pendiente</output></div>
+  <main class="workspace">
+    <aside class="panel structure" aria-labelledby="structure-title">
+      <div id="pages-panel"><div class="panel-heading"><h2>Páginas</h2><span id="page-count" class="badge">1 página</span></div><div id="pages" class="page-list" aria-label="Páginas del proyecto"></div><div class="page-actions"><button id="add-page" class="secondary" type="button">Página nueva</button><button id="duplicate-page" class="secondary" type="button">Duplicar página</button><button id="close-page" class="secondary" type="button">Cerrar página</button></div><label for="page-template">Página desde plantilla</label><select id="page-template"></select><button id="add-page-template" class="secondary" type="button">Crear página</button><button id="project-map" class="secondary" type="button" title="Las páginas y los botones que las unen">Mapa del proyecto</button><p class="hint">Cerrar guarda una copia de respaldo en el navegador si se puede. Descargá el proyecto para conservar todas las páginas.</p></div>
+      <div class="panel-heading"><h2 id="structure-title">Página</h2><span id="schema-version" class="badge">V4</span></div>
+      <label for="screen-id">ID de la pantalla (se abre con /tideframe ID)</label><input id="screen-id" name="screen-id" maxlength="32" spellcheck="false" value="menu">
+      <label for="screen-title">Título</label><input id="screen-title" name="screen-title" maxlength="40" value="TIDEFRAME">
+      <label for="quality-preset">Calidad</label><select id="quality-preset"><option value="low">Baja - Minijuegos (512 x 288)</option><option value="medium">Media - 1080p (1920 x 1080)</option><option value="high">Alta - 1440p (2560 x 1440)</option><option value="custom">Personalizada - hasta 4K</option></select>
+      <div id="custom-quality" hidden><label for="quality-width">Ancho personalizado (de a 32)</label><input id="quality-width" type="number" min="256" max="3840" step="32" value="1024"><output id="quality-dimensions">1024 x 576</output></div>
+      <p id="quality-help" class="hint">Baja usa un solo cuadro final y menos piezas. Ninguna calidad garantiza una descarga instantánea. La calidad afecta a las fotos que cargues después; las que ya están conservan su resolución. La resolución de la imagen no es la cantidad de píxeles de la pantalla.</p>
+      <fieldset class="presentation-controls"><legend>Cómo se muestra en el juego</legend>
+        <label for="presentation-mode">Tipo de pantalla</label><select id="presentation-mode" aria-describedby="presentation-help"><option value="menu">Menú - interactivo</option><option value="overlay">HUD - pasivo</option></select>
+        <label class="check-label" for="presentation-stack"><input id="presentation-stack" type="checkbox">Se suma a los HUD que ya se ven (no los reemplaza)</label>
+        <label for="presentation-scale">Escala manual del HUD en el juego</label><select id="presentation-scale" aria-describedby="scale-help"><option value="1">1x - normal</option><option value="2">2x - grande</option><option value="3">3x - la más grande</option></select>
+        <p id="scale-help" class="hint">Cambia el tamaño del HUD en el juego, aparte de la calidad de imagen y del zoom del editor. No detecta sola la ventana ni la escala de interfaz del jugador: probalo en Minecraft. Esta vista siempre muestra el lienzo completo.</p>
+        <label for="presentation-cursor">Cursor del juego</label><select id="presentation-cursor"><option value="arrow">Flecha</option><option value="cross">Cruz</option><option value="block">Bloque</option><option value="text">Texto</option></select>
+        <label for="presentation-cursorSize">Tamaño del cursor en esta página (0,25 a 1,5; vacío = el del servidor)</label><input id="presentation-cursorSize" type="number" min="0.25" max="1.5" step="0.05" placeholder="por defecto">
+        <label for="presentation-cursorSpeed">Velocidad del cursor en esta página (por la del jugador)</label><input id="presentation-cursorSpeed" type="number" min="0.25" max="4" step="0.05" value="1">
+        <p id="presentation-help" class="hint">El modo menú usa el cursor. El modo HUD queda a la vista mientras el jugador se mueve y mira, sin cursor ni botones.</p>
+        <output id="presentation-summary" aria-live="polite">Menú / 1x / cursor cruz</output>
+      </fieldset>
+      <details class="logic-controls" open><summary>Entrada y salida de la página</summary>
+        <div class="presentation-actions" role="group" aria-label="Entrada y salida prediseñadas">
+          <button class="secondary" type="button" data-screen-preset="open-slide-left">Entra desde la izquierda</button>
+          <button class="secondary" type="button" data-screen-preset="open-slide-right">Entra desde la derecha</button>
+          <button class="secondary" type="button" data-screen-preset="slide-in-out">Entra y sale deslizando</button>
+          <button class="secondary" type="button" data-screen-preset="open-fade-slow">Fundido lento</button>
+          <button class="secondary" type="button" data-screen-preset="open-none">Sin animación</button>
+        </div>
+        <p class="hint">Para ajustar duración, curva o lado, abrí "Transiciones" más abajo. Probalas con el botón Probar.</p>
+      </details>
+      <section id="advanced-screen-settings" class="advanced-settings" aria-label="Ajustes de la página"></section>
+      <details class="logic-controls"><summary>Lógica de la página en JSON</summary>
+        <label for="screen-logic">Variables, funciones, teclas, comportamiento, comando, animación y acciones al abrir o cerrar (JSON)</label>
+        <textarea id="screen-logic" rows="8" spellcheck="false" placeholder='{"variables":{"coins":"100"},"keybinds":[{"key":"Q","actions":[{"type":"close"}]}]}'></textarea>
+        <div class="advanced-draft-actions"><button id="apply-screen-logic" type="button" class="secondary">Aplicar JSON de la página</button><button id="revert-screen-logic" type="button" class="secondary">Descartar cambios</button></div>
+        <p class="hint">Aplicar guarda este borrador; Descartar lo deshace. Vacío quita la lógica al aplicar. Referencia: docs/LOGICA_V20.md. El servidor vuelve a revisar todo al publicar.</p>
+      </details>
+      <div class="section-heading"><h2>Capas</h2><output id="element-count">3 / 128</output></div>
+      <div id="elements" class="element-list layer-list" aria-label="Capas: arriba lo que se dibuja encima"></div>
+      <p class="hint">Arriba está lo que se dibuja encima. Arrastrá una fila para cambiar su capa. Doble clic (o F2) en el nombre lo renombra, y las acciones y tooltips que lo nombran se actualizan. El ojo lo oculta solo en el editor; el candado lo bloquea.</p>
+      <div id="add-tools" class="add-actions"><button id="add-label" class="secondary" type="button">Agregar texto</button><button id="add-button" class="secondary" type="button">Agregar botón</button><button id="add-decoration" class="secondary" type="button">Agregar decoración</button></div>
+      <label for="template-choice">Componentes listos para usar</label><select id="template-choice"></select><button id="insert-template" class="secondary" type="button">Insertar componente</button>
+      <p id="template-help" class="hint">Los componentes nuevos traen vidrio esmerilado, hover con brillo, GIF, listas, ventanas emergentes y tooltips ya armados.</p>
+      <details id="sound-picker" class="icon-picker sound-picker"><summary>Sonidos del servidor</summary><div id="sound-list" class="sound-list" aria-live="polite"></div>
+        <label for="sound-file">Subir un sonido (Ogg Vorbis .ogg, hasta 2 MB)</label><input id="sound-file" type="file" accept=".ogg,audio/ogg">
+        <label for="sound-name">Nombre: queda como tideframe:nombre</label><input id="sound-name" maxlength="32" spellcheck="false" placeholder="por ejemplo clic">
+        <button id="sound-send" class="secondary" type="button">Subir sonido</button>
+        <p id="sound-help" class="hint">Usalo en la acción de sonido (tideframe:clic 1 1) o en config.yml (sounds.click y sounds.hover). Mono suena desde el jugador; estéreo, igual en todos lados. El plugin lo suma al pack en la próxima recarga (publicar recarga sola).</p></details>
+      <details class="icon-picker"><summary>Íconos originales</summary><div id="icon-grid" class="icon-grid" role="group" aria-label="Íconos originales para insertar"></div><p class="hint">Dibujados para Tideframe, sin licencias de terceros. Entran como imagen de 32 píxeles en el centro de la página; agrandalos de a 16 píxeles para que el pixel art quede nítido.</p></details>
+      <label for="theme-choice">Tema de colores</label><select id="theme-choice"></select>
+      <div class="presentation-actions"><button id="apply-theme" class="secondary" type="button">Aplicar a la página</button><button id="apply-theme-selection" class="secondary" type="button">Aplicar a la selección</button></div>
+      <p class="hint">Los temas cambian el color de paneles, botones (con degradé) y textos, y ponen letras con degradé en los títulos grandes. Las imágenes y el relleno de las barras en vivo quedan igual.</p>
+      <div class="presentation-actions"><button id="add-close-x" class="secondary" type="button">Agregar X de cierre</button><button id="add-text-block" class="secondary" type="button">Agregar bloque de texto</button><button id="fill-canvas" class="secondary" type="button">Llenar el lienzo con lo elegido</button></div>
+      <p class="hint">"Llenar el lienzo" agranda lo elegido a todo el lienzo de 2 x 2. Los botones grandes igual necesitan áreas de clic separadas. La X usa una esquina libre y no duplica una X que ya exista. Los HUD pasivos se cierran con /tideframe close.</p>
+      <p class="hint">Shift + clic suma o quita de la selección. Hasta 128 elementos. Las áreas de clic de los botones no se pueden superponer; los textos y las decoraciones sí.</p>
+    </aside>
+    <section class="stage-panel" aria-labelledby="preview-title">
+      <div class="stage-heading"><h2 id="preview-title">Vista del lienzo completo</h2><span id="preview-mode" class="badge">MENÚ / LÍMITES DEL DISEÑO</span><button id="play-toggle" class="play-toggle" type="button" aria-pressed="false" title="Usá el menú como en el juego: hover, clics, páginas, transiciones y animaciones">▶ Probar</button></div>
+      <div id="play-bar" class="play-bar" hidden><output id="play-state" aria-live="polite">Probando</output><label class="check-label"><input id="play-permissions" type="checkbox" checked>Tener los permisos</label><button id="play-damage" class="secondary" type="button" title="Corre las acciones al recibir daño (y cierra si la página lo pide)">Simular daño</button><button id="play-world" class="secondary" type="button" title="Corre las acciones al cambiar de mundo">Cambiar de mundo</button><button id="play-restart" class="secondary" type="button">Reiniciar</button><button id="play-exit" type="button">Salir de Probar</button></div>
+      <div id="edit-tools">
+      <div class="selection-toolbar"><output id="selection-count" aria-live="polite">1 elegido</output><button id="cut-selection" class="secondary" type="button" title="Ctrl+X">Cortar</button><button id="copy-selection" class="secondary" type="button">Copiar</button><button id="paste-selection" class="secondary" type="button">Pegar</button><button id="duplicate-selection" class="secondary" type="button" title="Ctrl+D">Duplicar</button><button id="copy-style" class="secondary" type="button" title="Ctrl+Alt+C: colores, borde, forma, sombra, estilo del texto y efectos del elemento activo">Copiar estilo</button><button id="paste-style" class="secondary" type="button" title="Ctrl+Alt+V: pega el estilo copiado en todo lo elegido (no cambia textos, posiciones ni acciones)">Pegar estilo</button></div>
+      <div id="tools-panel" class="authoring-tools"><details><summary>Selección y capas</summary><div class="tool-grid"><button id="select-all" type="button">Elegir todo</button><button id="select-none" type="button">No elegir nada</button><button id="select-invert" type="button">Invertir selección</button><button id="hide-selection" type="button">Ocultar lo elegido</button><button id="show-all" type="button">Mostrar todo</button><button id="lock-selection" type="button">Bloquear lo elegido</button><button id="unlock-all" type="button">Desbloquear todo</button><button id="group-selection" type="button">Agrupar</button><button id="ungroup-selection" type="button">Desagrupar</button><button id="layer-up" type="button">Subir capa</button><button id="layer-down" type="button">Bajar capa</button></div></details>
+      <details><summary>Alinear y repartir</summary><label for="align-target">Alinear dentro de</label><select id="align-target"><option value="selection">La selección</option><option value="canvas">La pantalla</option></select><div class="tool-grid"><button type="button" data-align="left">Izquierda</button><button type="button" data-align="center">Centro X</button><button type="button" data-align="right">Derecha</button><button type="button" data-align="top">Arriba</button><button type="button" data-align="middle">Centro Y</button><button type="button" data-align="bottom">Abajo</button><button id="distribute-horizontal" type="button">Mismo espacio en horizontal</button><button id="distribute-vertical" type="button">Mismo espacio en vertical</button></div></details>
+      <details><summary>Ordenar como lista fija</summary><div class="layout-controls"><div><label for="layout-axis">Disposición</label><select id="layout-axis"><option value="row">Filas</option><option value="column">Columnas</option></select></div><div><label for="layout-target">Espacio</label><select id="layout-target"><option value="canvas">La pantalla</option><option value="selection">La selección</option></select></div><div><label for="layout-gap">Separación</label><input id="layout-gap" type="number" min="0" max="2" step=".01" value=".04"></div><div><label for="layout-padding">Margen</label><input id="layout-padding" type="number" min="0" max="1" step=".01" value=".05"></div><div><label for="layout-max">Máximo por línea</label><input id="layout-max" type="number" min="1" max="128" value="4"></div><div><label for="layout-sort">Ordenar por</label><select id="layout-sort"><option value="file">Orden del documento</option><option value="id">ID</option><option value="name">Texto</option><option value="layer">Capa</option></select></div><div><label for="layout-direction">Secuencia</label><select id="layout-direction"><option value="forward">Normal</option><option value="reverse">Invertida</option></select></div><div><label for="layout-corner">Esquina de inicio</label><select id="layout-corner"><option value="top-left">Arriba a la izquierda</option><option value="top-right">Arriba a la derecha</option><option value="bottom-left">Abajo a la izquierda</option><option value="bottom-right">Abajo a la derecha</option></select></div><div><label for="layout-align">Alinear en la celda</label><select id="layout-align"><option value="center">Centro</option><option value="start">Inicio</option><option value="end">Final</option></select></div><div><label for="layout-cell-width">Ancho de celda (vacío = automático)</label><input id="layout-cell-width" type="number" min=".01" max="2" step=".01"></div><div><label for="layout-cell-height">Alto de celda (vacío = automático)</label><input id="layout-cell-height" type="number" min=".01" max="2" step=".01"></div><label class="check-label"><input id="layout-wrap" type="checkbox" checked>Pasar a la línea siguiente</label><label class="check-label"><input id="layout-descending" type="checkbox">Orden descendente</label></div><button id="layout-selection" type="button">Ordenar lo elegido</button><p class="hint">Crea posiciones normales; no es una lista con desplazamiento (para eso, usá una lista de datos). Las áreas de clic de los botones tienen que quedar separadas.</p></details>
+      <details><summary>Vista y espacio de trabajo</summary><div class="layout-controls"><label class="check-label"><input data-pref="gridVisible" type="checkbox">Cuadrícula</label><label class="check-label"><input data-pref="snapEnabled" type="checkbox">Imán a la cuadrícula</label><label class="check-label"><input data-pref="smartGuides" type="checkbox">Guías inteligentes</label><label class="check-label"><input data-pref="snapObjects" type="checkbox">Imán a los elementos</label><label class="check-label"><input data-pref="showHotbar" type="checkbox">Guía de la barra de objetos</label><label class="check-label"><input data-pref="showHand" type="checkbox">Guía de la mano</label><label class="check-label"><input data-pref="showTools" type="checkbox">Panel de herramientas</label><label class="check-label"><input data-pref="showPages" type="checkbox">Panel de páginas</label><label class="check-label"><input data-pref="showFooter" type="checkbox">Pie de página</label><div><label for="snap-step">Paso de la cuadrícula</label><input id="snap-step" data-pref="snapStep" type="number" min=".01" max="1" step=".01" value=".05"></div></div><button id="advanced-toggle" class="secondary" type="button" aria-pressed="false">Áreas de clic: ocultas</button><p class="hint">La mano y la barra de objetos son guías aproximadas. El zoom y las guías no cambian las posiciones exportadas. Las áreas de clic se ven con línea punteada.</p></details></div>
+      <div class="zoom-palette"><label for="zoom-control">Zoom</label><input id="zoom-control" type="range" min="25" max="400" step="25" value="100"><output id="zoom-value">100%</output><button id="zoom-reset" class="secondary" type="button">100%</button><label for="primary-color">Color 1</label><input id="primary-color" type="color" value="#53dbc1"><label for="secondary-color">Color 2</label><input id="secondary-color" type="color" value="#253b50"><button id="pick-selected-color" class="secondary" type="button">Tomar el relleno elegido</button><button id="swap-colors" class="secondary" type="button">Intercambiar</button><button id="apply-primary" class="secondary" type="button">Rellenar con color 1</button><button id="apply-secondary" class="secondary" type="button">Rellenar con color 2</button></div>
+      <output id="caps-lock-state" class="caps-state" data-on="false" aria-live="polite">Bloq Mayús: NO</output>
+      </div>
+      <div class="sim-controls" role="group" aria-label="Ver cómo queda en la pantalla de un jugador">
+        <div><label for="sim-window">Ver como</label><select id="sim-window"><option value="">Lienzo completo (diseño)</option></select></div>
+        <div><label for="sim-gui">Escala de GUI</label><select id="sim-gui"><option value="0">Automática</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
+        <div><label for="sim-size">Tamaño del menú</label><select id="sim-size"><option value="autofit">Ajuste automático (26.2)</option><option value="4">1x</option><option value="7">1,75x</option><option value="8" selected>2x</option><option value="11">2,75x</option></select></div>
+        <output id="sim-info" aria-live="polite">Mostrando el lienzo completo, sin recortes.</output>
+      </div>
+      <div id="stage-viewport" class="stage-wrap"><div id="screen-frame" class="screen-frame"><div id="stage" class="stage" role="group" aria-label="Vista del diseño de la pantalla"></div></div></div>
+      <p id="stage-hint" class="hint stage-hint">Bloq Mayús apagado: arrastrar mueve lo elegido. Bloq Mayús prendido: arrastrar cambia el tamaño desde el centro (a la derecha o abajo agranda). Al apagarlo termina el cambio de tamaño. Shift + clic elige varios. Ctrl+C copia, Ctrl+V pega, Supr borra. Las flechas mueven; con Shift, de a pasos más grandes.</p>
+      <div class="coordinates"><span>X: -1 / +1</span><span>Y: +1 / -1</span><span>ORIGEN EN EL CENTRO</span></div>
+      <section id="play-log-panel" class="play-log-panel" hidden aria-labelledby="play-log-title"><div class="panel-heading"><h2 id="play-log-title">En el juego haría…</h2><button id="play-log-clear" class="secondary" type="button">Limpiar</button></div><ol id="play-log" class="play-log" aria-live="polite"></ol><p class="hint">Probar simula hover, clics, páginas, transiciones, visibilidad, variables, condiciones, fotogramas clave, desplazamiento y color. Comandos, mensajes, sonidos, ítems, teletransporte, diálogos y datos de otros plugins no corren acá: se anotan en esta lista. Los GIF y las carpetas de PNG se ven si el editor está conectado al servidor.</p></section>
+      <section id="play-vars-panel" class="play-vars-panel" hidden aria-labelledby="play-vars-title">
+        <div class="panel-heading"><h2 id="play-vars-title">Variables de la prueba</h2></div>
+        <div id="play-vars" class="play-vars" aria-label="Variables de la prueba"></div>
+        <form id="play-var-add" class="play-var-add"><input id="play-var-name" maxlength="25" spellcheck="false" placeholder="nombre (o *nombre)" aria-label="Nombre de la variable nueva"><input id="play-var-value" maxlength="256" placeholder="valor" aria-label="Valor de la variable nueva"><button class="secondary" type="submit">Agregar</button></form>
+        <h3 class="play-subtitle">Jugador simulado</h3>
+        <div id="play-samples" class="play-vars play-samples"></div>
+        <label for="play-placeholders">Placeholders simulados, uno por línea: %clave% = valor</label>
+        <textarea id="play-placeholders" rows="3" spellcheck="false" placeholder="%luckperms_primary_group_name% = vip"></textarea>
+        <p class="hint">Enter guarda cada cambio. Corre como en el juego: textos, listas, condiciones y "Cuando cambia una variable" se actualizan. Nada de esto cambia el proyecto.</p>
+      </section>
+      <p class="preview-note">Fuente propia en mapa de bits, formas e imágenes PNG incluidas. Los PNG entran en el elemento sin deformarse y la transparencia se conserva. Las áreas de clic del juego son rectangulares, también en elipses e imágenes transparentes. Las decoraciones se editan acá pero nunca reciben clics en el juego. La vista es una aproximación: el tamaño real en la pantalla y la alineación se comprueban en Minecraft.</p>
+    </section>
+    <aside class="panel inspector" aria-labelledby="inspector-title">
+      <div class="panel-heading"><h2 id="inspector-title">Inspector</h2><span id="selected-kind" class="badge">TEXTO</span></div>
+      <p id="empty-selection" hidden>Elegí un elemento para verlo acá.</p>
+      <p id="selection-help" class="hint">El inspector edita el elemento activo.</p>
+      <form id="inspector-form" novalidate>
+        <div class="tabs" role="tablist" aria-label="Partes del elemento">
+          <button type="button" role="tab" id="tab-design" data-tab="design" aria-selected="true" aria-controls="panel-design">Diseño</button>
+          <button type="button" role="tab" id="tab-interaction" data-tab="interaction" aria-selected="false" aria-controls="panel-interaction">Interacción</button>
+          <button type="button" role="tab" id="tab-animation" data-tab="animation" aria-selected="false" aria-controls="panel-animation">Animación</button>
+          <button type="button" role="tab" id="tab-data" data-tab="data" aria-selected="false" aria-controls="panel-data">Datos</button>
+          <button type="button" role="tab" id="tab-json" data-tab="json" aria-selected="false" aria-controls="panel-json">JSON</button>
+        </div>
+        <div class="tab-panel" id="panel-design" role="tabpanel" aria-labelledby="tab-design">
+        <label for="element-id">ID del elemento</label><input id="element-id" data-field="id" maxlength="32" spellcheck="false">
+        <label for="element-text">Texto (andan las tildes, la ñ, ¿ ¡ y ★ ❤ ✔ ✖ ← → • …; varias líneas con "Ancho de ajuste")</label><textarea id="element-text" data-field="text" maxlength="512" rows="3"></textarea>
+        <label for="element-kind">Tipo</label><select id="element-kind" data-field="kind"><option value="label">Texto</option><option value="button">Botón</option><option value="decoration">Decoración</option></select>
+        <div class="field-pair"><div><label for="element-x">Centro X</label><input id="element-x" data-field="x" type="number" step="0.02" min="-1" max="1"></div><div><label for="element-y">Centro Y</label><input id="element-y" data-field="y" type="number" step="0.02" min="-1" max="1"></div></div>
+        <div class="field-pair"><div><label for="element-width">Ancho</label><input id="element-width" data-field="width" type="number" step="0.02" min="0.01" max="2"></div><div><label for="element-height">Alto</label><input id="element-height" data-field="height" type="number" step="0.02" min="0.01" max="2"></div></div>
+        <label for="element-shape">Forma</label><select id="element-shape" data-field="shape"><option value="rectangle">Rectángulo</option><option value="rounded">Rectángulo redondeado</option><option value="ellipse">Elipse</option></select>
+        <label class="check-label" for="element-border"><input id="element-border" data-field="border" type="checkbox">Borde visible</label>
+        <label class="check-label" for="element-background"><input id="element-background" data-field="background" type="checkbox">Fondo</label>
+        <div class="image-actions"><button id="load-image" class="secondary" type="button" aria-describedby="image-help">Cargar imagen</button><button id="remove-image" class="secondary" type="button">Quitar imagen</button></div>
+        <input id="image-file" type="file" accept="image/*,.png,.jpg,.jpeg,.webp,.avif,.bmp,.gif,.heic,.heif,.tif,.tiff" hidden>
+        <div class="image-actions"><button id="load-hover-image" class="secondary" type="button">Cargar imagen de hover</button><button id="remove-hover-image" class="secondary" type="button">Quitar imagen de hover</button></div>
+        <input id="hover-image-file" type="file" accept="image/*,.png,.jpg,.jpeg,.webp,.avif,.bmp,.gif,.heic,.heif,.tif,.tiff" hidden>
+        <p id="hover-image-info" class="hint">Sin imagen de hover.</p>
+        <label for="element-item">Ícono de ítem del juego (opcional)</label><input id="element-item" type="text" list="item-list" autocomplete="off" spellcheck="false" placeholder="por ejemplo diamond"><datalist id="item-list"></datalist>
+        <p id="item-info" class="hint">Sin ícono. Dibuja un ítem con la textura de tu propio juego, centrado en la caja (16, 32, 48 o 64 píxeles). Solo entra en la parte de abajo del menú.</p>
+        <label for="style-slice">Bordes fijos de la imagen (9-slice, en píxeles de la imagen; 0 = la imagen se achica entera)</label><input id="style-slice" data-style="slice" type="number" min="0" max="64" step="1" value="0">
+        <label class="check-label" for="style-imageClip"><input id="style-imageClip" data-style="imageClip" type="checkbox">Recortar la imagen con la forma del elemento (esquinas redondeadas o elipse)</label>
+        <label for="style-sliceScale">Píxeles de la imagen por píxel del menú</label><select id="style-sliceScale" data-style="sliceScale"><option value="1">1 (pixel art del tamaño del menú)</option><option value="2">2 (bordes más finos y detallados)</option><option value="3">3</option><option value="4">4</option></select>
+        <p class="hint">Con bordes fijos la imagen llena toda la caja: las esquinas quedan intactas y los lados y el centro se estiran, sin deformarse. Ideal para marcos y paneles de cualquier tamaño.</p>
+        <p id="image-info" class="hint">Sin imagen. Cualquier elemento puede mostrar un PNG, también botones y decoraciones.</p>
+        <p id="image-help" class="hint">PNG, JPG, WebP, AVIF, BMP y GIF si este navegador los decodifica; hasta 64 MiB y 40 megapíxeles. La foto se ajusta al ancho de la calidad elegida por su lado más largo, sin agrandarse, con hasta 8.294.400 píxeles y 3840 por lado. Se guarda como PNG fijo (hasta 40 MiB): un GIF cargado acá queda en un solo cuadro; para un GIF animado, usá la pestaña Animación. SVG no se acepta. Si HEIC o TIFF no se decodifican, guardalos antes como JPG o PNG. Borrá el texto para un elemento que sea solo imagen.</p>
+        <details id="advanced-blur-controls" class="advanced-appearance" open><summary>Difuminado, vidrio y sombras</summary><div class="advanced-appearance-body">
+          <div id="blur-presets" class="blur-presets" role="group" aria-label="Difuminados prediseñados para lo elegido"></div>
+          <p class="hint">Los prediseñados se aplican a lo elegido que no esté bloqueado. Vidrio esmerilado prende un fondo translúcido. Quitar difuminados saca el difuminado y la sombra, y conserva colores y transparencia. Deshacer recupera el aspecto anterior.</p>
+          <label for="style-blur">Difuminado (suaviza todo el elemento, en píxeles lógicos)</label><input id="style-blur" data-style="blur" type="number" min="0" max="16" step="1" value="0">
+          <label for="style-backdropBlur">Difuminado del fondo (vidrio esmerilado: suaviza lo que está debajo)</label><input id="style-backdropBlur" data-style="backdropBlur" type="number" min="0" max="16" step="1" value="0">
+          <label for="style-shadowBlur">Difuminado de la sombra (0 = sombra clásica, en píxeles lógicos)</label><input id="style-shadowBlur" data-style="shadowBlur" type="number" min="0" max="16" step="1" value="0">
+          <p class="hint">El difuminado de la sombra necesita "Sombra" prendida, o usá "Sombra suave". Los difuminados se hornean en el pack: el vidrio suaviza el arte de abajo, no el mundo del juego, ni el texto en vivo ni las capas que cambian.</p>
+        </div></details>
+        <details id="advanced-controls" class="advanced-appearance"><summary>Apariencia, texto y área de clic</summary><div class="advanced-appearance-body">
+          <label for="style-opacity">Opacidad (0 = transparente, 1 = opaco)</label><input id="style-opacity" data-style="opacity" type="number" step="0.05" min="0" max="1">
+          <label for="style-brightness">Brillo (0 = negro, 1 = original, 2 = más claro)</label><input id="style-brightness" data-style="brightness" type="number" step="0.05" min="0" max="2" value="1">
+          <p class="hint">El brillo cambia los colores y la imagen del elemento. La opacidad maneja la transparencia, también la de su sombra.</p>
+          <label for="style-fillColor">Color de relleno</label><input id="style-fillColor" data-style="fillColor" type="color">
+          <label class="check-label"><input id="gradient-enabled" type="checkbox">Relleno con degradé</label>
+          <div class="field-pair"><div><label for="style-gradientColor">Degradé hasta</label><input id="style-gradientColor" data-style="gradientColor" type="color" value="#0b1620"></div>
+          <div><label for="style-gradientDirection">Dirección</label><select id="style-gradientDirection" data-style="gradientDirection"><option value="vertical">De arriba a abajo</option><option value="horizontal">De izquierda a derecha</option><option value="diagonal">Diagonal</option><option value="radial">Desde el centro</option></select></div></div>
+          <label for="style-borderColor">Color del borde</label><input id="style-borderColor" data-style="borderColor" type="color">
+          <label for="style-textColor">Color del texto</label><input id="style-textColor" data-style="textColor" type="color">
+          <label class="check-label" for="style-shadow"><input id="style-shadow" data-style="shadow" type="checkbox">Sombra</label>
+          <label for="style-rotation">Rotación (grados)</label><input id="style-rotation" data-style="rotation" type="number" min="-180" max="180" step="1" value="0">
+          <label for="style-radius">Redondeo de las esquinas</label><input id="style-radius" data-style="radius" type="number" min="0" max=".5" step=".01" value=".08">
+          <label for="style-outlineWidth">Grosor del borde (píxeles lógicos)</label><input id="style-outlineWidth" data-style="outlineWidth" type="number" min="0" max="8" step="1" value="1">
+          <label class="check-label"><input id="hover-color-enabled" type="checkbox">Color propio al pasar el cursor</label><label for="style-hoverColor">Color de hover</label><input id="style-hoverColor" data-style="hoverColor" type="color" value="#53dbc1">
+          <label for="style-hoverEffect">Efecto al pasar el cursor</label><select id="style-hoverEffect" data-style="hoverEffect"><option value="none">Ninguno</option><option value="translate">Subir</option><option value="scale">Agrandar</option><option value="glow">Brillo</option></select>
+          <label for="style-textCase">Letras</label><select id="style-textCase" data-style="textCase"><option value="upper">MAYÚSCULAS (como antes)</option><option value="original">Como se escribió (minúsculas y mayúsculas)</option></select>
+          <label for="style-textScale">Tamaño del texto</label><select id="style-textScale" data-style="textScale"><option value="1">1x</option><option value="2">2x</option><option value="3">3x</option><option value="4">4x</option></select>
+          <label class="check-label"><input id="text-outline-enabled" type="checkbox">Contorno del texto</label><label for="style-textOutline">Color del contorno</label><input id="style-textOutline" data-style="textOutline" type="color" value="#000000">
+          <label class="check-label" for="style-textShadow"><input id="style-textShadow" data-style="textShadow" type="checkbox">Sombra del texto</label>
+          <label class="check-label"><input id="text-gradient-enabled" type="checkbox">Degradé en el texto</label><label for="style-textGradient">Color de abajo del texto</label><input id="style-textGradient" data-style="textGradient" type="color" value="#f2a03a">
+          <p class="hint">Valores en vivo: {player} {health} {max_health} {food} {level} {xp} {ping} {online} {world} {x} {y} {z} {time} {balance} o %papi%. Un texto que sea solo {bar:health}, {bar:food}, {bar:xp}, {bar:air} o {bar:armor} se vuelve una barra en vivo estilo jefe: la caja es el riel, el color del texto es el relleno, con 10 marcas (:N para N marcas, :0 para lisa; por ejemplo {bar:health:20}) y una estela clara que muestra el daño reciente.</p>
+          <label for="style-textAlign">Alineación del texto</label><select id="style-textAlign" data-style="textAlign"><option value="left">Izquierda</option><option value="center">Centro</option><option value="right">Derecha</option></select>
+          <label for="style-wrapWidth">Ancho de ajuste del texto (0 = sin ajuste, píxeles lógicos)</label><input id="style-wrapWidth" data-style="wrapWidth" type="number" min="0" max="256" step="1" value="0">
+          <label for="element-layer">Capa (-128 a 128)</label><input id="element-layer" data-field="layer" type="number" step="1" min="-128" max="128">
+          <label class="check-label" for="custom-action-area"><input id="custom-action-area" type="checkbox">Área de clic propia del botón</label>
+          <div id="action-area-fields" hidden><div class="field-pair"><div><label for="area-x">Centro X del área</label><input id="area-x" data-area="x" type="number" step="0.02" min="-1" max="1"></div><div><label for="area-y">Centro Y del área</label><input id="area-y" data-area="y" type="number" step="0.02" min="-1" max="1"></div></div>
+          <div class="field-pair"><div><label for="area-width">Ancho del área</label><input id="area-width" data-area="width" type="number" step="0.02" min="0.01" max="2"></div><div><label for="area-height">Alto del área</label><input id="area-height" data-area="height" type="number" step="0.02" min="0.01" max="2"></div></div></div>
+          <p class="hint">Las líneas punteadas muestran las áreas de clic rectangulares del juego. Se pueden tocar pero no superponer: exportar lo rechaza. La opacidad no apaga los clics. Las decoraciones nunca reciben hover ni clics en el juego.</p>
+        </div></details>
+        </div>
+        <div class="tab-panel" id="panel-interaction" role="tabpanel" aria-labelledby="tab-interaction" hidden>
+        <label for="element-action">Acción simple del botón</label><input id="element-action" data-field="action" maxlength="140" spellcheck="false" aria-describedby="action-help">
+        <p id="action-help" class="hint">Vacío, close (cerrar), open:id_de_pantalla, message:Tu texto o command:/spawn (corre como el jugador, con sus permisos; {player} = su nombre). Para varias acciones, condiciones o variables, usá "Acciones por evento" abajo.</p>
+        <label class="check-label" for="conditional-message"><input id="conditional-message" type="checkbox">Mensaje según un permiso</label>
+        <fieldset id="condition-fields" hidden><legend>Permiso a revisar</legend>
+          <label for="condition-permission">Permiso</label><input id="condition-permission" data-condition="permission" maxlength="128" spellcheck="false">
+          <label for="condition-true">Mensaje si lo tiene</label><input id="condition-true" data-condition="ifTrue" maxlength="100">
+          <label for="condition-false">Mensaje si no lo tiene</label><input id="condition-false" data-condition="ifFalse" maxlength="100">
+          <p class="hint">Mensajes de texto simples, sin código.</p>
+        </fieldset>
+        <label for="element-tooltip">Tooltip (elemento que aparece mientras el cursor está sobre este botón)</label><select id="element-tooltip"><option value="">Ninguno</option></select>
+        <div class="presentation-actions" role="group" aria-label="Hover prediseñado">
+          <button class="secondary" type="button" data-element-preset="hover-grow">Hover: se agranda</button>
+          <button class="secondary" type="button" data-element-preset="hover-sound">Hover: sonido</button>
+        </div>
+        <div id="element-groups-interaction" class="advanced-settings"></div>
+        </div>
+        <div class="tab-panel" id="panel-animation" role="tabpanel" aria-labelledby="tab-animation" hidden>
+        <div class="presentation-actions" role="group" aria-label="Animaciones prediseñadas">
+          <button class="secondary" type="button" data-element-preset="enter-slide">Entra deslizando</button>
+          <button class="secondary" type="button" data-element-preset="pulse-loop">Late sin parar</button>
+          <button class="secondary" type="button" data-element-preset="spin-action">Gira con la acción "animation"</button>
+        </div>
+        <p class="hint">Probalas con el botón Probar: se reproducen en la vista.</p>
+        <fieldset id="upload-frames" class="upload-frames"><legend>Subir una animación al servidor</legend>
+          <label for="upload-files">Un GIF, o varios PNG (uno por cuadro, en orden de nombre)</label><input id="upload-files" type="file" accept=".gif,.png,image/gif,image/png" multiple>
+<label for="upload-name">Nombre en plugins/BigCasares/tideframe/engine/images</label><input id="upload-name" maxlength="32" spellcheck="false" placeholder="por ejemplo fuego">
+          <button id="upload-send" class="secondary" type="button">Subir y usar en este elemento</button>
+          <p id="upload-help" class="hint">Queda en el servidor y el elemento la usa como "Carpeta de PNG o nombre del GIF". El plugin la toma en la próxima recarga (publicar recarga solo).</p>
+        </fieldset>
+        <div id="element-groups-animation" class="advanced-settings"></div>
+        </div>
+        <div class="tab-panel" id="panel-data" role="tabpanel" aria-labelledby="tab-data" hidden>
+        <div id="element-groups-data" class="advanced-settings"></div>
+        </div>
+        <div class="tab-panel" id="panel-json" role="tabpanel" aria-labelledby="tab-json" hidden>
+          <label for="element-logic">Acciones, clic derecho, hover, salida del cursor, tooltip, fotogramas clave, oculto, visible si, cuadros, lista, arrastre y soltar (JSON)</label>
+          <textarea id="element-logic" rows="12" spellcheck="false" placeholder='{"actions":[{"type":"message","value":"<green>Hola {player}"}]}'></textarea>
+          <div class="advanced-draft-actions"><button id="apply-element-logic" type="button" class="secondary">Aplicar JSON del elemento</button><button id="revert-element-logic" type="button" class="secondary">Descartar cambios</button></div>
+          <p class="hint">Aplicar guarda este borrador; Descartar lo deshace. Vacío quita la lógica al aplicar. Las acciones reemplazan la acción simple.</p>
+          <section id="advanced-element-settings" class="advanced-settings" aria-label="Otros ajustes del elemento"></section>
+        </div>
+        <button id="delete-element" class="danger" type="button">Borrar lo elegido</button>
+      </form>
+    </aside>
+  </main>
+<footer id="status-panel"><p id="status" role="status" aria-live="polite">Pantalla válida. Lista para exportar.</p><p>Para llevarla al juego: con el editor conectado al servidor, tocá "Publicar en el servidor"; si no, exportá el JSON y guardalo en plugins/BigCasares/tideframe/engine/screens/. El módulo la recarga solo y pide aceptar el pack nuevo; después abrila con /tideframe ID. Los menús no se editan dentro del juego. Los archivos de proyecto guardan páginas, grupos y bloqueos del editor; no son pantallas del módulo.</p></footer>
+  <dialog id="review-dialog" aria-labelledby="review-title"><h2 id="review-title">Revisión del proyecto</h2><output id="review-summary" aria-live="polite"></output><ol id="review-list" class="review-list"></ol><p class="hint">Son avisos: nada de esto impide publicar, y el servidor vuelve a validar todo. Tocá un aviso para ir al elemento.</p><div class="selection-toolbar"><button id="review-publish" type="button" hidden>Publicar igual</button><button id="review-close" class="secondary" type="button">Cerrar</button></div></dialog>
+  <dialog id="map-dialog" class="map-dialog" aria-labelledby="map-title"><div class="panel-heading"><h2 id="map-title">Mapa del proyecto</h2><button id="map-close" class="secondary" type="button">Cerrar</button></div><p id="map-summary" class="hint map-summary"></p><div id="map-view" class="map-scroll"></div><p class="hint">Cada flecha es un botón (o una acción de la página) que abre otra página; el texto dice cuál. Borde verde: se abre directo (primera página, comando o al entrar). Punteado amarillo: no se abre desde ningún lado. Rojo: un enlace a una página que no existe. Tocá una caja para ir a esa página.</p></dialog>
+  <dialog id="player-dialog" aria-labelledby="player-title"><h2 id="player-title">Abrir en el juego</h2><label id="player-note" for="player-name"></label><input id="player-name" type="text" maxlength="16" autocomplete="off" spellcheck="false" placeholder="Tu nombre en el juego"><p class="hint">Se recuerda en este navegador. Vacío: se abre para el único jugador conectado.</p><div class="selection-toolbar"><button id="player-open" type="button">Abrir</button><button id="player-cancel" class="secondary" type="button">Cancelar</button></div></dialog>
+  <dialog id="recovery-dialog"><h2>Recuperar un proyecto</h2><label for="recovery-choice">Proyecto guardado o copia de respaldo</label><select id="recovery-choice"></select><p class="hint">Antes de recuperar se guarda una copia del proyecto actual. Si el guardado del navegador está lleno o no anda, no se reemplaza nada.</p><div class="selection-toolbar"><button id="restore-backup" type="button">Recuperar lo elegido</button><button id="close-recovery" class="secondary" type="button">Cancelar</button></div></dialog>
+</body>
+</html>

@@ -1,3 +1,9 @@
+# Ofertas del dia: cada dia se eligen 'cantidad' productos (los mismos para todos) con 'descuento' en el precio de compra.
+# Apagado por defecto; cantidad hasta 10, descuento hasta 0.5. Cada producto acepta 'limite-diario: N' (lotes por jugador y dia).
+ofertas:
+  enabled: false
+  cantidad: 2
+  descuento: 0.2
 categories:
   blocks:
     name: "&6Bloques"

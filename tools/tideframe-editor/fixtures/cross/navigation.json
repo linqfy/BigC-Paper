@@ -1,0 +1,243 @@
+{
+  "name": "navigation",
+  "about": "Leaving a page runs its on-close, back returns, globals stay, closing runs on-close once.",
+  "pages": [
+    {
+      "version": 9,
+      "id": "home",
+      "title": "HOME",
+      "quality": {
+        "preset": "low",
+        "width": 512,
+        "height": 288
+      },
+      "elements": [
+        {
+          "id": "go",
+          "text": "GO",
+          "x": 0,
+          "y": 0.75,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "button",
+          "action": "",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null,
+          "logic": {
+            "actions": [
+              {
+                "type": "redirect",
+                "value": "shop"
+              },
+              {
+                "type": "message",
+                "value": "never runs"
+              }
+            ]
+          }
+        },
+        {
+          "id": "quit",
+          "text": "QUIT",
+          "x": 0,
+          "y": 0.5700000000000001,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "button",
+          "action": "",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null,
+          "logic": {
+            "actions": [
+              {
+                "type": "close"
+              }
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "mode": "menu",
+        "scale": 1,
+        "cursor": "cross"
+      },
+      "logic": {
+        "variables": {
+          "*visits": "0"
+        },
+        "on-open": [
+          {
+            "type": "variable",
+            "variable": "*visits",
+            "operation": "add",
+            "value": "1"
+          },
+          {
+            "type": "message",
+            "value": "hello home {visits}"
+          }
+        ],
+        "on-close": [
+          {
+            "type": "message",
+            "value": "leaving home"
+          }
+        ]
+      }
+    },
+    {
+      "version": 9,
+      "id": "shop",
+      "title": "SHOP",
+      "quality": {
+        "preset": "low",
+        "width": 512,
+        "height": 288
+      },
+      "elements": [
+        {
+          "id": "back",
+          "text": "BACK",
+          "x": 0,
+          "y": 0.75,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "button",
+          "action": "",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null,
+          "logic": {
+            "actions": [
+              {
+                "type": "back"
+              }
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "mode": "menu",
+        "scale": 1,
+        "cursor": "cross"
+      },
+      "logic": {
+        "on-open": [
+          {
+            "type": "message",
+            "value": "hello shop {visits}"
+          }
+        ],
+        "on-close": [
+          {
+            "type": "message",
+            "value": "leaving shop"
+          }
+        ]
+      }
+    }
+  ],
+  "steps": [
+    {
+      "click": "go"
+    },
+    {
+      "click": "back"
+    },
+    {
+      "click": "quit"
+    }
+  ],
+  "expect": {
+    "events": [
+      "message hello home 1",
+      "open shop",
+      "message leaving home",
+      "message hello shop 1",
+      "back",
+      "message leaving shop",
+      "message hello home 2",
+      "close",
+      "message leaving home"
+    ],
+    "page": "home",
+    "closed": true
+  }
+}

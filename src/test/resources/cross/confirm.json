@@ -1,0 +1,129 @@
+{
+  "name": "confirm",
+  "about": "confirm runs then on yes and else on no; the rest of the list goes on after the answer.",
+  "pages": [
+    {
+      "version": 9,
+      "id": "sell",
+      "title": "SELL",
+      "quality": {
+        "preset": "low",
+        "width": 512,
+        "height": 288
+      },
+      "elements": [
+        {
+          "id": "sell",
+          "text": "SELL",
+          "x": 0,
+          "y": 0.75,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "button",
+          "action": "",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null,
+          "logic": {
+            "actions": [
+              {
+                "type": "confirm",
+                "title": "Sure?",
+                "value": "Sell for {price}?",
+                "yes": "Sell",
+                "no": "Keep",
+                "then": [
+                  {
+                    "type": "variable",
+                    "variable": "coins",
+                    "operation": "add",
+                    "value": "{price}"
+                  },
+                  {
+                    "type": "message",
+                    "value": "sold"
+                  }
+                ],
+                "else": [
+                  {
+                    "type": "message",
+                    "value": "kept"
+                  }
+                ]
+              },
+              {
+                "type": "message",
+                "value": "coins {coins}"
+              }
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "mode": "menu",
+        "scale": 1,
+        "cursor": "cross"
+      },
+      "logic": {
+        "variables": {
+          "coins": "0",
+          "price": "40"
+        }
+      }
+    }
+  ],
+  "steps": [
+    {
+      "answers": [
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "click": "sell"
+    },
+    {
+      "click": "sell"
+    }
+  ],
+  "expect": {
+    "events": [
+      "confirm Sell for 40?",
+      "message sold",
+      "message coins 40",
+      "confirm Sell for 40?",
+      "message kept",
+      "message coins 40"
+    ],
+    "variables": {
+      "coins": "40"
+    },
+    "page": "sell",
+    "closed": false
+  }
+}

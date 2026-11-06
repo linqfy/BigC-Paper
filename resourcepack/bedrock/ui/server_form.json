@@ -1,0 +1,21 @@
+{
+  "namespace": "server_form",
+  "main_screen_content": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_back",
+        "value": [
+          {
+            "bigc_form_factory": {
+              "type": "factory",
+              "control_ids": {
+                "long_form": "@bigc_forms.long_form"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

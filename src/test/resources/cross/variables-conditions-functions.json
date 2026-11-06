@@ -1,0 +1,143 @@
+{
+  "name": "variables-conditions-functions",
+  "about": "Conditions pick their branch, variables count down, functions take defaults and arguments.",
+  "pages": [
+    {
+      "version": 9,
+      "id": "shop",
+      "title": "SHOP",
+      "quality": {
+        "preset": "low",
+        "width": 512,
+        "height": 288
+      },
+      "elements": [
+        {
+          "id": "buy",
+          "text": "BUY",
+          "x": 0,
+          "y": 0.75,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "button",
+          "action": "",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null,
+          "logic": {
+            "actions": [
+              {
+                "type": "condition",
+                "value": "{coins} >= {price}",
+                "then": [
+                  {
+                    "type": "variable",
+                    "variable": "coins",
+                    "operation": "subtract",
+                    "value": "{price}"
+                  },
+                  {
+                    "type": "message",
+                    "value": "Bought! {coins} left"
+                  },
+                  {
+                    "type": "function",
+                    "function": "receipt",
+                    "arguments": {
+                      "item": "sword"
+                    }
+                  }
+                ],
+                "else": [
+                  {
+                    "type": "message",
+                    "value": "Not enough: {coins}"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "presentation": {
+        "mode": "menu",
+        "scale": 1,
+        "cursor": "cross"
+      },
+      "logic": {
+        "variables": {
+          "coins": "100",
+          "price": "30"
+        },
+        "functions": {
+          "receipt": {
+            "params": {
+              "item": "thing"
+            },
+            "actions": [
+              {
+                "type": "message",
+                "value": "Receipt: {item} for {price}"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "steps": [
+    {
+      "click": "buy"
+    },
+    {
+      "click": "buy"
+    },
+    {
+      "click": "buy"
+    },
+    {
+      "click": "buy"
+    }
+  ],
+  "expect": {
+    "events": [
+      "message Bought! 70 left",
+      "message Receipt: sword for 30",
+      "message Bought! 40 left",
+      "message Receipt: sword for 30",
+      "message Bought! 10 left",
+      "message Receipt: sword for 30",
+      "message Not enough: 10"
+    ],
+    "variables": {
+      "coins": "10"
+    },
+    "page": "shop",
+    "closed": false
+  }
+}

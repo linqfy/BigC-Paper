@@ -147,7 +147,8 @@ public final class ShopGuiController implements Listener {
             List<String> lore = new ArrayList<>();
             lore.add(ChatColor.GREEN + "Click izquierdo: comprar");
             lore.add(ChatColor.RED + "Click derecho: vender");
-            lore.add(ChatColor.GRAY + "Compra: " + entry.buyPrice());
+            String tag = service.priceTag(entry);
+            lore.add(ChatColor.GRAY + "Compra: " + service.buyPrice(entry) + (tag.isEmpty() ? "" : " " + ChatColor.GOLD + tag));
             lore.add(ChatColor.GRAY + "Venta: " + entry.sellPrice());
             for (String line : entry.lore()) {
                 lore.add(translate(line));

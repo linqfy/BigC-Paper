@@ -1,0 +1,2 @@
+# The final empty TSV column is required by the item icon parser.
+src/main/resources/tideframe/engine/item-icons.tsv whitespace=-blank-at-eol

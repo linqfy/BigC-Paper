@@ -64,6 +64,46 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    maxHeapSize = '4g'
+}
+
+// Reuse Paper's exact Adventure artifacts without replacing the existing Spigot test ItemStack factory.
+def tideframeTestAdventure = configurations.compileClasspath.incoming.artifactView {
+    componentFilter { id ->
+        id instanceof org.gradle.api.artifacts.component.ModuleComponentIdentifier && id.group == 'net.kyori'
+    }
+}.files
+dependencies {
+    testImplementation(tideframeTestAdventure)
+}
+
+// BigCasares' item tests need Spigot's standalone factory; the embedded UI tests exercise Paper audience methods.
+sourceSets {
+    test {
+        java.exclude 'dev/linqfy/bigCasares/modules/tideframe/engine/**'
+    }
+    tideframeTest {
+        java.srcDir 'src/test/java'
+        java.include 'dev/linqfy/bigCasares/modules/tideframe/engine/**'
+        resources.srcDir 'src/test/resources'
+        compileClasspath = sourceSets.main.output + configurations.compileClasspath + configurations.testCompileClasspath
+        runtimeClasspath = output + sourceSets.main.output + configurations.compileClasspath + configurations.testRuntimeClasspath
+    }
+}
+
+tasks.register('tideframeTest', Test) {
+    description = 'Runs the source-built Tideframe engine suite against the matching Paper API.'
+    group = 'verification'
+    testClassesDirs = sourceSets.tideframeTest.output.classesDirs
+    classpath = sourceSets.tideframeTest.runtimeClasspath
+    mustRunAfter(tasks.named('test'))
+}
+tasks.named('check') {
+    dependsOn(tasks.named('tideframeTest'))
+}
+
 // Plugins del servidor (no se compilan con BigCasares): runServer los pone en build/run-server/plugins.
 // Bedrock (Geyser + Floodgate) y GeyserModelEngine para que los de Bedrock vean los modelos de BetterModel.
 // Ver docs/don-pollos/compatibilidad-bedrock.md.
@@ -91,23 +131,25 @@ def verifiedArtifacts = [
                 sha256: "21570aff9ce17d6983928e8552777760e1ede5050026b04c686b0ae112e6fd7e",
                 dest: "verified-plugins/floodgate-spigot-2.2.5-b141.jar", plugin: true],
     // GeyserUtils (lado servidor) y GeyserModelEngine: modelos 3D para Bedrock.
-    geyserUtilsSpigot: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserUtils/releases/assets/528940887",
-                sha256: "b39677308d320c00be2a5bf8058296f39789b836cfb448d0c13437b2ecbdec43",
+    // Ids y digests del tag "latest" republicado el 02/11/2026 (los anteriores dan 404).
+    geyserUtilsSpigot: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserUtils/releases/assets/703180952",
+                sha256: "1de02334a7449929aa0577876ea2bba12eb5fb314048e9fbc21e4171b09c2542",
                 dest: "verified-plugins/geyserutils-spigot-1.0-SNAPSHOT.jar", plugin: true],
-    geyserModelEngine: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserModelEngine/releases/assets/641444897",
-                sha256: "6e777d569d7f7c2b8583ba21ba8ac7c451c265089bd34aefdb7f00c2fe8957a2",
+    geyserModelEngine: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserModelEngine/releases/assets/702501968",
+                sha256: "ce4295d05517c6bcdc1d5bc0c6e51b2daf4d07a45bc834e239c1d6019df035cc",
                 dest: "verified-plugins/GeyserModelEngine-1.0.9.jar", plugin: true],
     // Extensiones de Geyser (plugins/Geyser-Spigot/extensions) y el pack de GeyserDisplayEntity (packs/).
-    geyserModelEngineExtension: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserModelEngine/releases/assets/641444959",
-                sha256: "9b5e6c9b6e20f5f5aa7516cd32eb635f1a99d4458bd6327b828859cbb2aa4f18",
+    geyserModelEngineExtension: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserModelEngine/releases/assets/702502021",
+                sha256: "71671ee8c475f194f7caf13bc1cc4d3b4d10dc4fd9df042a31ee7b29fe7a7cb5",
                 dest: "run-server/plugins/Geyser-Spigot/extensions/GeyserModelEngineExtension-1.0.9.jar"],
-    geyserUtilsExtension: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserUtils/releases/assets/528940916",
-                sha256: "50120094bd46fefbb1672737540e3a66a483391e062625676805b4bb08e79ea9",
+    geyserUtilsExtension: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserUtils/releases/assets/703181035",
+                sha256: "8ed7b7dbece8341277652d4ee01706913e725cdf19b9664025bbb870299ec12a",
                 dest: "run-server/plugins/Geyser-Spigot/extensions/geyserutils-geyser-1.0-SNAPSHOT.jar"],
     // Opcional: meteoritos de WhatsApp y cara del bloque del secreto (item displays) para Bedrock.
-    geyserDisplayEntity: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserDisplayEntity/releases/assets/510239319",
-                sha256: "eb05806386dc9a614def3cb71b559d1f0d0f5b5b0e1fff51c063a3515832addf",
-                dest: "run-server/plugins/Geyser-Spigot/extensions/GeyserDisplayEntity-1.0.12.jar"],
+    // El tag "latest" ya no tiene la 1.0.12: ahora es la 1.0.15.
+    geyserDisplayEntity: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserDisplayEntity/releases/assets/702886655",
+                sha256: "7e84cfba4b6241dd6fe78806543f5f975522465b5707e0db5654592f829ad59e",
+                dest: "run-server/plugins/Geyser-Spigot/extensions/GeyserDisplayEntity-1.0.15.jar"],
     geyserDisplayEntityPack: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserDisplayEntity/releases/assets/368620700",
                 sha256: "7b9b69dbbbc8d2a43e85393a2e1f77118412ad788e5a9298bb64fcc65cbea4fa",
                 dest: "run-server/plugins/Geyser-Spigot/packs/GeyserDisplayEntityPack.mcpack"],
@@ -295,6 +337,33 @@ tasks.named("jar") {
         into("seed-content")
     }
 }
+
+tasks.register('verifyEmbeddedTideframe') {
+    group = 'verification'
+    description = 'Checks that the one BigCasares JAR contains the source-built UI engine, not an external plugin JAR.'
+    dependsOn(tasks.named('jar'))
+    doLast {
+        def archive = tasks.named('jar').get().archiveFile.get().asFile
+        new java.util.zip.ZipFile(archive).withCloseable { zip ->
+            ['dev/linqfy/bigCasares/modules/tideframe/engine/TideframeEngine.class', 'dev/linqfy/bigCasares/modules/tideframe/engine/TideframeApi.class',
+             'tideframe/engine/boss-face.png',
+             'tideframe/engine/item-icons.tsv', 'META-INF/tideframe/LICENSE'].each { path ->
+                if (zip.getEntry(path) == null) throw new GradleException("Missing embedded Tideframe resource: ${path}")
+            }
+            if (zip.getEntry('tideframe/engine/config.yml') != null) {
+                throw new GradleException('The engine settings belong in config.yml (tideframe-ui.motor), not in a config file of its own')
+            }
+            def entries = zip.entries().toList()*.name
+            if (entries.findAll { it.endsWith('plugin.yml') } != ['plugin.yml']) {
+                throw new GradleException('BigCasares must be the only plugin descriptor')
+            }
+            if (entries.any { it.contains('tideframe-api-') && it.endsWith('.jar') }) {
+                throw new GradleException('A precompiled Tideframe API JAR was packaged')
+            }
+        }
+    }
+}
+tasks.named('check') { dependsOn(tasks.named('verifyEmbeddedTideframe')) }
 
 processResources {
     def props = [version: version]

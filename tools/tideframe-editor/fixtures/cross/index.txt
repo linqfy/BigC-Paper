@@ -1,0 +1,12 @@
+variables-conditions-functions
+calculated-text
+cooldown
+confirm
+on-change
+triggers
+navigation
+visibility-and-lists
+closing-rules
+closing-wait
+hud-and-toasts
+legacy-fallback

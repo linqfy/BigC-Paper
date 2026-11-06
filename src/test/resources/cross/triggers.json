@@ -1,0 +1,123 @@
+{
+  "name": "triggers",
+  "about": "on-damage, on-world-change and timers with their values.",
+  "pages": [
+    {
+      "version": 9,
+      "id": "arena",
+      "title": "ARENA",
+      "quality": {
+        "preset": "low",
+        "width": 512,
+        "height": 288
+      },
+      "elements": [
+        {
+          "id": "info",
+          "text": "INFO",
+          "x": 0,
+          "y": 0.75,
+          "width": 0.6,
+          "height": 0.14,
+          "kind": "label",
+          "action": "",
+          "shape": "rectangle",
+          "border": true,
+          "messageCondition": null,
+          "background": false,
+          "image": null,
+          "style": {
+            "opacity": 1,
+            "fillColor": "#28384b",
+            "borderColor": "#ffffff",
+            "textColor": "#ffffff",
+            "shadow": false,
+            "rotation": 0,
+            "radius": 0.08,
+            "outlineWidth": 1,
+            "hoverColor": null,
+            "hoverEffect": "none",
+            "textAlign": "center",
+            "wrapWidth": 0,
+            "brightness": 1,
+            "textScale": 1,
+            "textOutline": null,
+            "textShadow": false,
+            "gradientColor": null,
+            "gradientDirection": "vertical",
+            "textGradient": null
+          },
+          "layer": 0,
+          "actionArea": null
+        }
+      ],
+      "presentation": {
+        "mode": "menu",
+        "scale": 1,
+        "cursor": "cross"
+      },
+      "logic": {
+        "variables": {
+          "ticks": "0"
+        },
+        "on-damage": [
+          {
+            "type": "message",
+            "value": "ouch {damage} {cause}"
+          }
+        ],
+        "on-world-change": [
+          {
+            "type": "message",
+            "value": "{from} -> {world}"
+          }
+        ],
+        "timers": [
+          {
+            "every": "1s",
+            "actions": [
+              {
+                "type": "variable",
+                "variable": "ticks",
+                "operation": "add",
+                "value": "1"
+              },
+              {
+                "type": "message",
+                "value": "tick {ticks}"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "steps": [
+    {
+      "damage": 3.456,
+      "cause": "fall"
+    },
+    {
+      "world": "world_nether"
+    },
+    {
+      "timer": 0
+    },
+    {
+      "timer": 0
+    }
+  ],
+  "expect": {
+    "events": [
+      "message ouch 3.46 fall",
+      "message world -> world_nether",
+      "message tick 1",
+      "message tick 2"
+    ],
+    "variables": {
+      "ticks": "2"
+    },
+    "page": "arena",
+    "closed": false
+  }
+}
