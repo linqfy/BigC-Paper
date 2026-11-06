@@ -1,4 +1,6 @@
 modules:
+  legendary-weapons:
+    enabled: false
   copper-apple: true
   smoke-bomb: true
   custom-crossbow: true
@@ -1838,3 +1840,27 @@ the-sift:
   block-models:
     enabled: true
     radius: 24
+
+legendary-weapons:
+  friendly-fire: false
+  model-animations:
+    enabled: false
+    idle: false
+  max-active-effects: 32
+  max-targets-per-pulse: 12
+  particles-per-ring: 24
+  spear:
+    death-return: on-respawn
+  # Daño base en HP (2 HP = 1 corazón); armadura y encantamientos reducen el daño.
+  # Cooldown y duración en segundos; alcance y radio en bloques.
+  abilities:
+    lightning-dash: {damage: 5, range: 10, radius: 0, duration: 1, cooldown: 16}
+    thunder-mark: {damage: 6, secondary-damage: 3, range: 0, radius: 4, duration: 6, cooldown: 34}
+    chain-lightning: {damage: 7, range: 15, radius: 5, duration: 1, cooldown: 30}
+    thunderstorm: {damage: 4.5, range: 20, radius: 6, duration: 8, cooldown: 52}
+    wrath-of-zeus: {damage: 14, secondary-damage: 5, range: 20, radius: 5, duration: 1.5, cooldown: 78}
+    wind-dash: {damage: 0, range: 9, radius: 0, duration: 1, cooldown: 18}
+    skybreaker: {damage: 8, outer-damage: 4, range: 8, radius: 5, duration: 10, cooldown: 40}
+    tornado: {damage: 2, max-damage: 6, speed: 3, range: 15, radius: 3, duration: 5, cooldown: 40}
+    wind-prison: {damage: 0, range: 12, radius: 5, duration: 5, cooldown: 50}
+    heavens-fall: {damage: 12, outer-damage: 6, range: 12, radius: 7, duration: 12, cooldown: 90}

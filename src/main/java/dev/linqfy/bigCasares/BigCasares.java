@@ -43,6 +43,7 @@ import dev.linqfy.bigCasares.modules.model.JavaModelGatewayFactory;
 import dev.linqfy.bigCasares.modules.nexus.NexusModule;
 import dev.linqfy.bigCasares.modules.pveboss.PveBossModule;
 import dev.linqfy.bigCasares.modules.resourcepack.ResourcePackModule;
+import dev.linqfy.bigCasares.modules.legendary.LegendaryWeaponsModule;
 import dev.linqfy.bigCasares.modules.shop.ShopModule;
 import dev.linqfy.bigCasares.modules.skillrating.SkillRatingModule;
 import dev.linqfy.bigCasares.modules.smokebomb.SmokeBombModule;
@@ -406,6 +407,7 @@ public final class BigCasares extends JavaPlugin {
 
         moduleManager.register(resourcePackModule);
         moduleManager.register(itemCatalogModule);
+        moduleManager.register(new LegendaryWeaponsModule(this));
         moduleManager.register(new CopperAppleModule(this));
         moduleManager.register(new SmokeBombModule(this));
         moduleManager.register(new CustomCrossbowModule(this));

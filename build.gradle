@@ -258,7 +258,7 @@ tasks.register("generateResourcePacks", JavaExec) {
     description = "Validates and builds the BigCasares Java and Bedrock resource packs."
     dependsOn(tasks.named("classes"))
     mainClass = "dev.linqfy.bigCasares.modules.resourcepack.ResourcePackBuildMain"
-    classpath = sourceSets.main.runtimeClasspath
+    classpath = sourceSets.main.runtimeClasspath + sourceSets.main.compileClasspath
     args = [
         layout.projectDirectory.dir("resourcepack").asFile.absolutePath,
         generatedResourcePackDirectory.get().asFile.absolutePath

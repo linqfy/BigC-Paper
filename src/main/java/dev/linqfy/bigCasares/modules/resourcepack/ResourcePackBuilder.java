@@ -52,6 +52,7 @@ public final class ResourcePackBuilder {
         copyTree(javaSource, javaRoot);
         copyTree(bedrockSource, bedrockRoot);
         new SharedResourcePackAssembler().assemble(sourceRoot, javaRoot, bedrockRoot, registry);
+        new LegendaryItemModels().compile(sourceRoot, javaRoot);
         new ResourcePackValidator().validate(registry, javaRoot, bedrockRoot);
         new JavaResourcePackBuilder().build(javaRoot, outputDirectory);
         new BedrockResourcePackBuilder().build(bedrockRoot, outputDirectory);
@@ -104,6 +105,7 @@ public final class ResourcePackBuilder {
 
     private static String treeDigest(Path root, String algorithm) throws IOException {
         MessageDigest digest = digest(algorithm);
+        digest.update(LegendaryItemModels.VERSION.getBytes(StandardCharsets.UTF_8));
         List<Path> files;
         try (var stream = Files.walk(root)) {
             files = stream.filter(Files::isRegularFile)

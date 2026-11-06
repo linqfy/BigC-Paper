@@ -12,6 +12,9 @@ libraries:
   - net.dv8tion:JDA:6.4.1
 
 commands:
+  weapons:
+    description: Armas legendarias y eventos de fabricación PvP
+    usage: /weapons help
   bigcasares:
     description: BigCasares management command
     usage: /<command> give <item_id> [player] [amount]
@@ -136,6 +139,8 @@ commands:
 
 
 permissions:
+  bigcasares.weapons.admin:
+    default: op
   bigcasares.sift.models.others:
     description: Switch The Sift's block models on or off for another player
   bigcasares.donpollos.admin:
@@ -145,6 +150,7 @@ permissions:
     description: Full access to BigCasares commands
     default: op
     children:
+      bigcasares.weapons.admin: true
       bigcasares.command.give: true
       bigcasares.command.give.others: true
       bigcasares.missions.open: true
