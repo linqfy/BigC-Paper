@@ -12,6 +12,10 @@ libraries:
   - net.dv8tion:JDA:6.4.1
 
 commands:
+  duperestore:
+    description: Consulta los dupes de Paper y recarga la reposición de hilo
+    usage: /<command> [status|reload]
+    permission: duperestore.admin
   bigcasares:
     description: BigCasares management command
     usage: /<command> give <item_id> [player] [amount]
@@ -136,6 +140,8 @@ commands:
 
 
 permissions:
+  duperestore.admin:
+    default: op
   bigcasares.sift.models.others:
     description: Switch The Sift's block models on or off for another player
   bigcasares.donpollos.admin:
@@ -145,6 +151,7 @@ permissions:
     description: Full access to BigCasares commands
     default: op
     children:
+      duperestore.admin: true
       bigcasares.command.give: true
       bigcasares.command.give.others: true
       bigcasares.missions.open: true

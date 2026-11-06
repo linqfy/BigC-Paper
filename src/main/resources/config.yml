@@ -1,4 +1,6 @@
 modules:
+  dupe-restore:
+    enabled: false
   copper-apple: true
   smoke-bomb: true
   custom-crossbow: true
@@ -1838,3 +1840,7 @@ the-sift:
   block-models:
     enabled: true
     radius: 24
+
+dupe-restore:
+  # El origen debe ser un bloque waterlogged adyacente al hilo.
+  string-duplication: true
