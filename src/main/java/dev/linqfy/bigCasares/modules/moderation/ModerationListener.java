@@ -162,11 +162,16 @@ public final class ModerationListener implements Listener {
         double upward = event.getTo().getY() - event.getFrom().getY();
         double expected = Math.max(0.215, player.getWalkSpeed() * 1.075) * (player.isSprinting() ? 1.3 : 1.0);
         boolean exempt = player.isInsideVehicle() || player.isGliding() || player.isRiptiding()
-            || player.isFlying() || player.getAllowFlight()
+            || player.isFlying()
+            || player.getAllowFlight() && !module.hasTechnicalFlight(player.getUniqueId())
             || MOVEMENT_EFFECTS.stream().anyMatch(player::hasPotionEffect);
         movement.sample(
             Instant.now(), player.getUniqueId(), player.getName(), horizontal, upward, expected, exempt
         ).ifPresent(module::acceptSignal);
+    }
+
+    void exemptMovement(UUID playerId, Instant until) {
+        movement.exempt(playerId, until);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

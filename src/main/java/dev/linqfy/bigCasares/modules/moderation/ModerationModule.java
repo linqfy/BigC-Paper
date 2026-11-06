@@ -28,6 +28,11 @@ public final class ModerationModule implements PluginModule {
     private BukkitRuntimeRegistrations registrations;
     private RuntimeRegistrationScope compatibilityScope;
     private boolean shutdownStarted;
+    /**
+     * Jugadores a quienes otro modulo les dio permiso de volar solo como mecanismo tecnico (por ejemplo para detectar un doble
+     * salto): ese permiso no los exime del detector de movimiento (si no, quedarian exentos todo el tiempo).
+     */
+    private final java.util.Set<java.util.UUID> technicalFlight = java.util.concurrent.ConcurrentHashMap.newKeySet();
 
     public ModerationModule(BigCasares plugin) {
         this.plugin = plugin;
@@ -115,6 +120,27 @@ public final class ModerationModule implements PluginModule {
             scope.close();
         }
         clearRuntimeState();
+    }
+
+    /** Marca (o desmarca) que el permiso de volar de ese jugador es solo tecnico: sigue bajo el detector de movimiento. */
+    public void setTechnicalFlight(java.util.UUID playerId, boolean technical) {
+        if (technical) {
+            technicalFlight.add(playerId);
+        } else {
+            technicalFlight.remove(playerId);
+        }
+    }
+
+    boolean hasTechnicalFlight(java.util.UUID playerId) {
+        return technicalFlight.contains(playerId);
+    }
+
+    /** El movimiento de ese jugador no se mide hasta esa hora (un impulso legitimo: salto, empuje de un boss...). */
+    public void exemptMovement(java.util.UUID playerId, java.time.Duration duration) {
+        ModerationListener active = listener;
+        if (active != null) {
+            active.exemptMovement(playerId, Instant.now().plus(duration));
+        }
     }
 
     public AuditService audit() {
@@ -253,6 +279,7 @@ public final class ModerationModule implements PluginModule {
         purgeTask = null;
         rareItemTask = null;
         listener = null;
+        technicalFlight.clear();
         logHandler = null;
         registrations = null;
         rareItemTracker = null;
