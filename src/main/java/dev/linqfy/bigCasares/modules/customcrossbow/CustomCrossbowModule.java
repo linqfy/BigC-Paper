@@ -66,6 +66,22 @@ public final class CustomCrossbowModule implements PluginModule {
         this.prismarineArrowListener = new PrismarineArrowListener(prismarineArrowItem, registrations);
         RocketJumpAirController rocketJumpAirController = new RocketJumpAirController(plugin, registrations);
 
+        CrossbowEnchantmentData enchantmentData = new CrossbowEnchantmentData();
+        SniperDamageService sniperDamage = new SniperDamageService();
+        for (CrossbowEnchantment enchantment : CrossbowEnchantment.values()) {
+            plugin.getCustomItemRegistry().register(new CrossbowEnchantmentBook(enchantment));
+            scope.register(enchantment.bookId(), () -> plugin.getCustomItemRegistry().unregister(enchantment.bookId()));
+        }
+        registrations.registerListener("crossbow-enchantments", new CrossbowEnchantmentListener(enchantmentData));
+        registrations.registerListener("sniper-damage", sniperDamage);
+        SniperCrossbowListener sniper = new SniperCrossbowListener(
+            plugin.getServer(), enchantmentData, sniperDamage, new NmsSniperScopeView(plugin));
+        registrations.ownCloseable("sniper-runtime", sniper);
+        registrations.scheduleRepeating("sniper-scope", sniper::tick, 1L, 1L);
+        registrations.registerListener("sniper-crossbow", sniper);
+        registrations.registerListener("multicharge-crossbow",
+            new MultichargeListener(enchantmentData, echoArrowItem, amethystArrowItem, registrations));
+
         plugin.getCustomItemRegistry().register(prismarineArrowItem);
         plugin.getCustomItemRegistry().register(echoArrowItem);
         plugin.getCustomItemRegistry().register(amethystArrowItem);
