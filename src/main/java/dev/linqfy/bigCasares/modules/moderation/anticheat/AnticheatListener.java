@@ -3,24 +3,35 @@ package dev.linqfy.bigCasares.modules.moderation.anticheat;
 import dev.linqfy.bigCasares.platform.ClientPlatform;
 import io.papermc.paper.event.entity.EntityKnockbackEvent;
 import io.papermc.paper.event.player.PrePlayerAttackEntityEvent;
+import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerBedLeaveEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
@@ -36,12 +47,15 @@ import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BoundingBox;
+import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -70,6 +84,14 @@ public final class AnticheatListener implements Listener {
     static final double PISTON_RADIUS = 4;
     public static final long HOVER_PERIOD_TICKS = 5;
     static final double VANILLA_GRAVITY = 0.08;
+    private static final Set<Material> RARE_ORES = EnumSet.of(
+        Material.DIAMOND_ORE, Material.DEEPSLATE_DIAMOND_ORE, Material.ANCIENT_DEBRIS,
+        Material.EMERALD_ORE, Material.DEEPSLATE_EMERALD_ORE
+    );
+    private static final Set<Material> MINING_STONE = EnumSet.of(
+        Material.STONE, Material.DEEPSLATE, Material.TUFF, Material.GRANITE, Material.DIORITE, Material.ANDESITE,
+        Material.NETHERRACK, Material.BASALT, Material.BLACKSTONE
+    );
 
     private final Server server;
     private final AnticheatSettings settings;
@@ -80,7 +102,13 @@ public final class AnticheatListener implements Listener {
     private final MovementCheck movement = new MovementCheck();
     private final HoverCheck hover = new HoverCheck();
     private final CombatCheck combat;
+    private final AuraCheck aura = new AuraCheck();
+    private final BlockInteractionCheck blocks = new BlockInteractionCheck();
+    private final GroundSpoofCheck ground = new GroundSpoofCheck();
+    private final XrayTracker xray = new XrayTracker();
     private final Map<UUID, Integer> lastMoveTick = new HashMap<>();
+    private final Map<UUID, Integer> containerOpenedTick = new HashMap<>();
+    private final Map<UUID, Integer> breakDepth = new HashMap<>();
 
     public AnticheatListener(
         Server server,
@@ -121,7 +149,13 @@ public final class AnticheatListener implements Listener {
         movement.clear();
         hover.clear();
         combat.clear();
+        aura.clear();
+        blocks.clear();
+        ground.clear();
+        xray.clear();
         lastMoveTick.clear();
+        containerOpenedTick.clear();
+        breakDepth.clear();
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -135,7 +169,8 @@ public final class AnticheatListener implements Listener {
         UUID id = player.getUniqueId();
         int tick = server.getCurrentTick();
         Integer previous = lastMoveTick.put(id, tick);
-        if (!settings.checkEnabled("movement-speed") && !settings.checkEnabled("upward-movement")) {
+        if (!settings.checkEnabled("movement-speed") && !settings.checkEnabled("upward-movement")
+            && !settings.checkEnabled("ground-spoof")) {
             return;
         }
         int elapsed = previous == null ? MovementCheck.MAX_ELAPSED_TICKS + 1 : Math.max(1, tick - previous);
@@ -154,6 +189,11 @@ public final class AnticheatListener implements Listener {
             exempt
         );
         movement.sample(id, sample).ifPresent(detection -> report(player, detection));
+        if (settings.checkEnabled("ground-spoof")) {
+            boolean claimsGround = player.isOnGround();
+            boolean supported = !claimsGround || exempt || EnvironmentProbe.supported(player, to);
+            ground.sample(id, claimsGround, supported, exempt).ifPresent(detection -> report(player, detection));
+        }
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -185,6 +225,126 @@ public final class AnticheatListener implements Listener {
         List<Detection> detections = combat.attack(attacker.getUniqueId(), System.currentTimeMillis(),
             target.getUniqueId(), distance, allowed);
         detections.forEach(detection -> report(attacker, detection));
+        if (target instanceof LivingEntity living && !(target instanceof ArmorStand)
+            && living.getWorld() == attacker.getWorld() && !lagging()
+            && !(settings.exemptBedrock() && platform.apply(attacker.getUniqueId()) == ClientPlatform.BEDROCK)) {
+            checkAura(attacker, living, tick);
+        }
+    }
+
+    private void checkAura(Player attacker, LivingEntity target, long tick) {
+        Location eye = attacker.getEyeLocation();
+        BoundingBox box = target.getBoundingBox();
+        Vector closest = new Vector(
+            clamp(eye.getX(), box.getMinX(), box.getMaxX()),
+            clamp(eye.getY(), box.getMinY(), box.getMaxY()),
+            clamp(eye.getZ(), box.getMinZ(), box.getMaxZ())
+        );
+        Vector toTarget = closest.clone().subtract(eye.toVector());
+        double distance = toTarget.length();
+        Vector look = eye.getDirection();
+        double angle = AuraCheck.angleDegrees(look.getX(), look.getY(), look.getZ(),
+            toTarget.getX(), toTarget.getY(), toTarget.getZ());
+        boolean throughWall = distance >= AuraCheck.MIN_MEASURED_DISTANCE
+            && blocked(eye, closest) && blocked(eye, box.getCenter())
+            && blocked(eye, new Vector(box.getCenterX(), box.getMaxY() - 0.1, box.getCenterZ()));
+        Integer openedAt = containerOpenedTick.get(attacker.getUniqueId());
+        InventoryType top = attacker.getOpenInventory().getTopInventory().getType();
+        boolean containerOpen = openedAt != null && top != InventoryType.CRAFTING && top != InventoryType.CREATIVE
+            && tick - openedAt > 10 + attacker.getPing() / 50;
+        boolean usingItem = attacker.isHandRaised() && attacker.getActiveItemUsedTime() > 5;
+        aura.attack(attacker.getUniqueId(), angle, distance, throughWall, containerOpen, usingItem)
+            .forEach(detection -> report(attacker, detection));
+    }
+
+    /** Un rayo de los ojos al punto choca con un bloque solido antes de llegar. */
+    private static boolean blocked(Location eye, Vector point) {
+        Vector direction = point.clone().subtract(eye.toVector());
+        double length = direction.length();
+        if (length < 1e-6 || eye.getWorld() == null) {
+            return false;
+        }
+        RayTraceResult hit = eye.getWorld().rayTraceBlocks(eye, direction.normalize(), length,
+            FluidCollisionMode.NEVER, true);
+        return hit != null && hit.getHitBlock() != null;
+    }
+
+    private static double clamp(double value, double min, double max) {
+        return Math.max(min, Math.min(max, value));
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onInventoryOpen(InventoryOpenEvent event) {
+        containerOpenedTick.put(event.getPlayer().getUniqueId(), server.getCurrentTick());
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onInventoryClose(InventoryCloseEvent event) {
+        containerOpenedTick.remove(event.getPlayer().getUniqueId());
+    }
+
+    /**
+     * Profundidad de BlockBreakEvent por jugador: si un modulo rompe bloques extra desde su propio handler (picos 3x3,
+     * hachas que talan), esos eventos llegan anidados dentro del original y no se cuentan como del jugador.
+     */
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onBreakEnter(BlockBreakEvent event) {
+        breakDepth.merge(event.getPlayer().getUniqueId(), 1, Integer::sum);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onBreak(BlockBreakEvent event) {
+        Player player = event.getPlayer();
+        UUID id = player.getUniqueId();
+        Integer depth = breakDepth.merge(id, -1, Integer::sum);
+        boolean nested = depth != null && depth > 0;
+        if (depth != null && depth <= 0) {
+            breakDepth.remove(id);
+        }
+        if (event.isCancelled() || nested || !blockChecksApply(player)) {
+            return;
+        }
+        long tick = server.getCurrentTick();
+        if (settings.checkEnabled("block-break-rate")) {
+            blocks.breakBlock(id, tick).ifPresent(detection -> report(player, detection));
+        }
+        if (settings.checkEnabled("xray-ratio")) {
+            Block block = event.getBlock();
+            xray.mined(id, System.currentTimeMillis(), mineralKind(block.getType()),
+                block.getX(), block.getY(), block.getZ()).ifPresent(detection -> report(player, detection));
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPlace(BlockPlaceEvent event) {
+        Player player = event.getPlayer();
+        if (!settings.checkEnabled("block-place-face") || !blockChecksApply(player) || player.isInsideVehicle()) {
+            return;
+        }
+        Block against = event.getBlockAgainst();
+        Block placed = event.getBlockPlaced();
+        BlockFace face = against.getFace(placed);
+        if (against.equals(placed) || face == null || !face.isCartesian()) {
+            return;
+        }
+        Location eye = player.getEyeLocation();
+        blocks.place(player.getUniqueId(), eye.getX(), eye.getY(), eye.getZ(),
+            against.getX(), against.getY(), against.getZ(), face.getModX(), face.getModY(), face.getModZ())
+            .ifPresent(detection -> report(player, detection));
+    }
+
+    private boolean blockChecksApply(Player player) {
+        GameMode mode = player.getGameMode();
+        return settings.enabled() && !bypassed(player) && !lagging()
+            && mode != GameMode.CREATIVE && mode != GameMode.SPECTATOR
+            && !(settings.exemptBedrock() && platform.apply(player.getUniqueId()) == ClientPlatform.BEDROCK);
+    }
+
+    private static XrayTracker.Kind mineralKind(Material type) {
+        if (RARE_ORES.contains(type)) {
+            return XrayTracker.Kind.RARE_ORE;
+        }
+        return MINING_STONE.contains(type) ? XrayTracker.Kind.STONE : XrayTracker.Kind.OTHER;
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -301,7 +461,13 @@ public final class AnticheatListener implements Listener {
         movement.forget(id);
         hover.forget(id);
         combat.forget(id);
+        aura.forget(id);
+        blocks.forget(id);
+        ground.forget(id);
+        xray.forget(id);
         lastMoveTick.remove(id);
+        containerOpenedTick.remove(id);
+        breakDepth.remove(id);
     }
 
     /**
@@ -379,6 +545,7 @@ public final class AnticheatListener implements Listener {
     }
 
     private void resetMovement(UUID playerId) {
+        ground.forget(playerId);
         movement.forget(playerId);
         hover.forget(playerId);
         lastMoveTick.remove(playerId);

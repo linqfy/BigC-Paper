@@ -110,6 +110,32 @@ final class EnvironmentProbe {
         return true;
     }
 
+    /** Algo que lo sostiene: un bloque (no aire) bajo la caja, con margen, o una entidad plataforma. */
+    static boolean supported(Player player, Location at) {
+        World world = at.getWorld();
+        if (world == null) {
+            return true;
+        }
+        double half = player.getWidth() / 2.0 + 0.3;
+        int minY = floor(at.getY() - 1.01);
+        int maxY = floor(at.getY() + 0.01);
+        for (int x = floor(at.getX() - half); x <= floor(at.getX() + half); x++) {
+            for (int z = floor(at.getZ() - half); z <= floor(at.getZ() + half); z++) {
+                for (int y = minY; y <= maxY; y++) {
+                    if (!world.getBlockAt(x, y, z).getType().isAir()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        for (Entity nearby : player.getNearbyEntities(1.5, 2.0, 1.5)) {
+            if (platform(nearby)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static boolean platform(Entity entity) {
         if (entity instanceof Vehicle || entity instanceof Boat || entity instanceof Minecart || entity instanceof Shulker) {
             return true;

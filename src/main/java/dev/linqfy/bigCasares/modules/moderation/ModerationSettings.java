@@ -27,7 +27,8 @@ public record ModerationSettings(
      * solas (premios de modulos, IP compartida por un tunel o una casa, logs de Paper causados por teleports de modulos).
      */
     static final Set<String> DEFAULT_AUDIT_ONLY_RULES = Set.of(
-        "rare-item-gain", "pack-cache-timing", "security-log", "ip-sudden-change", "ip-account-rate", "reconnect-rate"
+        "rare-item-gain", "pack-cache-timing", "security-log", "ip-sudden-change", "ip-account-rate", "reconnect-rate",
+        "xray-ratio"
     );
 
     /** Puntos para una regla: 0 significa solo auditoria. */
@@ -67,7 +68,11 @@ public record ModerationSettings(
             Map.entry("melee-rate", 25), Map.entry("combat-logout", 20),
             Map.entry("illegal-stack", 60), Map.entry("inventory-click-rate", 15),
             Map.entry("rare-item-gain", 25), Map.entry("security-log", 40),
-            Map.entry("hover-flight", 35), Map.entry("melee-multi-target", 30)
+            Map.entry("hover-flight", 35), Map.entry("melee-multi-target", 30),
+            Map.entry("ground-spoof", 30), Map.entry("killaura-angle", 30), Map.entry("killaura-wall", 30),
+            Map.entry("killaura-inventory", 25), Map.entry("killaura-use-item", 25),
+            Map.entry("block-break-rate", 30), Map.entry("block-place-face", 25),
+            Map.entry("xray-ratio", 20), Map.entry("item-duplicate", 60)
         );
         defaults.forEach((rule, fallback) -> points.put(
             rule, Math.max(0, config.getInt(root + "signals." + rule + ".points", fallback))

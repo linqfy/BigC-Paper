@@ -6,6 +6,7 @@ import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
 import dev.linqfy.bigCasares.modules.moderation.anticheat.AnticheatListener;
 import dev.linqfy.bigCasares.modules.moderation.anticheat.Detection;
+import dev.linqfy.bigCasares.modules.moderation.anticheat.DuplicateItemScanner;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitTask;
@@ -17,9 +18,12 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public final class ModerationModule implements PluginModule {
-    private static final Map<String, Integer> DEFAULT_DETECTION_POINTS = Map.of(
-        "movement-speed", 25, "upward-movement", 30, "hover-flight", 35,
-        "melee-reach", 30, "melee-rate", 25, "melee-multi-target", 30
+    private static final Map<String, Integer> DEFAULT_DETECTION_POINTS = Map.ofEntries(
+        Map.entry("movement-speed", 25), Map.entry("upward-movement", 30), Map.entry("hover-flight", 35),
+        Map.entry("ground-spoof", 30), Map.entry("melee-reach", 30), Map.entry("melee-rate", 25),
+        Map.entry("melee-multi-target", 30), Map.entry("killaura-angle", 30), Map.entry("killaura-wall", 30),
+        Map.entry("killaura-inventory", 25), Map.entry("killaura-use-item", 25), Map.entry("block-break-rate", 30),
+        Map.entry("block-place-face", 25), Map.entry("xray-ratio", 20), Map.entry("item-duplicate", 60)
     );
     private final BigCasares plugin;
     private final AuditService audit = new AuditService();
@@ -86,6 +90,14 @@ public final class ModerationModule implements PluginModule {
         scope.register("anticheat-state", ownedAnticheat::clear);
         registrations.scheduleRepeating("anticheat-hover-task", ownedAnticheat::sampleHover,
             AnticheatListener.HOVER_PERIOD_TICKS, AnticheatListener.HOVER_PERIOD_TICKS);
+        DuplicateItemScanner dupes = new DuplicateItemScanner(
+            plugin.getServer(), new org.bukkit.NamespacedKey(plugin, "item_uid"), settings.anticheat(),
+            this::acceptDetection
+        );
+        registrations.registerListener("anticheat-dupe-listener", dupes);
+        scope.register("anticheat-dupe-state", dupes::clear);
+        registrations.scheduleRepeating("anticheat-dupe-scan", dupes::scan,
+            DuplicateItemScanner.SCAN_PERIOD_TICKS, DuplicateItemScanner.SCAN_PERIOD_TICKS);
         BukkitRuntimeRegistrations activeRegistrations = registrations;
         logHandler = new ModerationLogHandler(
             () -> plugin.getServer().getOnlinePlayers(),
