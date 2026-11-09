@@ -251,6 +251,29 @@ moderation-system:
     inventory-click-rate: { points: 15 }
     rare-item-gain: { points: 25 }
     security-log: { points: 40 }
+    hover-flight: { points: 35 }
+    melee-multi-target: { points: 30 }
+  # Reglas que solo se registran en la auditoría, sin sumar puntos (no prueban un cheat). Un valor 0 en points hace lo mismo.
+  audit-only-rules:
+    - rare-item-gain
+    - pack-cache-timing
+    - security-log
+    - ip-sudden-change
+    - ip-account-rate
+    - reconnect-rate
+  # Checks de movimiento y combate. Todo lo que mueve a un jugador sin el cliente (setVelocity de un módulo, knockback,
+  # explosiones, teleports, pistones) abre una ventana de gracia sola, así que los módulos no generan avisos.
+  anticheat:
+    enabled: true
+    # Quien tenga este permiso no se mide (por defecto nadie, ni los OP). Vacío para desactivarlo.
+    bypass-permission: bigcasares.anticheat.bypass
+    # Bedrock (Geyser) tiene otra física y otra latencia: no se mide.
+    exempt-bedrock: true
+    # Con el servidor por debajo de estos TPS no se mide nada.
+    minimum-tps: 17.0
+    max-attacks-per-second: 22
+    # movement-speed, upward-movement, hover-flight, melee-reach, melee-rate, melee-multi-target
+    disabled-checks: []
 
 discord-integration:
   guild-id: 0

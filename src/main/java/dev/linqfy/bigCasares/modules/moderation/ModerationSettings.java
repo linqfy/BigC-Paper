@@ -1,5 +1,6 @@
 package dev.linqfy.bigCasares.modules.moderation;
 
+import dev.linqfy.bigCasares.modules.moderation.anticheat.AnticheatSettings;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -17,8 +18,25 @@ public record ModerationSettings(
     Duration retention,
     Set<String> sensitiveCommands,
     Set<Material> rareItems,
-    Map<String, Integer> signalPoints
+    Map<String, Integer> signalPoints,
+    Set<String> auditOnlyRules,
+    AnticheatSettings anticheat
 ) {
+    /**
+     * Reglas que se registran en la auditoria pero no suman puntos: no prueban un cheat y en un servidor normal saltan
+     * solas (premios de modulos, IP compartida por un tunel o una casa, logs de Paper causados por teleports de modulos).
+     */
+    static final Set<String> DEFAULT_AUDIT_ONLY_RULES = Set.of(
+        "rare-item-gain", "pack-cache-timing", "security-log", "ip-sudden-change", "ip-account-rate", "reconnect-rate"
+    );
+
+    /** Puntos para una regla: 0 significa solo auditoria. */
+    public int pointsFor(String rule, int fallback) {
+        if (auditOnlyRules.contains(rule)) {
+            return 0;
+        }
+        return signalPoints.getOrDefault(rule, fallback);
+    }
 
     public static ModerationSettings load(ConfigurationSection config) {
         String root = "moderation-system.";
@@ -48,11 +66,17 @@ public record ModerationSettings(
             Map.entry("upward-movement", 30), Map.entry("melee-reach", 30),
             Map.entry("melee-rate", 25), Map.entry("combat-logout", 20),
             Map.entry("illegal-stack", 60), Map.entry("inventory-click-rate", 15),
-            Map.entry("rare-item-gain", 25), Map.entry("security-log", 40)
+            Map.entry("rare-item-gain", 25), Map.entry("security-log", 40),
+            Map.entry("hover-flight", 35), Map.entry("melee-multi-target", 30)
         );
         defaults.forEach((rule, fallback) -> points.put(
-            rule, Math.max(1, config.getInt(root + "signals." + rule + ".points", fallback))
+            rule, Math.max(0, config.getInt(root + "signals." + rule + ".points", fallback))
         ));
+        Set<String> auditOnly = config.isList(root + "audit-only-rules")
+            ? config.getStringList(root + "audit-only-rules").stream()
+                .map(value -> value.trim().toLowerCase(Locale.ROOT))
+                .collect(java.util.stream.Collectors.toUnmodifiableSet())
+            : DEFAULT_AUDIT_ONLY_RULES;
         return new ModerationSettings(
             Duration.ofSeconds(config.getLong(root + "score-window-seconds", 60)),
             config.getInt(root + "warning-threshold", 50),
@@ -61,7 +85,9 @@ public record ModerationSettings(
             Duration.ofDays(config.getLong(root + "observation-retention-days", 30)),
             sensitive,
             Set.copyOf(rare),
-            Map.copyOf(points)
+            Map.copyOf(points),
+            auditOnly,
+            AnticheatSettings.load(config, root)
         );
     }
 }

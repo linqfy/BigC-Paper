@@ -4,6 +4,8 @@ import dev.linqfy.bigCasares.BigCasares;
 import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
+import dev.linqfy.bigCasares.modules.moderation.anticheat.AnticheatListener;
+import dev.linqfy.bigCasares.modules.moderation.anticheat.Detection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitTask;
@@ -15,12 +17,17 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public final class ModerationModule implements PluginModule {
+    private static final Map<String, Integer> DEFAULT_DETECTION_POINTS = Map.of(
+        "movement-speed", 25, "upward-movement", 30, "hover-flight", 35,
+        "melee-reach", 30, "melee-rate", 25, "melee-multi-target", 30
+    );
     private final BigCasares plugin;
     private final AuditService audit = new AuditService();
     private ModerationSettings settings;
     private AbuseScoringService scoring;
     private ObservationStorage observations;
     private ModerationListener listener;
+    private AnticheatListener anticheat;
     private ModerationLogHandler logHandler;
     private BukkitTask purgeTask;
     private BukkitTask rareItemTask;
@@ -70,6 +77,15 @@ public final class ModerationModule implements PluginModule {
         ModerationSignalTracker tracker = new ModerationSignalTracker(settings.sensitiveCommands());
         listener = new ModerationListener(plugin, this, tracker);
         registrations.registerListener("moderation-listener", listener);
+        anticheat = new AnticheatListener(
+            plugin.getServer(), settings.anticheat(), this::acceptDetection, this::hasTechnicalFlight,
+            plugin::resolvePlayerPlatform
+        );
+        registrations.registerListener("anticheat-listener", anticheat);
+        AnticheatListener ownedAnticheat = anticheat;
+        scope.register("anticheat-state", ownedAnticheat::clear);
+        registrations.scheduleRepeating("anticheat-hover-task", ownedAnticheat::sampleHover,
+            AnticheatListener.HOVER_PERIOD_TICKS, AnticheatListener.HOVER_PERIOD_TICKS);
         BukkitRuntimeRegistrations activeRegistrations = registrations;
         logHandler = new ModerationLogHandler(
             () -> plugin.getServer().getOnlinePlayers(),
@@ -110,6 +126,11 @@ public final class ModerationModule implements PluginModule {
             HandlerList.unregisterAll(listener);
             listener = null;
         }
+        if (anticheat != null) {
+            HandlerList.unregisterAll(anticheat);
+            anticheat.clear();
+            anticheat = null;
+        }
         if (logHandler != null) {
             Logger.getLogger("").removeHandler(logHandler);
             logHandler = null;
@@ -135,11 +156,14 @@ public final class ModerationModule implements PluginModule {
         return technicalFlight.contains(playerId);
     }
 
-    /** El movimiento de ese jugador no se mide hasta esa hora (un impulso legitimo: salto, empuje de un boss...). */
+    /**
+     * El movimiento de ese jugador no se mide durante ese tiempo (un impulso legitimo que no pase por setVelocity). Los
+     * setVelocity, knockback, explosiones y teleports ya eximen solos: los modulos no necesitan llamar esto para eso.
+     */
     public void exemptMovement(java.util.UUID playerId, java.time.Duration duration) {
-        ModerationListener active = listener;
+        AnticheatListener active = anticheat;
         if (active != null) {
-            active.exemptMovement(playerId, Instant.now().plus(duration));
+            active.grace(playerId, Math.max(1, duration.toMillis() / 50), "module");
         }
     }
 
@@ -151,11 +175,26 @@ public final class ModerationModule implements PluginModule {
         return observations;
     }
 
+    private void acceptDetection(Player player, Detection detection) {
+        acceptSignal(new AbuseSignal(
+            Instant.now(), player.getUniqueId(), player.getName(), detection.rule(),
+            DEFAULT_DETECTION_POINTS.getOrDefault(detection.rule(), 25), detection.evidence()
+        ));
+    }
+
     public void acceptSignal(AbuseSignal signal) {
         if (scoring == null) {
             return;
         }
-        int configuredPoints = settings.signalPoints().getOrDefault(signal.rule(), signal.points());
+        int configuredPoints = settings.pointsFor(signal.rule(), signal.points());
+        if (configuredPoints <= 0) {
+            audit.publish(new AuditEvent(
+                signal.timestamp(), AuditSeverity.INFO, "abuse", "observation", java.util.Optional.of(signal.playerId()),
+                signal.playerName(), "Observación (sin puntos): " + signal.rule(),
+                Map.of("rule", signal.rule(), "evidence", signal.evidence())
+            ));
+            return;
+        }
         AbuseSignal effectiveSignal = configuredPoints == signal.points() ? signal : new AbuseSignal(
             signal.timestamp(), signal.playerId(), signal.playerName(), signal.rule(), configuredPoints, signal.evidence()
         );
@@ -279,6 +318,7 @@ public final class ModerationModule implements PluginModule {
         purgeTask = null;
         rareItemTask = null;
         listener = null;
+        anticheat = null;
         technicalFlight.clear();
         logHandler = null;
         registrations = null;
