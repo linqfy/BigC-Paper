@@ -76,6 +76,10 @@ final class KeepInventoryTotemListener implements Listener {
     // NORMAL: before the Siftite capture (HIGH, skips kept inventories) and the tombstone (HIGHEST).
     @EventHandler(priority = EventPriority.NORMAL)
     public void onDeath(PlayerDeathEvent event) {
+        if (event.getKeepInventory()) {
+            // Already kept (gamerule or an event such as Lifesteal): do not spend the totem.
+            return;
+        }
         Player player = event.getEntity();
         PlayerInventory inventory = player.getInventory();
         ItemStack[] contents = inventory.getContents();

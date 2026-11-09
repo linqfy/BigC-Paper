@@ -130,6 +130,10 @@ commands:
     description: Manage and debug the one-shot End event
     usage: /<command> <status|validate|optin|portal|arm|abort|reset|debug>
     permission: bigcasares.endevent.admin
+  evento:
+    description: Join staff events, or start and stop them as staff
+    usage: /<command> <unirse|salir|estado|iniciar|detener|tipos>
+    aliases: [ eventos ]
   warp:
     description: Opens the warp menu or manages warps
     usage: /<command> [manage]
@@ -185,6 +189,7 @@ permissions:
       bigcasares.mobscaling.admin: true
       bigcasares.command.timer: true
       bigcasares.endevent.admin: true
+      bigcasares.events.admin: true
       bigcasares.danger.view: true
       bigcasares.danger.view.others: true
       bigcasares.acidrain.admin: true
@@ -215,6 +220,14 @@ permissions:
   bigcasares.endevent.admin:
     description: Manage and debug the End event
     default: op
+
+  bigcasares.events.admin:
+    description: Start and stop staff events and bypass event restrictions
+    default: op
+
+  bigcasares.events.join:
+    description: Join staff events
+    default: true
 
   bigcasares.warp.use:
     description: Use the warp command
