@@ -103,6 +103,7 @@ public final class ForexMarket {
         double quantity = (money - fee) / emerald.price();
         account(player).emeralds += quantity;
         cycleVolume += money;
+        emerald.series().addVolume(money);
         return new TradeReceipt(EMERALD_TICKER, true, quantity, money, fee, emerald.price(), 0);
     }
 
@@ -125,6 +126,7 @@ public final class ForexMarket {
         Account account = account(player);
         account.emeralds = held - sold <= Shitcoin.DUST ? 0 : held - sold;
         cycleVolume += gross;
+        emerald.series().addVolume(gross);
         return new TradeReceipt(EMERALD_TICKER, false, sold, payout, fee, emerald.price(), 0);
     }
 
@@ -178,7 +180,7 @@ public final class ForexMarket {
         }
         Shitcoin coin = new Shitcoin(ticker, name, creator, now(), settings.coins().creatorFeeDefault(),
             settings.coins().stakingShareDefault());
-        coin.record(price(coin));
+        coin.series().reset(price(coin));
         coins.put(ticker, coin);
         return coin;
     }
@@ -218,8 +220,7 @@ public final class ForexMarket {
         coin.pool(coin.pool() + net);
         coin.credit(player, tokens);
         payCreator(coin, creatorFee);
-        coin.addVolume(money);
-        cycleVolume += money;
+        trade(coin, money);
         coin.peakCap(Math.max(coin.peakCap(), marketCap(coin)));
         return new TradeReceipt(coin.ticker(), true, tokens, money, creatorFee + platformFee, price(coin), 0);
     }
@@ -248,8 +249,7 @@ public final class ForexMarket {
         coin.supply(coin.supply() - sold);
         coin.debit(player, sold);
         payCreator(coin, creatorFee);
-        coin.addVolume(gross);
-        cycleVolume += gross;
+        trade(coin, gross);
         return new TradeReceipt(coin.ticker(), false, sold, payout, creatorFee + platformFee, price(coin),
             Math.max(0, value - gross));
     }
@@ -477,7 +477,8 @@ public final class ForexMarket {
                 events.add(new MarketEvent.Pump(coin.ticker(), gain));
             }
             coin.cycleVolume(0);
-            coin.record(price(coin));
+            coin.series().observe(price(coin));
+            coin.series().close();
             coin.peakCap(Math.max(coin.peakCap(), marketCap(coin)));
         }
     }
@@ -521,13 +522,13 @@ public final class ForexMarket {
             coin.hype(coin.hype() * (1.0 + gain));
             coin.flipsSurvived(coin.flipsSurvived() + 1);
             coin.nextFlipAt(now + config.flipIntervalMinutes() * MINUTE);
-            coin.record(price(coin));
+            coin.series().observe(price(coin));
             coin.peakCap(Math.max(coin.peakCap(), marketCap(coin)));
             events.add(new MarketEvent.FlipSurvived(coin.ticker(), coin.flipsSurvived(), gain, coin.nextFlipAt()));
             return;
         }
         coin.hype(coin.hype() * config.collapseFactor());
-        coin.record(price(coin));
+        coin.series().observe(price(coin));
         long burned = coin.pool() + coin.dividendPot();
         Set<UUID> victims = new LinkedHashSet<>(coin.holdings().keySet());
         bury(coin, DeadCoin.Fate.COLLAPSE, burned);
@@ -562,6 +563,13 @@ public final class ForexMarket {
         return (long) Math.floor(curve.proceeds(coin.supply(), amount, coin.hype()) + 1e-6);
     }
 
+    private void trade(Shitcoin coin, long money) {
+        coin.addVolume(money);
+        cycleVolume += money;
+        coin.series().observe(price(coin));
+        coin.series().addVolume(money);
+    }
+
     private void payCreator(Shitcoin coin, long fee) {
         if (fee <= 0) {
             return;
@@ -576,7 +584,7 @@ public final class ForexMarket {
     private void bury(Shitcoin coin, DeadCoin.Fate fate, long lostPool) {
         coins.remove(coin.ticker());
         graveyard.addFirst(new DeadCoin(coin.ticker(), coin.name(), coin.creator(), fate,
-            Math.max(coin.peakCap(), marketCap(coin)), lostPool, now()));
+            Math.max(coin.peakCap(), marketCap(coin)), lostPool, now(), coin.series().candles()));
         while (graveyard.size() > GRAVEYARD) {
             graveyard.removeLast();
         }

@@ -1,7 +1,5 @@
 package dev.linqfy.bigCasares.modules.forex;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +14,6 @@ public final class Shitcoin {
 
     /** Tokens below this are dust: they do not count as a holder and are cleared on sale. */
     public static final double DUST = 1e-6;
-    static final int HISTORY = 48;
 
     private final String ticker;
     private final String name;
@@ -25,7 +22,7 @@ public final class Shitcoin {
     private final Map<UUID, Double> holdings = new LinkedHashMap<>();
     private final Map<UUID, Double> staked = new LinkedHashMap<>();
     private final Map<UUID, Long> lockedUntil = new LinkedHashMap<>();
-    private final Deque<Double> history = new ArrayDeque<>();
+    private final PriceSeries series = new PriceSeries(0);
 
     private double creatorFee;
     private double stakingShare;
@@ -267,14 +264,12 @@ public final class Shitcoin {
         }
     }
 
+    /** Close prices of the recent cycles, the current one last. */
     public List<Double> history() {
-        return List.copyOf(history);
+        return series.closes();
     }
 
-    void record(double price) {
-        history.addLast(price);
-        while (history.size() > HISTORY) {
-            history.removeFirst();
-        }
+    public PriceSeries series() {
+        return series;
     }
 }

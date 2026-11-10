@@ -18,7 +18,8 @@ final class ForexCommand implements CommandExecutor, TabCompleter {
 
     static final String ADMIN_PERMISSION = "bigcasares.forex.admin";
     private static final List<String> SUBCOMMANDS = List.of("menu", "mercado", "ver", "comprar", "vender", "cartera",
-        "crear", "comision", "dividendos", "stake", "unstake", "rugpull", "clan", "top", "cementerio", "aura", "ayuda");
+        "grafico", "crear", "comision", "dividendos", "stake", "unstake", "rugpull", "clan", "top", "cementerio", "aura",
+        "ayuda");
 
     private final ForexRuntime runtime;
 
@@ -57,6 +58,7 @@ final class ForexCommand implements CommandExecutor, TabCompleter {
             case "vender", "sell" -> runtime.sell(player, arg(args, 1, "/forex vender <esmeraldas|ticker> <cantidad|50%|todo>"),
                 ForexAmounts.quantity(arg(args, 2, "/forex vender <esmeraldas|ticker> <cantidad|50%|todo>")));
             case "cartera", "portfolio" -> portfolio(player);
+            case "grafico", "chart" -> runtime.giveChart(player, arg(args, 1, "/forex grafico <esmeraldas|ticker>"));
             case "crear" -> {
                 String ticker = arg(args, 1, "/forex crear <ticker> <nombre>");
                 String name = String.join(" ", Arrays.copyOfRange(args, Math.min(2, args.length), args.length));
@@ -105,6 +107,7 @@ final class ForexCommand implements CommandExecutor, TabCompleter {
             "§f/forex vender esmeraldas <cantidad|50%|todo>",
             "§f/forex comprar|vender <ticker> ... §7- especulá con shitcoins",
             "§f/forex ver <ticker> §7· §f/forex mercado §7· §f/forex top §7· §f/forex cartera",
+            "§f/forex grafico <esmeraldas|ticker> §7- mapa con velas en vivo",
             "§f/forex stake|unstake <ticker> [cantidad] §7- dividendos del creador",
             "§f/forex crear <ticker> <nombre> §7- lanzá tu moneda",
             "§f/forex comision <ticker> <3-5> §7· §f/forex dividendos <ticker> <0-100>",
@@ -265,7 +268,7 @@ final class ForexCommand implements CommandExecutor, TabCompleter {
         List<String> tickers = runtime.market().coins().stream().map(Shitcoin::ticker).toList();
         if (args.length == 2) {
             return switch (sub) {
-                case "comprar", "vender", "ver" -> filter(Stream.concat(Stream.of("esmeraldas"), tickers.stream()).toList(), args[1]);
+                case "comprar", "vender", "ver", "grafico" -> filter(Stream.concat(Stream.of("esmeraldas"), tickers.stream()).toList(), args[1]);
                 case "stake", "unstake", "rugpull", "clan", "comision", "dividendos" -> filter(ownedOrAll(sender, sub, tickers), args[1]);
                 case "admin" -> sender.hasPermission(ADMIN_PERMISSION) ? filter(List.of("ciclo", "flip", "guardar"), args[1]) : List.of();
                 default -> List.of();

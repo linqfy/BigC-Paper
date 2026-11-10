@@ -79,6 +79,7 @@ final class ForexBoard {
                 });
         }
         menu.set(27, ForexMenu.button(Material.ARROW, "§7Volver"), this::openMarket);
+        menu.set(35, chartButton(), clicker -> runtime.giveChart(clicker, ForexMarket.EMERALD_TICKER));
         menu.fill();
         menu.open(player);
     }
@@ -138,6 +139,7 @@ final class ForexBoard {
                 "§8Don Casares no olvida."), clicker -> confirmRug(clicker, coin.ticker()));
         }
         menu.set(36, ForexMenu.button(Material.ARROW, "§7Volver"), this::openMarket);
+        menu.set(44, chartButton(), clicker -> runtime.giveChart(clicker, coin.ticker()));
         menu.fill();
         menu.open(player);
     }
@@ -156,6 +158,11 @@ final class ForexBoard {
     }
 
     // ---------------------------------------------------------------- icons
+
+    private static ItemStack chartButton() {
+        return ForexMenu.button(Material.FILLED_MAP, "§bGráfico en vivo",
+            "§7Mapa con velas, volumen y precio actual.", "§8Colgalo en un marco.");
+    }
 
     private ItemStack emeraldIcon(UUID viewer) {
         ForexMarket market = runtime.market();

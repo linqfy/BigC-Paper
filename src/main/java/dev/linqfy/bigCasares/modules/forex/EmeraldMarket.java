@@ -1,7 +1,5 @@
 package dev.linqfy.bigCasares.modules.forex;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
@@ -20,7 +18,7 @@ public final class EmeraldMarket {
     }
 
     private final ForexSettings settings;
-    private final Deque<Double> history = new ArrayDeque<>();
+    private final PriceSeries series;
     private double price;
     private double allTimeHigh;
 
@@ -28,6 +26,7 @@ public final class EmeraldMarket {
         this.settings = settings;
         this.price = settings.emerald().startPrice();
         this.allTimeHigh = price;
+        this.series = new PriceSeries(price);
     }
 
     public double price() {
@@ -43,17 +42,21 @@ public final class EmeraldMarket {
         return Math.max(settings.emerald().startPrice(), allTimeHigh * (1.0 - settings.emerald().maxDrawdown()));
     }
 
+    /** Close prices of the recent cycles, the current one last. */
     public List<Double> history() {
-        return List.copyOf(history);
+        return series.closes();
     }
 
-    void restore(double restoredPrice, double restoredHigh, List<Double> restoredHistory) {
+    public PriceSeries series() {
+        return series;
+    }
+
+    void restore(double restoredPrice, double restoredHigh, List<Candle> restoredCandles) {
         if (restoredPrice > 0) {
             price = restoredPrice;
         }
         allTimeHigh = Math.max(price, restoredHigh);
-        history.clear();
-        restoredHistory.stream().filter(value -> value > 0).forEach(this::record);
+        series.restore(restoredCandles, Candle.flat(price));
     }
 
     /**
@@ -73,14 +76,8 @@ public final class EmeraldMarket {
             price = price * (1.0 + settings.perCycle(daily));
         }
         allTimeHigh = Math.max(allTimeHigh, price);
-        record(price);
+        series.observe(price);
+        series.close();
         return new Step(before, price, correction);
-    }
-
-    private void record(double value) {
-        history.addLast(value);
-        while (history.size() > Shitcoin.HISTORY) {
-            history.removeFirst();
-        }
     }
 }

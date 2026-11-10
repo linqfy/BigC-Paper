@@ -28,6 +28,7 @@ final class ForexRuntime {
     private final ForexAnnouncer announcer;
     private final ForexTeams teams;
     private final ForexBoard board;
+    private final ForexCharts charts;
 
     ForexRuntime(Plugin plugin, ForexSettings settings, ForexBank bank, ForexTeams teams) {
         this.plugin = plugin;
@@ -38,6 +39,8 @@ final class ForexRuntime {
         this.announcer = new ForexAnnouncer(plugin.getServer(), clock);
         this.teams = teams;
         this.board = new ForexBoard(this);
+        this.charts = new ForexCharts(plugin.getServer(), new ChartFeed(market),
+            new File(new File(plugin.getDataFolder(), "forex"), "charts.yml"), plugin.getLogger());
     }
 
     ForexMarket market() {
@@ -58,9 +61,11 @@ final class ForexRuntime {
 
     void start() {
         store.load(market);
+        charts.start();
     }
 
     void stop() {
+        charts.stop();
         store.save(market);
         announcer.clear();
     }
@@ -204,6 +209,22 @@ final class ForexRuntime {
                 + " §7tokens tenés pase libre a sus cofres protegidos.");
             return "§aListo.";
         });
+    }
+
+    /** Hands out the live chart map of an asset; dead coins keep their last chart. */
+    void giveChart(Player player, String rawAsset) {
+        String asset = ChartFeed.asset(rawAsset);
+        boolean known = ForexMarket.EMERALD_TICKER.equals(asset) || market.coin(asset).isPresent()
+            || market.graveyard().stream().anyMatch(dead -> dead.ticker().equals(asset));
+        if (!known) {
+            player.sendMessage(ForexAnnouncer.PREFIX + "§cNo existe $" + asset + ".");
+            return;
+        }
+        player.getInventory().addItem(charts.item(player, asset)).values()
+            .forEach(left -> player.getWorld().dropItemNaturally(player.getLocation(), left));
+        player.sendMessage(ForexAnnouncer.PREFIX + "§aGráfico de " + label(asset)
+            + " §aen vivo. §7Ponelo en marcos para armar tu pared de trading.");
+        player.playSound(player.getLocation(), Sound.UI_CARTOGRAPHY_TABLE_TAKE_RESULT, SoundCategory.MASTER, 0.8f, 1f);
     }
 
     void toggleAura(Player player) {

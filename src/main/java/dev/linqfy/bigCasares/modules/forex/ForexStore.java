@@ -55,7 +55,7 @@ public final class ForexStore {
         EmeraldMarket emerald = market.emerald();
         yaml.set("emerald.price", emerald.price());
         yaml.set("emerald.all-time-high", emerald.allTimeHigh());
-        yaml.set("emerald.history", emerald.history());
+        yaml.set("emerald.candles", emerald.series().encodeClosed());
         for (Map.Entry<UUID, ForexMarket.Account> entry : market.accounts().entrySet()) {
             ForexMarket.Account account = entry.getValue();
             if (account.isEmpty()) {
@@ -85,7 +85,8 @@ public final class ForexStore {
             yaml.set(path + ".last-dividend-at", coin.lastDividendAt());
             yaml.set(path + ".peak-cap", coin.peakCap());
             yaml.set(path + ".lifetime-volume", coin.lifetimeVolume());
-            yaml.set(path + ".history", coin.history());
+            yaml.set(path + ".candles", coin.series().encodeClosed());
+            yaml.set(path + ".candle", coin.series().current().encode());
             Map<UUID, Long> locks = coin.locks();
             for (Map.Entry<UUID, Double> holding : coin.holdings().entrySet()) {
                 String holder = path + ".holders." + holding.getKey();
@@ -108,14 +109,22 @@ public final class ForexStore {
             yaml.set(path + ".peak-cap", dead.peakCap());
             yaml.set(path + ".lost-pool", dead.lostPool());
             yaml.set(path + ".died-at", dead.diedAt());
+            yaml.set(path + ".candles", dead.candles().stream().map(Candle::encode).toList());
         }
         return yaml;
     }
 
     static void deserialize(ConfigurationSection yaml, ForexMarket market, Logger logger) {
         market.restoreClock(yaml.getLong("next-cycle-at", 0));
+        List<Candle> emeraldCandles;
+        try {
+            emeraldCandles = candles(yaml.getStringList("emerald.candles"));
+        } catch (RuntimeException invalid) {
+            logger.warning("[Forex] Ignoring the invalid emerald chart");
+            emeraldCandles = List.of();
+        }
         market.emerald().restore(yaml.getDouble("emerald.price", 0), yaml.getDouble("emerald.all-time-high", 0),
-            yaml.getDoubleList("emerald.history"));
+            emeraldCandles);
         ConfigurationSection accounts = yaml.getConfigurationSection("accounts");
         if (accounts != null) {
             for (String id : accounts.getKeys(false)) {
@@ -149,7 +158,8 @@ public final class ForexStore {
                 try {
                     market.restoreGrave(new DeadCoin(entry.getString("ticker"), entry.getString("name"),
                         UUID.fromString(entry.getString("creator")), DeadCoin.Fate.valueOf(entry.getString("fate")),
-                        entry.getDouble("peak-cap"), entry.getLong("lost-pool"), entry.getLong("died-at")));
+                        entry.getDouble("peak-cap"), entry.getLong("lost-pool"), entry.getLong("died-at"),
+                        candles(entry.getStringList("candles"))));
                 } catch (RuntimeException invalid) {
                     logger.warning("[Forex] Ignoring invalid graveyard entry " + key);
                 }
@@ -172,7 +182,9 @@ public final class ForexStore {
         coin.lastDividendAt(entry.getLong("last-dividend-at", coin.createdAt()));
         coin.peakCap(entry.getDouble("peak-cap"));
         coin.lifetimeVolume(entry.getLong("lifetime-volume"));
-        entry.getDoubleList("history").forEach(coin::record);
+        String current = entry.getString("candle");
+        coin.series().restore(candles(entry.getStringList("candles")),
+            current == null ? Candle.flat(0) : Candle.decode(current));
         ConfigurationSection holders = entry.getConfigurationSection("holders");
         if (holders != null) {
             for (String id : holders.getKeys(false)) {
@@ -182,6 +194,10 @@ public final class ForexStore {
             }
         }
         return coin;
+    }
+
+    private static List<Candle> candles(List<String> encoded) {
+        return encoded.stream().map(Candle::decode).toList();
     }
 
     private void write(YamlConfiguration yaml) throws IOException {

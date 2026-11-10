@@ -77,7 +77,7 @@ commands:
     usage: /<command> [deuda|jackpot|construir|colocar|quitar|lista|trago]
   forex:
     description: FOREX & Cryptos (esmeraldas virtuales, shitcoins, staking, rug pulls)
-    usage: /<command> [comprar|vender|ver|mercado|cartera|crear|stake|unstake|rugpull|clan|top|cementerio]
+    usage: /<command> [comprar|vender|ver|grafico|mercado|cartera|crear|stake|unstake|rugpull|clan|top|cementerio]
     aliases: [ cripto, crypto ]
     permission: bigcasares.forex
   glider:
