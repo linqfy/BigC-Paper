@@ -259,8 +259,13 @@ public final class BigCasaresCommand implements CommandExecutor, TabCompleter {
                     : List.of();
         }
         if ("nexus".equalsIgnoreCase(command.getName())) {
-            if (args.length == 1) return List.of("place", "claim", "give").stream().filter(value -> value.startsWith(args[0].toLowerCase(Locale.ROOT))).toList();
+            if (args.length == 1) return List.of("place", "claim", "give", "mejoras", "mejorar").stream().filter(value -> value.startsWith(args[0].toLowerCase(Locale.ROOT))).toList();
             if (args.length == 2 && "give".equalsIgnoreCase(args[0])) return null; // Player names
+            if (args.length == 2 && "mejorar".equalsIgnoreCase(args[0])) {
+                return java.util.Arrays.stream(dev.linqfy.bigCasares.modules.nexus.NexusUpgrade.values())
+                    .map(dev.linqfy.bigCasares.modules.nexus.NexusUpgrade::id)
+                    .filter(value -> value.startsWith(args[1].toLowerCase(Locale.ROOT))).toList();
+            }
             return List.of();
         }
         if ("tumba".equalsIgnoreCase(command.getName())) {
@@ -824,10 +829,13 @@ public final class BigCasaresCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if (args.length == 0) {
-            sender.sendMessage(ChatColor.YELLOW + "Uso: /nexus <place|claim|give>");
+            sender.sendMessage(ChatColor.YELLOW + "Uso: /nexus <place|claim|give|mejoras|mejorar>");
             return true;
         }
         String action = args[0].toLowerCase(Locale.ROOT);
+        if ("mejoras".equals(action) || "mejorar".equals(action)) {
+            return handleNexusUpgrade(player, action, args);
+        }
         if ("claim".equals(action)) {
             if (!player.hasPermission("bigcasares.nexus.claim")) {
                 sender.sendMessage(ChatColor.RED + "No tenes permiso para reclamar un Nexus.");
@@ -914,9 +922,92 @@ public final class BigCasaresCommand implements CommandExecutor, TabCompleter {
             }
             return true;
         } else {
-            sender.sendMessage(ChatColor.YELLOW + "Uso: /nexus <place|claim|give>");
+            sender.sendMessage(ChatColor.YELLOW + "Uso: /nexus <place|claim|give|mejoras|mejorar>");
             return true;
         }
+    }
+
+    private boolean handleNexusUpgrade(Player player, String action, String[] args) {
+        var nexusModule = plugin.getNexusModule();
+        var upgradeSettings = nexusModule == null ? null : nexusModule.upgradeSettings().orElse(null);
+        if (upgradeSettings == null) {
+            player.sendMessage(ChatColor.RED + "Nexus System no está disponible.");
+            return true;
+        }
+        var teamService = plugin.getTeamModule() == null ? null : plugin.getTeamModule().service().orElse(null);
+        Team team = teamService == null ? null : teamService.findByMember(player.getUniqueId()).orElse(null);
+        if (team == null) {
+            player.sendMessage(ChatColor.RED + "Necesitas pertenecer a un equipo.");
+            return true;
+        }
+        var installed = nexusModule.upgradesOf(team.id());
+        if ("mejoras".equals(action) || args.length < 2) {
+            player.sendMessage(ChatColor.GOLD + "--- Mejoras del Nexus ---");
+            for (var upgrade : dev.linqfy.bigCasares.modules.nexus.NexusUpgrade.values()) {
+                String state = installed.contains(upgrade)
+                    ? ChatColor.GREEN + "instalada"
+                    : ChatColor.YELLOW + dev.linqfy.bigCasares.modules.missions.VaultEconomyGateway
+                        .formatFallback(upgradeSettings.price(upgrade), "$");
+                player.sendMessage(ChatColor.AQUA + upgrade.displayName() + ChatColor.GRAY + " (" + upgrade.id() + ") "
+                    + state + ChatColor.GRAY + " - " + upgrade.description());
+            }
+            player.sendMessage(ChatColor.GRAY + "Comprá una con /nexus mejorar <" + java.util.Arrays.stream(
+                dev.linqfy.bigCasares.modules.nexus.NexusUpgrade.values())
+                .map(dev.linqfy.bigCasares.modules.nexus.NexusUpgrade::id).collect(Collectors.joining("|")) + ">");
+            return true;
+        }
+        var upgrade = dev.linqfy.bigCasares.modules.nexus.NexusUpgrade.parse(args[1]).orElse(null);
+        if (upgrade == null) {
+            player.sendMessage(ChatColor.RED + "Mejora desconocida. Usá /nexus mejoras para ver la lista.");
+            return true;
+        }
+        switch (nexusModule.canInstall(team.id(), upgrade)) {
+            case NO_ACTIVE_NEXUS -> {
+                player.sendMessage(ChatColor.RED + "Tu equipo necesita un Nexus colocado para instalar mejoras.");
+                return true;
+            }
+            case ALREADY_INSTALLED -> {
+                player.sendMessage(ChatColor.YELLOW + "Tu Nexus ya tiene " + upgrade.displayName() + ".");
+                return true;
+            }
+            case INSTALLED -> { }
+        }
+        double price = upgradeSettings.price(upgrade);
+        net.milkbowl.vault.economy.Economy economy = null;
+        if (price > 0.0) {
+            try {
+                economy = dev.linqfy.bigCasares.modules.missions.VaultEconomyGateway.resolveOrThrow(plugin);
+            } catch (IllegalStateException unavailable) {
+                player.sendMessage(ChatColor.RED + "La economía no está disponible: " + unavailable.getMessage());
+                return true;
+            }
+            if (!economy.has(player, price)) {
+                player.sendMessage(ChatColor.RED + "No te alcanza: " + upgrade.displayName() + " cuesta "
+                    + economy.format(price) + ".");
+                return true;
+            }
+            var withdrawal = economy.withdrawPlayer(player, price);
+            if (!withdrawal.transactionSuccess()) {
+                player.sendMessage(ChatColor.RED + "No se pudo cobrar la mejora: " + withdrawal.errorMessage);
+                return true;
+            }
+        }
+        var result = nexusModule.installUpgrade(team.id(), upgrade);
+        if (result != dev.linqfy.bigCasares.modules.nexus.NexusUpgradeResult.INSTALLED) {
+            if (economy != null) {
+                economy.depositPlayer(player, price);
+            }
+            player.sendMessage(ChatColor.RED + "No se pudo instalar la mejora; se devolvió el dinero.");
+            return true;
+        }
+        for (UUID memberId : team.members().keySet()) {
+            Player member = plugin.getServer().getPlayer(memberId);
+            if (member != null) {
+                member.sendMessage(ChatColor.GREEN + player.getName() + " instaló " + ChatColor.AQUA
+                    + upgrade.displayName() + ChatColor.GREEN + " en el Nexus del equipo.");
+            }
+        }
+        return true;
     }
 
     private boolean hasNexusItem(Player player, dev.linqfy.bigCasares.items.CustomItem item) {

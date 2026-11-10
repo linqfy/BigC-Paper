@@ -39,12 +39,14 @@ public final class NexusModule implements PluginModule {
     private final Map<NexusId, StoredNexus> stored = new LinkedHashMap<>();
     private final NexusAttackTracker attackTracker = new NexusAttackTracker();
     private final List<NexusProtectedContainer> containers = new ArrayList<>();
+    private final Map<NexusId, java.util.EnumSet<NexusUpgrade>> upgrades = new LinkedHashMap<>();
 
     private JavaNexusVisualGateway visualGateway;
     private NexusService service;
     private NexusListener listener;
     private NexusContainerListener containerListener;
     private NexusSettings settings;
+    private NexusUpgradeSettings upgradeSettings;
     private File storageFile;
     private BukkitTask restoreTask;
     private BukkitTask attackTask;
@@ -138,6 +140,7 @@ public final class NexusModule implements PluginModule {
             throw new IllegalStateException("NexusModule requires the BigCasares item catalog");
         }
         settings = NexusSettings.fromConfig(plugin.getConfig());
+        upgradeSettings = NexusUpgradeSettings.fromConfig(plugin.getConfig());
         storageFile = new File(plugin.getDataFolder(), "data/nexus/nexuses.yml");
         loadStoredNexuses();
         visualGateway = new JavaNexusVisualGateway(plugin, javaModels, registrations);
@@ -171,19 +174,11 @@ public final class NexusModule implements PluginModule {
                                             p.playSound(p.getLocation(), org.bukkit.Sound.EVENT_MOB_EFFECT_RAID_OMEN, 1.0f, 1.0f);
                                             p.sendTitle("", "§c¡Tú Nexus está bajo ataque!", 10, 70, 20);
                                         }
-                                        var discordModule = activeBigCasares.getDiscordIntegrationModule();
-                                        if (discordModule != null && discordModule.gateway() != null && discordModule.linkService() != null) {
-                                            discordModule.linkService().getDiscordId(member).ifPresent(discordId -> {
-                                                discordModule.gateway().sendPrivateMessage(
-                                                    discordId,
-                                                    "🚨 **¡ALERTA DE NEXUS!** 🚨\nTu base está siendo atacada en BigCasares. ¡Conéctate rápido para defenderla!"
-                                                );
-                                            });
-                                        }
                                     }
                                 }
                             });
                         }
+                        sendRaidAlert(sn, false);
                     }
                 }
             },
@@ -194,6 +189,16 @@ public final class NexusModule implements PluginModule {
         registrations.registerListener("nexus-container-listener", containerListener);
         restoreTask = registrations.scheduleImmediate("nexus-restore", this::restoreStoredNexuses);
         attackTask = registrations.scheduleRepeating("nexus-attack-state", this::refreshTransientState, 20L, 20L);
+        registrations.scheduleRepeating("nexus-upgrade-effects", this::applyUpgradeEffects,
+            upgradeSettings.intervalTicks(), upgradeSettings.intervalTicks());
+        registrations.registerListener("nexus-upgrade-spawn-listener", new org.bukkit.event.Listener() {
+            @org.bukkit.event.EventHandler(priority = org.bukkit.event.EventPriority.HIGH, ignoreCancelled = true)
+            public void onHostileSpawn(org.bukkit.event.entity.CreatureSpawnEvent event) {
+                if (blocksHostileSpawn(event)) {
+                    event.setCancelled(true);
+                }
+            }
+        });
 
         registrations.registerListener("nexus-placement-listener", new org.bukkit.event.Listener() {
             @org.bukkit.event.EventHandler(priority = org.bukkit.event.EventPriority.HIGH, ignoreCancelled = true)
@@ -307,6 +312,11 @@ public final class NexusModule implements PluginModule {
     }
 
     private void destroyNexus(NexusId nexusId) {
+        StoredNexus destroyed = stored.get(nexusId);
+        if (destroyed != null) {
+            sendRaidAlert(destroyed, true);
+        }
+        upgrades.remove(nexusId);
         attackTracker.clear(nexusId);
         containers.removeIf(container -> container.nexusId().equals(nexusId));
         stored.remove(nexusId);
@@ -366,6 +376,7 @@ public final class NexusModule implements PluginModule {
     private void loadStoredNexuses() {
         stored.clear();
         containers.clear();
+        upgrades.clear();
         if (!storageFile.isFile()) {
             return;
         }
@@ -389,6 +400,14 @@ public final class NexusModule implements PluginModule {
                     id, position, section.getString("team-name", "EQUIPO"),
                     health, settings.maximumHealth(), "bigcasares:nexus");
                 stored.put(id, new StoredNexus(teamId, section.getString("team-name", "EQUIPO"), request));
+                java.util.EnumSet<NexusUpgrade> installed = java.util.EnumSet.noneOf(NexusUpgrade.class);
+                for (String rawUpgrade : section.getStringList("upgrades")) {
+                    NexusUpgrade.parse(rawUpgrade).ifPresentOrElse(installed::add, () -> plugin.getLogger()
+                        .warning("Mejora de Nexus desconocida en " + rawId + ": " + rawUpgrade));
+                }
+                if (!installed.isEmpty()) {
+                    upgrades.put(id, installed);
+                }
             } catch (IllegalArgumentException | NullPointerException ex) {
                 plugin.getLogger().warning("Nexus persistido inválido " + rawId + ": " + ex.getMessage());
             }
@@ -423,6 +442,10 @@ public final class NexusModule implements PluginModule {
             yaml.set(path + ".z", base.position().z());
             yaml.set(path + ".yaw", base.position().yaw());
             yaml.set(path + ".health", health);
+            java.util.EnumSet<NexusUpgrade> installed = upgrades.get(id);
+            if (installed != null && !installed.isEmpty()) {
+                yaml.set(path + ".upgrades", installed.stream().map(NexusUpgrade::id).toList());
+            }
         }
         yaml.set("containers", containers.stream().map(container -> Map.of(
                 "nexus-id", container.nexusId().toString(), "team-id", container.teamId().toString(),
@@ -450,6 +473,7 @@ public final class NexusModule implements PluginModule {
         service = null;
         visualGateway = null;
         settings = null;
+        upgradeSettings = null;
         storageFile = null;
     }
 
@@ -594,5 +618,177 @@ public final class NexusModule implements PluginModule {
             }
             saveStoredNexuses();
         }
+    }
+
+    public Optional<NexusUpgradeSettings> upgradeSettings() {
+        return Optional.ofNullable(upgradeSettings);
+    }
+
+    /** Mejoras instaladas en el Nexus activo del equipo (vacío si no tiene Nexus). */
+    public java.util.Set<NexusUpgrade> upgradesOf(TeamId teamId) {
+        return findNexusId(teamId)
+            .map(upgrades::get)
+            .<java.util.Set<NexusUpgrade>>map(java.util.EnumSet::copyOf)
+            .orElse(java.util.Set.of());
+    }
+
+    /** Puede instalarse: el equipo tiene Nexus activo y todavía no tiene esta mejora. */
+    public NexusUpgradeResult canInstall(TeamId teamId, NexusUpgrade upgrade) {
+        Optional<NexusId> nexusId = findNexusId(teamId);
+        if (nexusId.isEmpty()) {
+            return NexusUpgradeResult.NO_ACTIVE_NEXUS;
+        }
+        java.util.EnumSet<NexusUpgrade> installed = upgrades.get(nexusId.get());
+        return installed != null && installed.contains(upgrade)
+            ? NexusUpgradeResult.ALREADY_INSTALLED
+            : NexusUpgradeResult.INSTALLED;
+    }
+
+    public NexusUpgradeResult installUpgrade(TeamId teamId, NexusUpgrade upgrade) {
+        Objects.requireNonNull(upgrade, "upgrade");
+        NexusUpgradeResult check = canInstall(teamId, upgrade);
+        if (check != NexusUpgradeResult.INSTALLED) {
+            return check;
+        }
+        NexusId nexusId = findNexusId(teamId).orElseThrow();
+        upgrades.computeIfAbsent(nexusId, ignored -> java.util.EnumSet.noneOf(NexusUpgrade.class)).add(upgrade);
+        saveStoredNexuses();
+        return NexusUpgradeResult.INSTALLED;
+    }
+
+    private Optional<NexusId> findNexusId(TeamId teamId) {
+        return stored.entrySet().stream()
+            .filter(entry -> entry.getValue().teamId().equals(teamId))
+            .map(Map.Entry::getKey)
+            .findFirst();
+    }
+
+    private Optional<Location> nexusLocation(StoredNexus nexus) {
+        NexusPosition position = nexus.request().position();
+        org.bukkit.World world = plugin.getServer().getWorld(position.worldId());
+        if (world == null || !world.isChunkLoaded((int) Math.floor(position.x()) >> 4, (int) Math.floor(position.z()) >> 4)) {
+            return Optional.empty();
+        }
+        return Optional.of(new Location(world, position.x(), position.y(), position.z()));
+    }
+
+    private void applyUpgradeEffects() {
+        NexusUpgradeSettings current = upgradeSettings;
+        if (current == null) {
+            return;
+        }
+        for (Map.Entry<NexusId, java.util.EnumSet<NexusUpgrade>> entry : upgrades.entrySet()) {
+            StoredNexus nexus = stored.get(entry.getKey());
+            if (nexus == null || entry.getValue().isEmpty()) {
+                continue;
+            }
+            Optional<Location> origin = nexusLocation(nexus);
+            if (origin.isEmpty()) {
+                continue;
+            }
+            if (entry.getValue().contains(NexusUpgrade.MOB_REPULSOR)) {
+                repelHostiles(origin.get(), current);
+            }
+            if (entry.getValue().contains(NexusUpgrade.SATURATION_AURA)) {
+                feedTeam(origin.get(), nexus.teamId(), current);
+            }
+        }
+    }
+
+    private void repelHostiles(Location origin, NexusUpgradeSettings current) {
+        double radius = current.repulsorRadius();
+        for (org.bukkit.entity.Entity entity : origin.getWorld().getNearbyEntities(origin, radius, radius, radius)) {
+            if (!isRepellable(entity) || entity.getLocation().distanceSquared(origin) > radius * radius) {
+                continue;
+            }
+            double[] push = NexusUpgradeSettings.pushAway(
+                entity.getX() - origin.getX(), entity.getZ() - origin.getZ(), current.repulsorStrength());
+            entity.setVelocity(new org.bukkit.util.Vector(push[0], 0.35, push[1]));
+            if (entity instanceof org.bukkit.entity.Mob mob) {
+                mob.setTarget(null);
+            }
+        }
+    }
+
+    /** Solo mobs hostiles comunes: nada de bosses ni mobs con nombre (eventos y jefes del servidor). */
+    private static boolean isRepellable(org.bukkit.entity.Entity entity) {
+        return entity instanceof org.bukkit.entity.Enemy
+            && entity instanceof org.bukkit.entity.LivingEntity
+            && !(entity instanceof org.bukkit.entity.Boss)
+            && !(entity instanceof org.bukkit.entity.Player)
+            && entity.customName() == null
+            && entity.isValid();
+    }
+
+    private void feedTeam(Location origin, TeamId teamId, NexusUpgradeSettings current) {
+        double radiusSquared = current.saturationRadius() * current.saturationRadius();
+        for (org.bukkit.entity.Player player : origin.getWorld().getPlayers()) {
+            if (player.isDead() || player.getLocation().distanceSquared(origin) > radiusSquared
+                || playerTeamLookup.apply(player.getUniqueId()).filter(teamId::equals).isEmpty()) {
+                continue;
+            }
+            float[] fed = NexusUpgradeSettings.feed(player.getFoodLevel(), player.getSaturation(), current.foodPerPulse());
+            player.setFoodLevel((int) fed[0]);
+            player.setSaturation(fed[1]);
+        }
+    }
+
+    private boolean blocksHostileSpawn(org.bukkit.event.entity.CreatureSpawnEvent event) {
+        NexusUpgradeSettings current = upgradeSettings;
+        if (current == null || !isRepellable(event.getEntity())) {
+            return false;
+        }
+        var reason = event.getSpawnReason();
+        if (reason != org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.NATURAL
+            && reason != org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.REINFORCEMENTS
+            && reason != org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.PATROL) {
+            return false;
+        }
+        Location location = event.getLocation();
+        double radiusSquared = current.repulsorRadius() * current.repulsorRadius();
+        for (Map.Entry<NexusId, java.util.EnumSet<NexusUpgrade>> entry : upgrades.entrySet()) {
+            StoredNexus nexus = stored.get(entry.getKey());
+            if (nexus == null || !entry.getValue().contains(NexusUpgrade.MOB_REPULSOR)) {
+                continue;
+            }
+            NexusPosition position = nexus.request().position();
+            if (!position.worldId().equals(location.getWorld().getUID())) {
+                continue;
+            }
+            double dx = location.getX() - position.x();
+            double dy = location.getY() - position.y();
+            double dz = location.getZ() - position.z();
+            if (dx * dx + dy * dy + dz * dz <= radiusSquared) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Alerta a los miembros vinculados en Discord: canal privado del equipo o, si no hay, mensaje directo. */
+    private void sendRaidAlert(StoredNexus nexus, boolean destroyed) {
+        if (!(plugin instanceof dev.linqfy.bigCasares.BigCasares bc) || bc.getTeamModule() == null) {
+            return;
+        }
+        var discordModule = bc.getDiscordIntegrationModule();
+        if (discordModule == null || discordModule.gateway() == null || discordModule.linkService() == null) {
+            return;
+        }
+        Optional<Team> team = bc.getTeamModule().service().flatMap(service -> service.findById(nexus.teamId()));
+        if (team.isEmpty()) {
+            return;
+        }
+        java.util.Set<Long> discordIds = new java.util.LinkedHashSet<>();
+        for (UUID member : team.get().members().keySet()) {
+            discordModule.linkService().getDiscordId(member).ifPresent(discordIds::add);
+        }
+        NexusPosition position = nexus.request().position();
+        String coordinates = Math.round(position.x()) + ", " + Math.round(position.y()) + ", " + Math.round(position.z());
+        String message = destroyed
+            ? "💥 **¡NEXUS DESTRUIDO!** 💥\nEl Nexus de **" + team.get().name() + "** cayó en " + coordinates + "."
+            : "🚨 **¡ALERTA DE RAIDEO!** 🚨\nEl Nexus de **" + team.get().name() + "** está siendo atacado en "
+                + coordinates + ". ¡Conéctense rápido para defenderlo!";
+        discordModule.gateway().sendTeamAlert(
+            nexus.teamId().toString(), team.get().tag(), java.util.Set.copyOf(discordIds), message);
     }
 }

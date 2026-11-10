@@ -59,6 +59,10 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+  pvp-quadrants:
+    enabled: true
+  domination-system:
+    enabled: true
 
 # El Gran Casares. Las fichas son la moneda de Vault (hace falta Vault y un proveedor de economía).
 # Las atracciones se arman con /casino construir o /casino colocar <tipo>; se guardan en casino/installations.yml.
@@ -261,6 +265,10 @@ discord-integration:
   authorized-user-id: 0
   reconciliation-seconds: 120
   bridge-avatar-template: "https://mc-heads.net/avatar/%player%/128"
+  raid-alerts:
+    # Categoría donde se crea un canal privado por equipo para las alertas de raideo del Nexus.
+    # En 0 las alertas llegan por mensaje directo. El bot necesita Manage Channels y Manage Roles.
+    category-id: 0
   servidor:
     title: "BigCasares"
     description: "Información oficial del servidor"
@@ -737,6 +745,23 @@ keep-inventory-totem:
   keep-experience: true
   # Cuantos totems puede llevar encima un jugador.
   max-carried: 1
+
+# Cuadrantes diagonales: dos cuadrantes opuestos son Anarquía (PvP) y los otros dos SMP Chill (sin PvP).
+pvp-quadrants:
+  # Mundos divididos en cuadrantes; en el resto no cambia nada.
+  worlds: [world]
+  center-x: 0
+  center-z: 0
+  # noreste-suroeste o noroeste-sureste: la diagonal que es Anarquía.
+  anarchy-diagonal: noreste-suroeste
+  # Tras un golpe PvP nadie puede entrar a la zona Chill durante este tiempo.
+  combat-tag-seconds: 150
+
+# Dominaciones y Venganza: muertes seguidas sobre el mismo jugador.
+domination-system:
+  kills-to-dominate: 3
+  domination-sound: "minecraft:entity.ender_dragon.growl"
+  revenge-sound: "minecraft:ui.toast.challenge_complete"
 
 elytra-failure:
   # Cada cuanto se tira el dado mientras alguien planea con elytra.
@@ -1803,6 +1828,17 @@ nexus-system:
     minimum-open-faces: 2
     minimum-walkable-width: 2
     prevent-doorway-placement: true
+  # Mejoras de base: /nexus mejoras y /nexus mejorar <repulsor|saturacion> (se pagan con Vault).
+  upgrades:
+    interval-ticks: 40
+    repulsor:
+      price: 25000
+      radius: 24
+      push-strength: 0.8
+    saturacion:
+      price: 15000
+      radius: 16
+      food-per-pulse: 1
 
 entity-shop-system:
   bedrock:

@@ -89,7 +89,7 @@ commands:
     permission: bigcasares.team.admin
   nexus:
     description: Manage your team Nexus
-    usage: /<command> [place|claim]
+    usage: /<command> [place|claim|mejoras|mejorar <mejora>]
   boss:
     description: Manage BigCasares PvE bosses
     usage: /<command> spawn abyss-guardian
@@ -397,6 +397,10 @@ permissions:
   bigcasares.nexus.claim:
     description: Claim the Nexus owned by the player's team
     default: true
+
+  bigcasares.quadrants.bypass:
+    description: Ignore the PvP quadrant combat tag when entering the Chill zone
+    default: false
 
   bigcasares.boss.spawn:
     description: Spawn a configured PvE boss

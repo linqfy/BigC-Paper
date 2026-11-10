@@ -23,6 +23,8 @@ import dev.linqfy.bigCasares.modules.geyser.BedrockShopForm;
 import dev.linqfy.bigCasares.modules.geyser.GeyserIntegrationModule;
 import dev.linqfy.bigCasares.modules.content.CustomContentModule;
 import dev.linqfy.bigCasares.modules.danger.DangerModule;
+import dev.linqfy.bigCasares.modules.domination.DominationModule;
+import dev.linqfy.bigCasares.modules.quadrants.QuadrantModule;
 import dev.linqfy.bigCasares.modules.dimension.DimensionModule;
 import dev.linqfy.bigCasares.modules.sift.SiftModule;
 import dev.linqfy.bigCasares.modules.tombstone.TombstoneModule;
@@ -86,6 +88,7 @@ public final class BigCasares extends JavaPlugin {
     private TombstoneModule tombstoneModule;
     private KeepInventoryTotemModule keepInventoryTotemModule;
     private SpecialItemsModule specialItemsModule;
+    private QuadrantModule quadrantModule;
     private WarpModule warpModule;
 
     private ResourcePackModule resourcePackModule;
@@ -183,6 +186,10 @@ public final class BigCasares extends JavaPlugin {
     
     public SpecialItemsModule getSpecialItemsModule() {
         return specialItemsModule;
+    }
+
+    public QuadrantModule getQuadrantModule() {
+        return quadrantModule;
     }
 
     public WarpModule getWarpModule() {
@@ -374,6 +381,7 @@ public final class BigCasares extends JavaPlugin {
         this.dangerModule = new DangerModule(this);
         this.tombstoneModule = new TombstoneModule(this);
         this.specialItemsModule = new SpecialItemsModule(this);
+        this.quadrantModule = new QuadrantModule(this);
         this.warpModule = new WarpModule(this);
         this.geyserIntegrationModule = new GeyserIntegrationModule(this);
         this.airdropModule = new AirdropModule(this);
@@ -434,6 +442,8 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(inventoryLimitModule);
         moduleManager.register(skillRatingModule);
         moduleManager.register(dangerModule);
+        moduleManager.register(quadrantModule);
+        moduleManager.register(new DominationModule(this));
         moduleManager.register(tombstoneModule);
         moduleManager.register(keepInventoryTotemModule);
         moduleManager.register(new ElytraFailureModule(this));
@@ -613,6 +623,7 @@ public final class BigCasares extends JavaPlugin {
         tombstoneModule = null;
         keepInventoryTotemModule = null;
         specialItemsModule = null;
+        quadrantModule = null;
         warpModule = null;
 
         resourcePackModule = null;
