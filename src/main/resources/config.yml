@@ -59,6 +59,8 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+  staff-events:
+    enabled: true
 
 # El Gran Casares. Las fichas son la moneda de Vault (hace falta Vault y un proveedor de economía).
 # Las atracciones se arman con /casino construir o /casino colocar <tipo>; se guardan en casino/installations.yml.
@@ -1994,3 +1996,60 @@ the-sift:
   block-models:
     enabled: true
     radius: 24
+
+# Eventos que solo inicia el staff con /evento iniciar <tipo>; nunca arrancan solos.
+# Lifesteal se juega en los mundos normales con keepInventory. KOTH, TNT Tag y Spleef usan un
+# inventario de evento: el inventario real se guarda en data/staff-events/snapshots.yml y se devuelve
+# al salir, al ser eliminado, al terminar el evento o al volver a entrar si hubo un crash.
+staff-events:
+  # Dimensión vacía bigcasares:eventos donde se arman las arenas. Aparece después del primer reinicio.
+  arena-dimension: true
+  # Mundo alternativo (vacío y dedicado: las arenas borran lo que haya) mientras la dimensión no esté activa.
+  fallback-arena-world: ""
+  arena-y: 100
+  # Segundos para unirse con /evento unirse antes de que arranque un evento de arena.
+  lobby-seconds: 30
+  lifesteal:
+    duration-minutes: 60
+    hearts-per-kill: 1
+    # Nadie baja de este piso; matar a alguien que ya está en el piso no roba nada.
+    floor-hearts: 3
+    max-hearts: 20
+    # Terminar con al menos estos corazones regala 1 corazón permanente.
+    permanent-reward-threshold: 12
+    max-permanent-bonus-hearts: 10
+  koth:
+    duration-minutes: 10
+    # Segundos solo en la colina para ganar; si se acaba el tiempo gana quien tenga más.
+    capture-seconds: 120
+    min-players: 2
+    platform-radius: 20
+    hill-radius: 3
+    knockback-level: 5
+    rewards:
+      # id del catálogo (nuke_shot) o material (minecraft:diamond), con :cantidad opcional.
+      items: []
+      # Comandos de consola; {player} es el ganador.
+      commands: []
+  tnt-tag:
+    round-seconds: 30
+    # Un portador de TNT cada tantos jugadores vivos.
+    players-per-tagger: 4
+    min-players: 2
+    platform-radius: 15
+    max-minutes: 15
+    rewards:
+      items: ["nuke_shot:1"]
+      commands: []
+  spleef:
+    min-players: 2
+    radius: 12
+    layers: 2
+    layer-gap: 6
+    efficiency-level: 255
+    # Segundos al inicio en los que todavía no se puede romper la nieve.
+    grace-seconds: 5
+    max-minutes: 10
+    rewards:
+      items: []
+      commands: []
