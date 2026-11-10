@@ -54,6 +54,8 @@ import dev.linqfy.bigCasares.modules.smokebomb.SmokeBombModule;
 import dev.linqfy.bigCasares.modules.teams.TeamModule;
 import dev.linqfy.bigCasares.modules.discord.DiscordIntegrationModule;
 import dev.linqfy.bigCasares.modules.endevent.EndEventModule;
+import dev.linqfy.bigCasares.modules.forex.ForexModule;
+import dev.linqfy.bigCasares.modules.forex.TeamServiceForexTeams;
 import dev.linqfy.bigCasares.modules.moderation.ModerationModule;
 import dev.linqfy.bigCasares.modules.servercontrol.ServerControlModule;
 import dev.linqfy.bigCasares.modules.servercontrol.VanishSessionRegistry;
@@ -67,6 +69,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public final class BigCasares extends JavaPlugin {
@@ -102,6 +105,7 @@ public final class BigCasares extends JavaPlugin {
     private MutangoModule mutangoModule;
     private CelularModule celularModule;
     private CasinoModule casinoModule;
+    private ForexModule forexModule;
     private GrapplingHookModule grapplingHookModule;
     private GliderModule gliderModule;
     private MobScalingModule mobScalingModule;
@@ -243,6 +247,10 @@ public final class BigCasares extends JavaPlugin {
 
     public CasinoModule getCasinoModule() {
         return casinoModule;
+    }
+
+    public ForexModule getForexModule() {
+        return forexModule;
     }
 
     public MobScalingModule getMobScalingModule() {
@@ -403,6 +411,11 @@ public final class BigCasares extends JavaPlugin {
                 && resourcePackModule.service().map(service -> service.hasLoadedPack(playerId)).orElse(false),
             javaModels
         );
+        this.forexModule = new ForexModule(this, new TeamServiceForexTeams(() -> teamModule == null
+            ? Optional.empty() : teamModule.service()));
+        ForexModule forex = forexModule;
+        this.casinoModule.setCreditRating(forex::creditMultiplier);
+        this.nexusModule.setContainerPass((playerId, teamId) -> forex.hasClanPass(playerId, teamId.toString()));
         this.moderationModule = new ModerationModule(this);
         this.serverControlModule = new ServerControlModule(
             this, moderationModule.audit(), moderationModule::acceptSignal, emojiAliasService
@@ -456,6 +469,7 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(new SchizophreniaModule(this));
         moduleManager.register(shopModule);
         moduleManager.register(casinoModule);
+        moduleManager.register(forexModule);
         moduleManager.register(pveBossModule);
         moduleManager.register(geyserIntegrationModule);
         moduleManager.register(moderationModule);
@@ -624,6 +638,7 @@ public final class BigCasares extends JavaPlugin {
         airdropModule = null;
         acidRainModule = null;
         casinoModule = null;
+        forexModule = null;
         grapplingHookModule = null;
         mobScalingModule = null;
         moderationModule = null;
