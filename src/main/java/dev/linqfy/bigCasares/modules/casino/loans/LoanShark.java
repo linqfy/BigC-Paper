@@ -77,14 +77,19 @@ public final class LoanShark extends Attraction {
                 clicker.sendMessage("§5[Don Casares] §7¿Más? Primero devolvé lo mío, pibe."));
         } else {
             int slot = 11;
-            for (LoanOffer offer : loans.settings().offers()) {
+            double rating = loans.creditRating(player.getUniqueId());
+            String history = rating < 1 ? "§aTasa preferencial: tu moneda tiene prestigio bancario."
+                : rating > 1 ? "§cDon Casares recuerda tus rug pulls: tasa de castigo." : "§8Historial crediticio limpio.";
+            for (LoanOffer base : loans.settings().offers()) {
                 if (slot > 15) {
                     break;
                 }
+                LoanOffer offer = loans.offerFor(player.getUniqueId(), base);
                 menu.set(slot, CasinoItems.button(Material.GOLD_INGOT, "§6Préstamo de " + context.chips(offer.principal()),
                     "§7Devolvés: §c" + context.chips(offer.repayment()) + " §8(+" + Math.round(offer.interest() * 100) + "%)",
                     "§7Plazo: §f" + CasinoFormat.duration(offer.termMinutes() * 60_000L),
                     "§7Mora: §c+" + Math.round(loans.settings().lateFeePerHour() * 100) + "% por hora",
+                    history,
                     "§4Si no pagás, viene el Cobrador de la AFIP."), (clicker, click) -> borrow(clicker, offer));
                 slot += 2;
             }

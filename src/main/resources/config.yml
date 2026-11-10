@@ -23,6 +23,8 @@ modules:
     enabled: true
   casino:
     enabled: true
+  forex:
+    enabled: true
   grappling-hook:
     enabled: true
   glider:
@@ -125,6 +127,84 @@ casino:
     cerveza_caliente: 60
     coctel_ruina: 300
     vaso_polvo_blanco: 800
+
+# FOREX & Cryptos: Esmeraldas Virtuales ($vEMR) vs Shitcoins. Todo se paga con la plata de Vault (/balance);
+# no hacen falta esmeraldas físicas. Hace falta Vault y un proveedor de economía. Estado en forex/market.yml.
+# Las tasas son fracciones (0.04 = 4%); los tiempos son minutos reales.
+forex:
+  # Cada ciclo se mueven los precios y cada shitcoin tira su 1 en 10 de pump.
+  cycle-minutes: 10
+  # Minutos reales que dura un "día" para los rendimientos diarios.
+  day-minutes: 1440
+  # Comisión de la plataforma en las shitcoins (se quema). Las ballenas pagan menos.
+  platform-fee: 0.01
+  min-trade: 10
+  # Pase de clan: con esta cantidad de la moneda oficial de un clan se abren sus cofres protegidos por el Nexus.
+  clan-pass-threshold: 500
+  emerald:
+    start-price: 100.0
+    # Crecimiento diario: más cerca del máximo cuanto más plata se mueve en el mercado.
+    daily-growth-min: 0.005
+    daily-growth-max: 0.02
+    # Chance diaria de una corrección controlada y su tamaño.
+    corrections-per-day: 0.25
+    correction-min: 0.02
+    correction-max: 0.06
+    # La reserva defiende un piso: nunca más de esto por debajo del máximo histórico.
+    max-drawdown: 0.12
+    fee: 0.005
+    # Plata movida por ciclo que cuenta como mercado "a pleno".
+    activity-reference: 100000
+  coins:
+    creation-cost: 5000
+    max-per-creator: 1
+    max-listed: 30
+    # Curva: precio = base-price * hype * (1 + supply / curve-depth).
+    base-price: 1.0
+    curve-depth: 10000
+    # Comisión del creador en cada compra y venta.
+    creator-fee-min: 0.03
+    creator-fee-max: 0.05
+    creator-fee-default: 0.04
+    # Parte de la comisión del creador que se reparte a quienes bloquean tokens (staking).
+    staking-share-default: 0.25
+    stake-lock-minutes: 60
+    dividend-minutes: 30
+    # Paseo aleatorio del hype en cada ciclo.
+    volatility: 0.04
+    drift: -0.002
+    pump-chance: 0.10
+    pump-min: 0.25
+    pump-max: 0.60
+    # Parte del pozo que se lleva el creador con /forex rugpull; el resto se reparte entre los holders.
+    rugpull-min: 0.80
+    rugpull-max: 0.90
+    # Horas sin poder lanzar otra moneda después de un rug pull.
+    rug-creation-cooldown-hours: 12
+  # El 50/50: solo para burbujas con masa crítica.
+  bubble:
+    min-holders: 6
+    min-pool: 25000
+    flip-interval-minutes: 180
+    warnings-minutes: [30, 10, 1]
+    # Cara: la burbuja sube otro escalón.
+    survive-pump-min: 0.25
+    survive-pump-max: 0.50
+    # Cruz: el precio se multiplica por esto (-99,999%) y el pozo se quema.
+    collapse-factor: 0.00001
+  # Holders con al menos min-share de una moneda del top de capitalización.
+  whales:
+    top-coins: 3
+    min-share: 0.05
+    fee-discount: 0.5
+  # Historial crediticio con Don Casares (casino): multiplicador del interés de sus préstamos.
+  credit:
+    prestige-tiers:
+      50000: 0.85
+      250000: 0.70
+      1000000: 0.50
+    rugpull-penalty: 0.5
+    max-multiplier: 3.0
 
 schizophrenia:
   # Un episodio empeora despacio (intensidad 1 a 5) hasta que alguien lo cura con un golpe del

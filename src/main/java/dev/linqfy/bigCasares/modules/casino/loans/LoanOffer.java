@@ -9,6 +9,11 @@ public record LoanOffer(String id, long principal, double interest, long termMin
         }
     }
 
+    /** The same offer with its interest scaled, for example by the borrower's credit history. */
+    public LoanOffer withInterestMultiplier(double multiplier) {
+        return new LoanOffer(id, principal, interest * Math.max(0, multiplier), termMinutes);
+    }
+
     public long repayment() {
         return Math.round(principal * (1.0 + interest));
     }
