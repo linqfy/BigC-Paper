@@ -52,6 +52,11 @@ public final class CompiledClass {
         return calls.stream().anyMatch(call -> owners.contains(call.owner()) && call.name().equals(name));
     }
 
+    /** True when the class holds this text in its constant pool, for example a string literal it uses. */
+    public boolean hasConstant(String text) {
+        return strings.contains(text);
+    }
+
     /** True when the annotation type (for example org.geysermc.event.subscribe.Subscribe) appears in the class. */
     public boolean mentionsType(String binaryName) {
         return strings.contains("L" + binaryName.replace('.', '/') + ";");

@@ -1,9 +1,8 @@
 package dev.linqfy.bigCasares.modules.schizophrenia;
 
+import dev.linqfy.bigCasares.testsupport.CompiledClass;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.SplittableRandom;
@@ -71,12 +70,12 @@ class HallucinationPickerTest {
 
     @Test
     void configIdsRoundTripAndEveryHallucinationHasAnEffect() throws Exception {
-        // The director needs a live server registry for its sounds, so check its wiring from source.
-        String director = Files.readString(Path.of(
-            "src/main/java/dev/linqfy/bigCasares/modules/schizophrenia/HallucinationDirector.java"));
+        // The director needs a live server registry for its sounds, so its wiring is read from the bytecode.
+        CompiledClass director = CompiledClass.of(getClass(),
+            "dev.linqfy.bigCasares.modules.schizophrenia.HallucinationDirector");
         for (Hallucination hallucination : Hallucination.values()) {
             assertEquals(hallucination, Hallucination.parse(hallucination.id()).orElseThrow());
-            assertTrue(director.contains("effects.put(Hallucination." + hallucination.name() + ","), hallucination::id);
+            assertTrue(director.hasConstant(hallucination.name()), hallucination::id);
         }
         assertTrue(Hallucination.parse(" ").isEmpty());
     }

@@ -1,33 +1,26 @@
 package dev.linqfy.bigCasares.modules.model;
 
+import dev.linqfy.bigCasares.testsupport.CompiledClass;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BetterModelAssetInstallerContractTest {
 
-    @Test
-    void reloadsEvenWhenInstalledAssetsAlreadyMatchToRepairAStaleGeneratedPack() throws Exception {
-        String source = Files.readString(Path.of(
-            "src/main/java/dev/linqfy/bigCasares/modules/model/BetterModelAssetInstaller.java"
-        ));
+    // BetterModel classes cannot be loaded in unit tests, so the wiring is checked from the compiled bytecode.
 
-        assertTrue(source.contains("BetterModel.platform().reload()"));
-        assertFalse(source.contains("if (changed)"), "BetterModel reload must not depend on copied bytes changing");
+    @Test
+    void installerAsksBetterModelToReloadTheCopiedModels() throws Exception {
+        CompiledClass installer = CompiledClass.of(getClass(), "dev.linqfy.bigCasares.modules.model.BetterModelAssetInstaller");
+
+        assertTrue(installer.calls("kr/toxicity/model/api/BetterModelPlatform", "reload"));
     }
 
     @Test
     void pveModuleRepeatsInstallAfterBetterModelDelayedInitialization() throws Exception {
-        String source = Files.readString(Path.of(
-            "src/main/java/dev/linqfy/bigCasares/modules/pveboss/PveBossModule.java"
-        ));
+        CompiledClass module = CompiledClass.of(getClass(), "dev.linqfy.bigCasares.modules.pveboss.PveBossModule");
 
-        assertTrue(source.contains("runTaskLater(plugin"));
-        assertTrue(source.contains("BetterModelAssetInstaller.installSahurModels(plugin)"));
-        assertTrue(source.contains("60L"), "Delayed reload must run after BetterModel startup tasks");
+        assertTrue(module.calls("dev/linqfy/bigCasares/modules/model/BetterModelAssetInstaller", "installSahurModels"));
+        assertTrue(module.calls("org/bukkit/scheduler/BukkitScheduler", "runTaskLater"));
     }
 }

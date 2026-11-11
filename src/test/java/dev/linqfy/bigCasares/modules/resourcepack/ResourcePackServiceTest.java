@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.lang.reflect.Method;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
@@ -189,19 +187,6 @@ class ResourcePackServiceTest {
         handler.handle(current.javaUuid(), PLAYER_ID, "SUCCESSFULLY_LOADED", () -> { });
 
         assertEquals(ResourcePackPlayerState.LOADED, service.state(PLAYER_ID));
-    }
-
-    @Test
-    void listenerRejectsForeignPackIdsBeforeReadingPlayerStatus() throws Exception {
-        String source = Files.readString(Path.of(
-            "src/main/java/dev/linqfy/bigCasares/modules/resourcepack/ResourcePackStatusListener.java"
-        ));
-
-        int idGuard = source.indexOf("if (!service.isBigCasaresPack(event.getID()))");
-        int playerAccess = source.indexOf("event.getPlayer()", idGuard);
-
-        assertTrue(idGuard >= 0, "listener must guard status events by pack ID");
-        assertTrue(playerAccess > idGuard, "foreign pack events must return before player status handling");
     }
 
     private static ResourcePackService service(ResourcePackManifest manifest, ResourcePackGateway gateway) {

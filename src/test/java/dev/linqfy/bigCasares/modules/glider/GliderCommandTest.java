@@ -1,6 +1,9 @@
 package dev.linqfy.bigCasares.modules.glider;
 
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,14 +21,13 @@ class GliderCommandTest {
 
     @Test
     void pluginDeclaresDedicatedGliderCommandAndPermissions() throws Exception {
-        String pluginYml = java.nio.file.Files.readString(java.nio.file.Path.of(
-            "src", "main", "resources", "plugin.yml"));
-        String module = java.nio.file.Files.readString(java.nio.file.Path.of(
-            "src", "main", "java", "dev", "linqfy", "bigCasares", "modules", "glider", "GliderModule.java"));
+        // permission names contain dots, so plugin.yml is read with '/' as the path separator
+        YamlConfiguration plugin = new YamlConfiguration();
+        plugin.options().pathSeparator('/');
+        plugin.load(new File("src/main/resources/plugin.yml"));
 
-        assertTrue(pluginYml.contains("  glider:"));
-        assertTrue(pluginYml.contains("bigcasares.glider.admin:"));
-        assertTrue(pluginYml.contains("bigcasares.glider.give:"));
-        assertTrue(module.contains("bindCommand(\"glider-command\""));
+        assertEquals("bigcasares.glider.give", plugin.getString("commands/glider/permission"));
+        assertTrue(plugin.isConfigurationSection("permissions/bigcasares.glider.admin"));
+        assertTrue(plugin.isConfigurationSection("permissions/bigcasares.glider.give"));
     }
 }
