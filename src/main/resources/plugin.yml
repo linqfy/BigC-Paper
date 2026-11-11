@@ -141,6 +141,15 @@ commands:
   siftmodels:
     description: Turns The Sift's block models over placed slabs, stairs and plants on or off for yourself
     usage: /<command> [on|off] [player]
+  duel:
+    description: Desafía a un jugador a un duelo 1v1
+    usage: /<command> <jugador> [kit|elegir] [chica|media|grande] [apuesta] | aceptar | rechazar | cancelar | menu | kits
+    aliases: [ duelo, duelos ]
+  piranha:
+    description: Hace aparecer un cardumen de pirañas
+    usage: /<command> spawn [cantidad]
+    aliases: [ pirana ]
+    permission: bigcasares.piranhas.admin
   content:
     description: List and give code-defined content items (e.g. The Sift)
     usage: /<command> <list [namespace]|give <id> [player] [amount]>
@@ -207,6 +216,7 @@ permissions:
       bigcasares.dimension.admin: true
       bigcasares.dimension.leave: true
       bigcasares.content.admin: true
+      bigcasares.piranhas.admin: true
 
   bigcasares.command.timer:
     description: Start a bossbar timer
@@ -423,3 +433,11 @@ permissions:
   bigcasares.content.admin:
     description: List and give code-defined content items
     default: op
+
+  bigcasares.piranhas.admin:
+    description: Spawn piranha schools with /piranha spawn
+    default: op
+
+  bigcasares.duels.bypass:
+    description: Use commands and edit the duel world while dueling
+    default: false

@@ -29,6 +29,10 @@ import dev.linqfy.bigCasares.modules.tombstone.TombstoneModule;
 import dev.linqfy.bigCasares.modules.keepinventorytotem.KeepInventoryTotemModule;
 import dev.linqfy.bigCasares.modules.elytrafailure.ElytraFailureModule;
 import dev.linqfy.bigCasares.modules.specialitems.SpecialItemsModule;
+import dev.linqfy.bigCasares.modules.duels.DuelsModule;
+import dev.linqfy.bigCasares.modules.phasearrows.PhaseArrowsModule;
+import dev.linqfy.bigCasares.modules.piranhas.PiranhasModule;
+import dev.linqfy.bigCasares.modules.trimabilities.TrimAbilitiesModule;
 import dev.linqfy.bigCasares.modules.warp.WarpModule;
 
 import dev.linqfy.bigCasares.modules.missions.MissionModule;
@@ -437,6 +441,9 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(tombstoneModule);
         moduleManager.register(keepInventoryTotemModule);
         moduleManager.register(new ElytraFailureModule(this));
+        moduleManager.register(new TrimAbilitiesModule(this));
+        moduleManager.register(new PhaseArrowsModule(this));
+        moduleManager.register(new PiranhasModule(this));
         moduleManager.register(specialItemsModule);
         moduleManager.register(warpModule);
 
@@ -456,6 +463,7 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(new SchizophreniaModule(this));
         moduleManager.register(shopModule);
         moduleManager.register(casinoModule);
+        moduleManager.register(new DuelsModule(this));
         moduleManager.register(pveBossModule);
         moduleManager.register(geyserIntegrationModule);
         moduleManager.register(moderationModule);
