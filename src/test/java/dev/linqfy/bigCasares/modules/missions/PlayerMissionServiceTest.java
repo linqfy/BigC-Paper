@@ -9,9 +9,34 @@ import java.util.Random;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PlayerMissionServiceTest {
+
+    @Test
+    void unchangedProgressKeepsTheSameStateInstance() {
+        MissionCatalog catalog = MissionCatalog.of(List.of(
+            new MissionDefinition("tuff-67", MissionScope.DAILY, "Toba exacta", "Consegui 67 bloques de toba", MissionType.HOLD_EXACT_ITEM_COUNT, 67, 100.0, 1, true, Map.of("material", "TUFF"))
+        ));
+        PlayerMissionService service = new PlayerMissionService(
+            catalog,
+            new MissionRotationPolicy(new Random(5)),
+            () -> Instant.parse("2026-04-19T10:00:00Z"),
+            1,
+            0,
+            () -> Instant.parse("2026-04-20T00:00:00Z"),
+            () -> Instant.parse("2026-04-26T00:00:00Z")
+        );
+        MissionPlayerState state = service.getOrCreateState(UUID.fromString("00000000-0000-0000-0000-000000000001"), null);
+
+        MissionPlayerState progressed = service.updateAbsoluteProgress(state, MissionScope.DAILY, "tuff-67", 10);
+
+        // The module only marks a player dirty (and later saves) when the instance changes.
+        assertNotSame(state, progressed);
+        assertSame(progressed, service.updateAbsoluteProgress(progressed, MissionScope.DAILY, "tuff-67", 10));
+    }
 
     @Test
     void marksMissionCompletedWhenProgressReachesGoal() {

@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 
 /**
  * A vanilla block state as written in data files ({@code {"Name": ..., "Properties": {...}}}).
@@ -20,6 +22,14 @@ import java.util.TreeMap;
  */
 public record BlockStateSpec(NamespacedId block, SortedMap<String, String> properties) implements JsonSerializable {
 
+    private static final Pattern TOKEN = Pattern.compile("[a-z0-9_]+");
+    /**
+     * Worldgen parses the same few hundred state strings millions of times, from several
+     * chunk-generation threads. Specs are immutable, so parsed values are shared; the key
+     * space is bounded by the number of distinct block states.
+     */
+    private static final Map<String, BlockStateSpec> PARSED = new ConcurrentHashMap<>();
+
     public BlockStateSpec {
         Objects.requireNonNull(block, "block");
         TreeMap<String, String> copy = new TreeMap<>();
@@ -27,7 +37,7 @@ public record BlockStateSpec(NamespacedId block, SortedMap<String, String> prope
             for (Map.Entry<String, String> entry : properties.entrySet()) {
                 String key = Objects.requireNonNull(entry.getKey(), "property").trim();
                 String value = Objects.requireNonNull(entry.getValue(), "value").trim();
-                if (!key.matches("[a-z0-9_]+") || !value.matches("[a-z0-9_]+")) {
+                if (!TOKEN.matcher(key).matches() || !TOKEN.matcher(value).matches()) {
                     throw new IllegalArgumentException("Invalid block property " + key + "=" + value + " on " + block);
                 }
                 copy.put(key, value);
@@ -46,6 +56,18 @@ public record BlockStateSpec(NamespacedId block, SortedMap<String, String> prope
 
     /** Parses command syntax: {@code minecraft:vine[east=true,up=false]}. */
     public static BlockStateSpec parse(String value) {
+        BlockStateSpec cached = PARSED.get(Objects.requireNonNull(value, "value"));
+        if (cached != null) {
+            return cached;
+        }
+        BlockStateSpec parsed = parseUncached(value);
+        if (PARSED.size() < 65_536) {
+            PARSED.putIfAbsent(value, parsed);
+        }
+        return parsed;
+    }
+
+    private static BlockStateSpec parseUncached(String value) {
         String trimmed = Objects.requireNonNull(value, "value").trim();
         int bracket = trimmed.indexOf('[');
         if (bracket < 0) {
