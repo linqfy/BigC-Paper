@@ -4,6 +4,7 @@ import dev.linqfy.bigCasares.BigCasares;
 import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
+import dev.linqfy.bigCasares.modules.tideframe.MenuTitleStyle;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.UUID;
 import java.util.Set;
 import java.util.LinkedHashMap;
@@ -40,9 +42,16 @@ public final class MissionModule implements PluginModule {
     private RuntimeRegistrationScope compatibilityScope;
     private final Map<UUID, MissionPlayerState> stateCache = new LinkedHashMap<>();
     private final Set<UUID> dirtyPlayers = new LinkedHashSet<>();
+    private volatile Supplier<MenuTitleStyle> menuTitleStyle =
+        () -> MenuTitleStyle.PLAIN;
 
     public MissionModule(BigCasares plugin) {
         this.plugin = plugin;
+    }
+
+    /** How the missions menu titles look (the tideframe-ui module draws a background); plain titles by default. */
+    public void configureMenuTitleStyle(Supplier<MenuTitleStyle> style) {
+        this.menuTitleStyle = style == null ? () -> MenuTitleStyle.PLAIN : style;
     }
 
     @Override
@@ -73,7 +82,7 @@ public final class MissionModule implements PluginModule {
             this::nextDailyReset,
             this::nextWeeklyReset
         );
-        this.hudController = new MissionHudController(this, economyGateway);
+        this.hudController = new MissionHudController(this, economyGateway, () -> menuTitleStyle.get());
 
         scope.register("module-state", this::clearRuntimeState);
         scope.register("hud-open-views", hudController::closeOpenViews);

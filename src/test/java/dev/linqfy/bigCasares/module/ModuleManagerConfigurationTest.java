@@ -32,4 +32,21 @@ class ModuleManagerConfigurationTest {
 
         assertFalse(ModuleManager.isEnabledInConfig(config, "entity-shop-system"));
     }
+
+    @Test
+    void aServerConfigWithoutTheSwitchUsesTheOneBundledInTheJar() {
+        YamlConfiguration bundled = new YamlConfiguration();
+        bundled.set("modules.tideframe-ui.enabled", false);
+        bundled.set("modules.copper-apple", true);
+        YamlConfiguration server = new YamlConfiguration();
+        server.set("modules.mission-system", true);
+        server.setDefaults(bundled);
+
+        assertFalse(ModuleManager.isEnabledInConfig(server, "tideframe-ui"), "shipped off: stays off on upgrade");
+        assertTrue(ModuleManager.isEnabledInConfig(server, "copper-apple"), "a bundled flat switch still counts");
+        assertTrue(ModuleManager.isEnabledInConfig(server, "unknown-module"), "no switch anywhere: on, as before");
+
+        server.set("modules.tideframe-ui.enabled", true);
+        assertTrue(ModuleManager.isEnabledInConfig(server, "tideframe-ui"), "the server's own switch wins");
+    }
 }

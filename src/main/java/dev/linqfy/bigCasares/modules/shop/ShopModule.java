@@ -5,6 +5,7 @@ import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
 import dev.linqfy.bigCasares.modules.bounties.BountyEconomyGateway;
+import dev.linqfy.bigCasares.modules.tideframe.MenuTitleStyle;
 import dev.linqfy.bigCasares.platform.ClientPlatform;
 import dev.linqfy.bigCasares.platform.ClientPlatformGateway;
 import dev.linqfy.bigCasares.platform.ClientEntityPresentationRegistry;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 public final class ShopModule implements PluginModule {
 
@@ -45,8 +47,15 @@ public final class ShopModule implements PluginModule {
     private RuntimeRegistrationScope compatibilityScope;
     private long runtimeResourceSequence;
 
+    private volatile Supplier<MenuTitleStyle> menuTitleStyle = () -> MenuTitleStyle.PLAIN;
+
     public ShopModule(BigCasares plugin) {
         this.plugin = plugin;
+    }
+
+    /** How the Java shop menu titles look (the tideframe-ui module draws a background); plain titles by default. */
+    public void configureMenuTitleStyle(Supplier<MenuTitleStyle> style) {
+        this.menuTitleStyle = style == null ? () -> MenuTitleStyle.PLAIN : style;
     }
 
     @Override
@@ -110,7 +119,7 @@ public final class ShopModule implements PluginModule {
             guiController.closeAll();
             org.bukkit.event.HandlerList.unregisterAll(guiController);
         }
-        this.guiController = new ShopGuiController(this, catalog, service);
+        this.guiController = new ShopGuiController(this, catalog, service, () -> menuTitleStyle.get());
         ShopGuiController ownedGuiController = guiController;
         registrations.registerListener(nextResourceId("shop-gui-listener"), ownedGuiController);
         registrations.ownCleanup(nextResourceId("shop-gui-windows"), ownedGuiController::closeAll);

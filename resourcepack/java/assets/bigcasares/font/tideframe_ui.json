@@ -1,0 +1,32 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        "": -8,
+        "": -169
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "bigcasares:gui/tideframe/misiones.png",
+      "ascent": 13,
+      "height": 222,
+      "chars": [""]
+    },
+    {
+      "type": "bitmap",
+      "file": "bigcasares:gui/tideframe/tienda_categorias.png",
+      "ascent": 13,
+      "height": 168,
+      "chars": [""]
+    },
+    {
+      "type": "bitmap",
+      "file": "bigcasares:gui/tideframe/tienda.png",
+      "ascent": 13,
+      "height": 222,
+      "chars": [""]
+    }
+  ]
+}

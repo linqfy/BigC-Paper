@@ -29,6 +29,9 @@ modules:
     enabled: true
   resource-pack-system:
     enabled: true
+  # Fondo dibujado para los menús de misiones y tienda (Java con el pack cargado). Apagado: títulos de siempre.
+  tideframe-ui:
+    enabled: false
   custom-item-catalog:
     enabled: true
   team-system:

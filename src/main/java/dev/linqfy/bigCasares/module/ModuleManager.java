@@ -4,6 +4,7 @@ import dev.linqfy.bigCasares.module.runtime.RuntimeCleanupOutcome;
 import dev.linqfy.bigCasares.module.runtime.RuntimeCleanupReport;
 import dev.linqfy.bigCasares.module.runtime.RuntimeGeneration;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -155,6 +156,19 @@ public final class ModuleManager {
             String legacyPath = "modules.shop-system";
             if (config.isBoolean(legacyPath)) {
                 return config.getBoolean(legacyPath);
+            }
+        }
+        // A server's config.yml from before a module existed has no switch for it: the one bundled in the JAR
+        // decides (a module shipped turned off stays off on upgrade). Without a bundled switch, it is on.
+        Configuration root = config.getRoot();
+        Configuration defaults = root == null ? null : root.getDefaults();
+        if (defaults != null) {
+            String prefix = config.getCurrentPath() == null || config.getCurrentPath().isEmpty() ? "" : config.getCurrentPath() + ".";
+            if (defaults.isBoolean(prefix + nestedPath)) {
+                return defaults.getBoolean(prefix + nestedPath);
+            }
+            if (defaults.isBoolean(prefix + flatPath)) {
+                return defaults.getBoolean(prefix + flatPath);
             }
         }
         return true;

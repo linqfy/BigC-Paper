@@ -49,6 +49,7 @@ import dev.linqfy.bigCasares.modules.pveboss.PveBossModule;
 import dev.linqfy.bigCasares.modules.resourcepack.ResourcePackModule;
 import dev.linqfy.bigCasares.modules.schizophrenia.SchizophreniaModule;
 import dev.linqfy.bigCasares.modules.shop.ShopModule;
+import dev.linqfy.bigCasares.modules.tideframe.TideframeUiModule;
 import dev.linqfy.bigCasares.modules.skillrating.SkillRatingModule;
 import dev.linqfy.bigCasares.modules.smokebomb.SmokeBombModule;
 import dev.linqfy.bigCasares.modules.teams.TeamModule;
@@ -423,8 +424,16 @@ public final class BigCasares extends JavaPlugin {
         this.siftModule = new SiftModule(this, dimensions::platform, customBlocks, contentItems, javaModels,
             this::resolveClientPlatform);
         this.shopModule.configurePlatform(this::resolveClientPlatform, this::sendBedrockShopForm);
+        TideframeUiModule tideframeUiModule = new TideframeUiModule(
+            playerId -> resourcePackModule != null
+                && resourcePackModule.service().map(service -> service.hasLoadedPack(playerId)).orElse(false),
+            playerId -> resolveClientPlatform(playerId) == ClientPlatform.BEDROCK
+        );
+        this.missionModule.configureMenuTitleStyle(tideframeUiModule::style);
+        this.shopModule.configureMenuTitleStyle(tideframeUiModule::style);
 
         moduleManager.register(resourcePackModule);
+        moduleManager.register(tideframeUiModule);
         moduleManager.register(itemCatalogModule);
         moduleManager.register(new CopperAppleModule(this));
         moduleManager.register(new SmokeBombModule(this));
