@@ -1,6 +1,8 @@
 package dev.linqfy.bigCasares.modules.mutango;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.BiConsumer;
@@ -18,6 +20,9 @@ final class MutangoFight {
     final MutangoDifficulty difficulty;
     /** Quienes estan peleando (el que la empezo y los que le pegaron a alguno): a ellos se les suma la victoria. */
     final Set<UUID> fighters = new HashSet<>();
+    /** Dano que hizo cada jugador en esta pelea (a cualquiera de sus Mutangos y a Neguechen): los tres que mas pegaron
+     *  se llevan el alma de Mutango. Vive en memoria: si se reinicia el servidor a mitad de pelea, vuelve a contar. */
+    final Map<UUID, Double> damage = new HashMap<>();
     /** Lef, Lihuen y Lican de esta pelea (en el orden en que aparecieron). */
     final MutangoRoster roster = new MutangoRoster();
     /** La lista viva del roster: incluye a los que no estan cargados (los saca solo una muerte confirmada). */

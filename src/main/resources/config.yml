@@ -59,6 +59,8 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+  netherite-quests:
+    enabled: true
 
 # El Gran Casares. Las fichas son la moneda de Vault (hace falta Vault y un proveedor de economía).
 # Las atracciones se arman con /casino construir o /casino colocar <tipo>; se guardan en casino/installations.yml.
@@ -750,6 +752,24 @@ elytra-failure:
   drift-strength: 0.12
   # Durabilidad que pierde la elytra al romperse el ala (fraccion del maximo).
   durability-loss-fraction: 0.25
+
+# Misiones de armadura de netherita. Cada activacion gasta 1 Alma de Boss (el top 3 de daño de un boss se lleva
+# una) y niveles: la primera es gratis y cada una cuesta level-cost-step niveles mas que la anterior.
+# Un boss sirve para una sola pieza: el set completo necesita almas de 4 bosses distintos.
+netherite-quests:
+  duration-hours: 24
+  level-cost-step: 20
+  # Lingote de netherita = 4 restos de netherita + 4 bloques de oro (en vez de lingotes).
+  gold-block-ingot-recipe: true
+  # Sin mejora de armadura de diamante a netherita en la mesa de herrero (las herramientas siguen igual).
+  block-smithing-armor: true
+  # Movimientos mas largos que esto (teletransportes, portales) no cuentan como caminar.
+  max-step-blocks: 10.0
+  targets:
+    casco: 3        # Guardianes Ancianos (Respiracion III)
+    peto: 500       # Creepers (Proteccion contra explosiones IV)
+    pantalones: 3   # Wardens (Sigilo Veloz III)
+    botas: 40000    # bloques caminados, cuentan igual en el Nether (Irrompibilidad II)
 
 custom-crossbow:
   sonic:

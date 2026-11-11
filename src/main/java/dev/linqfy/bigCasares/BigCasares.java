@@ -44,6 +44,7 @@ import dev.linqfy.bigCasares.modules.grapplinghook.GrapplingHookModule;
 import dev.linqfy.bigCasares.modules.glider.GliderModule;
 import dev.linqfy.bigCasares.modules.model.JavaModelGateway;
 import dev.linqfy.bigCasares.modules.model.JavaModelGatewayFactory;
+import dev.linqfy.bigCasares.modules.netheritequest.NetheriteQuestModule;
 import dev.linqfy.bigCasares.modules.nexus.NexusModule;
 import dev.linqfy.bigCasares.modules.pveboss.PveBossModule;
 import dev.linqfy.bigCasares.modules.resourcepack.ResourcePackModule;
@@ -93,6 +94,7 @@ public final class BigCasares extends JavaPlugin {
     private TeamModule teamModule;
     private NexusModule nexusModule;
     private PveBossModule pveBossModule;
+    private NetheriteQuestModule netheriteQuestModule;
     private GeyserIntegrationModule geyserIntegrationModule;
     private AirdropModule airdropModule;
     private AcidRainModule acidRainModule;
@@ -207,6 +209,18 @@ public final class BigCasares extends JavaPlugin {
 
     public PveBossModule getPveBossModule() {
         return pveBossModule;
+    }
+
+    public NetheriteQuestModule getNetheriteQuestModule() {
+        return netheriteQuestModule;
+    }
+
+    /** A boss died: its top three damage dealers get its soul (no-op while the netherite quests are off). */
+    public void awardBossSouls(String bossId, String bossName, java.util.Map<UUID, Double> damageByPlayer) {
+        NetheriteQuestModule quests = netheriteQuestModule;
+        if (quests != null) {
+            quests.awardBossSouls(bossId, bossName, damageByPlayer);
+        }
     }
 
     public GeyserIntegrationModule getGeyserIntegrationModule() {
@@ -396,6 +410,7 @@ public final class BigCasares extends JavaPlugin {
             teamId -> teamModule.service().flatMap(service -> service.findById(teamId))
                 .map(team -> team.color().legacyCode() + team.name().toUpperCase() + " [" + team.tag() + "]"),
             javaModels);
+        this.netheriteQuestModule = new NetheriteQuestModule(this);
         this.pveBossModule = new PveBossModule(
             this,
             this::resolveClientPlatform,
@@ -456,6 +471,7 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(new SchizophreniaModule(this));
         moduleManager.register(shopModule);
         moduleManager.register(casinoModule);
+        moduleManager.register(netheriteQuestModule);
         moduleManager.register(pveBossModule);
         moduleManager.register(geyserIntegrationModule);
         moduleManager.register(moderationModule);
@@ -620,6 +636,7 @@ public final class BigCasares extends JavaPlugin {
         teamModule = null;
         nexusModule = null;
         pveBossModule = null;
+        netheriteQuestModule = null;
         geyserIntegrationModule = null;
         airdropModule = null;
         acidRainModule = null;
