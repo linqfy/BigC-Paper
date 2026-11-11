@@ -9,7 +9,10 @@ import java.time.Clock;
 import java.time.Duration;
 import java.util.UUID;
 import java.util.function.Predicate;
+import java.util.List;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public final class TombstoneModule implements PluginModule {
     private final BigCasares plugin;
@@ -58,6 +61,32 @@ public final class TombstoneModule implements PluginModule {
     public boolean openNearby(Player player, double radius) {
         TombstoneRuntime current = runtime;
         return current != null && current.openNearby(player, radius);
+    }
+
+    /**
+     * Moves the player's whole inventory into a new tombstone at {@code location}, without a death.
+     * Returns false (and leaves the inventory untouched) when the module is off or there is nothing to bury.
+     */
+    public boolean bury(Player player, Location location) {
+        TombstoneRuntime current = runtime;
+        if (current == null) return false;
+        List<ItemStack> items = TombstoneItemLayout.snapshot(
+            player.getInventory().getStorageContents(),
+            player.getInventory().getArmorContents(),
+            player.getInventory().getItemInOffHand(),
+            player.getItemOnCursor()
+        );
+        if (!TombstoneItemLayout.hasItems(items)) return false;
+        player.getInventory().clear();
+        player.getInventory().setArmorContents(new ItemStack[4]);
+        player.getInventory().setItemInOffHand(null);
+        player.setItemOnCursor(null);
+        current.create(player.getUniqueId(), player.getName(), location, items);
+        return true;
+    }
+
+    public boolean capturesDeathOf(UUID playerId) {
+        return shouldCaptureDeath(playerId);
     }
 
     public void setDeathCaptureEligibility(Predicate<UUID> eligibility) {

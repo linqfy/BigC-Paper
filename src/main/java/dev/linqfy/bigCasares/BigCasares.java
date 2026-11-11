@@ -28,6 +28,7 @@ import dev.linqfy.bigCasares.modules.sift.SiftModule;
 import dev.linqfy.bigCasares.modules.tombstone.TombstoneModule;
 import dev.linqfy.bigCasares.modules.keepinventorytotem.KeepInventoryTotemModule;
 import dev.linqfy.bigCasares.modules.elytrafailure.ElytraFailureModule;
+import dev.linqfy.bigCasares.modules.humillacion.HumillacionModule;
 import dev.linqfy.bigCasares.modules.specialitems.SpecialItemsModule;
 import dev.linqfy.bigCasares.modules.warp.WarpModule;
 
@@ -437,6 +438,7 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(tombstoneModule);
         moduleManager.register(keepInventoryTotemModule);
         moduleManager.register(new ElytraFailureModule(this));
+        moduleManager.register(new HumillacionModule(this, tombstoneModule));
         moduleManager.register(specialItemsModule);
         moduleManager.register(warpModule);
 
