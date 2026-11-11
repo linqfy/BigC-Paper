@@ -10,6 +10,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Interaction;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.inventory.Inventory;
@@ -21,6 +22,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +39,8 @@ public final class TombstoneRuntime {
     private final NamespacedKey tombstoneIdKey;
     private final TombstoneLedger ledger = new TombstoneLedger();
     private final Map<UUID, ActiveTombstone> active = new LinkedHashMap<>();
+    private boolean closed;
+    private boolean loaded;
 
     public TombstoneRuntime(
         BigCasares plugin,
@@ -57,29 +61,89 @@ public final class TombstoneRuntime {
         removeOrphanVisuals();
         Instant now = clock.instant();
         ledger.restore(storage.loadAll(), now);
-        ledger.all().forEach(this::activate);
+        loaded = true;
+        for (TombstoneRecord record : ledger.all()) {
+            try {
+                activate(record);
+            } catch (RuntimeException failure) {
+                plugin.getLogger().log(Level.WARNING,
+                    "No se pudo mostrar la tumba " + record.id() + "; se reintentará.", failure);
+            }
+        }
         persist();
     }
 
-    public void create(UUID ownerId, String ownerName, Location requested, List<ItemStack> items) {
-        if (!TombstoneItemLayout.hasItems(items)) return;
-        Location location = safeLocation(requested);
-        TombstoneRecord record = new TombstoneRecord(
-            UUID.randomUUID(), ownerId, ownerName, location.getWorld().getUID(),
-            location.getX(), location.getY(), location.getZ(), location.getYaw(),
-            clock.instant().plus(lifetime), items
-        );
-        ledger.put(record);
-        activate(record);
-        persist();
+    /**
+     * Stores the items in a new tombstone. Returns false, keeping nothing, when the tombstone could not be recorded;
+     * the caller must then leave the items to vanilla so they are not lost. A tombstone whose visuals cannot be
+     * spawned yet is still recorded and retried by the heartbeat.
+     */
+    public boolean create(UUID ownerId, String ownerName, Location requested, List<ItemStack> items) {
+        if (closed || !loaded || !TombstoneItemLayout.hasItems(items)) return false;
+        TombstoneRecord record = null;
+        try {
+            Location location = safeLocation(requested);
+            record = new TombstoneRecord(
+                UUID.randomUUID(), ownerId, ownerName, location.getWorld().getUID(),
+                location.getX(), location.getY(), location.getZ(), location.getYaw(),
+                clock.instant().plus(lifetime), items
+            );
+            ledger.put(record);
+            persist();
+        } catch (RuntimeException failure) {
+            // Not kept in memory either: the items stay in the drops, and a second copy would come back later.
+            if (record != null) ledger.remove(record.id());
+            plugin.getLogger().log(Level.SEVERE,
+                "No se pudo guardar la tumba de " + ownerName + "; sus objetos caen normalmente.", failure);
+            return false;
+        }
+        try {
+            activate(record);
+        } catch (RuntimeException failure) {
+            plugin.getLogger().log(Level.WARNING,
+                "No se pudo mostrar la tumba " + record.id() + "; se reintentará.", failure);
+        }
+        return true;
     }
 
     public boolean open(UUID tombstoneId, org.bukkit.entity.Player player) {
-        ledger.find(tombstoneId).ifPresent(this::activate);
+        if (closed || player.isDead()) return false;
+        TombstoneRecord record = ledger.find(tombstoneId).orElse(null);
+        if (record == null) return false;
+        if (!record.expiresAt().isAfter(clock.instant())) {
+            remove(tombstoneId, null);
+            return false;
+        }
+        activate(record);
         ActiveTombstone tombstone = active.get(tombstoneId);
         if (tombstone == null) return false;
         player.openInventory(tombstone.inventory);
         return true;
+    }
+
+    /** Opens the tombstone behind a clicked visual; a visual whose tombstone no longer exists is discarded. */
+    public boolean openFromEntity(Entity entity, org.bukkit.entity.Player player) {
+        UUID id = tombstoneId(entity);
+        if (id == null) return false;
+        if (!closed && ledger.find(id).isEmpty()) {
+            entity.remove();
+            return false;
+        }
+        return open(id, player);
+    }
+
+    /**
+     * Removes tombstone visuals that are not the current ones of a live tombstone, so a duplicate that survived in
+     * a chunk (crash, older version, failed removal) disappears as soon as its chunk loads.
+     */
+    public void discardStrays(Collection<? extends Entity> entities) {
+        if (closed) return;
+        for (Entity entity : entities) {
+            UUID id = tombstoneId(entity);
+            if (id == null) continue;
+            ActiveTombstone tombstone = active.get(id);
+            if (tombstone == null || tombstone.visuals == null || !tombstone.visuals.owns(entity)) entity.remove();
+        }
     }
 
     public boolean openNearby(org.bukkit.entity.Player player, double radius) {
@@ -128,12 +192,17 @@ public final class TombstoneRuntime {
         player.openInventory(selection);
     }
 
-    public void reconcile(UUID tombstoneId) {
+    /**
+     * Saves what is left in the tombstone. {@code closing} is the player whose inventory is closing right now: when
+     * the tombstone is emptied every other viewer is closed out, but that player is not closed a second time.
+     */
+    public void reconcile(UUID tombstoneId, HumanEntity closing) {
+        if (closed) return;
         ActiveTombstone tombstone = active.get(tombstoneId);
         if (tombstone == null) return;
         refill(tombstone);
         if (!TombstoneItemLayout.hasItems(contents(tombstone))) {
-            remove(tombstoneId);
+            remove(tombstoneId, closing);
             return;
         }
         syncRecord(tombstone);
@@ -141,71 +210,104 @@ public final class TombstoneRuntime {
     }
 
     public void shutdown() {
-        active.values().forEach(this::syncRecord);
-        persist();
-        active.values().forEach(ActiveTombstone::removeVisuals);
-        active.clear();
+        if (closed) return;
+        closed = true;
+        List<ActiveTombstone> tombstones = List.copyOf(active.values());
+        try {
+            // Nobody may keep taking items from an inventory that is about to be saved and forgotten: after a
+            // reload the new runtime would restore the same items again.
+            tombstones.forEach(tombstone -> closeViewers(tombstone.inventory, null));
+            tombstones.forEach(this::syncRecord);
+            // Without a completed load the ledger is not the file's content; saving it would erase the file.
+            if (loaded) persist();
+        } finally {
+            tombstones.forEach(ActiveTombstone::removeVisuals);
+            active.clear();
+        }
     }
 
     private void activate(TombstoneRecord record) {
-        if (active.containsKey(record.id())) return;
-        World world = Bukkit.getWorld(record.worldId());
-        if (world == null) return;
-        Inventory inventory = Bukkit.createInventory(
-            new TombstoneInventoryHolder(record.id()), VISIBLE_SIZE, "Tumba de " + record.ownerName()
-        );
-        List<ItemStack> source = new ArrayList<>(record.items());
-        for (int slot = 0; slot < VISIBLE_SIZE && !source.isEmpty(); slot++) inventory.setItem(slot, source.removeFirst());
-        Location location = record.location(world);
-        TombstoneVisuals visuals = spawnVisuals(record, location);
-        ActiveTombstone tombstone = new ActiveTombstone(record, inventory, source, visuals);
-        active.put(record.id(), tombstone);
+        if (closed) return;
+        ActiveTombstone tombstone = active.get(record.id());
+        if (tombstone == null) {
+            if (Bukkit.getWorld(record.worldId()) == null) return;
+            Inventory inventory = Bukkit.createInventory(
+                new TombstoneInventoryHolder(record.id()), VISIBLE_SIZE, "Tumba de " + record.ownerName()
+            );
+            List<ItemStack> source = new ArrayList<>(record.items());
+            for (int slot = 0; slot < VISIBLE_SIZE && !source.isEmpty(); slot++) {
+                inventory.setItem(slot, source.removeFirst());
+            }
+            tombstone = new ActiveTombstone(record, inventory, source);
+            active.put(record.id(), tombstone);
+        }
+        ensureVisuals(tombstone);
         updateText(tombstone, clock.instant());
+    }
+
+    /**
+     * Spawns the visuals only while their chunk is loaded. They are not persistent, so the server discards them
+     * when the chunk unloads, and they come back here when it loads again. Spawning into an unloaded chunk would
+     * leave entities that report themselves invalid without being gone, and each retry would stack another set.
+     */
+    private void ensureVisuals(ActiveTombstone tombstone) {
+        TombstoneRecord record = tombstone.record;
+        World world = Bukkit.getWorld(record.worldId());
+        if (world == null) {
+            tombstone.discardVisuals();
+            return;
+        }
+        int chunkX = Location.locToBlock(record.x()) >> 4;
+        int chunkZ = Location.locToBlock(record.z()) >> 4;
+        if (!world.isChunkLoaded(chunkX, chunkZ)) return;
+        if (tombstone.visuals != null && tombstone.visuals.valid()) return;
+        tombstone.discardVisuals();
+        tombstone.visuals = spawnVisuals(record, record.location(world));
     }
 
     private TombstoneVisuals spawnVisuals(TombstoneRecord record, Location location) {
         World world = location.getWorld();
         if (world == null) throw new IllegalStateException("Tombstone world became unavailable");
-        BlockDisplay block = world.spawn(location.clone().subtract(0.5, 0.0, 0.5), BlockDisplay.class, display -> {
-            display.setPersistent(false);
-            display.setBlock(Bukkit.createBlockData(Material.CHEST));
-            mark(display, record.id());
-        });
-        Interaction interaction = world.spawn(location.clone().add(0, 0.5, 0), Interaction.class, entity -> {
-            entity.setPersistent(false);
-            entity.setInteractionWidth(1.2f);
-            entity.setInteractionHeight(1.5f);
-            entity.setResponsive(true);
-            mark(entity, record.id());
-        });
-        TextDisplay text = world.spawn(location.clone().add(0, 1.7, 0), TextDisplay.class, display -> {
-            display.setPersistent(false);
-            display.setBillboard(org.bukkit.entity.Display.Billboard.CENTER);
-            display.setAlignment(TextDisplay.TextAlignment.CENTER);
-            mark(display, record.id());
-        });
-        return new TombstoneVisuals(block, interaction, text);
+        List<Entity> spawned = new ArrayList<>(3);
+        try {
+            BlockDisplay block = world.spawn(location.clone().subtract(0.5, 0.0, 0.5), BlockDisplay.class, display -> {
+                display.setPersistent(false);
+                display.setBlock(Bukkit.createBlockData(Material.CHEST));
+                mark(display, record.id());
+            });
+            spawned.add(block);
+            Interaction interaction = world.spawn(location.clone().add(0, 0.5, 0), Interaction.class, entity -> {
+                entity.setPersistent(false);
+                entity.setInteractionWidth(1.2f);
+                entity.setInteractionHeight(1.5f);
+                entity.setResponsive(true);
+                mark(entity, record.id());
+            });
+            spawned.add(interaction);
+            TextDisplay text = world.spawn(location.clone().add(0, 1.7, 0), TextDisplay.class, display -> {
+                display.setPersistent(false);
+                display.setBillboard(org.bukkit.entity.Display.Billboard.CENTER);
+                display.setAlignment(TextDisplay.TextAlignment.CENTER);
+                mark(display, record.id());
+            });
+            spawned.add(text);
+            return new TombstoneVisuals(block, interaction, text);
+        } catch (RuntimeException failure) {
+            spawned.forEach(Entity::remove);
+            throw failure;
+        }
     }
 
     private void heartbeat() {
+        if (closed) return;
         Instant now = clock.instant();
         for (TombstoneRecord record : ledger.all()) {
             try {
                 if (!record.expiresAt().isAfter(now)) {
-                    remove(record.id());
+                    remove(record.id(), null);
                     continue;
                 }
-                ActiveTombstone tombstone = active.get(record.id());
-                if (tombstone == null) {
-                    activate(record);
-                    continue;
-                }
-                if (!tombstone.visuals.valid()) {
-                    tombstone.visuals.remove();
-                    tombstone.visuals = spawnVisuals(tombstone.record, tombstone.record.location(
-                        Bukkit.getWorld(tombstone.record.worldId())));
-                }
-                updateText(tombstone, now);
+                activate(record);
             } catch (RuntimeException failure) {
                 plugin.getLogger().log(Level.WARNING,
                     "No se pudo actualizar la tumba " + record.id() + "; se reintentará.", failure);
@@ -241,14 +343,28 @@ public final class TombstoneRuntime {
         ledger.put(updated);
     }
 
-    private void remove(UUID id) {
+    private void remove(UUID id, HumanEntity except) {
         ActiveTombstone removed = active.remove(id);
-        if (removed != null) removed.removeVisuals();
         ledger.remove(id);
-        persist();
+        try {
+            persist();
+        } finally {
+            if (removed != null) {
+                removed.removeVisuals();
+                // Removed from the map first, so the close events this triggers find nothing to reconcile.
+                closeViewers(removed.inventory, except);
+            }
+        }
+    }
+
+    private static void closeViewers(Inventory inventory, HumanEntity except) {
+        for (HumanEntity viewer : List.copyOf(inventory.getViewers())) {
+            if (viewer != except) viewer.closeInventory();
+        }
     }
 
     private void updateText(ActiveTombstone tombstone, Instant now) {
+        if (tombstone.visuals == null || !tombstone.visuals.text.isValid()) return;
         long seconds = Math.max(0L, Duration.between(now, tombstone.record.expiresAt()).toSeconds());
         tombstone.visuals.text.text(Component.text("Tumba de " + tombstone.record.ownerName() + "\nDesaparece en "
             + (seconds / 60) + ":" + String.format(java.util.Locale.ROOT, "%02d", seconds % 60)));
@@ -257,13 +373,34 @@ public final class TombstoneRuntime {
     private Location safeLocation(Location requested) {
         World world = requested.getWorld();
         if (world == null) throw new IllegalArgumentException("Death location must have a world");
-        if (requested.getY() < world.getMinHeight() + 1 || requested.getY() >= world.getMaxHeight() - 2) {
-            return world.getSpawnLocation().clone().add(0.5, 0.0, 0.5);
+        int x = requested.getBlockX();
+        int z = requested.getBlockZ();
+        int top = world.getMaxHeight() - 2;
+        int y = Math.min(requested.getBlockY(), top);
+        if (y < world.getMinHeight() + 1) {
+            // Fell into the void: put it on the column's surface if there is one, otherwise at the world spawn.
+            org.bukkit.block.Block surface = world.getHighestBlockAt(x, z);
+            if (surface.getType().isAir() || surface.getY() + 1 > top) {
+                return world.getSpawnLocation().toCenterLocation().subtract(0.0, 0.5, 0.0);
+            }
+            y = surface.getY() + 1;
         }
-        Location centered = requested.getBlock().getLocation().add(0.5, 0.0, 0.5);
-        if (centered.getBlock().isPassable() && centered.clone().add(0, 1, 0).getBlock().isPassable()) return centered;
-        int y = world.getHighestBlockYAt(centered.getBlockX(), centered.getBlockZ()) + 1;
-        return new Location(world, centered.getBlockX() + 0.5, y, centered.getBlockZ() + 0.5);
+        // Walk up a little to free space (suffocation, sand) instead of jumping to the column top, which in the
+        // Nether is the bedrock roof.
+        for (int candidate = y; candidate <= Math.min(top, y + 16); candidate++) {
+            if (open(world, x, candidate, z)) return centered(world, x, candidate, z);
+        }
+        int surface = world.getHighestBlockYAt(x, z) + 1;
+        if (surface >= world.getMinHeight() + 1 && surface <= top) return centered(world, x, surface, z);
+        return centered(world, x, y, z);
+    }
+
+    private static boolean open(World world, int x, int y, int z) {
+        return world.getBlockAt(x, y, z).isPassable() && world.getBlockAt(x, y + 1, z).isPassable();
+    }
+
+    private static Location centered(World world, int x, int y, int z) {
+        return new Location(world, x + 0.5, y, z + 0.5);
     }
 
     private void mark(Entity entity, UUID id) {
@@ -288,16 +425,19 @@ public final class TombstoneRuntime {
         private final List<ItemStack> overflow;
         private TombstoneVisuals visuals;
 
-        private ActiveTombstone(TombstoneRecord record, Inventory inventory, List<ItemStack> overflow,
-                                TombstoneVisuals visuals) {
+        private ActiveTombstone(TombstoneRecord record, Inventory inventory, List<ItemStack> overflow) {
             this.record = record;
             this.inventory = inventory;
             this.overflow = overflow;
-            this.visuals = visuals;
+        }
+
+        private void discardVisuals() {
+            if (visuals != null) visuals.remove();
+            visuals = null;
         }
 
         private void removeVisuals() {
-            visuals.remove();
+            discardVisuals();
         }
     }
 
@@ -306,10 +446,17 @@ public final class TombstoneRuntime {
             return block.isValid() && interaction.isValid() && text.isValid();
         }
 
+        private boolean owns(Entity entity) {
+            UUID id = entity.getUniqueId();
+            return id.equals(block.getUniqueId()) || id.equals(interaction.getUniqueId())
+                || id.equals(text.getUniqueId());
+        }
+
+        // Unconditional: isValid() is also false while the chunk is not loaded, and such an entity still exists.
         private void remove() {
-            if (block.isValid()) block.remove();
-            if (interaction.isValid()) interaction.remove();
-            if (text.isValid()) text.remove();
+            block.remove();
+            interaction.remove();
+            text.remove();
         }
     }
 }

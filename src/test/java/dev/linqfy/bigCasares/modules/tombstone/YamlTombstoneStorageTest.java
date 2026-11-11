@@ -3,7 +3,10 @@ package dev.linqfy.bigCasares.modules.tombstone;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +16,8 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class YamlTombstoneStorageTest {
 
@@ -35,5 +40,32 @@ class YamlTombstoneStorageTest {
         assertNull(restored.get(1));
         assertEquals(Material.DIRT, restored.get(8).getType());
         assertEquals(Material.SHIELD, restored.get(40).getType());
+    }
+
+    @Test
+    void unparsableFileFailsInsteadOfLoadingAsEmptyAndIsBackedUp(@TempDir Path directory) throws Exception {
+        Path file = directory.resolve("tombstones.yml");
+        Files.writeString(file, "tombstones:\n  broken: [unclosed\n");
+        YamlTombstoneStorage storage = new YamlTombstoneStorage(file);
+
+        assertThrows(IllegalStateException.class, storage::loadAll);
+
+        assertEquals("tombstones:\n  broken: [unclosed\n", Files.readString(file));
+        try (var files = Files.list(directory)) {
+            assertTrue(files.anyMatch(path -> path.getFileName().toString().startsWith("tombstones.yml.unreadable-")));
+        }
+    }
+
+    @Test
+    void malformedEntryIsSkippedAndTheOriginalFileIsBackedUp(@TempDir Path directory) throws Exception {
+        Path file = directory.resolve("tombstones.yml");
+        Files.writeString(file, "tombstones:\n  not-a-uuid:\n    owner-id: nope\n");
+        YamlTombstoneStorage storage = new YamlTombstoneStorage(file);
+
+        assertEquals(List.of(), storage.loadAll());
+
+        try (var files = Files.list(directory)) {
+            assertTrue(files.anyMatch(path -> path.getFileName().toString().startsWith("tombstones.yml.unreadable-")));
+        }
     }
 }
