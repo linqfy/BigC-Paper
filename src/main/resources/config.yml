@@ -59,6 +59,8 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+  villager-mood:
+    enabled: true
 
 # El Gran Casares. Las fichas son la moneda de Vault (hace falta Vault y un proveedor de economía).
 # Las atracciones se arman con /casino construir o /casino colocar <tipo>; se guardan en casino/installations.yml.
@@ -750,6 +752,75 @@ elytra-failure:
   drift-strength: 0.12
   # Durabilidad que pierde la elytra al romperse el ala (fraccion del maximo).
   durability-loss-fraction: 0.25
+
+# Comercio infinito con aldeanos... pero con consecuencias.
+villager-mood:
+  # Cada cuanto se revisa el animo de cada aldeano cargado.
+  check-interval-ticks: 100
+  trading:
+    # Los trueques nunca se bloquean por uso.
+    infinite: true
+    # Al abrir el menu se reponen todas las ofertas.
+    refresh-on-open: true
+  depression:
+    # Tiempo encerrado en una celda de 1x1 antes del primer nivel de depresion (12000 = 10 minutos).
+    confined-ticks-before-depression: 12000
+    # Tiempo extra encerrado por cada nivel adicional.
+    ticks-per-level: 6000
+    max-level: 5
+    # Cuantas veces mas rapido se recupera de lo que se deprime una vez libre.
+    recovery-rate: 2.0
+  prices:
+    # Recargo sobre el costo base por cada nivel (0.15 = +15%).
+    per-depression-level: 0.15
+    per-annoyance-level: 0.10
+    max-surcharge: 1.5
+  spam:
+    # Mas de max-trades-in-window trueques en window-ticks hace que el aldeano te insulte y suba los precios.
+    window-ticks: 200
+    max-trades-in-window: 32
+    # Cuanto dura cada nivel de fastidio.
+    ticks-per-level: 6000
+    max-level: 5
+  escape:
+    # Un aldeano encerrado puede escaparse por agujeros de 1x1 en la pared de su celda.
+    enabled: true
+    min-confined-ticks: 6000
+    chance-per-check: 0.02
+  cliff:
+    # Un aldeano deprimido y libre puede tirarse por un precipicio cercano.
+    enabled: true
+    min-depression: 2
+    chance-per-check: 0.05
+    search-radius: 12
+    min-drop: 6
+    attempt-ticks: 400
+  riot:
+    # Si hay suficientes aldeanos de mal humor cerca de un jugador, se amotinan contra el.
+    enabled: true
+    radius: 12.0
+    # Depresion + fastidio necesarios para sumarse al motin.
+    min-mood: 2
+    min-rioters: 3
+    chance-per-check: 0.02
+    duration-ticks: 400
+    cooldown-ticks: 12000
+    damage: 2.0
+    # Llaman a un golem de hierro (sin botin) que persigue al jugador durante el motin.
+    summon-golem: true
+  insults:
+    - "¿Otra vez vos? ¡Andá a laburar!"
+    - "Me tenés podrido con tanto trueque."
+    - "¿Te creés que soy un cajero automático?"
+    - "Pará un poco, que no soy tu esclavo."
+    - "Hmmm... ahora te sale más caro, vivo."
+    - "¡Tomatelás! Volvé cuando aprendas modales."
+  riot-shouts:
+    - "¡Libertad para los aldeanos!"
+    - "¡Basta de celdas de un bloque!"
+    - "¡Abajo el explotador!"
+    - "¡Hmmm! ¡HMMM!"
+    - "¡Queremos ventanas!"
 
 custom-crossbow:
   sonic:
