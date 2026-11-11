@@ -8,7 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -36,7 +38,7 @@ public final class MissionHudController implements Listener {
 
     public void open(Player player, MissionHudView view) {
         MissionPlayerState state = module.getOrCreateState(player);
-        Inventory inventory = Bukkit.createInventory(player, INVENTORY_SIZE, MissionTexts.title(view));
+        Inventory inventory = Bukkit.createInventory(new MissionMenuHolder(view), INVENTORY_SIZE, MissionTexts.title(view));
 
         switch (view) {
             case MAIN_MENU -> populateMainMenu(inventory, state);
@@ -50,7 +52,7 @@ public final class MissionHudController implements Listener {
 
     public void closeOpenViews() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (isMissionTitle(player.getOpenInventory().getTitle())) {
+            if (player.getOpenInventory().getTopInventory().getHolder() instanceof MissionMenuHolder) {
                 player.closeInventory();
             }
         }
@@ -63,14 +65,13 @@ public final class MissionHudController implements Listener {
             return;
         }
 
-        String title = event.getView().getTitle();
-        if (!isMissionTitle(title)) {
+        if (!(event.getView().getTopInventory().getHolder() instanceof MissionMenuHolder holder)) {
             return;
         }
 
         event.setCancelled(true);
         int slot = event.getRawSlot();
-        if (title.equals(MissionTexts.title(MissionHudView.MAIN_MENU))) {
+        if (holder.view() == MissionHudView.MAIN_MENU) {
             if (slot == DAILY_SLOT) {
                 open(player, MissionHudView.DAILY_LIST);
             } else if (slot == WEEKLY_SLOT) {
@@ -84,7 +85,7 @@ public final class MissionHudController implements Listener {
 
         if (slot == BACK_SLOT) {
             open(player, MissionHudView.MAIN_MENU);
-        } else if (title.equals(MissionTexts.title(MissionHudView.CLAIMABLES)) && slot == CLAIM_SLOT) {
+        } else if (holder.view() == MissionHudView.CLAIMABLES && slot == CLAIM_SLOT) {
             module.claimAll(player);
             open(player, MissionHudView.CLAIMABLES);
         }
@@ -143,13 +144,6 @@ public final class MissionHudController implements Listener {
         return createMenuItem(iconFor(assignment), ChatColor.WHITE + assignment.definition().title(), lore);
     }
 
-    private boolean isMissionTitle(String title) {
-        return title.equals(MissionTexts.title(MissionHudView.MAIN_MENU))
-            || title.equals(MissionTexts.title(MissionHudView.DAILY_LIST))
-            || title.equals(MissionTexts.title(MissionHudView.WEEKLY_LIST))
-            || title.equals(MissionTexts.title(MissionHudView.CLAIMABLES));
-    }
-
     private ItemStack createMenuItem(Material material, String name, List<String> lore) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
@@ -166,5 +160,20 @@ public final class MissionHudController implements Listener {
             case DAILY -> Material.PAPER;
             case WEEKLY -> Material.BOOK;
         };
+    }
+
+    @EventHandler
+    public void onInventoryDrag(InventoryDragEvent event) {
+        if (event.getView().getTopInventory().getHolder() instanceof MissionMenuHolder) {
+            event.setCancelled(true);
+        }
+    }
+
+    /** Identifies mission menus by holder: titles are plain text and can be spoofed or collide. */
+    private record MissionMenuHolder(MissionHudView view) implements InventoryHolder {
+        @Override
+        public Inventory getInventory() {
+            return null;
+        }
     }
 }

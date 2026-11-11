@@ -53,8 +53,13 @@ public final class CustomCrossbowChargeListener implements Listener {
         loadingTasks.clear();
     }
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerInteract(PlayerInteractEvent event) {
+        // RIGHT_CLICK_AIR is delivered pre-cancelled, so ignoreCancelled would drop it;
+        // honour other plugins through the item-use result instead.
+        if (event.useItemInHand() == Event.Result.DENY) {
+            return;
+        }
         if (event.getHand() != EquipmentSlot.HAND || !isRightClick(event.getAction())) {
             return;
         }

@@ -50,18 +50,52 @@ class ShopServiceTest {
         CustomItemRegistry registry = new CustomItemRegistry();
         registry.register(new TestCustomItem());
 
-        ShopItemResolver resolver = new ShopItemResolver(registry);
+        ItemStack custom = new TestCustomItem().createItemStack(1);
+        ShopItemResolver resolver = taggedOnly(registry, custom);
         FakeEconomyGateway economy = new FakeEconomyGateway(0.0);
         ShopService service = new ShopService(resolver, economy);
         ShopEntry entry = new ShopEntry("copper_apple", 12, null, "copper_apple", 1, 1500.0, 50.0, null, List.of());
 
-        ShopTransactionResult success = service.sell(List.of(new TestCustomItem().createItemStack(1)), entry);
+        ShopTransactionResult success = service.sell(List.of(custom), entry);
         ShopTransactionResult failure = service.sell(List.of(new ItemStack(Material.APPLE, 1)), entry);
 
         assertTrue(success.success());
         assertEquals(50.0, economy.balance());
         assertFalse(failure.success());
         assertEquals("No tenes suficientes items para vender.", failure.message());
+    }
+
+    @Test
+    void customEntryRejectsVanillaStackOfSameBaseMaterial() {
+        CustomItemRegistry registry = new CustomItemRegistry();
+        registry.register(new TestCustomItem());
+        ItemStack custom = new TestCustomItem().createItemStack(1);
+        FakeEconomyGateway economy = new FakeEconomyGateway(0.0);
+        ShopService service = new ShopService(taggedOnly(registry, custom), economy);
+        ShopEntry entry = new ShopEntry("copper_apple", 12, null, "copper_apple", 1, 1500.0, 50.0, null, List.of());
+
+        ShopTransactionResult result = service.sell(List.of(new ItemStack(Material.STICK, 64)), entry);
+
+        assertFalse(result.success());
+        assertEquals(0.0, economy.balance());
+    }
+
+    @Test
+    void vanillaEntryRejectsCustomItemOfSameMaterial() {
+        CustomItemRegistry registry = new CustomItemRegistry();
+        ItemStack custom = new TestCustomItem().createItemStack(1);
+        FakeEconomyGateway economy = new FakeEconomyGateway(0.0);
+        ShopService service = new ShopService(taggedOnly(registry, custom), economy);
+        ShopEntry entry = new ShopEntry("stick", 1, Material.STICK, null, 1, 1.0, 1.0, null, List.of());
+
+        assertFalse(service.sell(List.of(custom), entry).success());
+        assertTrue(service.sell(List.of(new ItemStack(Material.STICK, 1)), entry).success());
+    }
+
+    /** Identifies only {@code custom} as the copper apple, like a PDC-tagged stack in game. */
+    private static ShopItemResolver taggedOnly(CustomItemRegistry registry, ItemStack custom) {
+        return new ShopItemResolver(registry, stack -> stack == custom
+            ? java.util.Optional.of("copper_apple") : java.util.Optional.empty());
     }
 
     @Test

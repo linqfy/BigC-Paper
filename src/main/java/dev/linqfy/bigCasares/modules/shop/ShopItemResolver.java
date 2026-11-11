@@ -4,12 +4,21 @@ import dev.linqfy.bigCasares.items.CustomItem;
 import dev.linqfy.bigCasares.items.CustomItemRegistry;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Optional;
+import java.util.function.Function;
+
 public final class ShopItemResolver {
 
     private final CustomItemRegistry registry;
+    private final Function<ItemStack, Optional<String>> customIdLookup;
 
     public ShopItemResolver(CustomItemRegistry registry) {
+        this(registry, stack -> registry.findByItemStack(stack).map(CustomItem::getId));
+    }
+
+    ShopItemResolver(CustomItemRegistry registry, Function<ItemStack, Optional<String>> customIdLookup) {
         this.registry = registry;
+        this.customIdLookup = customIdLookup;
     }
 
     public ItemStack createStack(ShopEntry entry) {
@@ -26,23 +35,21 @@ public final class ShopItemResolver {
         if (stack == null || stack.getAmount() < 1) {
             return false;
         }
+        String customId = customItemId(stack);
         if (entry.material() != null) {
-            return stack.getType() == entry.material();
+            // A custom item built on this material is not the vanilla item the entry trades.
+            return stack.getType() == entry.material() && customId == null;
         }
-        boolean directMatch;
-        try {
-            directMatch = registry.findByItemStack(stack)
-                .map(item -> item.getId().equalsIgnoreCase(entry.customItemId()))
-                .orElse(false);
-        } catch (RuntimeException ex) {
-            directMatch = false;
-        }
-        if (directMatch) {
-            return true;
-        }
+        // Custom entries only match registry items. Comparing base materials would let a
+        // plain vanilla stack (for example a compass) sell at the custom item's price.
+        return customId != null && customId.equalsIgnoreCase(entry.customItemId());
+    }
 
-        return registry.findById(entry.customItemId())
-            .map(item -> item.createItemStack(1).getType() == stack.getType())
-            .orElse(false);
+    private String customItemId(ItemStack stack) {
+        try {
+            return customIdLookup.apply(stack).orElse(null);
+        } catch (RuntimeException ex) {
+            return null;
+        }
     }
 }

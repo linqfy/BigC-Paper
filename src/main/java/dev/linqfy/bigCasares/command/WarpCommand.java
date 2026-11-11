@@ -35,6 +35,10 @@ public final class WarpCommand implements CommandExecutor, TabCompleter {
             sender.sendMessage(ChatColor.RED + "Solo jugadores pueden usar este comando.");
             return true;
         }
+        if (module == null || module.getStorage() == null) {
+            sender.sendMessage(ChatColor.RED + "El sistema de warps esta desactivado.");
+            return true;
+        }
 
         if (args.length > 0 && "manage".equalsIgnoreCase(args[0])) {
             if (!player.hasPermission("bigcasares.warp.manage") && !player.isOp()) {
@@ -55,8 +59,11 @@ public final class WarpCommand implements CommandExecutor, TabCompleter {
 
     private void openWarpMenu(Player player) {
         Collection<Warp> warps = module.getStorage().getAll();
+        if (warps.isEmpty()) {
+            player.sendMessage(ChatColor.YELLOW + "Todavia no hay warps.");
+            return;
+        }
         int size = Math.min(54, Math.max(9, (int) Math.ceil(warps.size() / 9.0) * 9));
-        if (size == 0) size = 9; // Handle empty warps gracefully
 
         WarpMenuHolder holder = new WarpMenuHolder();
         Inventory inventory = Bukkit.createInventory(holder, size, "Menú de Warps");
@@ -92,7 +99,7 @@ public final class WarpCommand implements CommandExecutor, TabCompleter {
     }
 
     private boolean handleManage(Player player, String[] args) {
-        if (args.length < 3 && !("delete".equalsIgnoreCase(args[1]) && args.length == 2)) {
+        if (args.length < 3) {
             sendManageUsage(player);
             return true;
         }
@@ -152,7 +159,8 @@ public final class WarpCommand implements CommandExecutor, TabCompleter {
                 player.sendMessage(ChatColor.GREEN + "Descripción de warp " + id + " actualizada.");
                 return true;
             }
-        } catch (Exception ex) {
+        } catch (RuntimeException ex) {
+            module.getPlugin().getLogger().log(java.util.logging.Level.WARNING, "Fallo /warp manage " + action, ex);
             player.sendMessage(ChatColor.RED + "Ocurrió un error: " + ex.getMessage());
             return true;
         }
@@ -172,6 +180,9 @@ public final class WarpCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (module == null || module.getStorage() == null) {
+            return List.of();
+        }
         if (args.length == 1) {
             if (sender.hasPermission("bigcasares.warp.manage") || sender.isOp()) {
                 return "manage".startsWith(args[0].toLowerCase(Locale.ROOT)) ? List.of("manage") : List.of();

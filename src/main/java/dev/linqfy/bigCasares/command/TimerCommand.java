@@ -31,26 +31,19 @@ public class TimerCommand implements CommandExecutor, TabCompleter, Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!sender.hasPermission("bigcasares.command.timer")) {
-            sender.sendMessage(ChatColor.RED + "You don't have permission to use this command.");
+            sender.sendMessage(ChatColor.RED + "No tenes permiso para usar este comando.");
             return true;
         }
 
         if (args.length == 0) {
-            sender.sendMessage(ChatColor.RED + "Usage: /timer <seconds> [title...]");
-            sender.sendMessage(ChatColor.RED + "Usage: /timer cancel");
+            sender.sendMessage(ChatColor.RED + "Uso: /timer <segundos> [titulo...]");
+            sender.sendMessage(ChatColor.RED + "Uso: /timer cancel");
             return true;
         }
 
         if (args[0].equalsIgnoreCase("cancel")) {
-            if (activeTimerBar != null) {
-                activeTimerBar.removeAll();
-                activeTimerBar = null;
-            }
-            if (activeTimerTask != null) {
-                activeTimerTask.cancel();
-                activeTimerTask = null;
-            }
-            sender.sendMessage(ChatColor.GREEN + "Timer cancelled.");
+            shutdown();
+            sender.sendMessage(ChatColor.GREEN + "Timer cancelado.");
             return true;
         }
 
@@ -58,12 +51,12 @@ public class TimerCommand implements CommandExecutor, TabCompleter, Listener {
         try {
             totalSeconds = Integer.parseInt(args[0]);
         } catch (NumberFormatException e) {
-            sender.sendMessage(ChatColor.RED + "Invalid number of seconds. Must be an integer.");
+            sender.sendMessage(ChatColor.RED + "Cantidad de segundos invalida.");
             return true;
         }
 
         if (totalSeconds <= 0) {
-            sender.sendMessage(ChatColor.RED + "Time must be greater than 0.");
+            sender.sendMessage(ChatColor.RED + "El tiempo tiene que ser mayor a 0.");
             return true;
         }
 
@@ -77,12 +70,7 @@ public class TimerCommand implements CommandExecutor, TabCompleter, Listener {
         }
         String baseTitle = ChatColor.translateAlternateColorCodes('&', titleBuilder.toString().trim());
 
-        if (activeTimerBar != null) {
-            activeTimerBar.removeAll();
-        }
-        if (activeTimerTask != null) {
-            activeTimerTask.cancel();
-        }
+        shutdown();
 
         activeTimerBar = Bukkit.createBossBar(formatTitle(baseTitle, totalSeconds), BarColor.BLUE, BarStyle.SOLID);
         for (Player p : Bukkit.getOnlinePlayers()) {
@@ -112,9 +100,21 @@ public class TimerCommand implements CommandExecutor, TabCompleter, Listener {
             }
         };
         activeTimerTask.runTaskTimer(plugin, 20L, 20L);
-        sender.sendMessage(ChatColor.GREEN + "Timer started for " + totalSeconds + " seconds.");
+        sender.sendMessage(ChatColor.GREEN + "Timer iniciado por " + totalSeconds + " segundos.");
 
         return true;
+    }
+
+    /** Removes the boss bar; a plugin reload cancels the task but would leave the bar on screen. */
+    public void shutdown() {
+        if (activeTimerBar != null) {
+            activeTimerBar.removeAll();
+            activeTimerBar = null;
+        }
+        if (activeTimerTask != null && !activeTimerTask.isCancelled()) {
+            activeTimerTask.cancel();
+        }
+        activeTimerTask = null;
     }
 
     private String formatTitle(String base, int seconds) {
@@ -122,9 +122,9 @@ public class TimerCommand implements CommandExecutor, TabCompleter, Listener {
         int s = seconds % 60;
         String timeStr;
         if (m > 0) {
-            timeStr = String.format("%02d:%02d", m, s);
+            timeStr = String.format(java.util.Locale.ROOT, "%02d:%02d", m, s);
         } else {
-            timeStr = String.format("%ds", s);
+            timeStr = s + "s";
         }
         return base + " - " + timeStr;
     }
@@ -133,7 +133,7 @@ public class TimerCommand implements CommandExecutor, TabCompleter, Listener {
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         List<String> completions = new ArrayList<>();
         if (args.length == 1) {
-            if ("cancel".startsWith(args[0].toLowerCase())) {
+            if ("cancel".startsWith(args[0].toLowerCase(java.util.Locale.ROOT))) {
                 completions.add("cancel");
             }
             completions.add("60");

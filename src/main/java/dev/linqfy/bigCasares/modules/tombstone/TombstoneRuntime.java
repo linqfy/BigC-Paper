@@ -74,6 +74,20 @@ public final class TombstoneRuntime {
         persist();
     }
 
+    /** Keeps an audit trail of what each death stored, for item-loss support tickets. */
+    public void logDeathInventory(String playerName, List<ItemStack> items) {
+        StringBuilder summary = new StringBuilder();
+        for (ItemStack item : items) {
+            if (item != null && !item.getType().isAir()) {
+                if (!summary.isEmpty()) summary.append(", ");
+                summary.append(item.getAmount()).append('x').append(item.getType().name());
+            }
+        }
+        if (!summary.isEmpty()) {
+            plugin.getLogger().info("Tumba de " + playerName + ": " + summary);
+        }
+    }
+
     public boolean open(UUID tombstoneId, org.bukkit.entity.Player player) {
         ledger.find(tombstoneId).ifPresent(this::activate);
         ActiveTombstone tombstone = active.get(tombstoneId);
@@ -141,6 +155,9 @@ public final class TombstoneRuntime {
     }
 
     public void shutdown() {
+        // Close viewers first: an inventory left open after the runtime is gone would
+        // still hand out items that were already persisted, duplicating them.
+        active.values().forEach(ActiveTombstone::closeViewers);
         active.values().forEach(this::syncRecord);
         persist();
         active.values().forEach(ActiveTombstone::removeVisuals);
@@ -243,7 +260,10 @@ public final class TombstoneRuntime {
 
     private void remove(UUID id) {
         ActiveTombstone removed = active.remove(id);
-        if (removed != null) removed.removeVisuals();
+        if (removed != null) {
+            removed.closeViewers();
+            removed.removeVisuals();
+        }
         ledger.remove(id);
         persist();
     }
@@ -298,6 +318,12 @@ public final class TombstoneRuntime {
 
         private void removeVisuals() {
             visuals.remove();
+        }
+
+        private void closeViewers() {
+            for (org.bukkit.entity.HumanEntity viewer : List.copyOf(inventory.getViewers())) {
+                viewer.closeInventory();
+            }
         }
     }
 

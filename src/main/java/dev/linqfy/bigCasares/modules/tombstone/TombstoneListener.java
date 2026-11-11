@@ -12,7 +12,9 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -20,6 +22,8 @@ public final class TombstoneListener implements Listener {
     private final TombstoneRuntime runtime;
     private final BukkitRuntimeRegistrations registrations;
     private final Predicate<UUID> deathCaptureEligibility;
+    /** Tombstones with a reconcile already queued; shift-click spam then costs one save per tick. */
+    private final Set<UUID> pendingReconcile = new HashSet<>();
 
     public TombstoneListener(
         TombstoneRuntime runtime,
@@ -31,22 +35,15 @@ public final class TombstoneListener implements Listener {
         this.deathCaptureEligibility = deathCaptureEligibility;
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         if (!deathCaptureEligibility.test(player.getUniqueId())) {
             return;
         }
         List<ItemStack> items = snapshot(player);
-        
-        StringBuilder logMessage = new StringBuilder("Inventario de " + player.getName() + " antes de morir:\n");
-        for (ItemStack item : items) {
-            if (item != null && item.getType() != org.bukkit.Material.AIR) {
-                logMessage.append("- ").append(item.getAmount()).append("x ").append(item.getType().name()).append("\n");
-            }
-        }
-        org.bukkit.Bukkit.getLogger().info(logMessage.toString());
-        
+        runtime.logDeathInventory(player.getName(), items);
+
         org.bukkit.Location loc = player.getLocation();
         player.sendMessage(org.bukkit.ChatColor.YELLOW + "Has muerto en las coordenadas: " + 
             org.bukkit.ChatColor.RED + "X: " + loc.getBlockX() + " Y: " + loc.getBlockY() + " Z: " + loc.getBlockZ());
@@ -103,10 +100,12 @@ public final class TombstoneListener implements Listener {
     }
 
     private void reconcileNextTick(org.bukkit.inventory.InventoryHolder holder) {
-        if (holder instanceof TombstoneInventoryHolder tombstone) {
-            registrations.scheduleDelayed(
-                "tombstone-inventory-reconcile", () -> runtime.reconcile(tombstone.tombstoneId()), 1L
-            );
+        if (holder instanceof TombstoneInventoryHolder tombstone && pendingReconcile.add(tombstone.tombstoneId())) {
+            UUID id = tombstone.tombstoneId();
+            registrations.scheduleDelayed("tombstone-inventory-reconcile", () -> {
+                pendingReconcile.remove(id);
+                runtime.reconcile(id);
+            }, 1L);
         }
     }
 

@@ -996,6 +996,7 @@ public final class EndEventRuntime implements Listener {
         if (carrier.isPresent()) {
             missingEggHeartbeats = 0;
             Player player = carrier.orElseThrow();
+            boolean changed = eggBlock != null;
             eggBlock = null;
             if (service.phase() == EndEventPhase.EGG_AVAILABLE) {
                 if (!eligible(player)) {
@@ -1004,12 +1005,17 @@ public final class EndEventRuntime implements Listener {
                     return;
                 }
                 beginHunt(eligiblePlayers(), player);
+                changed = true;
             } else if (service.phase() == EndEventPhase.HUNT
                 && service.isSurvivor(player.getUniqueId())
                 && !service.eggCarrier().equals(Optional.of(player.getUniqueId()))) {
                 service.setEggCarrier(Optional.of(player.getUniqueId()));
+                changed = true;
             }
-            persistRuntime();
+            // The heartbeat runs every second; only write the state file when it changed.
+            if (changed) {
+                persistRuntime();
+            }
             return;
         }
         if (service.phase() == EndEventPhase.HUNT && service.eggCarrier().isPresent()) {
@@ -1018,8 +1024,10 @@ public final class EndEventRuntime implements Listener {
         Optional<Item> ground = findGroundEgg();
         if (ground.isPresent()) {
             missingEggHeartbeats = 0;
-            eggBlock = null;
-            persistRuntime();
+            if (eggBlock != null) {
+                eggBlock = null;
+                persistRuntime();
+            }
             return;
         }
         if (eggBlock != null) {
@@ -1536,8 +1544,8 @@ public final class EndEventRuntime implements Listener {
             return;
         }
         for (World world : Bukkit.getWorlds()) {
-            for (Entity entity : world.getEntities()) {
-                if (!(entity instanceof Item item) || !isTrackedDrop(item.getItemStack())) {
+            for (Item item : world.getEntitiesByClass(Item.class)) {
+                if (!isTrackedDrop(item.getItemStack())) {
                     continue;
                 }
                 Location destination = null;
@@ -1738,8 +1746,8 @@ public final class EndEventRuntime implements Listener {
 
     private Optional<Item> findGroundEgg() {
         for (World world : Bukkit.getWorlds()) {
-            for (Entity entity : world.getEntities()) {
-                if (entity instanceof Item item && isEventEgg(item.getItemStack())) {
+            for (Item item : world.getEntitiesByClass(Item.class)) {
+                if (isEventEgg(item.getItemStack())) {
                     return Optional.of(item);
                 }
             }
@@ -1749,9 +1757,8 @@ public final class EndEventRuntime implements Listener {
 
     private Optional<Item> findUntaggedDragonEgg() {
         for (World world : Bukkit.getWorlds()) {
-            for (Entity entity : world.getEntities()) {
-                if (entity instanceof Item item && item.getItemStack().getType() == Material.DRAGON_EGG
-                    && !isEventEgg(item.getItemStack())) {
+            for (Item item : world.getEntitiesByClass(Item.class)) {
+                if (item.getItemStack().getType() == Material.DRAGON_EGG && !isEventEgg(item.getItemStack())) {
                     return Optional.of(item);
                 }
             }

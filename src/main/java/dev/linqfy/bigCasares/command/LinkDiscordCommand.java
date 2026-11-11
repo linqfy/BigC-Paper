@@ -33,6 +33,7 @@ public class LinkDiscordCommand implements CommandExecutor {
         player.sendMessage(ChatColor.AQUA + "===============================");
         player.sendMessage(ChatColor.WHITE + "Para vincular tu cuenta, envía un " + ChatColor.YELLOW + "Mensaje Directo" + ChatColor.WHITE + " a nuestro bot de Discord con este código:");
         player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + code);
+        player.sendMessage(ChatColor.GRAY + "El codigo vence en 10 minutos.");
         player.sendMessage(ChatColor.AQUA + "===============================");
 
         return true;
