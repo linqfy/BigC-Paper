@@ -59,6 +59,8 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+  humillacion:
+    enabled: true
 
 # El Gran Casares. Las fichas son la moneda de Vault (hace falta Vault y un proveedor de economía).
 # Las atracciones se arman con /casino construir o /casino colocar <tipo>; se guardan en casino/installations.yml.
@@ -750,6 +752,19 @@ elytra-failure:
   drift-strength: 0.12
   # Durabilidad que pierde la elytra al romperse el ala (fraccion del maximo).
   durability-loss-fraction: 0.25
+
+humillacion:
+  # Daño de sobra (más allá de la vida + absorción) necesario para humillar en vez de matar.
+  # 20.0 = un golpe que te habría matado y le sobraban 10 corazones.
+  overkill-threshold: 20.0
+  # Vida con la que queda el humillado (2.0 = un corazón).
+  remaining-health: 2.0
+  # Solo cuenta si el golpe (o el proyectil) viene de otro jugador.
+  require-player-attacker: true
+  # Tras una humillación el jugador puede morir normalmente durante este tiempo.
+  immunity-seconds: 60
+  # Anunciar la humillación a todo el servidor.
+  broadcast: true
 
 custom-crossbow:
   sonic:
