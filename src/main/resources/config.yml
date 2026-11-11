@@ -59,6 +59,14 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+  trim-abilities:
+    enabled: true
+  phase-arrows:
+    enabled: true
+  piranhas:
+    enabled: true
+  duels:
+    enabled: true
 
 # El Gran Casares. Las fichas son la moneda de Vault (hace falta Vault y un proveedor de economía).
 # Las atracciones se arman con /casino construir o /casino colocar <tipo>; se guardan en casino/installations.yml.
@@ -1994,3 +2002,134 @@ the-sift:
   block-models:
     enabled: true
     radius: 24
+
+# Ramas pre-netherite: un set completo de armadura de diamante con el mismo patrón de adorno (trim)
+# da una habilidad pasiva suave según el patrón (centinela, duna, costa, salvaje, guardián, ojo, vex,
+# marea, hocico, costilla, aguja, explorador, modelador, silencio, criador, anfitrión, flujo, rayo).
+trim-abilities:
+  # Tiers de armadura que cuentan (prefijo del material).
+  tiers: [DIAMOND]
+  check-interval-ticks: 20
+
+# Las flechas espectrales atraviesan paredes finas.
+phase-arrows:
+  # Grosor máximo de pared (bloques) que puede atravesar.
+  max-thickness: 2.0
+  # Paredes que atraviesa cada flecha.
+  max-phases: 1
+  players-only: true
+  unphaseable-blocks: [BEDROCK, BARRIER, END_PORTAL_FRAME, REINFORCED_DEEPSLATE, OBSIDIAN, CRYING_OBSIDIAN]
+
+# Cardúmenes de pirañas en aguas de selva y pantano que atacan a quien nade cerca. Admin: /piranha spawn.
+piranhas:
+  biomes: [jungle, sparse_jungle, bamboo_jungle, swamp, mangrove_swamp]
+  spawn-interval-ticks: 400
+  spawn-chance: 0.35
+  school-min: 3
+  school-max: 5
+  # Máximo de pirañas a 32 bloques de un jugador antes de dejar de aparecer.
+  max-nearby: 8
+  hunt-range: 10.0
+  speed: 0.35
+  damage: 2.0
+  bite-cooldown-ticks: 20
+
+# Duelos 1v1: /duel <jugador> [kit|elegir] [chica|media|grande] [apuesta].
+# Sin kit, ambos banean uno y eligen otro en un menú. Las arenas están en un mundo aparte;
+# el inventario se guarda en duels/saved/ y se devuelve al terminar. Las apuestas usan Vault.
+duels:
+  world: bigcasares_duels
+  request-seconds: 60
+  draft-seconds: 20
+  countdown-seconds: 5
+  max-duration-seconds: 300
+  return-delay-seconds: 3
+  max-wager: 1000000
+  default-arena: media
+  # Items: "MATERIAL[*cantidad] [encantamiento:nivel ...]".
+  kits:
+    clasico:
+      name: Clásico
+      icon: IRON_SWORD
+      helmet: IRON_HELMET
+      chestplate: IRON_CHESTPLATE
+      leggings: IRON_LEGGINGS
+      boots: IRON_BOOTS
+      offhand: SHIELD
+      items:
+        - IRON_SWORD
+        - IRON_AXE
+        - BOW
+        - GOLDEN_APPLE*4
+        - COOKED_BEEF*16
+        - ARROW*16
+    diamante:
+      name: Diamante
+      icon: DIAMOND_SWORD
+      helmet: DIAMOND_HELMET protection:2
+      chestplate: DIAMOND_CHESTPLATE protection:2
+      leggings: DIAMOND_LEGGINGS protection:2
+      boots: DIAMOND_BOOTS protection:2
+      offhand: SHIELD
+      items:
+        - DIAMOND_SWORD sharpness:2
+        - DIAMOND_AXE
+        - BOW power:1
+        - GOLDEN_APPLE*6
+        - COOKED_BEEF*16
+        - ARROW*16
+    arquero:
+      name: Arquero
+      icon: BOW
+      helmet: CHAINMAIL_HELMET
+      chestplate: LEATHER_CHESTPLATE protection:2
+      leggings: CHAINMAIL_LEGGINGS
+      boots: LEATHER_BOOTS feather_falling:2
+      items:
+        - BOW power:3 punch:1
+        - STONE_SWORD
+        - GOLDEN_APPLE*4
+        - COOKED_BEEF*16
+        - SPECTRAL_ARROW*16
+        - ARROW*64
+    netherite:
+      name: Netherite
+      icon: NETHERITE_SWORD
+      helmet: NETHERITE_HELMET protection:3
+      chestplate: NETHERITE_CHESTPLATE protection:3
+      leggings: NETHERITE_LEGGINGS protection:3
+      boots: NETHERITE_BOOTS protection:3
+      offhand: SHIELD
+      items:
+        - NETHERITE_SWORD sharpness:4
+        - NETHERITE_AXE sharpness:2
+        - GOLDEN_APPLE*8
+        - ENDER_PEARL*2
+        - COOKED_BEEF*16
+    maza:
+      name: Maza
+      icon: MACE
+      helmet: DIAMOND_HELMET
+      chestplate: DIAMOND_CHESTPLATE
+      leggings: DIAMOND_LEGGINGS
+      boots: DIAMOND_BOOTS feather_falling:4
+      items:
+        - MACE density:2
+        - DIAMOND_SWORD
+        - WIND_CHARGE*16
+        - GOLDEN_APPLE*4
+        - COOKED_BEEF*16
+    ballesta:
+      name: Ballesta
+      icon: CROSSBOW
+      helmet: IRON_HELMET
+      chestplate: IRON_CHESTPLATE
+      leggings: IRON_LEGGINGS
+      boots: IRON_BOOTS
+      offhand: FIREWORK_ROCKET*8
+      items:
+        - CROSSBOW quick_charge:2 multishot:1
+        - IRON_SWORD
+        - GOLDEN_APPLE*4
+        - COOKED_BEEF*16
+        - ARROW*32
