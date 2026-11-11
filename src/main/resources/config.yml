@@ -1408,6 +1408,7 @@ mission-system:
       enabled: true
       params:
         entity: PIG
+        other-player: true
     daily-golem-kelp-2:
       scope: daily
       title: "Catering homicida"
@@ -1710,7 +1711,7 @@ mission-system:
     weekly-binding-pumpkin-y155:
       scope: weekly
       title: "Moda de altura"
-      description: "Ponete una calabaza con maldicion de ligadura y bancala toda la semana."
+      description: "Ponete una calabaza con maldicion de ligadura y subi a Y 155 o mas."
       type: EQUIP_SPECIFIC_ITEM
       goal: 1
       reward: 1750.0
@@ -1719,6 +1720,91 @@ mission-system:
       params:
         material: CARVED_PUMPKIN
         binding-curse: true
+        min-y: 155
+    weekly-admin-idea:
+      scope: weekly
+      title: "Mision propia"
+      description: "Dale una idea de mision al admin y que el admin la apruebe."
+      type: ADMIN_APPROVAL
+      goal: 1
+      reward: 2000.0
+      weight: 1
+      enabled: true
+      params: {}
+    daily-kiss-jeremy:
+      scope: daily
+      title: "Besar a Jeremy"
+      description: "Pegale un golpe a Jeremy (no importa si te esta persiguiendo o no)."
+      type: HIT_TARGET
+      goal: 1
+      reward: 600.0
+      weight: 1
+      enabled: true
+      params:
+        target: jeremy
+    weekly-kill-ghi-ghi:
+      scope: weekly
+      title: "Matar a Ghi Ghi"
+      description: "Mata a Ghi Ghi."
+      type: KILL_TARGET
+      goal: 1
+      reward: 5000.0
+      weight: 1
+      enabled: true
+      params:
+        target: "ghi ghi"
+    weekly-poppy-5-stacks:
+      scope: weekly
+      title: "Jardin de amapolas"
+      description: "Planta 5 stacks de amapolas (320)."
+      type: PLACE_BLOCK_COUNT
+      goal: 320
+      reward: 1500.0
+      weight: 1
+      enabled: true
+      params:
+        material: POPPY
+    weekly-clan-kill-20:
+      scope: weekly
+      title: "Fuego amigo"
+      description: "Mata 20 veces a alguien de tu clan (siempre al mismo)."
+      type: KILL_SAME_TEAMMATE
+      goal: 20
+      reward: 2500.0
+      weight: 1
+      enabled: true
+      params: {}
+    daily-whisper-spam-67:
+      scope: daily
+      title: "Spam"
+      description: "Un jugador te elige: mandale 67 susurros a ese mismo jugador."
+      type: WHISPER_SAME_PLAYER
+      goal: 67
+      reward: 400.0
+      weight: 1
+      enabled: true
+      params: {}
+    daily-break-cursed-helmet:
+      scope: daily
+      title: "Casco descartable"
+      description: "Ponete un casco con maldicion de ligadura y rompelo."
+      type: BREAK_CURSED_HELMET
+      goal: 1
+      reward: 700.0
+      weight: 1
+      enabled: true
+      params: {}
+    daily-horse-67:
+      scope: daily
+      title: "Caballo 67"
+      description: "Hace que un caballo haga el 67 (salta montado) 67 veces."
+      type: HORSE_JUMP_COUNT
+      goal: 67
+      reward: 450.0
+      weight: 1
+      enabled: true
+      params:
+        entity: HORSE
 
 bounty-system:
   economy:
