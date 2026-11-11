@@ -16,6 +16,7 @@ import java.util.List;
  * @param escape             escaping through 1x1 holes
  * @param cliff              depressed villagers jumping off cliffs
  * @param riot               villagers rioting against a player
+ * @param mafia              temporary enforcer crews attracted by many boxed villagers
  * @param insults            lines a fed-up villager says to the player
  * @param riotShouts         lines shouted during a riot
  */
@@ -28,6 +29,7 @@ public record VillagerMoodSettings(
     Escape escape,
     Cliff cliff,
     Riot riot,
+    VillagerMafiaSettings mafia,
     List<String> insults,
     List<String> riotShouts
 ) {
@@ -89,6 +91,7 @@ public record VillagerMoodSettings(
             new Escape(true, 6_000L, 0.02),
             new Cliff(true, 2, 0.05, 12, 6, 400L),
             new Riot(true, 12.0, 2, 3, 0.02, 400L, 12_000L, 2.0, true),
+            VillagerMafiaSettings.defaults(),
             List.of(
                 "¿Otra vez vos? ¡Andá a laburar!",
                 "Me tenés podrido con tanto trueque.",
@@ -158,6 +161,7 @@ public record VillagerMoodSettings(
                     config.getDouble(ROOT + "riot.damage", d.riot().damage()),
                     config.getBoolean(ROOT + "riot.summon-golem", d.riot().summonGolem())
                 ),
+                VillagerMafiaSettings.load(config),
                 lines(config, "insults", d.insults()),
                 lines(config, "riot-shouts", d.riotShouts())
             );

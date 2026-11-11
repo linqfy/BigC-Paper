@@ -808,6 +808,25 @@ villager-mood:
     damage: 2.0
     # Llaman a un golem de hierro (sin botin) que persigue al jugador durante el motin.
     summon-golem: true
+  mafia:
+    # Muchos aldeanos encerrados atraen matones; no cuenta a NPCs de otros modulos.
+    enabled: true
+    radius: 24.0
+    min-boxed-villagers: 6
+    # Deben seguir encerrados y llevar al menos 5 minutos en sus celdas.
+    min-confined-ticks: 6000
+    chance-per-check: 0.02
+    # De 1 a 8 matones por encuentro; como maximo 4 bandas simultaneas en el servidor.
+    crew-size: 3
+    duration-ticks: 1200
+    # El mismo grupo de aldeanos y el jugador comparten la espera, incluso si reloguea.
+    cooldown-ticks: 24000
+    # Vida y golpe como un wither skeleton en dificultad normal (sin el efecto wither).
+    health: 20.0
+    damage: 8.0
+    # Algunas bandas hacen pasadas a caballo disparando ballestas. Las flechas no se recogen.
+    drive-by-chance: 0.35
+    shot-cooldown-ticks: 40
   insults:
     - "¿Otra vez vos? ¡Andá a laburar!"
     - "Me tenés podrido con tanto trueque."

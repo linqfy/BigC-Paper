@@ -13,6 +13,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantInventory;
@@ -55,6 +56,7 @@ final class VillagerMoodRuntime {
     private final LongSupplier clock;
     private final Consumer<Runnable> nextTick;
     private final TradeSpamTracker spamTracker;
+    private final VillagerMafiaRuntime mafia;
     private final Map<UUID, Riot> riots = new HashMap<>();
     private final Map<UUID, Long> riotCooldownUntil = new HashMap<>();
     private final Map<UUID, CliffWalk> cliffWalks = new HashMap<>();
@@ -72,6 +74,7 @@ final class VillagerMoodRuntime {
         this.clock = clock;
         this.nextTick = nextTick;
         this.spamTracker = new TradeSpamTracker(settings.spam().windowTicks(), settings.spam().maxTradesInWindow());
+        this.mafia = new VillagerMafiaRuntime(settings.mafia(), confinedKey, this::isOrdinary, random);
     }
 
     // --- trading ---------------------------------------------------------------------------------
@@ -166,6 +169,9 @@ final class VillagerMoodRuntime {
                 considerRiot(player, now);
             }
         }
+        for (Player player : players) {
+            mafia.consider(player, now);
+        }
     }
 
     private void updateMood(Villager villager, BlockProbe probe) {
@@ -230,6 +236,7 @@ final class VillagerMoodRuntime {
     void tickActions() {
         tickCliffWalks();
         tickRiots();
+        mafia.tick(clock.getAsLong());
     }
 
     private void tickCliffWalks() {
@@ -356,6 +363,7 @@ final class VillagerMoodRuntime {
     // --- lifecycle -------------------------------------------------------------------------------
 
     void forget(UUID playerId) {
+        mafia.forget(playerId);
         spamTracker.forgetPlayer(playerId);
         Riot riot = riots.remove(playerId);
         if (riot != null && riot.golem != null && riot.golem.isValid()) {
@@ -364,6 +372,7 @@ final class VillagerMoodRuntime {
     }
 
     void shutdown() {
+        mafia.shutdown();
         for (Riot riot : riots.values()) {
             if (riot.golem != null && riot.golem.isValid()) {
                 riot.golem.remove();
@@ -373,6 +382,18 @@ final class VillagerMoodRuntime {
         riotCooldownUntil.clear();
         cliffWalks.clear();
         spamTracker.clear();
+    }
+
+    boolean isMafiaEntity(Entity entity) {
+        return mafia.owns(entity);
+    }
+
+    void onMafiaDamage(EntityDamageByEntityEvent event) {
+        mafia.onDamage(event);
+    }
+
+    void removeMafiaOrphan(Entity entity) {
+        mafia.removeOrphan(entity);
     }
 
     // --- helpers ---------------------------------------------------------------------------------

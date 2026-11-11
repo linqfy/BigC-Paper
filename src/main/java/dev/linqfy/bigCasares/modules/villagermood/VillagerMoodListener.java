@@ -5,9 +5,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityTransformEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.world.EntitiesLoadEvent;
 import org.bukkit.inventory.MerchantInventory;
 
 final class VillagerMoodListener implements Listener {
@@ -36,13 +40,37 @@ final class VillagerMoodListener implements Listener {
         runtime.onTrade(event.getPlayer(), event.getVillager());
     }
 
-    /** Riot golems are summoned for free: they must not feed iron farms. */
-    @EventHandler(priority = EventPriority.HIGH)
+    /** Temporary summons must not supply loot, equipment or experience farms. */
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onGolemDeath(EntityDeathEvent event) {
-        if (runtime.isRiotGolem(event.getEntity())) {
+        if (runtime.isRiotGolem(event.getEntity()) || runtime.isMafiaEntity(event.getEntity())) {
             event.getDrops().clear();
             event.setDroppedExp(0);
         }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    public void onMafiaDamage(EntityDamageByEntityEvent event) {
+        runtime.onMafiaDamage(event);
+    }
+
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    public void onMafiaInteract(PlayerInteractEntityEvent event) {
+        if (runtime.isMafiaEntity(event.getRightClicked())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    public void onMafiaTransform(EntityTransformEvent event) {
+        if (runtime.isMafiaEntity(event.getEntity())) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntitiesLoad(EntitiesLoadEvent event) {
+        event.getEntities().forEach(runtime::removeMafiaOrphan);
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
