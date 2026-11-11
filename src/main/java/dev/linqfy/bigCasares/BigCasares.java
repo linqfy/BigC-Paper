@@ -13,6 +13,7 @@ import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeCleanupOutcome;
 import dev.linqfy.bigCasares.module.runtime.RuntimeCleanupReport;
 import dev.linqfy.bigCasares.module.runtime.RuntimeGeneration;
+import dev.linqfy.bigCasares.modules.auctionhouse.AuctionHouseModule;
 import dev.linqfy.bigCasares.modules.bounties.BountyModule;
 import dev.linqfy.bigCasares.modules.casino.CasinoModule;
 import dev.linqfy.bigCasares.modules.copperapple.CopperAppleModule;
@@ -102,6 +103,7 @@ public final class BigCasares extends JavaPlugin {
     private MutangoModule mutangoModule;
     private CelularModule celularModule;
     private CasinoModule casinoModule;
+    private AuctionHouseModule auctionHouseModule;
     private GrapplingHookModule grapplingHookModule;
     private GliderModule gliderModule;
     private MobScalingModule mobScalingModule;
@@ -257,6 +259,10 @@ public final class BigCasares extends JavaPlugin {
         return serverControlModule;
     }
 
+    public AuctionHouseModule getAuctionHouseModule() {
+        return auctionHouseModule;
+    }
+
     public DiscordIntegrationModule getDiscordIntegrationModule() {
         return discordIntegrationModule;
     }
@@ -385,6 +391,7 @@ public final class BigCasares extends JavaPlugin {
         this.mutangoModule = new MutangoModule(this);
         this.celularModule = new CelularModule(this);
         this.casinoModule = new CasinoModule(this);
+        this.auctionHouseModule = new AuctionHouseModule(this);
         this.grapplingHookModule = new GrapplingHookModule(this, javaModels);
         this.gliderModule = new GliderModule(this);
         this.mobScalingModule = new MobScalingModule(this);
@@ -456,6 +463,7 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(new SchizophreniaModule(this));
         moduleManager.register(shopModule);
         moduleManager.register(casinoModule);
+        moduleManager.register(auctionHouseModule);
         moduleManager.register(pveBossModule);
         moduleManager.register(geyserIntegrationModule);
         moduleManager.register(moderationModule);
@@ -624,6 +632,7 @@ public final class BigCasares extends JavaPlugin {
         airdropModule = null;
         acidRainModule = null;
         casinoModule = null;
+        auctionHouseModule = null;
         grapplingHookModule = null;
         mobScalingModule = null;
         moderationModule = null;
