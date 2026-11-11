@@ -33,6 +33,7 @@ import dev.linqfy.bigCasares.modules.warp.WarpModule;
 
 import dev.linqfy.bigCasares.modules.missions.MissionModule;
 import dev.linqfy.bigCasares.modules.airdrop.AirdropModule;
+import dev.linqfy.bigCasares.modules.auth.AuthModule;
 import dev.linqfy.bigCasares.modules.acidrain.AcidRainModule;
 import dev.linqfy.bigCasares.modules.bloodmoon.BloodMoonModule;
 import dev.linqfy.bigCasares.modules.jeremy.JeremyModule;
@@ -108,6 +109,7 @@ public final class BigCasares extends JavaPlugin {
     private ModerationModule moderationModule;
     private ServerControlModule serverControlModule;
     private DiscordIntegrationModule discordIntegrationModule;
+    private AuthModule authModule;
     private EndEventModule endEventModule;
     private ContentItemFactory contentItems;
     private CustomBlockRegistry customBlocks;
@@ -259,6 +261,10 @@ public final class BigCasares extends JavaPlugin {
 
     public DiscordIntegrationModule getDiscordIntegrationModule() {
         return discordIntegrationModule;
+    }
+
+    public AuthModule getAuthModule() {
+        return authModule;
     }
 
     public EndEventModule getEndEventModule() {
@@ -415,6 +421,8 @@ public final class BigCasares extends JavaPlugin {
         this.discordIntegrationModule = new DiscordIntegrationModule(
             this, moderationModule.audit(), serverControlModule, emojiAliasService
         );
+        this.authModule = new AuthModule(this, this::resolveClientPlatform, () -> discordIntegrationModule,
+            vanishSessionRegistry);
         this.contentItems = new ContentItemFactory(new ContentItemRegistry());
         this.customBlocks = new CustomBlockRegistry();
         this.dimensionModule = new DimensionModule(this, this::matchesItemId);
@@ -465,6 +473,9 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(customContentModule);
         moduleManager.register(siftModule);
         moduleManager.register(discordIntegrationModule);
+        // Registered last: it wires itself to the Discord gateway and is disabled first, releasing limbo players
+        // while every other module is still active.
+        moduleManager.register(authModule);
         return moduleManager.enableRegisteredModules(generation);
     }
 
@@ -635,6 +646,7 @@ public final class BigCasares extends JavaPlugin {
         contentItems = null;
         customBlocks = null;
         discordIntegrationModule = null;
+        authModule = null;
         emojiAliasService = null;
     }
 

@@ -59,6 +59,8 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+  auth-system:
+    enabled: true
 
 # El Gran Casares. Las fichas son la moneda de Vault (hace falta Vault y un proveedor de economía).
 # Las atracciones se arman con /casino construir o /casino colocar <tipo>; se guardan en casino/installations.yml.
@@ -1994,3 +1996,61 @@ the-sift:
   block-models:
     enabled: true
     radius: 24
+
+# Login para servidor offline (auth-system). Sin iniciar sesión el jugador espera en un mundo vacío, con el
+# inventario guardado en data/auth/stash: no ve ítems, coordenadas, terreno ni jugadores.
+# Ingreso automático: premium (verificado con Mojang), Bedrock (Xbox vía Geyser) y sesión recordada (misma IP).
+# Métodos manuales: contraseña, app autenticadora (QR en un mapa), códigos de recuperación, Discord (DM con
+# botones o código), firma OpenPGP (chat o mod cliente por el canal bigcasares:auth), patrón y amigo de confianza.
+auth:
+  limbo-world: bigcasares_auth_limbo
+  login-timeout-seconds: 120
+  register-timeout-seconds: 300
+  # Intentos fallidos por conexión antes de expulsar.
+  max-attempts: 5
+  ip-lockout:
+    failures: 10
+    window-minutes: 10
+    lock-minutes: 15
+  password:
+    min-length: 6
+    pbkdf2-iterations: 210000
+  session-resume:
+    enabled: true
+    hours: 6
+  bedrock-auto-login: true
+  totp:
+    issuer: BigCasares
+    # Pasos de 30 s aceptados antes y después (relojes desfasados).
+    window: 1
+  discord:
+    enabled: true
+    # Al entrar, el bot manda un DM con "Aprobar ingreso" / "No fui yo" a quien tenga Discord vinculado.
+    auto-prompt: true
+    prompt-cooldown-seconds: 60
+  pgp:
+    enabled: true
+  pattern:
+    enabled: true
+    min-length: 4
+  friends:
+    enabled: true
+  plugin-channel: true
+  # Ingreso automático premium: el servidor transfiere al jugador a un verificador propio en otro puerto, que hace
+  # el login online-mode con Mojang y lo devuelve con una cookie firmada. Requiere accepts-transfers=true en
+  # server.properties y abrir el puerto. Desactivado hasta configurarlo.
+  premium:
+    enabled: false
+    bind-host: 0.0.0.0
+    port: 25599
+    # Host y puerto públicos del verificador (vacío = el mismo host que usó el jugador).
+    public-host: ""
+    public-port: 0
+    # Adónde vuelve el jugador (vacío/0 = el host que usó y el puerto de este servidor).
+    return-host: ""
+    return-port: 0
+    # La cookie solo vale desde la misma IP que se verificó.
+    bind-address: true
+    # Nombres nuevos que existen en Mojang se verifican solos; si falla (no premium), al reconectar entran normal.
+    auto-detect-new-players: true
+    session-server: https://sessionserver.mojang.com
