@@ -64,7 +64,7 @@ public final class WarpStorage {
             }
             config.save(file.toFile());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new java.io.UncheckedIOException("No se pudo guardar " + file, e);
         }
     }
 

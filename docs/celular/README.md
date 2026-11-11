@@ -1,8 +1,7 @@
 # Celular
 
 Módulo `celular` de BigCasares: un celular 3D que se craftea y pasa videos en la pantalla mientras lo tenés en la
-mano. Diseño técnico en [`docs/superpowers/specs/2026-10-04-celular-design.md`](../superpowers/specs/2026-10-04-celular-design.md)
-y plan con el reporte final en [`docs/superpowers/plans/2026-10-04-celular.md`](../superpowers/plans/2026-10-04-celular.md).
+mano.
 
 ![El celu en 3D](../../tools/celular/vista_previa_celular.png)
 

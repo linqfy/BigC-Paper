@@ -1,6 +1,7 @@
 package dev.linqfy.bigCasares.modules.specialitems;
 
 import org.bukkit.Material;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -21,8 +22,13 @@ public final class NukeShotListener implements Listener {
         this.runtime = Objects.requireNonNull(runtime, "runtime");
     }
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onUse(PlayerInteractEvent event) {
+        // RIGHT_CLICK_AIR is delivered pre-cancelled, so ignoreCancelled would drop it;
+        // honour other plugins through the item-use result instead.
+        if (event.useItemInHand() == Event.Result.DENY) {
+            return;
+        }
         if (event.getHand() != EquipmentSlot.HAND
             || (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK)) {
             return;

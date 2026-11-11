@@ -17,6 +17,7 @@ import java.util.function.BiFunction;
 import dev.linqfy.bigCasares.dimension.worldgen.BlockStateSpec;
 import org.bukkit.HeightMap;
 import org.bukkit.Server;
+import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.generator.LimitedRegion;
 
@@ -37,6 +38,10 @@ final class LimitedRegionAdapter implements WorldRegion {
 
     /** Parsed block data is immutable in practice; cache by state string. */
     private static final Map<String, BlockData> DATA_CACHE = new ConcurrentHashMap<>();
+    /** Reverse of DATA_CACHE: avoids getAsString() plus a parse for every block read. */
+    private static final Map<BlockData, BlockStateSpec> STATE_CACHE = new ConcurrentHashMap<>();
+    private static final BlockStateSpec AIR = BlockStateSpec.of("minecraft:air");
+    private static final Map<Material, String> BLOCK_IDS = new ConcurrentHashMap<>();
 
     private final Server server;
     private final RegionAccessor region;
@@ -136,20 +141,33 @@ final class LimitedRegionAdapter implements WorldRegion {
         if (!isWritable(x, y, z)) {
             return "minecraft:air";
         }
-        return region.getType(x, y, z).getKey().asString();
+        return BLOCK_IDS.computeIfAbsent(region.getType(x, y, z), type -> type.getKey().asString());
     }
 
     @Override
     public boolean isSolid(int x, int y, int z) {
-        return isWritable(x, y, z) && region.getType(x, y, z).isSolid() && region.getType(x, y, z).isOccluding();
+        if (!isWritable(x, y, z)) {
+            return false;
+        }
+        Material type = region.getType(x, y, z);
+        return type.isSolid() && type.isOccluding();
     }
 
     @Override
     public BlockStateSpec state(int x, int y, int z) {
         if (!isWritable(x, y, z)) {
-            return BlockStateSpec.of("minecraft:air");
+            return AIR;
         }
-        return BlockStateSpec.parse(region.getBlockData(x, y, z).getAsString());
+        BlockData data = region.getBlockData(x, y, z);
+        BlockStateSpec cached = STATE_CACHE.get(data);
+        if (cached != null) {
+            return cached;
+        }
+        BlockStateSpec parsed = BlockStateSpec.parse(data.getAsString());
+        if (STATE_CACHE.size() < 65_536) {
+            STATE_CACHE.putIfAbsent(data, parsed);
+        }
+        return parsed;
     }
 
     @Override

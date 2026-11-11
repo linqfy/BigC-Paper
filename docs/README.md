@@ -15,13 +15,4 @@ guides explain how to navigate and operate it:
 | The Sift dimension (port of Mielon's mod) | [The Sift](dimensions/the-sift.md) |
 | Phone assets and video conversion | [Celular](celular/README.md) |
 | Protocol test client | [Client](../tools/minecraft-test-client/README.md) |
-| Audit findings and cleanup proposals | [2026-10-14 audit](audits/2026-10-14.md) |
-
-## Historical records
-
-[Superpowers records](superpowers/README.md) index dated designs, plans and
-handoffs. [PR #11 review](pr-11-code-review.md) describes a past review snapshot.
-These retain rationale and unfinished proposals; dates, commands, versions and
-completion checkboxes are not evidence of today's implementation. Read only the
-relevant record, then verify its claims against source/tests. No historical record
-was deleted or moved during this audit.
+| Don Pollos boss, Bedrock compatibility, common errors | [Don Pollos](don-pollos/README.md) |

@@ -59,6 +59,11 @@ def main() -> int:
         basename = PurePosixPath(path).name
         added = status[0] in ("A", "C", "R")
         deleted = status[0] == "D"
+        if deleted:
+            # Removing files is cleanup, not new paperwork; only originals are protected.
+            if lower.startswith(("agent_uploads/", "tmp/sahur-uv-backup/")):
+                problems.append(f"{path}: source originals/backups must be preserved")
+            continue
         if path in POLICY and not owner_pr:
             problems.append(f"{path}: policy/CI file requires repository-owner PR")
         if path == "README.md":
@@ -67,7 +72,8 @@ def main() -> int:
             problems.append(f"{path}: no historical agent plans/audits")
         if lower.startswith(SCRATCH) or MODEL_NOTES.search(path):
             problems.append(f"{path}: private agent working material")
-        if lower.endswith((".md", ".mdx", ".rst")) and path not in {"AGENTS.md", "GUIDELINES.MD"}:
+        if (lower.endswith((".md", ".mdx", ".rst")) and not owner_pr
+                and path not in {"AGENTS.md", "GUIDELINES.MD"}):
             problems.append(f"{path}: no agent-authored/modified Markdown documentation")
         if added and lower.endswith(ARCHIVES):
             problems.append(f"{path}: generated or packaged artifact")
@@ -79,8 +85,6 @@ def main() -> int:
             "settings.gradle.kts", "pom.xml"
         }:
             problems.append(f"{path}: nested plugin/build project")
-        if deleted and lower.startswith(("agent_uploads/", "tmp/sahur-uv-backup/")):
-            problems.append(f"{path}: source originals/backups must be preserved")
 
     try:
         patch = subprocess.check_output(

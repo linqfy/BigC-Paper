@@ -38,7 +38,7 @@ public final class MissionListener implements Listener {
     @EventHandler
     public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
         Player player = event.getPlayer();
-        module.revalidatePassiveMissions(player);
+        module.requestPassiveRevalidation(player);
         if (!event.isSneaking()) {
             return;
         }
@@ -58,7 +58,7 @@ public final class MissionListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getWhoClicked() instanceof Player player) {
-            module.revalidatePassiveMissions(player);
+            module.requestPassiveRevalidation(player);
         }
     }
 
@@ -69,12 +69,12 @@ public final class MissionListener implements Listener {
             && event.getItem().getType() == Material.HONEYCOMB) {
             module.incrementMatchingMissions(event.getPlayer(), MissionType.WAX_BLOCK_COUNT, 1);
         }
-        module.revalidatePassiveMissions(event.getPlayer());
+        module.requestPassiveRevalidation(event.getPlayer());
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onBlockPlace(BlockPlaceEvent event) {
-        module.revalidatePassiveMissions(event.getPlayer());
+        module.requestPassiveRevalidation(event.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -134,14 +134,14 @@ public final class MissionListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player player) {
-            module.revalidatePassiveMissions(player);
+            module.requestPassiveRevalidation(player);
         }
     }
 
     @EventHandler
     public void onEntityToggleGlide(EntityToggleGlideEvent event) {
         if (event.getEntity() instanceof Player player) {
-            module.revalidatePassiveMissions(player);
+            module.requestPassiveRevalidation(player);
         }
     }
 

@@ -2,6 +2,7 @@ package dev.linqfy.bigCasares.modules.bounties;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -23,8 +24,13 @@ public final class PaymentPaperListener implements Listener {
         this.economy = economy;
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler
     public void onInteract(PlayerInteractEvent event) {
+        // RIGHT_CLICK_AIR is delivered pre-cancelled, so ignoreCancelled would drop it;
+        // honour other plugins through the item-use result instead.
+        if (event.useItemInHand() == Event.Result.DENY) {
+            return;
+        }
         if (event.getHand() != EquipmentSlot.HAND || !isRightClick(event.getAction())) {
             return;
         }

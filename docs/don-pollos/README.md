@@ -11,8 +11,6 @@ generar el mundo y el Don Pollo Boss, una pelea en cuatro fases con premio al fi
 - Generadores de modelos y assets: `tools/donpollos/` (ver su `README.md`)
 - Bedrock: [compatibilidad-bedrock.md](compatibilidad-bedrock.md)
 - Errores que corregimos en la revisión (para no repetirlos en otros módulos): [errores-comunes.md](errores-comunes.md)
-- Diseño y plan: `docs/superpowers/specs/2026-10-04-don-pollos-design.md` y
-  `docs/superpowers/plans/2026-10-04-don-pollos.md`
 
 ## Activarlo
 

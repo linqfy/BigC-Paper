@@ -150,8 +150,13 @@ public final class PlayerMissionService {
             return state;
         }
 
+        MissionAssignment next = updater.update(current);
+        if (next.equals(current)) {
+            // Keep the same instance so callers can tell nothing changed and skip saving.
+            return state;
+        }
         Map<String, MissionAssignment> updatedAssignments = new LinkedHashMap<>(source);
-        updatedAssignments.put(missionId, updater.update(current));
+        updatedAssignments.put(missionId, next);
 
         return scope == MissionScope.DAILY
             ? new MissionPlayerState(

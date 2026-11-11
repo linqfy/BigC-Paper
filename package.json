@@ -1,8 +1,0 @@
-{
-  "name": "bigcasares",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "@openai/codex": "^0.144.5"
-  }
-}

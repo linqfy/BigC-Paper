@@ -1,6 +1,7 @@
 package dev.linqfy.bigCasares.modules.glider;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -23,8 +24,13 @@ public final class GliderListener implements Listener {
         this.runtime = java.util.Objects.requireNonNull(runtime, "runtime");
     }
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onBoost(PlayerInteractEvent event) {
+        // RIGHT_CLICK_AIR is delivered pre-cancelled, so ignoreCancelled would drop it;
+        // honour other plugins through the item-use result instead.
+        if (event.useItemInHand() == Event.Result.DENY) {
+            return;
+        }
         Action action = event.getAction();
         if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) {
             return;

@@ -40,6 +40,8 @@ public final class MissionModule implements PluginModule {
     private RuntimeRegistrationScope compatibilityScope;
     private final Map<UUID, MissionPlayerState> stateCache = new LinkedHashMap<>();
     private final Set<UUID> dirtyPlayers = new LinkedHashSet<>();
+    private final Set<UUID> pendingRevalidation = new java.util.HashSet<>();
+    private BukkitRuntimeRegistrations registrations;
 
     public MissionModule(BigCasares plugin) {
         this.plugin = plugin;
@@ -60,6 +62,7 @@ public final class MissionModule implements PluginModule {
     @Override
     public void onEnable(RuntimeRegistrationScope scope) {
         BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(plugin, scope);
+        this.registrations = registrations;
         Economy economy = VaultEconomyGateway.resolveOrThrow(plugin);
         this.catalog = new MissionCatalogLoader().load(plugin.getConfig());
         this.storage = new YamlMissionStorage(plugin.getDataFolder().toPath().resolve("data").resolve("missions").resolve("players"));
@@ -203,8 +206,31 @@ public final class MissionModule implements PluginModule {
         updateMatchingMissions(player, MissionType.NAME_ENTITY_AFTER_PLAYER, ProgressUpdateMode.INCREMENT, 1, null, customName, "PIG");
     }
 
+    /**
+     * Coalesces passive-mission checks to one per player per tick. Interact, click and
+     * damage events fire many times a tick, and running a tick later also sees the
+     * inventory after the click is applied instead of before it.
+     */
+    public void requestPassiveRevalidation(Player player) {
+        BukkitRuntimeRegistrations active = registrations;
+        UUID playerId = player.getUniqueId();
+        if (active == null || !pendingRevalidation.add(playerId)) {
+            return;
+        }
+        active.scheduleDelayed("mission-passive-revalidation", () -> {
+            pendingRevalidation.remove(playerId);
+            Player online = plugin.getServer().getPlayer(playerId);
+            if (online != null) {
+                revalidatePassiveMissions(online);
+            }
+        }, 1L);
+    }
+
     public void revalidatePassiveMissions(Player player) {
         MissionPlayerState state = getOrCreateState(player);
+        if (!hasPassiveAssignment(state)) {
+            return;
+        }
         MissionPlayerState updated = state;
 
         for (MissionAssignment assignment : state.dailyAssignments().values()) {
@@ -215,6 +241,22 @@ public final class MissionModule implements PluginModule {
         }
 
         cacheUpdated(updated);
+    }
+
+    private static boolean hasPassiveAssignment(MissionPlayerState state) {
+        for (MissionAssignment assignment : state.dailyAssignments().values()) {
+            if (isPassive(assignment.definition().type())) return true;
+        }
+        for (MissionAssignment assignment : state.weeklyAssignments().values()) {
+            if (isPassive(assignment.definition().type())) return true;
+        }
+        return false;
+    }
+
+    private static boolean isPassive(MissionType type) {
+        return type == MissionType.HOLD_EXACT_ITEM_COUNT
+            || type == MissionType.EQUIP_SPECIFIC_ITEM
+            || type == MissionType.STAND_ON_BLOCK_AT_Y;
     }
 
     private MissionPlayerState revalidateAssignment(Player player, MissionPlayerState state, MissionScope scope, MissionAssignment assignment) {
@@ -321,8 +363,10 @@ public final class MissionModule implements PluginModule {
     }
 
     private void cacheUpdated(MissionPlayerState state) {
-        stateCache.put(state.playerId(), state);
-        dirtyPlayers.add(state.playerId());
+        // Move/click/interact handlers call this constantly; only real changes need a save.
+        if (stateCache.put(state.playerId(), state) != state) {
+            dirtyPlayers.add(state.playerId());
+        }
     }
 
     private void flushDirtyStates() {
@@ -399,6 +443,8 @@ public final class MissionModule implements PluginModule {
     }
 
     private void clearRuntimeState() {
+        pendingRevalidation.clear();
+        registrations = null;
         if (storage != null) flushDirtyStates();
         stateCache.clear();
         dirtyPlayers.clear();
