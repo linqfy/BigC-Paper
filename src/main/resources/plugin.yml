@@ -147,6 +147,11 @@ commands:
     permission: bigcasares.content.admin
 
 
+  duperestore:
+    description: Consulta los dupes de Paper y recarga la reposición de hilo
+    usage: /<command> [status|reload]
+    permission: bigcasares.duperestore.admin
+
 permissions:
   bigcasares.mutango.admin:
     description: Manage Mutango Boss (spawn, phases, ruins, shrine and rewards)
@@ -184,6 +189,7 @@ permissions:
       bigcasares.boss.spawn: true
       bigcasares.mobscaling.admin: true
       bigcasares.command.timer: true
+      bigcasares.duperestore.admin: true
       bigcasares.endevent.admin: true
       bigcasares.danger.view: true
       bigcasares.danger.view.others: true
@@ -228,6 +234,13 @@ permissions:
     description: Manage the mob scaling module
     default: op
 
+  bigcasares.duperestore.admin:
+    default: op
+  duperestore.admin:
+    description: Legacy alias for bigcasares.duperestore.admin
+    default: false
+    children:
+      bigcasares.duperestore.admin: true
   bigcasares.command.give:
     description: Give BigCasares custom items to yourself
     default: op

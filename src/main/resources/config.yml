@@ -59,6 +59,12 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+  dupe-restore:
+    enabled: false
+
+dupe-restore:
+  # El origen debe ser un bloque waterlogged adyacente al hilo.
+  string-duplication: true
 
 # El Gran Casares. Las fichas son la moneda de Vault (hace falta Vault y un proveedor de economía).
 # Las atracciones se arman con /casino construir o /casino colocar <tipo>; se guardan en casino/installations.yml.

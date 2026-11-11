@@ -23,6 +23,7 @@ import dev.linqfy.bigCasares.modules.geyser.BedrockShopForm;
 import dev.linqfy.bigCasares.modules.geyser.GeyserIntegrationModule;
 import dev.linqfy.bigCasares.modules.content.CustomContentModule;
 import dev.linqfy.bigCasares.modules.danger.DangerModule;
+import dev.linqfy.bigCasares.modules.dupes.DupeRestoreModule;
 import dev.linqfy.bigCasares.modules.dimension.DimensionModule;
 import dev.linqfy.bigCasares.modules.sift.SiftModule;
 import dev.linqfy.bigCasares.modules.tombstone.TombstoneModule;
@@ -425,6 +426,7 @@ public final class BigCasares extends JavaPlugin {
         this.shopModule.configurePlatform(this::resolveClientPlatform, this::sendBedrockShopForm);
 
         moduleManager.register(resourcePackModule);
+        moduleManager.register(new DupeRestoreModule(this));
         moduleManager.register(itemCatalogModule);
         moduleManager.register(new CopperAppleModule(this));
         moduleManager.register(new SmokeBombModule(this));
