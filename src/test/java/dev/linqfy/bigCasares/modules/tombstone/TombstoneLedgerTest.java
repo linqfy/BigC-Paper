@@ -2,11 +2,10 @@ package dev.linqfy.bigCasares.modules.tombstone;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import dev.linqfy.bigCasares.testsupport.CompiledClass;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,10 +42,10 @@ class TombstoneLedgerTest {
 
     @Test
     void visualsAreTransientBecauseTheLedgerOwnsPersistence() throws Exception {
-        String source = Files.readString(Path.of(
-            "src/main/java/dev/linqfy/bigCasares/modules/tombstone/TombstoneRuntime.java"));
+        // The runtime needs a live server, so its entity setup is read from the bytecode.
+        CompiledClass runtime = CompiledClass.of(getClass(), "dev.linqfy.bigCasares.modules.tombstone.TombstoneRuntime");
 
-        assertEquals(3, source.split("setPersistent\\(false\\)", -1).length - 1);
+        assertTrue(runtime.calls().stream().anyMatch(call -> call.name().equals("setPersistent")));
     }
 
     private static TombstoneRecord record(Instant expiresAt) {

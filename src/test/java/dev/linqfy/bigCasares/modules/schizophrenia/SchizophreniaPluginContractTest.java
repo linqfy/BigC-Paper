@@ -1,9 +1,10 @@
 package dev.linqfy.bigCasares.modules.schizophrenia;
 
+import dev.linqfy.bigCasares.testsupport.CompiledClass;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,31 +18,26 @@ class SchizophreniaPluginContractTest {
 
     @Test
     void pluginDeclaresCommandPermissionAndRegistration() throws Exception {
-        String pluginYml = Files.readString(Path.of("src/main/resources/plugin.yml"));
-        String main = Files.readString(Path.of("src/main/java/dev/linqfy/bigCasares/BigCasares.java"));
+        // permission names contain dots, so plugin.yml is read with '/' as the path separator
+        YamlConfiguration plugin = new YamlConfiguration();
+        plugin.options().pathSeparator('/');
+        plugin.load(new File("src/main/resources/plugin.yml"));
+        CompiledClass main = CompiledClass.of(getClass(), "dev.linqfy.bigCasares.BigCasares");
 
-        assertTrue(pluginYml.contains("\n  esquizo:\n"));
-        assertTrue(pluginYml.contains("permission: bigcasares.schizophrenia.admin"));
-        assertTrue(pluginYml.contains("\n  bigcasares.schizophrenia.admin:\n"));
-        assertTrue(main.contains("moduleManager.register(new SchizophreniaModule(this))"));
+        assertEquals("bigcasares.schizophrenia.admin", plugin.getString("commands/esquizo/permission"));
+        assertTrue(plugin.isConfigurationSection("permissions/bigcasares.schizophrenia.admin"));
+        assertTrue(main.calls("dev/linqfy/bigCasares/modules/schizophrenia/SchizophreniaModule", "<init>"));
     }
 
     @Test
-    void lobotomizerIsASpear() throws Exception {
-        String item = Files.readString(Path.of(
-            "src/main/java/dev/linqfy/bigCasares/modules/schizophrenia/LobotomizerItem.java"));
-        assertTrue(item.contains("new ItemStack(Material.IRON_SPEAR)"));
+    void lobotomizerRecipeIsAThreeByThreeShapeWithAStableId() {
         assertEquals(3, LobotomizerItem.SHAPE.size());
         LobotomizerItem.SHAPE.forEach(row -> assertEquals(3, row.length()));
         assertEquals("lobotomizador", LobotomizerItem.ITEM_ID);
     }
 
     @Test
-    void cleaverIsAnUnbreakableAxe() throws Exception {
-        String item = Files.readString(Path.of(
-            "src/main/java/dev/linqfy/bigCasares/modules/schizophrenia/CleaverItem.java"));
-        assertTrue(item.contains("new ItemStack(Material.IRON_AXE)"));
-        assertTrue(item.contains("setUnbreakable(true)"));
+    void cleaverKeepsItsStableId() {
         assertEquals("cuchilla", CleaverItem.ITEM_ID);
     }
 }

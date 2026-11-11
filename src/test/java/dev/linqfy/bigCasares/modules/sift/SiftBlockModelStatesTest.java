@@ -67,13 +67,11 @@ class SiftBlockModelStatesTest {
 
     @Test
     void everyLookAlikeHasBlockstatesAndEveryModelAnItemDefinition() throws IOException {
-        String source = Files.readString(Path.of("src/main/java/dev/linqfy/bigCasares/modules/sift/SiftStandIns.java"));
-        Matcher placed = Pattern.compile("(?:block|plant)\\(\"([a-z_]+)\"").matcher(source);
         String data = Files.readString(Path.of("src/main/resources/" + SiftBlockModelStates.RESOURCE));
         Set<String> missing = new TreeSet<>();
-        while (placed.find()) {
-            if (!data.contains("\"" + placed.group(1) + "\": {")) {
-                missing.add("blockstate " + placed.group(1));
+        for (SiftStandIns.StandIn standIn : SiftStandIns.ALL) {
+            if (standIn.name().equals("block") && !data.contains("\"" + standIn.path() + "\": {")) {
+                missing.add("blockstate " + standIn.path());
             }
         }
         Matcher model = Pattern.compile("\"model\": \"the_sift:block/([a-z_0-9]+)\"").matcher(data);

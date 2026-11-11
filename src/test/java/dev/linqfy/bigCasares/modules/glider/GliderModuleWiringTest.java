@@ -1,9 +1,10 @@
 package dev.linqfy.bigCasares.modules.glider;
 
+import dev.linqfy.bigCasares.testsupport.CompiledClass;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,12 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GliderModuleWiringTest {
 
     @Test
-    void moduleUsesProjectLifecycleAndIsRegistered() throws Exception {
+    void moduleIsCreatedByThePluginAndEnabledByDefault() throws Exception {
         assertEquals("glider", new GliderModule(null).getId());
-        String main = Files.readString(Path.of(
-            "src", "main", "java", "dev", "linqfy", "bigCasares", "BigCasares.java"));
-        String config = Files.readString(Path.of("src", "main", "resources", "config.yml"));
-        assertTrue(main.contains("new GliderModule(this)"));
-        assertTrue(config.contains("glider:"));
+        CompiledClass main = CompiledClass.of(getClass(), "dev.linqfy.bigCasares.BigCasares");
+        assertTrue(main.calls("dev/linqfy/bigCasares/modules/glider/GliderModule", "<init>"));
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/config.yml"));
+        assertTrue(config.getBoolean("modules.glider.enabled"));
     }
 }

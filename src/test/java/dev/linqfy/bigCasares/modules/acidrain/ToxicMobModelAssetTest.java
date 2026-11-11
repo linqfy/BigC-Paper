@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.linqfy.bigCasares.modules.model.JavaModelKeys;
+import dev.linqfy.bigCasares.testsupport.CompiledClass;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
@@ -76,15 +77,14 @@ class ToxicMobModelAssetTest {
 
     @Test
     void installerWiresTheToxicMobModelAndKey() throws Exception {
-        String installer = Files.readString(Path.of(
-            "src/main/java/dev/linqfy/bigCasares/modules/model/BetterModelAssetInstaller.java"));
-        assertTrue(installer.contains("public static void installToxicMobModel(JavaPlugin plugin)"));
-        assertTrue(installer.contains("\"toxic_mob.bbmodel\""));
-        assertTrue(installer.contains("\"toxic_mob.png\""));
-        assertTrue(installer.contains("\"toxic_brute.bbmodel\""));
-        assertTrue(installer.contains("\"toxic_brute.png\""));
-        assertTrue(installer.contains("\"toxic_spitter.bbmodel\""));
-        assertTrue(installer.contains("\"toxic_spitter.png\""));
+        // BetterModel classes cannot be loaded in unit tests, so the installer is read from its bytecode.
+        CompiledClass installer = CompiledClass.of(getClass(),
+            "dev.linqfy.bigCasares.modules.model.BetterModelAssetInstaller");
+        assertTrue(installer.hasConstant("installToxicMobModel"));
+        for (String asset : List.of("toxic_mob.bbmodel", "toxic_mob.png", "toxic_brute.bbmodel", "toxic_brute.png",
+            "toxic_spitter.bbmodel", "toxic_spitter.png")) {
+            assertTrue(installer.hasConstant(asset), asset);
+        }
         assertEquals("toxic_mob", JavaModelKeys.TOXIC_MOB);
         assertEquals("toxic_brute", JavaModelKeys.TOXIC_BRUTE);
         assertEquals("toxic_spitter", JavaModelKeys.TOXIC_SPITTER);
