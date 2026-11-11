@@ -60,6 +60,11 @@ public final class PlayerMissionService {
 
     public MissionPlayerState updateAbsoluteProgress(MissionPlayerState state, MissionScope scope, String missionId, int progress) {
         return withUpdatedAssignment(state, scope, missionId, assignment -> {
+            if (assignment.snapshot().completed()) {
+                // A finished mission stays finished until it is claimed or rotated out, even when the
+                // player later drops items, takes off gear or walks away.
+                return assignment;
+            }
             int clampedProgress = Math.max(0, progress);
             boolean completed = MissionProgressEngine.isCompleted(assignment.definition(), clampedProgress);
             return new MissionAssignment(
@@ -76,12 +81,54 @@ public final class PlayerMissionService {
         String marker
     ) {
         return withUpdatedAssignment(state, scope, missionId, assignment -> {
+            if (assignment.snapshot().completed()) {
+                return assignment;
+            }
             java.util.Set<String> markers = new java.util.LinkedHashSet<>(assignment.snapshot().markers());
             markers.add(marker);
             int progress = markers.size();
             return new MissionAssignment(assignment.definition(), new MissionProgressSnapshot(
                 progress, MissionProgressEngine.isCompleted(assignment.definition(), progress),
                 assignment.snapshot().claimed(), markers
+            ));
+        });
+    }
+
+    /**
+     * Counts progress against a single target. The first target seen is remembered; later events only
+     * count when they hit that same target again.
+     */
+    public MissionPlayerState recordSameTargetProgress(
+        MissionPlayerState state,
+        MissionScope scope,
+        String missionId,
+        String targetKey
+    ) {
+        return withUpdatedAssignment(state, scope, missionId, assignment -> {
+            MissionProgressSnapshot snapshot = assignment.snapshot();
+            if (snapshot.completed() || targetKey == null || targetKey.isBlank()) {
+                return assignment;
+            }
+            if (!snapshot.markers().isEmpty() && !snapshot.markers().contains(targetKey)) {
+                return assignment;
+            }
+            int progress = snapshot.progress() + 1;
+            return new MissionAssignment(assignment.definition(), new MissionProgressSnapshot(
+                progress, MissionProgressEngine.isCompleted(assignment.definition(), progress),
+                snapshot.claimed(), java.util.Set.of(targetKey)
+            ));
+        });
+    }
+
+    /** Marks an assigned mission as completed regardless of its progress, e.g. after an admin approval. */
+    public MissionPlayerState forceComplete(MissionPlayerState state, MissionScope scope, String missionId) {
+        return withUpdatedAssignment(state, scope, missionId, assignment -> {
+            if (assignment.snapshot().completed()) {
+                return assignment;
+            }
+            int progress = Math.max(assignment.snapshot().progress(), assignment.definition().goal());
+            return new MissionAssignment(assignment.definition(), new MissionProgressSnapshot(
+                progress, true, assignment.snapshot().claimed(), assignment.snapshot().markers()
             ));
         });
     }

@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MissionRotationPolicyTest {
 
@@ -73,6 +74,33 @@ class MissionRotationPolicyTest {
         );
 
         assertNotEquals(first.dailyAssignments().keySet(), second.dailyAssignments().keySet());
+    }
+
+    @Test
+    void prefersHeavilyWeightedMissions() {
+        MissionDefinition heavy = new MissionDefinition(
+            "heavy", MissionScope.DAILY, "H", "H", MissionType.HOLD_EXACT_ITEM_COUNT, 1, 1.0, 1000, true, Map.of());
+        MissionCatalog catalog = MissionCatalog.of(List.of(
+            definition("daily-a", MissionScope.DAILY),
+            definition("daily-b", MissionScope.DAILY),
+            definition("daily-c", MissionScope.DAILY),
+            heavy
+        ));
+        MissionRotationPolicy policy = new MissionRotationPolicy(new Random(3));
+
+        int heavyPicks = 0;
+        for (int i = 0; i < 200; i++) {
+            MissionPlayerState state = policy.createFreshState(
+                new UUID(i, i), catalog, 1, 0,
+                Instant.parse("2026-04-19T10:00:00Z"),
+                Instant.parse("2026-04-20T00:00:00Z"),
+                Instant.parse("2026-04-26T00:00:00Z"));
+            if (state.dailyAssignments().containsKey("heavy")) {
+                heavyPicks++;
+            }
+        }
+
+        assertTrue(heavyPicks > 180, "heavy mission picked " + heavyPicks + " times");
     }
 
     private static MissionDefinition definition(String id, MissionScope scope) {

@@ -40,7 +40,15 @@ public final class MissionRotationPolicy {
     private Map<String, MissionAssignment> select(UUID playerId, List<MissionDefinition> pool, int count) {
         List<MissionDefinition> shuffled = new ArrayList<>(pool);
         long seed = random.nextLong() ^ playerId.getMostSignificantBits() ^ playerId.getLeastSignificantBits();
-        Collections.shuffle(shuffled, new Random(seed));
+        Random rng = new Random(seed);
+        Collections.shuffle(shuffled, rng);
+        // Weighted sampling without replacement: higher weights tend to be drawn first.
+        Map<MissionDefinition, Double> keys = new java.util.IdentityHashMap<>();
+        for (MissionDefinition definition : shuffled) {
+            double weight = Math.max(1, definition.weight());
+            keys.put(definition, Math.pow(rng.nextDouble(), 1.0 / weight));
+        }
+        shuffled.sort(java.util.Comparator.comparingDouble((MissionDefinition definition) -> keys.get(definition)).reversed());
 
         Map<String, MissionAssignment> assignments = new LinkedHashMap<>();
         int limit = Math.min(count, shuffled.size());

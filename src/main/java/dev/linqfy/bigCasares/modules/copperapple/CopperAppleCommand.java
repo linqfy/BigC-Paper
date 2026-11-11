@@ -116,7 +116,7 @@ public final class CopperAppleCommand implements CommandExecutor, TabCompleter {
 
     private boolean handleMissionAdmin(Player player, CommandSender sender, String[] args, String label, MissionModule missionModule) {
         if (args.length < 4) {
-            sender.sendMessage(ChatColor.RED + "Uso: /" + label + " misiones admin <reroll|reset> <jugador>");
+            sender.sendMessage(ChatColor.RED + "Uso: /" + label + " misiones admin <reroll|reset|aprobar> <jugador> [mision]");
             return true;
         }
 
@@ -137,8 +137,21 @@ public final class CopperAppleCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        if ("aprobar".equalsIgnoreCase(args[2]) || "approve".equalsIgnoreCase(args[2])) {
+            String missionId = args.length >= 5 ? args[4] : null;
+            int approved = missionModule.approveMissions(target, missionId);
+            if (approved == 0) {
+                sender.sendMessage(ChatColor.YELLOW + target.getName() + " no tiene misiones pendientes para aprobar"
+                    + (missionId == null ? "." : " con id " + missionId + "."));
+                return true;
+            }
+            sender.sendMessage(ChatColor.GREEN + "Aprobaste " + approved + " mision(es) de " + target.getName() + ".");
+            target.sendMessage(ChatColor.GREEN + "Un admin aprobo tu mision. Reclamala en /misiones.");
+            return true;
+        }
+
         sender.sendMessage(ChatColor.RED + "Accion admin desconocida: " + args[2]);
-        sender.sendMessage(ChatColor.YELLOW + "Uso: /" + label + " misiones admin <reroll|reset> <jugador>");
+        sender.sendMessage(ChatColor.YELLOW + "Uso: /" + label + " misiones admin <reroll|reset|aprobar> <jugador> [mision]");
         return true;
     }
 
@@ -298,7 +311,7 @@ public final class CopperAppleCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 3 && "misiones".equalsIgnoreCase(args[0]) && "admin".equalsIgnoreCase(args[1])) {
-            return List.of("reroll", "reset").stream()
+            return List.of("reroll", "reset", "aprobar").stream()
                 .filter(option -> option.startsWith(args[2].toLowerCase()))
                 .collect(Collectors.toList());
         }
