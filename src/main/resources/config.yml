@@ -23,6 +23,8 @@ modules:
     enabled: true
   casino:
     enabled: true
+  auction-house:
+    enabled: true
   grappling-hook:
     enabled: true
   glider:
@@ -59,6 +61,18 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+
+# Casa de subastas (/ah). Usa la moneda de Vault (hace falta Vault y un proveedor de economía).
+# Las subastas y los items por reclamar se guardan en data/auction-house.yml.
+auction-house:
+  # Máximo 45 (una página de "Mis subastas").
+  max-listings-per-player: 10
+  min-price: 1
+  max-price: 1000000000
+  # Porcentaje del precio que se descuenta al vendedor cuando se vende.
+  tax-percent: 5
+  # Horas antes de que una subasta vuelva al vendedor como item por reclamar.
+  duration-hours: 48
 
 # El Gran Casares. Las fichas son la moneda de Vault (hace falta Vault y un proveedor de economía).
 # Las atracciones se arman con /casino construir o /casino colocar <tipo>; se guardan en casino/installations.yml.

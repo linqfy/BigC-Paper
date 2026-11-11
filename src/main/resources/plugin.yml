@@ -75,6 +75,10 @@ commands:
   casino:
     description: El Gran Casares (deuda, jackpot; admins construyen y colocan atracciones)
     usage: /<command> [deuda|jackpot|construir|colocar|quitar|lista|trago]
+  ah:
+    description: Casa de subastas (comprar y vender items entre jugadores)
+    usage: /<command> [vender <precio>|mis|reclamar|quitar <id>]
+    aliases: [ subastas, auctionhouse ]
   glider:
     description: Give one of the six BigCasares Glider tiers
     usage: /<command> give <1-6> [player] [amount]
@@ -202,6 +206,8 @@ permissions:
       bigcasares.celular.admin: true
       bigcasares.schizophrenia.admin: true
       bigcasares.casino.admin: true
+      bigcasares.auctionhouse.use: true
+      bigcasares.auctionhouse.admin: true
       bigcasares.glider.admin: true
       bigcasares.glider.give: true
       bigcasares.dimension.admin: true
@@ -355,6 +361,16 @@ permissions:
   bigcasares.casino.admin:
     description: Build the casino, place or remove attractions and give drinks with /casino
     default: op
+
+  bigcasares.auctionhouse.use:
+    description: Browse, buy and sell on the auction house with /ah
+    default: true
+
+  bigcasares.auctionhouse.admin:
+    description: Remove any auction house listing with /ah quitar
+    default: op
+    children:
+      bigcasares.auctionhouse.use: true
 
   bigcasares.glider.admin:
     description: Full Glider administration
