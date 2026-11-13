@@ -1,8 +1,6 @@
 package dev.linqfy.bigCasares.modules.geyser;
 
 import dev.linqfy.bigCasares.platform.ClientEntityPresentationRegistry;
-import org.geysermc.cumulus.form.SimpleForm;
-import org.geysermc.cumulus.util.FormImage;
 import org.geysermc.event.PostOrder;
 import org.geysermc.geyser.api.GeyserApi;
 import org.geysermc.geyser.api.block.custom.CustomBlockData;
@@ -93,19 +91,8 @@ public final class GeyserRuntimeBridge implements GeyserApiFacade, EventRegistra
         if (subscriptions.isClosed() || !settings.bedrockForms() || !isBedrockPlayer(playerId)) {
             return false;
         }
-        SimpleForm.Builder builder = SimpleForm.builder()
-            .title(form.title())
-            .content(form.content());
-        for (BedrockShopForm.Button button : form.buttons()) {
-            if (button.iconUrl() == null || button.iconUrl().isBlank()) {
-                builder.button(button.text());
-            } else {
-                builder.button(button.text(), FormImage.Type.URL, button.iconUrl());
-            }
-        }
-        builder.validResultHandler(response ->
-            formResponses.dispatch(form, playerId, response.clickedButtonId()));
-        return api.sendForm(playerId, builder.build());
+        return GeyserFormSender.send(api, playerId, form,
+            index -> formResponses.dispatch(form, playerId, index));
     }
 
     @Override
