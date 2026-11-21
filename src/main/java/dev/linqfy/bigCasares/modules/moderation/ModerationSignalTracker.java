@@ -22,35 +22,61 @@ public final class ModerationSignalTracker {
     private final Map<UUID, Deque<Instant>> reconnects = new HashMap<>();
     private final Map<String, Deque<Instant>> joinsByIp = new HashMap<>();
     private final Map<String, Map<UUID, Instant>> accountsByIp = new HashMap<>();
-    private final Map<UUID, Deque<Instant>> meleeHits = new HashMap<>();
     private final Map<UUID, Deque<Instant>> inventoryClicks = new HashMap<>();
     private final Map<UUID, String> lastKnownIps = new HashMap<>();
     private final Map<String, Set<UUID>> allAccountsByIp = new HashMap<>();
+
+    private static final int MIN_DUPLICATE_LENGTH = 4;
 
     public ModerationSignalTracker(Set<String> sensitiveCommands) {
         this.sensitiveCommands = sensitiveCommands;
     }
 
-    public List<AbuseSignal> chat(Instant now, UUID playerId, String playerName, String message) {
+    /** Direcciones que no identifican a un jugador: loopback, red privada/CGNAT, link-local o desconocida. */
+    public static boolean sharedAddress(String ip) {
+        if (ip == null || ip.isBlank() || "unknown".equals(ip)) {
+            return true;
+        }
+        try {
+            java.net.InetAddress address = java.net.InetAddress.ofLiteral(ip);
+            if (address.isLoopbackAddress() || address.isSiteLocalAddress() || address.isLinkLocalAddress()
+                || address.isAnyLocalAddress()) {
+                return true;
+            }
+            byte[] bytes = address.getAddress();
+            // 100.64.0.0/10 (CGNAT, tuneles tipo playit/tailscale) y fc00::/7 (IPv6 privada)
+            return bytes.length == 4 && (bytes[0] & 0xFF) == 100 && (bytes[1] & 0xC0) == 64
+                || bytes.length == 16 && (bytes[0] & 0xFE) == 0xFC;
+        } catch (IllegalArgumentException invalid) {
+            return true;
+        }
+    }
+
+    /** Llega desde el hilo asincrono del chat (puede haber varios a la vez): por eso todo el tracker es synchronized. */
+    public synchronized List<AbuseSignal> chat(Instant now, UUID playerId, String playerName, String message) {
         List<AbuseSignal> signals = new ArrayList<>();
-        if (threshold(chatTimes, playerId, now, Duration.ofSeconds(5), 7)) {
-            signals.add(signal(now, playerId, playerName, "chat-rate", 20, "7 mensajes en 5 segundos"));
+        if (threshold(chatTimes, playerId, now, Duration.ofSeconds(5), 8)) {
+            signals.add(signal(now, playerId, playerName, "chat-rate", 20, "8 mensajes en 5 segundos"));
         }
         String normalized = normalize(message);
-        if (!normalized.isBlank() && duplicate(chatDuplicates, playerId, normalized, now, Duration.ofSeconds(15), 3)) {
-            signals.add(signal(now, playerId, playerName, "chat-duplicate", 25, "3 mensajes normalizados idénticos"));
+        // respuestas cortas ("gg", "xd", "si") se repiten sin ser spam
+        if (normalized.length() >= MIN_DUPLICATE_LENGTH
+            && duplicate(chatDuplicates, playerId, normalized, now, Duration.ofSeconds(15), 4)) {
+            signals.add(signal(now, playerId, playerName, "chat-duplicate", 25, "4 mensajes normalizados idénticos"));
         }
         return signals;
     }
 
-    public List<AbuseSignal> command(Instant now, UUID playerId, String playerName, String command, boolean operator) {
+    public synchronized List<AbuseSignal> command(
+        Instant now, UUID playerId, String playerName, String command, boolean operator
+    ) {
         List<AbuseSignal> signals = new ArrayList<>();
-        if (threshold(commandTimes, playerId, now, Duration.ofSeconds(5), 8)) {
-            signals.add(signal(now, playerId, playerName, "command-rate", 20, "8 comandos en 5 segundos"));
+        if (threshold(commandTimes, playerId, now, Duration.ofSeconds(5), 12)) {
+            signals.add(signal(now, playerId, playerName, "command-rate", 20, "12 comandos en 5 segundos"));
         }
         String normalized = normalizeCommand(command);
-        if (duplicate(commandDuplicates, playerId, normalized, now, Duration.ofSeconds(10), 3)) {
-            signals.add(signal(now, playerId, playerName, "command-duplicate", 25, "3 comandos idénticos"));
+        if (duplicate(commandDuplicates, playerId, normalized, now, Duration.ofSeconds(10), 6)) {
+            signals.add(signal(now, playerId, playerName, "command-duplicate", 25, "6 comandos idénticos en 10 segundos"));
         }
         String root = normalized.split(" ", 2)[0].replaceFirst("^/", "");
         if (!operator && sensitiveCommands.contains(root)) {
@@ -59,10 +85,19 @@ public final class ModerationSignalTracker {
         return signals;
     }
 
-    public List<AbuseSignal> join(Instant now, UUID playerId, String playerName, String ip) {
+    /**
+     * @param sharedAddress la IP no identifica a una persona (loopback, red local, tunel o proxy sin forwarding): todos
+     *                      los jugadores la comparten, asi que las senales por IP no significan nada.
+     */
+    public synchronized List<AbuseSignal> join(
+        Instant now, UUID playerId, String playerName, String ip, boolean sharedAddress
+    ) {
         List<AbuseSignal> signals = new ArrayList<>();
         if (threshold(reconnects, playerId, now, Duration.ofSeconds(60), 4)) {
             signals.add(signal(now, playerId, playerName, "reconnect-rate", 20, "4 reconexiones en 60 segundos"));
+        }
+        if (sharedAddress) {
+            return signals;
         }
         Deque<Instant> ipJoins = joinsByIp.computeIfAbsent(ip, ignored -> new ArrayDeque<>());
         appendAndPurge(ipJoins, now, Duration.ofSeconds(60));
@@ -90,16 +125,10 @@ public final class ModerationSignalTracker {
         return signals;
     }
 
-    public Optional<AbuseSignal> meleeHit(Instant now, UUID playerId, String playerName) {
-        if (threshold(meleeHits, playerId, now, Duration.ofSeconds(1), 8)) {
-            return Optional.of(signal(now, playerId, playerName, "melee-rate", 25, "Más de 7 impactos por segundo"));
-        }
-        return Optional.empty();
-    }
-
-    public Optional<AbuseSignal> inventoryClick(Instant now, UUID playerId, String playerName) {
-        if (threshold(inventoryClicks, playerId, now, Duration.ofSeconds(1), 45)) {
-            return Optional.of(signal(now, playerId, playerName, "inventory-click-rate", 15, "45 clics de inventario por segundo"));
+    public synchronized Optional<AbuseSignal> inventoryClick(Instant now, UUID playerId, String playerName) {
+        // mods de inventario legitimos (arrastre con la rueda, shift-click masivo) pasan facil de 40 clics por segundo
+        if (threshold(inventoryClicks, playerId, now, Duration.ofSeconds(1), 60)) {
+            return Optional.of(signal(now, playerId, playerName, "inventory-click-rate", 15, "60 clics de inventario por segundo"));
         }
         return Optional.empty();
     }

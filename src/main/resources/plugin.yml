@@ -156,6 +156,9 @@ permissions:
   bigcasares.donpollos.admin:
     description: Manage Don Pollos (spawn, boss, cities, dances and items)
     default: op
+  bigcasares.anticheat.bypass:
+    description: Skip BigCasares movement and combat checks (not granted to operators by default)
+    default: false
   bigcasares.*:
     description: Full access to BigCasares commands
     default: op
