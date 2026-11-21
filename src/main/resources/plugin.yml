@@ -58,6 +58,9 @@ commands:
     description: Mutango Boss (spawn, fases, ruinas, santuario y premios)
     usage: /<command> [quitar|atacar|fase|ruinas|santuario|premios]
     permission: bigcasares.mutango.admin
+  mazmorra:
+    description: Mazmorras míticas (créditos; los admins dan items, crean mobs y jefes, limpian, ven info y localizan)
+    usage: /<command> <creditos|dar <fragmento|invocador> <cultura> [jugador] [cantidad]|mob <id|cultura> [mazmorra]|jefe <cultura>|quitar|info|localizar <cultura>>
   jeremy:
     description: Manage the Jeremy hunter
     usage: /<command> <status|start [player]|stop|cooldown reset>
@@ -156,6 +159,12 @@ permissions:
   bigcasares.donpollos.admin:
     description: Manage Don Pollos (spawn, boss, cities, dances and items)
     default: op
+  bigcasares.mythicdungeons.admin:
+    description: Manage the mythic dungeons (items, mobs, bosses, cleanup and locate)
+    default: op
+  bigcasares.mythicdungeons.credits:
+    description: See the credits of the mythic dungeons with /mazmorra creditos
+    default: true
   bigcasares.*:
     description: Full access to BigCasares commands
     default: op
@@ -197,6 +206,7 @@ permissions:
       bigcasares.jeremy.admin: true
       bigcasares.donpollos.admin: true
       bigcasares.mutango.admin: true
+      bigcasares.mythicdungeons.admin: true
       bigcasares.jeremy.start: true
       bigcasares.jeremy.stop: true
       bigcasares.celular.admin: true

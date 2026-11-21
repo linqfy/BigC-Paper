@@ -1,0 +1,156 @@
+# Pachamama corrompida por Mandinga, jefa mitica de la mazmorra sudamericana. Las fases, las rondas de piso pintado,
+# Mandinga, su pacto y sus ondas los maneja su encuentro (boss/pachamama/PachamamaFight); los umbrales de abajo solo
+# tienen que ser validos (la fase la decide el encuentro: 1 hasta el 50 %, 2 despues). Las habilidades de la lista
+# son los golpes cuerpo a cuerpo de Pachamama (el encuentro las suspende mientras sale de la tierra y durante el
+# cambio de fase).
+id: myth-pachamama
+display-name: "PACHAMAMA"
+maximum-health: 1400.0
+audience-radius: 48.0
+
+presentation:
+  java-model-key: bigcasares_myth_pachamama
+
+raid-scaling:
+  enabled: true
+  base-health: 1000.0
+  health-per-player: 400.0
+  minimum-players: 1
+  maximum-players: 6
+
+ui:
+  update-ticks: 5
+
+phases:
+  phase-2-at: 0.5
+  phase-3-at: 0.01
+
+category-weights:
+  physical: 1.0
+  magic: 0.6
+  movement: 0.5
+  defensive: 0.5
+
+animations:
+  idle:
+    type: LOOPING
+    duration-ticks: 60
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 0
+  walk:
+    type: LOOPING
+    duration-ticks: 32
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 2
+  attack:
+    type: ONE_SHOT
+    duration-ticks: 22
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  cast:
+    type: ONE_SHOT
+    duration-ticks: 28
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  rise:
+    type: ONE_SHOT
+    duration-ticks: 70
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 35
+  rage:
+    type: ONE_SHOT
+    duration-ticks: 50
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 30
+  death:
+    type: ONE_SHOT
+    duration-ticks: 70
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 40
+
+abilities:
+  golpe_de_tierra:
+    category: PHYSICAL
+    animation: attack
+    cooldown-seconds: 5.0
+    cast-time-seconds: 0.9
+    priority: 50
+    interruptible: false
+    conditions:
+      - type: TARGET_IN_RANGE
+        value: 4.5
+      - type: NOT_CASTING
+    targets:
+      type: ALL_IN_RADIUS
+      radius: 4.5
+    telegraph:
+      type: CIRCLE
+      radius: 4.5
+      particle: minecraft:block
+      warning-sound: minecraft:block.rooted_dirt.break
+    effects:
+      - type: DAMAGE
+        amount: 7.0
+      - type: KNOCKBACK
+        strength: 1.2
+      - type: SOUND
+        sound: minecraft:entity.ravager.attack
+  latigo_de_raices:
+    category: MAGIC
+    animation: cast
+    cooldown-seconds: 14.0
+    cast-time-seconds: 1.2
+    priority: 30
+    interruptible: false
+    conditions:
+      - type: TARGET_IN_RANGE
+        value: 7.0
+      - type: NOT_CASTING
+    targets:
+      type: ALL_IN_RADIUS
+      radius: 7.0
+    telegraph:
+      type: CIRCLE
+      radius: 7.0
+      particle: minecraft:block
+      warning-sound: minecraft:block.roots.break
+    effects:
+      - type: DAMAGE
+        amount: 4.0
+      - type: PULL
+        strength: 0.8
+      - type: SOUND
+        sound: minecraft:block.big_dripleaf.tilt_down
+
+dialogue:
+  spawn:
+    - "§2La tierra tiembla: Pachamama despierta... §5pero algo la pudrió por dentro."
+    - "§7No pises las baldosas pintadas cuando caiga el efecto."
+  phase-2:
+    - "§4¡Mandinga sale de la espalda de Pachamama! §7Saltá las ondas de su guitarra."
+  defeat:
+    - "§2Pachamama cae y la tierra se limpia. §7Mandinga se esfuma con una carcajada."
+
+music:
+  enabled: true
+  radius: 48
+  stop-when-leaving-radius: true
+  fallback-sound: minecraft:music.dragon
+  tracks:
+    phase-1: minecraft:music.dragon
+    phase-2: minecraft:music.dragon
+    phase-3: minecraft:music.dragon

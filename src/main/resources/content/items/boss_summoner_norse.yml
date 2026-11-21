@@ -1,0 +1,26 @@
+# Aspecto provisorio: modelo vanilla hasta que lleguen las texturas finales.
+id: boss_summoner_norse
+mechanic: mythic-summoner
+material: NETHER_STAR
+item-model: minecraft:heart_of_the_sea
+display:
+  translation-key: item.bigcasares.boss_summoner_norse
+  fallback-name: "Invocador de Odín"
+  lore:
+    - "§7Click derecho sobre el altar de la sala"
+    - "§7del jefe, dentro de la mazmorra nórdica."
+    - ""
+    - "§5Despierta a Odín."
+max-stack-size: 16
+recipe:
+  key: boss_summoner_norse_recipe
+  type: shapeless
+  result-amount: 1
+  ingredients:
+    - bigcasares:hate_fragment_norse
+    - bigcasares:hate_fragment_norse
+    - bigcasares:hate_fragment_norse
+    - bigcasares:hate_fragment_norse
+appearance:
+  java-item-definition: java/assets/bigcasares/items/keep_inventory_totem.json
+  bedrock-texture: bedrock/textures/item/keep_inventory_totem.png

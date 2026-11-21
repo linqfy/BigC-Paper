@@ -1,0 +1,16 @@
+# Aspecto provisorio: modelo vanilla hasta que lleguen las texturas finales.
+id: hate_fragment_medieval
+mechanic: mythic-fragment
+material: ECHO_SHARD
+item-model: minecraft:blaze_powder
+display:
+  translation-key: item.bigcasares.hate_fragment_medieval
+  fallback-name: "Fragmento de Odio de Diablo"
+  lore:
+    - "§7Lo sueltan los mobs de la mazmorra medieval."
+    - "§7Juntá 4 en la mesa de crafteo para armar"
+    - "§7el Invocador de Diablo."
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/bigcasares/items/crossbow_echo_shard.json
+  bedrock-texture: bedrock/textures/item/crossbow_echo_shard.png

@@ -37,7 +37,26 @@ public final class ItemCatalogValidator {
         Map.entry("glider_tier_4", "glider"),
         Map.entry("glider_tier_5", "glider"),
         Map.entry("glider_tier_6", "glider"),
-        Map.entry("keep_inventory_totem", "keep-inventory-totem")
+        Map.entry("keep_inventory_totem", "keep-inventory-totem"),
+        Map.entry("hate_fragment_greek", "mythic-fragment"),
+        Map.entry("boss_summoner_greek", "mythic-summoner"),
+        Map.entry("hate_fragment_norse", "mythic-fragment"),
+        Map.entry("boss_summoner_norse", "mythic-summoner"),
+        Map.entry("hate_fragment_medieval", "mythic-fragment"),
+        Map.entry("boss_summoner_medieval", "mythic-summoner"),
+        Map.entry("hate_fragment_egyptian", "mythic-fragment"),
+        Map.entry("boss_summoner_egyptian", "mythic-summoner"),
+        Map.entry("hate_fragment_mesopotamian", "mythic-fragment"),
+        Map.entry("boss_summoner_mesopotamian", "mythic-summoner"),
+        Map.entry("hate_fragment_japanese", "mythic-fragment"),
+        Map.entry("boss_summoner_japanese", "mythic-summoner"),
+        Map.entry("hate_fragment_mesoamerican", "mythic-fragment"),
+        Map.entry("boss_summoner_mesoamerican", "mythic-summoner"),
+        Map.entry("hate_fragment_arabian", "mythic-fragment"),
+        Map.entry("boss_summoner_arabian", "mythic-summoner"),
+        Map.entry("hate_fragment_andean", "mythic-fragment"),
+        Map.entry("boss_summoner_andean", "mythic-summoner"),
+        Map.entry("mandinga_guitar", "mythic-guitar")
     );
 
     private final ItemMaterialValidator materials;

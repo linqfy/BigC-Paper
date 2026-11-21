@@ -50,20 +50,51 @@ public record StructureDefinition(
         Objects.requireNonNull(placement, "placement");
     }
 
-    /** Random-spread placement: one attempt per {@code spacing x spacing} chunk cell. */
-    public record Placement(int spacing, int separation, int salt) {
+    /**
+     * Random-spread placement: one attempt per {@code spacing x spacing} chunk cell. The optional
+     * {@code exclusionZone} drops a start that has a candidate chunk of another set nearby.
+     */
+    public record Placement(int spacing, int separation, int salt, ExclusionZone exclusionZone) {
         public Placement {
             if (spacing <= 0 || separation < 0 || separation >= spacing) {
                 throw new IllegalArgumentException("Structure spacing must exceed separation");
             }
         }
 
+        public Placement(int spacing, int separation, int salt) {
+            this(spacing, separation, salt, null);
+        }
+
         JsonObject toJson() {
-            return Json.object()
-                .put("type", "minecraft:random_spread")
+            Json.ObjectBuilder builder = Json.object()
+                .put("type", "minecraft:random_spread");
+            if (exclusionZone != null) {
+                builder.put("exclusion_zone", exclusionZone.toJson());
+            }
+            return builder
                 .put("salt", salt)
                 .put("separation", separation)
                 .put("spacing", spacing)
+                .build();
+        }
+    }
+
+    /**
+     * Vanilla {@code exclusion_zone}: a start is skipped when {@code otherSet} has a candidate chunk
+     * (biome not checked) within {@code chunkCount} chunks; the codec accepts 1..16.
+     */
+    public record ExclusionZone(NamespacedId otherSet, int chunkCount) {
+        public ExclusionZone {
+            Objects.requireNonNull(otherSet, "otherSet");
+            if (chunkCount < 1 || chunkCount > 16) {
+                throw new IllegalArgumentException("exclusion_zone chunk_count must be within 1..16");
+            }
+        }
+
+        JsonObject toJson() {
+            return Json.object()
+                .put("chunk_count", chunkCount)
+                .put("other_set", otherSet.asString())
                 .build();
         }
     }

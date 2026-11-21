@@ -215,6 +215,41 @@ class BukkitRuntimeRegistrationsTest {
     }
 
     @Test
+    void cancelledTasksReleaseTheirRegistration() {
+        RuntimeRegistrationScope scope = new RuntimeRegistrationScope(new RuntimeGeneration(15), "mythic");
+        FakeBukkitAccess access = new FakeBukkitAccess();
+        BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(scope, access);
+        registrations.scheduleRepeating("heartbeat", () -> { }, 1L, 1L);
+        int baseline = scope.size();
+
+        for (int index = 0; index < 200; index++) {
+            BukkitTask[] self = new BukkitTask[1];
+            AtomicInteger runs = new AtomicInteger();
+            self[0] = registrations.scheduleRepeating("note", () -> {
+                if (runs.incrementAndGet() == 3) {
+                    self[0].cancel();
+                }
+            }, 0L, 1L);
+        }
+        BukkitTask cancelledBeforeRunning = registrations.scheduleDelayed("later", () -> { }, 40L);
+        registrations.scheduleImmediate("next", () -> { });
+        assertEquals(baseline + 202, scope.size());
+
+        cancelledBeforeRunning.cancel();
+        for (int tick = 0; tick < 3; tick++) {
+            access.scheduled.stream().filter(call -> !call.task().isCancelled()).toList()
+                .forEach(ScheduledCall::run);
+        }
+
+        assertEquals(baseline, scope.size());
+        assertTrue(access.scheduled.get(1).task().isCancelled());
+        assertTrue(access.scheduled.get(201).task().isCancelled());
+        RuntimeCleanupReport report = scope.close();
+        assertEquals(1, report.outcomes().size());
+        assertTrue(report.outcomes().getFirst().resourceId().startsWith("heartbeat#scheduled-"));
+    }
+
+    @Test
     void ownsArbitraryCleanupAndCloseablesInTheScope() {
         RuntimeRegistrationScope scope = new RuntimeRegistrationScope(new RuntimeGeneration(11), "geyser");
         BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(scope, new FakeBukkitAccess());

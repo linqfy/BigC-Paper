@@ -49,7 +49,26 @@ public final class ItemCatalogModule implements PluginModule {
         "glider_tier_4.yml",
         "glider_tier_5.yml",
         "glider_tier_6.yml",
-        "keep_inventory_totem.yml"
+        "keep_inventory_totem.yml",
+        "hate_fragment_greek.yml",
+        "boss_summoner_greek.yml",
+        "hate_fragment_norse.yml",
+        "boss_summoner_norse.yml",
+        "hate_fragment_medieval.yml",
+        "boss_summoner_medieval.yml",
+        "hate_fragment_egyptian.yml",
+        "boss_summoner_egyptian.yml",
+        "hate_fragment_mesopotamian.yml",
+        "boss_summoner_mesopotamian.yml",
+        "hate_fragment_japanese.yml",
+        "boss_summoner_japanese.yml",
+        "hate_fragment_mesoamerican.yml",
+        "boss_summoner_mesoamerican.yml",
+        "hate_fragment_arabian.yml",
+        "boss_summoner_arabian.yml",
+        "hate_fragment_andean.yml",
+        "boss_summoner_andean.yml",
+        "mandinga_guitar.yml"
     );
 
     private final BigCasares plugin;

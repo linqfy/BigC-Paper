@@ -38,6 +38,7 @@ import dev.linqfy.bigCasares.modules.bloodmoon.BloodMoonModule;
 import dev.linqfy.bigCasares.modules.jeremy.JeremyModule;
 import dev.linqfy.bigCasares.modules.donpollos.DonPollosModule;
 import dev.linqfy.bigCasares.modules.mutango.MutangoModule;
+import dev.linqfy.bigCasares.modules.mythicdungeons.MythicDungeonsModule;
 import dev.linqfy.bigCasares.modules.celular.CelularModule;
 import dev.linqfy.bigCasares.modules.mobscaling.MobScalingModule;
 import dev.linqfy.bigCasares.modules.grapplinghook.GrapplingHookModule;
@@ -101,6 +102,7 @@ public final class BigCasares extends JavaPlugin {
     private JeremyModule jeremyModule;
     private DonPollosModule donPollosModule;
     private MutangoModule mutangoModule;
+    private MythicDungeonsModule mythicDungeonsModule;
     private CelularModule celularModule;
     private CasinoModule casinoModule;
     private GrapplingHookModule grapplingHookModule;
@@ -236,6 +238,10 @@ public final class BigCasares extends JavaPlugin {
 
     public MutangoModule getMutangoModule() {
         return mutangoModule;
+    }
+
+    public MythicDungeonsModule getMythicDungeonsModule() {
+        return mythicDungeonsModule;
     }
 
     public CelularModule getCelularModule() {
@@ -404,6 +410,8 @@ public final class BigCasares extends JavaPlugin {
                 && resourcePackModule.service().map(service -> service.hasLoadedPack(playerId)).orElse(false),
             javaModels
         );
+        this.mythicDungeonsModule = new MythicDungeonsModule(
+            this, javaModels, pveBossModule, customItemRegistry, this::resolveClientPlatform);
         this.moderationModule = new ModerationModule(this);
         this.serverControlModule = new ServerControlModule(
             this, moderationModule.audit(), moderationModule::acceptSignal, emojiAliasService
@@ -466,6 +474,7 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(shopModule);
         moduleManager.register(casinoModule);
         moduleManager.register(pveBossModule);
+        moduleManager.register(mythicDungeonsModule);
         moduleManager.register(geyserIntegrationModule);
         moduleManager.register(moderationModule);
         moduleManager.register(serverControlModule);
@@ -629,6 +638,7 @@ public final class BigCasares extends JavaPlugin {
         teamModule = null;
         nexusModule = null;
         pveBossModule = null;
+        mythicDungeonsModule = null;
         geyserIntegrationModule = null;
         airdropModule = null;
         acidRainModule = null;

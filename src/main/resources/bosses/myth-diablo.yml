@@ -1,0 +1,118 @@
+# Diablo, jefe mitico de la mazmorra medieval. El combate es guionado (boss/diablo/DiabloEncounter): las dos fases
+# las decide el encuentro (phases.phase-2-at es donde empieza la fase 2; phase-3-at no se usa) y las habilidades de
+# abajo no corren (el encuentro las suspende); quedan porque el formato pide al menos una.
+id: myth-diablo
+display-name: "DIABLO"
+maximum-health: 700.0
+audience-radius: 40.0
+
+# Vida segun los jugadores del combate al aparecer: 400 + 300 por jugador (1 a 4).
+raid-scaling:
+  enabled: true
+  base-health: 400.0
+  health-per-player: 300.0
+  minimum-players: 1
+  maximum-players: 4
+
+presentation:
+  java-model-key: bigcasares_myth_diablo
+
+ui:
+  update-ticks: 5
+
+phases:
+  phase-2-at: 0.5
+  phase-3-at: 0.01
+
+category-weights:
+  physical: 1.0
+  magic: 0.5
+  movement: 0.5
+  defensive: 0.5
+
+# Cada nombre es un clip del modelo bigcasares_myth_diablo; el encuentro los pide por nombre.
+animations:
+  idle:
+    type: LOOPING
+    duration-ticks: 60
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 0
+  walk:
+    type: LOOPING
+    duration-ticks: 20
+    priority: 1
+  circle:
+    type: LOOPING
+    duration-ticks: 30
+    priority: 2
+  throw:
+    type: ONE_SHOT
+    duration-ticks: 20
+    priority: 10
+  attack:
+    type: ONE_SHOT
+    duration-ticks: 16
+    priority: 10
+  rage:
+    type: ONE_SHOT
+    duration-ticks: 40
+    priority: 20
+  sit:
+    type: LOOPING
+    duration-ticks: 40
+    priority: 15
+  grab:
+    type: LOOPING
+    duration-ticks: 40
+    priority: 16
+  stunned:
+    type: LOOPING
+    duration-ticks: 40
+    priority: 18
+  death:
+    type: ONE_SHOT
+    duration-ticks: 50
+    priority: 30
+
+abilities:
+  botellazo:
+    category: MAGIC
+    animation: throw
+    cooldown-seconds: 8.0
+    cast-time-seconds: 0.8
+    priority: 10
+    interruptible: false
+    conditions:
+      - type: NOT_CASTING
+    targets:
+      type: NEAREST_PLAYER
+      radius: 30.0
+      max-targets: 1
+    telegraph:
+      type: TARGET_MARK
+      radius: 1.5
+      particle: minecraft:dust
+      warning-sound: minecraft:entity.witch.throw
+    effects:
+      - type: DAMAGE
+        amount: 1.0
+
+dialogue:
+  spawn:
+    - "§4Diablo §7se acomoda la capa y destapa un vino."
+  phase-2:
+    - "§4§l¡DIABLO SE ENFURECE!"
+  defeat:
+    - "§7Diablo cae. El vino se derrama por la mazmorra."
+
+music:
+  enabled: true
+  radius: 40
+  stop-when-leaving-radius: true
+  fallback-sound: minecraft:music.dragon
+  tracks:
+    phase-1: minecraft:music.dragon
+    phase-2: minecraft:music.dragon
+    phase-3: minecraft:music.dragon

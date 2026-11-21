@@ -1,0 +1,9 @@
+Doomlike Dungeons
+Authors: JaredBGreat (Jared Blackburn), Xiroc
+Source: https://github.com/BlackJar72/DoomlikeDungeons
+License: MIT (see LICENSE in this folder)
+
+BigCasares contains a Java reimplementation of the Doomlike Dungeons layout
+algorithm (room seeds, node routes, room growth, features and theme settings),
+adapted to emit structure templates at datapack build time instead of placing
+blocks in a live world.

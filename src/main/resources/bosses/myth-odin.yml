@@ -1,0 +1,142 @@
+# Odín, jefe mitico de la mazmorra nórdica. Toda la pelea es guionada en OdinEncounter (boss/odin): las fases las
+# decide el encuentro (fase 1: guardianes vivos; fase 2: embestidas) y no por la vida. Los umbrales de abajo solo
+# tienen que ser validos. Solo recibe daño mientras esta aturdido.
+id: myth-odin
+display-name: "ODÍN"
+maximum-health: 1000.0
+audience-radius: 48.0
+
+presentation:
+  java-model-key: bigcasares_myth_odin
+
+# 1000 de vida con un jugador, +500 por cada otro (hasta 4): cada ventana de aturdimiento rinde lo mismo por cabeza.
+raid-scaling:
+  enabled: true
+  base-health: 500.0
+  health-per-player: 500.0
+  minimum-players: 1
+  maximum-players: 4
+
+ui:
+  update-ticks: 5
+
+phases:
+  phase-2-at: 0.5
+  phase-3-at: 0.01
+
+category-weights:
+  physical: 1.0
+  magic: 0.5
+  movement: 0.5
+  defensive: 0.5
+
+animations:
+  idle:
+    type: LOOPING
+    duration-ticks: 64
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 0
+  walk:
+    type: LOOPING
+    duration-ticks: 30
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 2
+  cast:
+    type: ONE_SHOT
+    duration-ticks: 36
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  rage:
+    type: ONE_SHOT
+    duration-ticks: 50
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 30
+  idle_casco:
+    type: LOOPING
+    duration-ticks: 48
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 1
+  carga:
+    type: LOOPING
+    duration-ticks: 20
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 20
+  embestida:
+    type: LOOPING
+    duration-ticks: 12
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 25
+  stunned:
+    type: LOOPING
+    duration-ticks: 40
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 25
+  death:
+    type: ONE_SHOT
+    duration-ticks: 50
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 40
+
+# El esquema pide al menos una habilidad; OdinEncounter las suspende siempre (suspendsAbilities), asi que esta no
+# corre nunca: queda como reserva por si se quita el encuentro.
+abilities:
+  gungnir:
+    category: MAGIC
+    animation: cast
+    cooldown-seconds: 8.0
+    cast-time-seconds: 1.0
+    priority: 50
+    interruptible: false
+    conditions:
+      - type: TARGET_IN_RANGE
+        value: 6.0
+      - type: NOT_CASTING
+    targets:
+      type: NEAREST_PLAYER
+      radius: 6.0
+      max-targets: 1
+    telegraph:
+      type: CIRCLE
+      radius: 3.0
+      particle: minecraft:dust
+      warning-sound: minecraft:item.trident.thunder
+    effects:
+      - type: DAMAGE
+        amount: 6.0
+      - type: KNOCKBACK
+        strength: 1.0
+
+# Los titulos de cada fase los manda el encuentro (con la explicacion de que hacer).
+dialogue:
+  spawn:
+    - "§9Odín, Padre de Todos, se alza en su trono. §7Hugin y Munin graznan."
+  defeat:
+    - "§7Odín cae de rodillas. Los cuervos se callan y el Valhalla queda en silencio."
+
+music:
+  enabled: true
+  radius: 48
+  stop-when-leaving-radius: true
+  fallback-sound: minecraft:music.dragon
+  tracks:
+    phase-1: minecraft:music.dragon
+    phase-2: minecraft:music.dragon
+    phase-3: minecraft:music.dragon

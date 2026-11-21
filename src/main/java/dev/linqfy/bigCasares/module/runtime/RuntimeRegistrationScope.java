@@ -1,17 +1,17 @@
 package dev.linqfy.bigCasares.module.runtime;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public final class RuntimeRegistrationScope {
 
     private final RuntimeGeneration generation;
     private final String ownerId;
-    private final List<Registration> registrations = new ArrayList<>();
-    private final Set<String> resourceIds = new HashSet<>();
+    /** En orden de registro; por id para que {@link #forget} sea O(1) aunque haya muchas tareas vivas. */
+    private final Map<String, Registration> registrations = new LinkedHashMap<>();
     private boolean closed;
 
     public RuntimeRegistrationScope() {
@@ -35,10 +35,10 @@ public final class RuntimeRegistrationScope {
         if (closed) {
             throw new IllegalStateException("Runtime registration scope is already closed");
         }
-        if (!resourceIds.add(normalizedId)) {
+        if (registrations.containsKey(normalizedId)) {
             throw new IllegalArgumentException("Duplicate runtime resource id: " + normalizedId);
         }
-        registrations.add(new Registration(normalizedId, action));
+        registrations.put(normalizedId, new Registration(normalizedId, action));
     }
 
     public synchronized boolean forget(String resourceId) {
@@ -46,10 +46,10 @@ public final class RuntimeRegistrationScope {
         if (normalizedId.isEmpty()) {
             throw new IllegalArgumentException("resourceId must not be blank");
         }
-        if (closed || !resourceIds.remove(normalizedId)) {
+        if (closed) {
             return false;
         }
-        return registrations.removeIf(registration -> registration.resourceId().equals(normalizedId));
+        return registrations.remove(normalizedId) != null;
     }
 
     public RuntimeCleanupReport close() {
@@ -60,9 +60,8 @@ public final class RuntimeRegistrationScope {
             }
             closed = true;
             generation.retire();
-            snapshot = List.copyOf(registrations);
+            snapshot = List.copyOf(registrations.values());
             registrations.clear();
-            resourceIds.clear();
         }
 
         List<RuntimeCleanupOutcome> outcomes = new ArrayList<>(snapshot.size());
@@ -76,6 +75,11 @@ public final class RuntimeRegistrationScope {
             }
         }
         return new RuntimeCleanupReport(outcomes, false);
+    }
+
+    /** Recursos registrados y todavia no liberados ni olvidados. */
+    public synchronized int size() {
+        return registrations.size();
     }
 
     public RuntimeGeneration generation() {

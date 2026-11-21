@@ -18,8 +18,12 @@ import java.time.Instant;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.logging.Level;
 
 public final class PveBossModule implements PluginModule {
 
@@ -31,6 +35,10 @@ public final class PveBossModule implements PluginModule {
     private final Function<UUID, Boolean> resourcePackLoaded;
     private final JavaModelGateway javaModels;
     private final Map<String, PaperAbyssGuardianRuntime> runtimes = new LinkedHashMap<>();
+    private final Map<String, PaperAbyssGuardianRuntime> externalRuntimes = new LinkedHashMap<>();
+    private final Map<String, AbyssGuardianDefinition> externalDefinitions = new LinkedHashMap<>();
+    private List<AbyssGuardianDefinition> builtInDefinitions = List.of();
+    private RuntimeRegistrationScope activeScope;
     private BossDefinitionCatalog definitions = new BossDefinitionCatalog(List.of());
     private SahurRewardService rewardService;
     private SahurRewardListener rewardListener;
@@ -109,6 +117,7 @@ public final class PveBossModule implements PluginModule {
     @Override
     public void onEnable(RuntimeRegistrationScope scope) {
         enabled = true;
+        activeScope = scope;
         if (plugin == null) {
             return;
         }
@@ -132,6 +141,7 @@ public final class PveBossModule implements PluginModule {
             File file = new File(plugin.getDataFolder(), resourcePath);
             return loader.load(YamlConfiguration.loadConfiguration(file));
         }).toList();
+        builtInDefinitions = loaded;
         definitions = new BossDefinitionCatalog(loaded);
 
         for (AbyssGuardianDefinition definition : loaded) {
@@ -149,11 +159,7 @@ public final class PveBossModule implements PluginModule {
                             }
                         });
                     }
-                    if (plugin.getDangerModule() == null) return;
-                    plugin.getDangerModule().service().ifPresent(danger -> standings.forEach(standing -> {
-                        danger.awardBossPlacement(standing.playerId(), standing.placement());
-                        plugin.getDangerModule().refreshPresentation(standing.playerId());
-                    }));
+                    awardDangerPlacements(standings);
                 });
             runtime.start();
             runtimes.put(definition.id(), runtime);
@@ -162,12 +168,144 @@ public final class PveBossModule implements PluginModule {
         plugin.getLogger().info("PvE Boss System listo: Guardián del Abismo y Tung Tung Tung Sahur cargados.");
     }
 
+    private void awardDangerPlacements(List<BossDamageStanding> standings) {
+        if (plugin.getDangerModule() == null) return;
+        plugin.getDangerModule().service().ifPresent(danger -> standings.forEach(standing -> {
+            danger.awardBossPlacement(standing.playerId(), standing.placement());
+            plugin.getDangerModule().refreshPresentation(standing.playerId());
+        }));
+    }
+
+    /**
+     * Adds a scripted boss owned by another module. Its definition is {@code bosses/<bossId>.yml}, loaded like
+     * the built-in ones; the runtime lives until {@link #unregisterExternalBoss}, module disable or reload.
+     * Placements still feed the danger module; {@code onDefeat} receives the top three after a defeat.
+     *
+     * @throws IllegalStateException    when the module is disabled or has no live plugin (tests)
+     * @throws IllegalArgumentException for a built-in id, an id already registered or a mismatching definition
+     */
+    public void registerExternalBoss(
+        String bossId,
+        BossEncounterControllerFactory factory,
+        Consumer<List<BossDamageStanding>> onDefeat
+    ) {
+        String id = normalizeBossId(bossId);
+        Objects.requireNonNull(factory, "factory");
+        Objects.requireNonNull(onDefeat, "onDefeat");
+        if (!enabled) {
+            throw new IllegalStateException("PvE Boss System no está disponible.");
+        }
+        if (supportedBossIds().contains(id)) {
+            throw new IllegalArgumentException("El boss " + id + " es interno y no se puede registrar.");
+        }
+        if (externalRuntimes.containsKey(id)) {
+            throw new IllegalArgumentException("El boss " + id + " ya está registrado.");
+        }
+        if (plugin == null || activeScope == null) {
+            throw new IllegalStateException("Registrar un boss externo requiere el plugin en ejecución.");
+        }
+        String resourcePath = "bosses/" + id + ".yml";
+        File file = new File(plugin.getDataFolder(), resourcePath);
+        if (!file.exists()) {
+            plugin.saveResource(resourcePath, false);
+        }
+        AbyssGuardianDefinition definition = new AbyssGuardianDefinitionLoader()
+            .load(YamlConfiguration.loadConfiguration(file));
+        if (!normalizeBossId(definition.id()).equals(id)) {
+            throw new IllegalArgumentException(
+                resourcePath + " declara el id " + definition.id() + " en lugar de " + id);
+        }
+        List<AbyssGuardianDefinition> catalog = new java.util.ArrayList<>(builtInDefinitions);
+        catalog.addAll(externalDefinitions.values());
+        catalog.add(definition);
+        BossDefinitionCatalog updated = new BossDefinitionCatalog(catalog);
+        PaperAbyssGuardianRuntime runtime = new PaperAbyssGuardianRuntime(
+            plugin, definition, service, platformGateway, resourcePackLoaded, javaModels, standings -> {
+                try {
+                    onDefeat.accept(standings);
+                } catch (RuntimeException failure) {
+                    plugin.getLogger().log(Level.WARNING, "Fallo al premiar el boss " + id, failure);
+                }
+                awardDangerPlacements(standings);
+            }, factory);
+        runtime.start();
+        try {
+            activeScope.register(externalScopeId(id), runtime::stop);
+        } catch (RuntimeException failure) {
+            runtime.stop();
+            throw failure;
+        }
+        externalRuntimes.put(id, runtime);
+        externalDefinitions.put(id, definition);
+        definitions = updated;
+    }
+
+    /** Stops and forgets an external boss and all its live instances; unknown ids are ignored. */
+    public void unregisterExternalBoss(String bossId) {
+        String id = normalizeBossId(bossId);
+        PaperAbyssGuardianRuntime runtime = externalRuntimes.remove(id);
+        if (externalDefinitions.remove(id) != null) {
+            List<AbyssGuardianDefinition> catalog = new java.util.ArrayList<>(builtInDefinitions);
+            catalog.addAll(externalDefinitions.values());
+            definitions = new BossDefinitionCatalog(catalog);
+        }
+        if (runtime == null) {
+            return;
+        }
+        if (activeScope != null) {
+            activeScope.forget(externalScopeId(id));
+        }
+        runtime.stop();
+    }
+
+    public List<String> externalBossIds() {
+        return List.copyOf(externalRuntimes.keySet());
+    }
+
+    public boolean isActive(UUID bossInstanceId) {
+        Objects.requireNonNull(bossInstanceId, "bossInstanceId");
+        return allRuntimes().stream().anyMatch(runtime -> runtime.isActive(bossInstanceId));
+    }
+
+    /** Admin removal of one live boss instance: no ranking, no rewards. */
+    public boolean removeBoss(UUID bossInstanceId) {
+        Objects.requireNonNull(bossInstanceId, "bossInstanceId");
+        for (PaperAbyssGuardianRuntime runtime : allRuntimes()) {
+            if (runtime.removeBoss(bossInstanceId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<PaperAbyssGuardianRuntime> allRuntimes() {
+        List<PaperAbyssGuardianRuntime> all = new java.util.ArrayList<>(runtimes.values());
+        all.addAll(externalRuntimes.values());
+        return all;
+    }
+
+    private static String externalScopeId(String bossId) {
+        return "paper-boss-runtime-external-" + bossId;
+    }
+
+    private static String normalizeBossId(String bossId) {
+        String id = Objects.requireNonNull(bossId, "bossId").strip().toLowerCase(Locale.ROOT);
+        if (id.isEmpty()) {
+            throw new IllegalArgumentException("boss id must not be blank");
+        }
+        return id;
+    }
+
     @Override
     public void onDisable() {
         if (plugin != null) {
             runtimes.values().forEach(PaperAbyssGuardianRuntime::stop);
+            externalRuntimes.values().forEach(PaperAbyssGuardianRuntime::stop);
         }
         runtimes.clear();
+        externalRuntimes.clear();
+        externalDefinitions.clear();
+        activeScope = null;
         service.shutdown(Instant.now());
         enabled = false;
         RuntimeRegistrationScope scope = compatibilityScope;
@@ -200,17 +338,24 @@ public final class PveBossModule implements PluginModule {
         AbyssGuardianDefinition definition = definitions.require(bossId);
         PaperAbyssGuardianRuntime runtime = runtimes.get(definition.id());
         if (runtime == null) {
+            runtime = externalRuntimes.get(normalizeBossId(definition.id()));
+        }
+        if (runtime == null) {
             throw new IllegalStateException("El boss " + definition.displayName() + " no está disponible.");
         }
         return runtime.spawn(location);
     }
 
     public int activeBossCount() {
-        return runtimes.values().stream().mapToInt(PaperAbyssGuardianRuntime::activeCount).sum();
+        return allRuntimes().stream().mapToInt(PaperAbyssGuardianRuntime::activeCount).sum();
     }
 
     private void clearRuntimeState() {
         runtimes.clear();
+        externalRuntimes.clear();
+        externalDefinitions.clear();
+        builtInDefinitions = List.of();
+        activeScope = null;
         definitions = new BossDefinitionCatalog(List.of());
         rewardListener = null;
         rewardService = null;

@@ -1,0 +1,10 @@
+YUNG's Better Dungeons
+Authors: YUNGNICKYOUNG, Acarii
+Source: https://github.com/YUNG-GANG/YUNGs-Better-Dungeons
+License: GNU Lesser General Public License v3.0 (see LICENSE in this folder;
+the GNU General Public License v3.0 it supplements is in COPYING)
+
+The .nbt structure templates in this folder are unmodified copies from the mod.
+BigCasares reads them at datapack build time, replaces their placeholder blocks,
+rewrites their jigsaw connectors and re-themes their blocks for each culture;
+the modified templates exist only inside the generated datapack.

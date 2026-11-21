@@ -66,6 +66,7 @@ public final class PaperAbyssGuardianRuntime implements Listener {
     private final JavaModelGateway javaModels;
     private final BossModelAnimationMapper modelAnimations;
     private final Consumer<List<BossDamageStanding>> damageLeaderboard;
+    private final BossEncounterControllerFactory encounterFactory;
     private final PveTransientOwner transients = new PveTransientOwner();
     private final Map<UUID, Instance> instances = new LinkedHashMap<>();
     private BukkitTask scheduler;
@@ -90,6 +91,23 @@ public final class PaperAbyssGuardianRuntime implements Listener {
         JavaModelGateway javaModels,
         Consumer<List<BossDamageStanding>> damageLeaderboard
     ) {
+        this(plugin, definition, service, platformGateway, resourcePackLoaded, javaModels, damageLeaderboard, null);
+    }
+
+    /**
+     * @param encounterFactory scripted controller of every instance, or {@code null} for the plain ability
+     *                         runtime; a scripted boss is marked with its own persistent key
+     */
+    public PaperAbyssGuardianRuntime(
+        JavaPlugin plugin,
+        AbyssGuardianDefinition definition,
+        PveBossService service,
+        ClientPlatformGateway platformGateway,
+        Function<UUID, Boolean> resourcePackLoaded,
+        JavaModelGateway javaModels,
+        Consumer<List<BossDamageStanding>> damageLeaderboard,
+        BossEncounterControllerFactory encounterFactory
+    ) {
         this.plugin = plugin;
         this.definition = definition;
         this.service = service;
@@ -98,11 +116,12 @@ public final class PaperAbyssGuardianRuntime implements Listener {
         this.presentation = new BossPresentationService(new PaperBossPresentationAdapter());
         this.music = new BossMusicService(new PaperBossAudioGateway(plugin.getServer()));
         this.bossIdKey = new NamespacedKey(plugin,
-            definition.id().equals("tung-tung-sahur") ? "sahur_boss_id" : "pve_boss_id");
+            BossEncounterRules.markerKeyName(definition.id(), encounterFactory != null));
         this.animationService = new BossAnimationService(new PaperBossAnimationGateway(new dev.linqfy.bigCasares.modules.geyser.GeyserBossVisualGateway()));
         this.javaModels = java.util.Objects.requireNonNull(javaModels, "javaModels");
         this.modelAnimations = new BossModelAnimationMapper();
         this.damageLeaderboard = java.util.Objects.requireNonNull(damageLeaderboard, "damageLeaderboard");
+        this.encounterFactory = encounterFactory;
     }
 
     public void start() {
@@ -129,9 +148,16 @@ public final class PaperAbyssGuardianRuntime implements Listener {
         Warden boss = world.spawn(location, Warden.class, entity -> {
             ClientEntityPresentationRegistry.register(entity.getUniqueId(), "WARDEN", bossIdKey.getKey());
             entity.getPersistentDataContainer().set(bossIdKey, PersistentDataType.STRING, bossId.toString());
+            if (encounterFactory != null) {
+                // mob-scaling and Jeremy only know the two built-in boss keys; this is the marker they skip
+                entity.getPersistentDataContainer().set(
+                    new NamespacedKey(plugin, "custom_entity"), PersistentDataType.STRING, definition.id());
+            }
             entity.customName(LEGACY.deserialize(definition.displayName()));
             entity.setCustomNameVisible(false);
-            entity.setPersistent(true);
+            // a scripted boss is not saved with its chunk: its fight cannot be recovered after an unload or a
+            // restart, and a saved Warden would come back invisible with no runtime behind it
+            entity.setPersistent(encounterFactory == null);
             entity.setRemoveWhenFarAway(false);
             entity.setInvisible(true);
             entity.setAI(false);
@@ -199,8 +225,28 @@ public final class PaperAbyssGuardianRuntime implements Listener {
                 : null,
             1
         );
+        if (encounterFactory != null) {
+            try {
+                instance.encounter = new GuardedBossEncounter(
+                    java.util.Objects.requireNonNull(
+                        encounterFactory.create(new EncounterContext(instance)), "encounter controller"),
+                    (stage, failure) -> logEncounterFailure(bossId, stage, failure));
+            } catch (RuntimeException failure) {
+                animationService.removeBoss(bossId);
+                ClientEntityPresentationRegistry.unregister(boss.getUniqueId());
+                javaModels.close(model);
+                text.remove();
+                boss.remove();
+                throw failure;
+            }
+        }
         instances.put(bossId, instance);
         if (instance.sahur != null) instance.sahur.start();
+        if (instance.encounter != null && !instance.encounter.start()) {
+            // a controller that could not start would be ticked half-built; end the fight instead
+            remove(bossId, MusicStopReason.MODULE_DISABLED, true);
+            throw new IllegalStateException("El encuentro de " + definition.displayName() + " no pudo iniciar.");
+        }
         service.registerInstance(coordinator);
 
         BossAudience audience = audienceFor(boss);
@@ -211,6 +257,19 @@ public final class PaperAbyssGuardianRuntime implements Listener {
 
     public int activeCount() {
         return instances.size();
+    }
+
+    public boolean isActive(UUID bossInstanceId) {
+        return instances.containsKey(bossInstanceId);
+    }
+
+    /** Removes one live instance without publishing its damage ranking (no rewards). */
+    public boolean removeBoss(UUID bossInstanceId) {
+        if (!instances.containsKey(bossInstanceId)) {
+            return false;
+        }
+        remove(bossInstanceId, MusicStopReason.MODULE_DISABLED, true);
+        return true;
     }
 
     public void stop() {
@@ -250,12 +309,24 @@ public final class PaperAbyssGuardianRuntime implements Listener {
             projectile.remove();
             return;
         }
+        if (event instanceof EntityDamageByEntityEvent byEntity
+            && byEntity.getDamager() instanceof Projectile projectile
+            && instance.encounter != null
+            && instance.encounter.blocksProjectile(projectile)) {
+            event.setCancelled(true);
+            projectile.remove();
+            return;
+        }
         event.setCancelled(true);
-        double damage = event.getFinalDamage();
+        double damage = instance.encounter == null
+            ? event.getFinalDamage()
+            : instance.encounter.filterDamage(event, attackingPlayer(event).orElse(null), event.getFinalDamage());
+        if (damage <= 0.0 || !instances.containsKey(id)) {
+            return;
+        }
         instance.health.damage(damage);
         attackingPlayer(event).ifPresent(player -> {
-            instance.damageByPlayer.merge(player.getUniqueId(), damage, Double::sum);
-            instance.damageReachedAt.put(player.getUniqueId(), Instant.now());
+            recordDamage(instance, player, damage);
             if (instance.sahur != null
                 && event instanceof EntityDamageByEntityEvent byEntity
                 && !(byEntity.getDamager() instanceof Projectile)
@@ -309,6 +380,12 @@ public final class PaperAbyssGuardianRuntime implements Listener {
     }
 
     private void updateInstance(UUID bossId, Instance instance, Instant now) {
+        if (instance.encounter != null) {
+            instance.encounter.tick(now);
+            if (!instances.containsKey(bossId)) {
+                return;
+            }
+        }
         Location loc = instance.boss.getLocation();
 
         animationService.tick(bossId, definition.updateTicks());
@@ -317,7 +394,9 @@ public final class PaperAbyssGuardianRuntime implements Listener {
 
         double health = instance.health.current();
         double fraction = instance.health.fraction();
-        int phase = definition.phaseFor(fraction);
+        int phase = instance.encounter == null
+            ? definition.phaseFor(fraction)
+            : instance.encounter.phase(definition.phaseFor(fraction));
         if (phase != instance.phase) {
             instance.phase = phase;
             if (phase == 3) {
@@ -339,7 +418,9 @@ public final class PaperAbyssGuardianRuntime implements Listener {
         BossAbilityContext context = new BossAbilityContext(
             position(loc), health, instance.health.maximum(), phase,
             candidates(instance), currentTarget(instance.boss).orElse(null));
-        Optional<BossAbilityRuntime> runtime = instance.coordinator.tick(now, context);
+        Optional<BossAbilityRuntime> runtime = instance.encounter != null && instance.encounter.suspendsAbilities()
+            ? Optional.empty()
+            : instance.coordinator.tick(now, context);
         if (runtime.isPresent()) {
             BossAbilityRuntime rt = runtime.get();
             BossAbilityDefinition ability = definition.abilities().stream()
@@ -372,10 +453,16 @@ public final class PaperAbyssGuardianRuntime implements Listener {
                 : definition.audienceRadius() + 1.0;
             boolean customAudio = platformGateway.resolvePlatform(player.getUniqueId()) == ClientPlatform.BEDROCK
                 || resourcePackLoaded.apply(player.getUniqueId());
+            BossMusicTrack track = instance.encounter == null
+                ? definition.musicForPhase(phase)
+                : BossEncounterRules.musicFor(definition.musicByPhase(), phase).orElse(null);
+            if (track == null) {
+                continue;
+            }
             music.update(
                 bossId,
                 player.getUniqueId(),
-                definition.musicForPhase(phase),
+                track,
                 distance,
                 definition.audienceRadius(),
                 customAudio,
@@ -395,6 +482,9 @@ public final class PaperAbyssGuardianRuntime implements Listener {
         }
         for (BossAbilityEffectDefinition effect : ability.effects()) {
             if (instance.sahur != null && instance.sahur.execute(effect.type(), runtime.targets())) {
+                continue;
+            }
+            if (instance.encounter != null && instance.encounter.execute(effect, List.copyOf(runtime.targets()))) {
                 continue;
             }
             for (UUID targetId : runtime.targets()) {
@@ -483,6 +573,8 @@ public final class PaperAbyssGuardianRuntime implements Listener {
     private void remove(UUID bossId, MusicStopReason reason, boolean removeBoss) {
         Instance instance = instances.remove(bossId);
         if (instance != null) {
+            // First, and guarded: a scripted controller always gets to remove what it owns.
+            if (instance.encounter != null) instance.encounter.stop();
             instance.coordinator.cancelAll(Instant.now());
             presentation.defeatBoss(bossId);
             music.stopBoss(bossId, reason);
@@ -511,6 +603,28 @@ public final class PaperAbyssGuardianRuntime implements Listener {
                 .toList()
         );
         damageLeaderboard.accept(standings);
+    }
+
+    private void recordDamage(Instance instance, Player player, double damage) {
+        instance.damageByPlayer.merge(player.getUniqueId(), damage, Double::sum);
+        instance.damageReachedAt.put(player.getUniqueId(), Instant.now());
+    }
+
+    /** Same defeat path as a lethal hit: the Warden dies, so {@link #onDeath} publishes the ranking. */
+    private void finishDefeat(Instance instance) {
+        if (instance.boss.isValid() && !instance.boss.isDead()) {
+            instance.boss.setHealth(0.0);
+        }
+        if (instances.get(instance.id) == instance) {
+            // The death event did not fire (the entity was already gone): finish the defeat directly.
+            publishDamageLeaderboard(instance);
+            remove(instance.id, MusicStopReason.BOSS_DEFEATED, true);
+        }
+    }
+
+    private void logEncounterFailure(UUID bossId, String stage, RuntimeException failure) {
+        plugin.getLogger().log(java.util.logging.Level.WARNING,
+            "El controlador del boss " + definition.id() + " (" + bossId + ") falló en " + stage, failure);
     }
 
     private List<Player> eligiblePlayers(Warden boss) {
@@ -702,6 +816,7 @@ public final class PaperAbyssGuardianRuntime implements Listener {
         private final Map<UUID, Double> damageByPlayer;
         private final Map<UUID, Instant> damageReachedAt;
         private final PaperSahurCombatController sahur;
+        private GuardedBossEncounter encounter;
         private int phase;
 
         private Instance(
@@ -726,6 +841,104 @@ public final class PaperAbyssGuardianRuntime implements Listener {
             this.damageReachedAt = damageReachedAt;
             this.sahur = sahur;
             this.phase = phase;
+        }
+    }
+
+    private final class EncounterContext implements BossEncounterContext {
+        private final Instance instance;
+
+        private EncounterContext(Instance instance) {
+            this.instance = instance;
+        }
+
+        private boolean active() {
+            return instances.get(instance.id) == instance;
+        }
+
+        @Override
+        public JavaPlugin plugin() {
+            return plugin;
+        }
+
+        @Override
+        public UUID bossInstanceId() {
+            return instance.id;
+        }
+
+        @Override
+        public AbyssGuardianDefinition definition() {
+            return definition;
+        }
+
+        @Override
+        public Warden boss() {
+            return instance.boss;
+        }
+
+        @Override
+        public JavaModelGateway models() {
+            return javaModels;
+        }
+
+        @Override
+        public JavaModelHandle model() {
+            return instance.model;
+        }
+
+        @Override
+        public void animate(String animation) {
+            animateModel(instance.model, animation);
+        }
+
+        @Override
+        public List<Player> players() {
+            return eligiblePlayers(instance.boss);
+        }
+
+        @Override
+        public boolean isBedrock(UUID playerId) {
+            return platformGateway.resolvePlatform(playerId) == ClientPlatform.BEDROCK;
+        }
+
+        @Override
+        public double health() {
+            return instance.health.current();
+        }
+
+        @Override
+        public double maximumHealth() {
+            return instance.health.maximum();
+        }
+
+        @Override
+        public void damage(double amount, Player attributedTo) {
+            double admitted = BossEncounterRules.admittedDamage(amount);
+            if (admitted <= 0.0 || !active()) {
+                return;
+            }
+            instance.health.damage(admitted);
+            if (attributedTo != null) {
+                recordDamage(instance, attributedTo, admitted);
+            }
+            if (instance.health.destroyed()) {
+                finishDefeat(instance);
+            }
+        }
+
+        @Override
+        public void heal(double amount) {
+            if (Double.isFinite(amount) && amount > 0.0 && active() && !instance.health.destroyed()) {
+                instance.health.heal(amount);
+            }
+        }
+
+        @Override
+        public void defeat() {
+            if (!active()) {
+                return;
+            }
+            instance.health.damage(instance.health.current());
+            finishDefeat(instance);
         }
     }
 

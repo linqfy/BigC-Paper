@@ -20,6 +20,14 @@ public final class BossHealthPool {
         return current;
     }
 
+    public double heal(double amount) {
+        if (!Double.isFinite(amount) || amount < 0.0) {
+            throw new IllegalArgumentException("heal must be finite and non-negative");
+        }
+        current = Math.min(maximum, current + amount);
+        return current;
+    }
+
     public double current() {
         return current;
     }

@@ -1,0 +1,144 @@
+# Hun Camé y Vucub Camé, los señores de Xibalbá: jefe mitico de la mazmorra mesoamericana. Toda la pelea es guionada
+# en CameEncounter (boss/came). Fase 1 = el juego de pelota (solo los goles en el aro les hacen daño); fase 2 = los
+# dos atacan juntos, cada uno con su vida, y se reviven si no caen a la vez. Las fases las decide el encuentro y no la
+# vida: los umbrales de abajo solo tienen que ser validos. La barra es la suma de las vidas de los dos.
+id: myth-came
+display-name: "HUN CAMÉ Y VUCUB CAMÉ"
+maximum-health: 720.0
+audience-radius: 48.0
+
+presentation:
+  java-model-key: bigcasares_myth_came
+
+# 720 de vida con un jugador, +320 por cada otro (hasta 4). Cada señor tiene la mitad; los tres goles les sacan un 30%.
+raid-scaling:
+  enabled: true
+  base-health: 400.0
+  health-per-player: 320.0
+  minimum-players: 1
+  maximum-players: 4
+
+ui:
+  update-ticks: 5
+
+phases:
+  phase-2-at: 0.5
+  phase-3-at: 0.01
+
+category-weights:
+  physical: 1.0
+  magic: 0.5
+  movement: 0.5
+  defensive: 0.5
+
+# Clips de Hun Camé (bigcasares_myth_came); Vucub Camé (bigcasares_myth_came_vucub) tiene los mismos.
+animations:
+  idle:
+    type: LOOPING
+    duration-ticks: 56
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 0
+  walk:
+    type: LOOPING
+    duration-ticks: 28
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 2
+  dash:
+    type: LOOPING
+    duration-ticks: 12
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 8
+  revive:
+    type: LOOPING
+    duration-ticks: 40
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 12
+  attack:
+    type: ONE_SHOT
+    duration-ticks: 22
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  slam:
+    type: ONE_SHOT
+    duration-ticks: 24
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  throw:
+    type: ONE_SHOT
+    duration-ticks: 36
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  rage:
+    type: ONE_SHOT
+    duration-ticks: 40
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 30
+  death:
+    type: ONE_SHOT
+    duration-ticks: 32
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 40
+
+# El esquema pide al menos una habilidad; CameEncounter las suspende siempre (suspendsAbilities), asi que esta no
+# corre nunca: queda como reserva por si se quita el encuentro.
+abilities:
+  golpe_de_xibalba:
+    category: PHYSICAL
+    animation: attack
+    cooldown-seconds: 6.0
+    cast-time-seconds: 1.0
+    priority: 50
+    interruptible: false
+    conditions:
+      - type: TARGET_IN_RANGE
+        value: 4.0
+      - type: NOT_CASTING
+    targets:
+      type: NEAREST_PLAYER
+      radius: 4.0
+      max-targets: 1
+    telegraph:
+      type: CIRCLE
+      radius: 3.0
+      particle: minecraft:dust
+      warning-sound: minecraft:entity.wither_skeleton.ambient
+    effects:
+      - type: DAMAGE
+        amount: 6.0
+      - type: KNOCKBACK
+        strength: 1.0
+
+# Los titulos de cada fase los manda el encuentro (con la explicacion de que hacer).
+dialogue:
+  spawn:
+    - "§2Hun Camé y Vucub Camé, señores de Xibalbá, te esperan en la cancha de pelota."
+  defeat:
+    - "§7Los dos señores de Xibalbá caen juntos. Esta vez nadie los levanta."
+
+music:
+  enabled: true
+  radius: 48
+  stop-when-leaving-radius: true
+  fallback-sound: minecraft:music.dragon
+  tracks:
+    phase-1: minecraft:music.dragon
+    phase-2: minecraft:music.dragon
+    phase-3: minecraft:music.dragon

@@ -1,0 +1,18 @@
+# Aspecto provisorio: modelo vanilla hasta que lleguen las texturas finales. Se gana solo con el pacto de Mandinga
+# (jefe Pachamama); sin receta. La guitarra no se rompe (el listener la marca irrompible y cancela el desgaste).
+id: mandinga_guitar
+mechanic: mythic-guitar
+material: CROSSBOW
+item-model: minecraft:crossbow
+display:
+  translation-key: item.bigcasares.mandinga_guitar
+  fallback-name: "Guitarra de Mandinga"
+  lore:
+    - "§7Click derecho: dispara una nota musical."
+    - "§7Nunca se rompe."
+    - ""
+    - "§4La pagaste con un corazón."
+max-stack-size: 1
+appearance:
+  java-item-definition: java/assets/bigcasares/items/keep_inventory_totem.json
+  bedrock-texture: bedrock/textures/item/keep_inventory_totem.png

@@ -1,0 +1,150 @@
+# Enlil, jefe mitico de la mazmorra mesopotamica. Las fases, las rafagas, los tornados, la inundacion y las tablillas
+# los maneja su encuentro (boss/enlil/EnlilFight); los umbrales de abajo solo tienen que ser validos (la fase la decide
+# el encuentro: 1 hasta el 50 %, 2 despues). La unica habilidad de la lista es el manotazo de viento que suelta cuando
+# esta en tierra en la fase 1 (el encuentro suspende la lista el resto del tiempo).
+id: myth-enlil
+display-name: "ENLIL"
+maximum-health: 1400.0
+audience-radius: 48.0
+
+presentation:
+  java-model-key: bigcasares_myth_enlil
+
+raid-scaling:
+  enabled: true
+  base-health: 1000.0
+  health-per-player: 400.0
+  minimum-players: 1
+  maximum-players: 6
+
+ui:
+  update-ticks: 5
+
+phases:
+  phase-2-at: 0.5
+  phase-3-at: 0.01
+
+category-weights:
+  physical: 1.0
+  magic: 0.5
+  movement: 0.5
+  defensive: 0.5
+
+animations:
+  idle:
+    type: LOOPING
+    duration-ticks: 48
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 0
+  walk:
+    type: LOOPING
+    duration-ticks: 24
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 2
+  cast:
+    type: ONE_SHOT
+    duration-ticks: 24
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  tornado:
+    type: ONE_SHOT
+    duration-ticks: 32
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  descend:
+    type: ONE_SHOT
+    duration-ticks: 20
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 15
+  land:
+    type: ONE_SHOT
+    duration-ticks: 14
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 15
+  ascend:
+    type: ONE_SHOT
+    duration-ticks: 20
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 15
+  rage:
+    type: ONE_SHOT
+    duration-ticks: 40
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 30
+  fall:
+    type: ONE_SHOT
+    duration-ticks: 28
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 25
+  death:
+    type: ONE_SHOT
+    duration-ticks: 60
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 40
+
+abilities:
+  soplo:
+    category: PHYSICAL
+    animation: cast
+    cooldown-seconds: 6.0
+    cast-time-seconds: 0.9
+    priority: 50
+    interruptible: false
+    conditions:
+      - type: TARGET_IN_RANGE
+        value: 4.0
+      - type: NOT_CASTING
+    targets:
+      type: ALL_IN_RADIUS
+      radius: 4.0
+    telegraph:
+      type: CIRCLE
+      radius: 4.0
+      particle: minecraft:cloud
+      warning-sound: minecraft:entity.breeze.inhale
+    effects:
+      - type: DAMAGE
+        amount: 4.0
+      - type: KNOCKBACK
+        strength: 1.1
+      - type: SOUND
+        sound: minecraft:entity.breeze.wind_burst
+
+dialogue:
+  spawn:
+    - "§bEnlil, señor del viento, se eleva sobre la arena."
+    - "§7Las flechas no lo alcanzan: esperá a que baje a tierra."
+  phase-2:
+    - "§c¡Enlil se enfurece! §9El diluvio cae sobre la arena."
+  defeat:
+    - "§7Enlil cae. El viento se calma y el agua se retira."
+
+music:
+  enabled: true
+  radius: 48
+  stop-when-leaving-radius: true
+  fallback-sound: minecraft:music.dragon
+  tracks:
+    phase-1: minecraft:music.dragon
+    phase-2: minecraft:music.dragon
+    phase-3: minecraft:music.dragon

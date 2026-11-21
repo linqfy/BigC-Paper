@@ -1,0 +1,146 @@
+# Enma, jefe mitico de la mazmorra japonesa. Toda la pelea es guionada en EnmaEncounter (boss/enma): las fases las
+# decide el encuentro y no la vida. Fase 1: el Espejo de Johari saca reflejos de cada jugador; mientras quede uno el
+# espejo no se rompe y mientras el espejo este en pie Enma no recibe dano (romperlo le saca el 15% de la vida).
+# Fase 2: golpe de shaku que saca oni, giro con el shaku y patrones de balas. Los umbrales de abajo solo tienen que
+# ser validos.
+id: myth-enma
+display-name: "ENMA"
+maximum-health: 1500.0
+audience-radius: 48.0
+
+presentation:
+  java-model-key: bigcasares_myth_enma
+
+# 1500 de vida con un jugador, +500 por cada otro (hasta 4)
+raid-scaling:
+  enabled: true
+  base-health: 1000.0
+  health-per-player: 500.0
+  minimum-players: 1
+  maximum-players: 4
+
+ui:
+  update-ticks: 5
+
+phases:
+  phase-2-at: 0.5
+  phase-3-at: 0.01
+
+category-weights:
+  physical: 1.0
+  magic: 0.5
+  movement: 0.5
+  defensive: 0.5
+
+animations:
+  idle:
+    type: LOOPING
+    duration-ticks: 60
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 0
+  walk:
+    type: LOOPING
+    duration-ticks: 32
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 2
+  attack:
+    type: ONE_SHOT
+    duration-ticks: 20
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  cast:
+    type: ONE_SHOT
+    duration-ticks: 32
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  mirror:
+    type: ONE_SHOT
+    duration-ticks: 30
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 10
+  slam:
+    type: ONE_SHOT
+    duration-ticks: 36
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 15
+  spin:
+    type: ONE_SHOT
+    duration-ticks: 60
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 15
+  rage:
+    type: ONE_SHOT
+    duration-ticks: 50
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 30
+  death:
+    type: ONE_SHOT
+    duration-ticks: 50
+    scale: [1.0, 1.0]
+    y-offset: [0.0, 0.0]
+    y-rotation: [0, 0]
+    priority: 40
+
+# El esquema pide al menos una habilidad; EnmaEncounter las suspende siempre (suspendsAbilities), asi que esta no
+# corre nunca: queda como reserva por si se quita el encuentro.
+abilities:
+  veredicto:
+    category: PHYSICAL
+    animation: attack
+    cooldown-seconds: 6.0
+    cast-time-seconds: 1.0
+    priority: 50
+    interruptible: false
+    conditions:
+      - type: TARGET_IN_RANGE
+        value: 5.0
+      - type: NOT_CASTING
+    targets:
+      type: ALL_IN_RADIUS
+      radius: 5.0
+      max-targets: 4
+    telegraph:
+      type: CIRCLE
+      radius: 5.0
+      particle: minecraft:flame
+      warning-sound: minecraft:block.bell.use
+    effects:
+      - type: DAMAGE
+        amount: 7.0
+      - type: KNOCKBACK
+        strength: 1.2
+
+# Los titulos de la fase 1 y del quiebre del espejo los manda el encuentro (con la explicacion de que hacer).
+dialogue:
+  spawn:
+    - "§4Enma, rey del Yomi, abre el libro de tus pecados. §7Un espejo de bronce brilla a su lado."
+  phase-2:
+    - "§4§l¡EL JUICIO DE ENMA!"
+  defeat:
+    - "§7Enma deja caer su shaku. El juicio queda suspendido... por ahora."
+
+music:
+  enabled: true
+  radius: 48
+  stop-when-leaving-radius: true
+  fallback-sound: minecraft:music.dragon
+  tracks:
+    phase-1: minecraft:music.dragon
+    phase-2: minecraft:music.dragon
+    phase-3: minecraft:music.dragon

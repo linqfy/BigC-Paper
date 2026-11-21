@@ -1,0 +1,46 @@
+# Mazmorras míticas: nueve culturas, cada una con su mazmorra, sus mobs y su jefe. Cada cultura suma su Fragmento de
+# Odio (lo sueltan sus mobs según fragment-chance) y el Invocador que llama al jefe desde el altar.
+# Se copia solo si falta; los cambios se aplican con /bc reload. Lo que falte o sea inválido usa el valor por defecto.
+
+altar:
+  # Bloque de la sala del jefe donde se usa el Invocador (click derecho).
+  material: LODESTONE
+  # Altura extra (en bloques) sobre el altar donde aparece el jefe.
+  boss-offset-y: 0.0
+
+spawns:
+  # Máximo de mobs de mazmorra vivos alrededor de un spawner o spawn natural (en cap-radius bloques).
+  spawner-cap: 6
+  cap-radius: 24
+  # Probabilidad de que un hostil natural adentro de la mazmorra se cambie por un mob de la cultura (si no, no nace).
+  natural-replace-chance: 0.6
+
+fragments:
+  # Cada nivel de Botín suma esto a la chance de soltar el fragmento.
+  looting-bonus-per-level: 0.02
+
+worldgen:
+  # false: no instala el datapack de las mazmorras. Uno ya instalado hay que borrarlo a mano de world/datapacks.
+  install: true
+
+rewards:
+  # Cuántos de los que más daño hicieron se llevan premio (el 1.º toda la experiencia, el 2.º 75 %, el resto 50 %).
+  top-players: 3
+  # Por jefe: experiencia (puntos) y botín vanilla (MATERIAL:cantidad). Si un jefe no está, usa el premio por defecto.
+  myth-zeus: {xp: 1500, items: ["DIAMOND:4", "GOLDEN_APPLE:2", "NETHERITE_SCRAP:1", "TRIDENT:1"]}
+  myth-odin: {xp: 1500, items: ["DIAMOND:4", "GOLDEN_APPLE:2", "NETHERITE_SCRAP:1", "TOTEM_OF_UNDYING:1"]}
+  myth-diablo: {xp: 1500, items: ["DIAMOND:4", "GOLDEN_APPLE:2", "NETHERITE_SCRAP:1", "GOLD_BLOCK:3"]}
+  myth-horus: {xp: 1500, items: ["DIAMOND:4", "GOLDEN_APPLE:2", "NETHERITE_SCRAP:1", "ENCHANTED_GOLDEN_APPLE:1"]}
+  myth-enlil: {xp: 1500, items: ["DIAMOND:4", "GOLDEN_APPLE:2", "NETHERITE_SCRAP:1", "LAPIS_BLOCK:4"]}
+  myth-enma: {xp: 1500, items: ["DIAMOND:4", "GOLDEN_APPLE:2", "NETHERITE_SCRAP:1", "IRON_BLOCK:4"]}
+  myth-came: {xp: 1500, items: ["DIAMOND:4", "GOLDEN_APPLE:2", "NETHERITE_SCRAP:1", "EMERALD_BLOCK:2"]}
+  myth-iblis: {xp: 1500, items: ["DIAMOND:4", "GOLDEN_APPLE:2", "NETHERITE_SCRAP:1", "BLAZE_ROD:8"]}
+  myth-pachamama: {xp: 1500, items: ["DIAMOND:4", "GOLDEN_APPLE:2", "NETHERITE_SCRAP:1", "AMETHYST_BLOCK:4"]}
+
+# Para cambiar un mob: mobs.<id>.health|damage|speed|fragment-chance|weight (weight = peso en el sorteo de spawns).
+# Ids: minotaur cerberus erinys draugr dwarf nidhogg hel treasure_dragon kobold goblin ghost ammit apophis mummy
+#      ereshkigal galla oni cave_yokai shikome xibalba_lord xolotl camazotz_bat ghul djinn supay salamanca_viper
+#      salamanca_goat
+# Ejemplo:
+#   minotaur: {health: 50, damage: 8, fragment-chance: 0.1}
+mobs: {}

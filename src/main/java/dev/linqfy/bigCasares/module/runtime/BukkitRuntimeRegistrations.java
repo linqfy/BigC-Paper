@@ -116,8 +116,9 @@ public final class BukkitRuntimeRegistrations {
         long periodTicks
     ) {
         String ownershipId = scheduledOwnershipId(resourceId);
-        return ownTask(ownershipId,
+        BukkitTask task = ownTask(ownershipId,
             access.scheduleRepeating(scope.guard(callback), delayTicks, periodTicks));
+        return new ForgettingTask(task, () -> scope.forget(ownershipId));
     }
 
     public Runnable guard(Runnable callback) {
@@ -298,12 +299,56 @@ public final class BukkitRuntimeRegistrations {
                 rollback(failure, () -> cancel(task));
                 throw failure;
             }
-            return task;
+            return new ForgettingTask(task, this::complete);
         }
 
         private synchronized void complete() {
             completed = true;
             scope.forget(resourceId);
+        }
+    }
+
+    /**
+     * La tarea que recibe quien programa: cancelarla tambien suelta su registro en el scope, asi las tareas que se
+     * cancelan solas (o que cancela su dueno antes del cierre) no se acumulan hasta que se apague el modulo.
+     */
+    private static final class ForgettingTask implements BukkitTask {
+
+        private final BukkitTask delegate;
+        private final Runnable forget;
+
+        private ForgettingTask(BukkitTask delegate, Runnable forget) {
+            this.delegate = delegate;
+            this.forget = forget;
+        }
+
+        @Override
+        public int getTaskId() {
+            return delegate.getTaskId();
+        }
+
+        @Override
+        public Plugin getOwner() {
+            return delegate.getOwner();
+        }
+
+        @Override
+        public boolean isSync() {
+            return delegate.isSync();
+        }
+
+        @Override
+        public boolean isCancelled() {
+            return delegate.isCancelled();
+        }
+
+        @Override
+        public void cancel() {
+            try {
+                delegate.cancel();
+            } finally {
+                forget.run();
+            }
         }
     }
 

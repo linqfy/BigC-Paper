@@ -1,0 +1,16 @@
+# Aspecto provisorio: modelo vanilla hasta que lleguen las texturas finales.
+id: hate_fragment_egyptian
+mechanic: mythic-fragment
+material: ECHO_SHARD
+item-model: minecraft:gold_nugget
+display:
+  translation-key: item.bigcasares.hate_fragment_egyptian
+  fallback-name: "Fragmento de Odio de Horus"
+  lore:
+    - "§7Lo sueltan los mobs de la mazmorra egipcia."
+    - "§7Juntá 4 en la mesa de crafteo para armar"
+    - "§7el Invocador de Horus."
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/bigcasares/items/crossbow_echo_shard.json
+  bedrock-texture: bedrock/textures/item/crossbow_echo_shard.png

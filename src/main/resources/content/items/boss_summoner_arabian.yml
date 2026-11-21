@@ -1,0 +1,26 @@
+# Aspecto provisorio: modelo vanilla hasta que lleguen las texturas finales.
+id: boss_summoner_arabian
+mechanic: mythic-summoner
+material: NETHER_STAR
+item-model: minecraft:fire_charge
+display:
+  translation-key: item.bigcasares.boss_summoner_arabian
+  fallback-name: "Invocador de Iblís"
+  lore:
+    - "§7Click derecho sobre el altar de la sala"
+    - "§7del jefe, dentro de la mazmorra árabe."
+    - ""
+    - "§5Despierta a Iblís."
+max-stack-size: 16
+recipe:
+  key: boss_summoner_arabian_recipe
+  type: shapeless
+  result-amount: 1
+  ingredients:
+    - bigcasares:hate_fragment_arabian
+    - bigcasares:hate_fragment_arabian
+    - bigcasares:hate_fragment_arabian
+    - bigcasares:hate_fragment_arabian
+appearance:
+  java-item-definition: java/assets/bigcasares/items/keep_inventory_totem.json
+  bedrock-texture: bedrock/textures/item/keep_inventory_totem.png
