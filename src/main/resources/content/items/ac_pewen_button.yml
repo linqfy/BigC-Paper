@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pewen_button
+mechanic: alexs-caves
+material: OAK_BUTTON
+item-model: alexscaves:pewen_button
+display:
+  translation-key: item.alexscaves.pewen_button
+  fallback-name: "Botón de pehuén"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_pewen_button_recipe
+  result-amount: 1
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_pewen_planks
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pewen_button.json
+  bedrock-texture: bedrock/textures/alexscaves/block/pewen/pewen_planks.png

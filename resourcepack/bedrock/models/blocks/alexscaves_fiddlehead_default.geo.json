@@ -1,0 +1,116 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_fiddlehead_default",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -7.2,
+                0.0,
+                0
+              ],
+              "size": [
+                14.4,
+                16.0,
+                0
+              ],
+              "pivot": [
+                0,
+                8,
+                0
+              ],
+              "rotation": [
+                0,
+                -45,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_fiddlehead"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_fiddlehead"
+                }
+              }
+            },
+            {
+              "origin": [
+                0,
+                0.0,
+                -7.2
+              ],
+              "size": [
+                0,
+                16.0,
+                14.4
+              ],
+              "pivot": [
+                0,
+                8,
+                0
+              ],
+              "rotation": [
+                0,
+                -45,
+                0
+              ],
+              "uv": {
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_fiddlehead"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_fiddlehead"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

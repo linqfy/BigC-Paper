@@ -1,0 +1,27 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.alexscaves.relentless_darkness"
+  },
+  "effects": {},
+  "max_cost": {
+    "base": 31,
+    "per_level_above_first": 20
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 20
+  },
+  "slots": [
+    "mainhand",
+    "offhand"
+  ],
+  "supported_items": "minecraft:bow",
+  "weight": 1,
+  "exclusive_set": [
+    "alexscaves:dark_nock",
+    "alexscaves:precise_volley",
+    "alexscaves:twilight_perfection"
+  ]
+}

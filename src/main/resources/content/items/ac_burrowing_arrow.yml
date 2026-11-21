@@ -1,0 +1,22 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_burrowing_arrow
+mechanic: alexs-caves
+material: ARROW
+item-model: alexscaves:burrowing_arrow
+display:
+  translation-key: item.alexscaves.burrowing_arrow
+  fallback-name: "Flecha agujereadora"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_burrowing_arrow_recipe
+  result-amount: 4
+  shape: ["T", "S", "D"]
+  ingredients:
+    T: bigcasares:ac_corrodent_teeth
+    S: STICK
+    D: bigcasares:ac_dark_tatters
+appearance:
+  java-item-definition: java/assets/alexscaves/items/burrowing_arrow.json
+  bedrock-texture: bedrock/textures/alexscaves/item/burrowing_arrow.png

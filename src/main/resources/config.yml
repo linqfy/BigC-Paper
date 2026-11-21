@@ -62,6 +62,9 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+  # Alex's Caves (recreación no oficial). Ajustes en alexs-caves.yml. Créditos: /alexscaves creditos
+  alexs-caves:
+    enabled: false
 
 # El Gran Casares. Las fichas son la moneda de Vault (hace falta Vault y un proveedor de economía).
 # Las atracciones se arman con /casino construir o /casino colocar <tipo>; se guardan en casino/installations.yml.

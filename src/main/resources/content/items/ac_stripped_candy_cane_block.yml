@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_stripped_candy_cane_block
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:stripped_candy_cane_block
+display:
+  translation-key: item.alexscaves.stripped_candy_cane_block
+  fallback-name: "Bloque de bastón de caramelo sin corteza"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/stripped_candy_cane_block.json
+  bedrock-texture: bedrock/textures/alexscaves/block/candy_cane_stripped.png

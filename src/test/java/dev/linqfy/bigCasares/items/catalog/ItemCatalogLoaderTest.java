@@ -48,6 +48,48 @@ class ItemCatalogLoaderTest {
     Path tempDir;
 
     @Test
+    void loadsArmorAndKeepsRevisionsOfItemsWithoutIt() throws Exception {
+        Files.writeString(tempDir.resolve("helmet.yml"), """
+            id: ac_primordial_helmet
+            mechanic: alexs-caves
+            material: LEATHER_HELMET
+            item-model: alexscaves:primordial_helmet
+            display:
+              translation-key: item.alexscaves.primordial_helmet
+              fallback-name: Casco primordial
+              lore: []
+            max-stack-size: 1
+            components:
+              max-damage: 220
+              armor:
+                slot: head
+                defense: 2.0
+                equipment-model: alexscaves:primordial
+            appearance:
+              java-item-definition: java/assets/alexscaves/items/primordial_helmet.json
+              bedrock-texture: bedrock/textures/alexscaves/item/primordial_helmet.png
+            """);
+
+        ItemArmorDefinition armor = new ItemCatalogLoader().load(tempDir).require("ac_primordial_helmet")
+            .armorDefinition().orElseThrow();
+
+        assertEquals("HEAD", armor.slot());
+        assertEquals(2.0, armor.defense());
+        assertEquals(0.0, armor.toughness(), "toughness defaults to 0");
+        assertEquals("alexscaves:primordial", armor.equipmentModel());
+        assertThrows(IllegalArgumentException.class, () -> new ItemArmorDefinition("OFFHAND", 1, 0, null));
+        assertThrows(IllegalArgumentException.class, () -> new ItemArmorDefinition("HEAD", -1, 0, null));
+        assertThrows(IllegalArgumentException.class, () -> new ItemArmorDefinition("HEAD", 1, 0, null, 1.5, null, 0));
+        ItemArmorDefinition diving = new ItemArmorDefinition("LEGS", 5, 0, null, 0.5, "copper_ingot", 25);
+        assertEquals("COPPER_INGOT", diving.repairItem());
+        assertEquals(0.5, diving.waterEfficiency());
+        assertEquals(25, diving.enchantability());
+        assertEquals("ItemArmorDefinition[slot=HEAD, defense=2.0, toughness=0.5, equipmentModel=alexscaves:hazmat_suit]",
+            new ItemArmorDefinition("HEAD", 2, 0.5, "alexscaves:hazmat_suit").revisionKey());
+        assertTrue(diving.revisionKey().contains("repair=COPPER_INGOT"));
+    }
+
+    @Test
     void loadsSahursBatCombatValuesWithoutARecipe() throws Exception {
         Files.writeString(tempDir.resolve("sahurs_bat.yml"), """
             id: sahurs_bat

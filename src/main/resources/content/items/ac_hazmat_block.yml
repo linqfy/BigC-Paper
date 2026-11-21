@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_hazmat_block
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:hazmat_block
+display:
+  translation-key: item.alexscaves.hazmat_block
+  fallback-name: "Bloque MP"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_hazmat_block_recipe
+  result-amount: 8
+  shape: ["PP", "PP"]
+  ingredients:
+    P: bigcasares:ac_polymer_plate
+appearance:
+  java-item-definition: java/assets/alexscaves/items/hazmat_block.json
+  bedrock-texture: bedrock/textures/alexscaves/block/hazmat_block.png

@@ -19,6 +19,8 @@ public final class CustomItemRegistry {
     private final Map<Integer, CustomItem> itemsByModelData = new LinkedHashMap<>();
     private final Map<String, CustomItem> itemsById = new LinkedHashMap<>();
     private final CatalogItemStackFactory stackFactory;
+    private final java.util.List<java.util.function.Consumer<CustomItemCatalog>> catalogListeners =
+        new java.util.concurrent.CopyOnWriteArrayList<>();
     private CustomItemCatalog catalog;
 
     public CustomItemRegistry() {
@@ -93,6 +95,21 @@ public final class CustomItemRegistry {
 
     public void installCatalog(CustomItemCatalog catalog) {
         this.catalog = java.util.Objects.requireNonNull(catalog, "catalog");
+        for (java.util.function.Consumer<CustomItemCatalog> listener : catalogListeners) {
+            try {
+                listener.accept(catalog);
+            } catch (RuntimeException failure) {
+                java.util.logging.Logger.getLogger(CustomItemRegistry.class.getName())
+                    .log(java.util.logging.Level.WARNING, "Falló un oyente de catálogo de objetos", failure);
+            }
+        }
+    }
+
+    /** Runs after every catalog install (load or reload). The returned handle removes the listener. */
+    public Runnable addCatalogListener(java.util.function.Consumer<CustomItemCatalog> listener) {
+        java.util.Objects.requireNonNull(listener, "listener");
+        catalogListeners.add(listener);
+        return () -> catalogListeners.remove(listener);
     }
 
     public Optional<CustomItemCatalog> catalog() {

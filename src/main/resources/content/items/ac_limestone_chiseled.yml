@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_limestone_chiseled
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:limestone_chiseled
+display:
+  translation-key: item.alexscaves.limestone_chiseled
+  fallback-name: "Caliza cincelada"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_limestone_chiseled_recipe
+  result-amount: 1
+  shape: ["A", "A"]
+  ingredients:
+    A: bigcasares:ac_limestone_slab
+appearance:
+  java-item-definition: java/assets/alexscaves/items/limestone_chiseled.json
+  bedrock-texture: bedrock/textures/alexscaves/block/limestone_chiseled_front.png

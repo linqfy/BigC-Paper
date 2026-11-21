@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_dusk_anemone
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:dusk_anemone
+display:
+  translation-key: item.alexscaves.dusk_anemone
+  fallback-name: "Anémona del alba"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/dusk_anemone.json
+  bedrock-texture: bedrock/textures/alexscaves/block/dusk_anemone_base.png

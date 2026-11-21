@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pewen_hanging_sign
+mechanic: alexs-caves
+material: OAK_HANGING_SIGN
+item-model: alexscaves:pewen_hanging_sign
+display:
+  translation-key: item.alexscaves.pewen_hanging_sign
+  fallback-name: "Cartel colgante de pehuén"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 16
+recipe:
+  key: ac_pewen_hanging_sign_recipe
+  result-amount: 3
+  shape: ["C C", "###", "###"]
+  ingredients:
+    C: IRON_CHAIN
+    "#": bigcasares:ac_stripped_pewen_log
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pewen_hanging_sign.json
+  bedrock-texture: bedrock/textures/alexscaves/item/pewen_hanging_sign.png

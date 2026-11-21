@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_rusty_scrap_metal
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:rusty_scrap_metal
+display:
+  translation-key: item.alexscaves.rusty_scrap_metal
+  fallback-name: "Chatarra corroída"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/rusty_scrap_metal.json
+  bedrock-texture: bedrock/textures/alexscaves/block/rusty_scrap_metal_0.png

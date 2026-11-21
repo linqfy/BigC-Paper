@@ -1,0 +1,104 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_thornwood_branch_west",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                0
+              ],
+              "size": [
+                16.0,
+                16.0,
+                0
+              ],
+              "uv": {
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_thornwood_thornwood_branch"
+                },
+                "north": {
+                  "uv": [
+                    16,
+                    16
+                  ],
+                  "uv_size": [
+                    -16,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_thornwood_thornwood_branch"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_thornwood_thornwood_branch"
+                },
+                "south": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_thornwood_thornwood_branch"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    17,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_thornwood_thornwood_branch"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    17,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_thornwood_thornwood_branch"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

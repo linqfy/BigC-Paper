@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_rusty_barrel
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:rusty_barrel
+display:
+  translation-key: item.alexscaves.rusty_barrel
+  fallback-name: "Barril corroído"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/rusty_barrel.json
+  bedrock-texture: bedrock/textures/alexscaves/block/rusty_barrel.png

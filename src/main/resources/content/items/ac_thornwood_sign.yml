@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_thornwood_sign
+mechanic: alexs-caves
+material: DARK_OAK_SIGN
+item-model: alexscaves:thornwood_sign
+display:
+  translation-key: item.alexscaves.thornwood_sign
+  fallback-name: "Cartel de pinchoárbol"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 16
+recipe:
+  key: ac_thornwood_sign_recipe
+  result-amount: 3
+  shape: ["###", "###", " X "]
+  ingredients:
+    "#": bigcasares:ac_thornwood_planks
+    X: STICK
+appearance:
+  java-item-definition: java/assets/alexscaves/items/thornwood_sign.json
+  bedrock-texture: bedrock/textures/alexscaves/item/thornwood_sign.png

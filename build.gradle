@@ -80,12 +80,14 @@ def modrinthPlugins = [
     [project: "bettermodel", version: "QTU9HP83"],   // 3.5.0
     // Geyser: deja entrar a los jugadores de Bedrock.
     [project: "geyser", version: "sT6fWVgD"],        // 2.11.3-b1249 (26.2)
-    // packetevents: GeyserModelEngine no carga sin el.
-    [project: "packetevents", version: "m78nFxYg"],  // 2.14.0 (26.2)
 ]
 
 // dest es relativo a build/. plugin: true = va a plugins/ por runServer; si no, es una extension o pack de Geyser.
 def verifiedArtifacts = [
+    // packetevents: GeyserModelEngine no carga sin el; alexs-caves compila contra el mismo JAR (ver abajo).
+    packetEvents: [url: "https://github.com/retrooper/packetevents/releases/download/v2.14.0/packetevents-spigot-2.14.0.jar",
+                sha256: "060087c58ec268eae7dd0eb1f17ac3bea1eaadda1693414141ff64e506091bd7",
+                dest: "verified-plugins/packetevents-spigot-2.14.0.jar", plugin: true],
     // Floodgate: los de Bedrock entran sin cuenta de Java.
     floodgate: [url: "https://download.geysermc.org/v2/projects/floodgate/versions/2.2.5/builds/141/downloads/spigot",
                 sha256: "21570aff9ce17d6983928e8552777760e1ede5050026b04c686b0ae112e6fd7e",
@@ -184,6 +186,14 @@ def verifiedTasks = verifiedArtifacts.collectEntries { name, artifact ->
         sha256 = artifact.sha256
         destination = layout.buildDirectory.file(artifact.dest)
     }]
+}
+
+// packetevents (opcional, plugin.yml softdepend): solo para compilar la reescritura de bloques por paquetes de
+// alexs-caves (blocks.packet-remap). Se compila contra el mismo JAR verificado que runServer instala; sin el plugin
+// en el servidor la funcion queda inerte.
+dependencies {
+    compileOnly(files(verifiedTasks.packetEvents.flatMap { it.destination }))
+    testImplementation(files(verifiedTasks.packetEvents.flatMap { it.destination }))
 }
 
 tasks.register("downloadGeyserExtensions") {

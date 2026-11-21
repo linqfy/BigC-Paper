@@ -1,0 +1,644 @@
+# Estados vanilla que dibujan los bloques de Alex's Caves. NO cambiar ni reordenar:
+# los mundos guardan estos estados. tools/alexscaves/generate_content.py solo agrega.
+# variante: índice            -> note block: instrument = índice / 50, note = (índice % 50) / 2,
+#                                powered = índice impar. 0-49 (instrument=harp) quedan vanilla.
+# variante: base índice       -> tripwire o chorus_plant (codificación en tools/alexscaves/block_bases.py).
+#           ... legacy índice -> estado de note block que tenía antes: reservado, se migra al cargar el chunk.
+abyssal_altar:
+  default: 443
+  active: 444
+abyssmarine:
+  default: 562
+abyssmarine_bricks:
+  default: 445
+  active: 446
+abyssmarine_pillar:
+  x: 447
+  x_active: 448
+  y: 449
+  y_active: 500
+  z: 501
+  z_active: 502
+abyssmarine_tiles:
+  default: 503
+  active: 504
+acidic_radrock:
+  default: 784
+amber:
+  default: 761
+amber_monolith:
+  default: 462
+ambersol:
+  default: 762
+azure_magnet:
+  down: 92
+  up: 93
+  north: 94
+  south: 95
+  west: 96
+  east: 97
+azure_neodymium_node:
+  down: 66
+  up: 67
+  north: 68
+  south: 69
+  west: 70
+  east: 71
+azure_neodymium_pillar:
+  down: 78
+  up: 79
+  north: 80
+  south: 81
+  west: 82
+  east: 83
+baleen_bone:
+  default: chorus_plant 19 legacy 408
+  x: chorus_plant 21 legacy 409
+block_of_azure_neodymium:
+  default: 85
+block_of_chiseled_chocolate:
+  default: 556
+block_of_chocolate:
+  x: 701
+  y: 702
+  z: 703
+block_of_chocolate_frosting:
+  default: 705
+block_of_frosted_chocolate:
+  default: 704
+block_of_frosting:
+  default: 706
+block_of_pearl:
+  default: 494
+block_of_polished_chocolate:
+  default: 555
+block_of_scarlet_neodymium:
+  default: 84
+block_of_uranium:
+  default: 785
+block_of_vanilla_frosting:
+  default: 707
+bone_nodule:
+  down: 410
+  up: 411
+  north: 412
+  south: 413
+  west: 414
+  east: 415
+bone_ribs:
+  north_false: chorus_plant 22 legacy 416
+  north_true: chorus_plant 23 legacy 417
+  south_false: chorus_plant 25 legacy 418
+  south_true: chorus_plant 26 legacy 419
+  west_false: chorus_plant 27 legacy 420
+  west_true: chorus_plant 28 legacy 421
+  east_false: chorus_plant 29 legacy 422
+  east_true: chorus_plant 30 legacy 423
+bone_worms:
+  down: tripwire 96 legacy 437
+  up: tripwire 97 legacy 438
+  north: tripwire 98 legacy 439
+  south: tripwire 99 legacy 440
+  west: tripwire 100 legacy 441
+  east: tripwire 101 legacy 442
+cake_layer:
+  x: 708
+  y: 709
+  z: 710
+candy_cane_block:
+  x: 718
+  y: 719
+  z: 720
+candy_cane_pole:
+  north: 551
+  east: 552
+  south: 553
+  west: 554
+  default: 725
+carmine_froglight:
+  x: 764
+  y: 765
+  z: 766
+chiseled_candy_cane_block:
+  z: 550
+  x: 648
+  y: 649
+  default: 721
+chocolate_ice_cream:
+  0: 727
+  1: 728
+  2: 729
+cinder_block:
+  default: 787
+cookie_block:
+  default: 711
+copper_valve:
+  default: 505
+coprolith:
+  default: 523
+coprolith_coal_ore:
+  default: 525
+curly_fern:
+  default: tripwire 118 legacy 463
+  upper: tripwire 119 legacy 464
+dough_block:
+  default: 712
+dusk_anemone:
+  default: tripwire 102 legacy 506
+energized_galena_azure:
+  default: 59
+energized_galena_neutral:
+  default: 57
+energized_galena_scarlet:
+  default: 58
+fern_thatch:
+  default: 763
+fiddlehead:
+  default: tripwire 121 legacy 466
+fissure_primal_magma:
+  r0: 457
+  r1: 458
+  r2: 459
+  r3: 460
+  r4: 461
+flood_basalt:
+  x: 672
+  y: 673
+  z: 674
+flytrap:
+  default: tripwire 120 legacy 465
+forsaken_idol:
+  north: 528
+  south: 529
+  west: 530
+  east: 531
+frosted_gingerbread_block:
+  default: 716
+frosted_gingerbread_bricks:
+  default: 717
+galena:
+  default: 50
+galena_bricks:
+  default: 52
+galena_iron_ore:
+  default: 53
+galena_pillar:
+  x: 54
+  y: 55
+  z: 56
+geothermal_vent:
+  default: 791
+geothermal_vent_medium:
+  default: 792
+geothermal_vent_thin:
+  default: 793
+giant_sweetberry:
+  default: 736
+gingerbread_block:
+  default: 714
+gingerbread_bricks:
+  default: 715
+guano_block:
+  default: 514
+guano_layer:
+  8: 522
+  1: tripwire 105 legacy 515
+  2: tripwire 106 legacy 516
+  3: tripwire 107 legacy 517
+  4: tripwire 108 legacy 518
+  5: tripwire 109 legacy 519
+  6: tripwire 110 legacy 520
+  7: tripwire 111 legacy 521
+guanostone:
+  default: 509
+guanostone_bricks:
+  default: 510
+guanostone_chiseled:
+  default: 511
+guanostone_redstone_ore:
+  default: 513
+guanostone_tiles:
+  default: 512
+gummy_ring_blue:
+  sunk: 559
+  down: 614
+  up: 615
+  north: 616
+  south: 617
+  west: 618
+  east: 619
+gummy_ring_green:
+  sunk: 558
+  down: 608
+  up: 609
+  north: 610
+  south: 611
+  west: 612
+  east: 613
+gummy_ring_pink:
+  sunk: 561
+  down: 626
+  up: 627
+  north: 628
+  south: 629
+  west: 630
+  east: 631
+gummy_ring_red:
+  sunk: 557
+  down: 602
+  up: 603
+  north: 604
+  south: 605
+  west: 606
+  east: 607
+gummy_ring_yellow:
+  sunk: 560
+  down: 620
+  up: 621
+  north: 622
+  south: 623
+  west: 624
+  east: 625
+hazmat_block:
+  x: 485
+  y: 486
+  z: 487
+hazmat_skull_block:
+  x: 491
+  y: 492
+  z: 493
+hazmat_warning_block:
+  x: 488
+  y: 489
+  z: 490
+heart_of_iron:
+  x: 109
+  y: 110
+  z: 111
+hollow_bone:
+  x: 424
+  y: 425
+  z: 426
+large_peppermint:
+  west: 600
+  east: 601
+  down: 746
+  up: 747
+  north: 748
+  south: 749
+licoroot:
+  x: 737
+  y: 738
+  z: 739
+licoroot_sprout:
+  default: tripwire 126 legacy 471
+limestone:
+  default: 750
+limestone_chiseled:
+  down: 752
+  up: 753
+  north: 754
+  south: 755
+  west: 756
+  east: 757
+limestone_pillar:
+  x: 758
+  y: 759
+  z: 760
+lollipop_bunch:
+  default: tripwire 125 legacy 470
+magnetic_activator:
+  down: 103
+  up: 104
+  north: 105
+  south: 106
+  west: 107
+  east: 108
+metal_barrel:
+  down: 678
+  up: 679
+  north: 680
+  south: 681
+  west: 682
+  east: 683
+metal_scaffolding:
+  default: 696
+metal_swarf:
+  default: 100
+midnight_anemone:
+  default: tripwire 104 legacy 508
+moth_ball:
+  1: 451
+  2: 452
+  3: 453
+  4: 454
+  5: 455
+muck:
+  default: 563
+mussel:
+  up_1: tripwire 32 legacy 564
+  up_2: tripwire 33 legacy 565
+  up_3: tripwire 34 legacy 566
+  up_4: tripwire 35 legacy 567
+  up_5: tripwire 36 legacy 568
+  down_1: tripwire 37 legacy 569
+  down_2: tripwire 38 legacy 570
+  down_3: tripwire 39 legacy 571
+  down_4: tripwire 40 legacy 572
+  down_5: tripwire 41 legacy 573
+  north_1: tripwire 42 legacy 574
+  north_2: tripwire 43 legacy 575
+  north_3: tripwire 44 legacy 576
+  north_4: tripwire 45 legacy 577
+  north_5: tripwire 46 legacy 578
+  south_1: tripwire 47 legacy 579
+  south_2: tripwire 48 legacy 580
+  south_3: tripwire 49 legacy 581
+  south_4: tripwire 50 legacy 582
+  south_5: tripwire 51 legacy 583
+  west_1: tripwire 52 legacy 584
+  west_2: tripwire 53 legacy 585
+  west_3: tripwire 54 legacy 586
+  west_4: tripwire 55 legacy 587
+  west_5: tripwire 56 legacy 588
+  east_1: tripwire 57 legacy 589
+  east_2: tripwire 58 legacy 590
+  east_3: tripwire 59 legacy 591
+  east_4: tripwire 60 legacy 592
+  east_5: tripwire 61 legacy 593
+nuclear_bomb:
+  default: 671
+packed_galena:
+  default: 51
+peering_coprolith:
+  default: 527
+pewen_log:
+  x: 767
+  y: 768
+  z: 769
+pewen_planks:
+  default: 779
+pewen_wood:
+  x: 770
+  y: 771
+  z: 772
+ping_pong_sponge:
+  default: tripwire 62 legacy 406
+  top: tripwire 63 legacy 407
+porous_coprolith:
+  default: 526
+primal_magma:
+  boss: 456
+  default: 675
+  active: 676
+radon_lamp_black:
+  default: 484
+radon_lamp_blue:
+  default: 481
+radon_lamp_brown:
+  default: 482
+radon_lamp_cyan:
+  default: 479
+radon_lamp_gray:
+  default: 477
+radon_lamp_green:
+  default: 698
+radon_lamp_light_blue:
+  default: 474
+radon_lamp_light_gray:
+  default: 478
+radon_lamp_lime:
+  default: 699
+radon_lamp_magenta:
+  default: 473
+radon_lamp_orange:
+  default: 472
+radon_lamp_pink:
+  default: 476
+radon_lamp_purple:
+  default: 480
+radon_lamp_red:
+  default: 483
+radon_lamp_white:
+  default: 700
+radon_lamp_yellow:
+  default: 475
+radrock:
+  default: 780
+radrock_bricks:
+  default: 781
+radrock_chiseled:
+  default: 782
+radrock_uranium_ore:
+  default: 783
+rock_candy_black:
+  default: 647
+rock_candy_blue:
+  default: 643
+rock_candy_brown:
+  default: 644
+rock_candy_cyan:
+  default: 641
+rock_candy_gray:
+  default: 639
+rock_candy_green:
+  default: 645
+rock_candy_light_blue:
+  default: 635
+rock_candy_light_gray:
+  default: 640
+rock_candy_lime:
+  default: 637
+rock_candy_magenta:
+  default: 634
+rock_candy_orange:
+  default: 633
+rock_candy_pink:
+  default: 638
+rock_candy_purple:
+  default: 642
+rock_candy_red:
+  default: 646
+rock_candy_white:
+  default: 632
+rock_candy_yellow:
+  default: 636
+rusty_barrel:
+  down: 684
+  up: 685
+  north: 686
+  south: 687
+  west: 688
+  east: 689
+rusty_scaffolding:
+  default: 697
+rusty_scrap_metal:
+  default: 789
+rusty_scrap_metal_plate:
+  default: 790
+scarlet_magnet:
+  down: 86
+  up: 87
+  north: 88
+  south: 89
+  west: 90
+  east: 91
+scarlet_neodymium_node:
+  down: 60
+  up: 61
+  north: 62
+  south: 63
+  west: 64
+  east: 65
+scarlet_neodymium_pillar:
+  down: 72
+  up: 73
+  north: 74
+  south: 75
+  west: 76
+  east: 77
+scrap_metal:
+  default: 101
+scrap_metal_plate:
+  default: 102
+small_peppermint:
+  down: 740
+  up: 741
+  north: 742
+  south: 743
+  west: 744
+  east: 745
+smooth_bone:
+  default: 427
+smooth_coprolith:
+  default: 524
+smooth_limestone:
+  default: 751
+stripped_candy_cane_block:
+  x: 722
+  y: 723
+  z: 724
+stripped_candy_cane_pole:
+  default: 726
+stripped_pewen_log:
+  x: 773
+  y: 774
+  z: 775
+stripped_pewen_wood:
+  x: 776
+  y: 777
+  z: 778
+stripped_thornwood_log:
+  x: 538
+  y: 539
+  z: 540
+stripped_thornwood_wood:
+  x: 541
+  y: 542
+  z: 543
+sulfur:
+  default: 786
+sulfur_bud_large:
+  down: 656
+  up: 657
+  north: 658
+  south: 659
+  west: 660
+  east: 661
+sulfur_bud_medium:
+  down: 650
+  up: 651
+  north: 652
+  south: 653
+  west: 654
+  east: 655
+sulfur_bud_small:
+  down: 794
+  up: 795
+  north: 796
+  south: 797
+  west: 798
+  east: 799
+sulfur_cluster:
+  down: 662
+  up: 663
+  north: 664
+  south: 665
+  west: 666
+  east: 667
+sundrop:
+  default: tripwire 124 legacy 469
+sweet_puff:
+  default: tripwire 123 legacy 468
+sweetberry_ice_cream:
+  0: 733
+  1: 734
+  2: 735
+tesla_bulb:
+  up: 98
+  down: 99
+thin_bone:
+  x_0: 428
+  x_1: 429
+  x_2: 430
+  y_0: 431
+  y_1: 432
+  y_2: 433
+  z_0: 434
+  z_1: 435
+  z_2: 436
+thornwood_branch:
+  down: tripwire 112 legacy 545
+  up: tripwire 113 legacy 546
+  north: tripwire 114 legacy 547
+  south: tripwire 115 legacy 548
+  west: tripwire 116 legacy 549
+  east: tripwire 117 legacy 450
+thornwood_log:
+  x: 532
+  y: 533
+  z: 534
+thornwood_planks:
+  default: 544
+thornwood_wood:
+  x: 535
+  y: 536
+  z: 537
+tube_worm:
+  straight_north: chorus_plant 3 legacy 594
+  straight_south: chorus_plant 5 legacy 595
+  straight_west: chorus_plant 6 legacy 596
+  straight_east: chorus_plant 7 legacy 597
+  turn_north: chorus_plant 9 legacy 598
+  turn_south: chorus_plant 10 legacy 599
+  turn_west: chorus_plant 11 legacy 400
+  turn_east: chorus_plant 12 legacy 401
+  elbow_north: chorus_plant 13 legacy 402
+  elbow_south: chorus_plant 14 legacy 403
+  elbow_west: chorus_plant 15 legacy 404
+  elbow_east: chorus_plant 16 legacy 405
+twilight_anemone:
+  default: tripwire 103 legacy 507
+underweed:
+  default: tripwire 122 legacy 467
+unrefined_waste:
+  default: 788
+uranium_rod:
+  x: 668
+  y: 669
+  z: 670
+vanilla_ice_cream:
+  0: 730
+  1: 731
+  2: 732
+volcanic_core:
+  default: 677
+wafer_cookie_block:
+  default: 713
+waste_drum:
+  down: 690
+  up: 691
+  north: 692
+  south: 693
+  west: 694
+  east: 695

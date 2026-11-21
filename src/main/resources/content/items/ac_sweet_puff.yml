@@ -1,0 +1,19 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_sweet_puff
+mechanic: alexs-caves
+material: COOKIE
+item-model: alexscaves:sweet_puff
+display:
+  translation-key: item.alexscaves.sweet_puff
+  fallback-name: "Buñuelo dulce"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+components:
+  food:
+    nutrition: 1
+    saturation: 0.2
+    can-always-eat: false
+appearance:
+  java-item-definition: java/assets/alexscaves/items/sweet_puff.json
+  bedrock-texture: bedrock/textures/alexscaves/block/sweet_puff.png

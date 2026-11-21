@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_telecore
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:telecore
+display:
+  translation-key: item.alexscaves.telecore
+  fallback-name: "Telenúcleo"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/telecore.json
+  bedrock-texture: bedrock/textures/alexscaves/item/telecore.png

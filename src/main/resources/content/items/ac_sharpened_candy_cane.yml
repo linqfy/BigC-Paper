@@ -1,0 +1,19 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_sharpened_candy_cane
+mechanic: alexs-caves
+material: COOKIE
+item-model: alexscaves:sharpened_candy_cane
+display:
+  translation-key: item.alexscaves.sharpened_candy_cane
+  fallback-name: "Bastón de caramelo afilado"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+components:
+  food:
+    nutrition: 2
+    saturation: 0.4
+    can-always-eat: false
+appearance:
+  java-item-definition: java/assets/alexscaves/items/sharpened_candy_cane.json
+  bedrock-texture: bedrock/textures/alexscaves/item/sharpened_candy_cane.png

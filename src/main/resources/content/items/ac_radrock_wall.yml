@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_radrock_wall
+mechanic: alexs-caves
+material: MOSSY_COBBLESTONE_WALL
+item-model: alexscaves:radrock_wall
+display:
+  translation-key: item.alexscaves.radrock_wall
+  fallback-name: "Muro de radiaroca"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_radrock_wall_recipe
+  result-amount: 6
+  shape: ["GGG", "GGG"]
+  ingredients:
+    G: bigcasares:ac_radrock
+appearance:
+  java-item-definition: java/assets/alexscaves/items/radrock_wall.json
+  bedrock-texture: bedrock/textures/alexscaves/block/radrock.png

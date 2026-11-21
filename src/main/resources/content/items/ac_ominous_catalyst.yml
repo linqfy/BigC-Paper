@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_ominous_catalyst
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:ominous_catalyst
+display:
+  translation-key: item.alexscaves.ominous_catalyst
+  fallback-name: "Catalizador ominoso"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_ominous_catalyst_recipe
+  result-amount: 1
+  shape: ["BBB", "BAB", "BBB"]
+  ingredients:
+    A: bigcasares:ac_amber_curiosity
+    B: bigcasares:ac_heavy_bone
+appearance:
+  java-item-definition: java/assets/alexscaves/items/ominous_catalyst.json
+  bedrock-texture: bedrock/textures/alexscaves/item/ominous_catalyst.png

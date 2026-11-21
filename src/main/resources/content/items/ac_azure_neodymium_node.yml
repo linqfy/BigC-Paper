@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_azure_neodymium_node
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:azure_neodymium_node
+display:
+  translation-key: item.alexscaves.azure_neodymium_node
+  fallback-name: "Nodo de neodimio azur"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_azure_neodymium_node_recipe
+  result-amount: 1
+  shape: [" N ", "NNN", " N "]
+  ingredients:
+    N: bigcasares:ac_raw_azure_neodymium
+appearance:
+  java-item-definition: java/assets/alexscaves/items/azure_neodymium_node.json
+  bedrock-texture: bedrock/textures/alexscaves/block/neodymium/azure_node_side_0.png

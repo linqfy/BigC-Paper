@@ -1,0 +1,16 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_magic_conch
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:magic_conch
+display:
+  translation-key: item.alexscaves.magic_conch
+  fallback-name: "Caracola mágica"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 5
+appearance:
+  java-item-definition: java/assets/alexscaves/items/magic_conch.json
+  bedrock-texture: bedrock/textures/alexscaves/item/magic_conch.png

@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_magnetic_activator
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:magnetic_activator
+display:
+  translation-key: item.alexscaves.magnetic_activator
+  fallback-name: "Activador magnético"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_magnetic_activator_recipe
+  result-amount: 1
+  shape: ["SSS", "SRS", "SSS"]
+  ingredients:
+    S: bigcasares:ac_scrap_metal
+    R: REDSTONE_BLOCK
+appearance:
+  java-item-definition: java/assets/alexscaves/items/magnetic_activator.json
+  bedrock-texture: bedrock/textures/alexscaves/block/magnetic_activator.png

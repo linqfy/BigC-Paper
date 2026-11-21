@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_guanostone_redstone_ore
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:guanostone_redstone_ore
+display:
+  translation-key: item.alexscaves.guanostone_redstone_ore
+  fallback-name: "Mena de redstone de guanopiedra"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/guanostone_redstone_ore.json
+  bedrock-texture: bedrock/textures/alexscaves/block/guanostone_redstone_ore.png

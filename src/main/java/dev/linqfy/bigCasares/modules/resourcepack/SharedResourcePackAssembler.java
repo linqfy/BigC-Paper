@@ -1,13 +1,20 @@
 package dev.linqfy.bigCasares.modules.resourcepack;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
+import java.util.Map;
 
 final class SharedResourcePackAssembler {
+    private static final Gson GSON = new Gson();
 
     void assemble(Path sourceRoot, Path javaRoot, Path bedrockRoot, ResourcePackRegistry registry) throws IOException {
         Path shared = sourceRoot.resolve("shared");
@@ -52,6 +59,24 @@ final class SharedResourcePackAssembler {
             if (!entries.isEmpty()) entries.append(",\n");
             entries.append("    \"bigcasares.").append(asset.id().replace('-', '_')).append("\": {\"textures\": \"textures/")
                 .append(asset.texturePath()).append("\"}");
+        }
+        // Module fragments (textures/item_texture.<module>.json) add their own icon keys; the
+        // fragment files are consumed here so they do not ship in the pack.
+        Path texturesRoot = bedrockRoot.resolve("textures");
+        if (Files.isDirectory(texturesRoot)) {
+            try (var fragments = Files.list(texturesRoot)) {
+                for (Path fragment : fragments.filter(path -> path.getFileName().toString().matches("item_texture\\.[a-z0-9_-]+\\.json"))
+                    .sorted(Comparator.naturalOrder()).toList()) {
+                    JsonObject data = JsonParser.parseString(Files.readString(fragment, StandardCharsets.UTF_8))
+                        .getAsJsonObject().getAsJsonObject("texture_data");
+                    for (Map.Entry<String, JsonElement> entry : data.entrySet()) {
+                        if (!entries.isEmpty()) entries.append(",\n");
+                        entries.append("    ").append(GSON.toJson(entry.getKey())).append(": ")
+                            .append(GSON.toJson(entry.getValue()));
+                    }
+                    Files.delete(fragment);
+                }
+            }
         }
         Path output = bedrockRoot.resolve("textures/item_texture.json");
         Files.createDirectories(output.getParent());

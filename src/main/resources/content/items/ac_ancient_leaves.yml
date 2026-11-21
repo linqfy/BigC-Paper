@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_ancient_leaves
+mechanic: alexs-caves
+material: JUNGLE_LEAVES
+item-model: alexscaves:ancient_leaves
+display:
+  translation-key: item.alexscaves.ancient_leaves
+  fallback-name: "Hojas antiguas"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/ancient_leaves.json
+  bedrock-texture: bedrock/textures/alexscaves/block/ancient_leaves.png

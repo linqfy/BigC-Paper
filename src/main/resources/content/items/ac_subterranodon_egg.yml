@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_subterranodon_egg
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:subterranodon_egg
+display:
+  translation-key: item.alexscaves.subterranodon_egg
+  fallback-name: "Huevo de subterraneodonte"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 16
+appearance:
+  java-item-definition: java/assets/alexscaves/items/subterranodon_egg.json
+  bedrock-texture: bedrock/textures/alexscaves/item/subterranodon_egg.png

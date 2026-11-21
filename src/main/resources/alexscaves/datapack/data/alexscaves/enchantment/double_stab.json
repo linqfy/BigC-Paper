@@ -1,0 +1,25 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.alexscaves.double_stab"
+  },
+  "effects": {},
+  "max_cost": {
+    "base": 31,
+    "per_level_above_first": 12
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 12
+  },
+  "slots": [
+    "mainhand",
+    "offhand"
+  ],
+  "supported_items": "minecraft:diamond_sword",
+  "weight": 2,
+  "exclusive_set": [
+    "alexscaves:impending_stab"
+  ]
+}

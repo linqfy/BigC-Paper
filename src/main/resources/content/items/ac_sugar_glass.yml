@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_sugar_glass
+mechanic: alexs-caves
+material: WHITE_STAINED_GLASS
+item-model: alexscaves:sugar_glass
+display:
+  translation-key: item.alexscaves.sugar_glass
+  fallback-name: "Cristal de azúcar"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/sugar_glass.json
+  bedrock-texture: bedrock/textures/alexscaves/block/sugar_glass.png

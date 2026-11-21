@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pewen_pressure_plate
+mechanic: alexs-caves
+material: OAK_PRESSURE_PLATE
+item-model: alexscaves:pewen_pressure_plate
+display:
+  translation-key: item.alexscaves.pewen_pressure_plate
+  fallback-name: "Placa de presión de pehuén"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_pewen_pressure_plate_recipe
+  result-amount: 1
+  shape: ["##"]
+  ingredients:
+    "#": bigcasares:ac_pewen_planks
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pewen_pressure_plate.json
+  bedrock-texture: bedrock/textures/alexscaves/block/pewen/pewen_planks.png

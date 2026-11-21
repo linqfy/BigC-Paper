@@ -1,0 +1,22 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_fertilizer
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:fertilizer
+display:
+  translation-key: item.alexscaves.fertilizer
+  fallback-name: "Fertilizante"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_fertilizer_recipe
+  result-amount: 1
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_guano
+    - bigcasares:ac_guano
+    - BONE_MEAL
+appearance:
+  java-item-definition: java/assets/alexscaves/items/fertilizer.json
+  bedrock-texture: bedrock/textures/alexscaves/item/fertilizer.png

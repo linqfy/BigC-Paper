@@ -1,0 +1,22 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_tremorzilla_egg
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:tremorzilla_egg
+display:
+  translation-key: item.alexscaves.tremorzilla_egg
+  fallback-name: "Huevo de temblorzilla"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_tremorzilla_egg_recipe
+  result-amount: 1
+  shape: [" T ", "TIT", "TET"]
+  ingredients:
+    T: bigcasares:ac_tectonic_shard
+    I: bigcasares:ac_immortal_embryo
+    E: bigcasares:ac_tremorsaurus_egg
+appearance:
+  java-item-definition: java/assets/alexscaves/items/tremorzilla_egg.json
+  bedrock-texture: bedrock/textures/alexscaves/item/tremorzilla_egg.png

@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pearl
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:pearl
+display:
+  translation-key: item.alexscaves.pearl
+  fallback-name: "Perla"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_pearl_recipe
+  result-amount: 1
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_gazing_pearl
+    - bigcasares:ac_marine_snow
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pearl.json
+  bedrock-texture: bedrock/textures/alexscaves/item/pearl.png

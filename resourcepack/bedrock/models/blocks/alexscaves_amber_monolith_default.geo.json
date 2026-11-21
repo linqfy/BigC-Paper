@@ -1,0 +1,240 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_amber_monolith_default",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                16.0,
+                0.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_amber_monolith_center"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_amber_monolith_center"
+                }
+              }
+            },
+            {
+              "origin": [
+                8.0,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                0.0,
+                16.0,
+                16.0
+              ],
+              "uv": {
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_amber_monolith_center"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_amber_monolith_center"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                8.0
+              ],
+              "size": [
+                16.0,
+                16.0,
+                0.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_amber_monolith_center"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_amber_monolith_center"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                0.0,
+                16.0,
+                16.0
+              ],
+              "uv": {
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_amber_monolith_center"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_amber_monolith_center"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                16.0,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                0.0,
+                16.0
+              ],
+              "uv": {
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_amber"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_amber"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                0.0,
+                16.0
+              ],
+              "uv": {
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_limestone_pillar_top"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_limestone_pillar_top"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

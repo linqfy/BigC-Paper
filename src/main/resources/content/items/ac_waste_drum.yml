@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_waste_drum
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:waste_drum
+display:
+  translation-key: item.alexscaves.waste_drum
+  fallback-name: "Barril residual"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/waste_drum.json
+  bedrock-texture: bedrock/textures/alexscaves/block/waste_drum.png

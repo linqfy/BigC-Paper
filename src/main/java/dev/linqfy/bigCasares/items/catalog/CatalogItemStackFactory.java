@@ -5,10 +5,12 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.components.EquippableComponent;
 import org.bukkit.inventory.meta.components.FoodComponent;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -65,6 +67,7 @@ public final class CatalogItemStackFactory {
         }
         definition.foodDefinition().ifPresent(food -> applyFood(meta, food));
         definition.combatDefinition().ifPresent(combat -> applyCombat(meta, definition.id(), combat));
+        definition.armorDefinition().ifPresent(armor -> applyArmor(meta, definition.id(), armor));
         if (definition.maxDamage() != null) {
             if (!(meta instanceof Damageable damageable)) {
                 throw new IllegalArgumentException(
@@ -82,6 +85,7 @@ public final class CatalogItemStackFactory {
         meta.getPersistentDataContainer().set(defaultLoreKey, PersistentDataType.STRING,
             String.join("\u001f", definition.display().lore()));
         stack.setItemMeta(meta);
+        definition.armorDefinition().ifPresent(armor -> ArmorComponents.apply(stack, armor));
     }
 
     static boolean supportsMaterialMigration(String itemId, Material previous, Material target) {
@@ -161,6 +165,32 @@ public final class CatalogItemStackFactory {
         );
     }
 
+    /** Armor and toughness while worn in the slot; the equipment model draws it on the player. */
+    static void applyArmor(ItemMeta meta, String itemId, ItemArmorDefinition armor) {
+        EquipmentSlot slot = EquipmentSlot.valueOf(armor.slot());
+        EquipmentSlotGroup group = slot.getGroup();
+        replaceModifier(meta, Attribute.ARMOR, new NamespacedKey("bigcasares", itemId + "_armor"), armor.defense(), group);
+        replaceModifier(meta, Attribute.ARMOR_TOUGHNESS, new NamespacedKey("bigcasares", itemId + "_armor_toughness"),
+            armor.toughness(), group);
+        NamespacedKey efficiencyKey = new NamespacedKey("bigcasares", itemId + "_water_efficiency");
+        if (armor.waterEfficiency() > 0.0) {
+            replaceModifier(meta, Attribute.WATER_MOVEMENT_EFFICIENCY, efficiencyKey, armor.waterEfficiency(), group);
+        } else if (meta.getAttributeModifiers(Attribute.WATER_MOVEMENT_EFFICIENCY) != null) {
+            // An older revision of the item had it: strip it when reconciling.
+            for (AttributeModifier modifier : java.util.List.copyOf(meta.getAttributeModifiers(Attribute.WATER_MOVEMENT_EFFICIENCY))) {
+                if (modifier.getKey().equals(efficiencyKey)) {
+                    meta.removeAttributeModifier(Attribute.WATER_MOVEMENT_EFFICIENCY, modifier);
+                }
+            }
+        }
+        EquippableComponent equippable = meta.getEquippable();
+        equippable.setSlot(slot);
+        if (armor.equipmentModel() != null) {
+            equippable.setModel(NamespacedKey.fromString(armor.equipmentModel()));
+        }
+        meta.setEquippable(equippable);
+    }
+
     static CombatModifierPlan combatModifierPlan(String itemId, ItemCombatDefinition combat) {
         java.util.Objects.requireNonNull(itemId, "itemId");
         java.util.Objects.requireNonNull(combat, "combat");
@@ -180,6 +210,16 @@ public final class CatalogItemStackFactory {
         NamespacedKey key,
         double amount
     ) {
+        replaceModifier(meta, attribute, key, amount, EquipmentSlotGroup.MAINHAND);
+    }
+
+    private static void replaceModifier(
+        ItemMeta meta,
+        Attribute attribute,
+        NamespacedKey key,
+        double amount,
+        EquipmentSlotGroup group
+    ) {
         java.util.Collection<AttributeModifier> existing = meta.getAttributeModifiers(attribute);
         if (existing != null) {
             for (AttributeModifier modifier : java.util.List.copyOf(existing)) {
@@ -189,7 +229,7 @@ public final class CatalogItemStackFactory {
             }
         }
         meta.addAttributeModifier(attribute, new AttributeModifier(
-            key, amount, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.MAINHAND
+            key, amount, AttributeModifier.Operation.ADD_NUMBER, group
         ));
     }
 }

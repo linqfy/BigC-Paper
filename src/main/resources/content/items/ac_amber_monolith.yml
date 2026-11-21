@@ -1,0 +1,23 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_amber_monolith
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:amber_monolith
+display:
+  translation-key: item.alexscaves.amber_monolith
+  fallback-name: "Monolito de ámbar"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_amber_monolith_recipe
+  result-amount: 1
+  shape: ["AAA", "ACA", "LDL"]
+  ingredients:
+    A: bigcasares:ac_amber
+    C: bigcasares:ac_amber_curiosity
+    L: bigcasares:ac_limestone
+    D: DIAMOND
+appearance:
+  java-item-definition: java/assets/alexscaves/items/amber_monolith.json
+  bedrock-texture: bedrock/textures/alexscaves/block/amber_monolith_center.png

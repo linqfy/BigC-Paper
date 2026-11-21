@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_volcanic_core
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:volcanic_core
+display:
+  translation-key: item.alexscaves.volcanic_core
+  fallback-name: "Núcleo volcánico"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/volcanic_core.json
+  bedrock-texture: bedrock/textures/alexscaves/block/volcanic_core.png

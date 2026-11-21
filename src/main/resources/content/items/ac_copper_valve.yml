@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_copper_valve
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:copper_valve
+display:
+  translation-key: item.alexscaves.copper_valve
+  fallback-name: "Válvula de cobre"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/copper_valve.json
+  bedrock-texture: bedrock/textures/alexscaves/block/copper_valve.png

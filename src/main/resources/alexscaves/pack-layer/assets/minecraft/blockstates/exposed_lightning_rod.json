@@ -1,0 +1,101 @@
+{
+  "variants": {
+    "facing=down,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 180
+    },
+    "facing=down,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 180
+    },
+    "facing=down,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on",
+      "x": 180
+    },
+    "facing=down,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/dusk_anemone"
+    },
+    "facing=east,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/twilight_anemone"
+    },
+    "facing=north,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90
+    },
+    "facing=north,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90
+    },
+    "facing=north,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on",
+      "x": 90
+    },
+    "facing=north,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/midnight_anemone"
+    },
+    "facing=south,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/ping_pong_sponge"
+    },
+    "facing=up,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod"
+    },
+    "facing=up,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod"
+    },
+    "facing=up,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on"
+    },
+    "facing=up,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/ping_pong_sponge_top"
+    },
+    "facing=west,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/thornwood_branch_top",
+      "x": 180
+    }
+  }
+}

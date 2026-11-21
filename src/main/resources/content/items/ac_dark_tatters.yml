@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_dark_tatters
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:dark_tatters
+display:
+  translation-key: item.alexscaves.dark_tatters
+  fallback-name: "Andrajos oscuros"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/dark_tatters.json
+  bedrock-texture: bedrock/textures/alexscaves/item/dark_tatters.png

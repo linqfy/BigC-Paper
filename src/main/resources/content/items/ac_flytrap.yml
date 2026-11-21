@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_flytrap
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:flytrap
+display:
+  translation-key: item.alexscaves.flytrap
+  fallback-name: "Atrapamoscas"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/flytrap.json
+  bedrock-texture: bedrock/textures/alexscaves/block/flytrap_mouth_open.png

@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_immortal_embryo
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:immortal_embryo
+display:
+  translation-key: item.alexscaves.immortal_embryo
+  fallback-name: "Embrión inmortal"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/immortal_embryo.json
+  bedrock-texture: bedrock/textures/alexscaves/item/immortal_embryo.png

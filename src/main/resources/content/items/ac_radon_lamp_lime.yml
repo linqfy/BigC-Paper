@@ -1,0 +1,22 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_radon_lamp_lime
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:radon_lamp_lime
+display:
+  translation-key: item.alexscaves.radon_lamp_lime
+  fallback-name: "Lámpara de radón verde  lima"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_radon_lamp_lime_recipe
+  result-amount: 4
+  shape: ["DRD", "RGR", "DRD"]
+  ingredients:
+    R: bigcasares:ac_radon_bottle
+    G: GLOWSTONE
+    D: LIME_DYE
+appearance:
+  java-item-definition: java/assets/alexscaves/items/radon_lamp_lime.json
+  bedrock-texture: bedrock/textures/alexscaves/block/radon_lamp_lime.png

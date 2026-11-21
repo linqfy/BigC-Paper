@@ -1,0 +1,184 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_giant_sweetberry_default",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                0.0,
+                -3
+              ],
+              "size": [
+                6,
+                6.0,
+                6
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    6,
+                    0
+                  ],
+                  "uv_size": [
+                    -6,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    6,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                },
+                "south": {
+                  "uv": [
+                    6,
+                    0
+                  ],
+                  "uv_size": [
+                    -6,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    6,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                },
+                "up": {
+                  "uv": [
+                    6,
+                    0
+                  ],
+                  "uv_size": [
+                    6,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                },
+                "down": {
+                  "uv": [
+                    6,
+                    0
+                  ],
+                  "uv_size": [
+                    -6,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                }
+              }
+            },
+            {
+              "origin": [
+                0,
+                6,
+                -4
+              ],
+              "size": [
+                0,
+                10.0,
+                12.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    10
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                },
+                "east": {
+                  "uv": [
+                    12,
+                    6
+                  ],
+                  "uv_size": [
+                    -12,
+                    10
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    10
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    6
+                  ],
+                  "uv_size": [
+                    12,
+                    10
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    16
+                  ],
+                  "uv_size": [
+                    0,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_giant_sweetberry"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_cloak_of_darkness
+mechanic: alexs-caves
+material: LEATHER_CHESTPLATE
+item-model: alexscaves:cloak_of_darkness
+display:
+  translation-key: item.alexscaves.cloak_of_darkness
+  fallback-name: "Caperuza de la Oscuridad"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 240
+  armor:
+    slot: CHEST
+    defense: 1.0
+    toughness: 0.5
+    equipment-model: alexscaves:darkness
+    enchantability: 40
+recipe:
+  key: ac_cloak_of_darkness_recipe
+  result-amount: 1
+  shape: ["D D", "DOD", "DDD"]
+  ingredients:
+    D: bigcasares:ac_shadow_silk
+    O: bigcasares:ac_occult_gem
+appearance:
+  java-item-definition: java/assets/alexscaves/items/cloak_of_darkness.json
+  bedrock-texture: bedrock/textures/alexscaves/item/cloak_of_darkness.png

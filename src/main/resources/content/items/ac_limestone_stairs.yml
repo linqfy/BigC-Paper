@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_limestone_stairs
+mechanic: alexs-caves
+material: SANDSTONE_STAIRS
+item-model: alexscaves:limestone_stairs
+display:
+  translation-key: item.alexscaves.limestone_stairs
+  fallback-name: "Escaleras de caliza"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_limestone_stairs_recipe
+  result-amount: 4
+  shape: ["G  ", "GG ", "GGG"]
+  ingredients:
+    G: bigcasares:ac_limestone
+appearance:
+  java-item-definition: java/assets/alexscaves/items/limestone_stairs.json
+  bedrock-texture: bedrock/textures/alexscaves/block/limestone.png

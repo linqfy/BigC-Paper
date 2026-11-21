@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_chocolate_ice_cream_scoop
+mechanic: alexs-caves
+material: SNOWBALL
+item-model: alexscaves:chocolate_ice_cream_scoop
+display:
+  translation-key: item.alexscaves.chocolate_ice_cream_scoop
+  fallback-name: "Cucharón de helado de chocolate"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 16
+appearance:
+  java-item-definition: java/assets/alexscaves/items/chocolate_ice_cream_scoop.json
+  bedrock-texture: bedrock/textures/alexscaves/item/chocolate_ice_cream_scoop.png

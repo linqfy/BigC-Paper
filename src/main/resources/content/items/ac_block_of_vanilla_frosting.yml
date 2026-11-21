@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_block_of_vanilla_frosting
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:block_of_vanilla_frosting
+display:
+  translation-key: item.alexscaves.block_of_vanilla_frosting
+  fallback-name: "Bloque de chocolate de vainilla"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/block_of_vanilla_frosting.json
+  bedrock-texture: bedrock/textures/alexscaves/block/vanilla_frosting.png

@@ -1,0 +1,264 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_uranium_rod_z",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                5,
+                6
+              ],
+              "size": [
+                6,
+                6,
+                2.0
+              ],
+              "uv": {
+                "down": {
+                  "uv": [
+                    4,
+                    12
+                  ],
+                  "uv_size": [
+                    6,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "east": {
+                  "uv": [
+                    4,
+                    12
+                  ],
+                  "uv_size": [
+                    6,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "up": {
+                  "uv": [
+                    4,
+                    12
+                  ],
+                  "uv_size": [
+                    6,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "west": {
+                  "uv": [
+                    4,
+                    12
+                  ],
+                  "uv_size": [
+                    6,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "north": {
+                  "uv": [
+                    10,
+                    12
+                  ],
+                  "uv_size": [
+                    -6,
+                    -6
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "south": {
+                  "uv": [
+                    10,
+                    0
+                  ],
+                  "uv_size": [
+                    -6,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                }
+              }
+            },
+            {
+              "origin": [
+                -3,
+                5,
+                -8.0
+              ],
+              "size": [
+                6,
+                6,
+                2.0
+              ],
+              "uv": {
+                "down": {
+                  "uv": [
+                    4,
+                    12
+                  ],
+                  "uv_size": [
+                    6,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "east": {
+                  "uv": [
+                    4,
+                    12
+                  ],
+                  "uv_size": [
+                    6,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "up": {
+                  "uv": [
+                    4,
+                    12
+                  ],
+                  "uv_size": [
+                    6,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "west": {
+                  "uv": [
+                    4,
+                    12
+                  ],
+                  "uv_size": [
+                    6,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "north": {
+                  "uv": [
+                    10,
+                    6
+                  ],
+                  "uv_size": [
+                    -6,
+                    -6
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "south": {
+                  "uv": [
+                    10,
+                    6
+                  ],
+                  "uv_size": [
+                    -6,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                }
+              }
+            },
+            {
+              "origin": [
+                -2,
+                6,
+                -6
+              ],
+              "size": [
+                4,
+                4,
+                12
+              ],
+              "uv": {
+                "down": {
+                  "uv": [
+                    0,
+                    1
+                  ],
+                  "uv_size": [
+                    4,
+                    12
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    1
+                  ],
+                  "uv_size": [
+                    4,
+                    12
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    1
+                  ],
+                  "uv_size": [
+                    4,
+                    12
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    1
+                  ],
+                  "uv_size": [
+                    4,
+                    12
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "north": {
+                  "uv": [
+                    20,
+                    10
+                  ],
+                  "uv_size": [
+                    -4,
+                    -4
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                },
+                "south": {
+                  "uv": [
+                    20,
+                    6
+                  ],
+                  "uv_size": [
+                    -4,
+                    4
+                  ],
+                  "material_instance": "alexscaves_block_uranium_rod"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

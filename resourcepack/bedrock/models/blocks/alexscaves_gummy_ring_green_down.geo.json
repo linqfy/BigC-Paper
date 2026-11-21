@@ -1,0 +1,904 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_gummy_ring_green_down",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -8.0,
+                12,
+                8.0
+              ],
+              "size": [
+                16.0,
+                4.0,
+                0.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                12,
+                3
+              ],
+              "size": [
+                16.0,
+                4.0,
+                0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    8
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                12,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                4.0,
+                0.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                12,
+                -3
+              ],
+              "size": [
+                16.0,
+                4.0,
+                0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    8
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                12,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                0,
+                16.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_top"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_top"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                16.0,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                0.0,
+                16.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_top"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_top"
+                }
+              }
+            },
+            {
+              "origin": [
+                8.0,
+                12,
+                -8.0
+              ],
+              "size": [
+                0.0,
+                4.0,
+                16.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    16
+                  ],
+                  "uv_size": [
+                    0,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                3,
+                12,
+                -8.0
+              ],
+              "size": [
+                0,
+                4.0,
+                16.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    8
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    16
+                  ],
+                  "uv_size": [
+                    0,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                12,
+                -8.0
+              ],
+              "size": [
+                0.0,
+                4.0,
+                16.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -3,
+                12,
+                -8.0
+              ],
+              "size": [
+                0,
+                4.0,
+                16.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    8
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                12,
+                -8.0
+              ],
+              "size": [
+                0.0,
+                4.0,
+                16.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_gummy_ring_green_side"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

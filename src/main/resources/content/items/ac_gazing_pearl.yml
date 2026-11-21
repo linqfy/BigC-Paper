@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_gazing_pearl
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:gazing_pearl
+display:
+  translation-key: item.alexscaves.gazing_pearl
+  fallback-name: "Perla observante"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+appearance:
+  java-item-definition: java/assets/alexscaves/items/gazing_pearl.json
+  bedrock-texture: bedrock/textures/alexscaves/item/gazing_pearl.png

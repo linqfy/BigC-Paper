@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_energized_galena_azure
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:energized_galena_azure
+display:
+  translation-key: item.alexscaves.energized_galena_azure
+  fallback-name: "Galena energizada azur"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_energized_galena_azure_recipe
+  result-amount: 8
+  shape: ["GGG", "GNG", "GGG"]
+  ingredients:
+    G: bigcasares:ac_galena
+    N: bigcasares:ac_raw_azure_neodymium
+appearance:
+  java-item-definition: java/assets/alexscaves/items/energized_galena_azure.json
+  bedrock-texture: bedrock/textures/alexscaves/block/energized_galena_azure.png

@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_wafer_cookie_stairs
+mechanic: alexs-caves
+material: BIRCH_STAIRS
+item-model: alexscaves:wafer_cookie_stairs
+display:
+  translation-key: item.alexscaves.wafer_cookie_stairs
+  fallback-name: "Escaleras de oblea"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/wafer_cookie_stairs.json
+  bedrock-texture: bedrock/textures/alexscaves/block/wafer_cookie_block.png

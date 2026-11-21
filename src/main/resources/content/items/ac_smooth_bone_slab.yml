@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_smooth_bone_slab
+mechanic: alexs-caves
+material: SMOOTH_QUARTZ_SLAB
+item-model: alexscaves:smooth_bone_slab
+display:
+  translation-key: item.alexscaves.smooth_bone_slab
+  fallback-name: "Losa de huesos lisa"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/smooth_bone_slab.json
+  bedrock-texture: bedrock/textures/alexscaves/block/smooth_bone.png

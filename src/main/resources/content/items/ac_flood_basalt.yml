@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_flood_basalt
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:flood_basalt
+display:
+  translation-key: item.alexscaves.flood_basalt
+  fallback-name: "Basalto de inundación"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/flood_basalt.json
+  bedrock-texture: bedrock/textures/alexscaves/block/flood_basalt.png

@@ -1,0 +1,114 @@
+{
+  "variants": {
+    "distance=1,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/bone_nodule",
+      "x": 90,
+      "y": 90
+    },
+    "distance=1,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_red_floating",
+      "x": 90,
+      "y": 180
+    },
+    "distance=1,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_cluster",
+      "x": 180
+    },
+    "distance=1,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/azure_neodymium_node_0",
+      "x": 180
+    },
+    "distance=2,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/hollow_bone_horizontal",
+      "y": 90
+    },
+    "distance=2,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_red_floating",
+      "x": 90,
+      "y": 270
+    },
+    "distance=2,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_cluster"
+    },
+    "distance=2,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/azure_neodymium_node_0"
+    },
+    "distance=3,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/hollow_bone"
+    },
+    "distance=3,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_red_floating",
+      "x": 90,
+      "y": 90
+    },
+    "distance=3,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_cluster",
+      "x": 90
+    },
+    "distance=3,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/azure_neodymium_node_0",
+      "x": 90
+    },
+    "distance=4,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/hollow_bone_horizontal"
+    },
+    "distance=4,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_red"
+    },
+    "distance=4,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_cluster",
+      "x": 270
+    },
+    "distance=4,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/azure_neodymium_node_0",
+      "x": 270
+    },
+    "distance=5,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/thin_bone_lower",
+      "y": 90
+    },
+    "distance=5,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_green_floating",
+      "x": 180
+    },
+    "distance=5,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_cluster",
+      "x": 90,
+      "y": 270
+    },
+    "distance=5,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/azure_neodymium_node_0",
+      "x": 90,
+      "y": 270
+    },
+    "distance=6,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/thin_bone",
+      "y": 90
+    },
+    "distance=6,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_green_floating"
+    },
+    "distance=6,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "distance=6,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/azure_neodymium_node_0",
+      "x": 90,
+      "y": 90
+    },
+    "distance=7,persistent=false,waterlogged=false": {
+      "model": "minecraft:block/acacia_leaves"
+    },
+    "distance=7,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/acacia_leaves"
+    },
+    "distance=7,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/metal_scaffolding"
+    },
+    "distance=7,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/galena_spire_3"
+    }
+  }
+}

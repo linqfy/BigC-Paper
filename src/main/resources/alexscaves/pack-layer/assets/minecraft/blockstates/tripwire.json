@@ -1,0 +1,475 @@
+{
+  "variants": {
+    "attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=false": {
+      "model": "minecraft:block/tripwire_ns"
+    },
+    "attached=false,disarmed=false,east=false,north=false,powered=false,south=false,west=true": {
+      "model": "minecraft:block/tripwire_n",
+      "y": 270
+    },
+    "attached=false,disarmed=false,east=false,north=false,powered=false,south=true,west=false": {
+      "model": "minecraft:block/tripwire_n",
+      "y": 180
+    },
+    "attached=false,disarmed=false,east=false,north=false,powered=false,south=true,west=true": {
+      "model": "minecraft:block/tripwire_ne",
+      "y": 180
+    },
+    "attached=false,disarmed=false,east=true,north=false,powered=false,south=false,west=false": {
+      "model": "minecraft:block/tripwire_n",
+      "y": 90
+    },
+    "attached=false,disarmed=false,east=true,north=false,powered=false,south=false,west=true": {
+      "model": "minecraft:block/tripwire_ns",
+      "y": 90
+    },
+    "attached=false,disarmed=false,east=true,north=false,powered=false,south=true,west=false": {
+      "model": "minecraft:block/tripwire_ne",
+      "y": 90
+    },
+    "attached=false,disarmed=false,east=true,north=false,powered=false,south=true,west=true": {
+      "model": "minecraft:block/tripwire_nse",
+      "y": 90
+    },
+    "attached=false,disarmed=false,east=false,north=true,powered=false,south=false,west=false": {
+      "model": "minecraft:block/tripwire_n"
+    },
+    "attached=false,disarmed=false,east=false,north=true,powered=false,south=false,west=true": {
+      "model": "minecraft:block/tripwire_ne",
+      "y": 270
+    },
+    "attached=false,disarmed=false,east=false,north=true,powered=false,south=true,west=false": {
+      "model": "minecraft:block/tripwire_ns"
+    },
+    "attached=false,disarmed=false,east=false,north=true,powered=false,south=true,west=true": {
+      "model": "minecraft:block/tripwire_nse",
+      "y": 180
+    },
+    "attached=false,disarmed=false,east=true,north=true,powered=false,south=false,west=false": {
+      "model": "minecraft:block/tripwire_ne"
+    },
+    "attached=false,disarmed=false,east=true,north=true,powered=false,south=false,west=true": {
+      "model": "minecraft:block/tripwire_nse",
+      "y": 270
+    },
+    "attached=false,disarmed=false,east=true,north=true,powered=false,south=true,west=false": {
+      "model": "minecraft:block/tripwire_nse"
+    },
+    "attached=false,disarmed=false,east=true,north=true,powered=false,south=true,west=true": {
+      "model": "minecraft:block/tripwire_nsew"
+    },
+    "attached=false,disarmed=false,east=false,north=false,powered=true,south=false,west=false": {
+      "model": "minecraft:block/tripwire_ns"
+    },
+    "attached=false,disarmed=false,east=false,north=false,powered=true,south=false,west=true": {
+      "model": "minecraft:block/tripwire_n",
+      "y": 270
+    },
+    "attached=false,disarmed=false,east=false,north=false,powered=true,south=true,west=false": {
+      "model": "minecraft:block/tripwire_n",
+      "y": 180
+    },
+    "attached=false,disarmed=false,east=false,north=false,powered=true,south=true,west=true": {
+      "model": "minecraft:block/tripwire_ne",
+      "y": 180
+    },
+    "attached=false,disarmed=false,east=true,north=false,powered=true,south=false,west=false": {
+      "model": "minecraft:block/tripwire_n",
+      "y": 90
+    },
+    "attached=false,disarmed=false,east=true,north=false,powered=true,south=false,west=true": {
+      "model": "minecraft:block/tripwire_ns",
+      "y": 90
+    },
+    "attached=false,disarmed=false,east=true,north=false,powered=true,south=true,west=false": {
+      "model": "minecraft:block/tripwire_ne",
+      "y": 90
+    },
+    "attached=false,disarmed=false,east=true,north=false,powered=true,south=true,west=true": {
+      "model": "minecraft:block/tripwire_nse",
+      "y": 90
+    },
+    "attached=false,disarmed=false,east=false,north=true,powered=true,south=false,west=false": {
+      "model": "minecraft:block/tripwire_n"
+    },
+    "attached=false,disarmed=false,east=false,north=true,powered=true,south=false,west=true": {
+      "model": "minecraft:block/tripwire_ne",
+      "y": 270
+    },
+    "attached=false,disarmed=false,east=false,north=true,powered=true,south=true,west=false": {
+      "model": "minecraft:block/tripwire_ns"
+    },
+    "attached=false,disarmed=false,east=false,north=true,powered=true,south=true,west=true": {
+      "model": "minecraft:block/tripwire_nse",
+      "y": 180
+    },
+    "attached=false,disarmed=false,east=true,north=true,powered=true,south=false,west=false": {
+      "model": "minecraft:block/tripwire_ne"
+    },
+    "attached=false,disarmed=false,east=true,north=true,powered=true,south=false,west=true": {
+      "model": "minecraft:block/tripwire_nse",
+      "y": 270
+    },
+    "attached=false,disarmed=false,east=true,north=true,powered=true,south=true,west=false": {
+      "model": "minecraft:block/tripwire_nse"
+    },
+    "attached=false,disarmed=false,east=true,north=true,powered=true,south=true,west=true": {
+      "model": "minecraft:block/tripwire_nsew"
+    },
+    "attached=false,disarmed=true,east=false,north=false,powered=false,south=false,west=false": {
+      "model": "alexscaves:block/mussel"
+    },
+    "attached=false,disarmed=true,east=false,north=false,powered=false,south=false,west=true": {
+      "model": "alexscaves:block/mussel_two"
+    },
+    "attached=false,disarmed=true,east=false,north=false,powered=false,south=true,west=false": {
+      "model": "alexscaves:block/mussel_three"
+    },
+    "attached=false,disarmed=true,east=false,north=false,powered=false,south=true,west=true": {
+      "model": "alexscaves:block/mussel_four"
+    },
+    "attached=false,disarmed=true,east=true,north=false,powered=false,south=false,west=false": {
+      "model": "alexscaves:block/mussel_five"
+    },
+    "attached=false,disarmed=true,east=true,north=false,powered=false,south=false,west=true": {
+      "model": "alexscaves:block/mussel",
+      "x": 180
+    },
+    "attached=false,disarmed=true,east=true,north=false,powered=false,south=true,west=false": {
+      "model": "alexscaves:block/mussel_two",
+      "x": 180
+    },
+    "attached=false,disarmed=true,east=true,north=false,powered=false,south=true,west=true": {
+      "model": "alexscaves:block/mussel_three",
+      "x": 180
+    },
+    "attached=false,disarmed=true,east=false,north=true,powered=false,south=false,west=false": {
+      "model": "alexscaves:block/mussel_four",
+      "x": 180
+    },
+    "attached=false,disarmed=true,east=false,north=true,powered=false,south=false,west=true": {
+      "model": "alexscaves:block/mussel_five",
+      "x": 180
+    },
+    "attached=false,disarmed=true,east=false,north=true,powered=false,south=true,west=false": {
+      "model": "alexscaves:block/mussel",
+      "x": 90
+    },
+    "attached=false,disarmed=true,east=false,north=true,powered=false,south=true,west=true": {
+      "model": "alexscaves:block/mussel_two",
+      "x": 90
+    },
+    "attached=false,disarmed=true,east=true,north=true,powered=false,south=false,west=false": {
+      "model": "alexscaves:block/mussel_three",
+      "x": 90
+    },
+    "attached=false,disarmed=true,east=true,north=true,powered=false,south=false,west=true": {
+      "model": "alexscaves:block/mussel_four",
+      "x": 90
+    },
+    "attached=false,disarmed=true,east=true,north=true,powered=false,south=true,west=false": {
+      "model": "alexscaves:block/mussel_five",
+      "x": 90
+    },
+    "attached=false,disarmed=true,east=true,north=true,powered=false,south=true,west=true": {
+      "model": "alexscaves:block/mussel",
+      "x": 270
+    },
+    "attached=false,disarmed=true,east=false,north=false,powered=true,south=false,west=false": {
+      "model": "alexscaves:block/mussel_two",
+      "x": 270
+    },
+    "attached=false,disarmed=true,east=false,north=false,powered=true,south=false,west=true": {
+      "model": "alexscaves:block/mussel_three",
+      "x": 270
+    },
+    "attached=false,disarmed=true,east=false,north=false,powered=true,south=true,west=false": {
+      "model": "alexscaves:block/mussel_four",
+      "x": 270
+    },
+    "attached=false,disarmed=true,east=false,north=false,powered=true,south=true,west=true": {
+      "model": "alexscaves:block/mussel_five",
+      "x": 270
+    },
+    "attached=false,disarmed=true,east=true,north=false,powered=true,south=false,west=false": {
+      "model": "alexscaves:block/mussel",
+      "x": 90,
+      "y": 270
+    },
+    "attached=false,disarmed=true,east=true,north=false,powered=true,south=false,west=true": {
+      "model": "alexscaves:block/mussel_two",
+      "x": 90,
+      "y": 270
+    },
+    "attached=false,disarmed=true,east=true,north=false,powered=true,south=true,west=false": {
+      "model": "alexscaves:block/mussel_three",
+      "x": 90,
+      "y": 270
+    },
+    "attached=false,disarmed=true,east=true,north=false,powered=true,south=true,west=true": {
+      "model": "alexscaves:block/mussel_four",
+      "x": 90,
+      "y": 270
+    },
+    "attached=false,disarmed=true,east=false,north=true,powered=true,south=false,west=false": {
+      "model": "alexscaves:block/mussel_five",
+      "x": 90,
+      "y": 270
+    },
+    "attached=false,disarmed=true,east=false,north=true,powered=true,south=false,west=true": {
+      "model": "alexscaves:block/mussel",
+      "x": 90,
+      "y": 90
+    },
+    "attached=false,disarmed=true,east=false,north=true,powered=true,south=true,west=false": {
+      "model": "alexscaves:block/mussel_two",
+      "x": 90,
+      "y": 90
+    },
+    "attached=false,disarmed=true,east=false,north=true,powered=true,south=true,west=true": {
+      "model": "alexscaves:block/mussel_three",
+      "x": 90,
+      "y": 90
+    },
+    "attached=false,disarmed=true,east=true,north=true,powered=true,south=false,west=false": {
+      "model": "alexscaves:block/mussel_four",
+      "x": 90,
+      "y": 90
+    },
+    "attached=false,disarmed=true,east=true,north=true,powered=true,south=false,west=true": {
+      "model": "alexscaves:block/mussel_five",
+      "x": 90,
+      "y": 90
+    },
+    "attached=false,disarmed=true,east=true,north=true,powered=true,south=true,west=false": {
+      "model": "alexscaves:block/ping_pong_sponge"
+    },
+    "attached=false,disarmed=true,east=true,north=true,powered=true,south=true,west=true": {
+      "model": "alexscaves:block/ping_pong_sponge_top"
+    },
+    "attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=false": {
+      "model": "minecraft:block/tripwire_attached_ns"
+    },
+    "attached=true,disarmed=false,east=false,north=false,powered=false,south=false,west=true": {
+      "model": "minecraft:block/tripwire_attached_n",
+      "y": 270
+    },
+    "attached=true,disarmed=false,east=false,north=false,powered=false,south=true,west=false": {
+      "model": "minecraft:block/tripwire_attached_n",
+      "y": 180
+    },
+    "attached=true,disarmed=false,east=false,north=false,powered=false,south=true,west=true": {
+      "model": "minecraft:block/tripwire_attached_ne",
+      "y": 180
+    },
+    "attached=true,disarmed=false,east=true,north=false,powered=false,south=false,west=false": {
+      "model": "minecraft:block/tripwire_attached_n",
+      "y": 90
+    },
+    "attached=true,disarmed=false,east=true,north=false,powered=false,south=false,west=true": {
+      "model": "minecraft:block/tripwire_attached_ns",
+      "y": 90
+    },
+    "attached=true,disarmed=false,east=true,north=false,powered=false,south=true,west=false": {
+      "model": "minecraft:block/tripwire_attached_ne",
+      "y": 90
+    },
+    "attached=true,disarmed=false,east=true,north=false,powered=false,south=true,west=true": {
+      "model": "minecraft:block/tripwire_attached_nse",
+      "y": 90
+    },
+    "attached=true,disarmed=false,east=false,north=true,powered=false,south=false,west=false": {
+      "model": "minecraft:block/tripwire_attached_n"
+    },
+    "attached=true,disarmed=false,east=false,north=true,powered=false,south=false,west=true": {
+      "model": "minecraft:block/tripwire_attached_ne",
+      "y": 270
+    },
+    "attached=true,disarmed=false,east=false,north=true,powered=false,south=true,west=false": {
+      "model": "minecraft:block/tripwire_attached_ns"
+    },
+    "attached=true,disarmed=false,east=false,north=true,powered=false,south=true,west=true": {
+      "model": "minecraft:block/tripwire_attached_nse",
+      "y": 180
+    },
+    "attached=true,disarmed=false,east=true,north=true,powered=false,south=false,west=false": {
+      "model": "minecraft:block/tripwire_attached_ne"
+    },
+    "attached=true,disarmed=false,east=true,north=true,powered=false,south=false,west=true": {
+      "model": "minecraft:block/tripwire_attached_nse",
+      "y": 270
+    },
+    "attached=true,disarmed=false,east=true,north=true,powered=false,south=true,west=false": {
+      "model": "minecraft:block/tripwire_attached_nse"
+    },
+    "attached=true,disarmed=false,east=true,north=true,powered=false,south=true,west=true": {
+      "model": "minecraft:block/tripwire_attached_nsew"
+    },
+    "attached=true,disarmed=false,east=false,north=false,powered=true,south=false,west=false": {
+      "model": "minecraft:block/tripwire_attached_ns"
+    },
+    "attached=true,disarmed=false,east=false,north=false,powered=true,south=false,west=true": {
+      "model": "minecraft:block/tripwire_attached_n",
+      "y": 270
+    },
+    "attached=true,disarmed=false,east=false,north=false,powered=true,south=true,west=false": {
+      "model": "minecraft:block/tripwire_attached_n",
+      "y": 180
+    },
+    "attached=true,disarmed=false,east=false,north=false,powered=true,south=true,west=true": {
+      "model": "minecraft:block/tripwire_attached_ne",
+      "y": 180
+    },
+    "attached=true,disarmed=false,east=true,north=false,powered=true,south=false,west=false": {
+      "model": "minecraft:block/tripwire_attached_n",
+      "y": 90
+    },
+    "attached=true,disarmed=false,east=true,north=false,powered=true,south=false,west=true": {
+      "model": "minecraft:block/tripwire_attached_ns",
+      "y": 90
+    },
+    "attached=true,disarmed=false,east=true,north=false,powered=true,south=true,west=false": {
+      "model": "minecraft:block/tripwire_attached_ne",
+      "y": 90
+    },
+    "attached=true,disarmed=false,east=true,north=false,powered=true,south=true,west=true": {
+      "model": "minecraft:block/tripwire_attached_nse",
+      "y": 90
+    },
+    "attached=true,disarmed=false,east=false,north=true,powered=true,south=false,west=false": {
+      "model": "minecraft:block/tripwire_attached_n"
+    },
+    "attached=true,disarmed=false,east=false,north=true,powered=true,south=false,west=true": {
+      "model": "minecraft:block/tripwire_attached_ne",
+      "y": 270
+    },
+    "attached=true,disarmed=false,east=false,north=true,powered=true,south=true,west=false": {
+      "model": "minecraft:block/tripwire_attached_ns"
+    },
+    "attached=true,disarmed=false,east=false,north=true,powered=true,south=true,west=true": {
+      "model": "minecraft:block/tripwire_attached_nse",
+      "y": 180
+    },
+    "attached=true,disarmed=false,east=true,north=true,powered=true,south=false,west=false": {
+      "model": "minecraft:block/tripwire_attached_ne"
+    },
+    "attached=true,disarmed=false,east=true,north=true,powered=true,south=false,west=true": {
+      "model": "minecraft:block/tripwire_attached_nse",
+      "y": 270
+    },
+    "attached=true,disarmed=false,east=true,north=true,powered=true,south=true,west=false": {
+      "model": "minecraft:block/tripwire_attached_nse"
+    },
+    "attached=true,disarmed=false,east=true,north=true,powered=true,south=true,west=true": {
+      "model": "minecraft:block/tripwire_attached_nsew"
+    },
+    "attached=true,disarmed=true,east=false,north=false,powered=false,south=false,west=false": {
+      "model": "alexscaves:block/bone_worms",
+      "x": 180
+    },
+    "attached=true,disarmed=true,east=false,north=false,powered=false,south=false,west=true": {
+      "model": "alexscaves:block/bone_worms"
+    },
+    "attached=true,disarmed=true,east=false,north=false,powered=false,south=true,west=false": {
+      "model": "alexscaves:block/bone_worms",
+      "x": 90
+    },
+    "attached=true,disarmed=true,east=false,north=false,powered=false,south=true,west=true": {
+      "model": "alexscaves:block/bone_worms",
+      "x": 90,
+      "y": 180
+    },
+    "attached=true,disarmed=true,east=true,north=false,powered=false,south=false,west=false": {
+      "model": "alexscaves:block/bone_worms",
+      "x": 90,
+      "y": 270
+    },
+    "attached=true,disarmed=true,east=true,north=false,powered=false,south=false,west=true": {
+      "model": "alexscaves:block/bone_worms",
+      "x": 90,
+      "y": 90
+    },
+    "attached=true,disarmed=true,east=true,north=false,powered=false,south=true,west=false": {
+      "model": "alexscaves:block/dusk_anemone"
+    },
+    "attached=true,disarmed=true,east=true,north=false,powered=false,south=true,west=true": {
+      "model": "alexscaves:block/twilight_anemone"
+    },
+    "attached=true,disarmed=true,east=false,north=true,powered=false,south=false,west=false": {
+      "model": "alexscaves:block/midnight_anemone"
+    },
+    "attached=true,disarmed=true,east=false,north=true,powered=false,south=false,west=true": {
+      "model": "alexscaves:block/guano_layer_height2"
+    },
+    "attached=true,disarmed=true,east=false,north=true,powered=false,south=true,west=false": {
+      "model": "alexscaves:block/guano_layer_height4"
+    },
+    "attached=true,disarmed=true,east=false,north=true,powered=false,south=true,west=true": {
+      "model": "alexscaves:block/guano_layer_height6"
+    },
+    "attached=true,disarmed=true,east=true,north=true,powered=false,south=false,west=false": {
+      "model": "alexscaves:block/guano_layer_height8"
+    },
+    "attached=true,disarmed=true,east=true,north=true,powered=false,south=false,west=true": {
+      "model": "alexscaves:block/guano_layer_height10"
+    },
+    "attached=true,disarmed=true,east=true,north=true,powered=false,south=true,west=false": {
+      "model": "alexscaves:block/guano_layer_height12"
+    },
+    "attached=true,disarmed=true,east=true,north=true,powered=false,south=true,west=true": {
+      "model": "alexscaves:block/guano_layer_height14"
+    },
+    "attached=true,disarmed=true,east=false,north=false,powered=true,south=false,west=false": {
+      "model": "alexscaves:block/thornwood_branch_top",
+      "x": 180
+    },
+    "attached=true,disarmed=true,east=false,north=false,powered=true,south=false,west=true": {
+      "model": "alexscaves:block/thornwood_branch_top"
+    },
+    "attached=true,disarmed=true,east=false,north=false,powered=true,south=true,west=false": {
+      "model": "alexscaves:block/thornwood_branch"
+    },
+    "attached=true,disarmed=true,east=false,north=false,powered=true,south=true,west=true": {
+      "model": "alexscaves:block/thornwood_branch",
+      "y": 180
+    },
+    "attached=true,disarmed=true,east=true,north=false,powered=true,south=false,west=false": {
+      "model": "alexscaves:block/thornwood_branch",
+      "y": 270
+    },
+    "attached=true,disarmed=true,east=true,north=false,powered=true,south=false,west=true": {
+      "model": "alexscaves:block/thornwood_branch",
+      "y": 90
+    },
+    "attached=true,disarmed=true,east=true,north=false,powered=true,south=true,west=false": {
+      "model": "alexscaves:block/curly_fern_bottom"
+    },
+    "attached=true,disarmed=true,east=true,north=false,powered=true,south=true,west=true": {
+      "model": "alexscaves:block/curly_fern_top"
+    },
+    "attached=true,disarmed=true,east=false,north=true,powered=true,south=false,west=false": {
+      "model": "alexscaves:block/flytrap_closed"
+    },
+    "attached=true,disarmed=true,east=false,north=true,powered=true,south=false,west=true": {
+      "model": "alexscaves:block/fiddlehead"
+    },
+    "attached=true,disarmed=true,east=false,north=true,powered=true,south=true,west=false": {
+      "model": "alexscaves:block/underweed"
+    },
+    "attached=true,disarmed=true,east=false,north=true,powered=true,south=true,west=true": {
+      "model": "alexscaves:block/sweet_puff"
+    },
+    "attached=true,disarmed=true,east=true,north=true,powered=true,south=false,west=false": {
+      "model": "alexscaves:block/sundrop"
+    },
+    "attached=true,disarmed=true,east=true,north=true,powered=true,south=false,west=true": {
+      "model": "alexscaves:block/lollipop_bunch"
+    },
+    "attached=true,disarmed=true,east=true,north=true,powered=true,south=true,west=false": {
+      "model": "alexscaves:block/licoroot_sprout"
+    },
+    "attached=true,disarmed=true,east=true,north=true,powered=true,south=true,west=true": {
+      "model": "minecraft:block/tripwire_attached_nsew"
+    }
+  }
+}

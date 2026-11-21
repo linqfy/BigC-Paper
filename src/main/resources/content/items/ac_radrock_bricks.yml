@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_radrock_bricks
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:radrock_bricks
+display:
+  translation-key: item.alexscaves.radrock_bricks
+  fallback-name: "Ladrillos de radiaoroca"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_radrock_bricks_recipe
+  result-amount: 4
+  shape: ["GG", "GG"]
+  ingredients:
+    G: bigcasares:ac_radrock
+appearance:
+  java-item-definition: java/assets/alexscaves/items/radrock_bricks.json
+  bedrock-texture: bedrock/textures/alexscaves/block/radrock_bricks.png

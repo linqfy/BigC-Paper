@@ -1,0 +1,344 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_azure_neodymium_node_north",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -7,
+                3,
+                -1
+              ],
+              "size": [
+                7,
+                7,
+                9.0
+              ],
+              "uv": {
+                "down": {
+                  "uv": [
+                    9,
+                    0
+                  ],
+                  "uv_size": [
+                    7,
+                    9
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_3"
+                },
+                "east": {
+                  "uv": [
+                    1,
+                    0
+                  ],
+                  "uv_size": [
+                    7,
+                    9
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_3"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    7
+                  ],
+                  "uv_size": [
+                    7,
+                    9
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_6"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    7
+                  ],
+                  "uv_size": [
+                    7,
+                    9
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_6"
+                },
+                "north": {
+                  "uv": [
+                    7,
+                    16
+                  ],
+                  "uv_size": [
+                    -7,
+                    -7
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_3"
+                },
+                "south": {
+                  "uv": [
+                    9,
+                    9
+                  ],
+                  "uv_size": [
+                    7,
+                    7
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_3"
+                }
+              }
+            },
+            {
+              "origin": [
+                -3,
+                7,
+                -4
+              ],
+              "size": [
+                8,
+                8,
+                12.0
+              ],
+              "uv": {
+                "down": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -8,
+                    12
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_2"
+                },
+                "east": {
+                  "uv": [
+                    8,
+                    4
+                  ],
+                  "uv_size": [
+                    8,
+                    12
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_5"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    12
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_1"
+                },
+                "west": {
+                  "uv": [
+                    8,
+                    4
+                  ],
+                  "uv_size": [
+                    8,
+                    12
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_5"
+                },
+                "north": {
+                  "uv": [
+                    8,
+                    8
+                  ],
+                  "uv_size": [
+                    -8,
+                    -8
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_4"
+                },
+                "south": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -8,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_4"
+                }
+              }
+            },
+            {
+              "origin": [
+                -6,
+                10,
+                3
+              ],
+              "size": [
+                3,
+                3,
+                5.0
+              ],
+              "uv": {
+                "down": {
+                  "uv": [
+                    0,
+                    2
+                  ],
+                  "uv_size": [
+                    3,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_6"
+                },
+                "east": {
+                  "uv": [
+                    3,
+                    2
+                  ],
+                  "uv_size": [
+                    3,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_6"
+                },
+                "up": {
+                  "uv": [
+                    6,
+                    2
+                  ],
+                  "uv_size": [
+                    3,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_6"
+                },
+                "west": {
+                  "uv": [
+                    9,
+                    2
+                  ],
+                  "uv_size": [
+                    3,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_6"
+                },
+                "north": {
+                  "uv": [
+                    6,
+                    3
+                  ],
+                  "uv_size": [
+                    -3,
+                    -3
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_5"
+                },
+                "south": {
+                  "uv": [
+                    3,
+                    0
+                  ],
+                  "uv_size": [
+                    -3,
+                    3
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_5"
+                }
+              }
+            },
+            {
+              "origin": [
+                -1,
+                1,
+                -8.0
+              ],
+              "size": [
+                8,
+                8,
+                16.0
+              ],
+              "uv": {
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_0"
+                },
+                "east": {
+                  "uv": [
+                    8,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_0"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_2"
+                },
+                "west": {
+                  "uv": [
+                    8,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_2"
+                },
+                "north": {
+                  "uv": [
+                    16,
+                    16
+                  ],
+                  "uv_size": [
+                    -8,
+                    -8
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_4"
+                },
+                "south": {
+                  "uv": [
+                    8,
+                    8
+                  ],
+                  "uv_size": [
+                    -8,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_neodymium_azure_node_side_4"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

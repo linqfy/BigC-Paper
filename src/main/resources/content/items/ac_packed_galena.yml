@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_packed_galena
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:packed_galena
+display:
+  translation-key: item.alexscaves.packed_galena
+  fallback-name: "Galena comprimida"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_packed_galena_recipe
+  result-amount: 1
+  shape: ["GGG", "GGG", "GGG"]
+  ingredients:
+    G: bigcasares:ac_galena
+appearance:
+  java-item-definition: java/assets/alexscaves/items/packed_galena.json
+  bedrock-texture: bedrock/textures/alexscaves/block/packed_galena.png

@@ -1,0 +1,99 @@
+# Alex's Caves (recreación no oficial para BigCasares). Créditos: /alexscaves creditos
+# Este archivo se copia solo si no existe: un JAR nuevo no pisa tus cambios.
+# Un valor inválido apaga solo su sección (se avisa en el log); no tira el plugin.
+
+worldgen:
+  enabled: true
+  # Copia el datapack del módulo a <mundo principal>/datapacks/. Hace falta un
+  # reinicio la primera vez para que los biomas existan.
+  install-datapack: true
+  # Mundos donde se generan los biomas (solo chunks nuevos).
+  worlds:
+    - world
+  # Valores del mod: radio medio 300, separación media 900.
+  biome-radius: 300
+  biome-separation: 900
+  width-randomness: 0.15
+  spacing-randomness: 0.45
+  biomes:
+    magnetic-caves:
+      enabled: true
+      min-spawn-distance: 400
+    primordial-caves:
+      enabled: true
+      min-spawn-distance: 450
+    toxic-caves:
+      enabled: true
+      min-spawn-distance: 650
+    abyssal-chasm:
+      enabled: true
+      min-spawn-distance: 400
+    forlorn-hollows:
+      enabled: true
+      min-spawn-distance: 650
+    candy-cavity:
+      enabled: true
+      min-spawn-distance: 500
+
+spawning:
+  enabled: true
+  interval-ticks: 40
+  radius: 48
+  attempts-per-player: 3
+  # cave_creature_spawn_count_modifier del mod.
+  cave-creature-multiplier: 1.75
+  # Fracción de los topes vanilla usados alrededor de cada jugador.
+  cap-scale: 0.5
+
+effects:
+  irradiated: true
+  hud: true
+
+magnetism:
+  enabled: true
+  max-entities-per-tick: 200
+  scan-radius: 6
+
+forlorn:
+  # Totem de la Posesión sobre jugadores (totem_of_possession_works_on_players del mod). Apagado por defecto.
+  possess-players: false
+
+enchantments:
+  enabled: true
+
+blocks:
+  # Prueba (apagado por defecto): los jugadores de Java reciben los bloques del módulo que no son cubos
+  # completos como otro bloque vanilla que no tapa a los vecinos (hojas, flor de chorus), para que el piso y
+  # las paredes de al lado no se vean transparentes, y los que el mod deja anegar (mejillones, gusanos...)
+  # se ven con agua cuando están en agua (algas, hojas o pararrayos anegados). Al romper uno anegado queda
+  # agua. Hace falta el plugin packetevents; los de Bedrock no cambian. El cliente los pica y los oye como
+  # el bloque prestado. Requiere reinicio.
+  packet-remap: false
+
+integration:
+  danger:
+    # Premios por puesto de Danger (1.º/2.º/3.º) al derrotar a Luxtructosaurus, Forsaken,
+    # Hullbreaker o un Tremorzilla salvaje, igual que los jefes PvE del plugin. El puesto
+    # sale del daño que cada jugador hizo al jefe durante la pelea.
+    placements: true
+  # Daño mínimo (en % de la vida máxima del jefe) para ocupar un puesto: unos pocos golpes,
+  # para que un toque suelto no gane premio. 0 = cualquier daño.
+  min-damage-percent: 2
+  economy:
+    # Recompensa de dinero (Vault) por puesto. Apagada por defecto; sin Vault o sin
+    # proveedor de economía no pasa nada (se avisa una vez en el log).
+    enabled: false
+    # Montos para el 1.º, 2.º y 3.er puesto de cada jefe. Un jefe escrito acá reemplaza sus
+    # montos por defecto (los puestos que no pongas no pagan); los que no escribas mantienen los suyos.
+    rewards:
+      luxtructosaurus: [500, 300, 150]
+      forsaken: [300, 200, 100]
+      hullbreaker: [400, 250, 125]
+      tremorzilla: [600, 400, 200]
+
+# Misiones (módulo missions): no hace falta código nuevo.
+#  - VISIT_BIOME / VISIT_BIOME_SET / CATCH_FISH_IN_BIOME: la clave es el path del bioma
+#    (magnetic_caves, primordial_caves, toxic_caves, abyssal_chasm, forlorn_hollows, candy_cavity).
+#  - KILL_ENTITY_IN_BIOME: "entity" admite el tipo vanilla (ZOMBIE) o el id del mob del
+#    módulo como alexscaves:<id> (p. ej. alexscaves:teletor). Sirve cualquier entidad
+#    propia del plugin con la etiqueta bigcasares:custom_entity, no solo las de este módulo.

@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_tree_star
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:tree_star
+display:
+  translation-key: item.alexscaves.tree_star
+  fallback-name: "Estrella arbórea"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/tree_star.json
+  bedrock-texture: bedrock/textures/alexscaves/item/tree_star.png

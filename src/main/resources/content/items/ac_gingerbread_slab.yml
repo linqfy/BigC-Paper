@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_gingerbread_slab
+mechanic: alexs-caves
+material: ACACIA_SLAB
+item-model: alexscaves:gingerbread_slab
+display:
+  translation-key: item.alexscaves.gingerbread_slab
+  fallback-name: "Losa de pan de jengibre"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/gingerbread_slab.json
+  bedrock-texture: bedrock/textures/alexscaves/block/gingerbread_block.png

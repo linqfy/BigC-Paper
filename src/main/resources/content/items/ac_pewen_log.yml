@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pewen_log
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:pewen_log
+display:
+  translation-key: item.alexscaves.pewen_log
+  fallback-name: "Tronco de pehuén"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pewen_log.json
+  bedrock-texture: bedrock/textures/alexscaves/block/pewen/pewen_log.png

@@ -1,0 +1,22 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_shadow_silk
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:shadow_silk
+display:
+  translation-key: item.alexscaves.shadow_silk
+  fallback-name: "Seda de las sombras"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_shadow_silk_recipe
+  result-amount: 2
+  shape: ["MDM", "DPD", "MDM"]
+  ingredients:
+    D: bigcasares:ac_dark_tatters
+    P: bigcasares:ac_pure_darkness
+    M: bigcasares:ac_moth_dust
+appearance:
+  java-item-definition: java/assets/alexscaves/items/shadow_silk.json
+  bedrock-texture: bedrock/textures/alexscaves/item/shadow_silk.png

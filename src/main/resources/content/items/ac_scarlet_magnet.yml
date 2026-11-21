@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_scarlet_magnet
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:scarlet_magnet
+display:
+  translation-key: item.alexscaves.scarlet_magnet
+  fallback-name: "Imán escarlata"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_scarlet_magnet_recipe
+  result-amount: 1
+  shape: ["I I", "N N", "NNN"]
+  ingredients:
+    N: bigcasares:ac_scarlet_neodymium_ingot
+    I: IRON_INGOT
+appearance:
+  java-item-definition: java/assets/alexscaves/items/scarlet_magnet.json
+  bedrock-texture: bedrock/textures/alexscaves/block/neodymium/scarlet_magnet_0.png

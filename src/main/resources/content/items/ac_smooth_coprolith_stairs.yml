@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_smooth_coprolith_stairs
+mechanic: alexs-caves
+material: POLISHED_GRANITE_STAIRS
+item-model: alexscaves:smooth_coprolith_stairs
+display:
+  translation-key: item.alexscaves.smooth_coprolith_stairs
+  fallback-name: "Escaleras de coprolito liso"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_smooth_coprolith_stairs_recipe
+  result-amount: 4
+  shape: ["G  ", "GG ", "GGG"]
+  ingredients:
+    G: bigcasares:ac_smooth_coprolith
+appearance:
+  java-item-definition: java/assets/alexscaves/items/smooth_coprolith_stairs.json
+  bedrock-texture: bedrock/textures/alexscaves/block/smooth_coprolith.png

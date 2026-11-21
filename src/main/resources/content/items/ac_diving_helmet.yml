@@ -1,0 +1,23 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_diving_helmet
+mechanic: alexs-caves
+material: LEATHER_HELMET
+item-model: alexscaves:diving_helmet
+display:
+  translation-key: item.alexscaves.diving_helmet
+  fallback-name: "Casco de buzo"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 220
+  armor:
+    slot: HEAD
+    defense: 2.0
+    toughness: 0.0
+    equipment-model: alexscaves:diving_suit
+    repair-item: COPPER_INGOT
+    enchantability: 25
+appearance:
+  java-item-definition: java/assets/alexscaves/items/diving_helmet.json
+  bedrock-texture: bedrock/textures/alexscaves/item/diving_helmet.png

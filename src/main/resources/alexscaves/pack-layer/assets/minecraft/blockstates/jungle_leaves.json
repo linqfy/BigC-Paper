@@ -1,0 +1,112 @@
+{
+  "variants": {
+    "distance=1,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_pink"
+    },
+    "distance=1,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/candy_cane_pole_south_true"
+    },
+    "distance=1,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_medium",
+      "x": 90,
+      "y": 90
+    },
+    "distance=1,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/copper_valve"
+    },
+    "distance=2,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/bone_nodule",
+      "x": 180
+    },
+    "distance=2,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/candy_cane_pole_west_true"
+    },
+    "distance=2,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_large",
+      "x": 180
+    },
+    "distance=2,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/scarlet_neodymium_node_0",
+      "x": 180
+    },
+    "distance=3,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/bone_nodule"
+    },
+    "distance=3,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/stripped_candy_cane_pole"
+    },
+    "distance=3,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_large"
+    },
+    "distance=3,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/scarlet_neodymium_node_0"
+    },
+    "distance=4,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/bone_nodule",
+      "x": 90
+    },
+    "distance=4,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_red_floating",
+      "x": 180
+    },
+    "distance=4,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_large",
+      "x": 90
+    },
+    "distance=4,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/scarlet_neodymium_node_0",
+      "x": 90
+    },
+    "distance=5,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/bone_nodule",
+      "x": 90,
+      "y": 180
+    },
+    "distance=5,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_red_floating"
+    },
+    "distance=5,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_large",
+      "x": 270
+    },
+    "distance=5,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/scarlet_neodymium_node_0",
+      "x": 270
+    },
+    "distance=6,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/bone_nodule",
+      "x": 90,
+      "y": 270
+    },
+    "distance=6,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_red_floating",
+      "x": 90
+    },
+    "distance=6,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_large",
+      "x": 90,
+      "y": 270
+    },
+    "distance=6,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/scarlet_neodymium_node_0",
+      "x": 90,
+      "y": 270
+    },
+    "distance=7,persistent=false,waterlogged=false": {
+      "model": "minecraft:block/jungle_leaves"
+    },
+    "distance=7,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/jungle_leaves"
+    },
+    "distance=7,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_large",
+      "x": 90,
+      "y": 90
+    },
+    "distance=7,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/scarlet_neodymium_node_0",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

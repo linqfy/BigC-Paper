@@ -1,0 +1,26 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_darkened_apple
+mechanic: alexs-caves
+material: APPLE
+item-model: alexscaves:darkened_apple
+display:
+  translation-key: item.alexscaves.darkened_apple
+  fallback-name: "Manzana oscurecida"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+components:
+  food:
+    nutrition: 4
+    saturation: 2.8
+    can-always-eat: true
+recipe:
+  key: ac_darkened_apple_recipe
+  result-amount: 1
+  shape: [" D ", "DPD", " D "]
+  ingredients:
+    P: APPLE
+    D: bigcasares:ac_pure_darkness
+appearance:
+  java-item-definition: java/assets/alexscaves/items/darkened_apple.json
+  bedrock-texture: bedrock/textures/alexscaves/item/darkened_apple.png

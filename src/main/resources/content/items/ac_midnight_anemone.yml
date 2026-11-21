@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_midnight_anemone
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:midnight_anemone
+display:
+  translation-key: item.alexscaves.midnight_anemone
+  fallback-name: "Anémona de la medianoche"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/midnight_anemone.json
+  bedrock-texture: bedrock/textures/alexscaves/block/midnight_anemone_base.png

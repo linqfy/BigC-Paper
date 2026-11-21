@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_hazmat_warning_block
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:hazmat_warning_block
+display:
+  translation-key: item.alexscaves.hazmat_warning_block
+  fallback-name: "Bloque MP de adventercia"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_hazmat_warning_block_recipe
+  result-amount: 4
+  shape: [" H ", "HHH"]
+  ingredients:
+    H: bigcasares:ac_hazmat_block
+appearance:
+  java-item-definition: java/assets/alexscaves/items/hazmat_warning_block.json
+  bedrock-texture: bedrock/textures/alexscaves/block/hazmat_warning_block.png

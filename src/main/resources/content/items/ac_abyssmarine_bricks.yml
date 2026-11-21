@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_abyssmarine_bricks
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:abyssmarine_bricks
+display:
+  translation-key: item.alexscaves.abyssmarine_bricks
+  fallback-name: "Ladrillos de abismarina"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/abyssmarine_bricks.json
+  bedrock-texture: bedrock/textures/alexscaves/block/abyssmarine_bricks.png

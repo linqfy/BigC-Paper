@@ -1,0 +1,104 @@
+{
+  "variants": {
+    "distance=1,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/moth_ball_3"
+    },
+    "distance=1,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/oak_leaves"
+    },
+    "distance=1,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/small_peppermint",
+      "y": 180
+    },
+    "distance=1,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_medium",
+      "x": 180
+    },
+    "distance=2,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/moth_ball_4"
+    },
+    "distance=2,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/oak_leaves"
+    },
+    "distance=2,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/small_peppermint",
+      "y": 270
+    },
+    "distance=2,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_medium"
+    },
+    "distance=3,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/moth_ball_5"
+    },
+    "distance=3,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/oak_leaves"
+    },
+    "distance=3,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/small_peppermint",
+      "y": 90
+    },
+    "distance=3,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_medium",
+      "x": 90
+    },
+    "distance=4,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/forsaken_idol"
+    },
+    "distance=4,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/oak_leaves"
+    },
+    "distance=4,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/large_peppermint",
+      "x": 90
+    },
+    "distance=4,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_medium",
+      "x": 270
+    },
+    "distance=5,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/forsaken_idol",
+      "y": 180
+    },
+    "distance=5,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/oak_leaves"
+    },
+    "distance=5,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/large_peppermint",
+      "x": 270
+    },
+    "distance=5,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_medium",
+      "x": 90,
+      "y": 270
+    },
+    "distance=6,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/forsaken_idol",
+      "y": 270
+    },
+    "distance=6,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/oak_leaves"
+    },
+    "distance=6,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/large_peppermint"
+    },
+    "distance=6,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_medium",
+      "x": 90,
+      "y": 90
+    },
+    "distance=7,persistent=false,waterlogged=false": {
+      "model": "minecraft:block/oak_leaves"
+    },
+    "distance=7,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/oak_leaves"
+    },
+    "distance=7,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/large_peppermint",
+      "y": 180
+    },
+    "distance=7,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_large",
+      "x": 180
+    }
+  }
+}

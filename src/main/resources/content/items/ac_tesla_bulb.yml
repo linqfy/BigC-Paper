@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_tesla_bulb
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:tesla_bulb
+display:
+  translation-key: item.alexscaves.tesla_bulb
+  fallback-name: "Bombilla Tesla"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_tesla_bulb_recipe
+  result-amount: 1
+  shape: ["NNN", "NCN", "NNN"]
+  ingredients:
+    N: bigcasares:ac_energized_galena_neutral
+    C: bigcasares:ac_telecore
+appearance:
+  java-item-definition: java/assets/alexscaves/items/tesla_bulb.json
+  bedrock-texture: bedrock/textures/alexscaves/block/galena_spire_3.png

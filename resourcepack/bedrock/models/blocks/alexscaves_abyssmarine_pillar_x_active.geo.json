@@ -1,0 +1,184 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_abyssmarine_pillar_x_active",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "uv": {
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar_top"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar_top"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "uv": {
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar_top_glow"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar_top_glow"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar_glow"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar_glow"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar_glow"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_abyssmarine_pillar_glow"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import dev.linqfy.bigCasares.BigCasares;
 import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
+import dev.linqfy.bigCasares.modules.alexscaves.AlexsCavesPackLayer;
 import dev.linqfy.bigCasares.platform.ClientPlatform;
 import dev.linqfy.bigCasares.platform.ClientPlatformGateway;
 import org.bukkit.event.HandlerList;
@@ -286,8 +287,18 @@ public final class ResourcePackModule implements PluginModule {
         return PackDeliveryUriResolver.resolve(active, this::javaArtifactUri);
     }
 
+    /**
+     * Optional layers never fail the pack: a broken Alex's Caves layer only means module blocks
+     * look like note blocks, while an exception here would roll back every module at startup.
+     */
     private List<JavaPackLayerProvider> javaLayers() {
-        return List.of();
+        try {
+            return AlexsCavesPackLayer.provide(plugin, packsRoot.resolve("layers")).map(List::of).orElseGet(List::of);
+        } catch (IOException | RuntimeException exception) {
+            plugin.getLogger().log(Level.SEVERE, "Could not build the Alex's Caves pack layer; building the pack without it",
+                exception);
+            return List.of();
+        }
     }
 
     private List<JavaPackDelivery> reloadAndPublishBetterModel() {

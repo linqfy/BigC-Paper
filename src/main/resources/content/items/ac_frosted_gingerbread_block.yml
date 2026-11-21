@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_frosted_gingerbread_block
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:frosted_gingerbread_block
+display:
+  translation-key: item.alexscaves.frosted_gingerbread_block
+  fallback-name: "Bloque de pan de jengibre congelado"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/frosted_gingerbread_block.json
+  bedrock-texture: bedrock/textures/alexscaves/block/frosted_gingerbread_block.png

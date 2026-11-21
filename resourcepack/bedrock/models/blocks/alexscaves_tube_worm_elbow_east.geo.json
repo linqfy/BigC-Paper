@@ -1,0 +1,184 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_tube_worm_elbow_east",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -4
+              ],
+              "size": [
+                12.0,
+                8.0,
+                8
+              ],
+              "uv": {
+                "east": {
+                  "uv": [
+                    8,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm_turn"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    8
+                  ],
+                  "uv_size": [
+                    8,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm_turn"
+                },
+                "north": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm_turn"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    12
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm_elbow"
+                },
+                "down": {
+                  "uv": [
+                    8,
+                    12
+                  ],
+                  "uv_size": [
+                    -8,
+                    -12
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm_elbow"
+                }
+              }
+            },
+            {
+              "origin": [
+                -4,
+                8,
+                -4
+              ],
+              "size": [
+                8,
+                8.0,
+                8
+              ],
+              "uv": {
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm"
+                },
+                "up": {
+                  "uv": [
+                    8,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm"
+                },
+                "down": {
+                  "uv": [
+                    8,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_tube_worm"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pure_darkness
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:pure_darkness
+display:
+  translation-key: item.alexscaves.pure_darkness
+  fallback-name: "Oscuridad pura"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pure_darkness.json
+  bedrock-texture: bedrock/textures/alexscaves/item/pure_darkness.png

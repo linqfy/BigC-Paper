@@ -1,0 +1,2549 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "minecraft:block/chorus_plant_side"
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "minecraft:block/chorus_plant_side",
+        "uvlock": true,
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "minecraft:block/chorus_plant_side",
+        "uvlock": true,
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "minecraft:block/chorus_plant_side",
+        "uvlock": true,
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "minecraft:block/chorus_plant_side",
+        "uvlock": true,
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": {
+        "model": "minecraft:block/chorus_plant_side",
+        "uvlock": true,
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "minecraft:block/chorus_plant_noside",
+          "weight": 2
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside1"
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside2"
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside3"
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "minecraft:block/chorus_plant_noside1",
+          "uvlock": true,
+          "y": 90
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside2",
+          "uvlock": true,
+          "y": 90
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside3",
+          "uvlock": true,
+          "y": 90
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside",
+          "uvlock": true,
+          "y": 90,
+          "weight": 2
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "minecraft:block/chorus_plant_noside2",
+          "uvlock": true,
+          "y": 180
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside3",
+          "uvlock": true,
+          "y": 180
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside",
+          "uvlock": true,
+          "y": 180,
+          "weight": 2
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside1",
+          "uvlock": true,
+          "y": 180
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "minecraft:block/chorus_plant_noside3",
+          "uvlock": true,
+          "y": 270
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside",
+          "uvlock": true,
+          "y": 270,
+          "weight": 2
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside1",
+          "uvlock": true,
+          "y": 270
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside2",
+          "uvlock": true,
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "false",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "true",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "false",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "minecraft:block/chorus_plant_noside",
+          "uvlock": true,
+          "x": 270,
+          "weight": 2
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside3",
+          "uvlock": true,
+          "x": 270
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside1",
+          "uvlock": true,
+          "x": 270
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside2",
+          "uvlock": true,
+          "x": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "false",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "true"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "false",
+            "south": "true",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "false",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "false",
+            "north": "true",
+            "south": "false",
+            "up": "true",
+            "west": "false"
+          },
+          {
+            "down": "false",
+            "east": "true",
+            "north": "true",
+            "south": "true",
+            "up": "true",
+            "west": "true"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "minecraft:block/chorus_plant_noside3",
+          "uvlock": true,
+          "x": 90
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside2",
+          "uvlock": true,
+          "x": 90
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside1",
+          "uvlock": true,
+          "x": 90
+        },
+        {
+          "model": "minecraft:block/chorus_plant_noside",
+          "uvlock": true,
+          "x": 90,
+          "weight": 2
+        }
+      ]
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "true",
+        "up": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "false",
+        "south": "true",
+        "up": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "false",
+        "south": "true",
+        "up": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "up": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm_turn"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "true",
+        "south": "true",
+        "up": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm_turn",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "true",
+        "south": "true",
+        "up": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm_turn",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "true",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm_turn",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "true",
+        "south": "false",
+        "up": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm_elbow"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "true",
+        "south": "true",
+        "up": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm_elbow",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "true",
+        "south": "true",
+        "up": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm_elbow",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "alexscaves:block/tube_worm_elbow",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "false",
+        "south": "true",
+        "up": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/baleen_bone"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "false",
+        "south": "false",
+        "up": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/baleen_bone",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "false",
+        "south": "true",
+        "up": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "alexscaves:block/bone_ribs"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "false",
+        "south": "true",
+        "up": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/bone_ribs_flipped"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "up": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/bone_ribs",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "true",
+        "south": "true",
+        "up": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "alexscaves:block/bone_ribs_flipped",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "false",
+        "north": "true",
+        "south": "true",
+        "up": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/bone_ribs",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "true",
+        "south": "false",
+        "up": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "alexscaves:block/bone_ribs_flipped",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "true",
+        "south": "false",
+        "up": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "alexscaves:block/bone_ribs",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "east": "true",
+        "north": "true",
+        "south": "true",
+        "up": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "alexscaves:block/bone_ribs_flipped",
+        "y": 90
+      }
+    }
+  ]
+}

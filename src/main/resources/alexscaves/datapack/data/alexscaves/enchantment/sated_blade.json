@@ -1,0 +1,22 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.alexscaves.sated_blade"
+  },
+  "effects": {},
+  "max_cost": {
+    "base": 31,
+    "per_level_above_first": 11
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 11
+  },
+  "slots": [
+    "mainhand",
+    "offhand"
+  ],
+  "supported_items": "minecraft:diamond_sword",
+  "weight": 10
+}

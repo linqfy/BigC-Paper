@@ -1,0 +1,22 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.alexscaves.sightless"
+  },
+  "effects": {},
+  "max_cost": {
+    "base": 31,
+    "per_level_above_first": 13
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 13
+  },
+  "slots": [
+    "mainhand",
+    "offhand"
+  ],
+  "supported_items": "minecraft:iron_sword",
+  "weight": 2
+}

@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_cinder_brick
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:cinder_brick
+display:
+  translation-key: item.alexscaves.cinder_brick
+  fallback-name: "Ladrillo de hormigón"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/cinder_brick.json
+  bedrock-texture: bedrock/textures/alexscaves/item/cinder_brick.png

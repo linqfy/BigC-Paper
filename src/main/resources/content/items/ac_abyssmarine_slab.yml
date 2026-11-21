@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_abyssmarine_slab
+mechanic: alexs-caves
+material: COBBLED_DEEPSLATE_SLAB
+item-model: alexscaves:abyssmarine_slab
+display:
+  translation-key: item.alexscaves.abyssmarine_slab
+  fallback-name: "Losa de abismarina"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/abyssmarine_slab.json
+  bedrock-texture: bedrock/textures/alexscaves/block/abyssmarine.png

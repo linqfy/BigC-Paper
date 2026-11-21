@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_block_of_chiseled_chocolate
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:block_of_chiseled_chocolate
+display:
+  translation-key: item.alexscaves.block_of_chiseled_chocolate
+  fallback-name: "Bloque de chocolate cincelado"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/block_of_chiseled_chocolate.json
+  bedrock-texture: bedrock/textures/alexscaves/block/block_of_chiseled_chocolate.png

@@ -1,0 +1,6 @@
+# Capa de pack Java del módulo (solo con alexs-caves activo).
+assets/minecraft/blockstates/note_block.json
+assets/minecraft/blockstates/tripwire.json
+assets/minecraft/blockstates/chorus_plant.json
+assets/minecraft/blockstates/petrified_oak_slab.json
+assets/minecraft/items/petrified_oak_slab.json

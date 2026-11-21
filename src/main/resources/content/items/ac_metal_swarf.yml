@@ -1,0 +1,23 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_metal_swarf
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:metal_swarf
+display:
+  translation-key: item.alexscaves.metal_swarf
+  fallback-name: "Virutas metálicas"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_metal_swarf_recipe
+  result-amount: 2
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_ferrouslime_ball
+    - RAW_IRON
+    - GRAVEL
+    - GRAVEL
+appearance:
+  java-item-definition: java/assets/alexscaves/items/metal_swarf.json
+  bedrock-texture: bedrock/textures/alexscaves/block/metal_swarf.png

@@ -1,6 +1,8 @@
 package dev.linqfy.bigCasares.modules.missions;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
@@ -28,6 +30,8 @@ import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.ItemStack;
 
 public final class MissionListener implements Listener {
+
+    private static final NamespacedKey CUSTOM_ENTITY = new NamespacedKey("bigcasares", "custom_entity");
 
     private final MissionModule module;
 
@@ -116,6 +120,13 @@ public final class MissionListener implements Listener {
             0.0,
             event.getEntityType().name()
         );
+        // Custom entities (Alex's Caves mobs, ...) are vanilla bases tagged in PDC: missions can also name them
+        // by that tag (e.g. alexscaves:teletor) without changing what the vanilla type name matches.
+        String customTag = event.getEntity().getPersistentDataContainer().get(CUSTOM_ENTITY, PersistentDataType.STRING);
+        if (MissionEntityKeys.isCustomKey(customTag)) {
+            module.recordOutboundProgress(
+                killer, MissionType.KILL_ENTITY_IN_BIOME, biomeKey(event.getEntity().getLocation()), 0.0, customTag);
+        }
     }
 
     @EventHandler(ignoreCancelled = true)

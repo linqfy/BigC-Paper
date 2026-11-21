@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_relicheirus_egg
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:relicheirus_egg
+display:
+  translation-key: item.alexscaves.relicheirus_egg
+  fallback-name: "Huevo de reliqueiro"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 16
+appearance:
+  java-item-definition: java/assets/alexscaves/items/relicheirus_egg.json
+  bedrock-texture: bedrock/textures/alexscaves/item/relicheirus_egg.png

@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_cycad
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:cycad
+display:
+  translation-key: item.alexscaves.cycad
+  fallback-name: "Cícada"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/cycad.json
+  bedrock-texture: bedrock/textures/alexscaves/block/cycad.png

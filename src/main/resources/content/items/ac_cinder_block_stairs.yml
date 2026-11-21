@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_cinder_block_stairs
+mechanic: alexs-caves
+material: POLISHED_ANDESITE_STAIRS
+item-model: alexscaves:cinder_block_stairs
+display:
+  translation-key: item.alexscaves.cinder_block_stairs
+  fallback-name: "Escaleras de ladrillos de hormigón"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_cinder_block_stairs_recipe
+  result-amount: 4
+  shape: ["G  ", "GG ", "GGG"]
+  ingredients:
+    G: bigcasares:ac_cinder_block
+appearance:
+  java-item-definition: java/assets/alexscaves/items/cinder_block_stairs.json
+  bedrock-texture: bedrock/textures/alexscaves/block/cinder_block.png

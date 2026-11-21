@@ -1,0 +1,1333 @@
+{
+  "texture_data": {
+    "alexscaves_abyssal_altar": {
+      "textures": "textures/alexscaves/block/abyssal_altar_0"
+    },
+    "alexscaves_abyssmarine": {
+      "textures": "textures/alexscaves/block/abyssmarine"
+    },
+    "alexscaves_abyssmarine_brick_slab": {
+      "textures": "textures/alexscaves/block/abyssmarine_bricks"
+    },
+    "alexscaves_abyssmarine_brick_stairs": {
+      "textures": "textures/alexscaves/block/abyssmarine_bricks"
+    },
+    "alexscaves_abyssmarine_brick_wall": {
+      "textures": "textures/alexscaves/block/abyssmarine_bricks"
+    },
+    "alexscaves_abyssmarine_bricks": {
+      "textures": "textures/alexscaves/block/abyssmarine_bricks"
+    },
+    "alexscaves_abyssmarine_pillar": {
+      "textures": "textures/alexscaves/block/abyssmarine_pillar"
+    },
+    "alexscaves_abyssmarine_slab": {
+      "textures": "textures/alexscaves/block/abyssmarine"
+    },
+    "alexscaves_abyssmarine_stairs": {
+      "textures": "textures/alexscaves/block/abyssmarine"
+    },
+    "alexscaves_abyssmarine_tiles": {
+      "textures": "textures/alexscaves/block/abyssmarine_tiles"
+    },
+    "alexscaves_abyssmarine_wall": {
+      "textures": "textures/alexscaves/block/abyssmarine"
+    },
+    "alexscaves_acidic_radrock": {
+      "textures": "textures/alexscaves/block/acidic_radrock"
+    },
+    "alexscaves_amber": {
+      "textures": "textures/alexscaves/block/amber"
+    },
+    "alexscaves_amber_curiosity": {
+      "textures": "textures/alexscaves/item/amber_curiosity"
+    },
+    "alexscaves_amber_monolith": {
+      "textures": "textures/alexscaves/block/amber_monolith_center"
+    },
+    "alexscaves_ambersol": {
+      "textures": "textures/alexscaves/block/ambersol"
+    },
+    "alexscaves_ancient_leaves": {
+      "textures": "textures/alexscaves/block/ancient_leaves"
+    },
+    "alexscaves_atlatitan_egg": {
+      "textures": "textures/alexscaves/item/atlatitan_egg"
+    },
+    "alexscaves_azure_magnet": {
+      "textures": "textures/alexscaves/block/neodymium/azure_magnet_0"
+    },
+    "alexscaves_azure_neodymium_ingot": {
+      "textures": "textures/alexscaves/item/azure_neodymium_ingot"
+    },
+    "alexscaves_azure_neodymium_node": {
+      "textures": "textures/alexscaves/block/neodymium/azure_node_side_0"
+    },
+    "alexscaves_azure_neodymium_pillar": {
+      "textures": "textures/alexscaves/block/neodymium/azure_pillar_side"
+    },
+    "alexscaves_baleen_bone": {
+      "textures": "textures/alexscaves/block/thin_bone"
+    },
+    "alexscaves_bioluminesscence": {
+      "textures": "textures/alexscaves/item/bioluminesscence"
+    },
+    "alexscaves_block_of_azure_neodymium": {
+      "textures": "textures/alexscaves/block/neodymium/block_of_azure"
+    },
+    "alexscaves_block_of_chiseled_chocolate": {
+      "textures": "textures/alexscaves/block/block_of_chiseled_chocolate"
+    },
+    "alexscaves_block_of_chocolate": {
+      "textures": "textures/alexscaves/block/block_of_chocolate"
+    },
+    "alexscaves_block_of_chocolate_frosting": {
+      "textures": "textures/alexscaves/block/chocolate_frosting"
+    },
+    "alexscaves_block_of_frosted_chocolate": {
+      "textures": "textures/alexscaves/block/frosted_chocolate_side"
+    },
+    "alexscaves_block_of_frosting": {
+      "textures": "textures/alexscaves/block/frosting"
+    },
+    "alexscaves_block_of_pearl": {
+      "textures": "textures/alexscaves/block/block_of_pearl"
+    },
+    "alexscaves_block_of_polished_chocolate": {
+      "textures": "textures/alexscaves/block/block_of_polished_chocolate"
+    },
+    "alexscaves_block_of_scarlet_neodymium": {
+      "textures": "textures/alexscaves/block/neodymium/block_of_scarlet"
+    },
+    "alexscaves_block_of_uranium": {
+      "textures": "textures/alexscaves/block/block_of_uranium"
+    },
+    "alexscaves_block_of_vanilla_frosting": {
+      "textures": "textures/alexscaves/block/vanilla_frosting"
+    },
+    "alexscaves_bone_nodule": {
+      "textures": "textures/alexscaves/block/bone_nodule"
+    },
+    "alexscaves_bone_ribs": {
+      "textures": "textures/alexscaves/block/bone_ribs"
+    },
+    "alexscaves_bone_worms": {
+      "textures": "textures/alexscaves/block/bone_worms"
+    },
+    "alexscaves_burrowing_arrow": {
+      "textures": "textures/alexscaves/item/burrowing_arrow"
+    },
+    "alexscaves_cake_layer": {
+      "textures": "textures/alexscaves/block/cake_layer"
+    },
+    "alexscaves_candy_cane": {
+      "textures": "textures/alexscaves/item/candy_cane"
+    },
+    "alexscaves_candy_cane_block": {
+      "textures": "textures/alexscaves/block/candy_cane_block"
+    },
+    "alexscaves_candy_cane_hook": {
+      "textures": "textures/alexscaves/item/candy_cane_hook"
+    },
+    "alexscaves_candy_cane_pole": {
+      "textures": "textures/alexscaves/block/candy_cane_block"
+    },
+    "alexscaves_caramel": {
+      "textures": "textures/alexscaves/item/caramel"
+    },
+    "alexscaves_caramel_apple": {
+      "textures": "textures/alexscaves/item/caramel_apple"
+    },
+    "alexscaves_carmine_froglight": {
+      "textures": "textures/alexscaves/block/carmine_froglight_side"
+    },
+    "alexscaves_cave_painting_ambersol": {
+      "textures": "textures/alexscaves/block/cave_painting/ambersol"
+    },
+    "alexscaves_cave_painting_dark": {
+      "textures": "textures/alexscaves/block/cave_painting/dark"
+    },
+    "alexscaves_cave_painting_dino_nuggets": {
+      "textures": "textures/alexscaves/block/cave_painting/dino_nuggets"
+    },
+    "alexscaves_cave_painting_enderman": {
+      "textures": "textures/alexscaves/block/cave_painting/enderman"
+    },
+    "alexscaves_cave_painting_footprint": {
+      "textures": "textures/alexscaves/block/cave_painting/footprint"
+    },
+    "alexscaves_cave_painting_footprints": {
+      "textures": "textures/alexscaves/block/cave_painting/footprints"
+    },
+    "alexscaves_cave_painting_friendship": {
+      "textures": "textures/alexscaves/block/cave_painting/friendship"
+    },
+    "alexscaves_cave_painting_grottoceratops": {
+      "textures": "textures/alexscaves/block/cave_painting/grottoceratops"
+    },
+    "alexscaves_cave_painting_grottoceratops_friend": {
+      "textures": "textures/alexscaves/block/cave_painting/grottoceratops_friend"
+    },
+    "alexscaves_cave_painting_hunt": {
+      "textures": "textures/alexscaves/block/cave_painting/hunt"
+    },
+    "alexscaves_cave_painting_mystery_1": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_1"
+    },
+    "alexscaves_cave_painting_mystery_2": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_2"
+    },
+    "alexscaves_cave_painting_mystery_3": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_3"
+    },
+    "alexscaves_cave_painting_mystery_4": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_4"
+    },
+    "alexscaves_cave_painting_mystery_5": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_5"
+    },
+    "alexscaves_cave_painting_mystery_6": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_6"
+    },
+    "alexscaves_cave_painting_mystery_7": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_7"
+    },
+    "alexscaves_cave_painting_mystery_8": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_8"
+    },
+    "alexscaves_cave_painting_mystery_9": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_9"
+    },
+    "alexscaves_cave_painting_pewen": {
+      "textures": "textures/alexscaves/block/cave_painting/pewen"
+    },
+    "alexscaves_cave_painting_portal": {
+      "textures": "textures/alexscaves/block/cave_painting/portal"
+    },
+    "alexscaves_cave_painting_relicheirus": {
+      "textures": "textures/alexscaves/block/cave_painting/relicheirus"
+    },
+    "alexscaves_cave_painting_relicheirus_slash": {
+      "textures": "textures/alexscaves/block/cave_painting/relicheirus_slash"
+    },
+    "alexscaves_cave_painting_subterranodon": {
+      "textures": "textures/alexscaves/block/cave_painting/subterranodon"
+    },
+    "alexscaves_cave_painting_subterranodon_ride": {
+      "textures": "textures/alexscaves/block/cave_painting/subterranodon_ride"
+    },
+    "alexscaves_cave_painting_tree_stars": {
+      "textures": "textures/alexscaves/block/cave_painting/tree_stars"
+    },
+    "alexscaves_cave_painting_tremorsaurus": {
+      "textures": "textures/alexscaves/block/cave_painting/tremorsaurus"
+    },
+    "alexscaves_cave_painting_tremorsaurus_friend": {
+      "textures": "textures/alexscaves/block/cave_painting/tremorsaurus_friend"
+    },
+    "alexscaves_cave_painting_trilocaris": {
+      "textures": "textures/alexscaves/block/cave_painting/trilocaris"
+    },
+    "alexscaves_cave_painting_vallumraptor_chest": {
+      "textures": "textures/alexscaves/block/cave_painting/vallumraptor_chest"
+    },
+    "alexscaves_cave_painting_vallumraptor_friend": {
+      "textures": "textures/alexscaves/block/cave_painting/vallumraptor_friend"
+    },
+    "alexscaves_charred_remnant": {
+      "textures": "textures/alexscaves/item/charred_remnant"
+    },
+    "alexscaves_chiseled_candy_cane_block": {
+      "textures": "textures/alexscaves/block/chiseled_candy_cane_block"
+    },
+    "alexscaves_chocolate_ice_cream": {
+      "textures": "textures/alexscaves/block/chocolate_ice_cream"
+    },
+    "alexscaves_chocolate_ice_cream_scoop": {
+      "textures": "textures/alexscaves/item/chocolate_ice_cream_scoop"
+    },
+    "alexscaves_cinder_block": {
+      "textures": "textures/alexscaves/block/cinder_block"
+    },
+    "alexscaves_cinder_block_slab": {
+      "textures": "textures/alexscaves/block/cinder_block"
+    },
+    "alexscaves_cinder_block_stairs": {
+      "textures": "textures/alexscaves/block/cinder_block"
+    },
+    "alexscaves_cinder_block_wall": {
+      "textures": "textures/alexscaves/block/cinder_block"
+    },
+    "alexscaves_cinder_brick": {
+      "textures": "textures/alexscaves/item/cinder_brick"
+    },
+    "alexscaves_cloak_of_darkness": {
+      "textures": "textures/alexscaves/item/cloak_of_darkness"
+    },
+    "alexscaves_cooked_dinosaur_chop": {
+      "textures": "textures/alexscaves/block/dinosaur_chop_cooked"
+    },
+    "alexscaves_cooked_lanternfish": {
+      "textures": "textures/alexscaves/item/cooked_lanternfish"
+    },
+    "alexscaves_cooked_trilocaris_tail": {
+      "textures": "textures/alexscaves/item/cooked_trilocaris_tail"
+    },
+    "alexscaves_cooked_tripodfish": {
+      "textures": "textures/alexscaves/item/cooked_tripodfish"
+    },
+    "alexscaves_cookie_block": {
+      "textures": "textures/alexscaves/block/cookie_block"
+    },
+    "alexscaves_copper_valve": {
+      "textures": "textures/alexscaves/block/copper_valve"
+    },
+    "alexscaves_coprolith": {
+      "textures": "textures/alexscaves/block/coprolith"
+    },
+    "alexscaves_coprolith_coal_ore": {
+      "textures": "textures/alexscaves/block/coprolith_coal_ore"
+    },
+    "alexscaves_coprolith_slab": {
+      "textures": "textures/alexscaves/block/coprolith"
+    },
+    "alexscaves_coprolith_stairs": {
+      "textures": "textures/alexscaves/block/coprolith"
+    },
+    "alexscaves_coprolith_wall": {
+      "textures": "textures/alexscaves/block/coprolith"
+    },
+    "alexscaves_corrodent_teeth": {
+      "textures": "textures/alexscaves/item/corrodent_teeth"
+    },
+    "alexscaves_curly_fern": {
+      "textures": "textures/alexscaves/block/curly_fern_bottom"
+    },
+    "alexscaves_cycad": {
+      "textures": "textures/alexscaves/block/cycad"
+    },
+    "alexscaves_dark_tatters": {
+      "textures": "textures/alexscaves/item/dark_tatters"
+    },
+    "alexscaves_darkened_apple": {
+      "textures": "textures/alexscaves/item/darkened_apple"
+    },
+    "alexscaves_depth_charge": {
+      "textures": "textures/alexscaves/item/depth_charge"
+    },
+    "alexscaves_depth_glass": {
+      "textures": "textures/alexscaves/block/depth_glass"
+    },
+    "alexscaves_desolate_dagger": {
+      "textures": "textures/alexscaves/item/desolate_dagger"
+    },
+    "alexscaves_dinosaur_chop": {
+      "textures": "textures/alexscaves/block/dinosaur_chop_raw"
+    },
+    "alexscaves_dinosaur_nugget": {
+      "textures": "textures/alexscaves/item/dinosaur_nugget_0"
+    },
+    "alexscaves_display_cave_painting_ambersol": {
+      "textures": "textures/alexscaves/block/cave_painting/ambersol"
+    },
+    "alexscaves_display_cave_painting_dark": {
+      "textures": "textures/alexscaves/block/cave_painting/dark"
+    },
+    "alexscaves_display_cave_painting_dino_nuggets": {
+      "textures": "textures/alexscaves/block/cave_painting/dino_nuggets"
+    },
+    "alexscaves_display_cave_painting_enderman": {
+      "textures": "textures/alexscaves/block/cave_painting/enderman"
+    },
+    "alexscaves_display_cave_painting_footprint": {
+      "textures": "textures/alexscaves/block/cave_painting/footprint"
+    },
+    "alexscaves_display_cave_painting_footprints": {
+      "textures": "textures/alexscaves/block/cave_painting/footprints"
+    },
+    "alexscaves_display_cave_painting_friendship": {
+      "textures": "textures/alexscaves/block/cave_painting/friendship"
+    },
+    "alexscaves_display_cave_painting_grottoceratops": {
+      "textures": "textures/alexscaves/block/cave_painting/grottoceratops"
+    },
+    "alexscaves_display_cave_painting_grottoceratops_friend": {
+      "textures": "textures/alexscaves/block/cave_painting/grottoceratops_friend"
+    },
+    "alexscaves_display_cave_painting_hunt": {
+      "textures": "textures/alexscaves/block/cave_painting/hunt"
+    },
+    "alexscaves_display_cave_painting_mystery_1": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_1"
+    },
+    "alexscaves_display_cave_painting_mystery_2": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_2"
+    },
+    "alexscaves_display_cave_painting_mystery_3": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_3"
+    },
+    "alexscaves_display_cave_painting_mystery_4": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_4"
+    },
+    "alexscaves_display_cave_painting_mystery_5": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_5"
+    },
+    "alexscaves_display_cave_painting_mystery_6": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_6"
+    },
+    "alexscaves_display_cave_painting_mystery_7": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_7"
+    },
+    "alexscaves_display_cave_painting_mystery_8": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_8"
+    },
+    "alexscaves_display_cave_painting_mystery_9": {
+      "textures": "textures/alexscaves/block/cave_painting/mystery_9"
+    },
+    "alexscaves_display_cave_painting_pewen": {
+      "textures": "textures/alexscaves/block/cave_painting/pewen"
+    },
+    "alexscaves_display_cave_painting_portal": {
+      "textures": "textures/alexscaves/block/cave_painting/portal"
+    },
+    "alexscaves_display_cave_painting_relicheirus": {
+      "textures": "textures/alexscaves/block/cave_painting/relicheirus"
+    },
+    "alexscaves_display_cave_painting_relicheirus_slash": {
+      "textures": "textures/alexscaves/block/cave_painting/relicheirus_slash"
+    },
+    "alexscaves_display_cave_painting_subterranodon": {
+      "textures": "textures/alexscaves/block/cave_painting/subterranodon"
+    },
+    "alexscaves_display_cave_painting_subterranodon_ride": {
+      "textures": "textures/alexscaves/block/cave_painting/subterranodon_ride"
+    },
+    "alexscaves_display_cave_painting_tree_stars": {
+      "textures": "textures/alexscaves/block/cave_painting/tree_stars"
+    },
+    "alexscaves_display_cave_painting_tremorsaurus": {
+      "textures": "textures/alexscaves/block/cave_painting/tremorsaurus"
+    },
+    "alexscaves_display_cave_painting_tremorsaurus_friend": {
+      "textures": "textures/alexscaves/block/cave_painting/tremorsaurus_friend"
+    },
+    "alexscaves_display_cave_painting_trilocaris": {
+      "textures": "textures/alexscaves/block/cave_painting/trilocaris"
+    },
+    "alexscaves_display_cave_painting_vallumraptor_chest": {
+      "textures": "textures/alexscaves/block/cave_painting/vallumraptor_chest"
+    },
+    "alexscaves_display_cave_painting_vallumraptor_friend": {
+      "textures": "textures/alexscaves/block/cave_painting/vallumraptor_friend"
+    },
+    "alexscaves_display_cooked_dinosaur_chop_0": {
+      "textures": "textures/alexscaves/block/dinosaur_chop_cooked"
+    },
+    "alexscaves_display_cooked_dinosaur_chop_1": {
+      "textures": "textures/alexscaves/block/dinosaur_chop_cooked"
+    },
+    "alexscaves_display_cooked_dinosaur_chop_2": {
+      "textures": "textures/alexscaves/block/dinosaur_chop_cooked"
+    },
+    "alexscaves_display_cooked_dinosaur_chop_3": {
+      "textures": "textures/alexscaves/block/dinosaur_chop_cooked"
+    },
+    "alexscaves_display_dinosaur_chop_0": {
+      "textures": "textures/alexscaves/block/dinosaur_chop_raw"
+    },
+    "alexscaves_display_dinosaur_chop_1": {
+      "textures": "textures/alexscaves/block/dinosaur_chop_raw"
+    },
+    "alexscaves_display_dinosaur_chop_2": {
+      "textures": "textures/alexscaves/block/dinosaur_chop_raw"
+    },
+    "alexscaves_display_dinosaur_chop_3": {
+      "textures": "textures/alexscaves/block/dinosaur_chop_raw"
+    },
+    "alexscaves_diving_boots": {
+      "textures": "textures/alexscaves/item/diving_boots"
+    },
+    "alexscaves_diving_chestplate": {
+      "textures": "textures/alexscaves/item/diving_chestplate"
+    },
+    "alexscaves_diving_helmet": {
+      "textures": "textures/alexscaves/item/diving_helmet"
+    },
+    "alexscaves_diving_leggings": {
+      "textures": "textures/alexscaves/item/diving_leggings"
+    },
+    "alexscaves_dough_block": {
+      "textures": "textures/alexscaves/block/dough_block"
+    },
+    "alexscaves_dreadbow": {
+      "textures": "textures/alexscaves/item/dreadbow"
+    },
+    "alexscaves_dusk_anemone": {
+      "textures": "textures/alexscaves/block/dusk_anemone_base"
+    },
+    "alexscaves_energized_galena_azure": {
+      "textures": "textures/alexscaves/block/energized_galena_azure"
+    },
+    "alexscaves_energized_galena_neutral": {
+      "textures": "textures/alexscaves/block/energized_galena_neutral"
+    },
+    "alexscaves_energized_galena_scarlet": {
+      "textures": "textures/alexscaves/block/energized_galena_scarlet"
+    },
+    "alexscaves_enigmatic_engine": {
+      "textures": "textures/alexscaves/block/enigmatic_engine"
+    },
+    "alexscaves_fern_thatch": {
+      "textures": "textures/alexscaves/block/fern_thatch_side"
+    },
+    "alexscaves_ferrouslime_ball": {
+      "textures": "textures/alexscaves/item/ferrouslime_ball"
+    },
+    "alexscaves_fertilizer": {
+      "textures": "textures/alexscaves/item/fertilizer"
+    },
+    "alexscaves_fiddlehead": {
+      "textures": "textures/alexscaves/item/fiddlehead"
+    },
+    "alexscaves_fissile_core": {
+      "textures": "textures/alexscaves/item/fissile_core"
+    },
+    "alexscaves_fissure_primal_magma": {
+      "textures": "textures/alexscaves/block/primal_magma_active"
+    },
+    "alexscaves_flood_basalt": {
+      "textures": "textures/alexscaves/block/flood_basalt"
+    },
+    "alexscaves_flytrap": {
+      "textures": "textures/alexscaves/block/flytrap_mouth_open"
+    },
+    "alexscaves_forsaken_idol": {
+      "textures": "textures/alexscaves/block/forsaken_idol_0"
+    },
+    "alexscaves_frosted_gingerbread_block": {
+      "textures": "textures/alexscaves/block/frosted_gingerbread_block"
+    },
+    "alexscaves_frosted_gingerbread_brick_slab": {
+      "textures": "textures/alexscaves/block/frosted_gingerbread_bricks"
+    },
+    "alexscaves_frosted_gingerbread_brick_stairs": {
+      "textures": "textures/alexscaves/block/frosted_gingerbread_bricks"
+    },
+    "alexscaves_frosted_gingerbread_brick_wall": {
+      "textures": "textures/alexscaves/block/frosted_gingerbread_bricks"
+    },
+    "alexscaves_frosted_gingerbread_bricks": {
+      "textures": "textures/alexscaves/block/frosted_gingerbread_bricks"
+    },
+    "alexscaves_frosted_gingerbread_door": {
+      "textures": "textures/alexscaves/block/frosted_gingerbread_door"
+    },
+    "alexscaves_frosted_gingerbread_slab": {
+      "textures": "textures/alexscaves/block/frosted_gingerbread_block"
+    },
+    "alexscaves_frosted_gingerbread_stairs": {
+      "textures": "textures/alexscaves/block/frosted_gingerbread_block"
+    },
+    "alexscaves_frosted_gingerbread_wall": {
+      "textures": "textures/alexscaves/block/frosted_gingerbread_block"
+    },
+    "alexscaves_galena": {
+      "textures": "textures/alexscaves/block/galena"
+    },
+    "alexscaves_galena_brick_slab": {
+      "textures": "textures/alexscaves/block/galena_bricks"
+    },
+    "alexscaves_galena_brick_stairs": {
+      "textures": "textures/alexscaves/block/galena_bricks"
+    },
+    "alexscaves_galena_brick_wall": {
+      "textures": "textures/alexscaves/block/galena_bricks"
+    },
+    "alexscaves_galena_bricks": {
+      "textures": "textures/alexscaves/block/galena_bricks"
+    },
+    "alexscaves_galena_gauntlet": {
+      "textures": "textures/alexscaves/item/galena_gauntlet_icon"
+    },
+    "alexscaves_galena_iron_ore": {
+      "textures": "textures/alexscaves/block/galena_iron_ore"
+    },
+    "alexscaves_galena_pillar": {
+      "textures": "textures/alexscaves/block/galena_pillar_single"
+    },
+    "alexscaves_galena_slab": {
+      "textures": "textures/alexscaves/block/galena"
+    },
+    "alexscaves_galena_stairs": {
+      "textures": "textures/alexscaves/block/galena"
+    },
+    "alexscaves_galena_wall": {
+      "textures": "textures/alexscaves/block/galena"
+    },
+    "alexscaves_gazing_pearl": {
+      "textures": "textures/alexscaves/item/gazing_pearl"
+    },
+    "alexscaves_gelatin_red": {
+      "textures": "textures/alexscaves/item/gelatin_red"
+    },
+    "alexscaves_geothermal_vent": {
+      "textures": "textures/alexscaves/block/geothermal_vent"
+    },
+    "alexscaves_geothermal_vent_medium": {
+      "textures": "textures/alexscaves/block/geothermal_vent_medium"
+    },
+    "alexscaves_geothermal_vent_thin": {
+      "textures": "textures/alexscaves/block/geothermal_vent_thin"
+    },
+    "alexscaves_giant_sweetberry": {
+      "textures": "textures/alexscaves/block/giant_sweetberry"
+    },
+    "alexscaves_gingerbarrel": {
+      "textures": "textures/alexscaves/block/gingerbarrel"
+    },
+    "alexscaves_gingerbread_block": {
+      "textures": "textures/alexscaves/block/gingerbread_block"
+    },
+    "alexscaves_gingerbread_brick_slab": {
+      "textures": "textures/alexscaves/block/gingerbread_bricks"
+    },
+    "alexscaves_gingerbread_brick_stairs": {
+      "textures": "textures/alexscaves/block/gingerbread_bricks"
+    },
+    "alexscaves_gingerbread_brick_wall": {
+      "textures": "textures/alexscaves/block/gingerbread_bricks"
+    },
+    "alexscaves_gingerbread_bricks": {
+      "textures": "textures/alexscaves/block/gingerbread_bricks"
+    },
+    "alexscaves_gingerbread_crumbs": {
+      "textures": "textures/alexscaves/item/gingerbread_crumbs"
+    },
+    "alexscaves_gingerbread_door": {
+      "textures": "textures/alexscaves/block/gingerbread_door"
+    },
+    "alexscaves_gingerbread_slab": {
+      "textures": "textures/alexscaves/block/gingerbread_block"
+    },
+    "alexscaves_gingerbread_stairs": {
+      "textures": "textures/alexscaves/block/gingerbread_block"
+    },
+    "alexscaves_gingerbread_wall": {
+      "textures": "textures/alexscaves/block/gingerbread_block"
+    },
+    "alexscaves_glow_ink_bomb": {
+      "textures": "textures/alexscaves/item/glow_ink_bomb"
+    },
+    "alexscaves_grottoceratops_egg": {
+      "textures": "textures/alexscaves/item/grottoceratops_egg"
+    },
+    "alexscaves_guano": {
+      "textures": "textures/alexscaves/item/guano"
+    },
+    "alexscaves_guano_block": {
+      "textures": "textures/alexscaves/block/guano"
+    },
+    "alexscaves_guano_layer": {
+      "textures": "textures/alexscaves/block/guano"
+    },
+    "alexscaves_guanostone": {
+      "textures": "textures/alexscaves/block/guanostone"
+    },
+    "alexscaves_guanostone_brick_slab": {
+      "textures": "textures/alexscaves/block/guanostone_bricks"
+    },
+    "alexscaves_guanostone_brick_stairs": {
+      "textures": "textures/alexscaves/block/guanostone_bricks"
+    },
+    "alexscaves_guanostone_brick_wall": {
+      "textures": "textures/alexscaves/block/guanostone_bricks"
+    },
+    "alexscaves_guanostone_bricks": {
+      "textures": "textures/alexscaves/block/guanostone_bricks"
+    },
+    "alexscaves_guanostone_chiseled": {
+      "textures": "textures/alexscaves/block/guanostone_chiseled"
+    },
+    "alexscaves_guanostone_redstone_ore": {
+      "textures": "textures/alexscaves/block/guanostone_redstone_ore"
+    },
+    "alexscaves_guanostone_slab": {
+      "textures": "textures/alexscaves/block/guanostone"
+    },
+    "alexscaves_guanostone_stairs": {
+      "textures": "textures/alexscaves/block/guanostone"
+    },
+    "alexscaves_guanostone_tiles": {
+      "textures": "textures/alexscaves/block/guanostone_tiles"
+    },
+    "alexscaves_guanostone_wall": {
+      "textures": "textures/alexscaves/block/guanostone"
+    },
+    "alexscaves_gumball_pile": {
+      "textures": "textures/alexscaves/item/gumball_pile"
+    },
+    "alexscaves_gummy_ring_blue": {
+      "textures": "textures/alexscaves/block/gummy_ring_blue_side"
+    },
+    "alexscaves_gummy_ring_green": {
+      "textures": "textures/alexscaves/block/gummy_ring_green_side"
+    },
+    "alexscaves_gummy_ring_pink": {
+      "textures": "textures/alexscaves/block/gummy_ring_pink_side"
+    },
+    "alexscaves_gummy_ring_red": {
+      "textures": "textures/alexscaves/block/gummy_ring_red_side"
+    },
+    "alexscaves_gummy_ring_yellow": {
+      "textures": "textures/alexscaves/block/gummy_ring_yellow_side"
+    },
+    "alexscaves_hazmat_block": {
+      "textures": "textures/alexscaves/block/hazmat_block"
+    },
+    "alexscaves_hazmat_boots": {
+      "textures": "textures/alexscaves/item/hazmat_boots"
+    },
+    "alexscaves_hazmat_chestplate": {
+      "textures": "textures/alexscaves/item/hazmat_chestplate"
+    },
+    "alexscaves_hazmat_leggings": {
+      "textures": "textures/alexscaves/item/hazmat_leggings"
+    },
+    "alexscaves_hazmat_mask": {
+      "textures": "textures/alexscaves/item/hazmat_mask"
+    },
+    "alexscaves_hazmat_skull_block": {
+      "textures": "textures/alexscaves/block/hazmat_skull_block"
+    },
+    "alexscaves_hazmat_warning_block": {
+      "textures": "textures/alexscaves/block/hazmat_warning_block"
+    },
+    "alexscaves_heart_of_iron": {
+      "textures": "textures/alexscaves/block/heart_of_iron_1"
+    },
+    "alexscaves_heavy_bone": {
+      "textures": "textures/alexscaves/item/heavy_bone"
+    },
+    "alexscaves_heavyweight": {
+      "textures": "textures/alexscaves/item/heavyweight"
+    },
+    "alexscaves_hollow_bone": {
+      "textures": "textures/alexscaves/block/hollow_bone"
+    },
+    "alexscaves_hood_of_darkness": {
+      "textures": "textures/alexscaves/item/hood_of_darkness"
+    },
+    "alexscaves_immortal_embryo": {
+      "textures": "textures/alexscaves/item/immortal_embryo"
+    },
+    "alexscaves_ink_bomb": {
+      "textures": "textures/alexscaves/item/ink_bomb"
+    },
+    "alexscaves_lanternfish": {
+      "textures": "textures/alexscaves/item/lanternfish"
+    },
+    "alexscaves_large_peppermint": {
+      "textures": "textures/alexscaves/block/large_peppermint_front"
+    },
+    "alexscaves_licoroot": {
+      "textures": "textures/alexscaves/block/licoroot/licoroot"
+    },
+    "alexscaves_licoroot_sprout": {
+      "textures": "textures/alexscaves/block/licoroot/licoroot_sprout"
+    },
+    "alexscaves_limestone": {
+      "textures": "textures/alexscaves/block/limestone"
+    },
+    "alexscaves_limestone_chiseled": {
+      "textures": "textures/alexscaves/block/limestone_chiseled_front"
+    },
+    "alexscaves_limestone_pillar": {
+      "textures": "textures/alexscaves/block/limestone_pillar"
+    },
+    "alexscaves_limestone_slab": {
+      "textures": "textures/alexscaves/block/limestone"
+    },
+    "alexscaves_limestone_spear": {
+      "textures": "textures/alexscaves/item/limestone_spear"
+    },
+    "alexscaves_limestone_stairs": {
+      "textures": "textures/alexscaves/block/limestone"
+    },
+    "alexscaves_limestone_wall": {
+      "textures": "textures/alexscaves/block/limestone"
+    },
+    "alexscaves_lollipop_bunch": {
+      "textures": "textures/alexscaves/block/lollipop_bunch"
+    },
+    "alexscaves_magic_conch": {
+      "textures": "textures/alexscaves/item/magic_conch"
+    },
+    "alexscaves_magnetic_activator": {
+      "textures": "textures/alexscaves/block/magnetic_activator"
+    },
+    "alexscaves_marine_snow": {
+      "textures": "textures/alexscaves/item/marine_snow"
+    },
+    "alexscaves_metal_barrel": {
+      "textures": "textures/alexscaves/block/metal_barrel"
+    },
+    "alexscaves_metal_scaffolding": {
+      "textures": "textures/alexscaves/block/metal_scaffolding_side"
+    },
+    "alexscaves_metal_swarf": {
+      "textures": "textures/alexscaves/block/metal_swarf"
+    },
+    "alexscaves_midnight_anemone": {
+      "textures": "textures/alexscaves/block/midnight_anemone_base"
+    },
+    "alexscaves_moth_ball": {
+      "textures": "textures/alexscaves/item/moth_ball"
+    },
+    "alexscaves_moth_dust": {
+      "textures": "textures/alexscaves/item/moth_dust"
+    },
+    "alexscaves_muck": {
+      "textures": "textures/alexscaves/block/muck"
+    },
+    "alexscaves_mussel": {
+      "textures": "textures/alexscaves/block/mussels"
+    },
+    "alexscaves_notor_gizmo": {
+      "textures": "textures/alexscaves/item/notor_gizmo"
+    },
+    "alexscaves_nuclear_bomb": {
+      "textures": "textures/alexscaves/block/nuclear_bomb_side_0"
+    },
+    "alexscaves_occult_gem": {
+      "textures": "textures/alexscaves/item/occult_gem"
+    },
+    "alexscaves_ominous_catalyst": {
+      "textures": "textures/alexscaves/item/ominous_catalyst"
+    },
+    "alexscaves_ortholance": {
+      "textures": "textures/alexscaves/item/ortholance"
+    },
+    "alexscaves_packed_galena": {
+      "textures": "textures/alexscaves/block/packed_galena"
+    },
+    "alexscaves_pearl": {
+      "textures": "textures/alexscaves/item/pearl"
+    },
+    "alexscaves_peering_coprolith": {
+      "textures": "textures/alexscaves/block/porous_coprolith_1"
+    },
+    "alexscaves_pewen_button": {
+      "textures": "textures/alexscaves/block/pewen/pewen_planks"
+    },
+    "alexscaves_pewen_door": {
+      "textures": "textures/alexscaves/block/pewen/pewen_planks"
+    },
+    "alexscaves_pewen_fence": {
+      "textures": "textures/alexscaves/block/pewen/pewen_planks"
+    },
+    "alexscaves_pewen_fence_gate": {
+      "textures": "textures/alexscaves/block/pewen/pewen_planks"
+    },
+    "alexscaves_pewen_hanging_sign": {
+      "textures": "textures/alexscaves/item/pewen_hanging_sign"
+    },
+    "alexscaves_pewen_log": {
+      "textures": "textures/alexscaves/block/pewen/pewen_log"
+    },
+    "alexscaves_pewen_planks": {
+      "textures": "textures/alexscaves/block/pewen/pewen_planks"
+    },
+    "alexscaves_pewen_pressure_plate": {
+      "textures": "textures/alexscaves/block/pewen/pewen_planks"
+    },
+    "alexscaves_pewen_sign": {
+      "textures": "textures/alexscaves/item/pewen_sign"
+    },
+    "alexscaves_pewen_slab": {
+      "textures": "textures/alexscaves/block/pewen/pewen_planks"
+    },
+    "alexscaves_pewen_stairs": {
+      "textures": "textures/alexscaves/block/pewen/pewen_planks"
+    },
+    "alexscaves_pewen_trapdoor": {
+      "textures": "textures/alexscaves/block/pewen/pewen_planks"
+    },
+    "alexscaves_pewen_wood": {
+      "textures": "textures/alexscaves/block/pewen/pewen_log"
+    },
+    "alexscaves_pine_nuts": {
+      "textures": "textures/alexscaves/item/pine_nuts"
+    },
+    "alexscaves_ping_pong_sponge": {
+      "textures": "textures/alexscaves/block/ping_pong_sponge"
+    },
+    "alexscaves_polymer_plate": {
+      "textures": "textures/alexscaves/item/polymer_plate"
+    },
+    "alexscaves_porous_coprolith": {
+      "textures": "textures/alexscaves/block/porous_coprolith_0"
+    },
+    "alexscaves_primal_magma": {
+      "textures": "textures/alexscaves/block/primal_magma"
+    },
+    "alexscaves_primitive_club": {
+      "textures": "textures/alexscaves/item/primitive_club"
+    },
+    "alexscaves_primordial_helmet": {
+      "textures": "textures/alexscaves/item/primordial_helmet"
+    },
+    "alexscaves_primordial_pants": {
+      "textures": "textures/alexscaves/item/primordial_pants"
+    },
+    "alexscaves_primordial_soup": {
+      "textures": "textures/alexscaves/item/primordial_soup"
+    },
+    "alexscaves_primordial_tunic": {
+      "textures": "textures/alexscaves/item/primordial_tunic"
+    },
+    "alexscaves_pure_darkness": {
+      "textures": "textures/alexscaves/item/pure_darkness"
+    },
+    "alexscaves_radiant_essence": {
+      "textures": "textures/alexscaves/item/radiant_essence"
+    },
+    "alexscaves_radon_bottle": {
+      "textures": "textures/alexscaves/item/radon_bottle"
+    },
+    "alexscaves_radon_lamp_black": {
+      "textures": "textures/alexscaves/block/radon_lamp_black"
+    },
+    "alexscaves_radon_lamp_blue": {
+      "textures": "textures/alexscaves/block/radon_lamp_blue"
+    },
+    "alexscaves_radon_lamp_brown": {
+      "textures": "textures/alexscaves/block/radon_lamp_brown"
+    },
+    "alexscaves_radon_lamp_cyan": {
+      "textures": "textures/alexscaves/block/radon_lamp_cyan"
+    },
+    "alexscaves_radon_lamp_gray": {
+      "textures": "textures/alexscaves/block/radon_lamp_gray"
+    },
+    "alexscaves_radon_lamp_green": {
+      "textures": "textures/alexscaves/block/radon_lamp_green"
+    },
+    "alexscaves_radon_lamp_light_blue": {
+      "textures": "textures/alexscaves/block/radon_lamp_light_blue"
+    },
+    "alexscaves_radon_lamp_light_gray": {
+      "textures": "textures/alexscaves/block/radon_lamp_light_gray"
+    },
+    "alexscaves_radon_lamp_lime": {
+      "textures": "textures/alexscaves/block/radon_lamp_lime"
+    },
+    "alexscaves_radon_lamp_magenta": {
+      "textures": "textures/alexscaves/block/radon_lamp_magenta"
+    },
+    "alexscaves_radon_lamp_orange": {
+      "textures": "textures/alexscaves/block/radon_lamp_orange"
+    },
+    "alexscaves_radon_lamp_pink": {
+      "textures": "textures/alexscaves/block/radon_lamp_pink"
+    },
+    "alexscaves_radon_lamp_purple": {
+      "textures": "textures/alexscaves/block/radon_lamp_purple"
+    },
+    "alexscaves_radon_lamp_red": {
+      "textures": "textures/alexscaves/block/radon_lamp_red"
+    },
+    "alexscaves_radon_lamp_white": {
+      "textures": "textures/alexscaves/block/radon_lamp_white"
+    },
+    "alexscaves_radon_lamp_yellow": {
+      "textures": "textures/alexscaves/block/radon_lamp_yellow"
+    },
+    "alexscaves_radrock": {
+      "textures": "textures/alexscaves/block/radrock"
+    },
+    "alexscaves_radrock_brick_slab": {
+      "textures": "textures/alexscaves/block/radrock_bricks"
+    },
+    "alexscaves_radrock_brick_stairs": {
+      "textures": "textures/alexscaves/block/radrock_bricks"
+    },
+    "alexscaves_radrock_brick_wall": {
+      "textures": "textures/alexscaves/block/radrock_bricks"
+    },
+    "alexscaves_radrock_bricks": {
+      "textures": "textures/alexscaves/block/radrock_bricks"
+    },
+    "alexscaves_radrock_chiseled": {
+      "textures": "textures/alexscaves/block/radrock_chiseled"
+    },
+    "alexscaves_radrock_slab": {
+      "textures": "textures/alexscaves/block/radrock"
+    },
+    "alexscaves_radrock_stairs": {
+      "textures": "textures/alexscaves/block/radrock"
+    },
+    "alexscaves_radrock_uranium_ore": {
+      "textures": "textures/alexscaves/block/radrock_uranium_ore"
+    },
+    "alexscaves_radrock_wall": {
+      "textures": "textures/alexscaves/block/radrock"
+    },
+    "alexscaves_raw_azure_neodymium": {
+      "textures": "textures/alexscaves/item/raw_azure_neodymium"
+    },
+    "alexscaves_raw_scarlet_neodymium": {
+      "textures": "textures/alexscaves/item/raw_scarlet_neodymium"
+    },
+    "alexscaves_raygun": {
+      "textures": "textures/alexscaves/item/raygun_icon"
+    },
+    "alexscaves_relicheirus_egg": {
+      "textures": "textures/alexscaves/item/relicheirus_egg"
+    },
+    "alexscaves_resistor_shield": {
+      "textures": "textures/alexscaves/item/resistor_shield_icon"
+    },
+    "alexscaves_rock_candy_black": {
+      "textures": "textures/alexscaves/block/rock_candy_black"
+    },
+    "alexscaves_rock_candy_blue": {
+      "textures": "textures/alexscaves/block/rock_candy_blue"
+    },
+    "alexscaves_rock_candy_brown": {
+      "textures": "textures/alexscaves/block/rock_candy_brown"
+    },
+    "alexscaves_rock_candy_cyan": {
+      "textures": "textures/alexscaves/block/rock_candy_cyan"
+    },
+    "alexscaves_rock_candy_gray": {
+      "textures": "textures/alexscaves/block/rock_candy_gray"
+    },
+    "alexscaves_rock_candy_green": {
+      "textures": "textures/alexscaves/block/rock_candy_green"
+    },
+    "alexscaves_rock_candy_light_blue": {
+      "textures": "textures/alexscaves/block/rock_candy_light_blue"
+    },
+    "alexscaves_rock_candy_light_gray": {
+      "textures": "textures/alexscaves/block/rock_candy_light_gray"
+    },
+    "alexscaves_rock_candy_lime": {
+      "textures": "textures/alexscaves/block/rock_candy_lime"
+    },
+    "alexscaves_rock_candy_magenta": {
+      "textures": "textures/alexscaves/block/rock_candy_magenta"
+    },
+    "alexscaves_rock_candy_orange": {
+      "textures": "textures/alexscaves/block/rock_candy_orange"
+    },
+    "alexscaves_rock_candy_pink": {
+      "textures": "textures/alexscaves/block/rock_candy_pink"
+    },
+    "alexscaves_rock_candy_purple": {
+      "textures": "textures/alexscaves/block/rock_candy_purple"
+    },
+    "alexscaves_rock_candy_red": {
+      "textures": "textures/alexscaves/block/rock_candy_red"
+    },
+    "alexscaves_rock_candy_white": {
+      "textures": "textures/alexscaves/block/rock_candy_white"
+    },
+    "alexscaves_rock_candy_yellow": {
+      "textures": "textures/alexscaves/block/rock_candy_yellow"
+    },
+    "alexscaves_rusty_barrel": {
+      "textures": "textures/alexscaves/block/rusty_barrel"
+    },
+    "alexscaves_rusty_scaffolding": {
+      "textures": "textures/alexscaves/block/rusty_scaffolding_side"
+    },
+    "alexscaves_rusty_scrap_metal": {
+      "textures": "textures/alexscaves/block/rusty_scrap_metal_0"
+    },
+    "alexscaves_rusty_scrap_metal_plate": {
+      "textures": "textures/alexscaves/block/rusty_scrap_metal_plate"
+    },
+    "alexscaves_sack_of_sating": {
+      "textures": "textures/alexscaves/item/sack_of_sating"
+    },
+    "alexscaves_scarlet_magnet": {
+      "textures": "textures/alexscaves/block/neodymium/scarlet_magnet_0"
+    },
+    "alexscaves_scarlet_neodymium_ingot": {
+      "textures": "textures/alexscaves/item/scarlet_neodymium_ingot"
+    },
+    "alexscaves_scarlet_neodymium_node": {
+      "textures": "textures/alexscaves/block/neodymium/scarlet_node_side_0"
+    },
+    "alexscaves_scarlet_neodymium_pillar": {
+      "textures": "textures/alexscaves/block/neodymium/scarlet_pillar_side"
+    },
+    "alexscaves_scrap_metal": {
+      "textures": "textures/alexscaves/block/scrap_metal_0"
+    },
+    "alexscaves_scrap_metal_plate": {
+      "textures": "textures/alexscaves/block/scrap_metal_plate"
+    },
+    "alexscaves_sea_glass_shards": {
+      "textures": "textures/alexscaves/item/sea_glass_shards"
+    },
+    "alexscaves_sea_pig": {
+      "textures": "textures/alexscaves/item/sea_pig"
+    },
+    "alexscaves_sea_staff": {
+      "textures": "textures/alexscaves/item/sea_staff"
+    },
+    "alexscaves_seeking_arrow": {
+      "textures": "textures/alexscaves/item/seeking_arrow"
+    },
+    "alexscaves_seething_stew": {
+      "textures": "textures/alexscaves/item/seething_stew"
+    },
+    "alexscaves_serene_salad": {
+      "textures": "textures/alexscaves/item/serene_salad"
+    },
+    "alexscaves_shadow_silk": {
+      "textures": "textures/alexscaves/item/shadow_silk"
+    },
+    "alexscaves_sharpened_candy_cane": {
+      "textures": "textures/alexscaves/item/sharpened_candy_cane"
+    },
+    "alexscaves_shot_gum": {
+      "textures": "textures/alexscaves/item/shot_gum_icon"
+    },
+    "alexscaves_small_peppermint": {
+      "textures": "textures/alexscaves/block/small_peppermint_front"
+    },
+    "alexscaves_smooth_bone": {
+      "textures": "textures/alexscaves/block/smooth_bone"
+    },
+    "alexscaves_smooth_bone_slab": {
+      "textures": "textures/alexscaves/block/smooth_bone"
+    },
+    "alexscaves_smooth_bone_stairs": {
+      "textures": "textures/alexscaves/block/smooth_bone"
+    },
+    "alexscaves_smooth_bone_wall": {
+      "textures": "textures/alexscaves/block/smooth_bone"
+    },
+    "alexscaves_smooth_coprolith": {
+      "textures": "textures/alexscaves/block/smooth_coprolith"
+    },
+    "alexscaves_smooth_coprolith_slab": {
+      "textures": "textures/alexscaves/block/smooth_coprolith"
+    },
+    "alexscaves_smooth_coprolith_stairs": {
+      "textures": "textures/alexscaves/block/smooth_coprolith"
+    },
+    "alexscaves_smooth_coprolith_wall": {
+      "textures": "textures/alexscaves/block/smooth_coprolith"
+    },
+    "alexscaves_smooth_limestone": {
+      "textures": "textures/alexscaves/block/smooth_limestone"
+    },
+    "alexscaves_smooth_limestone_slab": {
+      "textures": "textures/alexscaves/block/smooth_limestone"
+    },
+    "alexscaves_smooth_limestone_stairs": {
+      "textures": "textures/alexscaves/block/smooth_limestone"
+    },
+    "alexscaves_smooth_limestone_wall": {
+      "textures": "textures/alexscaves/block/smooth_limestone"
+    },
+    "alexscaves_stripped_candy_cane_block": {
+      "textures": "textures/alexscaves/block/candy_cane_stripped"
+    },
+    "alexscaves_stripped_candy_cane_pole": {
+      "textures": "textures/alexscaves/block/candy_cane_stripped"
+    },
+    "alexscaves_stripped_pewen_log": {
+      "textures": "textures/alexscaves/block/pewen/stripped_pewen_log"
+    },
+    "alexscaves_stripped_pewen_wood": {
+      "textures": "textures/alexscaves/block/pewen/stripped_pewen_log"
+    },
+    "alexscaves_stripped_thornwood_log": {
+      "textures": "textures/alexscaves/block/thornwood/stripped_thornwood_log"
+    },
+    "alexscaves_stripped_thornwood_wood": {
+      "textures": "textures/alexscaves/block/thornwood/stripped_thornwood_log"
+    },
+    "alexscaves_subterranodon_egg": {
+      "textures": "textures/alexscaves/item/subterranodon_egg"
+    },
+    "alexscaves_sugar_glass": {
+      "textures": "textures/alexscaves/block/sugar_glass"
+    },
+    "alexscaves_sugar_staff": {
+      "textures": "textures/alexscaves/item/sugar_staff"
+    },
+    "alexscaves_sulfur": {
+      "textures": "textures/alexscaves/block/sulfur"
+    },
+    "alexscaves_sulfur_bud_large": {
+      "textures": "textures/alexscaves/block/sulfur_bud_large"
+    },
+    "alexscaves_sulfur_bud_medium": {
+      "textures": "textures/alexscaves/block/sulfur_bud_medium"
+    },
+    "alexscaves_sulfur_bud_small": {
+      "textures": "textures/alexscaves/block/sulfur_bud_small"
+    },
+    "alexscaves_sulfur_cluster": {
+      "textures": "textures/alexscaves/block/sulfur_cluster"
+    },
+    "alexscaves_sulfur_dust": {
+      "textures": "textures/alexscaves/item/sulfur_dust"
+    },
+    "alexscaves_sundrop": {
+      "textures": "textures/alexscaves/block/sundrop_side"
+    },
+    "alexscaves_sweet_puff": {
+      "textures": "textures/alexscaves/block/sweet_puff"
+    },
+    "alexscaves_sweet_tooth": {
+      "textures": "textures/alexscaves/item/sweet_tooth"
+    },
+    "alexscaves_sweetberry_ice_cream": {
+      "textures": "textures/alexscaves/block/sweetberry_ice_cream"
+    },
+    "alexscaves_sweetberry_ice_cream_scoop": {
+      "textures": "textures/alexscaves/item/sweetberry_ice_cream_scoop"
+    },
+    "alexscaves_sweetish_fish_red": {
+      "textures": "textures/alexscaves/item/sweetish_fish_red"
+    },
+    "alexscaves_tectonic_shard": {
+      "textures": "textures/alexscaves/item/tectonic_shard"
+    },
+    "alexscaves_telecore": {
+      "textures": "textures/alexscaves/item/telecore"
+    },
+    "alexscaves_tesla_bulb": {
+      "textures": "textures/alexscaves/block/galena_spire_3"
+    },
+    "alexscaves_thin_bone": {
+      "textures": "textures/alexscaves/block/thin_bone"
+    },
+    "alexscaves_thornwood_branch": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_branch"
+    },
+    "alexscaves_thornwood_button": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_planks"
+    },
+    "alexscaves_thornwood_door": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_planks"
+    },
+    "alexscaves_thornwood_fence": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_planks"
+    },
+    "alexscaves_thornwood_fence_gate": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_planks"
+    },
+    "alexscaves_thornwood_hanging_sign": {
+      "textures": "textures/alexscaves/item/thornwood_hanging_sign"
+    },
+    "alexscaves_thornwood_log": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_log"
+    },
+    "alexscaves_thornwood_planks": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_planks"
+    },
+    "alexscaves_thornwood_pressure_plate": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_planks"
+    },
+    "alexscaves_thornwood_sign": {
+      "textures": "textures/alexscaves/item/thornwood_sign"
+    },
+    "alexscaves_thornwood_slab": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_planks"
+    },
+    "alexscaves_thornwood_stairs": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_planks"
+    },
+    "alexscaves_thornwood_trapdoor": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_trapdoor"
+    },
+    "alexscaves_thornwood_wood": {
+      "textures": "textures/alexscaves/block/thornwood/thornwood_log"
+    },
+    "alexscaves_totem_of_possession": {
+      "textures": "textures/alexscaves/item/totem_of_possession_unbound"
+    },
+    "alexscaves_tough_hide": {
+      "textures": "textures/alexscaves/item/tough_hide"
+    },
+    "alexscaves_toxic_paste": {
+      "textures": "textures/alexscaves/item/toxic_paste"
+    },
+    "alexscaves_tree_star": {
+      "textures": "textures/alexscaves/item/tree_star"
+    },
+    "alexscaves_tremorsaurus_egg": {
+      "textures": "textures/alexscaves/item/tremorsaurus_egg"
+    },
+    "alexscaves_tremorzilla_egg": {
+      "textures": "textures/alexscaves/item/tremorzilla_egg"
+    },
+    "alexscaves_trilocaris_tail": {
+      "textures": "textures/alexscaves/item/trilocaris_tail"
+    },
+    "alexscaves_tripodfish": {
+      "textures": "textures/alexscaves/item/tripodfish"
+    },
+    "alexscaves_tube_worm": {
+      "textures": "textures/alexscaves/block/tube_worm"
+    },
+    "alexscaves_twilight_anemone": {
+      "textures": "textures/alexscaves/block/twilight_anemone_base"
+    },
+    "alexscaves_underweed": {
+      "textures": "textures/alexscaves/block/underweed"
+    },
+    "alexscaves_unrefined_waste": {
+      "textures": "textures/alexscaves/block/unrefined_waste"
+    },
+    "alexscaves_uranium": {
+      "textures": "textures/alexscaves/item/uranium"
+    },
+    "alexscaves_uranium_rod": {
+      "textures": "textures/alexscaves/block/uranium_rod"
+    },
+    "alexscaves_uranium_shard": {
+      "textures": "textures/alexscaves/item/uranium_shard"
+    },
+    "alexscaves_vallumraptor_egg": {
+      "textures": "textures/alexscaves/item/vallumraptor_egg"
+    },
+    "alexscaves_vanilla_ice_cream": {
+      "textures": "textures/alexscaves/block/vanilla_ice_cream"
+    },
+    "alexscaves_vanilla_ice_cream_scoop": {
+      "textures": "textures/alexscaves/item/vanilla_ice_cream_scoop"
+    },
+    "alexscaves_vesper_stew": {
+      "textures": "textures/alexscaves/item/vesper_stew"
+    },
+    "alexscaves_vesper_wing": {
+      "textures": "textures/alexscaves/item/vesper_wing"
+    },
+    "alexscaves_volcanic_core": {
+      "textures": "textures/alexscaves/block/volcanic_core"
+    },
+    "alexscaves_wafer_cookie_block": {
+      "textures": "textures/alexscaves/block/wafer_cookie_block"
+    },
+    "alexscaves_wafer_cookie_slab": {
+      "textures": "textures/alexscaves/block/wafer_cookie_block"
+    },
+    "alexscaves_wafer_cookie_stairs": {
+      "textures": "textures/alexscaves/block/wafer_cookie_block"
+    },
+    "alexscaves_wafer_cookie_wall": {
+      "textures": "textures/alexscaves/block/wafer_cookie_block"
+    },
+    "alexscaves_waste_drum": {
+      "textures": "textures/alexscaves/block/waste_drum"
+    }
+  }
+}

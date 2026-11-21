@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_mussel
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:mussel
+display:
+  translation-key: item.alexscaves.mussel
+  fallback-name: "Mejillón"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/mussel.json
+  bedrock-texture: bedrock/textures/alexscaves/block/mussels.png

@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_guanostone_stairs
+mechanic: alexs-caves
+material: SMOOTH_SANDSTONE_STAIRS
+item-model: alexscaves:guanostone_stairs
+display:
+  translation-key: item.alexscaves.guanostone_stairs
+  fallback-name: "Escaleras de guanopiedra"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_guanostone_stairs_recipe
+  result-amount: 4
+  shape: ["A  ", "AA ", "AAA"]
+  ingredients:
+    A: bigcasares:ac_guanostone
+appearance:
+  java-item-definition: java/assets/alexscaves/items/guanostone_stairs.json
+  bedrock-texture: bedrock/textures/alexscaves/block/guanostone.png

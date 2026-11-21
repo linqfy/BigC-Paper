@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_amber_curiosity
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:amber_curiosity
+display:
+  translation-key: item.alexscaves.amber_curiosity
+  fallback-name: "Curiosidad ambarina"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/amber_curiosity.json
+  bedrock-texture: bedrock/textures/alexscaves/item/amber_curiosity.png

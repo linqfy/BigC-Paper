@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_heart_of_iron
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:heart_of_iron
+display:
+  translation-key: item.alexscaves.heart_of_iron
+  fallback-name: "Corazón férreo"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/heart_of_iron.json
+  bedrock-texture: bedrock/textures/alexscaves/block/heart_of_iron_1.png

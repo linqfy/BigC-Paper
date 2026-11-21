@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_gingerbread_door
+mechanic: alexs-caves
+material: ACACIA_DOOR
+item-model: alexscaves:gingerbread_door
+display:
+  translation-key: item.alexscaves.gingerbread_door
+  fallback-name: "Puerta de pan de jengibre"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/gingerbread_door.json
+  bedrock-texture: bedrock/textures/alexscaves/block/gingerbread_door.png

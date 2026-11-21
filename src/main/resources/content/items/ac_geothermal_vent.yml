@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_geothermal_vent
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:geothermal_vent
+display:
+  translation-key: item.alexscaves.geothermal_vent
+  fallback-name: "Respiradero geotérmico"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/geothermal_vent.json
+  bedrock-texture: bedrock/textures/alexscaves/block/geothermal_vent.png

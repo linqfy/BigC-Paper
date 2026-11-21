@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_ink_bomb
+mechanic: alexs-caves
+material: SNOWBALL
+item-model: alexscaves:ink_bomb
+display:
+  translation-key: item.alexscaves.ink_bomb
+  fallback-name: "Bomba de tinta"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/ink_bomb.json
+  bedrock-texture: bedrock/textures/alexscaves/item/ink_bomb.png

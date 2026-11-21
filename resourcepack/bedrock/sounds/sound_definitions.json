@@ -1,6 +1,3587 @@
 {
   "format_version": "1.14.0",
   "sound_definitions": {
+    "alexscaves:abyssmarine_glow_off": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/abyssmarine/abyssmarine_glow_off"
+        }
+      ]
+    },
+    "alexscaves:abyssmarine_glow_on": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/abyssmarine/abyssmarine_glow_on"
+        }
+      ]
+    },
+    "alexscaves:acid_burn": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/acid/acid_burn_0"
+        },
+        {
+          "name": "sounds/alexscaves/block/acid/acid_burn_1"
+        },
+        {
+          "name": "sounds/alexscaves/block/acid/acid_burn_2"
+        }
+      ]
+    },
+    "alexscaves:amber_monolith_place": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/amber/amber_monolith_place"
+        }
+      ]
+    },
+    "alexscaves:amber_monolith_summon": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/amber/amber_monolith_summon_0"
+        },
+        {
+          "name": "sounds/alexscaves/block/amber/amber_monolith_summon_1"
+        },
+        {
+          "name": "sounds/alexscaves/block/amber/amber_monolith_summon_2"
+        }
+      ]
+    },
+    "alexscaves:atlatitan_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_death_1"
+        }
+      ]
+    },
+    "alexscaves:atlatitan_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:atlatitan_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_idle_2"
+        }
+      ]
+    },
+    "alexscaves:atlatitan_kick": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_kick_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_kick_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_kick_2"
+        }
+      ]
+    },
+    "alexscaves:atlatitan_step": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_step_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_step_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_step_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_step_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_step_4"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_step_5"
+        }
+      ]
+    },
+    "alexscaves:atlatitan_stomp": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_stomp_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/atlatitan/atlatitan_stomp_1"
+        }
+      ]
+    },
+    "alexscaves:atlatitan_tail": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_tail_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_tail_1"
+        }
+      ]
+    },
+    "alexscaves:azure_neodymium_push_loop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/neodymium/azure_neodymium_push_loop"
+        }
+      ]
+    },
+    "alexscaves:boundroid_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_death_2"
+        }
+      ]
+    },
+    "alexscaves:boundroid_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:boundroid_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_idle_3"
+        }
+      ]
+    },
+    "alexscaves:boundroid_slam": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_slam_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_slam_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/boundroid/boundroid_slam_2"
+        }
+      ]
+    },
+    "alexscaves:brainiac_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_attack_2"
+        }
+      ]
+    },
+    "alexscaves:brainiac_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_death"
+        }
+      ]
+    },
+    "alexscaves:brainiac_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_hurt_1"
+        }
+      ]
+    },
+    "alexscaves:brainiac_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_idle_2"
+        }
+      ]
+    },
+    "alexscaves:brainiac_lick": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_lick_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_lick_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_step_2"
+        }
+      ]
+    },
+    "alexscaves:brainiac_throw": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_throw_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/brainiac/brainiac_throw_1"
+        }
+      ]
+    },
+    "alexscaves:candicorn_charge_loop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_charge_loop"
+        }
+      ]
+    },
+    "alexscaves:candicorn_charge_start": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_charge_start"
+        }
+      ]
+    },
+    "alexscaves:candicorn_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_death"
+        }
+      ]
+    },
+    "alexscaves:candicorn_gallop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_gallop_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_gallop_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_gallop_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_gallop_3"
+        }
+      ]
+    },
+    "alexscaves:candicorn_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:candicorn_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_idle_2"
+        }
+      ]
+    },
+    "alexscaves:candicorn_step": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_step_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_step_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_step_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/candicorn/candicorn_step_3"
+        }
+      ]
+    },
+    "alexscaves:candy_cane_hook_launch": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/candy_cane_hook/candy_cane_hook_launch"
+        }
+      ]
+    },
+    "alexscaves:candy_cane_hook_reel": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/candy_cane_hook/candy_cane_hook_reel"
+        }
+      ]
+    },
+    "alexscaves:caniac_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_attack_2"
+        }
+      ]
+    },
+    "alexscaves:caniac_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_death_1"
+        }
+      ]
+    },
+    "alexscaves:caniac_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_hurt_1"
+        }
+      ]
+    },
+    "alexscaves:caniac_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_idle_2"
+        }
+      ]
+    },
+    "alexscaves:caniac_swing": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_swing_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_swing_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caniac/caniac_swing_2"
+        }
+      ]
+    },
+    "alexscaves:caramel_cube_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/caramel_cube/caramel_cube_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caramel_cube/caramel_cube_attack_1"
+        }
+      ]
+    },
+    "alexscaves:caramel_cube_big": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/caramel_cube/caramel_cube_big_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caramel_cube/caramel_cube_big_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caramel_cube/caramel_cube_big_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caramel_cube/caramel_cube_big_3"
+        }
+      ]
+    },
+    "alexscaves:caramel_cube_small": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/caramel_cube/caramel_cube_small_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caramel_cube/caramel_cube_small_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caramel_cube/caramel_cube_small_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/caramel_cube/caramel_cube_small_3"
+        }
+      ]
+    },
+    "alexscaves:corrodent_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_attack_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_attack_3"
+        }
+      ]
+    },
+    "alexscaves:corrodent_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_death_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_death_3"
+        }
+      ]
+    },
+    "alexscaves:corrodent_dig_loop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_dig_loop"
+        }
+      ]
+    },
+    "alexscaves:corrodent_dig_stop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_dig_stop"
+        }
+      ]
+    },
+    "alexscaves:corrodent_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:corrodent_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_idle_2"
+        }
+      ]
+    },
+    "alexscaves:corrodent_teeth": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_teeth_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_teeth_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/corrodent/corrodent_teeth_2"
+        }
+      ]
+    },
+    "alexscaves:darkness_incarnate_enter": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/misc/darkness_incarnate/darkness_incarnate_enter"
+        }
+      ]
+    },
+    "alexscaves:darkness_incarnate_exit": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/misc/darkness_incarnate/darkness_incarnate_exit"
+        }
+      ]
+    },
+    "alexscaves:darkness_incarnate_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/misc/darkness_incarnate/darkness_incarnate_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/misc/darkness_incarnate/darkness_incarnate_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/misc/darkness_incarnate/darkness_incarnate_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/misc/darkness_incarnate/darkness_incarnate_idle_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_admire": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_admire_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_admire_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_admire_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_admire_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_attack_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_attack_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_death_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_death_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_hostile": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_hostile_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_hostile_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_hostile_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_hostile_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one/deep_one_idle_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_knight_admire": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_admire_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_admire_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_admire_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_admire_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_knight_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_attack_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_attack_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_knight_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_death_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_death_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_knight_hostile": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_hostile_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_hostile_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_hostile_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_hostile_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_knight_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_knight_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_knight/deep_one_knight_idle_3"
+        }
+      ]
+    },
+    "alexscaves:deep_one_mage_admire": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_admire_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_admire_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_admire_2"
+        }
+      ]
+    },
+    "alexscaves:deep_one_mage_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_attack_2"
+        }
+      ]
+    },
+    "alexscaves:deep_one_mage_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_death_2"
+        }
+      ]
+    },
+    "alexscaves:deep_one_mage_hostile": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_hostile_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_hostile_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_hostile_2"
+        }
+      ]
+    },
+    "alexscaves:deep_one_mage_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:deep_one_mage_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/deep_one_mage/deep_one_mage_idle_2"
+        }
+      ]
+    },
+    "alexscaves:desolate_dagger_hit": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/desolate_dagger/desolate_dagger_hit_0"
+        },
+        {
+          "name": "sounds/alexscaves/item/desolate_dagger/desolate_dagger_hit_1"
+        },
+        {
+          "name": "sounds/alexscaves/item/desolate_dagger/desolate_dagger_hit_2"
+        }
+      ]
+    },
+    "alexscaves:desolate_dagger_summon": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/desolate_dagger/desolate_dagger_summon_0"
+        },
+        {
+          "name": "sounds/alexscaves/item/desolate_dagger/desolate_dagger_summon_1"
+        },
+        {
+          "name": "sounds/alexscaves/item/desolate_dagger/desolate_dagger_summon_2"
+        }
+      ]
+    },
+    "alexscaves:dreadbow_rain": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/dreadbow/dreadbow_rain_0"
+        },
+        {
+          "name": "sounds/alexscaves/item/dreadbow/dreadbow_rain_1"
+        },
+        {
+          "name": "sounds/alexscaves/item/dreadbow/dreadbow_rain_2"
+        }
+      ]
+    },
+    "alexscaves:dreadbow_release": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/dreadbow/dreadbow_release"
+        }
+      ]
+    },
+    "alexscaves:ferrouslime_combine": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/ferrouslime/ferrouslime_combine_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/ferrouslime/ferrouslime_combine_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/ferrouslime/ferrouslime_combine_2"
+        }
+      ]
+    },
+    "alexscaves:ferrouslime_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/ferrouslime/ferrouslime_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/ferrouslime/ferrouslime_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/ferrouslime/ferrouslime_death_2"
+        }
+      ]
+    },
+    "alexscaves:ferrouslime_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/ferrouslime/ferrouslime_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/ferrouslime/ferrouslime_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/ferrouslime/ferrouslime_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:forsaken_aoe": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_aoe_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_aoe_1"
+        }
+      ]
+    },
+    "alexscaves:forsaken_bite": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_bite_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_bite_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_bite_2"
+        }
+      ]
+    },
+    "alexscaves:forsaken_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_death"
+        }
+      ]
+    },
+    "alexscaves:forsaken_grab": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_grab"
+        }
+      ]
+    },
+    "alexscaves:forsaken_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:forsaken_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_idle_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_idle_4"
+        }
+      ]
+    },
+    "alexscaves:forsaken_leap": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_leap_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_leap_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_leap_2"
+        }
+      ]
+    },
+    "alexscaves:forsaken_screech": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_screech_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_screech_1"
+        }
+      ]
+    },
+    "alexscaves:forsaken_spawn": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_spawn_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_spawn_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_spawn_2"
+        }
+      ]
+    },
+    "alexscaves:forsaken_step": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_step_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_step_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/forsaken/forsaken_step_2"
+        }
+      ]
+    },
+    "alexscaves:galena_gauntlet_stop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/galena_gauntlet/galena_gauntlet_stop"
+        }
+      ]
+    },
+    "alexscaves:galena_gauntlet_use_loop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/galena_gauntlet/galena_gauntlet_use_loop"
+        }
+      ]
+    },
+    "alexscaves:gammaroach_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_attack_2"
+        }
+      ]
+    },
+    "alexscaves:gammaroach_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_death_2"
+        }
+      ]
+    },
+    "alexscaves:gammaroach_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:gammaroach_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_idle_2"
+        }
+      ]
+    },
+    "alexscaves:gammaroach_spray": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_spray_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_spray_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gammaroach/gammaroach_spray_2"
+        }
+      ]
+    },
+    "alexscaves:geothermal_vent_bubble": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/geothermal_vent/geothermal_vent_bubble_0"
+        },
+        {
+          "name": "sounds/alexscaves/block/geothermal_vent/geothermal_vent_bubble_1"
+        },
+        {
+          "name": "sounds/alexscaves/block/geothermal_vent/geothermal_vent_bubble_2"
+        }
+      ]
+    },
+    "alexscaves:gingerbread_man_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_attack_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_attack_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_attack_4"
+        }
+      ]
+    },
+    "alexscaves:gingerbread_man_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_death_2"
+        }
+      ]
+    },
+    "alexscaves:gingerbread_man_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_hurt_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_hurt_4"
+        }
+      ]
+    },
+    "alexscaves:gingerbread_man_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_idle_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_idle_4"
+        }
+      ]
+    },
+    "alexscaves:gingerbread_man_talk": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_talk_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_talk_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gingerbread_man/gingerbread_man_talk_2"
+        }
+      ]
+    },
+    "alexscaves:gloomoth_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_death_2"
+        }
+      ]
+    },
+    "alexscaves:gloomoth_flap": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_flap_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_flap_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_flap_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_flap_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_flap_4"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_flap_5"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_flap_6"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_flap_7"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_flap_8"
+        }
+      ]
+    },
+    "alexscaves:gloomoth_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gloomoth/gloomoth_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:gossamer_worm_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gossamer_worm/gossamer_worm_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gossamer_worm/gossamer_worm_death_1"
+        }
+      ]
+    },
+    "alexscaves:gossamer_worm_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gossamer_worm/gossamer_worm_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gossamer_worm/gossamer_worm_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gossamer_worm/gossamer_worm_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:gossamer_worm_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gossamer_worm/gossamer_worm_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gossamer_worm/gossamer_worm_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gossamer_worm/gossamer_worm_idle_2"
+        }
+      ]
+    },
+    "alexscaves:grottoceratops_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_attack_2"
+        }
+      ]
+    },
+    "alexscaves:grottoceratops_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_death_2"
+        }
+      ]
+    },
+    "alexscaves:grottoceratops_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:grottoceratops_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/grottoceratops/grottoceratops_idle_2"
+        }
+      ]
+    },
+    "alexscaves:gum_worm_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_attack_2"
+        }
+      ]
+    },
+    "alexscaves:gum_worm_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_death"
+        }
+      ]
+    },
+    "alexscaves:gum_worm_dig_loop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_dig_loop"
+        }
+      ]
+    },
+    "alexscaves:gum_worm_dig_stop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_dig_stop_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_dig_stop_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_dig_stop_2"
+        }
+      ]
+    },
+    "alexscaves:gum_worm_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_hurt_1"
+        }
+      ]
+    },
+    "alexscaves:gum_worm_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gum_worm/gum_worm_idle_2"
+        }
+      ]
+    },
+    "alexscaves:gumball_bounce": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gumbeeper/gumball_bounce"
+        }
+      ]
+    },
+    "alexscaves:gumball_hit": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gumbeeper/gumball_hit"
+        }
+      ]
+    },
+    "alexscaves:gumball_launch": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gumbeeper/gumball_launch"
+        }
+      ]
+    },
+    "alexscaves:gumbeeper_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gumbeeper/gumbeeper_death"
+        }
+      ]
+    },
+    "alexscaves:gumbeeper_explode": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gumbeeper/gumbeeper_explode"
+        }
+      ]
+    },
+    "alexscaves:gumbeeper_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gumbeeper/gumbeeper_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gumbeeper/gumbeeper_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gumbeeper/gumbeeper_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:gummy_bear_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_death_2"
+        }
+      ]
+    },
+    "alexscaves:gummy_bear_eat": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_eat_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_eat_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_eat_2"
+        }
+      ]
+    },
+    "alexscaves:gummy_bear_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_hurt_1"
+        }
+      ]
+    },
+    "alexscaves:gummy_bear_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_idle_2"
+        }
+      ]
+    },
+    "alexscaves:gummy_bear_snore": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_snore_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_snore_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_snore_2"
+        }
+      ]
+    },
+    "alexscaves:gummy_bear_step": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_step_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/gummy_bear/gummy_bear_step_1"
+        }
+      ]
+    },
+    "alexscaves:hullbreaker_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_attack_2"
+        }
+      ]
+    },
+    "alexscaves:hullbreaker_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_death_1"
+        }
+      ]
+    },
+    "alexscaves:hullbreaker_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:hullbreaker_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_idle_3"
+        }
+      ]
+    },
+    "alexscaves:hullbreaker_land_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_land_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_land_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_land_death_2"
+        }
+      ]
+    },
+    "alexscaves:hullbreaker_land_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_land_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_land_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_land_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:hullbreaker_land_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_land_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_land_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_land_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/hullbreaker/hullbreaker_land_idle_3"
+        }
+      ]
+    },
+    "alexscaves:lanternfish_flop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/lanternfish/lanternfish_flop_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/lanternfish/lanternfish_flop_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/lanternfish/lanternfish_flop_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/lanternfish/lanternfish_flop_3"
+        }
+      ]
+    },
+    "alexscaves:lanternfish_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/lanternfish/lanternfish_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/lanternfish/lanternfish_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/lanternfish/lanternfish_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/lanternfish/lanternfish_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:large_nuclear_explosion": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/misc/nuclear_explosion/large_nuclear_explosion"
+        }
+      ]
+    },
+    "alexscaves:licowitch_cast_hex": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_cast_hex_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_cast_hex_1"
+        }
+      ]
+    },
+    "alexscaves:licowitch_cast_peppermint": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_cast_peppermint_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_cast_peppermint_1"
+        }
+      ]
+    },
+    "alexscaves:licowitch_cast_summon": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_cast_summon_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_cast_summon_1"
+        }
+      ]
+    },
+    "alexscaves:licowitch_celebrate": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_celebrate_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_celebrate_1"
+        }
+      ]
+    },
+    "alexscaves:licowitch_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_death_1"
+        }
+      ]
+    },
+    "alexscaves:licowitch_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:licowitch_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/licowitch/licowitch_idle_2"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_attack_stomp": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_attack_stomp_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_attack_stomp_1"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_death"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_idle_3"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_jump": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_jump"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_kick": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_kick_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_kick_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_kick_2"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_roar": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_roar"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_step": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_step_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_step_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_step_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_step_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_step_4"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_step_5"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_stomp": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_stomp_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_stomp_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_stomp_2"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_summon": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_summon"
+        }
+      ]
+    },
+    "alexscaves:luxtructosaurus_tail": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_tail_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/luxtructosaurus/luxtructosaurus_tail_1"
+        }
+      ]
+    },
+    "alexscaves:magic_conch_summon": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/magic_conch/magic_conch_summon"
+        }
+      ]
+    },
+    "alexscaves:magnetron_assemble": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_assemble"
+        }
+      ]
+    },
+    "alexscaves:magnetron_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_attack_2"
+        }
+      ]
+    },
+    "alexscaves:magnetron_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_death_2"
+        }
+      ]
+    },
+    "alexscaves:magnetron_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:magnetron_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/magnetron/magnetron_idle_2"
+        }
+      ]
+    },
+    "alexscaves:mine_guardian_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_death"
+        }
+      ]
+    },
+    "alexscaves:mine_guardian_explode": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_explode_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_explode_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_explode_2"
+        }
+      ]
+    },
+    "alexscaves:mine_guardian_flop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_flop_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_flop_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_flop_2"
+        }
+      ]
+    },
+    "alexscaves:mine_guardian_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:mine_guardian_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_idle_3"
+        }
+      ]
+    },
+    "alexscaves:mine_guardian_land_explode": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_land_explode_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_land_explode_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_land_explode_2"
+        }
+      ]
+    },
+    "alexscaves:mine_guardian_scan": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_scan_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_scan_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/mine_guardian/mine_guardian_scan_2"
+        }
+      ]
+    },
+    "alexscaves:moth_ball_place": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/moth_ball/moth_ball_place_0"
+        },
+        {
+          "name": "sounds/alexscaves/block/moth_ball/moth_ball_place_1"
+        },
+        {
+          "name": "sounds/alexscaves/block/moth_ball/moth_ball_place_2"
+        },
+        {
+          "name": "sounds/alexscaves/block/moth_ball/moth_ball_place_3"
+        }
+      ]
+    },
+    "alexscaves:neodymium_break": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_break_0"
+        },
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_break_1"
+        },
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_break_2"
+        },
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_break_3"
+        },
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_break_4"
+        }
+      ]
+    },
+    "alexscaves:neodymium_place": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_place_0"
+        },
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_place_1"
+        },
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_place_2"
+        },
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_place_3"
+        },
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_place_4"
+        }
+      ]
+    },
+    "alexscaves:neodymium_step": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_step_0"
+        },
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_step_1"
+        },
+        {
+          "name": "sounds/alexscaves/block/neodymium/neodymium_step_2"
+        }
+      ]
+    },
+    "alexscaves:notor_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/notor/notor_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/notor/notor_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/notor/notor_death_2"
+        }
+      ]
+    },
+    "alexscaves:notor_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/notor/notor_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/notor/notor_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/notor/notor_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:notor_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/notor/notor_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/notor/notor_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/notor/notor_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/notor/notor_idle_3"
+        }
+      ]
+    },
+    "alexscaves:nuclear_bomb_defuse": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/nuclear_bomb/nuclear_bomb_defuse"
+        }
+      ]
+    },
+    "alexscaves:nuclear_bomb_place": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/nuclear_bomb/nuclear_bomb_place_0"
+        },
+        {
+          "name": "sounds/alexscaves/block/nuclear_bomb/nuclear_bomb_place_1"
+        },
+        {
+          "name": "sounds/alexscaves/block/nuclear_bomb/nuclear_bomb_place_2"
+        },
+        {
+          "name": "sounds/alexscaves/block/nuclear_bomb/nuclear_bomb_place_3"
+        }
+      ]
+    },
+    "alexscaves:nuclear_explosion": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/misc/nuclear_explosion/nuclear_explosion"
+        }
+      ]
+    },
+    "alexscaves:nuclear_explosion_rumble": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/misc/nuclear_explosion/nuclear_explosion_rumble"
+        }
+      ]
+    },
+    "alexscaves:nuclear_siren": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/misc/nuclear_siren"
+        }
+      ]
+    },
+    "alexscaves:nucleeper_charge": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/nucleeper/nucleeper_charge"
+        }
+      ]
+    },
+    "alexscaves:nucleeper_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/nucleeper/nucleeper_death"
+        }
+      ]
+    },
+    "alexscaves:nucleeper_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/nucleeper/nucleeper_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/nucleeper/nucleeper_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/nucleeper/nucleeper_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/nucleeper/nucleeper_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:nucleeper_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/nucleeper/nucleeper_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/nucleeper/nucleeper_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/nucleeper/nucleeper_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/nucleeper/nucleeper_idle_3"
+        }
+      ]
+    },
+    "alexscaves:primal_magma_fissure_close": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/primal_magma/primal_magma_fissure_close_0"
+        },
+        {
+          "name": "sounds/alexscaves/block/primal_magma/primal_magma_fissure_close_1"
+        },
+        {
+          "name": "sounds/alexscaves/block/primal_magma/primal_magma_fissure_close_2"
+        }
+      ]
+    },
+    "alexscaves:radgill_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/radgill/radgill_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/radgill/radgill_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/radgill/radgill_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/radgill/radgill_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:raycat_absorb": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_absorb_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_absorb_1"
+        }
+      ]
+    },
+    "alexscaves:raycat_eat": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_eat_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_eat_1"
+        }
+      ]
+    },
+    "alexscaves:raycat_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:raycat_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/raycat/raycat_idle_3"
+        }
+      ]
+    },
+    "alexscaves:raygun_empty": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/raygun/raygun_empty"
+        }
+      ]
+    },
+    "alexscaves:raygun_loop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/raygun/raygun_loop"
+        }
+      ]
+    },
+    "alexscaves:raygun_reload": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/raygun/raygun_reload"
+        }
+      ]
+    },
+    "alexscaves:raygun_start": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/raygun/raygun_start"
+        }
+      ]
+    },
+    "alexscaves:relicheirus_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_death_2"
+        }
+      ]
+    },
+    "alexscaves:relicheirus_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:relicheirus_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_idle_2"
+        }
+      ]
+    },
+    "alexscaves:relicheirus_scratch": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_scratch_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_scratch_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/relicheirus/relicheirus_scratch_2"
+        }
+      ]
+    },
+    "alexscaves:resistor_shield_azure_loop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/resistor_shield/resistor_shield_azure_loop"
+        }
+      ]
+    },
+    "alexscaves:resistor_shield_scarlet_loop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/resistor_shield/resistor_shield_scarlet_loop"
+        }
+      ]
+    },
+    "alexscaves:resistor_shield_slam": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/resistor_shield/resistor_shield_slam_0"
+        },
+        {
+          "name": "sounds/alexscaves/item/resistor_shield/resistor_shield_slam_1"
+        },
+        {
+          "name": "sounds/alexscaves/item/resistor_shield/resistor_shield_slam_2"
+        },
+        {
+          "name": "sounds/alexscaves/item/resistor_shield/resistor_shield_slam_3"
+        },
+        {
+          "name": "sounds/alexscaves/item/resistor_shield/resistor_shield_slam_4"
+        }
+      ]
+    },
+    "alexscaves:resistor_shield_spin": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/resistor_shield/resistor_shield_spin_0"
+        },
+        {
+          "name": "sounds/alexscaves/item/resistor_shield/resistor_shield_spin_1"
+        },
+        {
+          "name": "sounds/alexscaves/item/resistor_shield/resistor_shield_spin_2"
+        }
+      ]
+    },
+    "alexscaves:scarlet_neodymium_pull_loop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/block/neodymium/scarlet_neodymium_pull_loop"
+        }
+      ]
+    },
+    "alexscaves:sea_pig_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_death_1"
+        }
+      ]
+    },
+    "alexscaves:sea_pig_eat": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_eat_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_eat_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_eat_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_eat_3"
+        }
+      ]
+    },
+    "alexscaves:sea_pig_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:sea_pig_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/sea_pig/sea_pig_idle_1"
+        }
+      ]
+    },
+    "alexscaves:sea_staff_hit": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/sea_staff/sea_staff_hit_0"
+        },
+        {
+          "name": "sounds/alexscaves/item/sea_staff/sea_staff_hit_1"
+        },
+        {
+          "name": "sounds/alexscaves/item/sea_staff/sea_staff_hit_2"
+        }
+      ]
+    },
+    "alexscaves:sea_staff_woosh": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/sea_staff/sea_staff_woosh_0"
+        },
+        {
+          "name": "sounds/alexscaves/item/sea_staff/sea_staff_woosh_1"
+        },
+        {
+          "name": "sounds/alexscaves/item/sea_staff/sea_staff_woosh_2"
+        },
+        {
+          "name": "sounds/alexscaves/item/sea_staff/sea_staff_woosh_3"
+        },
+        {
+          "name": "sounds/alexscaves/item/sea_staff/sea_staff_woosh_4"
+        }
+      ]
+    },
+    "alexscaves:shotgum_empty": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/shotgum/shotgum_empty"
+        }
+      ]
+    },
+    "alexscaves:shotgum_reload": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/shotgum/shotgum_reload"
+        }
+      ]
+    },
+    "alexscaves:shotgum_shoot": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/shotgum/shotgum_shoot"
+        }
+      ]
+    },
+    "alexscaves:subterranodon_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_death_2"
+        }
+      ]
+    },
+    "alexscaves:subterranodon_flap": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_flap_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_flap_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_flap_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_flap_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_flap_4"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_flap_5"
+        }
+      ]
+    },
+    "alexscaves:subterranodon_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:subterranodon_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/subterranodon/subterranodon_idle_3"
+        }
+      ]
+    },
+    "alexscaves:sweetish_fish_flop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/sweetish_fish/sweetish_fish_flop_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/sweetish_fish/sweetish_fish_flop_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/sweetish_fish/sweetish_fish_flop_2"
+        }
+      ]
+    },
+    "alexscaves:sweetish_fish_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/sweetish_fish/sweetish_fish_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/sweetish_fish/sweetish_fish_hurt_1"
+        }
+      ]
+    },
+    "alexscaves:teletor_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/teletor/teletor_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/teletor/teletor_death_1"
+        }
+      ]
+    },
+    "alexscaves:teletor_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/teletor/teletor_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/teletor/teletor_hurt_1"
+        }
+      ]
+    },
+    "alexscaves:teletor_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/teletor/teletor_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/teletor/teletor_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/teletor/teletor_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/teletor/teletor_idle_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/teletor/teletor_idle_4"
+        }
+      ]
+    },
+    "alexscaves:tephra_hit": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/misc/tephra/tephra_hit_0"
+        },
+        {
+          "name": "sounds/alexscaves/misc/tephra/tephra_hit_1"
+        },
+        {
+          "name": "sounds/alexscaves/misc/tephra/tephra_hit_2"
+        }
+      ]
+    },
+    "alexscaves:tephra_whistle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/misc/tephra/tephra_whistle_0",
+          "volume": 0.5
+        },
+        {
+          "name": "sounds/alexscaves/misc/tephra/tephra_whistle_1",
+          "volume": 0.5
+        },
+        {
+          "name": "sounds/alexscaves/misc/tephra/tephra_whistle_2",
+          "volume": 0.5
+        }
+      ]
+    },
+    "alexscaves:totem_of_possession_use": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/item/totem_of_possession/totem_of_possession_use"
+        }
+      ]
+    },
+    "alexscaves:tremorsaurus_bite": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorsaurus/tremorsaurus_bite"
+        }
+      ]
+    },
+    "alexscaves:tremorsaurus_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorsaurus/tremorsaurus_death"
+        }
+      ]
+    },
+    "alexscaves:tremorsaurus_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorsaurus/tremorsaurus_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorsaurus/tremorsaurus_hurt_1"
+        }
+      ]
+    },
+    "alexscaves:tremorsaurus_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorsaurus/tremorsaurus_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorsaurus/tremorsaurus_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorsaurus/tremorsaurus_idle_2"
+        }
+      ]
+    },
+    "alexscaves:tremorsaurus_roar": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorsaurus/tremorsaurus_roar_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorsaurus/tremorsaurus_roar_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorsaurus/tremorsaurus_roar_2"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_beam_end": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_beam_end"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_beam_loop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_beam_loop"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_beam_start": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_beam_start"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_bite": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_bite"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_charge_complete": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_charge_complete"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_charge_normal": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_charge_normal"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_death"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_eat": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_eat_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_eat_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_eat_2"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_idle_3"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_roar": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_roar"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_scratch_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_scratch_attack"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_stomp": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_stomp_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_stomp_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_stomp_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_stomp_3"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_stomp_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_stomp_attack"
+        }
+      ]
+    },
+    "alexscaves:tremorzilla_tail_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tremorzilla/tremorzilla_tail_attack"
+        }
+      ]
+    },
+    "alexscaves:trilocaris_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/trilocaris/trilocaris_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/trilocaris/trilocaris_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/trilocaris/trilocaris_death_2"
+        }
+      ]
+    },
+    "alexscaves:trilocaris_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/trilocaris/trilocaris_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/trilocaris/trilocaris_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/trilocaris/trilocaris_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:tripodfish_flop": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tripodfish/tripodfish_flop_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tripodfish/tripodfish_flop_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tripodfish/tripodfish_flop_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tripodfish/tripodfish_flop_3"
+        }
+      ]
+    },
+    "alexscaves:tripodfish_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/tripodfish/tripodfish_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tripodfish/tripodfish_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tripodfish/tripodfish_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/tripodfish/tripodfish_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:underzealot_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_attack_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_attack_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_attack_4"
+        }
+      ]
+    },
+    "alexscaves:underzealot_chant": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_chant_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_chant_1"
+        }
+      ]
+    },
+    "alexscaves:underzealot_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_death_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_death_3"
+        }
+      ]
+    },
+    "alexscaves:underzealot_dig": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_dig_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_dig_1"
+        }
+      ]
+    },
+    "alexscaves:underzealot_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_hurt_3"
+        }
+      ]
+    },
+    "alexscaves:underzealot_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_idle_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_idle_4"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_idle_5"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_idle_6"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_idle_7"
+        }
+      ]
+    },
+    "alexscaves:underzealot_transformation": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_transformation_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_transformation_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/underzealot/underzealot_transformation_2"
+        }
+      ]
+    },
+    "alexscaves:vallumraptor_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_attack_2"
+        }
+      ]
+    },
+    "alexscaves:vallumraptor_call": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_call_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_call_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_call_2"
+        }
+      ]
+    },
+    "alexscaves:vallumraptor_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_death_1"
+        }
+      ]
+    },
+    "alexscaves:vallumraptor_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_hurt_2"
+        }
+      ]
+    },
+    "alexscaves:vallumraptor_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vallumraptor/vallumraptor_idle_2"
+        }
+      ]
+    },
+    "alexscaves:vesper_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_death"
+        }
+      ]
+    },
+    "alexscaves:vesper_flap": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_flap_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_flap_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_flap_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_flap_3"
+        }
+      ]
+    },
+    "alexscaves:vesper_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_hurt_1"
+        }
+      ]
+    },
+    "alexscaves:vesper_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_idle_3"
+        }
+      ]
+    },
+    "alexscaves:vesper_quiet_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_quiet_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_quiet_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_quiet_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_quiet_idle_3"
+        }
+      ]
+    },
+    "alexscaves:vesper_scream": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_scream_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_scream_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/vesper/vesper_scream_2"
+        }
+      ]
+    },
+    "alexscaves:watcher_attack": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_attack_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_attack_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_attack_2"
+        }
+      ]
+    },
+    "alexscaves:watcher_death": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_death_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_death_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_death_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_death_3"
+        }
+      ]
+    },
+    "alexscaves:watcher_hurt": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_hurt_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_hurt_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_hurt_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_hurt_3"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_hurt_4"
+        }
+      ]
+    },
+    "alexscaves:watcher_idle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_idle_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_idle_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_idle_2"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_idle_3"
+        }
+      ]
+    },
+    "alexscaves:watcher_scare": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_scare_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_scare_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_scare_2"
+        }
+      ]
+    },
+    "alexscaves:watcher_spawn": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_spawn_0"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_spawn_1"
+        },
+        {
+          "name": "sounds/alexscaves/mob/watcher/watcher_spawn_2"
+        }
+      ]
+    },
     "bigcasares.music.abyss_guardian": {
       "category": "music",
       "sounds": [

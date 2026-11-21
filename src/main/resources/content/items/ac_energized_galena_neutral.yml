@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_energized_galena_neutral
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:energized_galena_neutral
+display:
+  translation-key: item.alexscaves.energized_galena_neutral
+  fallback-name: "Galena energizada"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_energized_galena_neutral_recipe
+  result-amount: 2
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_energized_galena_scarlet
+    - bigcasares:ac_energized_galena_azure
+appearance:
+  java-item-definition: java/assets/alexscaves/items/energized_galena_neutral.json
+  bedrock-texture: bedrock/textures/alexscaves/block/energized_galena_neutral.png

@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pewen_wood
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:pewen_wood
+display:
+  translation-key: item.alexscaves.pewen_wood
+  fallback-name: "Leño de pehúen"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_pewen_wood_recipe
+  result-amount: 3
+  shape: ["##", "##"]
+  ingredients:
+    "#": bigcasares:ac_pewen_log
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pewen_wood.json
+  bedrock-texture: bedrock/textures/alexscaves/block/pewen/pewen_log.png

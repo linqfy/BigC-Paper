@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_rusty_scrap_metal_plate
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:rusty_scrap_metal_plate
+display:
+  translation-key: item.alexscaves.rusty_scrap_metal_plate
+  fallback-name: "Placa de chatarra corroída"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_rusty_scrap_metal_plate_recipe
+  result-amount: 4
+  shape: ["GG", "GG"]
+  ingredients:
+    G: bigcasares:ac_rusty_scrap_metal
+appearance:
+  java-item-definition: java/assets/alexscaves/items/rusty_scrap_metal_plate.json
+  bedrock-texture: bedrock/textures/alexscaves/block/rusty_scrap_metal_plate.png

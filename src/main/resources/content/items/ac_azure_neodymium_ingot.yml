@@ -1,0 +1,25 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_azure_neodymium_ingot
+mechanic: alexs-caves
+material: IRON_NUGGET
+item-model: alexscaves:azure_neodymium_ingot
+display:
+  translation-key: item.alexscaves.azure_neodymium_ingot
+  fallback-name: "Lingote de neodimio azul"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_azure_neodymium_ingot_recipe
+  result-amount: 1
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_raw_azure_neodymium
+    - bigcasares:ac_raw_azure_neodymium
+    - bigcasares:ac_raw_azure_neodymium
+    - IRON_INGOT
+    - IRON_INGOT
+    - IRON_INGOT
+appearance:
+  java-item-definition: java/assets/alexscaves/items/azure_neodymium_ingot.json
+  bedrock-texture: bedrock/textures/alexscaves/item/azure_neodymium_ingot.png

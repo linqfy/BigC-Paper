@@ -1,0 +1,104 @@
+{
+  "variants": {
+    "distance=1,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/thin_bone_upper"
+    },
+    "distance=1,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_blue_floating"
+    },
+    "distance=1,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/chocolate_ice_cream_dripping"
+    },
+    "distance=1,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/geothermal_vent_medium"
+    },
+    "distance=2,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/abyssal_altar"
+    },
+    "distance=2,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_blue_floating",
+      "x": 90
+    },
+    "distance=2,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/vanilla_ice_cream_dripping"
+    },
+    "distance=2,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_small",
+      "x": 180
+    },
+    "distance=3,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/abyssal_altar_active"
+    },
+    "distance=3,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_blue_floating",
+      "x": 90,
+      "y": 180
+    },
+    "distance=3,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sweetberry_ice_cream_dripping"
+    },
+    "distance=3,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_small"
+    },
+    "distance=4,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/copper_valve"
+    },
+    "distance=4,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_blue_floating",
+      "x": 90,
+      "y": 270
+    },
+    "distance=4,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/giant_sweetberry"
+    },
+    "distance=4,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_small",
+      "x": 90
+    },
+    "distance=5,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/moth_ball_1"
+    },
+    "distance=5,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_blue_floating",
+      "x": 90,
+      "y": 90
+    },
+    "distance=5,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/small_peppermint",
+      "x": 90
+    },
+    "distance=5,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_small",
+      "x": 270
+    },
+    "distance=6,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/moth_ball_2"
+    },
+    "distance=6,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/gummy_ring_blue"
+    },
+    "distance=6,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/small_peppermint",
+      "x": 270
+    },
+    "distance=6,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_small",
+      "x": 90,
+      "y": 270
+    },
+    "distance=7,persistent=false,waterlogged=false": {
+      "model": "minecraft:block/spruce_leaves"
+    },
+    "distance=7,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/spruce_leaves"
+    },
+    "distance=7,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/small_peppermint"
+    },
+    "distance=7,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/sulfur_bud_small",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

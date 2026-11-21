@@ -1,0 +1,111 @@
+{
+  "variants": {
+    "distance=1,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_green_floating",
+      "x": 90,
+      "y": 180
+    },
+    "distance=1,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/forsaken_idol",
+      "y": 180
+    },
+    "distance=1,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/scarlet_magnet",
+      "x": 90
+    },
+    "distance=1,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/bone_ribs"
+    },
+    "distance=2,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_green_floating",
+      "x": 90,
+      "y": 270
+    },
+    "distance=2,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/forsaken_idol",
+      "y": 270
+    },
+    "distance=2,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/scarlet_magnet",
+      "x": 270
+    },
+    "distance=2,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/bone_ribs_flipped"
+    },
+    "distance=3,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_green_floating",
+      "x": 90,
+      "y": 90
+    },
+    "distance=3,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/forsaken_idol",
+      "y": 90
+    },
+    "distance=3,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/scarlet_magnet",
+      "x": 90,
+      "y": 270
+    },
+    "distance=3,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/bone_ribs",
+      "y": 180
+    },
+    "distance=4,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_green"
+    },
+    "distance=4,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/moth_ball_1"
+    },
+    "distance=4,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/scarlet_magnet",
+      "x": 90,
+      "y": 90
+    },
+    "distance=4,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/bone_ribs_flipped",
+      "y": 180
+    },
+    "distance=5,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_blue_floating",
+      "x": 180
+    },
+    "distance=5,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/moth_ball_2"
+    },
+    "distance=5,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/azure_magnet",
+      "x": 180
+    },
+    "distance=5,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/bone_ribs",
+      "y": 270
+    },
+    "distance=6,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_blue_floating"
+    },
+    "distance=6,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/moth_ball_3"
+    },
+    "distance=6,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/azure_magnet"
+    },
+    "distance=6,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/bone_ribs_flipped",
+      "y": 270
+    },
+    "distance=7,persistent=false,waterlogged=false": {
+      "model": "minecraft:block/pale_oak_leaves"
+    },
+    "distance=7,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/pale_oak_leaves"
+    },
+    "distance=7,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/azure_magnet",
+      "x": 90
+    },
+    "distance=7,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/bone_ribs",
+      "y": 90
+    }
+  }
+}

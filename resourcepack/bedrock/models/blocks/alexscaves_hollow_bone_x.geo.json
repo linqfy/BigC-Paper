@@ -1,0 +1,344 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_hollow_bone_x",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -8.0,
+                14,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                2.0,
+                16.0
+              ],
+              "uv": {
+                "east": {
+                  "uv": [
+                    0,
+                    14
+                  ],
+                  "uv_size": [
+                    16,
+                    2
+                  ],
+                  "material_instance": "bone_block_top"
+                },
+                "south": {
+                  "uv": [
+                    14,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "bone_block_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    14
+                  ],
+                  "uv_size": [
+                    16,
+                    2
+                  ],
+                  "material_instance": "bone_block_top"
+                },
+                "north": {
+                  "uv": [
+                    14,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "bone_block_side"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    16
+                  ],
+                  "material_instance": "bone_block_side"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    16
+                  ],
+                  "uv_size": [
+                    -16,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_hollow_bone"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                2.0,
+                16.0
+              ],
+              "uv": {
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    2
+                  ],
+                  "material_instance": "bone_block_top"
+                },
+                "south": {
+                  "uv": [
+                    2,
+                    0
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "bone_block_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    2
+                  ],
+                  "material_instance": "bone_block_top"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "bone_block_side"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_hollow_bone"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    16
+                  ],
+                  "uv_size": [
+                    -16,
+                    -16
+                  ],
+                  "material_instance": "bone_block_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                2,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                12,
+                2.0
+              ],
+              "uv": {
+                "east": {
+                  "uv": [
+                    16,
+                    2
+                  ],
+                  "uv_size": [
+                    -2,
+                    12
+                  ],
+                  "material_instance": "bone_block_top"
+                },
+                "south": {
+                  "uv": [
+                    2,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_hollow_bone"
+                },
+                "west": {
+                  "uv": [
+                    14,
+                    2
+                  ],
+                  "uv_size": [
+                    2,
+                    12
+                  ],
+                  "material_instance": "bone_block_top"
+                },
+                "north": {
+                  "uv": [
+                    2,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    16
+                  ],
+                  "material_instance": "bone_block_side"
+                },
+                "up": {
+                  "uv": [
+                    20,
+                    24
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_hollow_bone"
+                },
+                "down": {
+                  "uv": [
+                    18,
+                    40
+                  ],
+                  "uv_size": [
+                    -2,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_hollow_bone"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                2,
+                6
+              ],
+              "size": [
+                16.0,
+                12,
+                2.0
+              ],
+              "uv": {
+                "east": {
+                  "uv": [
+                    2,
+                    2
+                  ],
+                  "uv_size": [
+                    -2,
+                    12
+                  ],
+                  "material_instance": "bone_block_top"
+                },
+                "south": {
+                  "uv": [
+                    2,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    16
+                  ],
+                  "material_instance": "bone_block_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    2
+                  ],
+                  "uv_size": [
+                    2,
+                    12
+                  ],
+                  "material_instance": "bone_block_top"
+                },
+                "north": {
+                  "uv": [
+                    2,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_hollow_bone"
+                },
+                "up": {
+                  "uv": [
+                    20,
+                    24
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_hollow_bone"
+                },
+                "down": {
+                  "uv": [
+                    18,
+                    40
+                  ],
+                  "uv_size": [
+                    -2,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_hollow_bone"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

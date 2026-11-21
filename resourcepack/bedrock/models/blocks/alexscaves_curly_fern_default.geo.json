@@ -1,0 +1,834 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_curly_fern_default",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                0
+              ],
+              "size": [
+                16.0,
+                16.0,
+                0
+              ],
+              "pivot": [
+                0,
+                16,
+                0
+              ],
+              "rotation": [
+                0,
+                -45,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_bottom"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_bottom"
+                },
+                "south": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_bottom"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_bottom"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_bottom"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_bottom"
+                }
+              }
+            },
+            {
+              "origin": [
+                -3.5,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                7.0,
+                0.0,
+                8.0
+              ],
+              "pivot": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                45,
+                0,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    10,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    10,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    10
+                  ],
+                  "uv_size": [
+                    -7,
+                    -10
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    10
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                }
+              }
+            },
+            {
+              "origin": [
+                -3.5,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                7.0,
+                0.0,
+                0.0
+              ],
+              "pivot": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                45,
+                0,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    10
+                  ],
+                  "uv_size": [
+                    7,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    10
+                  ],
+                  "uv_size": [
+                    7,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -3.5
+              ],
+              "size": [
+                8.0,
+                0.0,
+                7.0
+              ],
+              "pivot": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                -45
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    10,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    10,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    10
+                  ],
+                  "uv_size": [
+                    -7,
+                    -10
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    10
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -3.5
+              ],
+              "size": [
+                0.0,
+                0.0,
+                7.0
+              ],
+              "pivot": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                -45
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    10
+                  ],
+                  "uv_size": [
+                    7,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    10
+                  ],
+                  "uv_size": [
+                    7,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                }
+              }
+            },
+            {
+              "origin": [
+                0,
+                0.0,
+                -3.5
+              ],
+              "size": [
+                8.0,
+                0.0,
+                7.0
+              ],
+              "pivot": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                45
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    10,
+                    0
+                  ],
+                  "uv_size": [
+                    -10,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "east": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "south": {
+                  "uv": [
+                    10,
+                    0
+                  ],
+                  "uv_size": [
+                    -10,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "west": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    10
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    10
+                  ],
+                  "uv_size": [
+                    -7,
+                    -10
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                }
+              }
+            },
+            {
+              "origin": [
+                8.0,
+                0.0,
+                -3.5
+              ],
+              "size": [
+                0.0,
+                0.0,
+                7.0
+              ],
+              "pivot": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                45
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "east": {
+                  "uv": [
+                    7,
+                    10
+                  ],
+                  "uv_size": [
+                    -7,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "west": {
+                  "uv": [
+                    7,
+                    10
+                  ],
+                  "uv_size": [
+                    -7,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                }
+              }
+            },
+            {
+              "origin": [
+                -3.5,
+                0.0,
+                0
+              ],
+              "size": [
+                7.0,
+                0.0,
+                8.0
+              ],
+              "pivot": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                -45,
+                0,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "east": {
+                  "uv": [
+                    10,
+                    0
+                  ],
+                  "uv_size": [
+                    -10,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "south": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "west": {
+                  "uv": [
+                    10,
+                    0
+                  ],
+                  "uv_size": [
+                    -10,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    10
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    10
+                  ],
+                  "uv_size": [
+                    -7,
+                    -10
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                }
+              }
+            },
+            {
+              "origin": [
+                -3.5,
+                0.0,
+                8.0
+              ],
+              "size": [
+                7.0,
+                0.0,
+                0.0
+              ],
+              "pivot": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                -45,
+                0,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    7,
+                    10
+                  ],
+                  "uv_size": [
+                    -7,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "south": {
+                  "uv": [
+                    7,
+                    10
+                  ],
+                  "uv_size": [
+                    -7,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    5
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "up": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    0
+                  ],
+                  "uv_size": [
+                    -7,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_curly_fern_frawn"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

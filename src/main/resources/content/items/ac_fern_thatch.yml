@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_fern_thatch
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:fern_thatch
+display:
+  translation-key: item.alexscaves.fern_thatch
+  fallback-name: "Paja de helechos"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_fern_thatch_recipe
+  result-amount: 1
+  shape: ["FF", "FF"]
+  ingredients:
+    F: FERN
+appearance:
+  java-item-definition: java/assets/alexscaves/items/fern_thatch.json
+  bedrock-texture: bedrock/textures/alexscaves/block/fern_thatch_side.png
