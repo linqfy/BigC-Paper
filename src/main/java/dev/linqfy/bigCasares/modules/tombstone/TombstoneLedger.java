@@ -23,6 +23,17 @@ final class TombstoneLedger {
         records.put(record.id(), record);
     }
 
+    void putPersisted(TombstoneRecord record, TombstoneStorage storage) {
+        TombstoneRecord previous = records.put(record.id(), record);
+        try {
+            storage.saveAll(all());
+        } catch (RuntimeException failure) {
+            if (previous == null) records.remove(record.id());
+            else records.put(record.id(), previous);
+            throw failure;
+        }
+    }
+
     Optional<TombstoneRecord> find(UUID id) {
         return Optional.ofNullable(records.get(id));
     }

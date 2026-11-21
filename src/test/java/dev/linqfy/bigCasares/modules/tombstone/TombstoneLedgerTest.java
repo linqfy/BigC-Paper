@@ -8,11 +8,14 @@ import java.time.Instant;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Collection;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TombstoneLedgerTest {
 
@@ -47,6 +50,34 @@ class TombstoneLedgerTest {
             "src/main/java/dev/linqfy/bigCasares/modules/tombstone/TombstoneRuntime.java"));
 
         assertEquals(3, source.split("setPersistent\\(false\\)", -1).length - 1);
+    }
+
+    @Test
+    void failedSaveDoesNotLeaveAnUncommittedRecordInTheLedger() {
+        TombstoneLedger ledger = new TombstoneLedger();
+        TombstoneRecord record = record(Instant.now().plusSeconds(60));
+        TombstoneStorage failing = new TombstoneStorage() {
+            public List<TombstoneRecord> loadAll() { return List.of(); }
+            public void saveAll(Collection<TombstoneRecord> records) { throw new IllegalStateException("disk"); }
+        };
+
+        assertThrows(IllegalStateException.class, () -> ledger.putPersisted(record, failing));
+        assertTrue(ledger.find(record.id()).isEmpty());
+    }
+
+    @Test
+    void successfulSaveContainsTheNewRecord() {
+        TombstoneLedger ledger = new TombstoneLedger();
+        TombstoneRecord record = record(Instant.now().plusSeconds(60));
+        List<TombstoneRecord> saved = new ArrayList<>();
+        TombstoneStorage storage = new TombstoneStorage() {
+            public List<TombstoneRecord> loadAll() { return List.copyOf(saved); }
+            public void saveAll(Collection<TombstoneRecord> records) { saved.addAll(records); }
+        };
+
+        ledger.putPersisted(record, storage);
+        assertEquals(List.of(record), saved);
+        assertEquals(List.of(record), ledger.all());
     }
 
     private static TombstoneRecord record(Instant expiresAt) {

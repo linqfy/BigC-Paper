@@ -61,17 +61,28 @@ public final class TombstoneRuntime {
         persist();
     }
 
-    public void create(UUID ownerId, String ownerName, Location requested, List<ItemStack> items) {
-        if (!TombstoneItemLayout.hasItems(items)) return;
-        Location location = safeLocation(requested);
-        TombstoneRecord record = new TombstoneRecord(
-            UUID.randomUUID(), ownerId, ownerName, location.getWorld().getUID(),
-            location.getX(), location.getY(), location.getZ(), location.getYaw(),
-            clock.instant().plus(lifetime), items
-        );
-        ledger.put(record);
-        activate(record);
-        persist();
+    public boolean create(UUID ownerId, String ownerName, Location requested, List<ItemStack> items) {
+        if (!TombstoneItemLayout.hasItems(items)) return false;
+        TombstoneRecord record;
+        try {
+            Location location = safeLocation(requested);
+            record = new TombstoneRecord(
+                UUID.randomUUID(), ownerId, ownerName, location.getWorld().getUID(),
+                location.getX(), location.getY(), location.getZ(), location.getYaw(),
+                clock.instant().plus(lifetime), items
+            );
+            ledger.putPersisted(record, storage);
+        } catch (RuntimeException failure) {
+            plugin.getLogger().log(Level.SEVERE, "No se pudo guardar la tumba de " + ownerName, failure);
+            return false;
+        }
+        try {
+            activate(record);
+        } catch (RuntimeException failure) {
+            plugin.getLogger().log(Level.WARNING,
+                "No se pudo mostrar la tumba " + record.id() + "; se reintentará.", failure);
+        }
+        return true;
     }
 
     public boolean open(UUID tombstoneId, org.bukkit.entity.Player player) {
