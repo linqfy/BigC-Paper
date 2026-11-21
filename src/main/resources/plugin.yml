@@ -115,6 +115,21 @@ commands:
   linkeardiscord:
     description: Vincula tu cuenta de Minecraft con Discord
     usage: /<command>
+  login:
+    description: Inicia sesión (contraseña, app, Discord, PGP, patrón o amigo)
+    usage: /<command> <contraseña|código|discord|pgp|patron|amigo>
+    aliases: [ l, log ]
+  register:
+    description: Registra tu nombre con una contraseña o una clave PGP
+    usage: /<command> <contraseña> <contraseña> | pgp <clave>
+    aliases: [ reg ]
+  auth:
+    description: Configura la seguridad de tu cuenta
+    usage: /<command> [estado|password|totp|codigos|pgp|patron|discord|confiar|2fa|sesion|olvidar]
+    aliases: [ cuenta ]
+  premium:
+    description: Activa el ingreso automático con Minecraft original
+    usage: /<command> [off]
   resourcepack:
     description: Reload or send resource pack manually
     usage: /<command>
@@ -207,6 +222,7 @@ permissions:
       bigcasares.dimension.admin: true
       bigcasares.dimension.leave: true
       bigcasares.content.admin: true
+      bigcasares.auth.admin: true
 
   bigcasares.command.timer:
     description: Start a bossbar timer
@@ -422,4 +438,8 @@ permissions:
 
   bigcasares.content.admin:
     description: List and give code-defined content items
+    default: op
+
+  bigcasares.auth.admin:
+    description: Inspect, reset and force logins of BigCasares accounts
     default: op
