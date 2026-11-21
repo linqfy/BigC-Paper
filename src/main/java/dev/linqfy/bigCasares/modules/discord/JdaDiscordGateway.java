@@ -12,6 +12,9 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.PermissionOverride;
+import net.dv8tion.jda.api.entities.channel.concrete.Category;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -42,6 +45,9 @@ import java.time.Instant;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.EnumSet;
+import java.util.Locale;
+import java.util.Set;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +62,11 @@ import java.util.logging.Logger;
 
 public final class JdaDiscordGateway extends ListenerAdapter implements DiscordGateway {
     private static final int MAX_OUTAGE_EVENTS = 500;
+    static final String TEAM_TOPIC_PREFIX = "bigcasares-team:";
+    private static final EnumSet<Permission> TEAM_MEMBER_ALLOW =
+        EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_HISTORY);
+    private static final EnumSet<Permission> TEAM_BOT_ALLOW =
+        EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_SEND, Permission.MESSAGE_HISTORY);
 
     private final BigCasares plugin;
     private final DiscordSettings settings;
@@ -75,6 +86,7 @@ public final class JdaDiscordGateway extends ListenerAdapter implements DiscordG
     });
     private final Deque<AuditEvent> outageQueue = new ArrayDeque<>();
     private final Map<String, PendingAudit> pendingWarnings = new HashMap<>();
+    private final Map<String, List<String>> pendingTeamChannels = new HashMap<>();
     private volatile JDA jda;
     private volatile TextChannel publicChannel;
     private volatile TextChannel logChannel;
@@ -242,6 +254,102 @@ public final class JdaDiscordGateway extends ListenerAdapter implements DiscordG
         }, error -> {
             // Ignore if user not found
         });
+    }
+
+    @Override
+    public void sendTeamAlert(String teamKey, String teamTag, Set<Long> memberIds, String message) {
+        JDA active = jda;
+        if (!callbacksActive() || active == null || memberIds.isEmpty()) {
+            return;
+        }
+        Guild guild = active.getGuildById(settings.guildId());
+        Category category = guild == null || settings.raidAlertCategoryId() <= 0
+            ? null : guild.getCategoryById(settings.raidAlertCategoryId());
+        if (category == null) {
+            DiscordGateway.super.sendTeamAlert(teamKey, teamTag, memberIds, message);
+            return;
+        }
+        String topic = TEAM_TOPIC_PREFIX + teamKey;
+        String content = mentions(memberIds) + "\n" + message;
+        TextChannel existing = category.getTextChannels().stream()
+            .filter(channel -> topic.equals(channel.getTopic()))
+            .findFirst()
+            .orElse(null);
+        if (existing != null) {
+            syncTeamChannel(existing, guild, memberIds, content);
+            return;
+        }
+        synchronized (pendingTeamChannels) {
+            List<String> queued = pendingTeamChannels.get(teamKey);
+            if (queued != null) {
+                queued.add(content);
+                return;
+            }
+            pendingTeamChannels.put(teamKey, new ArrayList<>(List.of(content)));
+        }
+        var action = category.createTextChannel(teamChannelName(teamTag))
+            .setTopic(topic)
+            .addPermissionOverride(guild.getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
+            .addMemberPermissionOverride(guild.getSelfMember().getIdLong(), TEAM_BOT_ALLOW, null);
+        for (long memberId : memberIds) {
+            action = action.addMemberPermissionOverride(memberId, TEAM_MEMBER_ALLOW, null);
+        }
+        action.queue(channel -> {
+            List<String> queued;
+            synchronized (pendingTeamChannels) {
+                queued = pendingTeamChannels.remove(teamKey);
+            }
+            if (queued != null && callbacksActive()) {
+                queued.forEach(text -> channel.sendMessage(text).queue());
+            }
+        }, error -> {
+            synchronized (pendingTeamChannels) {
+                pendingTeamChannels.remove(teamKey);
+            }
+            plugin.getLogger().warning("No se pudo crear el canal privado de alertas del equipo " + teamTag
+                + " (¿falta Manage Channels/Manage Roles?): " + error.getMessage());
+            DiscordGateway.super.sendTeamAlert(teamKey, teamTag, memberIds, message);
+        });
+    }
+
+    private void syncTeamChannel(TextChannel channel, Guild guild, Set<Long> memberIds, String content) {
+        var manager = channel.getManager();
+        long self = guild.getSelfMember().getIdLong();
+        for (PermissionOverride override : channel.getMemberPermissionOverrides()) {
+            long id = override.getIdLong();
+            if (id != self && !memberIds.contains(id)) {
+                manager = manager.removePermissionOverride(id);
+            }
+        }
+        for (long memberId : memberIds) {
+            manager = manager.putMemberPermissionOverride(memberId, TEAM_MEMBER_ALLOW, null);
+        }
+        manager.queue(ok -> channel.sendMessage(content).queue(), error -> {
+            plugin.getLogger().warning("No se pudieron actualizar los permisos del canal " + channel.getName()
+                + ": " + error.getMessage());
+            channel.sendMessage(content).queue();
+        });
+    }
+
+    static String teamChannelName(String teamTag) {
+        String slug = teamTag == null ? "" : teamTag.toLowerCase(Locale.ROOT)
+            .replaceAll("§.", "")
+            .replaceAll("[^a-z0-9-]+", "-")
+            .replaceAll("-{2,}", "-")
+            .replaceAll("^-|-$", "");
+        String name = "raid-" + (slug.isEmpty() ? "equipo" : slug);
+        return name.length() > 90 ? name.substring(0, 90) : name;
+    }
+
+    private static String mentions(Set<Long> memberIds) {
+        StringBuilder builder = new StringBuilder();
+        for (long memberId : memberIds) {
+            if (!builder.isEmpty()) {
+                builder.append(' ');
+            }
+            builder.append("<@").append(memberId).append('>');
+        }
+        return builder.toString();
     }
 
     @Override
