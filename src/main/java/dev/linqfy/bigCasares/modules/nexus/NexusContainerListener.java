@@ -17,7 +17,7 @@ public final class NexusContainerListener implements Listener {
     public void onOpen(InventoryOpenEvent event) {
         if (!(event.getPlayer() instanceof Player player) || event.getInventory().getLocation() == null) return;
         Block block = event.getInventory().getLocation().getBlock();
-        if (!module.canUseContainer(player.getUniqueId(), block)) {
+        if (!module.canOpenContainer(player.getUniqueId(), block)) {
             event.setCancelled(true);
             player.sendMessage("§c[!] Este cofre está protegido por el Nexus de otro equipo.");
         }

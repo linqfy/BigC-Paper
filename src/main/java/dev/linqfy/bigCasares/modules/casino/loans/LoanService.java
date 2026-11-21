@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.LongSupplier;
+import java.util.function.ToDoubleFunction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,6 +36,7 @@ public final class LoanService {
     private final Logger logger;
     private final LongSupplier clock;
     private final Map<UUID, Deque<ChestRef>> chests = new HashMap<>();
+    private ToDoubleFunction<UUID> creditRating = ignored -> 1.0;
 
     public record ChestRef(String world, int x, int y, int z) {
         public Location location() {
@@ -55,6 +57,21 @@ public final class LoanService {
 
     public CasinoSettings.Loans settings() {
         return settings;
+    }
+
+    /** Multiplier on the interest of every offer for a player; 1 is the standard rate. */
+    public void creditRating(ToDoubleFunction<UUID> rating) {
+        creditRating = rating == null ? ignored -> 1.0 : rating;
+    }
+
+    public double creditRating(UUID player) {
+        double rating = creditRating.applyAsDouble(player);
+        return Double.isFinite(rating) && rating >= 0 ? rating : 1.0;
+    }
+
+    /** The offer as Don Casares quotes it to this player. */
+    public LoanOffer offerFor(UUID player, LoanOffer offer) {
+        return offer.withInterestMultiplier(creditRating(player));
     }
 
     public Optional<Loan> loan(UUID player) {

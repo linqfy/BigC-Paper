@@ -75,6 +75,11 @@ commands:
   casino:
     description: El Gran Casares (deuda, jackpot; admins construyen y colocan atracciones)
     usage: /<command> [deuda|jackpot|construir|colocar|quitar|lista|trago]
+  forex:
+    description: FOREX & Cryptos (esmeraldas virtuales, shitcoins, staking, rug pulls)
+    usage: /<command> [comprar|vender|ver|grafico|mercado|cartera|crear|stake|unstake|rugpull|clan|top|cementerio]
+    aliases: [ cripto, crypto ]
+    permission: bigcasares.forex
   glider:
     description: Give one of the six BigCasares Glider tiers
     usage: /<command> give <1-6> [player] [amount]
@@ -202,6 +207,8 @@ permissions:
       bigcasares.celular.admin: true
       bigcasares.schizophrenia.admin: true
       bigcasares.casino.admin: true
+      bigcasares.forex: true
+      bigcasares.forex.admin: true
       bigcasares.glider.admin: true
       bigcasares.glider.give: true
       bigcasares.dimension.admin: true
@@ -354,6 +361,14 @@ permissions:
 
   bigcasares.casino.admin:
     description: Build the casino, place or remove attractions and give drinks with /casino
+    default: op
+
+  bigcasares.forex:
+    description: Trade virtual emeralds and shitcoins with /forex
+    default: true
+
+  bigcasares.forex.admin:
+    description: Force forex market cycles and 50/50 flips with /forex admin
     default: op
 
   bigcasares.glider.admin:

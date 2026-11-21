@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.logging.Level;
 import org.bukkit.inventory.ItemStack;
@@ -39,6 +40,7 @@ public final class NexusModule implements PluginModule {
     private final Map<NexusId, StoredNexus> stored = new LinkedHashMap<>();
     private final NexusAttackTracker attackTracker = new NexusAttackTracker();
     private final List<NexusProtectedContainer> containers = new ArrayList<>();
+    private BiPredicate<UUID, TeamId> containerPass = (playerId, teamId) -> false;
 
     private JavaNexusVisualGateway visualGateway;
     private NexusService service;
@@ -500,6 +502,16 @@ public final class NexusModule implements PluginModule {
     public boolean isProtectedContainer(org.bukkit.block.Block block) { return findContainer(block).isPresent(); }
     public boolean canUseContainer(UUID playerId, org.bukkit.block.Block block) {
         return findContainer(block).map(value -> playerTeamLookup.apply(playerId).filter(value.teamId()::equals).isPresent()).orElse(true);
+    }
+
+    /** Opening also lets in outsiders the owning team granted a pass (holders of its clan coin); breaking does not. */
+    public boolean canOpenContainer(UUID playerId, org.bukkit.block.Block block) {
+        return canUseContainer(playerId, block)
+            || findContainer(block).map(value -> containerPass.test(playerId, value.teamId())).orElse(false);
+    }
+
+    public void setContainerPass(BiPredicate<UUID, TeamId> pass) {
+        this.containerPass = pass == null ? (playerId, teamId) -> false : pass;
     }
     public void unregisterContainer(org.bukkit.block.Block block) {
         containers.removeIf(value -> value.matches(block.getWorld().getUID(), block.getX(), block.getY(), block.getZ()));

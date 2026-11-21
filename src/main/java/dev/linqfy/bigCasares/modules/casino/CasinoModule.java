@@ -8,6 +8,9 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
+import java.util.UUID;
+import java.util.function.ToDoubleFunction;
+
 /**
  * "El Gran Casares": card tables, the big roulette, slot machines, the fight pit, the loan shark and his
  * collector, the pawn shop and the bar. Bets are paid in the server's Vault currency ("fichas").
@@ -19,9 +22,15 @@ public final class CasinoModule implements PluginModule {
     private final BigCasares plugin;
     private RuntimeRegistrationScope compatibilityScope;
     private CasinoRuntime runtime;
+    private ToDoubleFunction<UUID> creditRating = ignored -> 1.0;
 
     public CasinoModule(BigCasares plugin) {
         this.plugin = plugin;
+    }
+
+    /** Lets another module adjust Don Casares' interest per borrower (the forex credit history). */
+    public void setCreditRating(ToDoubleFunction<UUID> rating) {
+        this.creditRating = rating == null ? ignored -> 1.0 : rating;
     }
 
     @Override
@@ -52,6 +61,7 @@ public final class CasinoModule implements PluginModule {
         }
         CasinoSettings settings = CasinoSettings.load(plugin.getConfig());
         CasinoRuntime created = new CasinoRuntime(plugin, settings, new VaultCasinoBank(plugin.getServer(), economy));
+        created.loans().creditRating(creditRating);
         BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(plugin, scope);
         registrations.ownCleanup("casino-runtime", created::stop);
         registrations.registerListener("casino-listener", new CasinoListener(created));
