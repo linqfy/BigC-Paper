@@ -125,7 +125,7 @@ public final class CustomItemRegistry {
 
     private Optional<String> resolveCanonicalId(ItemStack itemStack) {
         CustomItemCatalog activeCatalog = catalog;
-        if (activeCatalog == null || itemStack == null || !itemStack.hasItemMeta()) {
+        if (itemStack == null || !itemStack.hasItemMeta()) {
             return Optional.empty();
         }
         String rawId = itemStack.getItemMeta().getPersistentDataContainer().get(
@@ -133,7 +133,10 @@ public final class CustomItemRegistry {
         if (rawId == null) {
             return Optional.empty();
         }
-        return activeCatalog.find(rawId).map(CustomItemDefinition::id);
+        String normalized = normalizeId(rawId);
+        if (itemsById.containsKey(normalized)) return Optional.of(normalized);
+        return activeCatalog == null ? Optional.empty()
+            : activeCatalog.find(normalized).map(CustomItemDefinition::id);
     }
 
     private Optional<CustomItem> findByLegacyItemStack(ItemStack itemStack) {

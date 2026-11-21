@@ -84,6 +84,7 @@ public final class GeyserIntegrationModule implements PluginModule {
                 customItemDefinitions().forEach(runtime::registerCustomItem);
                 celularItemDefinitions().forEach(runtime::registerCustomItem);
                 GeyserSiftContent.items().forEach(runtime::registerCustomItem);
+                GeyserLegendaryItems.definitions(plugin.getCustomItemRegistry()).forEach(runtime::registerCustomItem);
             }
             if (settings.customBlocks()) {
                 registerSiftBlocks(runtime);

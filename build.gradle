@@ -34,7 +34,17 @@ repositories {
     }
 }
 
+configurations {
+    resourcePackCompiler {
+        canBeConsumed = false
+        // Align only the compiler's two pure libraries with the server-provided API versions.
+        shouldResolveConsistentlyWith(configurations.compileClasspath)
+    }
+}
+
 dependencies {
+    resourcePackCompiler("com.google.code.gson:gson") { transitive = false }
+    resourcePackCompiler("org.joml:joml") { transitive = false }
     compileOnly("io.papermc.paper:paper-api:26.2.build.56-alpha")
     compileOnly("io.github.toxicity188:bettermodel-bukkit-api:3.2.0")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7") {
@@ -61,6 +71,7 @@ dependencies {
     testRuntimeOnly("io.github.toxicity188:bettermodel-bukkit-api:3.2.0")
     testImplementation(platform("org.junit:junit-bom:5.11.4"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.geysermc.cumulus:cumulus:1.1.2") { transitive = false }
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -258,7 +269,7 @@ tasks.register("generateResourcePacks", JavaExec) {
     description = "Validates and builds the BigCasares Java and Bedrock resource packs."
     dependsOn(tasks.named("classes"))
     mainClass = "dev.linqfy.bigCasares.modules.resourcepack.ResourcePackBuildMain"
-    classpath = sourceSets.main.runtimeClasspath
+    classpath = sourceSets.main.runtimeClasspath + configurations.resourcePackCompiler
     args = [
         layout.projectDirectory.dir("resourcepack").asFile.absolutePath,
         generatedResourcePackDirectory.get().asFile.absolutePath
