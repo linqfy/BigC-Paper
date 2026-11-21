@@ -182,9 +182,13 @@ final class DonPollosBossDefeat implements Listener {
                         () -> fixOvershoot(boss, id, serial, activePhase, max, health), 1L);
                 }
             }
+            Player hitter = killer(event);
+            if (hitter != null && finalDamage > 0) {
+                boss.damageByPlayer.merge(hitter.getUniqueId(), Math.min(finalDamage, health), Double::sum);
+            }
             if (finalDamage >= health) {
                 event.setCancelled(true);
-                startDefeat(boss, killer(event));
+                startDefeat(boss, hitter);
             }
         }
     }
@@ -258,6 +262,9 @@ final class DonPollosBossDefeat implements Listener {
         ravager.getPersistentDataContainer().set(defeatedKey, PersistentDataType.STRING,
             winner == null ? "" : winner.getUniqueId().toString());
         showDefeatedBar(boss);
+        if (plugin instanceof dev.linqfy.bigCasares.BigCasares bigCasares) {
+            bigCasares.awardBossSouls("don-pollo", "Don Pollo", boss.damageByPlayer);
+        }
         ravager.getWorld().playSound(ravager.getLocation(), Sound.ENTITY_RAVAGER_HURT, 3f, 0.5f);
         plugin.getLogger().info("Don Pollo Boss derrotado por " + (winner == null ? "nadie" : winner.getName()));
     }

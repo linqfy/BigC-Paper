@@ -138,6 +138,10 @@ commands:
     description: Inspect and travel between BigCasares custom dimensions
     usage: /<command> <list|info|tp|leave|locate|phase|pack|export>
     aliases: [ dim ]
+  netherita:
+    description: Misiones de armadura de netherita (estado, activar y almas de boss)
+    usage: /<command> [estado|activar <casco|peto|pantalones|botas>|alma <jugador> <boss> [cantidad]|reset <jugador>]
+    aliases: [ netherite ]
   siftmodels:
     description: Turns The Sift's block models over placed slabs, stairs and plants on or off for yourself
     usage: /<command> [on|off] [player]
@@ -153,6 +157,9 @@ permissions:
     default: op
   bigcasares.sift.models.others:
     description: Switch The Sift's block models on or off for another player
+  bigcasares.netherita.admin:
+    description: Give boss souls and reset netherite quests
+    default: op
   bigcasares.donpollos.admin:
     description: Manage Don Pollos (spawn, boss, cities, dances and items)
     default: op
@@ -196,6 +203,7 @@ permissions:
       bigcasares.bloodmoon.stop: true
       bigcasares.jeremy.admin: true
       bigcasares.donpollos.admin: true
+      bigcasares.netherita.admin: true
       bigcasares.mutango.admin: true
       bigcasares.jeremy.start: true
       bigcasares.jeremy.stop: true

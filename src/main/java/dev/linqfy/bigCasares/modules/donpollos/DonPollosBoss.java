@@ -5,8 +5,10 @@ import org.bukkit.Location;
 import org.bukkit.entity.Ravager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -24,6 +26,8 @@ final class DonPollosBoss {
     long nextChickens;
     /** Bichos invocados por este boss (gallinas, Labubus y Coronel). */
     final Set<UUID> minions = new HashSet<>();
+    /** Dano que le hizo cada jugador: los tres que mas le pegaron se llevan su alma al derrotarlo. */
+    final Map<UUID, Double> damageByPlayer = new HashMap<>();
     Location levitateFrom;
     long levitateStart;
     /** Tick en que termina de levitar (0: no esta levitando). */
