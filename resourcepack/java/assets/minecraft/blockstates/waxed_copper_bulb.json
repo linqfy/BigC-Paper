@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "lit=true,powered=false": {
+      "model": "caichet:block/light_panel"
+    },
+    "lit=false,powered=false": {
+      "model": "caichet:block/light_panel_off"
+    },
+    "lit=true,powered=true": {
+      "model": "caichet:block/light_panel"
+    },
+    "lit=false,powered=true": {
+      "model": "caichet:block/light_panel_off"
+    }
+  }
+}

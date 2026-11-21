@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "caichet:boss_eye",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/caichet/entity/boss_eye"
+      },
+      "geometry": {
+        "default": "geometry.caichet.boss_eye"
+      },
+      "animations": {
+        "idle": "animation.caichet.boss_eye.idle"
+      },
+      "scripts": {
+        "animate": [
+          "idle"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.caichet.default"
+      ]
+    }
+  }
+}

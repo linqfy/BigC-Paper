@@ -21,6 +21,8 @@ import org.geysermc.geyser.api.pack.ResourcePack;
 import org.geysermc.geyser.api.util.Identifier;
 import org.geysermc.geyser.api.item.custom.v2.CustomItemBedrockOptions;
 import org.geysermc.geyser.api.item.custom.v2.CustomItemDefinition;
+import org.geysermc.geyser.api.item.custom.v2.component.java.JavaConsumable;
+import org.geysermc.geyser.api.item.custom.v2.component.java.JavaItemDataComponents;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -179,16 +181,27 @@ public final class GeyserRuntimeBridge implements GeyserApiFacade, EventRegistra
 
     public void onDefineCustomItems(GeyserDefineCustomItemsEvent event) {
         for (GeyserCustomItemDefinition definition : customItems) {
-            CustomItemDefinition geyserDefinition = CustomItemDefinition.builder(
+            CustomItemDefinition.Builder builder = CustomItemDefinition.builder(
                     Identifier.of(definition.bedrockIdentifier()),
                     Identifier.of(definition.javaModelIdentifier()))
                 .displayName(definition.displayName())
                 .bedrockOptions(CustomItemBedrockOptions.builder()
                     .icon(definition.icon())
-                    .allowOffhand(true))
-                .build();
-            event.register(Identifier.of(definition.javaBaseIdentifier()), geyserDefinition);
+                    .allowOffhand(true));
+            GeyserItemConsumption consumption = definition.consumption();
+            if (consumption != null) {
+                builder.component(JavaItemDataComponents.CONSUMABLE,
+                    JavaConsumable.of(consumption.seconds(), animation(consumption.animation())));
+            }
+            event.register(Identifier.of(definition.javaBaseIdentifier()), builder.build());
         }
+    }
+
+    private static JavaConsumable.Animation animation(GeyserItemConsumption.Animation animation) {
+        return switch (animation) {
+            case EAT -> JavaConsumable.Animation.EAT;
+            case DRINK -> JavaConsumable.Animation.DRINK;
+        };
     }
 
     public void onDefineCustomBlocks(GeyserDefineCustomBlocksEvent event) {
@@ -199,6 +212,9 @@ public final class GeyserRuntimeBridge implements GeyserApiFacade, EventRegistra
                 .texture(texture)
                 .renderMethod(definition.renderMethod())
                 .build()));
+            if (definition.lightEmission() > 0) {
+                components.lightEmission(definition.lightEmission());
+            }
             List<Integer> rotation = definition.rotation();
             if (rotation.stream().anyMatch(angle -> angle != 0)) {
                 components.transformation(new TransformationComponent(rotation.get(0), rotation.get(1), rotation.get(2)));
@@ -209,7 +225,10 @@ public final class GeyserRuntimeBridge implements GeyserApiFacade, EventRegistra
                 .components(components.build())
                 .build();
             event.register(block);
-            event.registerOverride(definition.javaState(), block.defaultBlockState());
+            // Geyser finds the Java state by its identifier; a block without properties has no brackets.
+            for (String javaState : definition.javaStates()) {
+                event.registerOverride(javaState, block.defaultBlockState());
+            }
         }
     }
 

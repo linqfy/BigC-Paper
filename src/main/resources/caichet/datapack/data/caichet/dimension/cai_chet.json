@@ -1,0 +1,11 @@
+{
+  "type": "caichet:cai_chet",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "caichet:desert",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "caichet:desierto"
+    }
+  }
+}

@@ -17,14 +17,20 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * A Bedrock custom block that Geyser shows in place of one Java block state: a full cube with a texture per face
- * (keys of the Bedrock pack's terrain_texture.json) and a turn in steps of 90 degrees. Content blocks are
- * mushroom-block states on Java, which a Bedrock client would draw as mushroom blocks.
+ * A Bedrock custom block that Geyser shows in place of one or more Java block states: a full cube with a texture per
+ * face (keys of the Bedrock pack's terrain_texture.json) and a turn in steps of 90 degrees. Content blocks are
+ * retextured vanilla states on Java (mushroom blocks, the hotel's waxed copper), which a Bedrock client would
+ * otherwise draw as the vanilla block.
  *
- * @param javaState   the Java block state, e.g. {@code minecraft:brown_mushroom_block[down=true,east=false,...]}
+ * @param javaState   the Java block state, e.g. {@code minecraft:brown_mushroom_block[down=true,east=false,...]}, or
+ *                    just the block, e.g. {@code minecraft:waxed_copper_block}, when it has no properties
  * @param name        the Bedrock block name; Geyser puts it in its own namespace
  * @param faces       texture per face: up, down, north, south, east, west
  * @param rotation    turn around x, y and z, as the Java blockstate turns the model
+ * @param aliasStates further Java states shown as this same Bedrock block (a bulb is the same panel whether or not
+ *                    it is powered)
+ * @param lightEmission light the Bedrock client draws from the block, 0 to 15; Bedrock lights by its own block, not
+ *                    by the Java light it is sent
  */
 public record GeyserCustomBlockDefinition(
     String javaState,
@@ -32,14 +38,23 @@ public record GeyserCustomBlockDefinition(
     String displayName,
     Map<String, String> faces,
     String renderMethod,
-    List<Integer> rotation
+    List<Integer> rotation,
+    List<String> aliasStates,
+    int lightEmission
 ) {
     static final Set<String> FACES = Set.of("up", "down", "north", "south", "east", "west");
+    private static final String STATE = "minecraft:[a-z_]+(\\[[a-z_]+=[a-z0-9_]+(,[a-z_]+=[a-z0-9_]+)*])?";
+
+    public GeyserCustomBlockDefinition(String javaState, String name, String displayName,
+                                       Map<String, String> faces, String renderMethod, List<Integer> rotation) {
+        this(javaState, name, displayName, faces, renderMethod, rotation, List.of(), 0);
+    }
 
     public GeyserCustomBlockDefinition {
-        javaState = requireText(javaState, "javaState");
-        if (!javaState.matches("minecraft:[a-z_]+\\[[a-z_]+=[a-z0-9_]+(,[a-z_]+=[a-z0-9_]+)*]")) {
-            throw new IllegalArgumentException("Not a block state: " + javaState);
+        javaState = requireState(javaState);
+        aliasStates = aliasStates.stream().map(GeyserCustomBlockDefinition::requireState).toList();
+        if (lightEmission < 0 || lightEmission > 15) {
+            throw new IllegalArgumentException("Light is 0 to 15: " + lightEmission);
         }
         name = requireText(name, "name");
         if (!name.matches("[a-z0-9_]+")) {
@@ -55,6 +70,14 @@ public record GeyserCustomBlockDefinition(
         if (rotation.size() != 3 || rotation.stream().anyMatch(angle -> angle % 90 != 0)) {
             throw new IllegalArgumentException(name + " turns by right angles only: " + rotation);
         }
+    }
+
+    /** Every Java state this block replaces, the first one being {@link #javaState()}. */
+    public List<String> javaStates() {
+        List<String> states = new ArrayList<>();
+        states.add(javaState);
+        states.addAll(aliasStates);
+        return List.copyOf(states);
     }
 
     /** Reads the {@code blocks} list that tools/export_sift_bedrock.py writes. */
@@ -79,6 +102,14 @@ public record GeyserCustomBlockDefinition(
         } catch (RuntimeException malformed) {
             throw new IOException("Malformed custom block list", malformed);
         }
+    }
+
+    private static String requireState(String state) {
+        String text = requireText(state, "javaState");
+        if (!text.matches(STATE)) {
+            throw new IllegalArgumentException("Not a block state: " + text);
+        }
+        return text;
     }
 
     private static String requireText(String value, String field) {

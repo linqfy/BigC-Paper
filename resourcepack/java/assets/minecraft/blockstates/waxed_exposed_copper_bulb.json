@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "lit=false,powered=false": {
+      "model": "caichet:block/tiles_dirty"
+    },
+    "lit=true,powered=false": {
+      "model": "minecraft:block/exposed_copper_bulb_lit"
+    },
+    "lit=false,powered=true": {
+      "model": "caichet:block/tiles_dirty"
+    },
+    "lit=true,powered=true": {
+      "model": "minecraft:block/exposed_copper_bulb_lit_powered"
+    }
+  }
+}

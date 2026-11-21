@@ -1,0 +1,30 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "caichet:dream_winged",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/caichet/entity/dream_winged"
+      },
+      "geometry": {
+        "default": "geometry.caichet.dream_winged"
+      },
+      "animations": {
+        "billboard": "animation.caichet.billboard",
+        "flap": "animation.caichet.dream_winged.flap"
+      },
+      "scripts": {
+        "animate": [
+          "billboard",
+          "flap"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.caichet.default"
+      ]
+    }
+  }
+}

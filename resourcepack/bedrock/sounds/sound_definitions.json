@@ -635,6 +635,128 @@
           "name": "sounds/the_sift/block/sift_portal/open"
         }
       ]
+    },
+    "caichet:train.whistle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/caichet/tren_silbato"
+        },
+        {
+          "name": "sounds/caichet/tren_silbato_2"
+        }
+      ]
+    },
+    "caichet:train.engine": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/caichet/tren_motor_loop",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:train.steam": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/caichet/tren_vapor_1"
+        },
+        {
+          "name": "sounds/caichet/tren_vapor_2"
+        }
+      ]
+    },
+    "caichet:weapon.beam": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/caichet/arma_rayo"
+        }
+      ]
+    },
+    "caichet:door.key": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/caichet/puerta_llave"
+        }
+      ]
+    },
+    "caichet:door.creak": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/caichet/puerta_chirrido"
+        }
+      ]
+    },
+    "caichet:figure.appear": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/figura_respiro"
+        },
+        {
+          "name": "sounds/caichet/figura_fantasma"
+        }
+      ]
+    },
+    "caichet:figure.chase": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/figura_te_veo"
+        }
+      ]
+    },
+    "caichet:eye.roar": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/ojo_rugido"
+        }
+      ]
+    },
+    "caichet:pit.travel": {
+      "category": "ambient",
+      "sounds": [
+        {
+          "name": "sounds/caichet/pozo_viaje"
+        }
+      ]
+    },
+    "caichet:pit.return": {
+      "category": "ambient",
+      "sounds": [
+        {
+          "name": "sounds/caichet/pozo_viaje_corto"
+        }
+      ]
+    },
+    "caichet:dream.chimes": {
+      "category": "ambient",
+      "sounds": [
+        {
+          "name": "sounds/caichet/sueno_campanas_1",
+          "stream": true,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/caichet/sueno_campanas_2",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:hotel.flicker": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/caichet/hotel_zumbido_loop"
+        }
+      ]
     }
   }
 }

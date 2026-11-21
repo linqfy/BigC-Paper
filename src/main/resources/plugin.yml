@@ -58,6 +58,10 @@ commands:
     description: Mutango Boss (spawn, fases, ruinas, santuario y premios)
     usage: /<command> [quitar|atacar|fase|ruinas|santuario|premios]
     permission: bigcasares.mutango.admin
+  caichet:
+    description: Cai chet (objetos, viajes entre el desierto, el hotel y el Sueno, y el tren)
+    usage: /<command> <give <objeto> [cantidad]|tp|tren [aqui]|hotel|sueno|pozo>
+    permission: bigcasares.caichet.admin
   jeremy:
     description: Manage the Jeremy hunter
     usage: /<command> <status|start [player]|stop|cooldown reset>
@@ -151,6 +155,9 @@ permissions:
   bigcasares.mutango.admin:
     description: Manage Mutango Boss (spawn, phases, ruins, shrine and rewards)
     default: op
+  bigcasares.caichet.admin:
+    description: Manage Cai chet (items, travel between its worlds and the train)
+    default: op
   bigcasares.sift.models.others:
     description: Switch The Sift's block models on or off for another player
   bigcasares.donpollos.admin:
@@ -197,6 +204,7 @@ permissions:
       bigcasares.jeremy.admin: true
       bigcasares.donpollos.admin: true
       bigcasares.mutango.admin: true
+      bigcasares.caichet.admin: true
       bigcasares.jeremy.start: true
       bigcasares.jeremy.stop: true
       bigcasares.celular.admin: true

@@ -1,0 +1,80 @@
+{
+  "train.whistle": {
+    "sounds": [
+      "caichet:tren_silbato",
+      "caichet:tren_silbato_2"
+    ]
+  },
+  "train.engine": {
+    "sounds": [
+      {
+        "name": "caichet:tren_motor_loop",
+        "stream": true
+      }
+    ]
+  },
+  "train.steam": {
+    "sounds": [
+      "caichet:tren_vapor_1",
+      "caichet:tren_vapor_2"
+    ]
+  },
+  "weapon.beam": {
+    "sounds": [
+      "caichet:arma_rayo"
+    ]
+  },
+  "door.key": {
+    "sounds": [
+      "caichet:puerta_llave"
+    ]
+  },
+  "door.creak": {
+    "sounds": [
+      "caichet:puerta_chirrido"
+    ]
+  },
+  "figure.appear": {
+    "sounds": [
+      "caichet:figura_respiro",
+      "caichet:figura_fantasma"
+    ]
+  },
+  "figure.chase": {
+    "sounds": [
+      "caichet:figura_te_veo"
+    ]
+  },
+  "eye.roar": {
+    "sounds": [
+      "caichet:ojo_rugido"
+    ]
+  },
+  "pit.travel": {
+    "sounds": [
+      "caichet:pozo_viaje"
+    ]
+  },
+  "pit.return": {
+    "sounds": [
+      "caichet:pozo_viaje_corto"
+    ]
+  },
+  "dream.chimes": {
+    "sounds": [
+      {
+        "name": "caichet:sueno_campanas_1",
+        "stream": true
+      },
+      {
+        "name": "caichet:sueno_campanas_2",
+        "stream": true
+      }
+    ]
+  },
+  "hotel.flicker": {
+    "sounds": [
+      "caichet:hotel_zumbido_loop"
+    ]
+  }
+}
