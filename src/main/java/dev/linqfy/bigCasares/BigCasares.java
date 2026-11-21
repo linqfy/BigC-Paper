@@ -52,6 +52,7 @@ import dev.linqfy.bigCasares.modules.shop.ShopModule;
 import dev.linqfy.bigCasares.modules.tideframe.TideframeUiModule;
 import dev.linqfy.bigCasares.modules.skillrating.SkillRatingModule;
 import dev.linqfy.bigCasares.modules.smokebomb.SmokeBombModule;
+import dev.linqfy.bigCasares.modules.staffevents.StaffEventsModule;
 import dev.linqfy.bigCasares.modules.teams.TeamModule;
 import dev.linqfy.bigCasares.modules.discord.DiscordIntegrationModule;
 import dev.linqfy.bigCasares.modules.endevent.EndEventModule;
@@ -115,6 +116,7 @@ public final class BigCasares extends JavaPlugin {
     private DimensionModule dimensionModule;
     private CustomContentModule customContentModule;
     private SiftModule siftModule;
+    private StaffEventsModule staffEventsModule;
     private EmojiAliasService emojiAliasService;
     private final VanishSessionRegistry vanishSessionRegistry = new VanishSessionRegistry();
     private final ReloadCoordinator reloadCoordinator = new ReloadCoordinator();
@@ -274,6 +276,10 @@ public final class BigCasares extends JavaPlugin {
         return siftModule;
     }
 
+    public StaffEventsModule getStaffEventsModule() {
+        return staffEventsModule;
+    }
+
     public ContentItemFactory getContentItems() {
         return contentItems;
     }
@@ -412,7 +418,8 @@ public final class BigCasares extends JavaPlugin {
         this.keepInventoryTotemModule = new KeepInventoryTotemModule(this);
         this.tombstoneModule.setDeathCaptureEligibility(playerId ->
             (endEventModule == null || !endEventModule.bypassTombstone(playerId))
-                && (keepInventoryTotemModule == null || !keepInventoryTotemModule.protectsDeath(playerId)));
+                && (keepInventoryTotemModule == null || !keepInventoryTotemModule.protectsDeath(playerId))
+                && (staffEventsModule == null || !staffEventsModule.protectsDeath(playerId)));
         this.discordIntegrationModule = new DiscordIntegrationModule(
             this, moderationModule.audit(), serverControlModule, emojiAliasService
         );
@@ -423,6 +430,8 @@ public final class BigCasares extends JavaPlugin {
         DimensionModule dimensions = dimensionModule;
         this.siftModule = new SiftModule(this, dimensions::platform, customBlocks, contentItems, javaModels,
             this::resolveClientPlatform);
+        this.staffEventsModule = new StaffEventsModule(this, dimensions::platform, this::serverControlPvp,
+            endEventModule::bypassTombstone);
         this.shopModule.configurePlatform(this::resolveClientPlatform, this::sendBedrockShopForm);
         TideframeUiModule tideframeUiModule = new TideframeUiModule(
             playerId -> resourcePackModule != null
@@ -473,6 +482,7 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(dimensionModule);
         moduleManager.register(customContentModule);
         moduleManager.register(siftModule);
+        moduleManager.register(staffEventsModule);
         moduleManager.register(discordIntegrationModule);
         return moduleManager.enableRegisteredModules(generation);
     }
@@ -492,6 +502,14 @@ public final class BigCasares extends JavaPlugin {
         String catalogId = id.startsWith("bigcasares:") ? id.substring("bigcasares:".length()) : id;
         return customItemRegistry != null
             && customItemRegistry.resolveItemId(stack).map(catalogId::equals).orElse(false);
+    }
+
+    /** PvP state chosen through server control, when that module is running. */
+    private java.util.Optional<Boolean> serverControlPvp() {
+        if (serverControlModule == null || serverControlModule.service() == null) {
+            return java.util.Optional.empty();
+        }
+        return java.util.Optional.of(serverControlModule.service().effectivePvp(java.time.Instant.now()));
     }
 
     private boolean acidRainEventActive() {
@@ -656,6 +674,7 @@ public final class BigCasares extends JavaPlugin {
         dimensionModule = null;
         customContentModule = null;
         siftModule = null;
+        staffEventsModule = null;
         contentItems = null;
         customBlocks = null;
         discordIntegrationModule = null;
