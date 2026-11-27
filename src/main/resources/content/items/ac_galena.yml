@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_galena
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:galena
+display:
+  translation-key: item.alexscaves.galena
+  fallback-name: "Galena"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/galena.json
+  bedrock-texture: bedrock/textures/alexscaves/block/galena.png

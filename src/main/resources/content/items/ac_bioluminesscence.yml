@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_bioluminesscence
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:bioluminesscence
+display:
+  translation-key: item.alexscaves.bioluminesscence
+  fallback-name: "Biolumiscencia"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/bioluminesscence.json
+  bedrock-texture: bedrock/textures/alexscaves/item/bioluminesscence.png

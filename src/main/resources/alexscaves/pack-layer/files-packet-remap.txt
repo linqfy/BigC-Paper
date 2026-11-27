@@ -1,0 +1,21 @@
+# Solo con blocks.packet-remap y packetevents (ver alexscaves/client-remap.txt).
+assets/minecraft/blockstates/acacia_leaves.json
+assets/minecraft/blockstates/azalea_leaves.json
+assets/minecraft/blockstates/birch_leaves.json
+assets/minecraft/blockstates/cherry_leaves.json
+assets/minecraft/blockstates/chorus_flower.json
+assets/minecraft/blockstates/dark_oak_leaves.json
+assets/minecraft/blockstates/exposed_lightning_rod.json
+assets/minecraft/blockstates/flowering_azalea_leaves.json
+assets/minecraft/blockstates/jungle_leaves.json
+assets/minecraft/blockstates/lightning_rod.json
+assets/minecraft/blockstates/mangrove_leaves.json
+assets/minecraft/blockstates/oak_leaves.json
+assets/minecraft/blockstates/oxidized_lightning_rod.json
+assets/minecraft/blockstates/pale_oak_leaves.json
+assets/minecraft/blockstates/spruce_leaves.json
+assets/minecraft/blockstates/waxed_exposed_lightning_rod.json
+assets/minecraft/blockstates/waxed_lightning_rod.json
+assets/minecraft/blockstates/waxed_oxidized_lightning_rod.json
+assets/minecraft/blockstates/waxed_weathered_lightning_rod.json
+assets/minecraft/blockstates/weathered_lightning_rod.json

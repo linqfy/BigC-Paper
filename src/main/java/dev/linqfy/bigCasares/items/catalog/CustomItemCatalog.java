@@ -94,7 +94,9 @@ public final class CustomItemCatalog {
             definition.recipeDefinition().map(Object::toString).orElse(""),
             definition.appearance().javaItemDefinition(),
             definition.appearance().bedrockTexture(),
-            "\n"
+            // Only items with armor add this part, so existing item revisions stay the same.
+            definition.armorDefinition().map(armor -> armor.revisionKey() + "|").orElse("")
+                + "\n"
         );
     }
 }

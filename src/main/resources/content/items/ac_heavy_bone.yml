@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_heavy_bone
+mechanic: alexs-caves
+material: BONE
+item-model: alexscaves:heavy_bone
+display:
+  translation-key: item.alexscaves.heavy_bone
+  fallback-name: "Hueso pesado"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 16
+appearance:
+  java-item-definition: java/assets/alexscaves/items/heavy_bone.json
+  bedrock-texture: bedrock/textures/alexscaves/item/heavy_bone.png

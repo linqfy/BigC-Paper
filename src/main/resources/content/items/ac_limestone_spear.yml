@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_limestone_spear
+mechanic: alexs-caves
+material: SNOWBALL
+item-model: alexscaves:limestone_spear
+display:
+  translation-key: item.alexscaves.limestone_spear
+  fallback-name: "Lanza de caliza"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 16
+recipe:
+  key: ac_limestone_spear_recipe
+  result-amount: 4
+  shape: [" L ", "LSL", " S "]
+  ingredients:
+    L: bigcasares:ac_limestone
+    S: STICK
+appearance:
+  java-item-definition: java/assets/alexscaves/items/limestone_spear.json
+  bedrock-texture: bedrock/textures/alexscaves/item/limestone_spear.png

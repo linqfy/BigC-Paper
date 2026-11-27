@@ -3,7 +3,7 @@ package dev.linqfy.bigCasares.modules.customcrossbow;
 import java.util.List;
 
 public enum CrossbowEnchantment {
-    SNIPER("sniper_book", "Francotirador", 1024, List.of(
+    SNIPER("sniper_book", "Francotirador", 1026, List.of(
         "§7Agachate para usar la mira integrada.",
         "§7Carga 1 corazón cada 1,5 s; máximo 6 (9 s).",
         "§7Mantené clic derecho para cargar; soltá para disparar.",

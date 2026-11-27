@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_ping_pong_sponge
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:ping_pong_sponge
+display:
+  translation-key: item.alexscaves.ping_pong_sponge
+  fallback-name: "Esponja ping-Pong"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/ping_pong_sponge.json
+  bedrock-texture: bedrock/textures/alexscaves/block/ping_pong_sponge.png

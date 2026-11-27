@@ -1,0 +1,107 @@
+{
+  "variants": {
+    "distance=1,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_pink_floating",
+      "x": 180
+    },
+    "distance=1,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/large_peppermint",
+      "y": 270
+    },
+    "distance=1,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_small",
+      "x": 90,
+      "y": 270
+    },
+    "distance=1,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/thin_bone_vertical"
+    },
+    "distance=2,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_pink_floating"
+    },
+    "distance=2,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/large_peppermint",
+      "y": 90
+    },
+    "distance=2,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_small",
+      "x": 90,
+      "y": 90
+    },
+    "distance=2,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/thin_bone_vertical"
+    },
+    "distance=3,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_pink_floating",
+      "x": 90
+    },
+    "distance=3,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/giant_sweetberry"
+    },
+    "distance=3,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_medium",
+      "x": 180
+    },
+    "distance=3,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/thin_bone_lower"
+    },
+    "distance=4,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_pink_floating",
+      "x": 90,
+      "y": 180
+    },
+    "distance=4,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/candy_cane_pole"
+    },
+    "distance=4,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_medium"
+    },
+    "distance=4,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/thin_bone"
+    },
+    "distance=5,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_pink_floating",
+      "x": 90,
+      "y": 270
+    },
+    "distance=5,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/candy_cane_pole_north_true"
+    },
+    "distance=5,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_medium",
+      "x": 90
+    },
+    "distance=5,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/thin_bone_upper"
+    },
+    "distance=6,persistent=false,waterlogged=false": {
+      "model": "alexscaves:block/gummy_ring_pink_floating",
+      "x": 90,
+      "y": 90
+    },
+    "distance=6,persistent=false,waterlogged=true": {
+      "model": "alexscaves:block/candy_cane_pole_east_true"
+    },
+    "distance=6,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_medium",
+      "x": 270
+    },
+    "distance=6,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/abyssal_altar"
+    },
+    "distance=7,persistent=false,waterlogged=false": {
+      "model": "minecraft:block/dark_oak_leaves"
+    },
+    "distance=7,persistent=false,waterlogged=true": {
+      "model": "minecraft:block/dark_oak_leaves"
+    },
+    "distance=7,persistent=true,waterlogged=false": {
+      "model": "alexscaves:block/sulfur_bud_medium",
+      "x": 90,
+      "y": 270
+    },
+    "distance=7,persistent=true,waterlogged=true": {
+      "model": "alexscaves:block/abyssal_altar_active"
+    }
+  }
+}

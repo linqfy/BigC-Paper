@@ -1,0 +1,19 @@
+# Generado por tools/alexscaves/generate_content.py (ítem propio de BigCasares, no está en el mod).
+id: ac_turron
+mechanic: alexs-caves
+material: DRIED_KELP
+item-model: alexscaves:turron
+display:
+  translation-key: item.alexscaves.turron
+  fallback-name: "Turrón"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+components:
+  food:
+    nutrition: 4
+    saturation: 2.4
+    can-always-eat: false
+appearance:
+  java-item-definition: java/assets/alexscaves/items/turron.json
+  bedrock-texture: bedrock/textures/alexscaves/item/turron.png

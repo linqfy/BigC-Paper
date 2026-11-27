@@ -1,0 +1,25 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_shot_gum
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:shot_gum
+display:
+  translation-key: item.alexscaves.shot_gum
+  fallback-name: "Tirachicles"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 4
+recipe:
+  key: ac_shot_gum_recipe
+  result-amount: 1
+  shape: ["SPP", "III", "IN "]
+  ingredients:
+    S: bigcasares:ac_sugar_glass
+    P: bigcasares:ac_gumball_pile
+    I: IRON_INGOT
+    N: IRON_NUGGET
+appearance:
+  java-item-definition: java/assets/alexscaves/items/shot_gum.json
+  bedrock-texture: bedrock/textures/alexscaves/item/shot_gum_icon.png

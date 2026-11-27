@@ -1,0 +1,23 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_moth_ball
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:moth_ball
+display:
+  translation-key: item.alexscaves.moth_ball
+  fallback-name: "Bola antioscurolillas"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_moth_ball_recipe
+  result-amount: 1
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_moth_dust
+    - bigcasares:ac_guano
+    - STRING
+    - STRING
+appearance:
+  java-item-definition: java/assets/alexscaves/items/moth_ball.json
+  bedrock-texture: bedrock/textures/alexscaves/item/moth_ball.png

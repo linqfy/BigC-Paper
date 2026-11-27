@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_heavyweight
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:heavyweight
+display:
+  translation-key: item.alexscaves.heavyweight
+  fallback-name: "Peso pesado"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/heavyweight.json
+  bedrock-texture: bedrock/textures/alexscaves/item/heavyweight.png

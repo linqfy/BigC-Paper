@@ -17,8 +17,18 @@ public record CustomItemDefinition(
     ItemFoodDefinition food,
     ItemRecipeDefinition recipe,
     ItemCombatDefinition combat,
-    ItemAppearanceDefinition appearance
+    ItemAppearanceDefinition appearance,
+    ItemArmorDefinition armor
 ) {
+
+    /** Items without an armor component. */
+    public CustomItemDefinition(String id, String mechanic, String material, String itemModel,
+                                OptionalInt legacyCustomModelData, ItemDisplayDefinition display, int maxStackSize,
+                                Integer maxDamage, ItemFoodDefinition food, ItemRecipeDefinition recipe,
+                                ItemCombatDefinition combat, ItemAppearanceDefinition appearance) {
+        this(id, mechanic, material, itemModel, legacyCustomModelData, display, maxStackSize, maxDamage, food, recipe,
+            combat, appearance, null);
+    }
 
     public CustomItemDefinition {
         id = normalizeId(id);
@@ -49,6 +59,10 @@ public record CustomItemDefinition(
 
     public Optional<ItemCombatDefinition> combatDefinition() {
         return Optional.ofNullable(combat);
+    }
+
+    public Optional<ItemArmorDefinition> armorDefinition() {
+        return Optional.ofNullable(armor);
     }
 
     private static String normalizeId(String value) {

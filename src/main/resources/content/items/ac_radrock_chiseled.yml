@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_radrock_chiseled
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:radrock_chiseled
+display:
+  translation-key: item.alexscaves.radrock_chiseled
+  fallback-name: "Radiaroca cincelada"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_radrock_chiseled_recipe
+  result-amount: 1
+  shape: ["G", "G"]
+  ingredients:
+    G: bigcasares:ac_radrock_slab
+appearance:
+  java-item-definition: java/assets/alexscaves/items/radrock_chiseled.json
+  bedrock-texture: bedrock/textures/alexscaves/block/radrock_chiseled.png

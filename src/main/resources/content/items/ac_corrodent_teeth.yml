@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_corrodent_teeth
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:corrodent_teeth
+display:
+  translation-key: item.alexscaves.corrodent_teeth
+  fallback-name: "Dientes de corroedor"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/corrodent_teeth.json
+  bedrock-texture: bedrock/textures/alexscaves/item/corrodent_teeth.png

@@ -1,0 +1,122 @@
+{
+  "magnetic_ruins": [
+    "magnetic_ruins_0",
+    "magnetic_ruins_1",
+    "magnetic_ruins_2",
+    "magnetic_ruins_3",
+    "magnetic_ruins_5",
+    "magnetic_ruins_6",
+    "magnetic_ruins_7",
+    "magnetic_ruins_8",
+    "magnetic_ruins_9"
+  ],
+  "toxic_ruins": [
+    "toxic_ruins_0",
+    "toxic_ruins_1",
+    "toxic_ruins_10",
+    "toxic_ruins_11",
+    "toxic_ruins_2",
+    "toxic_ruins_3",
+    "toxic_ruins_4",
+    "toxic_ruins_5",
+    "toxic_ruins_6",
+    "toxic_ruins_7",
+    "toxic_ruins_8",
+    "toxic_ruins_9"
+  ],
+  "caveman_house": [
+    "caveman_house_0",
+    "caveman_house_1",
+    "caveman_house_2",
+    "caveman_house_3",
+    "caveman_house_4",
+    "caveman_house_5",
+    "caveman_house_6"
+  ],
+  "big_lollipop_top": [
+    "big_lollipop_top_0",
+    "big_lollipop_top_1",
+    "big_lollipop_top_2",
+    "big_lollipop_top_3",
+    "big_lollipop_top_4"
+  ],
+  "small_lollipop_top": [
+    "small_lollipop_top_0",
+    "small_lollipop_top_1",
+    "small_lollipop_top_2",
+    "small_lollipop_top_3"
+  ],
+  "chocolate_bar": [
+    "chocolate_bar_0",
+    "chocolate_bar_1"
+  ],
+  "soda_bottle": [
+    "soda_bottle",
+    "soda_bottle_side"
+  ],
+  "licowitch_tower": [
+    "licowitch_tower"
+  ],
+  "gingerbread_house": [
+    "gingerbread_house_0",
+    "gingerbread_house_1",
+    "gingerbread_house_2",
+    "gingerbread_house_3",
+    "gingerbread_house_4",
+    "gingerbread_house_5",
+    "gingerbread_house_6",
+    "gingerbread_house_7",
+    "gingerbread_house_8",
+    "gingerbread_house_9"
+  ],
+  "gingerbread_town_center": [
+    "gingerbread_town_center"
+  ],
+  "whalefall_skull": [
+    "whalefall_skull_0",
+    "whalefall_skull_1",
+    "whalefall_skull_2"
+  ],
+  "whalefall_body": [
+    "whalefall_body_0",
+    "whalefall_body_1",
+    "whalefall_body_2",
+    "whalefall_body_3"
+  ],
+  "whalefall_tail": [
+    "whalefall_tail_0",
+    "whalefall_tail_1",
+    "whalefall_tail_2",
+    "whalefall_tail_3"
+  ],
+  "deep_one_ruins": [
+    "deep_one_ruins_0",
+    "deep_one_ruins_1",
+    "deep_one_ruins_2",
+    "deep_one_ruins_3"
+  ],
+  "abyssal_ruins": [
+    "abyssal_ruins_0",
+    "abyssal_ruins_1",
+    "abyssal_ruins_2",
+    "abyssal_ruins_3"
+  ],
+  "forlorn_hut": [
+    "forlorn_hut_0",
+    "forlorn_hut_1",
+    "forlorn_hut_2",
+    "forlorn_hut_3",
+    "forlorn_hut_4",
+    "forlorn_hut_5",
+    "forlorn_hut_6"
+  ],
+  "forlorn_idol": [
+    "forlorn_idol"
+  ],
+  "forlorn_post": [
+    "forlorn_post_0",
+    "forlorn_post_1",
+    "forlorn_post_2",
+    "forlorn_post_3"
+  ]
+}

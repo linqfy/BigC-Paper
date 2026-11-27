@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_abyssal_altar
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:abyssal_altar
+display:
+  translation-key: item.alexscaves.abyssal_altar
+  fallback-name: "Altar abisal"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/abyssal_altar.json
+  bedrock-texture: bedrock/textures/alexscaves/block/abyssal_altar_0.png

@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_stripped_pewen_log
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:stripped_pewen_log
+display:
+  translation-key: item.alexscaves.stripped_pewen_log
+  fallback-name: "Tronco de pehuén sin corteza"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/stripped_pewen_log.json
+  bedrock-texture: bedrock/textures/alexscaves/block/pewen/stripped_pewen_log.png

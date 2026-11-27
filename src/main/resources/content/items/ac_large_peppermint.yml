@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_large_peppermint
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:large_peppermint
+display:
+  translation-key: item.alexscaves.large_peppermint
+  fallback-name: "Menta grande"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/large_peppermint.json
+  bedrock-texture: bedrock/textures/alexscaves/block/large_peppermint_front.png

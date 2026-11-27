@@ -182,6 +182,13 @@ public final class MissionListener implements Listener {
             0.0,
             event.getEntityType().name()
         );
+        // Custom entities (Alex's Caves mobs, ...) are vanilla bases tagged in PDC: missions can also name them
+        // by that tag (e.g. alexscaves:teletor) without changing what the vanilla type name matches.
+        String customTag = event.getEntity().getPersistentDataContainer().get(customEntityKey, PersistentDataType.STRING);
+        if (MissionEntityKeys.isCustomKey(customTag)) {
+            module.recordOutboundProgress(
+                killer, MissionType.KILL_ENTITY_IN_BIOME, biomeKey(event.getEntity().getLocation()), 0.0, customTag);
+        }
     }
 
     @EventHandler(ignoreCancelled = true)

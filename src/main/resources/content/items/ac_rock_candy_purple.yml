@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_rock_candy_purple
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:rock_candy_purple
+display:
+  translation-key: item.alexscaves.rock_candy_purple
+  fallback-name: "Roca de caramelo morado"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/rock_candy_purple.json
+  bedrock-texture: bedrock/textures/alexscaves/block/rock_candy_purple.png

@@ -62,6 +62,7 @@ public final class ItemCatalogLoader {
         ItemFoodDefinition food = parseFood(yaml.getConfigurationSection("components.food"), source);
         ItemRecipeDefinition recipe = parseRecipe(yaml.getConfigurationSection("recipe"), source);
         ItemCombatDefinition combat = parseCombat(yaml.getConfigurationSection("components.combat"), source);
+        ItemArmorDefinition armor = parseArmor(yaml.getConfigurationSection("components.armor"), source);
         ConfigurationSection appearance = requiredSection(yaml, "appearance", source);
         ItemAppearanceDefinition appearanceDefinition = new ItemAppearanceDefinition(
             requiredString(appearance, "java-item-definition", source),
@@ -70,7 +71,8 @@ public final class ItemCatalogLoader {
         return new CustomItemDefinition(
             id, mechanic, material, itemModel, modelData, displayDefinition, maxStackSize, maxDamage, food, recipe,
             combat,
-            appearanceDefinition
+            appearanceDefinition,
+            armor
         );
     }
 
@@ -84,6 +86,35 @@ public final class ItemCatalogLoader {
         return new ItemCombatDefinition(
             combat.getDouble("attack-damage"), combat.getDouble("attack-speed")
         );
+    }
+
+    private static ItemArmorDefinition parseArmor(ConfigurationSection armor, Path source) {
+        if (armor == null) {
+            return null;
+        }
+        if (!armor.isString("slot") || !armor.isSet("defense")) {
+            throw new IllegalArgumentException("armor component is incomplete in " + source);
+        }
+        String repair = armor.getString("repair-item");
+        if (repair != null && !repair.isBlank()) {
+            if (!repair.trim().matches("[A-Za-z0-9_:]+")) {
+                throw new IllegalArgumentException("armor repair-item is not an item name (" + repair + ") in " + source);
+            }
+            boolean item;
+            try {
+                org.bukkit.Material material = org.bukkit.Material.matchMaterial(repair.trim());
+                item = material != null && material.isItem();
+            } catch (LinkageError | RuntimeException noServer) {
+                // Without a server (unit tests) the material registry is not there; the stack factory checks it again.
+                item = true;
+            }
+            if (!item) {
+                throw new IllegalArgumentException("armor repair-item is not an item (" + repair + ") in " + source);
+            }
+        }
+        return new ItemArmorDefinition(armor.getString("slot"), armor.getDouble("defense"),
+            armor.getDouble("toughness", 0.0), armor.getString("equipment-model"),
+            armor.getDouble("water-efficiency", 0.0), armor.getString("repair-item"), armor.getInt("enchantability", 0));
     }
 
     private static ItemFoodDefinition parseFood(ConfigurationSection food, Path source) {

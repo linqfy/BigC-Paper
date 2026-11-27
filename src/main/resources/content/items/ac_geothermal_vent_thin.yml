@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_geothermal_vent_thin
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:geothermal_vent_thin
+display:
+  translation-key: item.alexscaves.geothermal_vent_thin
+  fallback-name: "Respiradero geotérmico delgado"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_geothermal_vent_thin_recipe
+  result-amount: 3
+  shape: ["G", "G"]
+  ingredients:
+    G: bigcasares:ac_geothermal_vent_medium
+appearance:
+  java-item-definition: java/assets/alexscaves/items/geothermal_vent_thin.json
+  bedrock-texture: bedrock/textures/alexscaves/block/geothermal_vent_thin.png

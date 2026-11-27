@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_thornwood_fence
+mechanic: alexs-caves
+material: DARK_OAK_FENCE
+item-model: alexscaves:thornwood_fence
+display:
+  translation-key: item.alexscaves.thornwood_fence
+  fallback-name: "Valla de pinchoárbol"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_thornwood_fence_recipe
+  result-amount: 3
+  shape: ["W#W", "W#W"]
+  ingredients:
+    "#": STICK
+    W: bigcasares:ac_thornwood_planks
+appearance:
+  java-item-definition: java/assets/alexscaves/items/thornwood_fence.json
+  bedrock-texture: bedrock/textures/alexscaves/block/thornwood/thornwood_planks.png

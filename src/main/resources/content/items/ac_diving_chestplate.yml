@@ -1,0 +1,23 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_diving_chestplate
+mechanic: alexs-caves
+material: LEATHER_CHESTPLATE
+item-model: alexscaves:diving_chestplate
+display:
+  translation-key: item.alexscaves.diving_chestplate
+  fallback-name: "Peto de buzo"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 320
+  armor:
+    slot: CHEST
+    defense: 6.0
+    toughness: 0.0
+    equipment-model: alexscaves:diving_suit
+    repair-item: COPPER_INGOT
+    enchantability: 25
+appearance:
+  java-item-definition: java/assets/alexscaves/items/diving_chestplate.json
+  bedrock-texture: bedrock/textures/alexscaves/item/diving_chestplate.png

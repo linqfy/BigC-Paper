@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_bone_ribs
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:bone_ribs
+display:
+  translation-key: item.alexscaves.bone_ribs
+  fallback-name: "Costillas de huesos"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/bone_ribs.json
+  bedrock-texture: bedrock/textures/alexscaves/block/bone_ribs.png

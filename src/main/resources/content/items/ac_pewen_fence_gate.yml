@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pewen_fence_gate
+mechanic: alexs-caves
+material: OAK_FENCE_GATE
+item-model: alexscaves:pewen_fence_gate
+display:
+  translation-key: item.alexscaves.pewen_fence_gate
+  fallback-name: "Puerta de valla de pehuén"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_pewen_fence_gate_recipe
+  result-amount: 1
+  shape: ["#W#", "#W#"]
+  ingredients:
+    "#": STICK
+    W: bigcasares:ac_pewen_planks
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pewen_fence_gate.json
+  bedrock-texture: bedrock/textures/alexscaves/block/pewen/pewen_planks.png

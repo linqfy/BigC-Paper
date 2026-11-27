@@ -1,0 +1,28 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_vesper_stew
+mechanic: alexs-caves
+material: MUSHROOM_STEW
+item-model: alexscaves:vesper_stew
+display:
+  translation-key: item.alexscaves.vesper_stew
+  fallback-name: "Estofado de visperador"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  food:
+    nutrition: 5
+    saturation: 3.0
+    can-always-eat: true
+recipe:
+  key: ac_vesper_stew_recipe
+  result-amount: 1
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_vesper_wing
+    - bigcasares:ac_thornwood_branch
+    - BROWN_MUSHROOM
+    - BOWL
+appearance:
+  java-item-definition: java/assets/alexscaves/items/vesper_stew.json
+  bedrock-texture: bedrock/textures/alexscaves/item/vesper_stew.png

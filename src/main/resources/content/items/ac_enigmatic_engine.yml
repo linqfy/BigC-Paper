@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_enigmatic_engine
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:enigmatic_engine
+display:
+  translation-key: item.alexscaves.enigmatic_engine
+  fallback-name: "Motor enigmático"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/enigmatic_engine.json
+  bedrock-texture: bedrock/textures/alexscaves/block/enigmatic_engine.png

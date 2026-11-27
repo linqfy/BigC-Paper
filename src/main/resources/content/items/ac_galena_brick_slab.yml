@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_galena_brick_slab
+mechanic: alexs-caves
+material: DEEPSLATE_BRICK_SLAB
+item-model: alexscaves:galena_brick_slab
+display:
+  translation-key: item.alexscaves.galena_brick_slab
+  fallback-name: "Losa de ladrillos de galena"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_galena_brick_slab_recipe
+  result-amount: 6
+  shape: ["GGG"]
+  ingredients:
+    G: bigcasares:ac_galena_bricks
+appearance:
+  java-item-definition: java/assets/alexscaves/items/galena_brick_slab.json
+  bedrock-texture: bedrock/textures/alexscaves/block/galena_bricks.png

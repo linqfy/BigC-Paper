@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "description": "Alex's Caves por AlexModGuy (LGPL). Recreación no oficial para BigCasares. Ver licenses/alexscaves/CREDITS.txt",
+    "max_format": 107,
+    "min_format": [
+      107,
+      1
+    ]
+  }
+}

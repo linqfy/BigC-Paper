@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_coprolith_coal_ore
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:coprolith_coal_ore
+display:
+  translation-key: item.alexscaves.coprolith_coal_ore
+  fallback-name: "Mena de carbón de coprolito"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/coprolith_coal_ore.json
+  bedrock-texture: bedrock/textures/alexscaves/block/coprolith_coal_ore.png

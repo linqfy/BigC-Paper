@@ -1,0 +1,744 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_sweetberry_ice_cream_1",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0,
+                0.01,
+                -8.0
+              ],
+              "size": [
+                8.0,
+                5.99,
+                0.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    8,
+                    10
+                  ],
+                  "uv_size": [
+                    -8,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "east": {
+                  "uv": [
+                    16,
+                    10
+                  ],
+                  "uv_size": [
+                    -4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "south": {
+                  "uv": [
+                    10,
+                    13
+                  ],
+                  "uv_size": [
+                    -10,
+                    3
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "west": {
+                  "uv": [
+                    16,
+                    10
+                  ],
+                  "uv_size": [
+                    -4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -8,
+                    4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    5
+                  ],
+                  "uv_size": [
+                    -8,
+                    4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.01,
+                -8.0
+              ],
+              "size": [
+                8.0,
+                5.99,
+                0.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    8,
+                    10
+                  ],
+                  "uv_size": [
+                    -8,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "east": {
+                  "uv": [
+                    16,
+                    10
+                  ],
+                  "uv_size": [
+                    -4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "south": {
+                  "uv": [
+                    10,
+                    13
+                  ],
+                  "uv_size": [
+                    -10,
+                    3
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "west": {
+                  "uv": [
+                    16,
+                    10
+                  ],
+                  "uv_size": [
+                    -4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -8,
+                    4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    5
+                  ],
+                  "uv_size": [
+                    -8,
+                    4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                0,
+                0.01,
+                8.0
+              ],
+              "size": [
+                8.0,
+                5.99,
+                0.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    13
+                  ],
+                  "uv_size": [
+                    10,
+                    3
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "east": {
+                  "uv": [
+                    12,
+                    10
+                  ],
+                  "uv_size": [
+                    4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    10
+                  ],
+                  "uv_size": [
+                    8,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "west": {
+                  "uv": [
+                    12,
+                    10
+                  ],
+                  "uv_size": [
+                    4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    4
+                  ],
+                  "uv_size": [
+                    -8,
+                    -4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    9
+                  ],
+                  "uv_size": [
+                    -8,
+                    -4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.01,
+                8.0
+              ],
+              "size": [
+                8.0,
+                5.99,
+                0.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    13
+                  ],
+                  "uv_size": [
+                    10,
+                    3
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "east": {
+                  "uv": [
+                    12,
+                    10
+                  ],
+                  "uv_size": [
+                    4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    10
+                  ],
+                  "uv_size": [
+                    8,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "west": {
+                  "uv": [
+                    12,
+                    10
+                  ],
+                  "uv_size": [
+                    4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    4
+                  ],
+                  "uv_size": [
+                    -8,
+                    -4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    9
+                  ],
+                  "uv_size": [
+                    -8,
+                    -4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                8.0,
+                0.01,
+                0
+              ],
+              "size": [
+                0.0,
+                5.99,
+                8.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    16,
+                    10
+                  ],
+                  "uv_size": [
+                    -4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "east": {
+                  "uv": [
+                    10,
+                    13
+                  ],
+                  "uv_size": [
+                    -10,
+                    3
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "south": {
+                  "uv": [
+                    16,
+                    10
+                  ],
+                  "uv_size": [
+                    -4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "west": {
+                  "uv": [
+                    8,
+                    10
+                  ],
+                  "uv_size": [
+                    -8,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -8,
+                    4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    5
+                  ],
+                  "uv_size": [
+                    -8,
+                    4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                8.0,
+                0.01,
+                -8.0
+              ],
+              "size": [
+                0.0,
+                5.99,
+                8.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    16,
+                    10
+                  ],
+                  "uv_size": [
+                    -4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "east": {
+                  "uv": [
+                    10,
+                    13
+                  ],
+                  "uv_size": [
+                    -10,
+                    3
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "south": {
+                  "uv": [
+                    16,
+                    10
+                  ],
+                  "uv_size": [
+                    -4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "west": {
+                  "uv": [
+                    8,
+                    10
+                  ],
+                  "uv_size": [
+                    -8,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -8,
+                    4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    5
+                  ],
+                  "uv_size": [
+                    -8,
+                    4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.01,
+                0
+              ],
+              "size": [
+                0.0,
+                5.99,
+                8.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    12,
+                    10
+                  ],
+                  "uv_size": [
+                    4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    10
+                  ],
+                  "uv_size": [
+                    8,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "south": {
+                  "uv": [
+                    12,
+                    10
+                  ],
+                  "uv_size": [
+                    4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    13
+                  ],
+                  "uv_size": [
+                    10,
+                    3
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    4
+                  ],
+                  "uv_size": [
+                    -8,
+                    -4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    9
+                  ],
+                  "uv_size": [
+                    -8,
+                    -4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.01,
+                -8.0
+              ],
+              "size": [
+                0.0,
+                5.99,
+                8.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    12,
+                    10
+                  ],
+                  "uv_size": [
+                    4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    10
+                  ],
+                  "uv_size": [
+                    8,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "south": {
+                  "uv": [
+                    12,
+                    10
+                  ],
+                  "uv_size": [
+                    4,
+                    6
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    13
+                  ],
+                  "uv_size": [
+                    10,
+                    3
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    4
+                  ],
+                  "uv_size": [
+                    -8,
+                    -4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    9
+                  ],
+                  "uv_size": [
+                    -8,
+                    -4
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_sweetberry_ice_cream"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

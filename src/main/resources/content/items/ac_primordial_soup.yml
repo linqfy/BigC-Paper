@@ -1,0 +1,28 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_primordial_soup
+mechanic: alexs-caves
+material: MUSHROOM_STEW
+item-model: alexscaves:primordial_soup
+display:
+  translation-key: item.alexscaves.primordial_soup
+  fallback-name: "Sopa primordial"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  food:
+    nutrition: 6
+    saturation: 7.2
+    can-always-eat: false
+recipe:
+  key: ac_primordial_soup_recipe
+  result-amount: 1
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_cooked_trilocaris_tail
+    - bigcasares:ac_cooked_trilocaris_tail
+    - bigcasares:ac_tree_star
+    - BOWL
+appearance:
+  java-item-definition: java/assets/alexscaves/items/primordial_soup.json
+  bedrock-texture: bedrock/textures/alexscaves/item/primordial_soup.png

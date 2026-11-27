@@ -1,0 +1,22 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_uranium_rod
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:uranium_rod
+display:
+  translation-key: item.alexscaves.uranium_rod
+  fallback-name: "Vara de uranio"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_uranium_rod_recipe
+  result-amount: 1
+  shape: ["UIU", "UBU", "UIU"]
+  ingredients:
+    U: bigcasares:ac_uranium
+    B: BLAZE_ROD
+    I: IRON_INGOT
+appearance:
+  java-item-definition: java/assets/alexscaves/items/uranium_rod.json
+  bedrock-texture: bedrock/textures/alexscaves/block/uranium_rod.png

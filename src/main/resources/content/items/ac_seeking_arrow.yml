@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_seeking_arrow
+mechanic: alexs-caves
+material: ARROW
+item-model: alexscaves:seeking_arrow
+display:
+  translation-key: item.alexscaves.seeking_arrow
+  fallback-name: "Flecha rastreadora"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_seeking_arrow_recipe
+  result-amount: 8
+  shape: ["AAA", "ANA", "AAA"]
+  ingredients:
+    A: ARROW
+    N: bigcasares:ac_scarlet_neodymium_ingot
+appearance:
+  java-item-definition: java/assets/alexscaves/items/seeking_arrow.json
+  bedrock-texture: bedrock/textures/alexscaves/item/seeking_arrow.png

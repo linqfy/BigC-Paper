@@ -1,0 +1,184 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_bone_ribs_south_true",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -8.0,
+                0.005,
+                -8.0
+              ],
+              "size": [
+                16.0,
+                0.0,
+                16.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    0,
+                    16
+                  ],
+                  "uv_size": [
+                    0,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                },
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    16
+                  ],
+                  "uv_size": [
+                    16,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    16
+                  ],
+                  "uv_size": [
+                    -16,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                8.0
+              ],
+              "size": [
+                16.0,
+                16.0,
+                0.0
+              ],
+              "uv": {
+                "south": {
+                  "uv": [
+                    16,
+                    16
+                  ],
+                  "uv_size": [
+                    -16,
+                    -16
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                },
+                "north": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                },
+                "up": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                },
+                "down": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_bone_ribs"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

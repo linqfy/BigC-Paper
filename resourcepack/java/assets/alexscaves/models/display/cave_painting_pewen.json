@@ -1,0 +1,31 @@
+{
+  "textures": {
+    "painting": "alexscaves:block/cave_painting/pewen",
+    "particle": "alexscaves:block/cave_painting/pewen"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        15.95
+      ],
+      "to": [
+        16,
+        16,
+        15.95
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#painting"
+        }
+      }
+    }
+  ]
+}

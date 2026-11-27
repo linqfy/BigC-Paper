@@ -1,0 +1,22 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_radon_lamp_purple
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:radon_lamp_purple
+display:
+  translation-key: item.alexscaves.radon_lamp_purple
+  fallback-name: "Lámpara de radón morada"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_radon_lamp_purple_recipe
+  result-amount: 4
+  shape: ["DRD", "RGR", "DRD"]
+  ingredients:
+    R: bigcasares:ac_radon_bottle
+    G: GLOWSTONE
+    D: PURPLE_DYE
+appearance:
+  java-item-definition: java/assets/alexscaves/items/radon_lamp_purple.json
+  bedrock-texture: bedrock/textures/alexscaves/block/radon_lamp_purple.png

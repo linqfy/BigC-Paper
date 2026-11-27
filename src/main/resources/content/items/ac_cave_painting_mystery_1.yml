@@ -1,0 +1,15 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_cave_painting_mystery_1
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:cave_painting_mystery_1
+display:
+  translation-key: item.alexscaves.cave_painting_mystery_1
+  fallback-name: "Pintura rupestre"
+  lore:
+    - "§8Alex's Caves"
+    - "§7Misterio I"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/cave_painting_mystery_1.json
+  bedrock-texture: bedrock/textures/alexscaves/block/cave_painting/mystery_1.png

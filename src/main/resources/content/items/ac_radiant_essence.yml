@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_radiant_essence
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:radiant_essence
+display:
+  translation-key: item.alexscaves.radiant_essence
+  fallback-name: "Esencia radiante"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/radiant_essence.json
+  bedrock-texture: bedrock/textures/alexscaves/item/radiant_essence.png

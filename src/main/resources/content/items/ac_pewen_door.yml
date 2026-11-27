@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pewen_door
+mechanic: alexs-caves
+material: OAK_DOOR
+item-model: alexscaves:pewen_door
+display:
+  translation-key: item.alexscaves.pewen_door
+  fallback-name: "Puerta de pehuén"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_pewen_door_recipe
+  result-amount: 3
+  shape: ["##", "##", "##"]
+  ingredients:
+    "#": bigcasares:ac_pewen_planks
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pewen_door.json
+  bedrock-texture: bedrock/textures/alexscaves/block/pewen/pewen_planks.png

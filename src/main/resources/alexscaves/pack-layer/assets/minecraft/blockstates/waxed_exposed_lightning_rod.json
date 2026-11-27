@@ -1,0 +1,106 @@
+{
+  "variants": {
+    "facing=down,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 180
+    },
+    "facing=down,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 180
+    },
+    "facing=down,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on",
+      "x": 180
+    },
+    "facing=down,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/mussel_three",
+      "x": 90
+    },
+    "facing=east,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/mussel_four",
+      "x": 90
+    },
+    "facing=north,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90
+    },
+    "facing=north,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90
+    },
+    "facing=north,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on",
+      "x": 90
+    },
+    "facing=north,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/mussel_five",
+      "x": 90
+    },
+    "facing=south,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/mussel",
+      "x": 270
+    },
+    "facing=up,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod"
+    },
+    "facing=up,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod"
+    },
+    "facing=up,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on"
+    },
+    "facing=up,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/mussel_two",
+      "x": 270
+    },
+    "facing=west,powered=false,waterlogged=false": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,powered=false,waterlogged=true": {
+      "model": "minecraft:block/exposed_lightning_rod",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,powered=true,waterlogged=false": {
+      "model": "minecraft:block/lightning_rod_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,powered=true,waterlogged=true": {
+      "model": "alexscaves:block/mussel_three",
+      "x": 270
+    }
+  }
+}

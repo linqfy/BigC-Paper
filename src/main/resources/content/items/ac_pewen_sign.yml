@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pewen_sign
+mechanic: alexs-caves
+material: OAK_SIGN
+item-model: alexscaves:pewen_sign
+display:
+  translation-key: item.alexscaves.pewen_sign
+  fallback-name: "Cartel de pehuén"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 16
+recipe:
+  key: ac_pewen_sign_recipe
+  result-amount: 3
+  shape: ["###", "###", " X "]
+  ingredients:
+    "#": bigcasares:ac_pewen_planks
+    X: STICK
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pewen_sign.json
+  bedrock-texture: bedrock/textures/alexscaves/item/pewen_sign.png

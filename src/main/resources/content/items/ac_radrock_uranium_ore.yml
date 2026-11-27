@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_radrock_uranium_ore
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:radrock_uranium_ore
+display:
+  translation-key: item.alexscaves.radrock_uranium_ore
+  fallback-name: "Mena de uranio de radiaroca"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/radrock_uranium_ore.json
+  bedrock-texture: bedrock/textures/alexscaves/block/radrock_uranium_ore.png

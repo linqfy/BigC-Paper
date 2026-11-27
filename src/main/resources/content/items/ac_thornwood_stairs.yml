@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_thornwood_stairs
+mechanic: alexs-caves
+material: DARK_OAK_STAIRS
+item-model: alexscaves:thornwood_stairs
+display:
+  translation-key: item.alexscaves.thornwood_stairs
+  fallback-name: "Escaleras de pinchoárbol"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_thornwood_stairs_recipe
+  result-amount: 4
+  shape: ["#  ", "## ", "###"]
+  ingredients:
+    "#": bigcasares:ac_thornwood_planks
+appearance:
+  java-item-definition: java/assets/alexscaves/items/thornwood_stairs.json
+  bedrock-texture: bedrock/textures/alexscaves/block/thornwood/thornwood_planks.png

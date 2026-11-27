@@ -1,0 +1,1064 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_metal_scaffolding_default",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                6,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                2.0,
+                16.0,
+                2.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    14,
+                    0
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "east": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "south": {
+                  "uv": [
+                    14,
+                    0
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "west": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "up": {
+                  "uv": [
+                    8,
+                    16
+                  ],
+                  "uv_size": [
+                    2,
+                    -2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "down": {
+                  "uv": [
+                    10,
+                    14
+                  ],
+                  "uv_size": [
+                    2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                -8.0
+              ],
+              "size": [
+                2.0,
+                16.0,
+                2.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "east": {
+                  "uv": [
+                    14,
+                    0
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "south": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "west": {
+                  "uv": [
+                    14,
+                    0
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "up": {
+                  "uv": [
+                    10,
+                    16
+                  ],
+                  "uv_size": [
+                    -2,
+                    -2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    14
+                  ],
+                  "uv_size": [
+                    -2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                }
+              }
+            },
+            {
+              "origin": [
+                6,
+                0.0,
+                6
+              ],
+              "size": [
+                2.0,
+                16.0,
+                2.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "east": {
+                  "uv": [
+                    14,
+                    0
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "south": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "west": {
+                  "uv": [
+                    14,
+                    0
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "up": {
+                  "uv": [
+                    8,
+                    14
+                  ],
+                  "uv_size": [
+                    2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "down": {
+                  "uv": [
+                    10,
+                    16
+                  ],
+                  "uv_size": [
+                    2,
+                    -2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                6
+              ],
+              "size": [
+                2.0,
+                16.0,
+                2.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    14,
+                    0
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "east": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "south": {
+                  "uv": [
+                    14,
+                    0
+                  ],
+                  "uv_size": [
+                    -2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "west": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    2,
+                    16
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "up": {
+                  "uv": [
+                    10,
+                    14
+                  ],
+                  "uv_size": [
+                    -2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    16
+                  ],
+                  "uv_size": [
+                    -2,
+                    -2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                }
+              }
+            },
+            {
+              "origin": [
+                -6,
+                0.0,
+                7
+              ],
+              "size": [
+                12,
+                14.0,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -6,
+                0.0,
+                -7
+              ],
+              "size": [
+                12,
+                14.0,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "south": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -7,
+                0.0,
+                -6
+              ],
+              "size": [
+                0,
+                14.0,
+                12
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "west": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -6,
+                16.0,
+                -6
+              ],
+              "size": [
+                12,
+                0.0,
+                12
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_top"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_top"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    8,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_top"
+                },
+                "west": {
+                  "uv": [
+                    -32,
+                    0
+                  ],
+                  "uv_size": [
+                    32,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_top"
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    12
+                  ],
+                  "uv_size": [
+                    -12,
+                    -12
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_top"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    12
+                  ],
+                  "uv_size": [
+                    -12,
+                    -12
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_top"
+                }
+              }
+            },
+            {
+              "origin": [
+                7,
+                0.0,
+                -6
+              ],
+              "size": [
+                0,
+                14.0,
+                12
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "east": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    0
+                  ],
+                  "uv_size": [
+                    -12,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_side"
+                }
+              }
+            },
+            {
+              "origin": [
+                -6,
+                14,
+                -8.0
+              ],
+              "size": [
+                12,
+                2.0,
+                2.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    8
+                  ],
+                  "uv_size": [
+                    2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    2
+                  ],
+                  "uv_size": [
+                    12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "west": {
+                  "uv": [
+                    2,
+                    8
+                  ],
+                  "uv_size": [
+                    2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    6
+                  ],
+                  "uv_size": [
+                    -12,
+                    -2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    6
+                  ],
+                  "uv_size": [
+                    -12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                14,
+                -6
+              ],
+              "size": [
+                2.0,
+                2.0,
+                12
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    2,
+                    8
+                  ],
+                  "uv_size": [
+                    2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    8
+                  ],
+                  "uv_size": [
+                    2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    2
+                  ],
+                  "uv_size": [
+                    12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    6
+                  ],
+                  "uv_size": [
+                    -12,
+                    -2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    6
+                  ],
+                  "uv_size": [
+                    -12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                }
+              }
+            },
+            {
+              "origin": [
+                -6,
+                14,
+                6
+              ],
+              "size": [
+                12,
+                2.0,
+                2.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    2
+                  ],
+                  "uv_size": [
+                    12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "east": {
+                  "uv": [
+                    2,
+                    8
+                  ],
+                  "uv_size": [
+                    2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    8
+                  ],
+                  "uv_size": [
+                    2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    6
+                  ],
+                  "uv_size": [
+                    -12,
+                    -2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    6
+                  ],
+                  "uv_size": [
+                    -12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                }
+              }
+            },
+            {
+              "origin": [
+                6,
+                14,
+                -6
+              ],
+              "size": [
+                2.0,
+                2.0,
+                12
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0,
+                    8
+                  ],
+                  "uv_size": [
+                    2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    2
+                  ],
+                  "uv_size": [
+                    12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "south": {
+                  "uv": [
+                    2,
+                    8
+                  ],
+                  "uv_size": [
+                    2,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "up": {
+                  "uv": [
+                    12,
+                    6
+                  ],
+                  "uv_size": [
+                    -12,
+                    -2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                },
+                "down": {
+                  "uv": [
+                    12,
+                    6
+                  ],
+                  "uv_size": [
+                    -12,
+                    2
+                  ],
+                  "material_instance": "alexscaves_block_metal_scaffolding_poles"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

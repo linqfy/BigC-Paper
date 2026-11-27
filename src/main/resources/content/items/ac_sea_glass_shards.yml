@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_sea_glass_shards
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:sea_glass_shards
+display:
+  translation-key: item.alexscaves.sea_glass_shards
+  fallback-name: "Fragmentos de cristal abisal"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/sea_glass_shards.json
+  bedrock-texture: bedrock/textures/alexscaves/item/sea_glass_shards.png

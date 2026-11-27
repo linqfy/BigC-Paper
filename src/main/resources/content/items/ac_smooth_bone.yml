@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_smooth_bone
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:smooth_bone
+display:
+  translation-key: item.alexscaves.smooth_bone
+  fallback-name: "Bloque de huesos liso"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/smooth_bone.json
+  bedrock-texture: bedrock/textures/alexscaves/block/smooth_bone.png

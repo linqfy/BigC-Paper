@@ -82,36 +82,38 @@ def modrinthPlugins = [
     [project: "bettermodel", version: "QTU9HP83"],   // 3.5.0
     // Geyser: deja entrar a los jugadores de Bedrock.
     [project: "geyser", version: "sT6fWVgD"],        // 2.11.3-b1249 (26.2)
-    // packetevents: GeyserModelEngine no carga sin el.
-    [project: "packetevents", version: "m78nFxYg"],  // 2.14.0 (26.2)
 ]
 
 // dest es relativo a build/. plugin: true = va a plugins/ por runServer; si no, es una extension o pack de Geyser.
 def verifiedArtifacts = [
+    // packetevents: GeyserModelEngine no carga sin el; alexs-caves compila contra el mismo JAR (ver abajo).
+    packetEvents: [url: "https://github.com/retrooper/packetevents/releases/download/v2.14.0/packetevents-spigot-2.14.0.jar",
+                sha256: "060087c58ec268eae7dd0eb1f17ac3bea1eaadda1693414141ff64e506091bd7",
+                dest: "verified-plugins/packetevents-spigot-2.14.0.jar", plugin: true],
     // Floodgate: los de Bedrock entran sin cuenta de Java.
     floodgate: [url: "https://download.geysermc.org/v2/projects/floodgate/versions/2.2.5/builds/141/downloads/spigot",
                 sha256: "21570aff9ce17d6983928e8552777760e1ede5050026b04c686b0ae112e6fd7e",
                 dest: "verified-plugins/floodgate-spigot-2.2.5-b141.jar", plugin: true],
     // GeyserUtils (lado servidor) y GeyserModelEngine: modelos 3D para Bedrock.
-    geyserUtilsSpigot: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserUtils/releases/assets/528940887",
-                sha256: "b39677308d320c00be2a5bf8058296f39789b836cfb448d0c13437b2ecbdec43",
+    geyserUtilsSpigot: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserUtils/releases/assets/703180952",
+                sha256: "1de02334a7449929aa0577876ea2bba12eb5fb314048e9fbc21e4171b09c2542",
                 dest: "verified-plugins/geyserutils-spigot-1.0-SNAPSHOT.jar", plugin: true],
-    geyserModelEngine: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserModelEngine/releases/assets/641444897",
-                sha256: "6e777d569d7f7c2b8583ba21ba8ac7c451c265089bd34aefdb7f00c2fe8957a2",
+    geyserModelEngine: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserModelEngine/releases/assets/702501968",
+                sha256: "ce4295d05517c6bcdc1d5bc0c6e51b2daf4d07a45bc834e239c1d6019df035cc",
                 dest: "verified-plugins/GeyserModelEngine-1.0.9.jar", plugin: true],
     // Extensiones de Geyser (plugins/Geyser-Spigot/extensions) y el pack de GeyserDisplayEntity (packs/).
-    geyserModelEngineExtension: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserModelEngine/releases/assets/641444959",
-                sha256: "9b5e6c9b6e20f5f5aa7516cd32eb635f1a99d4458bd6327b828859cbb2aa4f18",
+    geyserModelEngineExtension: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserModelEngine/releases/assets/702502021",
+                sha256: "71671ee8c475f194f7caf13bc1cc4d3b4d10dc4fd9df042a31ee7b29fe7a7cb5",
                 dest: "run-server/plugins/Geyser-Spigot/extensions/GeyserModelEngineExtension-1.0.9.jar"],
-    geyserUtilsExtension: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserUtils/releases/assets/528940916",
-                sha256: "50120094bd46fefbb1672737540e3a66a483391e062625676805b4bb08e79ea9",
+    geyserUtilsExtension: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserUtils/releases/assets/703181035",
+                sha256: "8ed7b7dbece8341277652d4ee01706913e725cdf19b9664025bbb870299ec12a",
                 dest: "run-server/plugins/Geyser-Spigot/extensions/geyserutils-geyser-1.0-SNAPSHOT.jar"],
     // Opcional: meteoritos de WhatsApp y cara del bloque del secreto (item displays) para Bedrock.
-    geyserDisplayEntity: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserDisplayEntity/releases/assets/510239319",
-                sha256: "eb05806386dc9a614def3cb71b559d1f0d0f5b5b0e1fff51c063a3515832addf",
-                dest: "run-server/plugins/Geyser-Spigot/extensions/GeyserDisplayEntity-1.0.12.jar"],
-    geyserDisplayEntityPack: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserDisplayEntity/releases/assets/368620700",
-                sha256: "7b9b69dbbbc8d2a43e85393a2e1f77118412ad788e5a9298bb64fcc65cbea4fa",
+    geyserDisplayEntity: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserDisplayEntity/releases/assets/702886655",
+                sha256: "7e84cfba4b6241dd6fe78806543f5f975522465b5707e0db5654592f829ad59e",
+                dest: "run-server/plugins/Geyser-Spigot/extensions/GeyserDisplayEntity-1.0.15.jar"],
+    geyserDisplayEntityPack: [url: "https://api.github.com/repos/GeyserExtensionists/GeyserDisplayEntity/releases/assets/740132387",
+                sha256: "aa3882a429b1fcab34f5331f12338269b493bf13ba84eee7f4e5287eaa942a33",
                 dest: "run-server/plugins/Geyser-Spigot/packs/GeyserDisplayEntityPack.mcpack"],
 ]
 
@@ -186,6 +188,14 @@ def verifiedTasks = verifiedArtifacts.collectEntries { name, artifact ->
         sha256 = artifact.sha256
         destination = layout.buildDirectory.file(artifact.dest)
     }]
+}
+
+// packetevents (opcional, plugin.yml softdepend): solo para compilar la reescritura de bloques por paquetes de
+// alexs-caves (blocks.packet-remap). Se compila contra el mismo JAR verificado que runServer instala; sin el plugin
+// en el servidor la funcion queda inerte.
+dependencies {
+    compileOnly(files(verifiedTasks.packetEvents.flatMap { it.destination }))
+    testImplementation(files(verifiedTasks.packetEvents.flatMap { it.destination }))
 }
 
 tasks.register("downloadGeyserExtensions") {

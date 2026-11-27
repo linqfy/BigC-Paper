@@ -1,0 +1,19 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_gelatin_red
+mechanic: alexs-caves
+material: COOKIE
+item-model: alexscaves:gelatin_red
+display:
+  translation-key: item.alexscaves.gelatin_red
+  fallback-name: "Gelatina roja"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+components:
+  food:
+    nutrition: 3
+    saturation: 1.5
+    can-always-eat: false
+appearance:
+  java-item-definition: java/assets/alexscaves/items/gelatin_red.json
+  bedrock-texture: bedrock/textures/alexscaves/item/gelatin_red.png

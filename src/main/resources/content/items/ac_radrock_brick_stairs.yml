@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_radrock_brick_stairs
+mechanic: alexs-caves
+material: MOSSY_STONE_BRICK_STAIRS
+item-model: alexscaves:radrock_brick_stairs
+display:
+  translation-key: item.alexscaves.radrock_brick_stairs
+  fallback-name: "Escaleras de ladrillos de radiaroca"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_radrock_brick_stairs_recipe
+  result-amount: 4
+  shape: ["G  ", "GG ", "GGG"]
+  ingredients:
+    G: bigcasares:ac_radrock_bricks
+appearance:
+  java-item-definition: java/assets/alexscaves/items/radrock_brick_stairs.json
+  bedrock-texture: bedrock/textures/alexscaves/block/radrock_bricks.png

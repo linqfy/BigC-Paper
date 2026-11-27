@@ -1,0 +1,26 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_primitive_club
+mechanic: alexs-caves
+material: WOODEN_SWORD
+item-model: alexscaves:primitive_club
+display:
+  translation-key: item.alexscaves.primitive_club
+  fallback-name: "Cachiporra primitiva"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 120
+  combat:
+    attack-damage: 9.0
+    attack-speed: 0.25
+recipe:
+  key: ac_primitive_club_recipe
+  result-amount: 1
+  shape: ["  C", " C ", "B  "]
+  ingredients:
+    B: bigcasares:ac_heavy_bone
+    C: bigcasares:ac_cycad
+appearance:
+  java-item-definition: java/assets/alexscaves/items/primitive_club.json
+  bedrock-texture: bedrock/textures/alexscaves/item/primitive_club.png

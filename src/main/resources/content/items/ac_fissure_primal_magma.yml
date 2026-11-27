@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_fissure_primal_magma
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:fissure_primal_magma
+display:
+  translation-key: item.alexscaves.fissure_primal_magma
+  fallback-name: "Magma primigenio"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/fissure_primal_magma.json
+  bedrock-texture: bedrock/textures/alexscaves/block/primal_magma_active.png

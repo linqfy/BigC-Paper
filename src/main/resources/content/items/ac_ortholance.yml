@@ -1,0 +1,19 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_ortholance
+mechanic: alexs-caves
+material: IRON_SWORD
+item-model: alexscaves:ortholance
+display:
+  translation-key: item.alexscaves.ortholance
+  fallback-name: "Ortolanza"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 340
+  combat:
+    attack-damage: 6.0
+    attack-speed: 1.6
+appearance:
+  java-item-definition: java/assets/alexscaves/items/ortholance.json
+  bedrock-texture: bedrock/textures/alexscaves/item/ortholance.png

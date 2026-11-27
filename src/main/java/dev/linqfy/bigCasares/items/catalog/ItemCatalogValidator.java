@@ -1,5 +1,6 @@
 package dev.linqfy.bigCasares.items.catalog;
 
+import dev.linqfy.bigCasares.modules.alexscaves.AlexsCavesItemIds;
 import dev.linqfy.bigCasares.modules.resourcepack.JsonSyntaxValidator;
 
 import javax.imageio.ImageIO;
@@ -60,6 +61,9 @@ public final class ItemCatalogValidator {
         Set<String> recipeKeys = new HashSet<>();
         for (CustomItemDefinition definition : catalog.definitions().values()) {
             String expectedMechanic = EXPECTED_MECHANICS.get(definition.id());
+            if (expectedMechanic == null && AlexsCavesItemIds.contains(definition.id())) {
+                expectedMechanic = AlexsCavesItemIds.MECHANIC;
+            }
             if (expectedMechanic == null || !expectedMechanic.equals(definition.mechanic())) {
                 throw new IllegalArgumentException("unsupported item mechanic for " + definition.id());
             }

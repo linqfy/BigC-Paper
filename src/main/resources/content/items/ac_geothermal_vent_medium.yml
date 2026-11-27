@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_geothermal_vent_medium
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:geothermal_vent_medium
+display:
+  translation-key: item.alexscaves.geothermal_vent_medium
+  fallback-name: "Respiradero geotérmico mediano"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_geothermal_vent_medium_recipe
+  result-amount: 3
+  shape: ["G", "G"]
+  ingredients:
+    G: bigcasares:ac_geothermal_vent
+appearance:
+  java-item-definition: java/assets/alexscaves/items/geothermal_vent_medium.json
+  bedrock-texture: bedrock/textures/alexscaves/block/geothermal_vent_medium.png

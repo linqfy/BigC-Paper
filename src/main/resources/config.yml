@@ -72,6 +72,9 @@ modules:
     enabled: true
   elytra-failure:
     enabled: true
+  # Alex's Caves (recreación no oficial). Ajustes en alexs-caves.yml. Créditos: /alexscaves creditos
+  alexs-caves:
+    enabled: false
   auth-system:
     enabled: true
   humillacion:

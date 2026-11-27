@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_tough_hide
+mechanic: alexs-caves
+material: RABBIT_HIDE
+item-model: alexscaves:tough_hide
+display:
+  translation-key: item.alexscaves.tough_hide
+  fallback-name: "Cuero tenaz"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/tough_hide.json
+  bedrock-texture: bedrock/textures/alexscaves/item/tough_hide.png

@@ -1,0 +1,19 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_cooked_tripodfish
+mechanic: alexs-caves
+material: COOKED_COD
+item-model: alexscaves:cooked_tripodfish
+display:
+  translation-key: item.alexscaves.cooked_tripodfish
+  fallback-name: "Pez trípode cocinado"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+components:
+  food:
+    nutrition: 5
+    saturation: 3.4
+    can-always-eat: false
+appearance:
+  java-item-definition: java/assets/alexscaves/items/cooked_tripodfish.json
+  bedrock-texture: bedrock/textures/alexscaves/item/cooked_tripodfish.png

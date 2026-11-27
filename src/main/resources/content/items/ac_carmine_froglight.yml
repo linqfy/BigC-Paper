@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_carmine_froglight
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:carmine_froglight
+display:
+  translation-key: item.alexscaves.carmine_froglight
+  fallback-name: "Ranaluz carmín"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/carmine_froglight.json
+  bedrock-texture: bedrock/textures/alexscaves/block/carmine_froglight_side.png

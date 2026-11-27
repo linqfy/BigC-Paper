@@ -1,0 +1,19 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_trilocaris_tail
+mechanic: alexs-caves
+material: BEETROOT
+item-model: alexscaves:trilocaris_tail
+display:
+  translation-key: item.alexscaves.trilocaris_tail
+  fallback-name: "Cola de trilocárido cruda"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+components:
+  food:
+    nutrition: 2
+    saturation: 1.2
+    can-always-eat: false
+appearance:
+  java-item-definition: java/assets/alexscaves/items/trilocaris_tail.json
+  bedrock-texture: bedrock/textures/alexscaves/item/trilocaris_tail.png

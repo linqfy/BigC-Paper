@@ -1,0 +1,16 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_sea_staff
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:sea_staff
+display:
+  translation-key: item.alexscaves.sea_staff
+  fallback-name: "Bastón del mar"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 850
+appearance:
+  java-item-definition: java/assets/alexscaves/items/sea_staff.json
+  bedrock-texture: bedrock/textures/alexscaves/item/sea_staff.png

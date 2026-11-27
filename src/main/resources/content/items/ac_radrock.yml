@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_radrock
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:radrock
+display:
+  translation-key: item.alexscaves.radrock
+  fallback-name: "Radiaroca"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/radrock.json
+  bedrock-texture: bedrock/textures/alexscaves/block/radrock.png

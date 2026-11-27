@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_sulfur_bud_large
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:sulfur_bud_large
+display:
+  translation-key: item.alexscaves.sulfur_bud_large
+  fallback-name: "Brote de azufre grande"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/sulfur_bud_large.json
+  bedrock-texture: bedrock/textures/alexscaves/block/sulfur_bud_large.png

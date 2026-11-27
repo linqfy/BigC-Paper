@@ -1,0 +1,19 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_sea_pig
+mechanic: alexs-caves
+material: COOKIE
+item-model: alexscaves:sea_pig
+display:
+  translation-key: item.alexscaves.sea_pig
+  fallback-name: "Cerdo de mar"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+components:
+  food:
+    nutrition: 1
+    saturation: 0.4
+    can-always-eat: false
+appearance:
+  java-item-definition: java/assets/alexscaves/items/sea_pig.json
+  bedrock-texture: bedrock/textures/alexscaves/item/sea_pig.png

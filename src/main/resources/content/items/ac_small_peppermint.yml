@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_small_peppermint
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:small_peppermint
+display:
+  translation-key: item.alexscaves.small_peppermint
+  fallback-name: "Menta pequeña"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/small_peppermint.json
+  bedrock-texture: bedrock/textures/alexscaves/block/small_peppermint_front.png

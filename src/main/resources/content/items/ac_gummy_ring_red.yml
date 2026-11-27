@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_gummy_ring_red
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:gummy_ring_red
+display:
+  translation-key: item.alexscaves.gummy_ring_red
+  fallback-name: "Anillo de gominola roja"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/gummy_ring_red.json
+  bedrock-texture: bedrock/textures/alexscaves/block/gummy_ring_red_side.png

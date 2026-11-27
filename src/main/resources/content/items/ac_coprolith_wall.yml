@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_coprolith_wall
+mechanic: alexs-caves
+material: GRANITE_WALL
+item-model: alexscaves:coprolith_wall
+display:
+  translation-key: item.alexscaves.coprolith_wall
+  fallback-name: "Muro de coprolito"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_coprolith_wall_recipe
+  result-amount: 6
+  shape: ["AAA", "AAA"]
+  ingredients:
+    A: bigcasares:ac_coprolith
+appearance:
+  java-item-definition: java/assets/alexscaves/items/coprolith_wall.json
+  bedrock-texture: bedrock/textures/alexscaves/block/coprolith.png

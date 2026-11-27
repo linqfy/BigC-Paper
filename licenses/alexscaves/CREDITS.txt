@@ -1,0 +1,33 @@
+Créditos
+
+Alex's Caves
+
+El módulo alexs-caves de BigCasares es una recreación no oficial del mod
+de Minecraft Alex's Caves, hecha para un servidor privado entre amigos. No
+está afiliada ni respaldada por su autor.
+
+Mod: Alex's Caves 2.0.2 (Forge/NeoForge, Minecraft 1.20.1)
+Autores: Alexthe668 (AlexModGuy) y Noonyeyz
+Colaboradores: LudoCrypt, _Ninni, PrismaticPinky, RenRen, Gatetoh, arby698, PlummetStudios, HolidayRaptor
+Música de los discos: _Ninni ("Fusion", "Tasty")
+Modrinth: https://modrinth.com/mod/alexs-caves
+CurseForge: https://www.curseforge.com/minecraft/mc-mods/alexs-caves
+Código fuente: https://github.com/AlexModGuy/AlexsCaves
+
+Licencia
+
+- El mods.toml del mod declara la licencia GNU Lesser General Public
+  License (sin indicar versión). El mod no publica una licencia distinta para
+  sus assets, así que se asume que esa licencia cubre también las texturas,
+  modelos y sonidos. No está confirmado por el autor.
+- Se incluye el texto de la LGPL 3.0 y de la GPL 3.0 (a la que remite la LGPL)
+  en licenses/alexscaves/.
+- Los assets del mod que usan los packs de BigCasares (bajo el namespace
+  alexscaves) se redistribuyen adaptados: convertidos al formato de packs de
+  Minecraft 26.2, a Bedrock y a BetterModel. Las modificaciones están en este
+  repositorio.
+- El código del módulo es una reimplementación para Paper; los valores de juego
+  se tomaron del mod para respetar su gameplay.
+
+En el juego, /alexscaves creditos muestra estos créditos. La descripción de
+los packs Java y Bedrock los resume.

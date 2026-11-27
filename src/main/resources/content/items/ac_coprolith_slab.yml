@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_coprolith_slab
+mechanic: alexs-caves
+material: GRANITE_SLAB
+item-model: alexscaves:coprolith_slab
+display:
+  translation-key: item.alexscaves.coprolith_slab
+  fallback-name: "Losa de coprolito"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_coprolith_slab_recipe
+  result-amount: 6
+  shape: ["AAA"]
+  ingredients:
+    A: bigcasares:ac_coprolith
+appearance:
+  java-item-definition: java/assets/alexscaves/items/coprolith_slab.json
+  bedrock-texture: bedrock/textures/alexscaves/block/coprolith.png

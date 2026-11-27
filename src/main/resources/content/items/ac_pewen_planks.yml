@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pewen_planks
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:pewen_planks
+display:
+  translation-key: item.alexscaves.pewen_planks
+  fallback-name: "Tablones de pehuén"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_pewen_planks_recipe
+  result-amount: 4
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_pewen_log
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pewen_planks.json
+  bedrock-texture: bedrock/textures/alexscaves/block/pewen/pewen_planks.png

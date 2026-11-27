@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_curly_fern
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:curly_fern
+display:
+  translation-key: item.alexscaves.curly_fern
+  fallback-name: "Helecho ondulado"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/curly_fern.json
+  bedrock-texture: bedrock/textures/alexscaves/block/curly_fern_bottom.png

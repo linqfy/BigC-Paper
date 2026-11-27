@@ -1,0 +1,21 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_azure_magnet
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:azure_magnet
+display:
+  translation-key: item.alexscaves.azure_magnet
+  fallback-name: "Imán azur"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_azure_magnet_recipe
+  result-amount: 1
+  shape: ["I I", "N N", "NNN"]
+  ingredients:
+    N: bigcasares:ac_azure_neodymium_ingot
+    I: IRON_INGOT
+appearance:
+  java-item-definition: java/assets/alexscaves/items/azure_magnet.json
+  bedrock-texture: bedrock/textures/alexscaves/block/neodymium/azure_magnet_0.png

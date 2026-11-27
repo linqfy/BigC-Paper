@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_raw_scarlet_neodymium
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:raw_scarlet_neodymium
+display:
+  translation-key: item.alexscaves.raw_scarlet_neodymium
+  fallback-name: "Neodimio escarlata en bruto"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/raw_scarlet_neodymium.json
+  bedrock-texture: bedrock/textures/alexscaves/item/raw_scarlet_neodymium.png

@@ -44,6 +44,7 @@ import dev.linqfy.bigCasares.modules.missions.MissionModule;
 import dev.linqfy.bigCasares.modules.airdrop.AirdropModule;
 import dev.linqfy.bigCasares.modules.auth.AuthModule;
 import dev.linqfy.bigCasares.modules.acidrain.AcidRainModule;
+import dev.linqfy.bigCasares.modules.alexscaves.AlexsCavesModule;
 import dev.linqfy.bigCasares.modules.bloodmoon.BloodMoonModule;
 import dev.linqfy.bigCasares.modules.jeremy.JeremyModule;
 import dev.linqfy.bigCasares.modules.donpollos.DonPollosModule;
@@ -135,6 +136,7 @@ public final class BigCasares extends JavaPlugin {
     private DimensionModule dimensionModule;
     private CustomContentModule customContentModule;
     private SiftModule siftModule;
+    private AlexsCavesModule alexsCavesModule;
     private StaffEventsModule staffEventsModule;
     private EmojiAliasService emojiAliasService;
     private final VanishSessionRegistry vanishSessionRegistry = new VanishSessionRegistry();
@@ -257,6 +259,10 @@ public final class BigCasares extends JavaPlugin {
 
     public AcidRainModule getAcidRainModule() {
         return acidRainModule;
+    }
+
+    public AlexsCavesModule getAlexsCavesModule() {
+        return alexsCavesModule;
     }
 
     public BloodMoonModule getBloodMoonModule() {
@@ -471,6 +477,7 @@ public final class BigCasares extends JavaPlugin {
         );
         this.endEventModule = new EndEventModule(this);
         this.keepInventoryTotemModule = new KeepInventoryTotemModule(this);
+        this.alexsCavesModule = new AlexsCavesModule(this, javaModels);
         DuelsModule duelsModule = new DuelsModule(this);
         this.tombstoneModule.setDeathCaptureEligibility(playerId ->
             (endEventModule == null || !endEventModule.bypassTombstone(playerId))
@@ -544,6 +551,7 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(forexModule);
         moduleManager.register(auctionHouseModule);
         moduleManager.register(netheriteQuestModule);
+        moduleManager.register(alexsCavesModule);
         moduleManager.register(pveBossModule);
         moduleManager.register(geyserIntegrationModule);
         moduleManager.register(moderationModule);
@@ -754,6 +762,7 @@ public final class BigCasares extends JavaPlugin {
         staffEventsModule = null;
         contentItems = null;
         customBlocks = null;
+        alexsCavesModule = null;
         discordIntegrationModule = null;
         authModule = null;
         emojiAliasService = null;

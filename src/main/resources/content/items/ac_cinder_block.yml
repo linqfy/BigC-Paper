@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_cinder_block
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:cinder_block
+display:
+  translation-key: item.alexscaves.cinder_block
+  fallback-name: "Ladrillos de hormigón"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_cinder_block_recipe
+  result-amount: 2
+  shape: ["CC", "CC"]
+  ingredients:
+    C: bigcasares:ac_cinder_brick
+appearance:
+  java-item-definition: java/assets/alexscaves/items/cinder_block.json
+  bedrock-texture: bedrock/textures/alexscaves/block/cinder_block.png

@@ -1,0 +1,284 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.alexscaves_flytrap_default",
+        "texture_width": 16,
+        "texture_height": 16
+      },
+      "bones": [
+        {
+          "name": "block",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4.5,
+                13,
+                -1.5
+              ],
+              "size": [
+                9.0,
+                3.0,
+                3.0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    0.5,
+                    8
+                  ],
+                  "uv_size": [
+                    8.5,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_mouth_closed_0"
+                },
+                "east": {
+                  "uv": [
+                    7,
+                    6
+                  ],
+                  "uv_size": [
+                    3,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_mouth_closed_1"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    9,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_mouth_closed_0"
+                },
+                "west": {
+                  "uv": [
+                    7,
+                    6
+                  ],
+                  "uv_size": [
+                    3,
+                    8
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_mouth_closed_1"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -9,
+                    3
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_mouth_closed_1"
+                },
+                "down": {
+                  "uv": [
+                    7,
+                    6
+                  ],
+                  "uv_size": [
+                    9,
+                    -3
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_mouth_closed_1"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                0
+              ],
+              "size": [
+                16.0,
+                14.0,
+                0
+              ],
+              "pivot": [
+                0,
+                7,
+                0
+              ],
+              "rotation": [
+                0,
+                45,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                }
+              }
+            },
+            {
+              "origin": [
+                -8.0,
+                0.0,
+                0
+              ],
+              "size": [
+                16.0,
+                14.0,
+                0
+              ],
+              "pivot": [
+                0,
+                7,
+                0
+              ],
+              "rotation": [
+                0,
+                -45,
+                0
+              ],
+              "uv": {
+                "north": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                },
+                "east": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                },
+                "south": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    16,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                },
+                "west": {
+                  "uv": [
+                    0,
+                    0
+                  ],
+                  "uv_size": [
+                    0,
+                    14
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                },
+                "up": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                },
+                "down": {
+                  "uv": [
+                    16,
+                    0
+                  ],
+                  "uv_size": [
+                    -16,
+                    0
+                  ],
+                  "material_instance": "alexscaves_block_flytrap_stem"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

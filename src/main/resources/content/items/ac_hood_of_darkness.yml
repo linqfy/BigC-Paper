@@ -1,0 +1,29 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_hood_of_darkness
+mechanic: alexs-caves
+material: LEATHER_HELMET
+item-model: alexscaves:hood_of_darkness
+display:
+  translation-key: item.alexscaves.hood_of_darkness
+  fallback-name: "Capucha de la Oscuridad"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 165
+  armor:
+    slot: HEAD
+    defense: 1.0
+    toughness: 0.5
+    equipment-model: alexscaves:darkness
+    enchantability: 40
+recipe:
+  key: ac_hood_of_darkness_recipe
+  result-amount: 1
+  shape: ["DOD", "D D"]
+  ingredients:
+    D: bigcasares:ac_shadow_silk
+    O: bigcasares:ac_occult_gem
+appearance:
+  java-item-definition: java/assets/alexscaves/items/hood_of_darkness.json
+  bedrock-texture: bedrock/textures/alexscaves/item/hood_of_darkness.png

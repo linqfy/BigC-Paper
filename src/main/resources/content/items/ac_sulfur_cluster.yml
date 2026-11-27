@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_sulfur_cluster
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:sulfur_cluster
+display:
+  translation-key: item.alexscaves.sulfur_cluster
+  fallback-name: "Cúmulo de azufre"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/sulfur_cluster.json
+  bedrock-texture: bedrock/textures/alexscaves/block/sulfur_cluster.png

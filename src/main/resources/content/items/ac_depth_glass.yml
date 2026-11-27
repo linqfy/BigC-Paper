@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_depth_glass
+mechanic: alexs-caves
+material: TINTED_GLASS
+item-model: alexscaves:depth_glass
+display:
+  translation-key: item.alexscaves.depth_glass
+  fallback-name: "Cristal abisal"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/depth_glass.json
+  bedrock-texture: bedrock/textures/alexscaves/block/depth_glass.png

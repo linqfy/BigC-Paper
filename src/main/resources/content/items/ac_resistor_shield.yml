@@ -1,0 +1,24 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_resistor_shield
+mechanic: alexs-caves
+material: SHIELD
+item-model: alexscaves:resistor_shield
+display:
+  translation-key: item.alexscaves.resistor_shield
+  fallback-name: "Escudo de resistidor"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 1000
+recipe:
+  key: ac_resistor_shield_recipe
+  result-amount: 1
+  shape: ["SSS", " H ", "AAA"]
+  ingredients:
+    A: bigcasares:ac_azure_neodymium_ingot
+    H: bigcasares:ac_heart_of_iron
+    S: bigcasares:ac_scarlet_neodymium_ingot
+appearance:
+  java-item-definition: java/assets/alexscaves/items/resistor_shield.json
+  bedrock-texture: bedrock/textures/alexscaves/item/resistor_shield_icon.png

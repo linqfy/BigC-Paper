@@ -2,7 +2,7 @@
   "format_version": 2,
   "header": {
     "name": "BigCasares Frameworks V2",
-    "description": "Modelos, sonidos e interfaces Bedrock de BigCasares",
+    "description": "Modelos, sonidos e interfaces Bedrock de BigCasares. Incluye assets de Alex's Caves (AlexModGuy, LGPL): ver licenses/alexscaves/CREDITS.txt",
     "uuid": "7e1cc35b-7a9f-4af4-b930-93f936f9cb64",
     "version": [2, 0, 0],
     "min_engine_version": [1, 21, 0]

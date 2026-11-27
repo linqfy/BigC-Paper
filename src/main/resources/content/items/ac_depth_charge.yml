@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_depth_charge
+mechanic: alexs-caves
+material: SNOWBALL
+item-model: alexscaves:depth_charge
+display:
+  translation-key: item.alexscaves.depth_charge
+  fallback-name: "Carga profunda"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/depth_charge.json
+  bedrock-texture: bedrock/textures/alexscaves/item/depth_charge.png

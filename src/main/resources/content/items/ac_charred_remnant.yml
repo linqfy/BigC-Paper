@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_charred_remnant
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:charred_remnant
+display:
+  translation-key: item.alexscaves.charred_remnant
+  fallback-name: "Remanente carbonizado"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/charred_remnant.json
+  bedrock-texture: bedrock/textures/alexscaves/item/charred_remnant.png

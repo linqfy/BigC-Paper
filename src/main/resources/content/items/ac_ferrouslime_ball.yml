@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_ferrouslime_ball
+mechanic: alexs-caves
+material: SLIME_BALL
+item-model: alexscaves:ferrouslime_ball
+display:
+  translation-key: item.alexscaves.ferrouslime_ball
+  fallback-name: "Bola de ferroslime"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/ferrouslime_ball.json
+  bedrock-texture: bedrock/textures/alexscaves/item/ferrouslime_ball.png

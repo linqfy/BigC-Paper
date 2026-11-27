@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_block_of_pearl
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:block_of_pearl
+display:
+  translation-key: item.alexscaves.block_of_pearl
+  fallback-name: "Bloque de perlas"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_block_of_pearl_recipe
+  result-amount: 1
+  shape: ["NNN", "NNN", "NNN"]
+  ingredients:
+    N: bigcasares:ac_pearl
+appearance:
+  java-item-definition: java/assets/alexscaves/items/block_of_pearl.json
+  bedrock-texture: bedrock/textures/alexscaves/block/block_of_pearl.png

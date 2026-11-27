@@ -1,0 +1,4210 @@
+{
+  "format_version": 2,
+  "items": {
+    "minecraft:acacia_door": [
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbread_door",
+        "bedrock_identifier": "alexscaves:gingerbread_door",
+        "display_name": "Puerta de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbread_door"
+        }
+      }
+    ],
+    "minecraft:acacia_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbread_slab",
+        "bedrock_identifier": "alexscaves:gingerbread_slab",
+        "display_name": "Losa de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbread_slab"
+        }
+      }
+    ],
+    "minecraft:acacia_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbread_stairs",
+        "bedrock_identifier": "alexscaves:gingerbread_stairs",
+        "display_name": "Escaleras de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbread_stairs"
+        }
+      }
+    ],
+    "minecraft:andesite_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:cinder_block_wall",
+        "bedrock_identifier": "alexscaves:cinder_block_wall",
+        "display_name": "Muro de ladrillos de hormigón",
+        "bedrock_options": {
+          "icon": "alexscaves_cinder_block_wall"
+        }
+      }
+    ],
+    "minecraft:apple": [
+      {
+        "type": "definition",
+        "model": "alexscaves:caramel_apple",
+        "bedrock_identifier": "alexscaves:caramel_apple",
+        "display_name": "Manzana acaramelada",
+        "bedrock_options": {
+          "icon": "alexscaves_caramel_apple"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:darkened_apple",
+        "bedrock_identifier": "alexscaves:darkened_apple",
+        "display_name": "Manzana oscurecida",
+        "bedrock_options": {
+          "icon": "alexscaves_darkened_apple"
+        }
+      }
+    ],
+    "minecraft:arrow": [
+      {
+        "type": "definition",
+        "model": "alexscaves:seeking_arrow",
+        "bedrock_identifier": "alexscaves:seeking_arrow",
+        "display_name": "Flecha rastreadora",
+        "bedrock_options": {
+          "icon": "alexscaves_seeking_arrow"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:burrowing_arrow",
+        "bedrock_identifier": "alexscaves:burrowing_arrow",
+        "display_name": "Flecha agujereadora",
+        "bedrock_options": {
+          "icon": "alexscaves_burrowing_arrow"
+        }
+      }
+    ],
+    "minecraft:barrel": [
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbarrel",
+        "bedrock_identifier": "alexscaves:gingerbarrel",
+        "display_name": "Barril de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbarrel"
+        }
+      }
+    ],
+    "minecraft:beetroot": [
+      {
+        "type": "definition",
+        "model": "alexscaves:dinosaur_chop",
+        "bedrock_identifier": "alexscaves:dinosaur_chop",
+        "display_name": "Chuleta de dinosaurio",
+        "bedrock_options": {
+          "icon": "alexscaves_dinosaur_chop"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:trilocaris_tail",
+        "bedrock_identifier": "alexscaves:trilocaris_tail",
+        "display_name": "Cola de trilocárido cruda",
+        "bedrock_options": {
+          "icon": "alexscaves_trilocaris_tail"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:lanternfish",
+        "bedrock_identifier": "alexscaves:lanternfish",
+        "display_name": "Pez linterna",
+        "bedrock_options": {
+          "icon": "alexscaves_lanternfish"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:tripodfish",
+        "bedrock_identifier": "alexscaves:tripodfish",
+        "display_name": "Pez trípode",
+        "bedrock_options": {
+          "icon": "alexscaves_tripodfish"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:vesper_wing",
+        "bedrock_identifier": "alexscaves:vesper_wing",
+        "display_name": "Ala de visperador",
+        "bedrock_options": {
+          "icon": "alexscaves_vesper_wing"
+        }
+      }
+    ],
+    "minecraft:birch_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:wafer_cookie_slab",
+        "bedrock_identifier": "alexscaves:wafer_cookie_slab",
+        "display_name": "Losa de oblea",
+        "bedrock_options": {
+          "icon": "alexscaves_wafer_cookie_slab"
+        }
+      }
+    ],
+    "minecraft:birch_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:wafer_cookie_stairs",
+        "bedrock_identifier": "alexscaves:wafer_cookie_stairs",
+        "display_name": "Escaleras de oblea",
+        "bedrock_options": {
+          "icon": "alexscaves_wafer_cookie_stairs"
+        }
+      }
+    ],
+    "minecraft:bone": [
+      {
+        "type": "definition",
+        "model": "alexscaves:heavy_bone",
+        "bedrock_identifier": "alexscaves:heavy_bone",
+        "display_name": "Hueso pesado",
+        "bedrock_options": {
+          "icon": "alexscaves_heavy_bone"
+        }
+      }
+    ],
+    "minecraft:bow": [
+      {
+        "type": "definition",
+        "model": "alexscaves:dreadbow",
+        "bedrock_identifier": "alexscaves:dreadbow",
+        "display_name": "Arco horripilante",
+        "bedrock_options": {
+          "icon": "alexscaves_dreadbow"
+        }
+      }
+    ],
+    "minecraft:brick_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:frosted_gingerbread_brick_slab",
+        "bedrock_identifier": "alexscaves:frosted_gingerbread_brick_slab",
+        "display_name": "Losa de ladrillos de pan de jengibre congelado",
+        "bedrock_options": {
+          "icon": "alexscaves_frosted_gingerbread_brick_slab"
+        }
+      }
+    ],
+    "minecraft:brick_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:frosted_gingerbread_brick_stairs",
+        "bedrock_identifier": "alexscaves:frosted_gingerbread_brick_stairs",
+        "display_name": "Escaleras de ladrillos de pan de jengibre congelado",
+        "bedrock_options": {
+          "icon": "alexscaves_frosted_gingerbread_brick_stairs"
+        }
+      }
+    ],
+    "minecraft:brick_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:frosted_gingerbread_brick_wall",
+        "bedrock_identifier": "alexscaves:frosted_gingerbread_brick_wall",
+        "display_name": "Muro de ladrillos de pan de jengibre congelado",
+        "bedrock_options": {
+          "icon": "alexscaves_frosted_gingerbread_brick_wall"
+        }
+      }
+    ],
+    "minecraft:cobbled_deepslate_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssmarine_slab",
+        "bedrock_identifier": "alexscaves:abyssmarine_slab",
+        "display_name": "Losa de abismarina",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssmarine_slab"
+        }
+      }
+    ],
+    "minecraft:cobbled_deepslate_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssmarine_stairs",
+        "bedrock_identifier": "alexscaves:abyssmarine_stairs",
+        "display_name": "Escaleras de abismarina",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssmarine_stairs"
+        }
+      }
+    ],
+    "minecraft:cobbled_deepslate_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssmarine_wall",
+        "bedrock_identifier": "alexscaves:abyssmarine_wall",
+        "display_name": "Muro de abismarina",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssmarine_wall"
+        }
+      }
+    ],
+    "minecraft:cooked_chicken": [
+      {
+        "type": "definition",
+        "model": "alexscaves:dinosaur_nugget",
+        "bedrock_identifier": "alexscaves:dinosaur_nugget",
+        "display_name": "Nugget de dinosaurio",
+        "bedrock_options": {
+          "icon": "alexscaves_dinosaur_nugget"
+        }
+      }
+    ],
+    "minecraft:cooked_cod": [
+      {
+        "type": "definition",
+        "model": "alexscaves:cooked_trilocaris_tail",
+        "bedrock_identifier": "alexscaves:cooked_trilocaris_tail",
+        "display_name": "Cola de trilocárido cocinada",
+        "bedrock_options": {
+          "icon": "alexscaves_cooked_trilocaris_tail"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cooked_lanternfish",
+        "bedrock_identifier": "alexscaves:cooked_lanternfish",
+        "display_name": "Pez linterna cocinado",
+        "bedrock_options": {
+          "icon": "alexscaves_cooked_lanternfish"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cooked_tripodfish",
+        "bedrock_identifier": "alexscaves:cooked_tripodfish",
+        "display_name": "Pez trípode cocinado",
+        "bedrock_options": {
+          "icon": "alexscaves_cooked_tripodfish"
+        }
+      }
+    ],
+    "minecraft:cooked_porkchop": [
+      {
+        "type": "definition",
+        "model": "alexscaves:cooked_dinosaur_chop",
+        "bedrock_identifier": "alexscaves:cooked_dinosaur_chop",
+        "display_name": "Chuleta de dinosaurio cocinada",
+        "bedrock_options": {
+          "icon": "alexscaves_cooked_dinosaur_chop"
+        }
+      }
+    ],
+    "minecraft:cookie": [
+      {
+        "type": "definition",
+        "model": "alexscaves:candy_cane",
+        "bedrock_identifier": "alexscaves:candy_cane",
+        "display_name": "Bastón de caramelo",
+        "bedrock_options": {
+          "icon": "alexscaves_candy_cane"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sharpened_candy_cane",
+        "bedrock_identifier": "alexscaves:sharpened_candy_cane",
+        "display_name": "Bastón de caramelo afilado",
+        "bedrock_options": {
+          "icon": "alexscaves_sharpened_candy_cane"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gumball_pile",
+        "bedrock_identifier": "alexscaves:gumball_pile",
+        "display_name": "Pila de chicles",
+        "bedrock_options": {
+          "icon": "alexscaves_gumball_pile"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:caramel",
+        "bedrock_identifier": "alexscaves:caramel",
+        "display_name": "Caramelo",
+        "bedrock_options": {
+          "icon": "alexscaves_caramel"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sweetish_fish_red",
+        "bedrock_identifier": "alexscaves:sweetish_fish_red",
+        "display_name": "Pez de gominola rojo",
+        "bedrock_options": {
+          "icon": "alexscaves_sweetish_fish_red"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gelatin_red",
+        "bedrock_identifier": "alexscaves:gelatin_red",
+        "display_name": "Gelatina roja",
+        "bedrock_options": {
+          "icon": "alexscaves_gelatin_red"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sweet_puff",
+        "bedrock_identifier": "alexscaves:sweet_puff",
+        "display_name": "Buñuelo dulce",
+        "bedrock_options": {
+          "icon": "alexscaves_sweet_puff"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbread_crumbs",
+        "bedrock_identifier": "alexscaves:gingerbread_crumbs",
+        "display_name": "Migas de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbread_crumbs"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sea_pig",
+        "bedrock_identifier": "alexscaves:sea_pig",
+        "display_name": "Cerdo de mar",
+        "bedrock_options": {
+          "icon": "alexscaves_sea_pig"
+        }
+      }
+    ],
+    "minecraft:dark_oak_button": [
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_button",
+        "bedrock_identifier": "alexscaves:thornwood_button",
+        "display_name": "Botón de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_button"
+        }
+      }
+    ],
+    "minecraft:dark_oak_door": [
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_door",
+        "bedrock_identifier": "alexscaves:thornwood_door",
+        "display_name": "Puerta de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_door"
+        }
+      }
+    ],
+    "minecraft:dark_oak_fence": [
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_fence",
+        "bedrock_identifier": "alexscaves:thornwood_fence",
+        "display_name": "Valla de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_fence"
+        }
+      }
+    ],
+    "minecraft:dark_oak_fence_gate": [
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_fence_gate",
+        "bedrock_identifier": "alexscaves:thornwood_fence_gate",
+        "display_name": "Puerta de valla de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_fence_gate"
+        }
+      }
+    ],
+    "minecraft:dark_oak_hanging_sign": [
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_hanging_sign",
+        "bedrock_identifier": "alexscaves:thornwood_hanging_sign",
+        "display_name": "Cartel colgante de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_hanging_sign"
+        }
+      }
+    ],
+    "minecraft:dark_oak_pressure_plate": [
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_pressure_plate",
+        "bedrock_identifier": "alexscaves:thornwood_pressure_plate",
+        "display_name": "Placa de presión de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_pressure_plate"
+        }
+      }
+    ],
+    "minecraft:dark_oak_sign": [
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_sign",
+        "bedrock_identifier": "alexscaves:thornwood_sign",
+        "display_name": "Cartel de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_sign"
+        }
+      }
+    ],
+    "minecraft:dark_oak_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_slab",
+        "bedrock_identifier": "alexscaves:thornwood_slab",
+        "display_name": "Losa de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_slab"
+        }
+      }
+    ],
+    "minecraft:dark_oak_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_stairs",
+        "bedrock_identifier": "alexscaves:thornwood_stairs",
+        "display_name": "Escaleras de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_stairs"
+        }
+      }
+    ],
+    "minecraft:dark_oak_trapdoor": [
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_trapdoor",
+        "bedrock_identifier": "alexscaves:thornwood_trapdoor",
+        "display_name": "Trampilla de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_trapdoor"
+        }
+      }
+    ],
+    "minecraft:deepslate_brick_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:galena_brick_slab",
+        "bedrock_identifier": "alexscaves:galena_brick_slab",
+        "display_name": "Losa de ladrillos de galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena_brick_slab"
+        }
+      }
+    ],
+    "minecraft:deepslate_brick_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:galena_brick_stairs",
+        "bedrock_identifier": "alexscaves:galena_brick_stairs",
+        "display_name": "Escaleras de ladrillos de galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena_brick_stairs"
+        }
+      }
+    ],
+    "minecraft:deepslate_brick_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:galena_brick_wall",
+        "bedrock_identifier": "alexscaves:galena_brick_wall",
+        "display_name": "Muro de ladrillos de galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena_brick_wall"
+        }
+      }
+    ],
+    "minecraft:deepslate_tile_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssmarine_brick_slab",
+        "bedrock_identifier": "alexscaves:abyssmarine_brick_slab",
+        "display_name": "Losa de ladrillos de abismarina",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssmarine_brick_slab"
+        }
+      }
+    ],
+    "minecraft:deepslate_tile_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssmarine_brick_stairs",
+        "bedrock_identifier": "alexscaves:abyssmarine_brick_stairs",
+        "display_name": "Escaleras de ladrillos de abismarina",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssmarine_brick_stairs"
+        }
+      }
+    ],
+    "minecraft:deepslate_tile_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssmarine_brick_wall",
+        "bedrock_identifier": "alexscaves:abyssmarine_brick_wall",
+        "display_name": "Muro de ladrillos de abismarina",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssmarine_brick_wall"
+        }
+      }
+    ],
+    "minecraft:diamond_sword": [
+      {
+        "type": "definition",
+        "model": "alexscaves:desolate_dagger",
+        "bedrock_identifier": "alexscaves:desolate_dagger",
+        "display_name": "Daga desolada",
+        "bedrock_options": {
+          "icon": "alexscaves_desolate_dagger"
+        }
+      }
+    ],
+    "minecraft:diorite_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_bone_wall",
+        "bedrock_identifier": "alexscaves:smooth_bone_wall",
+        "display_name": "Muro de huesos liso",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_bone_wall"
+        }
+      }
+    ],
+    "minecraft:dried_kelp": [
+      {
+        "type": "definition",
+        "model": "alexscaves:turron",
+        "bedrock_identifier": "alexscaves:turron",
+        "display_name": "Turrón",
+        "bedrock_options": {
+          "icon": "alexscaves_turron"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:pine_nuts",
+        "bedrock_identifier": "alexscaves:pine_nuts",
+        "display_name": "Piñones",
+        "bedrock_options": {
+          "icon": "alexscaves_pine_nuts"
+        }
+      }
+    ],
+    "minecraft:granite_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbread_brick_slab",
+        "bedrock_identifier": "alexscaves:gingerbread_brick_slab",
+        "display_name": "Losa de ladrillos de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbread_brick_slab"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:coprolith_slab",
+        "bedrock_identifier": "alexscaves:coprolith_slab",
+        "display_name": "Losa de coprolito",
+        "bedrock_options": {
+          "icon": "alexscaves_coprolith_slab"
+        }
+      }
+    ],
+    "minecraft:granite_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbread_brick_stairs",
+        "bedrock_identifier": "alexscaves:gingerbread_brick_stairs",
+        "display_name": "Escaleras de ladrillos de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbread_brick_stairs"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:coprolith_stairs",
+        "bedrock_identifier": "alexscaves:coprolith_stairs",
+        "display_name": "Piedras de coprolito",
+        "bedrock_options": {
+          "icon": "alexscaves_coprolith_stairs"
+        }
+      }
+    ],
+    "minecraft:granite_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbread_brick_wall",
+        "bedrock_identifier": "alexscaves:gingerbread_brick_wall",
+        "display_name": "Muro de ladrillos de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbread_brick_wall"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:coprolith_wall",
+        "bedrock_identifier": "alexscaves:coprolith_wall",
+        "display_name": "Muro de coprolito",
+        "bedrock_options": {
+          "icon": "alexscaves_coprolith_wall"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_coprolith_wall",
+        "bedrock_identifier": "alexscaves:smooth_coprolith_wall",
+        "display_name": "Muro de coprolito liso",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_coprolith_wall"
+        }
+      }
+    ],
+    "minecraft:iron_nugget": [
+      {
+        "type": "definition",
+        "model": "alexscaves:scarlet_neodymium_ingot",
+        "bedrock_identifier": "alexscaves:scarlet_neodymium_ingot",
+        "display_name": "Lingote de neodimio escarlata",
+        "bedrock_options": {
+          "icon": "alexscaves_scarlet_neodymium_ingot"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:azure_neodymium_ingot",
+        "bedrock_identifier": "alexscaves:azure_neodymium_ingot",
+        "display_name": "Lingote de neodimio azul",
+        "bedrock_options": {
+          "icon": "alexscaves_azure_neodymium_ingot"
+        }
+      }
+    ],
+    "minecraft:iron_sword": [
+      {
+        "type": "definition",
+        "model": "alexscaves:ortholance",
+        "bedrock_identifier": "alexscaves:ortholance",
+        "display_name": "Ortolanza",
+        "bedrock_options": {
+          "icon": "alexscaves_ortholance"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:totem_of_possession",
+        "bedrock_identifier": "alexscaves:totem_of_possession",
+        "display_name": "Totem de posesión",
+        "bedrock_options": {
+          "icon": "alexscaves_totem_of_possession"
+        }
+      }
+    ],
+    "minecraft:jungle_door": [
+      {
+        "type": "definition",
+        "model": "alexscaves:frosted_gingerbread_door",
+        "bedrock_identifier": "alexscaves:frosted_gingerbread_door",
+        "display_name": "Puerta de pan de jengibre congelado",
+        "bedrock_options": {
+          "icon": "alexscaves_frosted_gingerbread_door"
+        }
+      }
+    ],
+    "minecraft:jungle_leaves": [
+      {
+        "type": "definition",
+        "model": "alexscaves:ancient_leaves",
+        "bedrock_identifier": "alexscaves:ancient_leaves",
+        "display_name": "Hojas antiguas",
+        "bedrock_options": {
+          "icon": "alexscaves_ancient_leaves"
+        }
+      }
+    ],
+    "minecraft:jungle_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:frosted_gingerbread_slab",
+        "bedrock_identifier": "alexscaves:frosted_gingerbread_slab",
+        "display_name": "Losa de pan de jengibre congelado",
+        "bedrock_options": {
+          "icon": "alexscaves_frosted_gingerbread_slab"
+        }
+      }
+    ],
+    "minecraft:jungle_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:frosted_gingerbread_stairs",
+        "bedrock_identifier": "alexscaves:frosted_gingerbread_stairs",
+        "display_name": "Escaleras de pan de jengibre congelado",
+        "bedrock_options": {
+          "icon": "alexscaves_frosted_gingerbread_stairs"
+        }
+      }
+    ],
+    "minecraft:leather_boots": [
+      {
+        "type": "definition",
+        "model": "alexscaves:hazmat_boots",
+        "bedrock_identifier": "alexscaves:hazmat_boots",
+        "display_name": "Botas MP",
+        "bedrock_options": {
+          "icon": "alexscaves_hazmat_boots"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:diving_boots",
+        "bedrock_identifier": "alexscaves:diving_boots",
+        "display_name": "Botas de buzo",
+        "bedrock_options": {
+          "icon": "alexscaves_diving_boots"
+        }
+      }
+    ],
+    "minecraft:leather_chestplate": [
+      {
+        "type": "definition",
+        "model": "alexscaves:hazmat_chestplate",
+        "bedrock_identifier": "alexscaves:hazmat_chestplate",
+        "display_name": "Peto MP",
+        "bedrock_options": {
+          "icon": "alexscaves_hazmat_chestplate"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:primordial_tunic",
+        "bedrock_identifier": "alexscaves:primordial_tunic",
+        "display_name": "Tunica primordial",
+        "bedrock_options": {
+          "icon": "alexscaves_primordial_tunic"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:diving_chestplate",
+        "bedrock_identifier": "alexscaves:diving_chestplate",
+        "display_name": "Peto de buzo",
+        "bedrock_options": {
+          "icon": "alexscaves_diving_chestplate"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cloak_of_darkness",
+        "bedrock_identifier": "alexscaves:cloak_of_darkness",
+        "display_name": "Caperuza de la Oscuridad",
+        "bedrock_options": {
+          "icon": "alexscaves_cloak_of_darkness"
+        }
+      }
+    ],
+    "minecraft:leather_helmet": [
+      {
+        "type": "definition",
+        "model": "alexscaves:hazmat_mask",
+        "bedrock_identifier": "alexscaves:hazmat_mask",
+        "display_name": "Máscara MP",
+        "bedrock_options": {
+          "icon": "alexscaves_hazmat_mask"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:primordial_helmet",
+        "bedrock_identifier": "alexscaves:primordial_helmet",
+        "display_name": "Casco primordial",
+        "bedrock_options": {
+          "icon": "alexscaves_primordial_helmet"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:diving_helmet",
+        "bedrock_identifier": "alexscaves:diving_helmet",
+        "display_name": "Casco de buzo",
+        "bedrock_options": {
+          "icon": "alexscaves_diving_helmet"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:hood_of_darkness",
+        "bedrock_identifier": "alexscaves:hood_of_darkness",
+        "display_name": "Capucha de la Oscuridad",
+        "bedrock_options": {
+          "icon": "alexscaves_hood_of_darkness"
+        }
+      }
+    ],
+    "minecraft:leather_leggings": [
+      {
+        "type": "definition",
+        "model": "alexscaves:hazmat_leggings",
+        "bedrock_identifier": "alexscaves:hazmat_leggings",
+        "display_name": "Grebas MP",
+        "bedrock_options": {
+          "icon": "alexscaves_hazmat_leggings"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:primordial_pants",
+        "bedrock_identifier": "alexscaves:primordial_pants",
+        "display_name": "Pantalones primordiales",
+        "bedrock_options": {
+          "icon": "alexscaves_primordial_pants"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:diving_leggings",
+        "bedrock_identifier": "alexscaves:diving_leggings",
+        "display_name": "Grebas de buzo",
+        "bedrock_options": {
+          "icon": "alexscaves_diving_leggings"
+        }
+      }
+    ],
+    "minecraft:mossy_cobblestone_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:radrock_slab",
+        "bedrock_identifier": "alexscaves:radrock_slab",
+        "display_name": "Losa de radiaroca",
+        "bedrock_options": {
+          "icon": "alexscaves_radrock_slab"
+        }
+      }
+    ],
+    "minecraft:mossy_cobblestone_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:radrock_stairs",
+        "bedrock_identifier": "alexscaves:radrock_stairs",
+        "display_name": "Escaleras de radiaroca",
+        "bedrock_options": {
+          "icon": "alexscaves_radrock_stairs"
+        }
+      }
+    ],
+    "minecraft:mossy_cobblestone_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:radrock_wall",
+        "bedrock_identifier": "alexscaves:radrock_wall",
+        "display_name": "Muro de radiaroca",
+        "bedrock_options": {
+          "icon": "alexscaves_radrock_wall"
+        }
+      }
+    ],
+    "minecraft:mossy_stone_brick_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:radrock_brick_slab",
+        "bedrock_identifier": "alexscaves:radrock_brick_slab",
+        "display_name": "Losa de ladrillos de radiaroca",
+        "bedrock_options": {
+          "icon": "alexscaves_radrock_brick_slab"
+        }
+      }
+    ],
+    "minecraft:mossy_stone_brick_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:radrock_brick_stairs",
+        "bedrock_identifier": "alexscaves:radrock_brick_stairs",
+        "display_name": "Escaleras de ladrillos de radiaroca",
+        "bedrock_options": {
+          "icon": "alexscaves_radrock_brick_stairs"
+        }
+      }
+    ],
+    "minecraft:mossy_stone_brick_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:radrock_brick_wall",
+        "bedrock_identifier": "alexscaves:radrock_brick_wall",
+        "display_name": "Muro de ladrillos de radiaroca",
+        "bedrock_options": {
+          "icon": "alexscaves_radrock_brick_wall"
+        }
+      }
+    ],
+    "minecraft:mud_brick_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone_brick_slab",
+        "bedrock_identifier": "alexscaves:guanostone_brick_slab",
+        "display_name": "Losa de ladrillos de guanopiedra",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone_brick_slab"
+        }
+      }
+    ],
+    "minecraft:mud_brick_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone_brick_stairs",
+        "bedrock_identifier": "alexscaves:guanostone_brick_stairs",
+        "display_name": "Escaleras de ladrillos de guanopiedra",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone_brick_stairs"
+        }
+      }
+    ],
+    "minecraft:mud_brick_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:frosted_gingerbread_wall",
+        "bedrock_identifier": "alexscaves:frosted_gingerbread_wall",
+        "display_name": "Muro de pan de jengibre congelado",
+        "bedrock_options": {
+          "icon": "alexscaves_frosted_gingerbread_wall"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone_brick_wall",
+        "bedrock_identifier": "alexscaves:guanostone_brick_wall",
+        "display_name": "Muro de ladrillos de guanopiedra",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone_brick_wall"
+        }
+      }
+    ],
+    "minecraft:mushroom_stew": [
+      {
+        "type": "definition",
+        "model": "alexscaves:serene_salad",
+        "bedrock_identifier": "alexscaves:serene_salad",
+        "display_name": "Ensalada serena",
+        "bedrock_options": {
+          "icon": "alexscaves_serene_salad"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:seething_stew",
+        "bedrock_identifier": "alexscaves:seething_stew",
+        "display_name": "Estofado encolerizante",
+        "bedrock_options": {
+          "icon": "alexscaves_seething_stew"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:primordial_soup",
+        "bedrock_identifier": "alexscaves:primordial_soup",
+        "display_name": "Sopa primordial",
+        "bedrock_options": {
+          "icon": "alexscaves_primordial_soup"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:vesper_stew",
+        "bedrock_identifier": "alexscaves:vesper_stew",
+        "display_name": "Estofado de visperador",
+        "bedrock_options": {
+          "icon": "alexscaves_vesper_stew"
+        }
+      }
+    ],
+    "minecraft:note_block": [
+      {
+        "type": "definition",
+        "model": "alexscaves:galena",
+        "bedrock_identifier": "alexscaves:galena",
+        "display_name": "Galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:packed_galena",
+        "bedrock_identifier": "alexscaves:packed_galena",
+        "display_name": "Galena comprimida",
+        "bedrock_options": {
+          "icon": "alexscaves_packed_galena"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:galena_bricks",
+        "bedrock_identifier": "alexscaves:galena_bricks",
+        "display_name": "Ladrillos de galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena_bricks"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:galena_iron_ore",
+        "bedrock_identifier": "alexscaves:galena_iron_ore",
+        "display_name": "Mena de hierro de galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena_iron_ore"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:galena_pillar",
+        "bedrock_identifier": "alexscaves:galena_pillar",
+        "display_name": "Pilar de galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena_pillar"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:energized_galena_neutral",
+        "bedrock_identifier": "alexscaves:energized_galena_neutral",
+        "display_name": "Galena energizada",
+        "bedrock_options": {
+          "icon": "alexscaves_energized_galena_neutral"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:energized_galena_scarlet",
+        "bedrock_identifier": "alexscaves:energized_galena_scarlet",
+        "display_name": "Galena energizada escarlata",
+        "bedrock_options": {
+          "icon": "alexscaves_energized_galena_scarlet"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:energized_galena_azure",
+        "bedrock_identifier": "alexscaves:energized_galena_azure",
+        "display_name": "Galena energizada azur",
+        "bedrock_options": {
+          "icon": "alexscaves_energized_galena_azure"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:scarlet_neodymium_node",
+        "bedrock_identifier": "alexscaves:scarlet_neodymium_node",
+        "display_name": "Nodo de neodimio escarlata",
+        "bedrock_options": {
+          "icon": "alexscaves_scarlet_neodymium_node"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:azure_neodymium_node",
+        "bedrock_identifier": "alexscaves:azure_neodymium_node",
+        "display_name": "Nodo de neodimio azur",
+        "bedrock_options": {
+          "icon": "alexscaves_azure_neodymium_node"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:scarlet_neodymium_pillar",
+        "bedrock_identifier": "alexscaves:scarlet_neodymium_pillar",
+        "display_name": "Pilar de neodimio escarlata",
+        "bedrock_options": {
+          "icon": "alexscaves_scarlet_neodymium_pillar"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:azure_neodymium_pillar",
+        "bedrock_identifier": "alexscaves:azure_neodymium_pillar",
+        "display_name": "Pilar de neodimio azur",
+        "bedrock_options": {
+          "icon": "alexscaves_azure_neodymium_pillar"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_scarlet_neodymium",
+        "bedrock_identifier": "alexscaves:block_of_scarlet_neodymium",
+        "display_name": "Bloque de neodimio escarlata",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_scarlet_neodymium"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_azure_neodymium",
+        "bedrock_identifier": "alexscaves:block_of_azure_neodymium",
+        "display_name": "Bloque de neodimio azur",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_azure_neodymium"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:scarlet_magnet",
+        "bedrock_identifier": "alexscaves:scarlet_magnet",
+        "display_name": "Imán escarlata",
+        "bedrock_options": {
+          "icon": "alexscaves_scarlet_magnet"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:azure_magnet",
+        "bedrock_identifier": "alexscaves:azure_magnet",
+        "display_name": "Imán azur",
+        "bedrock_options": {
+          "icon": "alexscaves_azure_magnet"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:tesla_bulb",
+        "bedrock_identifier": "alexscaves:tesla_bulb",
+        "display_name": "Bombilla Tesla",
+        "bedrock_options": {
+          "icon": "alexscaves_tesla_bulb"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:metal_swarf",
+        "bedrock_identifier": "alexscaves:metal_swarf",
+        "display_name": "Virutas metálicas",
+        "bedrock_options": {
+          "icon": "alexscaves_metal_swarf"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:scrap_metal",
+        "bedrock_identifier": "alexscaves:scrap_metal",
+        "display_name": "Chatarra",
+        "bedrock_options": {
+          "icon": "alexscaves_scrap_metal"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:scrap_metal_plate",
+        "bedrock_identifier": "alexscaves:scrap_metal_plate",
+        "display_name": "Placa de ccatarra",
+        "bedrock_options": {
+          "icon": "alexscaves_scrap_metal_plate"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:magnetic_activator",
+        "bedrock_identifier": "alexscaves:magnetic_activator",
+        "display_name": "Activador magnético",
+        "bedrock_options": {
+          "icon": "alexscaves_magnetic_activator"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:heart_of_iron",
+        "bedrock_identifier": "alexscaves:heart_of_iron",
+        "display_name": "Corazón férreo",
+        "bedrock_options": {
+          "icon": "alexscaves_heart_of_iron"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:limestone",
+        "bedrock_identifier": "alexscaves:limestone",
+        "display_name": "Caliza",
+        "bedrock_options": {
+          "icon": "alexscaves_limestone"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_limestone",
+        "bedrock_identifier": "alexscaves:smooth_limestone",
+        "display_name": "Caliza lisa",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_limestone"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:limestone_chiseled",
+        "bedrock_identifier": "alexscaves:limestone_chiseled",
+        "display_name": "Caliza cincelada",
+        "bedrock_options": {
+          "icon": "alexscaves_limestone_chiseled"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:limestone_pillar",
+        "bedrock_identifier": "alexscaves:limestone_pillar",
+        "display_name": "Pilar de caliza",
+        "bedrock_options": {
+          "icon": "alexscaves_limestone_pillar"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:amber",
+        "bedrock_identifier": "alexscaves:amber",
+        "display_name": "Ámbar",
+        "bedrock_options": {
+          "icon": "alexscaves_amber"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:ambersol",
+        "bedrock_identifier": "alexscaves:ambersol",
+        "display_name": "Solámbar",
+        "bedrock_options": {
+          "icon": "alexscaves_ambersol"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:fern_thatch",
+        "bedrock_identifier": "alexscaves:fern_thatch",
+        "display_name": "Paja de helechos",
+        "bedrock_options": {
+          "icon": "alexscaves_fern_thatch"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:carmine_froglight",
+        "bedrock_identifier": "alexscaves:carmine_froglight",
+        "display_name": "Ranaluz carmín",
+        "bedrock_options": {
+          "icon": "alexscaves_carmine_froglight"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_log",
+        "bedrock_identifier": "alexscaves:pewen_log",
+        "display_name": "Tronco de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_log"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_wood",
+        "bedrock_identifier": "alexscaves:pewen_wood",
+        "display_name": "Leño de pehúen",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_wood"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:stripped_pewen_log",
+        "bedrock_identifier": "alexscaves:stripped_pewen_log",
+        "display_name": "Tronco de pehuén sin corteza",
+        "bedrock_options": {
+          "icon": "alexscaves_stripped_pewen_log"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:stripped_pewen_wood",
+        "bedrock_identifier": "alexscaves:stripped_pewen_wood",
+        "display_name": "Leño de pehuén sin corteza",
+        "bedrock_options": {
+          "icon": "alexscaves_stripped_pewen_wood"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_planks",
+        "bedrock_identifier": "alexscaves:pewen_planks",
+        "display_name": "Tablones de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_planks"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radrock",
+        "bedrock_identifier": "alexscaves:radrock",
+        "display_name": "Radiaroca",
+        "bedrock_options": {
+          "icon": "alexscaves_radrock"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radrock_bricks",
+        "bedrock_identifier": "alexscaves:radrock_bricks",
+        "display_name": "Ladrillos de radiaoroca",
+        "bedrock_options": {
+          "icon": "alexscaves_radrock_bricks"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radrock_chiseled",
+        "bedrock_identifier": "alexscaves:radrock_chiseled",
+        "display_name": "Radiaroca cincelada",
+        "bedrock_options": {
+          "icon": "alexscaves_radrock_chiseled"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radrock_uranium_ore",
+        "bedrock_identifier": "alexscaves:radrock_uranium_ore",
+        "display_name": "Mena de uranio de radiaroca",
+        "bedrock_options": {
+          "icon": "alexscaves_radrock_uranium_ore"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:acidic_radrock",
+        "bedrock_identifier": "alexscaves:acidic_radrock",
+        "display_name": "Radiaroca acídica",
+        "bedrock_options": {
+          "icon": "alexscaves_acidic_radrock"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_uranium",
+        "bedrock_identifier": "alexscaves:block_of_uranium",
+        "display_name": "Bloque de uranio",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_uranium"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sulfur",
+        "bedrock_identifier": "alexscaves:sulfur",
+        "display_name": "Azufre",
+        "bedrock_options": {
+          "icon": "alexscaves_sulfur"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cinder_block",
+        "bedrock_identifier": "alexscaves:cinder_block",
+        "display_name": "Ladrillos de hormigón",
+        "bedrock_options": {
+          "icon": "alexscaves_cinder_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:unrefined_waste",
+        "bedrock_identifier": "alexscaves:unrefined_waste",
+        "display_name": "Residuo sin refinar",
+        "bedrock_options": {
+          "icon": "alexscaves_unrefined_waste"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rusty_scrap_metal",
+        "bedrock_identifier": "alexscaves:rusty_scrap_metal",
+        "display_name": "Chatarra corroída",
+        "bedrock_options": {
+          "icon": "alexscaves_rusty_scrap_metal"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rusty_scrap_metal_plate",
+        "bedrock_identifier": "alexscaves:rusty_scrap_metal_plate",
+        "display_name": "Placa de chatarra corroída",
+        "bedrock_options": {
+          "icon": "alexscaves_rusty_scrap_metal_plate"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:geothermal_vent",
+        "bedrock_identifier": "alexscaves:geothermal_vent",
+        "display_name": "Respiradero geotérmico",
+        "bedrock_options": {
+          "icon": "alexscaves_geothermal_vent"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:geothermal_vent_medium",
+        "bedrock_identifier": "alexscaves:geothermal_vent_medium",
+        "display_name": "Respiradero geotérmico mediano",
+        "bedrock_options": {
+          "icon": "alexscaves_geothermal_vent_medium"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:geothermal_vent_thin",
+        "bedrock_identifier": "alexscaves:geothermal_vent_thin",
+        "display_name": "Respiradero geotérmico delgado",
+        "bedrock_options": {
+          "icon": "alexscaves_geothermal_vent_thin"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sulfur_bud_small",
+        "bedrock_identifier": "alexscaves:sulfur_bud_small",
+        "display_name": "Brote de azufre pequeño",
+        "bedrock_options": {
+          "icon": "alexscaves_sulfur_bud_small"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sulfur_bud_medium",
+        "bedrock_identifier": "alexscaves:sulfur_bud_medium",
+        "display_name": "Brote de azufre mediano",
+        "bedrock_options": {
+          "icon": "alexscaves_sulfur_bud_medium"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sulfur_bud_large",
+        "bedrock_identifier": "alexscaves:sulfur_bud_large",
+        "display_name": "Brote de azufre grande",
+        "bedrock_options": {
+          "icon": "alexscaves_sulfur_bud_large"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sulfur_cluster",
+        "bedrock_identifier": "alexscaves:sulfur_cluster",
+        "display_name": "Cúmulo de azufre",
+        "bedrock_options": {
+          "icon": "alexscaves_sulfur_cluster"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:flood_basalt",
+        "bedrock_identifier": "alexscaves:flood_basalt",
+        "display_name": "Basalto de inundación",
+        "bedrock_options": {
+          "icon": "alexscaves_flood_basalt"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:primal_magma",
+        "bedrock_identifier": "alexscaves:primal_magma",
+        "display_name": "Magma primigenio",
+        "bedrock_options": {
+          "icon": "alexscaves_primal_magma"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:volcanic_core",
+        "bedrock_identifier": "alexscaves:volcanic_core",
+        "display_name": "Núcleo volcánico",
+        "bedrock_options": {
+          "icon": "alexscaves_volcanic_core"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:fissure_primal_magma",
+        "bedrock_identifier": "alexscaves:fissure_primal_magma",
+        "display_name": "Magma primigenio",
+        "bedrock_options": {
+          "icon": "alexscaves_fissure_primal_magma"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:amber_monolith",
+        "bedrock_identifier": "alexscaves:amber_monolith",
+        "display_name": "Monolito de ámbar",
+        "bedrock_options": {
+          "icon": "alexscaves_amber_monolith"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:metal_barrel",
+        "bedrock_identifier": "alexscaves:metal_barrel",
+        "display_name": "Barril metálico",
+        "bedrock_options": {
+          "icon": "alexscaves_metal_barrel"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rusty_barrel",
+        "bedrock_identifier": "alexscaves:rusty_barrel",
+        "display_name": "Barril corroído",
+        "bedrock_options": {
+          "icon": "alexscaves_rusty_barrel"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:waste_drum",
+        "bedrock_identifier": "alexscaves:waste_drum",
+        "display_name": "Barril residual",
+        "bedrock_options": {
+          "icon": "alexscaves_waste_drum"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:metal_scaffolding",
+        "bedrock_identifier": "alexscaves:metal_scaffolding",
+        "display_name": "Andamios metálicos",
+        "bedrock_options": {
+          "icon": "alexscaves_metal_scaffolding"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rusty_scaffolding",
+        "bedrock_identifier": "alexscaves:rusty_scaffolding",
+        "display_name": "Andamio corroído",
+        "bedrock_options": {
+          "icon": "alexscaves_rusty_scaffolding"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_green",
+        "bedrock_identifier": "alexscaves:radon_lamp_green",
+        "display_name": "Lámpara de radón verde",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_green"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_lime",
+        "bedrock_identifier": "alexscaves:radon_lamp_lime",
+        "display_name": "Lámpara de radón verde  lima",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_lime"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_white",
+        "bedrock_identifier": "alexscaves:radon_lamp_white",
+        "display_name": "Lámpara de radón blanca",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_white"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_orange",
+        "bedrock_identifier": "alexscaves:radon_lamp_orange",
+        "display_name": "Lámpara de radón naranja",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_orange"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_magenta",
+        "bedrock_identifier": "alexscaves:radon_lamp_magenta",
+        "display_name": "Lámpara de radón magenta",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_magenta"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_light_blue",
+        "bedrock_identifier": "alexscaves:radon_lamp_light_blue",
+        "display_name": "Lámpara de radón azul claro",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_light_blue"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_yellow",
+        "bedrock_identifier": "alexscaves:radon_lamp_yellow",
+        "display_name": "Lámpara de radón amarilla",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_yellow"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_pink",
+        "bedrock_identifier": "alexscaves:radon_lamp_pink",
+        "display_name": "Lámpara de radón rosa",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_pink"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_gray",
+        "bedrock_identifier": "alexscaves:radon_lamp_gray",
+        "display_name": "Lámpara de radón gris",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_gray"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_light_gray",
+        "bedrock_identifier": "alexscaves:radon_lamp_light_gray",
+        "display_name": "Lámpara de radón gris claro",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_light_gray"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_cyan",
+        "bedrock_identifier": "alexscaves:radon_lamp_cyan",
+        "display_name": "Lámpara de radón cian",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_cyan"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_purple",
+        "bedrock_identifier": "alexscaves:radon_lamp_purple",
+        "display_name": "Lámpara de radón morada",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_purple"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_blue",
+        "bedrock_identifier": "alexscaves:radon_lamp_blue",
+        "display_name": "Lámpara de radón azul",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_blue"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_brown",
+        "bedrock_identifier": "alexscaves:radon_lamp_brown",
+        "display_name": "Lámpara de radón marrón",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_brown"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_red",
+        "bedrock_identifier": "alexscaves:radon_lamp_red",
+        "display_name": "Lámpara de radón roja",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_red"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_lamp_black",
+        "bedrock_identifier": "alexscaves:radon_lamp_black",
+        "display_name": "Lámpara de radón negra",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_lamp_black"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:hazmat_block",
+        "bedrock_identifier": "alexscaves:hazmat_block",
+        "display_name": "Bloque MP",
+        "bedrock_options": {
+          "icon": "alexscaves_hazmat_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:hazmat_warning_block",
+        "bedrock_identifier": "alexscaves:hazmat_warning_block",
+        "display_name": "Bloque MP de adventercia",
+        "bedrock_options": {
+          "icon": "alexscaves_hazmat_warning_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:hazmat_skull_block",
+        "bedrock_identifier": "alexscaves:hazmat_skull_block",
+        "display_name": "Bloque HP de calavera",
+        "bedrock_options": {
+          "icon": "alexscaves_hazmat_skull_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_chocolate",
+        "bedrock_identifier": "alexscaves:block_of_chocolate",
+        "display_name": "Bloque de chocolate",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_chocolate"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_frosted_chocolate",
+        "bedrock_identifier": "alexscaves:block_of_frosted_chocolate",
+        "display_name": "Bloque de chocolate congelado",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_frosted_chocolate"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_chocolate_frosting",
+        "bedrock_identifier": "alexscaves:block_of_chocolate_frosting",
+        "display_name": "Bloque de glaseado de chocolate",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_chocolate_frosting"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_frosting",
+        "bedrock_identifier": "alexscaves:block_of_frosting",
+        "display_name": "Bloque de glaseado",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_frosting"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_vanilla_frosting",
+        "bedrock_identifier": "alexscaves:block_of_vanilla_frosting",
+        "display_name": "Bloque de chocolate de vainilla",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_vanilla_frosting"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cake_layer",
+        "bedrock_identifier": "alexscaves:cake_layer",
+        "display_name": "Estrato de tarta",
+        "bedrock_options": {
+          "icon": "alexscaves_cake_layer"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cookie_block",
+        "bedrock_identifier": "alexscaves:cookie_block",
+        "display_name": "Bloque de galleta",
+        "bedrock_options": {
+          "icon": "alexscaves_cookie_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:dough_block",
+        "bedrock_identifier": "alexscaves:dough_block",
+        "display_name": "Bloque de masa",
+        "bedrock_options": {
+          "icon": "alexscaves_dough_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:wafer_cookie_block",
+        "bedrock_identifier": "alexscaves:wafer_cookie_block",
+        "display_name": "Bloque de oblea",
+        "bedrock_options": {
+          "icon": "alexscaves_wafer_cookie_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbread_block",
+        "bedrock_identifier": "alexscaves:gingerbread_block",
+        "display_name": "Bloque de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbread_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbread_bricks",
+        "bedrock_identifier": "alexscaves:gingerbread_bricks",
+        "display_name": "Ladrillos de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbread_bricks"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:frosted_gingerbread_block",
+        "bedrock_identifier": "alexscaves:frosted_gingerbread_block",
+        "display_name": "Bloque de pan de jengibre congelado",
+        "bedrock_options": {
+          "icon": "alexscaves_frosted_gingerbread_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:frosted_gingerbread_bricks",
+        "bedrock_identifier": "alexscaves:frosted_gingerbread_bricks",
+        "display_name": "Ladrillos de pan de jengibre congelado",
+        "bedrock_options": {
+          "icon": "alexscaves_frosted_gingerbread_bricks"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:candy_cane_block",
+        "bedrock_identifier": "alexscaves:candy_cane_block",
+        "display_name": "Bloque de bastón de caramelo",
+        "bedrock_options": {
+          "icon": "alexscaves_candy_cane_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:chiseled_candy_cane_block",
+        "bedrock_identifier": "alexscaves:chiseled_candy_cane_block",
+        "display_name": "Bloque de bastón de caramelo cincelado",
+        "bedrock_options": {
+          "icon": "alexscaves_chiseled_candy_cane_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:stripped_candy_cane_block",
+        "bedrock_identifier": "alexscaves:stripped_candy_cane_block",
+        "display_name": "Bloque de bastón de caramelo sin corteza",
+        "bedrock_options": {
+          "icon": "alexscaves_stripped_candy_cane_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:candy_cane_pole",
+        "bedrock_identifier": "alexscaves:candy_cane_pole",
+        "display_name": "Estaca de bastón de caramelo",
+        "bedrock_options": {
+          "icon": "alexscaves_candy_cane_pole"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:stripped_candy_cane_pole",
+        "bedrock_identifier": "alexscaves:stripped_candy_cane_pole",
+        "display_name": "Estaca de bastón de caramelo sin corteza",
+        "bedrock_options": {
+          "icon": "alexscaves_stripped_candy_cane_pole"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_polished_chocolate",
+        "bedrock_identifier": "alexscaves:block_of_polished_chocolate",
+        "display_name": "Bloque de chocolate pulido",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_polished_chocolate"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_chiseled_chocolate",
+        "bedrock_identifier": "alexscaves:block_of_chiseled_chocolate",
+        "display_name": "Bloque de chocolate cincelado",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_chiseled_chocolate"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:chocolate_ice_cream",
+        "bedrock_identifier": "alexscaves:chocolate_ice_cream",
+        "display_name": "Helado de chocolate",
+        "bedrock_options": {
+          "icon": "alexscaves_chocolate_ice_cream"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:vanilla_ice_cream",
+        "bedrock_identifier": "alexscaves:vanilla_ice_cream",
+        "display_name": "Helado de vainilLa",
+        "bedrock_options": {
+          "icon": "alexscaves_vanilla_ice_cream"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sweetberry_ice_cream",
+        "bedrock_identifier": "alexscaves:sweetberry_ice_cream",
+        "display_name": "Helado de bayas dulces",
+        "bedrock_options": {
+          "icon": "alexscaves_sweetberry_ice_cream"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:giant_sweetberry",
+        "bedrock_identifier": "alexscaves:giant_sweetberry",
+        "display_name": "Cereza gigante",
+        "bedrock_options": {
+          "icon": "alexscaves_giant_sweetberry"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:licoroot",
+        "bedrock_identifier": "alexscaves:licoroot",
+        "display_name": "Regaraíz",
+        "bedrock_options": {
+          "icon": "alexscaves_licoroot"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:small_peppermint",
+        "bedrock_identifier": "alexscaves:small_peppermint",
+        "display_name": "Menta pequeña",
+        "bedrock_options": {
+          "icon": "alexscaves_small_peppermint"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:large_peppermint",
+        "bedrock_identifier": "alexscaves:large_peppermint",
+        "display_name": "Menta grande",
+        "bedrock_options": {
+          "icon": "alexscaves_large_peppermint"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gummy_ring_red",
+        "bedrock_identifier": "alexscaves:gummy_ring_red",
+        "display_name": "Anillo de gominola roja",
+        "bedrock_options": {
+          "icon": "alexscaves_gummy_ring_red"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gummy_ring_green",
+        "bedrock_identifier": "alexscaves:gummy_ring_green",
+        "display_name": "Anillo de gominola verde",
+        "bedrock_options": {
+          "icon": "alexscaves_gummy_ring_green"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gummy_ring_blue",
+        "bedrock_identifier": "alexscaves:gummy_ring_blue",
+        "display_name": "Anillo de gominola azul",
+        "bedrock_options": {
+          "icon": "alexscaves_gummy_ring_blue"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gummy_ring_yellow",
+        "bedrock_identifier": "alexscaves:gummy_ring_yellow",
+        "display_name": "Anillo de gominola amarilla",
+        "bedrock_options": {
+          "icon": "alexscaves_gummy_ring_yellow"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gummy_ring_pink",
+        "bedrock_identifier": "alexscaves:gummy_ring_pink",
+        "display_name": "Anillo de gominola rosa",
+        "bedrock_options": {
+          "icon": "alexscaves_gummy_ring_pink"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_white",
+        "bedrock_identifier": "alexscaves:rock_candy_white",
+        "display_name": "Roca de caramelo blanco",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_white"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_orange",
+        "bedrock_identifier": "alexscaves:rock_candy_orange",
+        "display_name": "Roca de caramelo naranja",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_orange"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_magenta",
+        "bedrock_identifier": "alexscaves:rock_candy_magenta",
+        "display_name": "Roca de caramelo magenta",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_magenta"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_light_blue",
+        "bedrock_identifier": "alexscaves:rock_candy_light_blue",
+        "display_name": "Roca de caramelo azul claro",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_light_blue"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_yellow",
+        "bedrock_identifier": "alexscaves:rock_candy_yellow",
+        "display_name": "Roca de caramelo amarillo",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_yellow"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_lime",
+        "bedrock_identifier": "alexscaves:rock_candy_lime",
+        "display_name": "Roca de caramelo verde lima",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_lime"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_pink",
+        "bedrock_identifier": "alexscaves:rock_candy_pink",
+        "display_name": "Roca de caramelo rosa",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_pink"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_gray",
+        "bedrock_identifier": "alexscaves:rock_candy_gray",
+        "display_name": "Roca de caramelo gris",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_gray"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_light_gray",
+        "bedrock_identifier": "alexscaves:rock_candy_light_gray",
+        "display_name": "Roca de caramelo gris claro",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_light_gray"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_cyan",
+        "bedrock_identifier": "alexscaves:rock_candy_cyan",
+        "display_name": "Roca de caramelo cian",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_cyan"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_purple",
+        "bedrock_identifier": "alexscaves:rock_candy_purple",
+        "display_name": "Roca de caramelo morado",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_purple"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_blue",
+        "bedrock_identifier": "alexscaves:rock_candy_blue",
+        "display_name": "Roca de caramelo azul",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_blue"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_brown",
+        "bedrock_identifier": "alexscaves:rock_candy_brown",
+        "display_name": "Roca de caramelo marrón",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_brown"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_green",
+        "bedrock_identifier": "alexscaves:rock_candy_green",
+        "display_name": "Roca de caramelo verde",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_green"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_red",
+        "bedrock_identifier": "alexscaves:rock_candy_red",
+        "display_name": "Roca de caramelo rojo",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_red"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:rock_candy_black",
+        "bedrock_identifier": "alexscaves:rock_candy_black",
+        "display_name": "Roca de caramelo negro",
+        "bedrock_options": {
+          "icon": "alexscaves_rock_candy_black"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:frostmint",
+        "bedrock_identifier": "alexscaves:frostmint",
+        "display_name": "Menta helada",
+        "bedrock_options": {
+          "icon": "alexscaves_frostmint"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssmarine",
+        "bedrock_identifier": "alexscaves:abyssmarine",
+        "display_name": "Abismarina",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssmarine"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:muck",
+        "bedrock_identifier": "alexscaves:muck",
+        "display_name": "Lodo abisal",
+        "bedrock_options": {
+          "icon": "alexscaves_muck"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:block_of_pearl",
+        "bedrock_identifier": "alexscaves:block_of_pearl",
+        "display_name": "Bloque de perlas",
+        "bedrock_options": {
+          "icon": "alexscaves_block_of_pearl"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:mussel",
+        "bedrock_identifier": "alexscaves:mussel",
+        "display_name": "Mejillón",
+        "bedrock_options": {
+          "icon": "alexscaves_mussel"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:tube_worm",
+        "bedrock_identifier": "alexscaves:tube_worm",
+        "display_name": "Gusano tubícola",
+        "bedrock_options": {
+          "icon": "alexscaves_tube_worm"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:ping_pong_sponge",
+        "bedrock_identifier": "alexscaves:ping_pong_sponge",
+        "display_name": "Esponja ping-Pong",
+        "bedrock_options": {
+          "icon": "alexscaves_ping_pong_sponge"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:baleen_bone",
+        "bedrock_identifier": "alexscaves:baleen_bone",
+        "display_name": "Hueso con barbas",
+        "bedrock_options": {
+          "icon": "alexscaves_baleen_bone"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:bone_nodule",
+        "bedrock_identifier": "alexscaves:bone_nodule",
+        "display_name": "Nódulo de huesos",
+        "bedrock_options": {
+          "icon": "alexscaves_bone_nodule"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:bone_ribs",
+        "bedrock_identifier": "alexscaves:bone_ribs",
+        "display_name": "Costillas de huesos",
+        "bedrock_options": {
+          "icon": "alexscaves_bone_ribs"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:hollow_bone",
+        "bedrock_identifier": "alexscaves:hollow_bone",
+        "display_name": "Bloque de huesos hueco",
+        "bedrock_options": {
+          "icon": "alexscaves_hollow_bone"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_bone",
+        "bedrock_identifier": "alexscaves:smooth_bone",
+        "display_name": "Bloque de huesos liso",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_bone"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:thin_bone",
+        "bedrock_identifier": "alexscaves:thin_bone",
+        "display_name": "Bloque de huesos delgado",
+        "bedrock_options": {
+          "icon": "alexscaves_thin_bone"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:bone_worms",
+        "bedrock_identifier": "alexscaves:bone_worms",
+        "display_name": "Gusanos osícolas",
+        "bedrock_options": {
+          "icon": "alexscaves_bone_worms"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssal_altar",
+        "bedrock_identifier": "alexscaves:abyssal_altar",
+        "display_name": "Altar abisal",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssal_altar"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssmarine_bricks",
+        "bedrock_identifier": "alexscaves:abyssmarine_bricks",
+        "display_name": "Ladrillos de abismarina",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssmarine_bricks"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssmarine_pillar",
+        "bedrock_identifier": "alexscaves:abyssmarine_pillar",
+        "display_name": "Pilar de abismarina",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssmarine_pillar"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:abyssmarine_tiles",
+        "bedrock_identifier": "alexscaves:abyssmarine_tiles",
+        "display_name": "Azulejos de abismarina",
+        "bedrock_options": {
+          "icon": "alexscaves_abyssmarine_tiles"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:copper_valve",
+        "bedrock_identifier": "alexscaves:copper_valve",
+        "display_name": "Válvula de cobre",
+        "bedrock_options": {
+          "icon": "alexscaves_copper_valve"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:dusk_anemone",
+        "bedrock_identifier": "alexscaves:dusk_anemone",
+        "display_name": "Anémona del alba",
+        "bedrock_options": {
+          "icon": "alexscaves_dusk_anemone"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:twilight_anemone",
+        "bedrock_identifier": "alexscaves:twilight_anemone",
+        "display_name": "Anémona del crepúsculo",
+        "bedrock_options": {
+          "icon": "alexscaves_twilight_anemone"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:midnight_anemone",
+        "bedrock_identifier": "alexscaves:midnight_anemone",
+        "display_name": "Anémona de la medianoche",
+        "bedrock_options": {
+          "icon": "alexscaves_midnight_anemone"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:uranium_rod",
+        "bedrock_identifier": "alexscaves:uranium_rod",
+        "display_name": "Vara de uranio",
+        "bedrock_options": {
+          "icon": "alexscaves_uranium_rod"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:nuclear_bomb",
+        "bedrock_identifier": "alexscaves:nuclear_bomb",
+        "display_name": "Bomba nuclear",
+        "bedrock_options": {
+          "icon": "alexscaves_nuclear_bomb"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone",
+        "bedrock_identifier": "alexscaves:guanostone",
+        "display_name": "Guanopiedra",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone_bricks",
+        "bedrock_identifier": "alexscaves:guanostone_bricks",
+        "display_name": "Ladrillos de guanopiedra",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone_bricks"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone_chiseled",
+        "bedrock_identifier": "alexscaves:guanostone_chiseled",
+        "display_name": "Guanopiedra cincelada",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone_chiseled"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone_tiles",
+        "bedrock_identifier": "alexscaves:guanostone_tiles",
+        "display_name": "Azulejos de guanopiedra",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone_tiles"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone_redstone_ore",
+        "bedrock_identifier": "alexscaves:guanostone_redstone_ore",
+        "display_name": "Mena de redstone de guanopiedra",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone_redstone_ore"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guano_block",
+        "bedrock_identifier": "alexscaves:guano_block",
+        "display_name": "Bloque de guano",
+        "bedrock_options": {
+          "icon": "alexscaves_guano_block"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guano_layer",
+        "bedrock_identifier": "alexscaves:guano_layer",
+        "display_name": "Capa de guano",
+        "bedrock_options": {
+          "icon": "alexscaves_guano_layer"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:moth_ball",
+        "bedrock_identifier": "alexscaves:moth_ball",
+        "display_name": "Bola antioscurolillas",
+        "bedrock_options": {
+          "icon": "alexscaves_moth_ball"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:coprolith",
+        "bedrock_identifier": "alexscaves:coprolith",
+        "display_name": "Coprolito",
+        "bedrock_options": {
+          "icon": "alexscaves_coprolith"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_coprolith",
+        "bedrock_identifier": "alexscaves:smooth_coprolith",
+        "display_name": "Coprolito liso",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_coprolith"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:coprolith_coal_ore",
+        "bedrock_identifier": "alexscaves:coprolith_coal_ore",
+        "display_name": "Mena de carbón de coprolito",
+        "bedrock_options": {
+          "icon": "alexscaves_coprolith_coal_ore"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:porous_coprolith",
+        "bedrock_identifier": "alexscaves:porous_coprolith",
+        "display_name": "Coprolito poroso",
+        "bedrock_options": {
+          "icon": "alexscaves_porous_coprolith"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:peering_coprolith",
+        "bedrock_identifier": "alexscaves:peering_coprolith",
+        "display_name": "Coprolito ojeante",
+        "bedrock_options": {
+          "icon": "alexscaves_peering_coprolith"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:forsaken_idol",
+        "bedrock_identifier": "alexscaves:forsaken_idol",
+        "display_name": "Ídolo olvidado",
+        "bedrock_options": {
+          "icon": "alexscaves_forsaken_idol"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_log",
+        "bedrock_identifier": "alexscaves:thornwood_log",
+        "display_name": "Tronco de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_log"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_wood",
+        "bedrock_identifier": "alexscaves:thornwood_wood",
+        "display_name": "Leño de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_wood"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:stripped_thornwood_log",
+        "bedrock_identifier": "alexscaves:stripped_thornwood_log",
+        "display_name": "Tronco de pinchoárbol sin corteza",
+        "bedrock_options": {
+          "icon": "alexscaves_stripped_thornwood_log"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:stripped_thornwood_wood",
+        "bedrock_identifier": "alexscaves:stripped_thornwood_wood",
+        "display_name": "Leño de pinchoárbol sin corteza",
+        "bedrock_options": {
+          "icon": "alexscaves_stripped_thornwood_wood"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_planks",
+        "bedrock_identifier": "alexscaves:thornwood_planks",
+        "display_name": "Tablones de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_planks"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:thornwood_branch",
+        "bedrock_identifier": "alexscaves:thornwood_branch",
+        "display_name": "Rama de pinchoárbol",
+        "bedrock_options": {
+          "icon": "alexscaves_thornwood_branch"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:curly_fern",
+        "bedrock_identifier": "alexscaves:curly_fern",
+        "display_name": "Helecho ondulado",
+        "bedrock_options": {
+          "icon": "alexscaves_curly_fern"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:underweed",
+        "bedrock_identifier": "alexscaves:underweed",
+        "display_name": "Hierbajo subterráneo",
+        "bedrock_options": {
+          "icon": "alexscaves_underweed"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cycad",
+        "bedrock_identifier": "alexscaves:cycad",
+        "display_name": "Cícada",
+        "bedrock_options": {
+          "icon": "alexscaves_cycad"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sundrop",
+        "bedrock_identifier": "alexscaves:sundrop",
+        "display_name": "Gotasol",
+        "bedrock_options": {
+          "icon": "alexscaves_sundrop"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:lollipop_bunch",
+        "bedrock_identifier": "alexscaves:lollipop_bunch",
+        "display_name": "Ramo de piruletas",
+        "bedrock_options": {
+          "icon": "alexscaves_lollipop_bunch"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:licoroot_sprout",
+        "bedrock_identifier": "alexscaves:licoroot_sprout",
+        "display_name": "Brote de regaraíz",
+        "bedrock_options": {
+          "icon": "alexscaves_licoroot_sprout"
+        }
+      }
+    ],
+    "minecraft:oak_button": [
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_button",
+        "bedrock_identifier": "alexscaves:pewen_button",
+        "display_name": "Botón de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_button"
+        }
+      }
+    ],
+    "minecraft:oak_door": [
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_door",
+        "bedrock_identifier": "alexscaves:pewen_door",
+        "display_name": "Puerta de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_door"
+        }
+      }
+    ],
+    "minecraft:oak_fence": [
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_fence",
+        "bedrock_identifier": "alexscaves:pewen_fence",
+        "display_name": "Valla de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_fence"
+        }
+      }
+    ],
+    "minecraft:oak_fence_gate": [
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_fence_gate",
+        "bedrock_identifier": "alexscaves:pewen_fence_gate",
+        "display_name": "Puerta de valla de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_fence_gate"
+        }
+      }
+    ],
+    "minecraft:oak_hanging_sign": [
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_hanging_sign",
+        "bedrock_identifier": "alexscaves:pewen_hanging_sign",
+        "display_name": "Cartel colgante de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_hanging_sign"
+        }
+      }
+    ],
+    "minecraft:oak_pressure_plate": [
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_pressure_plate",
+        "bedrock_identifier": "alexscaves:pewen_pressure_plate",
+        "display_name": "Placa de presión de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_pressure_plate"
+        }
+      }
+    ],
+    "minecraft:oak_sign": [
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_sign",
+        "bedrock_identifier": "alexscaves:pewen_sign",
+        "display_name": "Cartel de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_sign"
+        }
+      }
+    ],
+    "minecraft:oak_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_slab",
+        "bedrock_identifier": "alexscaves:pewen_slab",
+        "display_name": "Losa de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_slab"
+        }
+      }
+    ],
+    "minecraft:oak_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_stairs",
+        "bedrock_identifier": "alexscaves:pewen_stairs",
+        "display_name": "Escaleras de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_stairs"
+        }
+      }
+    ],
+    "minecraft:oak_trapdoor": [
+      {
+        "type": "definition",
+        "model": "alexscaves:pewen_trapdoor",
+        "bedrock_identifier": "alexscaves:pewen_trapdoor",
+        "display_name": "Trampilla de pehuén",
+        "bedrock_options": {
+          "icon": "alexscaves_pewen_trapdoor"
+        }
+      }
+    ],
+    "minecraft:paper": [
+      {
+        "type": "definition",
+        "model": "alexscaves:raw_scarlet_neodymium",
+        "bedrock_identifier": "alexscaves:raw_scarlet_neodymium",
+        "display_name": "Neodimio escarlata en bruto",
+        "bedrock_options": {
+          "icon": "alexscaves_raw_scarlet_neodymium"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:raw_azure_neodymium",
+        "bedrock_identifier": "alexscaves:raw_azure_neodymium",
+        "display_name": "Neodimio azur en bruto",
+        "bedrock_options": {
+          "icon": "alexscaves_raw_azure_neodymium"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:telecore",
+        "bedrock_identifier": "alexscaves:telecore",
+        "display_name": "Telenúcleo",
+        "bedrock_options": {
+          "icon": "alexscaves_telecore"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:notor_gizmo",
+        "bedrock_identifier": "alexscaves:notor_gizmo",
+        "display_name": "Artilugio notificador",
+        "bedrock_options": {
+          "icon": "alexscaves_notor_gizmo"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:heavyweight",
+        "bedrock_identifier": "alexscaves:heavyweight",
+        "display_name": "Peso pesado",
+        "bedrock_options": {
+          "icon": "alexscaves_heavyweight"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:tree_star",
+        "bedrock_identifier": "alexscaves:tree_star",
+        "display_name": "Estrella arbórea",
+        "bedrock_options": {
+          "icon": "alexscaves_tree_star"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:fiddlehead",
+        "bedrock_identifier": "alexscaves:fiddlehead",
+        "display_name": "Brote de helecho",
+        "bedrock_options": {
+          "icon": "alexscaves_fiddlehead"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:flytrap",
+        "bedrock_identifier": "alexscaves:flytrap",
+        "display_name": "Atrapamoscas",
+        "bedrock_options": {
+          "icon": "alexscaves_flytrap"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:tectonic_shard",
+        "bedrock_identifier": "alexscaves:tectonic_shard",
+        "display_name": "Fragmento tectónico",
+        "bedrock_options": {
+          "icon": "alexscaves_tectonic_shard"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:ominous_catalyst",
+        "bedrock_identifier": "alexscaves:ominous_catalyst",
+        "display_name": "Catalizador ominoso",
+        "bedrock_options": {
+          "icon": "alexscaves_ominous_catalyst"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:amber_curiosity",
+        "bedrock_identifier": "alexscaves:amber_curiosity",
+        "display_name": "Curiosidad ambarina",
+        "bedrock_options": {
+          "icon": "alexscaves_amber_curiosity"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:uranium",
+        "bedrock_identifier": "alexscaves:uranium",
+        "display_name": "Uranio",
+        "bedrock_options": {
+          "icon": "alexscaves_uranium"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:uranium_shard",
+        "bedrock_identifier": "alexscaves:uranium_shard",
+        "display_name": "Fragmento de uranio",
+        "bedrock_options": {
+          "icon": "alexscaves_uranium_shard"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sulfur_dust",
+        "bedrock_identifier": "alexscaves:sulfur_dust",
+        "display_name": "Polvo de azufre",
+        "bedrock_options": {
+          "icon": "alexscaves_sulfur_dust"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cinder_brick",
+        "bedrock_identifier": "alexscaves:cinder_brick",
+        "display_name": "Ladrillo de hormigón",
+        "bedrock_options": {
+          "icon": "alexscaves_cinder_brick"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:polymer_plate",
+        "bedrock_identifier": "alexscaves:polymer_plate",
+        "display_name": "Placa de polímero",
+        "bedrock_options": {
+          "icon": "alexscaves_polymer_plate"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:toxic_paste",
+        "bedrock_identifier": "alexscaves:toxic_paste",
+        "display_name": "Pasta tóxica",
+        "bedrock_options": {
+          "icon": "alexscaves_toxic_paste"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:fissile_core",
+        "bedrock_identifier": "alexscaves:fissile_core",
+        "display_name": "Núcleo físil",
+        "bedrock_options": {
+          "icon": "alexscaves_fissile_core"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:charred_remnant",
+        "bedrock_identifier": "alexscaves:charred_remnant",
+        "display_name": "Remanente carbonizado",
+        "bedrock_options": {
+          "icon": "alexscaves_charred_remnant"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:raygun",
+        "bedrock_identifier": "alexscaves:raygun",
+        "display_name": "Pistola de rayos",
+        "bedrock_options": {
+          "icon": "alexscaves_raygun"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:subterranodon_egg",
+        "bedrock_identifier": "alexscaves:subterranodon_egg",
+        "display_name": "Huevo de subterraneodonte",
+        "bedrock_options": {
+          "icon": "alexscaves_subterranodon_egg"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:vallumraptor_egg",
+        "bedrock_identifier": "alexscaves:vallumraptor_egg",
+        "display_name": "Huevo de vallumráptor",
+        "bedrock_options": {
+          "icon": "alexscaves_vallumraptor_egg"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:grottoceratops_egg",
+        "bedrock_identifier": "alexscaves:grottoceratops_egg",
+        "display_name": "Huevo de grutacerátops",
+        "bedrock_options": {
+          "icon": "alexscaves_grottoceratops_egg"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:tremorsaurus_egg",
+        "bedrock_identifier": "alexscaves:tremorsaurus_egg",
+        "display_name": "Huevo de temblorsaurio",
+        "bedrock_options": {
+          "icon": "alexscaves_tremorsaurus_egg"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:relicheirus_egg",
+        "bedrock_identifier": "alexscaves:relicheirus_egg",
+        "display_name": "Huevo de reliqueiro",
+        "bedrock_options": {
+          "icon": "alexscaves_relicheirus_egg"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:atlatitan_egg",
+        "bedrock_identifier": "alexscaves:atlatitan_egg",
+        "display_name": "Huevo de atlatitán",
+        "bedrock_options": {
+          "icon": "alexscaves_atlatitan_egg"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:tremorzilla_egg",
+        "bedrock_identifier": "alexscaves:tremorzilla_egg",
+        "display_name": "Huevo de temblorzilla",
+        "bedrock_options": {
+          "icon": "alexscaves_tremorzilla_egg"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sweet_tooth",
+        "bedrock_identifier": "alexscaves:sweet_tooth",
+        "display_name": "Diente dulce",
+        "bedrock_options": {
+          "icon": "alexscaves_sweet_tooth"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:radiant_essence",
+        "bedrock_identifier": "alexscaves:radiant_essence",
+        "display_name": "Esencia radiante",
+        "bedrock_options": {
+          "icon": "alexscaves_radiant_essence"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sugar_staff",
+        "bedrock_identifier": "alexscaves:sugar_staff",
+        "display_name": "Vara de azúcar",
+        "bedrock_options": {
+          "icon": "alexscaves_sugar_staff"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:shot_gum",
+        "bedrock_identifier": "alexscaves:shot_gum",
+        "display_name": "Tirachicles",
+        "bedrock_options": {
+          "icon": "alexscaves_shot_gum"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:candy_cane_hook",
+        "bedrock_identifier": "alexscaves:candy_cane_hook",
+        "display_name": "Gancho de caramelo",
+        "bedrock_options": {
+          "icon": "alexscaves_candy_cane_hook"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sack_of_sating",
+        "bedrock_identifier": "alexscaves:sack_of_sating",
+        "display_name": "Saco saciado",
+        "bedrock_options": {
+          "icon": "alexscaves_sack_of_sating"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:bioluminesscence",
+        "bedrock_identifier": "alexscaves:bioluminesscence",
+        "display_name": "Biolumiscencia",
+        "bedrock_options": {
+          "icon": "alexscaves_bioluminesscence"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:pearl",
+        "bedrock_identifier": "alexscaves:pearl",
+        "display_name": "Perla",
+        "bedrock_options": {
+          "icon": "alexscaves_pearl"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:marine_snow",
+        "bedrock_identifier": "alexscaves:marine_snow",
+        "display_name": "Nieve marina",
+        "bedrock_options": {
+          "icon": "alexscaves_marine_snow"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:gazing_pearl",
+        "bedrock_identifier": "alexscaves:gazing_pearl",
+        "display_name": "Perla observante",
+        "bedrock_options": {
+          "icon": "alexscaves_gazing_pearl"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sea_glass_shards",
+        "bedrock_identifier": "alexscaves:sea_glass_shards",
+        "display_name": "Fragmentos de cristal abisal",
+        "bedrock_options": {
+          "icon": "alexscaves_sea_glass_shards"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sea_staff",
+        "bedrock_identifier": "alexscaves:sea_staff",
+        "display_name": "Bastón del mar",
+        "bedrock_options": {
+          "icon": "alexscaves_sea_staff"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:magic_conch",
+        "bedrock_identifier": "alexscaves:magic_conch",
+        "display_name": "Caracola mágica",
+        "bedrock_options": {
+          "icon": "alexscaves_magic_conch"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:enigmatic_engine",
+        "bedrock_identifier": "alexscaves:enigmatic_engine",
+        "display_name": "Motor enigmático",
+        "bedrock_options": {
+          "icon": "alexscaves_enigmatic_engine"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:immortal_embryo",
+        "bedrock_identifier": "alexscaves:immortal_embryo",
+        "display_name": "Embrión inmortal",
+        "bedrock_options": {
+          "icon": "alexscaves_immortal_embryo"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:moth_dust",
+        "bedrock_identifier": "alexscaves:moth_dust",
+        "display_name": "Polvo de oscurolilla",
+        "bedrock_options": {
+          "icon": "alexscaves_moth_dust"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:dark_tatters",
+        "bedrock_identifier": "alexscaves:dark_tatters",
+        "display_name": "Andrajos oscuros",
+        "bedrock_options": {
+          "icon": "alexscaves_dark_tatters"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:corrodent_teeth",
+        "bedrock_identifier": "alexscaves:corrodent_teeth",
+        "display_name": "Dientes de corroedor",
+        "bedrock_options": {
+          "icon": "alexscaves_corrodent_teeth"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:occult_gem",
+        "bedrock_identifier": "alexscaves:occult_gem",
+        "display_name": "Gema oculta",
+        "bedrock_options": {
+          "icon": "alexscaves_occult_gem"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:fertilizer",
+        "bedrock_identifier": "alexscaves:fertilizer",
+        "display_name": "Fertilizante",
+        "bedrock_options": {
+          "icon": "alexscaves_fertilizer"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:pure_darkness",
+        "bedrock_identifier": "alexscaves:pure_darkness",
+        "display_name": "Oscuridad pura",
+        "bedrock_options": {
+          "icon": "alexscaves_pure_darkness"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:shadow_silk",
+        "bedrock_identifier": "alexscaves:shadow_silk",
+        "display_name": "Seda de las sombras",
+        "bedrock_options": {
+          "icon": "alexscaves_shadow_silk"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_ambersol",
+        "bedrock_identifier": "alexscaves:cave_painting_ambersol",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_ambersol"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_dark",
+        "bedrock_identifier": "alexscaves:cave_painting_dark",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_dark"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_dino_nuggets",
+        "bedrock_identifier": "alexscaves:cave_painting_dino_nuggets",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_dino_nuggets"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_enderman",
+        "bedrock_identifier": "alexscaves:cave_painting_enderman",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_enderman"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_footprint",
+        "bedrock_identifier": "alexscaves:cave_painting_footprint",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_footprint"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_footprints",
+        "bedrock_identifier": "alexscaves:cave_painting_footprints",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_footprints"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_friendship",
+        "bedrock_identifier": "alexscaves:cave_painting_friendship",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_friendship"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_grottoceratops",
+        "bedrock_identifier": "alexscaves:cave_painting_grottoceratops",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_grottoceratops"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_grottoceratops_friend",
+        "bedrock_identifier": "alexscaves:cave_painting_grottoceratops_friend",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_grottoceratops_friend"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_hunt",
+        "bedrock_identifier": "alexscaves:cave_painting_hunt",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_hunt"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_mystery_1",
+        "bedrock_identifier": "alexscaves:cave_painting_mystery_1",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_mystery_1"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_mystery_2",
+        "bedrock_identifier": "alexscaves:cave_painting_mystery_2",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_mystery_2"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_mystery_3",
+        "bedrock_identifier": "alexscaves:cave_painting_mystery_3",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_mystery_3"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_mystery_4",
+        "bedrock_identifier": "alexscaves:cave_painting_mystery_4",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_mystery_4"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_mystery_5",
+        "bedrock_identifier": "alexscaves:cave_painting_mystery_5",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_mystery_5"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_mystery_6",
+        "bedrock_identifier": "alexscaves:cave_painting_mystery_6",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_mystery_6"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_mystery_7",
+        "bedrock_identifier": "alexscaves:cave_painting_mystery_7",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_mystery_7"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_mystery_8",
+        "bedrock_identifier": "alexscaves:cave_painting_mystery_8",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_mystery_8"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_mystery_9",
+        "bedrock_identifier": "alexscaves:cave_painting_mystery_9",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_mystery_9"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_pewen",
+        "bedrock_identifier": "alexscaves:cave_painting_pewen",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_pewen"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_portal",
+        "bedrock_identifier": "alexscaves:cave_painting_portal",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_portal"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_relicheirus",
+        "bedrock_identifier": "alexscaves:cave_painting_relicheirus",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_relicheirus"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_relicheirus_slash",
+        "bedrock_identifier": "alexscaves:cave_painting_relicheirus_slash",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_relicheirus_slash"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_subterranodon",
+        "bedrock_identifier": "alexscaves:cave_painting_subterranodon",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_subterranodon"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_subterranodon_ride",
+        "bedrock_identifier": "alexscaves:cave_painting_subterranodon_ride",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_subterranodon_ride"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_tree_stars",
+        "bedrock_identifier": "alexscaves:cave_painting_tree_stars",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_tree_stars"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_tremorsaurus",
+        "bedrock_identifier": "alexscaves:cave_painting_tremorsaurus",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_tremorsaurus"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_tremorsaurus_friend",
+        "bedrock_identifier": "alexscaves:cave_painting_tremorsaurus_friend",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_tremorsaurus_friend"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_trilocaris",
+        "bedrock_identifier": "alexscaves:cave_painting_trilocaris",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_trilocaris"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_vallumraptor_chest",
+        "bedrock_identifier": "alexscaves:cave_painting_vallumraptor_chest",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_vallumraptor_chest"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:cave_painting_vallumraptor_friend",
+        "bedrock_identifier": "alexscaves:cave_painting_vallumraptor_friend",
+        "display_name": "Pintura rupestre",
+        "bedrock_options": {
+          "icon": "alexscaves_cave_painting_vallumraptor_friend"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_ambersol",
+        "bedrock_identifier": "alexscaves:display_cave_painting_ambersol",
+        "display_name": "Cave painting ambersol",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_ambersol"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_dark",
+        "bedrock_identifier": "alexscaves:display_cave_painting_dark",
+        "display_name": "Cave painting dark",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_dark"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_dino_nuggets",
+        "bedrock_identifier": "alexscaves:display_cave_painting_dino_nuggets",
+        "display_name": "Cave painting dino nuggets",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_dino_nuggets"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_enderman",
+        "bedrock_identifier": "alexscaves:display_cave_painting_enderman",
+        "display_name": "Cave painting enderman",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_enderman"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_footprint",
+        "bedrock_identifier": "alexscaves:display_cave_painting_footprint",
+        "display_name": "Cave painting footprint",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_footprint"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_footprints",
+        "bedrock_identifier": "alexscaves:display_cave_painting_footprints",
+        "display_name": "Cave painting footprints",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_footprints"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_friendship",
+        "bedrock_identifier": "alexscaves:display_cave_painting_friendship",
+        "display_name": "Cave painting friendship",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_friendship"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_grottoceratops",
+        "bedrock_identifier": "alexscaves:display_cave_painting_grottoceratops",
+        "display_name": "Cave painting grottoceratops",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_grottoceratops"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_grottoceratops_friend",
+        "bedrock_identifier": "alexscaves:display_cave_painting_grottoceratops_friend",
+        "display_name": "Cave painting grottoceratops friend",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_grottoceratops_friend"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_hunt",
+        "bedrock_identifier": "alexscaves:display_cave_painting_hunt",
+        "display_name": "Cave painting hunt",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_hunt"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_mystery_1",
+        "bedrock_identifier": "alexscaves:display_cave_painting_mystery_1",
+        "display_name": "Cave painting mystery 1",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_mystery_1"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_mystery_2",
+        "bedrock_identifier": "alexscaves:display_cave_painting_mystery_2",
+        "display_name": "Cave painting mystery 2",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_mystery_2"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_mystery_3",
+        "bedrock_identifier": "alexscaves:display_cave_painting_mystery_3",
+        "display_name": "Cave painting mystery 3",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_mystery_3"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_mystery_4",
+        "bedrock_identifier": "alexscaves:display_cave_painting_mystery_4",
+        "display_name": "Cave painting mystery 4",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_mystery_4"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_mystery_5",
+        "bedrock_identifier": "alexscaves:display_cave_painting_mystery_5",
+        "display_name": "Cave painting mystery 5",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_mystery_5"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_mystery_6",
+        "bedrock_identifier": "alexscaves:display_cave_painting_mystery_6",
+        "display_name": "Cave painting mystery 6",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_mystery_6"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_mystery_7",
+        "bedrock_identifier": "alexscaves:display_cave_painting_mystery_7",
+        "display_name": "Cave painting mystery 7",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_mystery_7"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_mystery_8",
+        "bedrock_identifier": "alexscaves:display_cave_painting_mystery_8",
+        "display_name": "Cave painting mystery 8",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_mystery_8"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_mystery_9",
+        "bedrock_identifier": "alexscaves:display_cave_painting_mystery_9",
+        "display_name": "Cave painting mystery 9",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_mystery_9"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_pewen",
+        "bedrock_identifier": "alexscaves:display_cave_painting_pewen",
+        "display_name": "Cave painting pewen",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_pewen"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_portal",
+        "bedrock_identifier": "alexscaves:display_cave_painting_portal",
+        "display_name": "Cave painting portal",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_portal"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_relicheirus",
+        "bedrock_identifier": "alexscaves:display_cave_painting_relicheirus",
+        "display_name": "Cave painting relicheirus",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_relicheirus"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_relicheirus_slash",
+        "bedrock_identifier": "alexscaves:display_cave_painting_relicheirus_slash",
+        "display_name": "Cave painting relicheirus slash",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_relicheirus_slash"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_subterranodon",
+        "bedrock_identifier": "alexscaves:display_cave_painting_subterranodon",
+        "display_name": "Cave painting subterranodon",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_subterranodon"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_subterranodon_ride",
+        "bedrock_identifier": "alexscaves:display_cave_painting_subterranodon_ride",
+        "display_name": "Cave painting subterranodon ride",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_subterranodon_ride"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_tree_stars",
+        "bedrock_identifier": "alexscaves:display_cave_painting_tree_stars",
+        "display_name": "Cave painting tree stars",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_tree_stars"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_tremorsaurus",
+        "bedrock_identifier": "alexscaves:display_cave_painting_tremorsaurus",
+        "display_name": "Cave painting tremorsaurus",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_tremorsaurus"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_tremorsaurus_friend",
+        "bedrock_identifier": "alexscaves:display_cave_painting_tremorsaurus_friend",
+        "display_name": "Cave painting tremorsaurus friend",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_tremorsaurus_friend"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_trilocaris",
+        "bedrock_identifier": "alexscaves:display_cave_painting_trilocaris",
+        "display_name": "Cave painting trilocaris",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_trilocaris"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_vallumraptor_chest",
+        "bedrock_identifier": "alexscaves:display_cave_painting_vallumraptor_chest",
+        "display_name": "Cave painting vallumraptor chest",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_vallumraptor_chest"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cave_painting_vallumraptor_friend",
+        "bedrock_identifier": "alexscaves:display_cave_painting_vallumraptor_friend",
+        "display_name": "Cave painting vallumraptor friend",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cave_painting_vallumraptor_friend"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cooked_dinosaur_chop_0",
+        "bedrock_identifier": "alexscaves:display_cooked_dinosaur_chop_0",
+        "display_name": "Cooked dinosaur chop 0",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cooked_dinosaur_chop_0"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cooked_dinosaur_chop_1",
+        "bedrock_identifier": "alexscaves:display_cooked_dinosaur_chop_1",
+        "display_name": "Cooked dinosaur chop 1",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cooked_dinosaur_chop_1"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cooked_dinosaur_chop_2",
+        "bedrock_identifier": "alexscaves:display_cooked_dinosaur_chop_2",
+        "display_name": "Cooked dinosaur chop 2",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cooked_dinosaur_chop_2"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/cooked_dinosaur_chop_3",
+        "bedrock_identifier": "alexscaves:display_cooked_dinosaur_chop_3",
+        "display_name": "Cooked dinosaur chop 3",
+        "bedrock_options": {
+          "icon": "alexscaves_display_cooked_dinosaur_chop_3"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/dinosaur_chop_0",
+        "bedrock_identifier": "alexscaves:display_dinosaur_chop_0",
+        "display_name": "Dinosaur chop 0",
+        "bedrock_options": {
+          "icon": "alexscaves_display_dinosaur_chop_0"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/dinosaur_chop_1",
+        "bedrock_identifier": "alexscaves:display_dinosaur_chop_1",
+        "display_name": "Dinosaur chop 1",
+        "bedrock_options": {
+          "icon": "alexscaves_display_dinosaur_chop_1"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/dinosaur_chop_2",
+        "bedrock_identifier": "alexscaves:display_dinosaur_chop_2",
+        "display_name": "Dinosaur chop 2",
+        "bedrock_options": {
+          "icon": "alexscaves_display_dinosaur_chop_2"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:display/dinosaur_chop_3",
+        "bedrock_identifier": "alexscaves:display_dinosaur_chop_3",
+        "display_name": "Dinosaur chop 3",
+        "bedrock_options": {
+          "icon": "alexscaves_display_dinosaur_chop_3"
+        }
+      }
+    ],
+    "minecraft:petrified_oak_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_limestone_slab",
+        "bedrock_identifier": "alexscaves:smooth_limestone_slab",
+        "display_name": "Losa de caliza lisa",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_limestone_slab"
+        }
+      }
+    ],
+    "minecraft:polished_andesite_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:cinder_block_slab",
+        "bedrock_identifier": "alexscaves:cinder_block_slab",
+        "display_name": "Losa de ladrillos de hormigón",
+        "bedrock_options": {
+          "icon": "alexscaves_cinder_block_slab"
+        }
+      }
+    ],
+    "minecraft:polished_andesite_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:cinder_block_stairs",
+        "bedrock_identifier": "alexscaves:cinder_block_stairs",
+        "display_name": "Escaleras de ladrillos de hormigón",
+        "bedrock_options": {
+          "icon": "alexscaves_cinder_block_stairs"
+        }
+      }
+    ],
+    "minecraft:polished_deepslate_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:galena_slab",
+        "bedrock_identifier": "alexscaves:galena_slab",
+        "display_name": "Losa de galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena_slab"
+        }
+      }
+    ],
+    "minecraft:polished_deepslate_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:galena_stairs",
+        "bedrock_identifier": "alexscaves:galena_stairs",
+        "display_name": "Escaleras de galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena_stairs"
+        }
+      }
+    ],
+    "minecraft:polished_deepslate_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:galena_wall",
+        "bedrock_identifier": "alexscaves:galena_wall",
+        "display_name": "Muro de galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena_wall"
+        }
+      }
+    ],
+    "minecraft:polished_granite_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_coprolith_slab",
+        "bedrock_identifier": "alexscaves:smooth_coprolith_slab",
+        "display_name": "Losa de coprolito liso",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_coprolith_slab"
+        }
+      }
+    ],
+    "minecraft:polished_granite_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_coprolith_stairs",
+        "bedrock_identifier": "alexscaves:smooth_coprolith_stairs",
+        "display_name": "Escaleras de coprolito liso",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_coprolith_stairs"
+        }
+      }
+    ],
+    "minecraft:potion": [
+      {
+        "type": "definition",
+        "model": "alexscaves:radon_bottle",
+        "bedrock_identifier": "alexscaves:radon_bottle",
+        "display_name": "Botella de radón",
+        "bedrock_options": {
+          "icon": "alexscaves_radon_bottle"
+        }
+      }
+    ],
+    "minecraft:rabbit_hide": [
+      {
+        "type": "definition",
+        "model": "alexscaves:tough_hide",
+        "bedrock_identifier": "alexscaves:tough_hide",
+        "display_name": "Cuero tenaz",
+        "bedrock_options": {
+          "icon": "alexscaves_tough_hide"
+        }
+      }
+    ],
+    "minecraft:red_sandstone_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:gingerbread_wall",
+        "bedrock_identifier": "alexscaves:gingerbread_wall",
+        "display_name": "Muro de pan de jengibre",
+        "bedrock_options": {
+          "icon": "alexscaves_gingerbread_wall"
+        }
+      }
+    ],
+    "minecraft:sandstone_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:limestone_slab",
+        "bedrock_identifier": "alexscaves:limestone_slab",
+        "display_name": "Losa de caliza",
+        "bedrock_options": {
+          "icon": "alexscaves_limestone_slab"
+        }
+      }
+    ],
+    "minecraft:sandstone_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:limestone_stairs",
+        "bedrock_identifier": "alexscaves:limestone_stairs",
+        "display_name": "Escaleras de caliza",
+        "bedrock_options": {
+          "icon": "alexscaves_limestone_stairs"
+        }
+      }
+    ],
+    "minecraft:sandstone_wall": [
+      {
+        "type": "definition",
+        "model": "alexscaves:limestone_wall",
+        "bedrock_identifier": "alexscaves:limestone_wall",
+        "display_name": "Muro de caliza",
+        "bedrock_options": {
+          "icon": "alexscaves_limestone_wall"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_limestone_wall",
+        "bedrock_identifier": "alexscaves:smooth_limestone_wall",
+        "display_name": "Muro de caliza lisa",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_limestone_wall"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:wafer_cookie_wall",
+        "bedrock_identifier": "alexscaves:wafer_cookie_wall",
+        "display_name": "Muro de oblea",
+        "bedrock_options": {
+          "icon": "alexscaves_wafer_cookie_wall"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone_wall",
+        "bedrock_identifier": "alexscaves:guanostone_wall",
+        "display_name": "Muro de guanopiedra",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone_wall"
+        }
+      }
+    ],
+    "minecraft:shield": [
+      {
+        "type": "definition",
+        "model": "alexscaves:galena_gauntlet",
+        "bedrock_identifier": "alexscaves:galena_gauntlet",
+        "display_name": "Guante de galena",
+        "bedrock_options": {
+          "icon": "alexscaves_galena_gauntlet"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:resistor_shield",
+        "bedrock_identifier": "alexscaves:resistor_shield",
+        "display_name": "Escudo de resistidor",
+        "bedrock_options": {
+          "icon": "alexscaves_resistor_shield"
+        }
+      }
+    ],
+    "minecraft:slime_ball": [
+      {
+        "type": "definition",
+        "model": "alexscaves:ferrouslime_ball",
+        "bedrock_identifier": "alexscaves:ferrouslime_ball",
+        "display_name": "Bola de ferroslime",
+        "bedrock_options": {
+          "icon": "alexscaves_ferrouslime_ball"
+        }
+      }
+    ],
+    "minecraft:smooth_quartz_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_bone_slab",
+        "bedrock_identifier": "alexscaves:smooth_bone_slab",
+        "display_name": "Losa de huesos lisa",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_bone_slab"
+        }
+      }
+    ],
+    "minecraft:smooth_quartz_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_bone_stairs",
+        "bedrock_identifier": "alexscaves:smooth_bone_stairs",
+        "display_name": "Escaleras de huesos lisa",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_bone_stairs"
+        }
+      }
+    ],
+    "minecraft:smooth_sandstone_slab": [
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone_slab",
+        "bedrock_identifier": "alexscaves:guanostone_slab",
+        "display_name": "Losa de guanopiedra",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone_slab"
+        }
+      }
+    ],
+    "minecraft:smooth_sandstone_stairs": [
+      {
+        "type": "definition",
+        "model": "alexscaves:smooth_limestone_stairs",
+        "bedrock_identifier": "alexscaves:smooth_limestone_stairs",
+        "display_name": "Escaleras de caliza lisa",
+        "bedrock_options": {
+          "icon": "alexscaves_smooth_limestone_stairs"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guanostone_stairs",
+        "bedrock_identifier": "alexscaves:guanostone_stairs",
+        "display_name": "Escaleras de guanopiedra",
+        "bedrock_options": {
+          "icon": "alexscaves_guanostone_stairs"
+        }
+      }
+    ],
+    "minecraft:snowball": [
+      {
+        "type": "definition",
+        "model": "alexscaves:limestone_spear",
+        "bedrock_identifier": "alexscaves:limestone_spear",
+        "display_name": "Lanza de caliza",
+        "bedrock_options": {
+          "icon": "alexscaves_limestone_spear"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:vanilla_ice_cream_scoop",
+        "bedrock_identifier": "alexscaves:vanilla_ice_cream_scoop",
+        "display_name": "Cucharón de helado de vainilla",
+        "bedrock_options": {
+          "icon": "alexscaves_vanilla_ice_cream_scoop"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:chocolate_ice_cream_scoop",
+        "bedrock_identifier": "alexscaves:chocolate_ice_cream_scoop",
+        "display_name": "Cucharón de helado de chocolate",
+        "bedrock_options": {
+          "icon": "alexscaves_chocolate_ice_cream_scoop"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:sweetberry_ice_cream_scoop",
+        "bedrock_identifier": "alexscaves:sweetberry_ice_cream_scoop",
+        "display_name": "Cucharón de helado de bayas dulces",
+        "bedrock_options": {
+          "icon": "alexscaves_sweetberry_ice_cream_scoop"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:depth_charge",
+        "bedrock_identifier": "alexscaves:depth_charge",
+        "display_name": "Carga profunda",
+        "bedrock_options": {
+          "icon": "alexscaves_depth_charge"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:ink_bomb",
+        "bedrock_identifier": "alexscaves:ink_bomb",
+        "display_name": "Bomba de tinta",
+        "bedrock_options": {
+          "icon": "alexscaves_ink_bomb"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:glow_ink_bomb",
+        "bedrock_identifier": "alexscaves:glow_ink_bomb",
+        "display_name": "Bomba de tinta luminosa",
+        "bedrock_options": {
+          "icon": "alexscaves_glow_ink_bomb"
+        }
+      },
+      {
+        "type": "definition",
+        "model": "alexscaves:guano",
+        "bedrock_identifier": "alexscaves:guano",
+        "display_name": "Guano",
+        "bedrock_options": {
+          "icon": "alexscaves_guano"
+        }
+      }
+    ],
+    "minecraft:tinted_glass": [
+      {
+        "type": "definition",
+        "model": "alexscaves:depth_glass",
+        "bedrock_identifier": "alexscaves:depth_glass",
+        "display_name": "Cristal abisal",
+        "bedrock_options": {
+          "icon": "alexscaves_depth_glass"
+        }
+      }
+    ],
+    "minecraft:white_stained_glass": [
+      {
+        "type": "definition",
+        "model": "alexscaves:sugar_glass",
+        "bedrock_identifier": "alexscaves:sugar_glass",
+        "display_name": "Cristal de azúcar",
+        "bedrock_options": {
+          "icon": "alexscaves_sugar_glass"
+        }
+      }
+    ],
+    "minecraft:wooden_sword": [
+      {
+        "type": "definition",
+        "model": "alexscaves:primitive_club",
+        "bedrock_identifier": "alexscaves:primitive_club",
+        "display_name": "Cachiporra primitiva",
+        "bedrock_options": {
+          "icon": "alexscaves_primitive_club"
+        }
+      }
+    ]
+  }
+}

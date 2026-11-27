@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_giant_sweetberry
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:giant_sweetberry
+display:
+  translation-key: item.alexscaves.giant_sweetberry
+  fallback-name: "Cereza gigante"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/giant_sweetberry.json
+  bedrock-texture: bedrock/textures/alexscaves/block/giant_sweetberry.png

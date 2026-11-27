@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_sweetberry_ice_cream_scoop
+mechanic: alexs-caves
+material: SNOWBALL
+item-model: alexscaves:sweetberry_ice_cream_scoop
+display:
+  translation-key: item.alexscaves.sweetberry_ice_cream_scoop
+  fallback-name: "Cucharón de helado de bayas dulces"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 16
+appearance:
+  java-item-definition: java/assets/alexscaves/items/sweetberry_ice_cream_scoop.json
+  bedrock-texture: bedrock/textures/alexscaves/item/sweetberry_ice_cream_scoop.png

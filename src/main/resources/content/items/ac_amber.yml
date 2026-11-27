@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_amber
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:amber
+display:
+  translation-key: item.alexscaves.amber
+  fallback-name: "Ámbar"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/amber.json
+  bedrock-texture: bedrock/textures/alexscaves/block/amber.png

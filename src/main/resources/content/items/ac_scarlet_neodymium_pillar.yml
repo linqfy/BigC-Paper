@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_scarlet_neodymium_pillar
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:scarlet_neodymium_pillar
+display:
+  translation-key: item.alexscaves.scarlet_neodymium_pillar
+  fallback-name: "Pilar de neodimio escarlata"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_scarlet_neodymium_pillar_recipe
+  result-amount: 2
+  shape: ["NN", "NN", "NN"]
+  ingredients:
+    N: bigcasares:ac_raw_scarlet_neodymium
+appearance:
+  java-item-definition: java/assets/alexscaves/items/scarlet_neodymium_pillar.json
+  bedrock-texture: bedrock/textures/alexscaves/block/neodymium/scarlet_pillar_side.png

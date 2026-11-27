@@ -1,0 +1,20 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_pewen_stairs
+mechanic: alexs-caves
+material: OAK_STAIRS
+item-model: alexscaves:pewen_stairs
+display:
+  translation-key: item.alexscaves.pewen_stairs
+  fallback-name: "Escaleras de pehuén"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_pewen_stairs_recipe
+  result-amount: 4
+  shape: ["#  ", "## ", "###"]
+  ingredients:
+    "#": bigcasares:ac_pewen_planks
+appearance:
+  java-item-definition: java/assets/alexscaves/items/pewen_stairs.json
+  bedrock-texture: bedrock/textures/alexscaves/block/pewen/pewen_planks.png

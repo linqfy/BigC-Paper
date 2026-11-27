@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_uranium_shard
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:uranium_shard
+display:
+  translation-key: item.alexscaves.uranium_shard
+  fallback-name: "Fragmento de uranio"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/uranium_shard.json
+  bedrock-texture: bedrock/textures/alexscaves/item/uranium_shard.png

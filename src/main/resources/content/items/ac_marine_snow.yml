@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_marine_snow
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:marine_snow
+display:
+  translation-key: item.alexscaves.marine_snow
+  fallback-name: "Nieve marina"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/marine_snow.json
+  bedrock-texture: bedrock/textures/alexscaves/item/marine_snow.png

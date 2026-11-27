@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_toxic_paste
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:toxic_paste
+display:
+  translation-key: item.alexscaves.toxic_paste
+  fallback-name: "Pasta tóxica"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/toxic_paste.json
+  bedrock-texture: bedrock/textures/alexscaves/item/toxic_paste.png

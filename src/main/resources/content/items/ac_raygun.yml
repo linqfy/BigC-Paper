@@ -1,0 +1,24 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_raygun
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:raygun
+display:
+  translation-key: item.alexscaves.raygun
+  fallback-name: "Pistola de rayos"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  max-damage: 1000
+recipe:
+  key: ac_raygun_recipe
+  result-amount: 1
+  shape: ["PPP", "FUU", "P  "]
+  ingredients:
+    P: bigcasares:ac_polymer_plate
+    U: bigcasares:ac_uranium_rod
+    F: bigcasares:ac_fissile_core
+appearance:
+  java-item-definition: java/assets/alexscaves/items/raygun.json
+  bedrock-texture: bedrock/textures/alexscaves/item/raygun_icon.png

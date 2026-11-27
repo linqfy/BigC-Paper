@@ -1,0 +1,28 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_serene_salad
+mechanic: alexs-caves
+material: MUSHROOM_STEW
+item-model: alexscaves:serene_salad
+display:
+  translation-key: item.alexscaves.serene_salad
+  fallback-name: "Ensalada serena"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 1
+components:
+  food:
+    nutrition: 5
+    saturation: 3.5
+    can-always-eat: false
+recipe:
+  key: ac_serene_salad_recipe
+  result-amount: 1
+  type: shapeless
+  ingredients:
+    - bigcasares:ac_fiddlehead
+    - bigcasares:ac_tree_star
+    - bigcasares:ac_pine_nuts
+    - BOWL
+appearance:
+  java-item-definition: java/assets/alexscaves/items/serene_salad.json
+  bedrock-texture: bedrock/textures/alexscaves/item/serene_salad.png

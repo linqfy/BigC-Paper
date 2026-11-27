@@ -3,6 +3,7 @@ package dev.linqfy.bigCasares.modules.items;
 import dev.linqfy.bigCasares.BigCasares;
 import dev.linqfy.bigCasares.items.CustomItemRegistry;
 import dev.linqfy.bigCasares.items.catalog.CustomItemCatalog;
+import dev.linqfy.bigCasares.items.catalog.CustomItemDefinition;
 import dev.linqfy.bigCasares.items.catalog.BukkitCatalogRecipeGateway;
 import dev.linqfy.bigCasares.items.catalog.CatalogRecipeRuntime;
 import dev.linqfy.bigCasares.items.catalog.ItemCatalogLoader;
@@ -15,11 +16,16 @@ import dev.linqfy.bigCasares.items.catalog.OnlineItemReconciler;
 import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
+import dev.linqfy.bigCasares.modules.alexscaves.AlexsCavesItemIds;
+import dev.linqfy.bigCasares.modules.alexscaves.AlexsCavesModule;
 import org.bukkit.Material;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public final class ItemCatalogModule implements PluginModule {
 
@@ -149,14 +155,35 @@ public final class ItemCatalogModule implements PluginModule {
     }
 
     private void seedDefaults() {
-        new ItemCatalogSeeder(DEFAULT_FILES).seed(
+        new ItemCatalogSeeder(defaultFiles()).seed(
             name -> plugin.getResource("content/items/" + name), itemDirectory());
+    }
+
+    /** Alex's Caves items come from a generated list and only exist while that module is opted in. */
+    private List<String> defaultFiles() {
+        if (!AlexsCavesModule.isExplicitlyEnabled(plugin.getConfig())) {
+            return DEFAULT_FILES;
+        }
+        return Stream.concat(DEFAULT_FILES.stream(), AlexsCavesItemIds.defaultFiles().stream()).toList();
     }
 
     private CustomItemCatalog loadCandidate() {
         CustomItemCatalog candidate = new ItemCatalogLoader().load(itemDirectory());
+        if (!AlexsCavesModule.isExplicitlyEnabled(plugin.getConfig())) {
+            candidate = withoutAlexsCaves(candidate);
+        }
         new ItemCatalogValidator(ItemCatalogModule::isAvailableMaterial).validate(candidate, contentDirectory().resolve("pack"));
         return candidate;
+    }
+
+    static CustomItemCatalog withoutAlexsCaves(CustomItemCatalog catalog) {
+        Map<String, CustomItemDefinition> kept = new LinkedHashMap<>();
+        catalog.definitions().forEach((id, definition) -> {
+            if (!AlexsCavesItemIds.contains(id)) {
+                kept.put(id, definition);
+            }
+        });
+        return kept.size() == catalog.size() ? catalog : new CustomItemCatalog(kept);
     }
 
     private Path contentDirectory() {

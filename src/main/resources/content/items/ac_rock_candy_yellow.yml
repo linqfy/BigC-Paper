@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_rock_candy_yellow
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:rock_candy_yellow
+display:
+  translation-key: item.alexscaves.rock_candy_yellow
+  fallback-name: "Roca de caramelo amarillo"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/rock_candy_yellow.json
+  bedrock-texture: bedrock/textures/alexscaves/block/rock_candy_yellow.png

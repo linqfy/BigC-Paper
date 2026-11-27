@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_gingerbread_stairs
+mechanic: alexs-caves
+material: ACACIA_STAIRS
+item-model: alexscaves:gingerbread_stairs
+display:
+  translation-key: item.alexscaves.gingerbread_stairs
+  fallback-name: "Escaleras de pan de jengibre"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/gingerbread_stairs.json
+  bedrock-texture: bedrock/textures/alexscaves/block/gingerbread_block.png

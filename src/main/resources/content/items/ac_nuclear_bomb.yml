@@ -1,0 +1,23 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_nuclear_bomb
+mechanic: alexs-caves
+material: NOTE_BLOCK
+item-model: alexscaves:nuclear_bomb
+display:
+  translation-key: item.alexscaves.nuclear_bomb
+  fallback-name: "Bomba nuclear"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+recipe:
+  key: ac_nuclear_bomb_recipe
+  result-amount: 1
+  shape: ["IFI", "UBU", "IFI"]
+  ingredients:
+    U: bigcasares:ac_uranium_rod
+    B: bigcasares:ac_block_of_uranium
+    F: bigcasares:ac_fissile_core
+    I: IRON_BLOCK
+appearance:
+  java-item-definition: java/assets/alexscaves/items/nuclear_bomb.json
+  bedrock-texture: bedrock/textures/alexscaves/block/nuclear_bomb_side_0.png

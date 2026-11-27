@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_moth_dust
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:moth_dust
+display:
+  translation-key: item.alexscaves.moth_dust
+  fallback-name: "Polvo de oscurolilla"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/moth_dust.json
+  bedrock-texture: bedrock/textures/alexscaves/item/moth_dust.png

@@ -1,0 +1,14 @@
+# Generado por tools/alexscaves/generate_content.py desde Alex's Caves 2.0.2 (AlexModGuy, LGPL).
+id: ac_notor_gizmo
+mechanic: alexs-caves
+material: PAPER
+item-model: alexscaves:notor_gizmo
+display:
+  translation-key: item.alexscaves.notor_gizmo
+  fallback-name: "Artilugio notificador"
+  lore:
+    - "§8Alex's Caves"
+max-stack-size: 64
+appearance:
+  java-item-definition: java/assets/alexscaves/items/notor_gizmo.json
+  bedrock-texture: bedrock/textures/alexscaves/item/notor_gizmo.png
