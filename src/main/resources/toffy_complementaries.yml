@@ -1,0 +1,172 @@
+# =====================================================================================================
+#  Toffy Complementaries: nivel de equipo de 0 a 200  (CÓMO se calcula)
+# =====================================================================================================
+#  Hay dos archivos, los dos en plugins/BigCasares/:
+#    toffy_complementaries.yml      <- este: qué vale 0, qué vale 200, pesos, curva y salida.
+#    toffy_valores.yml  <- cuánto vale cada armadura, arma, herramienta, encantamiento y objeto custom.
+#  Se copian la primera vez y nunca se pisan. Después de editarlos usá  /toffy reload  (o /bigcasares reload).
+#  Si algo está mal escrito, la consola dice qué archivo y qué clave fallan. Al recargar se mantiene la última
+#  configuración que funcionó; si el error ya estaba al arrancar el servidor, se usan los valores de fábrica.
+#
+#  Cómo se calcula:
+#    poder de un ítem   = valor del ítem + puntos de cada encantamiento        (los dos en toffy_valores.yml)
+#    A (armadura, 0..1) = poder de las 4 piezas, ubicado entre la referencia "zero" y la "max"
+#    W (arma, 0..1)     = la mejor arma, comparada con la referencia de SU familia
+#    T (herram., 0..1)  = la mejor herramienta, comparada con la referencia de SU familia
+#    t                  = (armor·A + weapon·W + tool·T) / (armor + weapon + tool)          pesos de weights:
+#    nivel              = maximum · curva(t)
+#  La curva siempre deja la referencia zero en 0 y la max en 200: solo cambia los valores del medio.
+#  Las claves aceptan "netherite_sword" o "minecraft:netherite_sword". Los objetos custom se escriben
+#  "custom:<nombre>" (el nombre que tienen en custom-items: de toffy_valores.yml).
+# =====================================================================================================
+
+output:
+  # Nivel que tiene la referencia "max". Entre 0.001 y 1000000; por defecto 200.0.
+  maximum: 200.0
+  # Decimales del valor que reciben los otros módulos y el comando (0 = número entero). Entre 0 y 6; por defecto 1.
+  decimals: 1
+
+# Cuánto pesa cada parte. No hace falta que sumen 1: se usan como proporción.
+# Cada peso va de 0 a 1000 y la suma tiene que ser mayor que 0. Por defecto armor 0.6, weapon 0.4, tool 0.0.
+# Con 0.6 / 0.4 / 0, la armadura máxima sin arma da 120, el arma máxima sin armadura da 80 y las herramientas no
+# cuentan. Para que cuenten, dales peso (por ejemplo armor 0.55, weapon 0.35, tool 0.1); entonces el 200 también
+# pide la herramienta de referencia.
+weights:
+  armor: 0.6
+  weapon: 0.4
+  tool: 0.0
+
+# Dónde se busca cada parte en un jugador. Siempre cuenta la MEJOR que se encuentre.
+#
+# armor-search (armadura), por cada lugar (casco, pechera, pantalones, botas):
+#   WORN       solo la pieza que tiene puesta
+#   INVENTORY  la puesta y las que lleve en el inventario: cuenta la mejor de cada lugar   <- por defecto
+#
+# weapon-search (armas) y tool-search (herramientas):
+#   MAIN_HAND  solo la mano principal (cambia apenas el jugador cambia de slot)
+#   HANDS      mano principal y secundaria
+#   HOTBAR     la barra rápida (9 slots) y la mano secundaria
+#   INVENTORY  todo el inventario y la mano secundaria
+# Los mobs siempre usan lo que tienen puesto y sus dos manos.
+# Por defecto: armor-search INVENTORY, weapon-search HOTBAR, tool-search INVENTORY.
+armor-search: INVENTORY
+weapon-search: HOTBAR
+tool-search: INVENTORY
+
+# Memoria del equipo, para el "nivel real". Cada jugador tiene guardado, por lugar de armadura, su mejor arma y su
+# mejor herramienta, lo mejor que tuvo:
+#   - si se pone algo igual o mejor, eso pasa a ser lo recordado;
+#   - si se lo saca (deja el lugar vacío) o lo cambia por algo peor, se sigue recordando lo anterior.
+# El nivel real usa lo que tiene ahora más lo recordado; nunca es menor que el nivel actual. La durabilidad no cuenta.
+# Se guarda en plugins/BigCasares/data/toffy-complementaries/players/<uuid>.yml, así que sobrevive a desconexiones y reinicios.
+memory:
+  # false: el nivel real es igual al actual y no se toca lo guardado. Por defecto true.
+  enabled: true
+  # Minutos sin volver a tener una pieza recordada hasta que se olvida (cuenta tiempo real, también desconectado).
+  # 0 = no se olvida por tiempo. Entre 0 y 525600 (un año); por defecto 60.
+  forget-after-minutes: 60
+  # Al morir se olvida todo y se vuelve a empezar con lo que tenga después de morir. Por defecto true.
+  # Aunque la memoria esté desactivada, morir igual olvida lo guardado si esto es true.
+  forget-on-death: true
+  # Cada cuántos ticks se revisa el equipo de los jugadores conectados (20 ticks = 1 segundo).
+  # Entre 1 y 1200; por defecto 20. Este valor se aplica con /bigcasares reload; los demás también con /toffy reload.
+  check-interval-ticks: 20
+
+# Curva que dobla el progreso t (0..1) antes de multiplicarlo por maximum. type por defecto LINEAR.
+#   LINEAR       f(t) = t                                    (sin cambios)
+#   EXPONENTIAL  f(t) = (e^(k·t) - 1) / (e^k - 1)            usa strength (k). k > 0: sube lento al principio y
+#                                                            rápido al final. k < 0: al revés. Entre 0.000001 y 50
+#                                                            en valor absoluto. Por defecto strength 3.0.
+#   LOGARITHMIC  f(t) = ln(1 + k·t) / ln(1 + k)              usa strength (k). Sube rápido al principio. Entre
+#                                                            0.000001 y 1000000. Por defecto strength 3.0.
+#   POWER        f(t) = t^p                                  usa exponent (p). p > 1 lento al principio, p < 1 rápido
+#                                                            al principio (0.5 = raíz cuadrada). Mayor que 0 y como
+#                                                            mucho 100. Por defecto exponent 2.0.
+#   SIGMOID      curva en S                                  usa strength (k, más alto = más brusca; entre 0.000001 y
+#                                                            100, por defecto 3.0) y midpoint (mayor que 0 y menor que
+#                                                            1, donde está el salto; por defecto 0.5).
+#   POINTS       puntos [t, f(t)] unidos con rectas          usa points. Tiene que empezar en [0, 0], terminar
+#                                                            en [1, 1], con t creciente y f(t) que nunca baje. Cada
+#                                                            punto va entre 0 y 1.
+# Los parámetros que no usa la curva elegida se ignoran.
+curve:
+  type: LINEAR
+  strength: 3.0
+  exponent: 2.0
+  midpoint: 0.5
+  points:
+    - [0.0, 0.0]
+    - [0.5, 0.3]
+    - [1.0, 1.0]
+
+# Las dos referencias. Cada ítem se escribe como
+#   item: netherite_sword
+#   enchantments: { sharpness: 5, unbreaking: 3 }
+# o, sin encantamientos, directamente:  sword: wooden_sword
+# Un objeto custom se escribe con su nombre:  item: custom:sahurs_bat
+references:
+  # Lo que vale 0. Vacío = un jugador sin absolutamente nada. Si nombrás algunas piezas o familias pero no todas,
+  # las que faltan valen 0 y la consola avisa.
+  # Ejemplo para que la armadura de cuero completa valga 0:
+  #   armor:
+  #     helmet: leather_helmet
+  #     chestplate: leather_chestplate
+  #     leggings: leather_leggings
+  #     boots: leather_boots
+  zero:
+    armor: {}
+    weapons: {}
+    tools: {}
+
+  # Lo que vale 200: netherite completa con todos los encantamientos compatibles entre sí que suman puntos
+  # (datos de vanilla 26.2) y un arma full encantada de cualquiera de las familias. Como lleva todos los encantamientos
+  # que suman, ninguna combinación con piezas de menor material puede igualarla: el 200 exige este equipo.
+  max:
+    armor:
+      helmet:
+        item: netherite_helmet
+        enchantments: { protection: 4, thorns: 3, respiration: 3, aqua_affinity: 1, unbreaking: 3, mending: 1 }
+      chestplate:
+        item: netherite_chestplate
+        enchantments: { protection: 4, thorns: 3, unbreaking: 3, mending: 1 }
+      leggings:
+        item: netherite_leggings
+        enchantments: { protection: 4, thorns: 3, swift_sneak: 3, unbreaking: 3, mending: 1 }
+      boots:
+        item: netherite_boots
+        enchantments: { protection: 4, thorns: 3, feather_falling: 4, depth_strider: 3, soul_speed: 3, unbreaking: 3, mending: 1 }
+    # Una referencia por cada familia de "weapons:" de toffy_valores.yml. Cada arma se compara contra la de su
+    # familia, así una maza full y una espada full valen lo mismo (W = 1).
+    weapons:
+      sword:
+        item: netherite_sword
+        enchantments: { sharpness: 5, fire_aspect: 2, knockback: 2, looting: 3, sweeping_edge: 3, unbreaking: 3, mending: 1 }
+      axe:
+        item: netherite_axe
+        enchantments: { sharpness: 5, efficiency: 5, fortune: 3, unbreaking: 3, mending: 1 }
+      mace:
+        item: mace
+        enchantments: { density: 5, wind_burst: 3, fire_aspect: 2, unbreaking: 3, mending: 1 }
+      spear:
+        item: netherite_spear
+        enchantments: { sharpness: 5, lunge: 3, fire_aspect: 2, knockback: 2, looting: 3, unbreaking: 3, mending: 1 }
+      trident:
+        item: trident
+        enchantments: { impaling: 5, loyalty: 3, channeling: 1, unbreaking: 3, mending: 1 }
+    # Una referencia por cada familia de "tools:". Solo se usan si weights.tool es mayor que 0.
+    tools:
+      pickaxe:
+        item: netherite_pickaxe
+        enchantments: { efficiency: 5, fortune: 3, unbreaking: 3, mending: 1 }
+      shovel:
+        item: netherite_shovel
+        enchantments: { efficiency: 5, fortune: 3, unbreaking: 3, mending: 1 }
+      hoe:
+        item: netherite_hoe
+        enchantments: { efficiency: 5, fortune: 3, unbreaking: 3, mending: 1 }
+      shears:
+        item: shears
+        enchantments: { efficiency: 5, unbreaking: 3, mending: 1 }
+      fishing_rod:
+        item: fishing_rod
+        enchantments: { luck_of_the_sea: 3, lure: 3, unbreaking: 3, mending: 1 }

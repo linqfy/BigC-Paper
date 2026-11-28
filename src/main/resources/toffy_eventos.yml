@@ -1,0 +1,184 @@
+# =====================================================================================================
+#  toffy_eventos.yml: eventos del staff (Lifesteal, KOTH, TNT Tag, Spleef) y tiempos de los torneos
+# =====================================================================================================
+#  Los eventos los inicia el staff con /toffy evento iniciar <tipo> <torneo> [segundos] y nunca arrancan solos.
+#  Se juegan sobre los anotados del torneo (/anotar <torneo>). Lifesteal se juega en los mundos normales con
+#  keepInventory. KOTH, TNT Tag y Spleef usan un inventario de evento: el inventario real se guarda en
+#  data/toffy-complementaries/eventos/snapshots.yml y se devuelve al salir, al ser eliminado, al terminar el evento
+#  o al volver a entrar si hubo un crash. Los premios y corazones que un jugador no pudo recibir (estaba
+#  desconectado) quedan en data/toffy-complementaries/eventos/owed.yml y se entregan al volver a entrar.
+#
+#  Textos (chat, titulos, barra de accion, sonidos por caso): toffy_mensajes.yml. Casos de evento: evento-lobby, evento-unido,
+#  evento-salio, evento-empieza, evento-ganador, evento-eliminado, evento-cancelado, evento-fin, evento-aviso, evento-no-disponible,
+#  evento-boton, evento-cuenta, evento-lifesteal-* (iniciado, reglas, meta, tiempo, fin*, robo-*, piso, maximo, cancelado),
+#  evento-koth-* (ajuste, tirado, libre, disputada, rey, barra), evento-tnt-* (tenes, corre, ronda, pasa-*, explota),
+#  evento-spleef-* (gracia, romper), evento-kit-*, evento-descripcion-*, evento-premio*, evento-motivo-*, evento-causa-*.
+#  Tipos de evento (se pueden escribir de cualquiera de las dos formas):
+#    lifesteal (robavida)   koth (rey)   tnttag (tnt)   spleef (nieve)
+#  Despues de editar: /toffy reload. Los cambios se aplican al PROXIMO evento (nunca a uno en curso).
+#  Los tiempos de torneos (torneos.*) se aplican al momento de /toffy reload.
+#
+#  Los rangos de cada clave estan en el comentario de la clave (minimo a maximo).
+
+# Interruptor de los eventos. false = no se puede iniciar ninguno (los inventarios guardados se siguen devolviendo).
+enabled: true
+
+# Dimensión vacía bigcasares:eventos donde se arman las arenas. Aparece después del primer reinicio.
+arena-dimension: true
+# Mundo alternativo (vacío y dedicado: las arenas borran lo que haya) mientras la dimensión no esté activa.
+# No puede ser el mundo principal del servidor (se ignora con un aviso).
+fallback-arena-world: ""
+# Altura de la arena. Rango 0 a 250.
+arena-y: 100
+# Segundos de espera en la sala previa antes de que arranque un evento de arena. Rango 5 a 600.
+# Los anotados del torneo entran solos; los demas se anotan con /anotar <torneo> durante la espera.
+lobby-seconds: 30
+# Segundos de la espera en los que se repite el anuncio con el boton [UNIRSE] (cada uno entre 5 y 600, de mayor a
+# menor). Ademas, en los ultimos 5 segundos cada uno recibe la cuenta regresiva. Por defecto: 20 y 10.
+lobby-countdown-seconds: [20, 10]
+
+# Lista de comandos que puede usar un participante durante el evento (sin la barra, en minúsculas).
+allowed-commands: [anotar, toffy, tcomp, evento, eventos]
+
+lifesteal:
+  duration-minutes: 60       # Duración del evento. Rango 1 a más.
+  hearts-per-kill: 1         # Corazones que roba cada kill. Rango 1 a más.
+  # Nadie baja de este piso; matar a alguien que ya está en el piso no roba nada. Rango 1 a más.
+  floor-hearts: 3
+  max-hearts: 20             # Máximo de corazones del evento. No puede ser menor que floor-hearts.
+  # Terminar con al menos estos corazones regala corazón(es) permanente(s). Rango 1 a más.
+  permanent-reward-threshold: 12
+  # Corazones permanentes que da cada vez (con max-permanent-bonus-hearts como tope). Rango 0 a 20.
+  permanent-heart-reward: 1
+  max-permanent-bonus-hearts: 10   # Tope de corazones permanentes por jugador. Rango 0 a más.
+  # Jugadores online mínimos del torneo para empezar. Rango 1 a más.
+  min-players: 1
+  # Segundos restantes en los que se avisa cuánto falta (cada uno entre 1 y 86400).
+  warning-seconds: [300, 60]
+  # false = la protección de inventario solo vale para los anotados del evento; true = para cualquier muerte en
+  # el servidor mientras el evento corre (lo original).
+  keep-inventory-everyone: true
+  # Premio extra para quien llega al umbral (además del corazón permanente). Items: id[:cantidad]; comandos: {player}.
+  rewards:
+    items: []
+    commands: []
+koth:
+  duration-minutes: 10       # Duración máxima. Rango 1 a más.
+  # Segundos solo en la colina para ganar; si se acaba el tiempo gana quien tenga más. Rango 1 a más.
+  capture-seconds: 120
+  min-players: 2             # Rango 1 a más.
+  platform-radius: 20        # Radio de la plataforma. Rango 6 a 48.
+  hill-radius: 3             # Radio de la colina de oro. Rango 1 a 10.
+  knockback-level: 5         # Nivel de Knockback del palo. Rango 1 a 255.
+  rewards:
+    # id del catálogo (nuke_shot) o material (minecraft:diamond), con :cantidad opcional.
+    items: []
+    # Comandos de consola; {player} es el ganador.
+    commands: []
+tnt-tag:
+  round-seconds: 30          # Segundos de cada ronda. Rango 5 a 600.
+  # Un portador de TNT cada tantos jugadores vivos. Rango 1 a más.
+  players-per-tagger: 4
+  min-players: 2             # Rango 2 a más.
+  platform-radius: 15        # Rango 6 a 48.
+  max-minutes: 15            # Duración máxima. Rango 1 a más.
+  # Segundos de la ronda en los que suena la alarma de la TNT (y el sonido del pase). Rango 1 a 60.
+  warning-seconds: 5
+  # Milisegundos que hay que esperar para pasar la TNT al que te la acaba de pasar. Rango 0 a 60000.
+  tag-cooldown-ms: 1000
+  rewards:
+    items: ["nuke_shot:1"]
+    commands: []
+spleef:
+  min-players: 2             # Rango 2 a más.
+  radius: 12                 # Rango 4 a 40.
+  layers: 2                  # Capas de nieve. Rango 1 a 5.
+  layer-gap: 6               # Distancia entre capas. Rango 3 a 20.
+  efficiency-level: 255      # Nivel de Efficiency de la pala. Rango 1 a 255.
+  # Segundos al inicio en los que todavía no se puede romper la nieve. Rango 0 a 60.
+  grace-seconds: 5
+  max-minutes: 10            # Duración máxima. Rango 1 a más.
+  rewards:
+    items: []
+    commands: []
+
+# Materiales de las arenas. Cada uno debe ser un bloque sólido (por ejemplo WHITE_CONCRETE); si no, se usa el de abajo.
+arena:
+  # Segundos del reloj de la arena: 6000 = mediodía. Rango 0 a 23999.
+  time-of-day: 6000
+  # Bloques que arma por tick (más alto = más rápido pero más carga). Rango 16 a 100000.
+  build-blocks-per-tick: 512
+  materials:
+    koth-platform: SMOOTH_STONE        # KOTH: el piso del centro (anillo interior)
+    koth-edge: POLISHED_BLACKSTONE     # KOTH: el borde del piso
+    hill: GOLD_BLOCK                   # KOTH: la colina de oro
+    hill-ring: STONE_BRICKS            # KOTH: el anillo de la colina
+    tnt-platform: RED_CONCRETE         # TNT Tag: piso (cuadros rojos)
+    tnt-platform-alt: WHITE_CONCRETE   # TNT Tag: piso (cuadros blancos)
+    tnt-outer: BLACK_CONCRETE          # TNT Tag: base de afuera
+    wall: BARRIER                      # Paredes invisibles (KOTH no las usa; TNT Tag y Spleef sí)
+    spleef-floor: SNOW_BLOCK          # Spleef: la nieve que se rompe
+
+# Barra de estado de cada evento. color: BLUE, GREEN, PINK, PURPLE, RED, WHITE, YELLOW. style: SOLID, SEGMENTED_6,
+# SEGMENTED_10, SEGMENTED_12, SEGMENTED_20. title: vacío = el nombre del evento.
+bossbar:
+  lifesteal:
+    color: RED
+    style: SEGMENTED_10
+    title: ""
+  koth:
+    color: YELLOW
+    style: SOLID
+    title: ""
+  tnt-tag:
+    color: YELLOW
+    style: SOLID
+    title: ""
+  spleef:
+    color: YELLOW
+    style: SOLID
+    title: ""
+
+# Sonidos que el plugin reproduce solos (no los textos del chat). sonido = clave del sonido de Minecraft; vacío = mudo.
+# volumen 0 a 10, tono 0.5 a 2 (fuera de rango se ajusta).
+sounds:
+  lobby-countdown:
+    sonido: "minecraft:block.note_block.hat"
+    volumen: 1.0
+    tono: 1.2
+  begin:
+    sonido: "minecraft:entity.ender_dragon.growl"
+    volumen: 0.6
+    tono: 1.4
+  tag:
+    sonido: "minecraft:entity.tnt.primed"
+    volumen: 1.0
+    tono: 1.0
+  tnt-warning:
+    sonido: "minecraft:entity.tnt.primed"
+    volumen: 0.8
+    tono: 1.0
+  explosion:
+    sonido: "minecraft:entity.generic.explode"
+    volumen: 1.0
+    tono: 1.0
+  winner:
+    sonido: "minecraft:ui.toast.challenge_complete"
+    volumen: 1.0
+    tono: 1.0
+
+# Tiempos y formatos de los torneos (teletransportes y eventos programados, /toffy torneo programar y
+# /toffy evento programar). Son los que se muestran y los que se aceptan al escribir una hora o fecha.
+torneos:
+  # Minutos antes de un teletransporte programado en que se avisa a los anotados. Lista de 1 a 1440.
+  avisos-tp-minutos: [5, 1]
+  # Minutos antes de un evento programado en que se avisa a los anotados. Lista de 1 a 1440.
+  avisos-evento-minutos: [5, 1]
+  # Un programado que pasó hace más minutos que esto al cargar se descarta (el servidor estaba apagado). 1 a 1440.
+  perdido-tras-minutos: 5
+  # system o un id de zona horaria (por ejemplo America/Argentina/Buenos_Aires).
+  zona-horaria: system
+  # Patrón de fecha (java.time). Si no tiene año, la fecha se toma como el próximo día. dd/MM también se acepta.
+  formato-fecha: dd/MM/yyyy
+  # Patrón de hora (java.time). H:mm también se acepta.
+  formato-hora: HH:mm

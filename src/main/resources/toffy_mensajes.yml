@@ -1,0 +1,306 @@
+# =====================================================================================================
+#  toffy_mensajes.yml: MENSAJES de chat de Toffy Complementaries (torneos)
+# =====================================================================================================
+#  Cada clave es un caso. Se puede usar:
+#    - Colores con &  (por ejemplo &a verde, &e amarillo, &c rojo, &l negrita, &r reset).
+#    - Estos marcadores, que se reemplazan por su valor:
+#        {jugador}  nombre del jugador
+#        {torneo}   nombre del torneo tal como se escribio al crearlo
+#        {cantidad} cantidad de participantes anotados
+#        {x} {y} {z} {mundo}  lugar al que se llevo o devolvio al jugador (solo en llevado y devuelto)
+#        {evento}   nombre del evento (solo en los mensajes de eventos)
+#        {hora} {fecha}  hora (HH:mm) y fecha (dd/MM/yyyy) del teletransporte programado (tp-programado)
+#        {minutos}  minutos que faltan para el teletransporte (tp-aviso)
+#        {segundos} segundos que faltan para empezar (evento-lobby)
+#        {grupo}    grupo del jugador (anotado, llevado y los casos de grupo; vacio si no tiene)
+#        {grupos}   lista de grupos abiertos separada por comas (grupo-elegir)
+#        {motivo}   por que (evento-eliminado, evento-cancelado)
+#        {detalle}  como termino el evento (evento-fin)
+#    - Un texto vacio ("") significa NO enviar nada en ese caso.
+#  Cada torneo puede tener su propio texto para un caso con:
+#    /toffy torneo mensaje <torneo> <caso> <texto...>      (y con "reset" vuelve a este archivo)
+#  Orden de busqueda: texto del torneo -> este archivo -> texto por defecto del plugin.
+#  Despues de editar: /toffy reload
+#
+#  Prefijos: {prefijo} se reemplaza por el prefijo de abajo. Los mensajes de evento (evento-*) de chat llevan
+#  prefijo-eventos delante, salvo que el texto ponga {prefijo} donde quiera.
+#
+#  Cada caso puede ser un texto (chat, como siempre) o una seccion con:
+#    evento-unido:
+#      texto: "&aEntraste al evento &e{evento}&a."
+#      tipo: chat          # chat | titulo | actionbar | ninguno (ninguno = solo el sonido)
+#      subtitulo: "&7..."  # solo con tipo: titulo
+#      sonido: "minecraft:block.note_block.pling"   # vacio o sin sonido = no suena
+#      volumen: 1.0        # 0 a 10 (se ajusta al rango)
+#      tono: 1.0           # 0.5 a 2
+#  Un texto vacio ("") sigue siendo "no enviar nada".
+
+# Prefijo de los mensajes de torneo ({prefijo}).
+prefijo: "&6Toffy &8» &7"
+
+# Prefijo de los mensajes de eventos (se pone delante de cada texto de chat de un evento).
+prefijo-eventos: "&6[Eventos] &r"
+
+# Se lo dice al jugador que se acaba de anotar con /anotar. ({grupo} es su grupo, o vacio.)
+anotado: "&aTe anotaste al torneo &e{torneo}&a. Sos el participante &e#{cantidad}&a."
+
+# Se lo dice al jugador que ya estaba anotado.
+ya-anotado: "&eYa estabas anotado en el torneo &6{torneo}&e."
+
+# Se lo dice al jugador cuando las inscripciones del torneo estan cerradas.
+inscripcion-cerrada: "&cLa inscripcion al torneo &e{torneo}&c esta cerrada."
+
+# Se lo dice al jugador cuando el torneo que escribio no existe ({torneo} es lo que escribio).
+torneo-no-existe: "&cNo existe el torneo &e{torneo}&c."
+
+# Anuncio para TODO el servidor cada vez que alguien se anota. Vacio = sin anuncio.
+anuncio-anotado: ""
+
+# Anuncio para todo el servidor al cerrar las inscripciones (/toffy torneo cerrar <torneo>).
+# Si el comando lleva un texto propio, se usa ese texto en lugar de este.
+cierre: "&6Se cerraron las inscripciones al torneo &e{torneo}&6. Participantes: &e{cantidad}&6."
+
+# Anuncio para todo el servidor al volver a abrir las inscripciones. Vacio = sin anuncio.
+apertura: ""
+
+# Se lo dice a cada participante que se lleva con /toffy tp concursantes. ({grupo} es su grupo, o vacio.)
+llevado: "&aFuiste llevado al torneo &e{torneo}&a."
+
+# Se lo dice a cada participante que se devuelve con /toffy tp devolver (o al entrar si estaba desconectado).
+devuelto: "&aVolviste a donde estabas antes del torneo &e{torneo}&a."
+
+# Se lo dice a un participante conectado al que no hay donde devolver (nunca se lo llevo).
+sin-lugar-guardado: "&cNo hay un lugar guardado para devolverte del torneo &e{torneo}&c."
+
+# ---------------------------------------------------------------------------------------------------
+#  Teletransporte programado (/toffy tp programar). Lo lleva al lugar fijo del torneo a la hora indicada.
+# ---------------------------------------------------------------------------------------------------
+
+# Anuncio para TODO el servidor cuando se programa el teletransporte. Vacio = sin anuncio.
+tp-programado: "&6Teletransporte del torneo &e{torneo}&6 programado para el &e{fecha}&6 a las &e{hora}&6."
+
+# Aviso a los anotados conectados, 5 y 1 minuto antes del teletransporte. Vacio = sin aviso.
+tp-aviso: "&6El torneo &e{torneo}&6 se teletransporta en &e{minutos} min&6."
+
+# Se lo dice al admin cuando cancela el teletransporte programado (/toffy tp programar <torneo> cancelar).
+tp-cancelado: "&7Se cancelo el teletransporte programado del torneo &e{torneo}&7."
+
+# ---------------------------------------------------------------------------------------------------
+#  Grupos (subcategorias del torneo, /toffy torneo grupo <torneo> ...). {grupo} es el nombre del grupo.
+# ---------------------------------------------------------------------------------------------------
+
+# Se lo dice al jugador que se anota a un grupo con /anotar <torneo> <grupo>.
+grupo-anotado: "&aEntraste al grupo &e{grupo}&a del torneo &e{torneo}&a."
+
+# Se lo dice al jugador que ya estaba en otro grupo y lo pasaron a este (o se movio solo con /anotar).
+grupo-cambiado: "&aTe pasamos al grupo &e{grupo}&a del torneo &e{torneo}&a."
+
+# Se lo dice al jugador que quiere elegir un grupo que no esta abierto (solo el staff lo pone).
+grupo-cerrado: "&cEl grupo &e{grupo}&c del torneo &e{torneo}&c no se elige solo: pedile a un admin que te anote."
+
+# Se lo dice al jugador que quiere entrar a un grupo que ya tiene su cupo.
+grupo-lleno: "&cEl grupo &e{grupo}&c del torneo &e{torneo}&c esta lleno."
+
+# Con grupo-obligatorio, /anotar <torneo> lista los grupos abiertos ({grupos} es la lista separada por comas).
+grupo-elegir: "&6El torneo &e{torneo}&6 se anota por grupo. Grupos abiertos: &e{grupos}&6. Usa &e/anotar {torneo} <grupo>&6."
+
+# Se lo dice al jugador que un admin o el plugin puso en un grupo (/toffy torneo grupo ... asignar o repartir).
+grupo-asignado: "&aUn admin te puso en el grupo &e{grupo}&a del torneo &e{torneo}&a."
+
+# ---------------------------------------------------------------------------------------------------
+#  Eventos (los inicia el staff con /toffy evento iniciar <tipo> <torneo>). Son sobre el torneo:
+#  el texto de un torneo (/toffy torneo mensaje) tiene prioridad sobre estos.
+# ---------------------------------------------------------------------------------------------------
+
+# Anuncio para TODO el servidor al abrir la espera de un evento, con el boton [UNIRSE]. Vacio = sin anuncio.
+evento-lobby: "&6Va a empezar el evento &e{evento}&6 en &e{segundos} s&6. Anotate con &e/anotar {torneo}&6 para entrar."
+
+# Se lo dice al jugador que entra al evento (los anotados online entran solos; los demas con /anotar durante la espera).
+evento-unido: "&aEntraste al evento &e{evento}&a. Tu inventario queda guardado y lo recuperas al salir."
+
+# Se lo dice a los que siguen en el evento cuando alguien sale por su cuenta (/anotar salir).
+evento-salio: "&7{jugador} salio del evento &e{evento}&7. Quedan &e{cantidad}&7."
+
+# Se lo dice a los participantes cuando la arena empieza.
+evento-empieza: "&e{evento} empieza! &7Participantes: &e{cantidad}&7."
+
+# Anuncio para TODO el servidor con el ganador.
+evento-ganador: "&6&l{jugador} &7gano el evento &e{evento}&7."
+
+# Se lo dice a los participantes cuando alguien queda afuera (murio, se cayo, exploto o se desconecto).
+evento-eliminado: "&c{jugador} quedo eliminado ({motivo}). &7Quedan &e{cantidad}&7."
+
+# Anuncio para TODO el servidor cuando se cancela el evento (lo para el staff o no hay suficientes jugadores).
+evento-cancelado: "&c{evento} se cancelo. &7{motivo}"
+
+# Anuncio para TODO el servidor al terminar el evento. {detalle} es el motivo del final (por ejemplo, se acabo el tiempo).
+evento-fin: "&e{evento} &7termino. {detalle}"
+
+# ---------------------------------------------------------------------------------------------------
+#  Rango de nivel, minimo de anotados y eventos programados.
+# ---------------------------------------------------------------------------------------------------
+
+# Se lo dice al jugador que no entra (o que no se lleva) porque su nivel esta fuera del rango del torneo.
+# {nivel} es su nivel; {min} y {max} son el rango del torneo.
+nivel-fuera-de-rango: "&cNo podes entrar al torneo &e{torneo}&c: tu nivel es &e{nivel}&c y el torneo pide entre &e{min}&c y &e{max}&c."
+
+# Anuncio para TODO el servidor cuando se cancela un teletransporte o evento programado por falta de anotados
+# conectados. {cantidad} es cuantos hay y {minimo} lo que pide el torneo.
+minimo-no-alcanzado: "&cSe cancelo el programado del torneo &e{torneo}&c: hay &e{cantidad}&c anotados conectados y el minimo es &e{minimo}&c."
+
+# Aviso a los anotados conectados, 5 y 1 minuto antes de un evento programado. {evento} es el tipo de evento.
+evento-aviso: "&6El evento &e{evento}&6 del torneo &e{torneo}&6 empieza en &e{minutos} min&6."
+
+# ---------------------------------------------------------------------------------------------------
+#  Eventos: textos del juego (cada uno tiene su caso; "" = no enviar). Los que empiezan por {prefijo} o
+#  son piezas de otro mensaje (causas, motivos, el boton, nombres de los objetos) no llevan prefijo.
+#  Placeholders habituales: {jugador} {evento} {torneo} {clave} (la clave del torneo) {cantidad} {segundos}.
+# ---------------------------------------------------------------------------------------------------
+
+# Texto que sale cuando el evento no esta disponible (los comandos de anotar lo muestran).
+evento-no-disponible: "&cLos eventos no estan disponibles."
+
+# Anuncio del boton para entrar al evento, al abrir la espera (el texto de [UNIRSE] y su ayuda al pasar el mouse).
+evento-boton: "&a&l[UNIRSE]"
+evento-boton-ayuda: "&7Tu inventario se guarda y se devuelve al salir"
+
+# Cuenta regresiva en la espera (los ultimos 5 segundos, a los anotados).
+evento-cuenta: "&eEmpieza en &f{segundos}&e..."
+
+# Lo ven los que ya estan en el evento cuando alguien entra durante la espera.
+evento-unido-otros: "&f{jugador} &7se unió ({cantidad})."
+
+# Se lo dice a quien quiere entrar o salir mientras la arena todavia se arma.
+evento-preparando: "&7La arena todavía se está preparando."
+
+# Se lo dice al jugador que intenta entrar estando muerto.
+evento-reaparece: "&cReaparecé antes de unirte."
+
+# Se lo dice al que intenta entrar con el evento ya empezado.
+evento-ya-empezo: "&cEl evento ya empezo."
+
+# Problemas con el inventario al entrar al evento.
+evento-inventario-ocupado: "&cTu inventario está ocupado por otra actividad o recuperación."
+evento-inventario-no-guardado: "&cNo se pudo guardar tu inventario; no entraste al evento."
+evento-inventario-pendiente: "&cTenés un inventario de evento pendiente; avisá al staff."
+
+# Comando que no se permite durante el evento ({clave} es la clave del torneo). La lista de comandos permitidos
+# es allowed-commands en toffy_eventos.yml.
+evento-comando-bloqueado: "&cDurante el evento solo podés usar /anotar y /toffy. Para irte: /anotar salir {clave}"
+
+# Teletransporte fuera de la arena durante un evento.
+evento-tp-bloqueado: "&cPara salir del evento usá /anotar salir {clave}."
+
+# Salida de un Lifesteal (no gana el corazon permanente).
+evento-salida-lifesteal: "&7Saliste del Lifesteal. No ganas el corazon permanente."
+
+# Recuperacion del inventario al salir, morir o terminar el evento.
+evento-recuperado: "&7Recuperaste tu inventario."
+evento-recuperado-antes: "&7Recuperaste el inventario que tenías antes del evento."
+evento-recuperacion-pendiente: "&cTu inventario sigue protegido; se reintentará al poder guardarlo."
+
+# Premios. {premio} es el premio: "2x diamond" (lista de items y comandos).
+evento-premio-pendiente: "&eTu premio se te entrega cuando vuelvas a entrar al servidor."
+evento-premio: "&6Premio: &f{premio}"
+# Premio de un evento que termino mientras el jugador estaba desconectado ({evento}, {premio}).
+evento-premio-al-entrar: "&6Recibiste el premio del evento &e{evento}&6, que terminó mientras estabas desconectado: &f{premio}"
+# Corazon permanente de Lifesteal que termino mientras el jugador estaba desconectado ({corazones}).
+evento-corazon-al-entrar: "&6Recibiste {corazones} corazón permanente del Lifesteal, que terminó mientras estabas desconectado."
+
+# La arena no se pudo armar (revisa la consola).
+evento-error-arena: "&cNo se pudo preparar la arena; revisá la consola."
+
+# Motivos que van dentro de evento-cancelado, evento-eliminado y evento-fin ({detalle}).
+evento-motivo-minimo: "Hacían falta {minimo} jugadores y hubo {cantidad}."
+evento-motivo-detener: "Lo canceló {staff}."
+evento-motivo-tiempo-lider: "&7Se acabó el tiempo. &f{jugador} &7tenía más tiempo en la colina."
+evento-motivo-sin-ganador: "&7Se acabó el tiempo sin ganador."
+evento-motivo-nadie: "&7No quedó nadie en pie."
+
+# Por que quedo eliminado un jugador (dentro de evento-eliminado, {motivo}).
+evento-causa-murio: "murió"
+evento-causa-cayo: "se cayó"
+evento-causa-exploto: "explotó"
+evento-causa-desconecto: "se desconectó"
+evento-causa-salio: "salió"
+
+# TNT Tag: al explotar el portador (ademas de la eliminacion). Vacio = nada extra.
+evento-tnt-explota: ""
+
+# ---------------------------------------------------------------------------------------------------
+#  Lifesteal
+# ---------------------------------------------------------------------------------------------------
+
+# Al empezar. {staff} quien lo inicio, {minutos} su duracion, {cantidad} los concursantes online.
+evento-lifesteal-iniciado: "&c&lLIFESTEAL &7iniciado por &f{staff} &7por &f{minutos} min&7. Concursantes: &f{cantidad}&7."
+# Reglas al empezar: {robo} corazones por kill, {piso} el piso.
+evento-lifesteal-reglas: "&7PvP global con &aKeepInventory&7. Cada kill roba &c{robo} ❤&7. Nadie baja de &e{piso} ❤&7 (matar a alguien en el piso no da nada)."
+# Meta al empezar: {umbral} corazones para el permanente, {permanente} cuantos da.
+evento-lifesteal-meta: "&7Terminá con &c{umbral} ❤ o más &7y ganás &6{permanente} corazón permanente&7."
+# Aviso de tiempo (torneos ... lifesteal.warning-seconds). {tiempo} lo que falta.
+evento-lifesteal-tiempo: "&eLifesteal termina en &f{tiempo}&e."
+# Al terminar y quien llego al umbral: {total} sus corazones, {permanente} cuantos permanentes gano.
+evento-lifesteal-fin: "&c&lLIFESTEAL &7terminó. Los corazones del evento volvieron a la normalidad."
+evento-lifesteal-fin-corazon: "&6¡Terminaste con {total} ❤ y ganaste {permanente} corazón permanente!"
+evento-lifesteal-fin-maximo: "&7Terminaste con {total} ❤, pero ya tenés el máximo de corazones permanentes."
+evento-lifesteal-fin-nadie: "&7Nadie llegó a {umbral} ❤."
+evento-lifesteal-fin-ganadores: "&6Corazón permanente para: &f{jugadores}"
+# Robo de corazones: {atacante} quien mato, {victima} a quien, {robado} cuantos, {total} los que tiene ahora.
+evento-lifesteal-robo-victima: "&c{atacante} te robó {robado} ❤."
+evento-lifesteal-robo-atacante: "&aLe robaste {robado} ❤ a {victima} &7({total} ❤)."
+evento-lifesteal-piso: "&7{victima} está en el piso de {piso} ❤: no le robaste nada."
+evento-lifesteal-maximo: "&7Ya estás en el máximo de {maximo} ❤."
+# Cancelado por el staff ({evento}, {staff}).
+evento-lifesteal-cancelado: "&c{evento} fue cancelado por {staff}."
+
+# ---------------------------------------------------------------------------------------------------
+#  King of the Hill
+# ---------------------------------------------------------------------------------------------------
+
+# Al empezar la ronda ({segundos} para ganar).
+evento-koth-ajuste: "&e¡A la colina! &7Quedate solo sobre el oro {segundos} s para ganar."
+# Al que lo tiran de la colina.
+evento-koth-tirado: "&7Te tiraron de la colina."
+# Estado de la colina (piezas de la barra de accion): libre, disputada o con rey.
+evento-koth-libre: "&7Colina libre"
+evento-koth-disputada: "&cColina disputada"
+evento-koth-rey: "&6Rey: &f{rey}"
+# Barra de accion de cada jugador: {colina} estado, {puntos} sus segundos, {captura} los que hacen falta.
+evento-koth-barra: "{colina} &8| &eTus puntos: &f{puntos}/{captura}"
+
+# ---------------------------------------------------------------------------------------------------
+#  TNT Tag
+# ---------------------------------------------------------------------------------------------------
+
+# Barra de accion: {segundos} hasta que explote la ronda.
+evento-tnt-tenes: "&c&l¡TENÉS LA TNT! &7Pegale a alguien &8| &f{segundos} s"
+evento-tnt-corre: "&aCorré &8| &7explota en &f{segundos} s"
+# Nueva ronda: {portadores} los que tienen la TNT, {tiene} "tiene" o "tienen", {segundos} hasta que explota.
+evento-tnt-ronda: "&cNueva ronda: &f{portadores} &c{tiene} la TNT. &7Explota en {segundos} s."
+# Al pasar la TNT: {atacante} quien la paso, {victima} a quien.
+evento-tnt-pasa-victima: "&c¡{atacante} te pasó la TNT!"
+evento-tnt-pasa-atacante: "&aLe pasaste la TNT a {victima}."
+
+# ---------------------------------------------------------------------------------------------------
+#  Spleef
+# ---------------------------------------------------------------------------------------------------
+
+# Durante la gracia ({segundos} hasta que se puede romper) y al empezar a romper.
+evento-spleef-gracia: "&eLa nieve se puede romper en &f{segundos} s&e."
+evento-spleef-romper: "&e&l¡A romper!"
+
+# ---------------------------------------------------------------------------------------------------
+#  Objetos del kit (nombres) y descripcion de cada evento al empezar la espera.
+# ---------------------------------------------------------------------------------------------------
+
+evento-kit-palo: "&6&lPalo del Rey"
+evento-kit-pala: "&b&lPala de Spleef"
+# Descripcion de los objetos del kit (linea de la descripcion, debajo del nombre).
+evento-kit-lore: "&7Objeto de evento: desaparece al salir."
+
+# Descripcion del evento al abrir la espera. {knockback} el nivel del palo de KOTH.
+evento-descripcion-koth: "Zona de captura con palos irrompibles Knockback {knockback}. Quedate solo en el oro para sumar."
+# {bombardeo} se completa solo: aviso del Nuke Shot cuando el premio de TNT Tag lo incluye.
+evento-descripcion-tnt: "Persecución explosiva: pasá la TNT antes de que explote.{bombardeo}"
+# {eficiencia} el nivel de la pala.
+evento-descripcion-spleef: "Pista de nieve con pala de madera Efficiency {eficiencia}. Caer por debajo de la última capa te deja afuera."

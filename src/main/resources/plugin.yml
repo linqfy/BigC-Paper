@@ -62,6 +62,18 @@ commands:
     description: Manage the Jeremy hunter
     usage: /<command> <status|start [player]|stop|cooldown reset>
     permission: bigcasares.jeremy.admin
+  toffy:
+    description: Show your Toffy level (0-200) or another player's, list your commands (ayuda), preview the curve, reload files, manage tournaments and staff events
+    usage: /<command> [nivel|ayuda|curva|reload|torneo|tp|evento]
+    aliases: [ tcomp ]
+  evento:
+    description: Staff events from the Toffy module (same as /toffy evento); players join the lobby with unirse or leave with salir
+    usage: /<command> [iniciar|detener|tipos|estado|programar|unirse|salir]
+    aliases: [ eventos ]
+  anotar:
+    description: Sign up for a tournament, leave it, see which ones are open, or check the running staff event
+    usage: /<command> [torneo [grupo] | salir <torneo> | estado]
+    permission: bigcasares.toffy.anotar
   celular:
     description: Give a Celular (the phone that plays videos)
     usage: /<command> give [player]
@@ -157,10 +169,6 @@ commands:
     description: Manage and debug the one-shot End event
     usage: /<command> <status|validate|optin|portal|arm|abort|reset|debug>
     permission: bigcasares.endevent.admin
-  evento:
-    description: Join staff events, or start and stop them as staff
-    usage: /<command> <unirse|salir|estado|iniciar|detener|tipos>
-    aliases: [ eventos ]
   warp:
     description: Opens the warp menu or manages warps
     usage: /<command> [manage]
@@ -212,6 +220,8 @@ permissions:
     children:
       bigcasares.command.give: true
       bigcasares.command.give.others: true
+      bigcasares.events.admin: true
+      bigcasares.events.join: true
       bigcasares.missions.open: true
       bigcasares.missions.claim: true
       bigcasares.missions.admin: true
@@ -235,7 +245,6 @@ permissions:
       bigcasares.mobscaling.admin: true
       bigcasares.command.timer: true
       bigcasares.endevent.admin: true
-      bigcasares.events.admin: true
       bigcasares.danger.view: true
       bigcasares.danger.view.others: true
       bigcasares.acidrain.admin: true
@@ -252,6 +261,7 @@ permissions:
       bigcasares.jeremy.start: true
       bigcasares.jeremy.stop: true
       bigcasares.celular.admin: true
+      bigcasares.toffy.admin: true
       bigcasares.schizophrenia.admin: true
       bigcasares.casino.admin: true
       bigcasares.forex: true
@@ -273,14 +283,6 @@ permissions:
   bigcasares.endevent.admin:
     description: Manage and debug the End event
     default: op
-
-  bigcasares.events.admin:
-    description: Start and stop staff events and bypass event restrictions
-    default: op
-
-  bigcasares.events.join:
-    description: Join staff events
-    default: true
 
   bigcasares.warp.use:
     description: Use the warp command
@@ -409,6 +411,47 @@ permissions:
   bigcasares.jeremy.stop:
     description: Stop the active Jeremy hunt
     default: op
+
+  bigcasares.toffy.check:
+    description: See your own Toffy Complementaries equipment level
+    default: true
+
+  bigcasares.toffy.check.others:
+    description: See another player's Toffy Complementaries equipment level
+    default: op
+
+  bigcasares.toffy.anotar:
+    description: Sign up for tournaments, leave them and join staff events with /anotar
+    default: true
+
+  bigcasares.toffy.torneo.admin:
+    description: Manage tournaments and teleport their participants with /toffy torneo and /toffy tp
+    default: op
+
+  bigcasares.toffy.evento.admin:
+    description: Start, stop and inspect staff events with /toffy evento; bypass event restrictions
+    default: op
+
+  bigcasares.events.admin:
+    description: Staff events with /evento (same as /toffy evento)
+    default: op
+    children:
+      bigcasares.toffy.evento.admin: true
+
+  bigcasares.events.join:
+    description: Join the event in lobby with /evento unirse and leave it with /evento salir
+    default: true
+    children:
+      bigcasares.toffy.anotar: true
+
+  bigcasares.toffy.admin:
+    description: Reload the Toffy Complementaries files and preview the curve
+    default: op
+    children:
+      bigcasares.toffy.check: true
+      bigcasares.toffy.check.others: true
+      bigcasares.toffy.torneo.admin: true
+      bigcasares.toffy.evento.admin: true
 
   bigcasares.schizophrenia.admin:
     description: Start, stop and provoke schizophrenia episodes; give the Lobotomizador
