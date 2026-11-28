@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "caichet:sonrisa",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/caichet/entity/sonrisa"
+      },
+      "geometry": {
+        "default": "geometry.caichet.sonrisa"
+      },
+      "render_controllers": [
+        "controller.render.caichet.default"
+      ],
+      "animations": {
+        "billboard": "animation.caichet.billboard"
+      },
+      "scripts": {
+        "animate": [
+          "billboard"
+        ]
+      }
+    }
+  }
+}

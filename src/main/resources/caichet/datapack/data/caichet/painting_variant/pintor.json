@@ -1,0 +1,13 @@
+{
+  "asset_id": "caichet:pintor",
+  "width": 3,
+  "height": 4,
+  "title": {
+    "text": "El Pintor",
+    "color": "yellow"
+  },
+  "author": {
+    "text": "El Sueño",
+    "color": "gray"
+  }
+}

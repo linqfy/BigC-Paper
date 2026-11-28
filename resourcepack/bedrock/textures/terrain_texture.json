@@ -4,6 +4,51 @@
   "padding": 8,
   "num_mip_levels": 4,
   "texture_data": {
+    "caichet_carpet_mustard": {
+      "textures": "textures/caichet/blocks/carpet_mustard"
+    },
+    "caichet_carpet_olive": {
+      "textures": "textures/caichet/blocks/carpet_olive"
+    },
+    "caichet_carpet_yellow": {
+      "textures": "textures/caichet/blocks/carpet_yellow"
+    },
+    "caichet_ceiling_warm": {
+      "textures": "textures/caichet/blocks/ceiling_warm"
+    },
+    "caichet_ceiling_yellow": {
+      "textures": "textures/caichet/blocks/ceiling_yellow"
+    },
+    "caichet_cream_lines": {
+      "textures": "textures/caichet/blocks/cream_lines"
+    },
+    "caichet_light_panel": {
+      "textures": "textures/caichet/blocks/light_panel"
+    },
+    "caichet_light_panel_off": {
+      "textures": "textures/caichet/blocks/light_panel_off"
+    },
+    "caichet_pool_mosaic": {
+      "textures": "textures/caichet/blocks/pool_mosaic"
+    },
+    "caichet_tiles_dirty": {
+      "textures": "textures/caichet/blocks/tiles_dirty"
+    },
+    "caichet_tiles_white": {
+      "textures": "textures/caichet/blocks/tiles_white"
+    },
+    "caichet_wainscot": {
+      "textures": "textures/caichet/blocks/wainscot"
+    },
+    "caichet_wallpaper_beige": {
+      "textures": "textures/caichet/blocks/wallpaper_beige"
+    },
+    "caichet_wallpaper_yellow": {
+      "textures": "textures/caichet/blocks/wallpaper_yellow"
+    },
+    "caichet_wood_panel": {
+      "textures": "textures/caichet/blocks/wood_panel"
+    },
     "the_sift_chiseled_siftslate": {
       "textures": "textures/the_sift/blocks/chiseled_siftslate"
     },

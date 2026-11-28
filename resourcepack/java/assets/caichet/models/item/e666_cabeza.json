@@ -1,0 +1,145 @@
+{
+  "textures": {
+    "e666_cara": "caichet:item/e666_cara",
+    "e666_piel_oscura": "caichet:item/e666_piel_oscura",
+    "particle": "caichet:item/e666_cara"
+  },
+  "elements": [
+    {
+      "from": [
+        2.5,
+        8,
+        3.5
+      ],
+      "to": [
+        13.5,
+        25,
+        12.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_cara"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        }
+      }
+    },
+    {
+      "from": [
+        3.5,
+        25,
+        4.2
+      ],
+      "to": [
+        12.5,
+        26.2,
+        11.8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#e666_piel_oscura"
+        }
+      }
+    }
+  ]
+}

@@ -635,6 +635,825 @@
           "name": "sounds/the_sift/block/sift_portal/open"
         }
       ]
+    },
+    "caichet:train.whistle": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/caichet/tren_silbato"
+        },
+        {
+          "name": "sounds/caichet/tren_silbato_2"
+        }
+      ]
+    },
+    "caichet:train.engine": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/caichet/tren_motor_loop",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:train.steam": {
+      "category": "neutral",
+      "sounds": [
+        {
+          "name": "sounds/caichet/tren_vapor_1"
+        },
+        {
+          "name": "sounds/caichet/tren_vapor_2"
+        }
+      ]
+    },
+    "caichet:weapon.beam": {
+      "category": "player",
+      "sounds": [
+        {
+          "name": "sounds/caichet/arma_rayo"
+        }
+      ]
+    },
+    "caichet:door.key": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/caichet/puerta_llave"
+        }
+      ]
+    },
+    "caichet:door.creak": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/caichet/puerta_chirrido"
+        }
+      ]
+    },
+    "caichet:figure.appear": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/figura_respiro"
+        },
+        {
+          "name": "sounds/caichet/figura_fantasma"
+        }
+      ]
+    },
+    "caichet:figure.chase": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/figura_te_veo"
+        }
+      ]
+    },
+    "caichet:eye.roar": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/ojo_rugido"
+        }
+      ]
+    },
+    "caichet:pit.travel": {
+      "category": "ambient",
+      "sounds": [
+        {
+          "name": "sounds/caichet/pozo_viaje"
+        }
+      ]
+    },
+    "caichet:pit.return": {
+      "category": "ambient",
+      "sounds": [
+        {
+          "name": "sounds/caichet/pozo_viaje_corto"
+        }
+      ]
+    },
+    "caichet:dream.chimes": {
+      "category": "ambient",
+      "sounds": [
+        {
+          "name": "sounds/caichet/sueno_campanas_1",
+          "stream": true,
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/caichet/sueno_campanas_2",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:hotel.flicker": {
+      "category": "block",
+      "sounds": [
+        {
+          "name": "sounds/caichet/hotel_zumbido_loop"
+        }
+      ]
+    },
+    "caichet:entity.jumpscare": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/susto_fuerte",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:entity.attack": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/entidad_ataque",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:entity.step": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/paso_1",
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/caichet/paso_2",
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/caichet/paso_3",
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/caichet/paso_4",
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/caichet/paso_5",
+          "load_on_low_memory": true
+        },
+        {
+          "name": "sounds/caichet/paso_6",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:sonrisa.laugh": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/sonrisa_risa",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:e666.heartbeat_slow": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/latido_lento",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:e666.heartbeat_fast": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/latido_rapido",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:juancarlos.growl": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/juancarlos_grunido",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:juancarlos.grab": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/juancarlos_agarre",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:arana.screech": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/arana_chillido",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:arana.click": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/arana_click",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:payaso.giggle": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/payaso_risitas",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:payaso.laugh": {
+      "category": "hostile",
+      "sounds": [
+        {
+          "name": "sounds/caichet/payaso_carcajada",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:backrooms.ambient": {
+      "category": "ambient",
+      "sounds": [
+        {
+          "name": "sounds/caichet/backrooms_ambiente",
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.1": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_1",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.2": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_2",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.3": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_3",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.4": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_4",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.5": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_5",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.6": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_6",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.7": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_7",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.8": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_8",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.9": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_9",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.10": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_10",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.11": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_11",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.12": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_12",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_1.13": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_1_13",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_2.1": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_2_1",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_2.2": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_2_2",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_2.3": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_2_3",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_2.4": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_2_4",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_2.5": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_2_5",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_3.1": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_3_1",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_3.2": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_3_2",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_3.3": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_3_3",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_3.4": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_3_4",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.sueno_3.5": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/sueno_3_5",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_1.1": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_1_1",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_1.2": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_1_2",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_1.3": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_1_3",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_1.4": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_1_4",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.1": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_1",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.2": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_2",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.3": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_3",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.4": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_4",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.5": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_5",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.6": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_6",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.7": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_7",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.8": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_8",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.9": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_9",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.10": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_10",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.11": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_11",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.12": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_12",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.13": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_13",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.14": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_14",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_2.15": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_2_15",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.1": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_1",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.2": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_2",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.3": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_3",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.4": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_4",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.5": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_5",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.6": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_6",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.7": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_7",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.8": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_8",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.9": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_9",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.10": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_10",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.11": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_11",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.12": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_12",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.13": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_13",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
+    },
+    "caichet:music.hotel_3.14": {
+      "category": "record",
+      "sounds": [
+        {
+          "name": "sounds/caichet/musica/hotel_3_14",
+          "stream": true,
+          "load_on_low_memory": true
+        }
+      ]
     }
   }
 }

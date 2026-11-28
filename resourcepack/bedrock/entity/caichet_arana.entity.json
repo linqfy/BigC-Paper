@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "caichet:arana",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/caichet/entity/arana"
+      },
+      "geometry": {
+        "default": "geometry.caichet.arana"
+      },
+      "render_controllers": [
+        "controller.render.caichet.default"
+      ],
+      "animations": {
+        "walk": "animation.caichet.arana.walk"
+      },
+      "scripts": {
+        "animate": [
+          "walk"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "textures": {
+    "s": "caichet:item/sonrisa",
+    "particle": "caichet:item/sonrisa"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        8
+      ],
+      "to": [
+        16,
+        16,
+        8
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#s"
+        },
+        "north": {
+          "uv": [
+            16,
+            0,
+            0,
+            16
+          ],
+          "texture": "#s"
+        }
+      }
+    }
+  ]
+}

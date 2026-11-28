@@ -1,0 +1,13 @@
+{
+  "asset_id": "caichet:cena",
+  "width": 6,
+  "height": 2,
+  "title": {
+    "text": "La Cena",
+    "color": "yellow"
+  },
+  "author": {
+    "text": "El Sueño",
+    "color": "gray"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "asset_id": "caichet:esfera",
+  "width": 4,
+  "height": 5,
+  "title": {
+    "text": "La Esfera",
+    "color": "yellow"
+  },
+  "author": {
+    "text": "El Sueño",
+    "color": "gray"
+  }
+}

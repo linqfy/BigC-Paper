@@ -1,0 +1,13 @@
+{
+  "asset_id": "caichet:retrato",
+  "width": 3,
+  "height": 4,
+  "title": {
+    "text": "El Retrato",
+    "color": "yellow"
+  },
+  "author": {
+    "text": "El Sueño",
+    "color": "gray"
+  }
+}

@@ -156,3 +156,27 @@ assets:
     type: item-model
     java-model: celular:item/celular
     texture: item/celular_bedrock
+  caichet-arma:
+    type: item-model
+    java-model: caichet:item/arma
+    texture: item/caichet_arma
+  caichet-botella:
+    type: item-model
+    java-model: caichet:item/botella
+    texture: item/caichet_botella
+  caichet-jarra:
+    type: item-model
+    java-model: caichet:item/jarra
+    texture: item/caichet_jarra
+  caichet-llave:
+    type: item-model
+    java-model: caichet:item/llave
+    texture: item/caichet_llave
+  caichet-reloj-suenos:
+    type: item-model
+    java-model: caichet:item/reloj_suenos
+    texture: item/caichet_reloj_suenos
+  caichet-despertar:
+    type: item-model
+    java-model: caichet:item/despertar
+    texture: item/caichet_despertar

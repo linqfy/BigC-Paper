@@ -12,39 +12,7 @@
           },
           {
             "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
             "east": "true",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
             "north": "true",
             "south": "true",
             "up": "false",
@@ -55,48 +23,8 @@
             "east": "true",
             "north": "true",
             "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
             "up": "true",
             "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "true"
           },
           {
             "down": "true",
@@ -143,38 +71,6 @@
             "north": "false",
             "south": "true",
             "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "true",
-            "up": "false",
             "west": "true"
           },
           {
@@ -184,22 +80,6 @@
             "south": "true",
             "up": "false",
             "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
           },
           {
             "down": "true",
@@ -266,46 +146,6 @@
           },
           {
             "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
             "east": "true",
             "north": "false",
             "south": "true",
@@ -319,22 +159,6 @@
             "south": "true",
             "up": "false",
             "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "true",
-            "west": "false"
           },
           {
             "down": "true",
@@ -401,46 +225,6 @@
           },
           {
             "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
             "east": "true",
             "north": "false",
             "south": "true",
@@ -453,22 +237,6 @@
             "north": "true",
             "south": "true",
             "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
             "west": "true"
           },
           {
@@ -536,46 +304,6 @@
           },
           {
             "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
             "east": "true",
             "north": "false",
             "south": "true",
@@ -589,22 +317,6 @@
             "south": "true",
             "up": "true",
             "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "true"
           },
           {
             "down": "true",
@@ -667,70 +379,6 @@
         "OR": [
           {
             "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
             "east": "true",
             "north": "false",
             "south": "true",
@@ -747,46 +395,6 @@
           },
           {
             "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
             "east": "true",
             "north": "false",
             "south": "true",
@@ -800,22 +408,6 @@
             "south": "true",
             "up": "true",
             "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "true"
           },
           {
             "down": "true",
@@ -884,47 +476,7 @@
             "north": "false",
             "south": "true",
             "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "false",
             "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "true",
-            "west": "false"
           },
           {
             "down": "true",
@@ -933,14 +485,6 @@
             "south": "true",
             "up": "true",
             "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "true"
           },
           {
             "down": "true",
@@ -983,78 +527,6 @@
           {
             "down": "true",
             "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
             "north": "false",
             "south": "true",
             "up": "true",
@@ -1081,70 +553,6 @@
           {
             "south": "false",
             "down": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "true"
           },
           {
             "down": "true",
@@ -1178,70 +586,6 @@
           },
           {
             "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "true",
-            "west": "false"
-          },
-          {
-            "down": "true",
             "east": "true",
             "north": "false",
             "south": "true",
@@ -1269,70 +613,6 @@
           {
             "up": "false",
             "down": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "false"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "false",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "true",
-            "north": "true",
-            "south": "false",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "false",
-            "south": "true",
-            "up": "false",
-            "west": "true"
-          },
-          {
-            "down": "true",
-            "east": "false",
-            "north": "true",
-            "south": "true",
-            "up": "false",
-            "west": "true"
           },
           {
             "down": "true",
@@ -1534,6 +814,201 @@
         "south": "false",
         "up": "false",
         "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/wallpaper_beige"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "false",
+        "south": "true",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/wainscot"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/carpet_mustard"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "false",
+        "south": "false",
+        "up": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/ceiling_warm"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "true",
+        "south": "true",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/wallpaper_yellow"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "up": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/carpet_yellow"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "up": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/ceiling_yellow"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "false",
+        "south": "true",
+        "up": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/wood_panel"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "false",
+        "south": "true",
+        "up": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/carpet_olive"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "true",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/pool_mosaic"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "true",
+        "south": "true",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/cream_lines"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "true",
+        "south": "false",
+        "up": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/tiles_white"
+      },
+      "when": {
+        "down": "true",
+        "east": "true",
+        "north": "true",
+        "south": "false",
+        "up": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/tiles_dirty"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "true",
+        "south": "true",
+        "up": "false",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/light_panel"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "true",
+        "south": "true",
+        "up": "true",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "caichet:block/light_panel_off"
+      },
+      "when": {
+        "down": "true",
+        "east": "false",
+        "north": "true",
+        "south": "false",
+        "up": "true",
+        "west": "true"
       }
     }
   ]

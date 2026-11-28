@@ -1,0 +1,137 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.caichet.e666.walk": {
+      "loop": true,
+      "bones": {
+        "pierna_izq": {
+          "rotation": [
+            "math.sin(query.anim_time * 360) * 25",
+            0,
+            0
+          ]
+        },
+        "pierna_der": {
+          "rotation": [
+            "-math.sin(query.anim_time * 360) * 25",
+            0,
+            0
+          ]
+        },
+        "brazo_izq": {
+          "rotation": [
+            "-math.sin(query.anim_time * 360) * 12",
+            0,
+            0
+          ]
+        },
+        "brazo_der": {
+          "rotation": [
+            "math.sin(query.anim_time * 360) * 12",
+            0,
+            0
+          ]
+        },
+        "cabeza": {
+          "rotation": [
+            0,
+            0,
+            "math.sin(query.anim_time * 47) > 0.92 ? 20 : 0"
+          ]
+        }
+      }
+    },
+    "animation.caichet.juancarlos.walk": {
+      "loop": true,
+      "bones": {
+        "tunica": {
+          "rotation": [
+            0,
+            0,
+            "math.sin(query.anim_time * 120) * 3"
+          ]
+        },
+        "cabeza": {
+          "rotation": [
+            0,
+            0,
+            "math.sin(query.anim_time * 120) * 4"
+          ]
+        },
+        "brazo_izq": {
+          "rotation": [
+            "math.sin(query.anim_time * 120) * 5",
+            0,
+            0
+          ]
+        },
+        "brazo_der": {
+          "rotation": [
+            "-math.sin(query.anim_time * 120) * 5",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.caichet.arana.walk": {
+      "loop": true,
+      "bones": {
+        "pata_0": {
+          "rotation": [
+            "-20 + math.sin(query.anim_time * 540) * 20",
+            0,
+            0
+          ]
+        },
+        "pata_2": {
+          "rotation": [
+            "-20 + math.sin(query.anim_time * 540) * 20",
+            0,
+            0
+          ]
+        },
+        "pata_1": {
+          "rotation": [
+            "-20 - math.sin(query.anim_time * 540) * 20",
+            0,
+            0
+          ]
+        },
+        "pata_3": {
+          "rotation": [
+            "-20 - math.sin(query.anim_time * 540) * 20",
+            0,
+            0
+          ]
+        },
+        "cuerpo": {
+          "position": [
+            0,
+            "math.abs(math.sin(query.anim_time * 540)) * 1.5",
+            0
+          ]
+        }
+      }
+    },
+    "animation.caichet.payaso.peek": {
+      "loop": true,
+      "bones": {
+        "cabeza": {
+          "rotation": [
+            0,
+            0,
+            "25 + math.sin(query.anim_time * 90) * 4"
+          ]
+        },
+        "cuerpo": {
+          "rotation": [
+            0,
+            0,
+            8
+          ]
+        }
+      }
+    }
+  }
+}

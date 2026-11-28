@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "caichet:juancarlos",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/caichet/entity/juancarlos"
+      },
+      "geometry": {
+        "default": "geometry.caichet.juancarlos"
+      },
+      "render_controllers": [
+        "controller.render.caichet.default"
+      ],
+      "animations": {
+        "walk": "animation.caichet.juancarlos.walk"
+      },
+      "scripts": {
+        "animate": [
+          "walk"
+        ]
+      }
+    }
+  }
+}

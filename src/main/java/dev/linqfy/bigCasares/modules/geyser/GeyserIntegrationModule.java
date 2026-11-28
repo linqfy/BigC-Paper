@@ -4,6 +4,9 @@ import dev.linqfy.bigCasares.BigCasares;
 import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
+import dev.linqfy.bigCasares.modules.caichet.CaiChetBedrockBlocks;
+import dev.linqfy.bigCasares.modules.caichet.CaiChetBedrockEntities;
+import dev.linqfy.bigCasares.modules.caichet.CaiChetBedrockItems;
 import dev.linqfy.bigCasares.modules.celular.CelularModule;
 
 import java.io.IOException;
@@ -83,10 +86,12 @@ public final class GeyserIntegrationModule implements PluginModule {
             if (settings.customItems()) {
                 customItemDefinitions().forEach(runtime::registerCustomItem);
                 celularItemDefinitions().forEach(runtime::registerCustomItem);
+                GeyserCaiChetItems.definitions(CaiChetBedrockItems.all()).forEach(runtime::registerCustomItem);
                 GeyserSiftContent.items().forEach(runtime::registerCustomItem);
             }
             if (settings.customBlocks()) {
                 registerSiftBlocks(runtime);
+                GeyserCaiChetBlocks.definitions(CaiChetBedrockBlocks.all()).forEach(runtime::registerCustomBlock);
             }
             if (settings.customEntities()) {
                 runtime.registerCustomEntity(new GeyserCustomEntityDefinition(
@@ -100,6 +105,13 @@ public final class GeyserIntegrationModule implements PluginModule {
                 runtime.registerCustomEntity(new GeyserCustomEntityDefinition(
                     "MANNEQUIN", "bigcasares:merchant", "shop_npc_id"));
                 GeyserSiftContent.entities().forEach(runtime::registerCustomEntity);
+                // cai chet solo cambia sus cuerpos de Bedrock por los modelos si Geyser acepto todas sus entidades
+                boolean caiChetEntities = true;
+                for (GeyserCustomEntityDefinition definition
+                    : GeyserCaiChetEntities.definitions(CaiChetBedrockEntities.all())) {
+                    caiChetEntities &= runtime.registerCustomEntity(definition);
+                }
+                CaiChetBedrockEntities.setAvailable(caiChetEntities);
                 plugin.getLogger().warning("La API de entidades custom de Geyser 2.11 es experimental; los fallbacks siguen activos.");
             }
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException
@@ -134,6 +146,7 @@ public final class GeyserIntegrationModule implements PluginModule {
     }
 
     private void closeFacade() {
+        CaiChetBedrockEntities.setAvailable(false);
         Optional<GeyserApiFacade> closing = facade;
         facade = Optional.empty();
         platformGateway = new GeyserPlatformGateway(Optional.empty());

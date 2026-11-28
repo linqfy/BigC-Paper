@@ -1,0 +1,1811 @@
+{
+  "providers": [
+    {
+      "type": "space",
+      "advances": {
+        "\uf8ff": -1,
+        "\uf8fe": -280
+      }
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_0_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue100"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_0_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue101"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_0_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue102"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_0_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue103"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_0_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue104"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_0_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue105"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_0_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue106"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_0_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue107"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_1_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue108"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_1_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue109"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_1_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue10a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_1_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue10b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_1_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue10c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_1_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue10d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_1_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue10e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_1_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue10f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_2_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue110"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_2_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue111"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_2_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue112"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_2_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue113"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_2_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue114"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_2_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue115"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_2_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue116"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_2_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue117"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_3_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue118"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_3_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue119"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_3_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue11a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_3_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue11b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_3_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue11c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_3_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue11d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_3_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue11e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_3_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue11f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_4_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue120"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_4_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue121"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_4_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue122"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_4_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue123"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_4_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue124"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_4_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue125"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_4_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue126"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_4_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue127"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_5_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue128"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_5_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue129"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_5_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue12a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_5_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue12b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_5_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue12c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_5_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue12d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_5_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue12e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_5_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue12f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_6_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue130"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_6_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue131"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_6_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue132"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_6_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue133"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_6_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue134"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_6_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue135"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_6_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue136"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_6_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue137"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_7_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue138"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_7_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue139"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_7_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue13a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_7_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue13b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_7_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue13c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_7_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue13d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_7_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue13e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_7_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue13f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_8_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue140"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_8_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue141"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_8_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue142"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_8_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue143"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_8_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue144"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_8_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue145"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_8_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue146"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_8_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue147"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_9_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue148"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_9_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue149"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_9_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue14a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_9_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue14b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_9_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue14c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_9_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue14d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_9_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue14e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_9_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue14f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_10_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue150"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_10_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue151"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_10_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue152"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_10_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue153"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_10_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue154"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_10_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue155"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_10_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue156"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_10_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue157"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_11_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue158"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_11_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue159"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_11_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue15a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_11_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue15b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_11_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue15c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_11_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue15d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_11_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue15e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_11_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue15f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_12_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue160"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_12_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue161"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_12_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue162"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_12_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue163"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_12_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue164"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_12_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue165"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_12_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue166"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_12_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue167"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_13_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue168"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_13_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue169"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_13_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue16a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_13_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue16b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_13_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue16c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_13_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue16d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_13_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue16e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_13_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue16f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_14_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue170"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_14_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue171"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_14_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue172"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_14_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue173"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_14_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue174"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_14_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue175"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_14_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue176"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_14_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue177"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_15_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue178"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_15_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue179"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_15_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue17a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_15_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue17b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_15_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue17c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_15_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue17d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_15_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue17e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_15_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue17f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_16_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue180"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_16_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue181"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_16_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue182"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_16_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue183"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_16_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue184"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_16_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue185"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_16_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue186"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_16_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue187"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_17_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue188"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_17_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue189"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_17_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue18a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_17_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue18b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_17_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue18c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_17_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue18d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_17_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue18e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_17_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue18f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_18_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue190"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_18_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue191"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_18_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue192"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_18_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue193"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_18_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue194"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_18_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue195"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_18_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue196"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_18_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue197"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_19_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue198"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_19_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue199"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_19_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue19a"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_19_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue19b"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_19_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue19c"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_19_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue19d"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_19_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue19e"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_19_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue19f"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_20_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1a0"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_20_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1a1"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_20_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1a2"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_20_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1a3"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_20_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1a4"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_20_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1a5"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_20_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1a6"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_20_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1a7"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_21_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1a8"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_21_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1a9"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_21_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1aa"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_21_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1ab"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_21_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1ac"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_21_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1ad"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_21_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1ae"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_21_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1af"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_22_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1b0"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_22_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1b1"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_22_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1b2"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_22_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1b3"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_22_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1b4"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_22_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1b5"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_22_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1b6"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_22_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1b7"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_23_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1b8"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_23_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1b9"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_23_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1ba"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_23_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1bb"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_23_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1bc"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_23_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1bd"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_23_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1be"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_23_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1bf"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_24_0.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1c0"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_24_1.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1c1"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_24_2.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1c2"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_24_3.png",
+      "ascent": 75,
+      "height": 78,
+      "chars": [
+        "\ue1c3"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_24_4.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1c4"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_24_5.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1c5"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_24_6.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1c6"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "caichet:font/susto_24_7.png",
+      "ascent": -3,
+      "height": 78,
+      "chars": [
+        "\ue1c7"
+      ]
+    }
+  ]
+}

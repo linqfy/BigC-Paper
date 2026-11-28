@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "caichet:dream_rainbow",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/caichet/entity/dream_rainbow"
+      },
+      "geometry": {
+        "default": "geometry.caichet.dream_rainbow"
+      },
+      "animations": {
+        "billboard": "animation.caichet.billboard"
+      },
+      "scripts": {
+        "animate": [
+          "billboard"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.caichet.default"
+      ]
+    }
+  }
+}

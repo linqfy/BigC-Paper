@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "caichet:demon_train",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/caichet/entity/demon_train"
+      },
+      "geometry": {
+        "default": "geometry.caichet.demon_train"
+      },
+      "render_controllers": [
+        "controller.render.caichet.default"
+      ]
+    }
+  }
+}

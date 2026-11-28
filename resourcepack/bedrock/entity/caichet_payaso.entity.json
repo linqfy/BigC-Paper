@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "caichet:payaso",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/caichet/entity/payaso"
+      },
+      "geometry": {
+        "default": "geometry.caichet.payaso"
+      },
+      "render_controllers": [
+        "controller.render.caichet.default"
+      ],
+      "animations": {
+        "peek": "animation.caichet.payaso.peek"
+      },
+      "scripts": {
+        "animate": [
+          "peek"
+        ]
+      }
+    }
+  }
+}

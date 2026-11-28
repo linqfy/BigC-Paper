@@ -4,12 +4,14 @@ import dev.linqfy.bigCasares.blocks.CustomBlockDefinition;
 import dev.linqfy.bigCasares.blocks.CustomBlockRegistry;
 import dev.linqfy.bigCasares.blocks.MushroomState;
 import dev.linqfy.bigCasares.dimension.json.Json;
+import dev.linqfy.bigCasares.modules.caichet.CaiChetBlocks;
 import dev.linqfy.bigCasares.modules.sift.SiftBlocks;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -32,7 +34,9 @@ public final class CustomBlockstateExportMain {
 
     /** Every custom block shipped with the plugin, in registration order. */
     static List<CustomBlockDefinition> builtInBlocks() {
-        return SiftBlocks.definitions();
+        List<CustomBlockDefinition> blocks = new ArrayList<>(SiftBlocks.definitions());
+        blocks.addAll(CaiChetBlocks.definitions());
+        return blocks;
     }
 
     /** File name ({@code brown_mushroom_block.json}) to JSON text, for every mushroom base. */

@@ -1,0 +1,13 @@
+{
+  "asset_id": "caichet:laptop",
+  "width": 2,
+  "height": 3,
+  "title": {
+    "text": "La Laptop",
+    "color": "yellow"
+  },
+  "author": {
+    "text": "El Sueño",
+    "color": "gray"
+  }
+}

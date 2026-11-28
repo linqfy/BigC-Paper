@@ -17,6 +17,9 @@ modules:
     enabled: true
   mutango:
     enabled: true
+  # Cai chet: el desierto del tren, el hotel y el Sueno. Crea dos mundos y una dimension (datapack).
+  caichet:
+    enabled: false
   celular:
     enabled: true
   schizophrenia:

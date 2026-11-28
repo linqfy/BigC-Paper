@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "caichet:e666",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/caichet/entity/e666"
+      },
+      "geometry": {
+        "default": "geometry.caichet.e666"
+      },
+      "render_controllers": [
+        "controller.render.caichet.default"
+      ],
+      "animations": {
+        "walk": "animation.caichet.e666.walk"
+      },
+      "scripts": {
+        "animate": [
+          "walk"
+        ]
+      }
+    }
+  }
+}

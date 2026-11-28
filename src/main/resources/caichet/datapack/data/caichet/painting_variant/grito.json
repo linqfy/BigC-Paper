@@ -1,0 +1,13 @@
+{
+  "asset_id": "caichet:grito",
+  "width": 4,
+  "height": 5,
+  "title": {
+    "text": "El Grito",
+    "color": "yellow"
+  },
+  "author": {
+    "text": "El Sueño",
+    "color": "gray"
+  }
+}

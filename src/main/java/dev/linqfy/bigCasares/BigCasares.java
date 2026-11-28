@@ -47,6 +47,7 @@ import dev.linqfy.bigCasares.modules.acidrain.AcidRainModule;
 import dev.linqfy.bigCasares.modules.bloodmoon.BloodMoonModule;
 import dev.linqfy.bigCasares.modules.jeremy.JeremyModule;
 import dev.linqfy.bigCasares.modules.donpollos.DonPollosModule;
+import dev.linqfy.bigCasares.modules.caichet.CaiChetModule;
 import dev.linqfy.bigCasares.modules.mutango.MutangoModule;
 import dev.linqfy.bigCasares.modules.celular.CelularModule;
 import dev.linqfy.bigCasares.modules.mobscaling.MobScalingModule;
@@ -118,6 +119,7 @@ public final class BigCasares extends JavaPlugin {
     private JeremyModule jeremyModule;
     private DonPollosModule donPollosModule;
     private MutangoModule mutangoModule;
+    private CaiChetModule caiChetModule;
     private CelularModule celularModule;
     private CasinoModule casinoModule;
     private ForexModule forexModule;
@@ -273,6 +275,10 @@ public final class BigCasares extends JavaPlugin {
 
     public MutangoModule getMutangoModule() {
         return mutangoModule;
+    }
+
+    public CaiChetModule getCaiChetModule() {
+        return caiChetModule;
     }
 
     public CelularModule getCelularModule() {
@@ -438,6 +444,7 @@ public final class BigCasares extends JavaPlugin {
         this.jeremyModule = new JeremyModule(this);
         this.donPollosModule = new DonPollosModule(this);
         this.mutangoModule = new MutangoModule(this);
+        this.caiChetModule = new CaiChetModule(this);
         this.celularModule = new CelularModule(this);
         this.casinoModule = new CasinoModule(this);
         this.auctionHouseModule = new AuctionHouseModule(this);
@@ -537,6 +544,7 @@ public final class BigCasares extends JavaPlugin {
         moduleManager.register(jeremyModule);
         moduleManager.register(donPollosModule);
         moduleManager.register(mutangoModule);
+        moduleManager.register(caiChetModule);
         moduleManager.register(celularModule);
         moduleManager.register(new SchizophreniaModule(this));
         moduleManager.register(shopModule);

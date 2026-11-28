@@ -1,0 +1,13 @@
+{
+  "asset_id": "caichet:gotico",
+  "width": 4,
+  "height": 5,
+  "title": {
+    "text": "G\u00f3tico",
+    "color": "yellow"
+  },
+  "author": {
+    "text": "El Sueño",
+    "color": "gray"
+  }
+}
