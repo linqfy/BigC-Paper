@@ -1,6 +1,8 @@
 package dev.linqfy.bigCasares.modules.resourcepack;
 
 import dev.linqfy.bigCasares.BigCasares;
+import dev.linqfy.bigCasares.module.ModuleManager;
+import dev.linqfy.bigCasares.modules.tideframe.TideframeUiModule;
 import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
@@ -28,6 +30,7 @@ import kr.toxicity.model.api.event.PluginEndReloadEvent;
 
 public final class ResourcePackModule implements PluginModule {
     private final BigCasares plugin;
+    private boolean panelsEnabled;
     private final ClientPlatformGateway platformGateway;
     private ResourcePackService service;
     private ResourcePackStatusListener listener;
@@ -72,6 +75,7 @@ public final class ResourcePackModule implements PluginModule {
         }
         BukkitRuntimeRegistrations registrations = new BukkitRuntimeRegistrations(plugin, scope);
         scope.register("module-state", this::clearRuntimeState);
+        this.panelsEnabled = ModuleManager.isEnabledInConfig(plugin.getConfig(), TideframeUiModule.ID);
         this.settings = ResourcePackSettings.load(plugin.getConfig());
         this.contentPackRoot = plugin.getDataFolder().toPath().resolve("content/pack");
         this.packsRoot = plugin.getDataFolder().toPath().resolve("packs");
@@ -144,7 +148,7 @@ public final class ResourcePackModule implements PluginModule {
             @Override
             public PackPublication prepare(UUID jobId) throws Exception {
                 try (StagedPackCandidate candidate = new StagedPackBuilder(
-                    contentPackRoot, packsRoot, javaLayers()).build(jobId)) {
+                    contentPackRoot, packsRoot, javaLayers(), panelsEnabled).build(jobId)) {
                     try {
                         return artifactPublisher.prepare(candidate, ResourcePackModule.this::javaArtifactUri);
                     } catch (Throwable failure) {
@@ -250,7 +254,7 @@ public final class ResourcePackModule implements PluginModule {
 
     private ActivePackManifest buildOrReuseActivePack() {
         try (StagedPackCandidate candidate = new StagedPackBuilder(
-            contentPackRoot, packsRoot, javaLayers()).build(UUID.randomUUID())) {
+            contentPackRoot, packsRoot, javaLayers(), panelsEnabled).build(UUID.randomUUID())) {
             return artifactPublisher.publish(candidate, this::javaArtifactUri).manifest();
         } catch (IOException exception) {
             throw new IllegalStateException("Could not build or reuse runtime pack", exception);

@@ -6,6 +6,7 @@ import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
 import dev.linqfy.bigCasares.modules.bounties.BountyEconomyGateway;
 import dev.linqfy.bigCasares.modules.tideframe.MenuTitleStyle;
+import dev.linqfy.bigCasares.modules.tideframe.NativeMenus;
 import dev.linqfy.bigCasares.platform.ClientPlatform;
 import dev.linqfy.bigCasares.platform.ClientPlatformGateway;
 import dev.linqfy.bigCasares.platform.ClientEntityPresentationRegistry;
@@ -36,6 +37,8 @@ public final class ShopModule implements PluginModule {
     private ShopService service;
     private ShopEconomyGateway economyGateway;
     private ShopGuiController guiController;
+    private NativeMenus nativeMenus;
+    private NativeShop nativeShop;
     private ShopNpcFactory npcFactory;
     private ShopNpcListener npcListener;
     private final List<org.bukkit.entity.Entity> npcs = new ArrayList<>();
@@ -81,6 +84,7 @@ public final class ShopModule implements PluginModule {
     @Override
     public void onDisable() {
         enabled = false;
+        closeNativeShop();
         formGeneration.invalidate();
         if (guiController != null) {
             guiController.closeAll();
@@ -104,6 +108,7 @@ public final class ShopModule implements PluginModule {
 
     public void reload() {
         enabled = false;
+        closeNativeShop();
         formGeneration.invalidate();
         Economy economy = BountyEconomyGateway.resolveOrThrow(plugin);
         File file = new File(plugin.getDataFolder(), "shop.yml");
@@ -120,6 +125,9 @@ public final class ShopModule implements PluginModule {
             org.bukkit.event.HandlerList.unregisterAll(guiController);
         }
         this.guiController = new ShopGuiController(this, catalog, service, () -> menuTitleStyle.get());
+        if (nativeMenus != null) {
+            nativeShop = new NativeShop(plugin, nativeMenus, catalog, service, economyGateway, this::openClassicCategory);
+        }
         ShopGuiController ownedGuiController = guiController;
         registrations.registerListener(nextResourceId("shop-gui-listener"), ownedGuiController);
         registrations.ownCleanup(nextResourceId("shop-gui-windows"), ownedGuiController::closeAll);
@@ -144,12 +152,36 @@ public final class ShopModule implements PluginModule {
             player.sendMessage("§cEl shop no esta disponible.");
             return;
         }
-        if (platformGateway.resolvePlatform(player.getUniqueId()) == ClientPlatform.BEDROCK
-            && bedrockFormSender != null) {
-            openBedrockCategories(player);
-            return;
+        if (platformGateway.resolvePlatform(player.getUniqueId()) == ClientPlatform.BEDROCK) {
+            if (bedrockFormSender != null) {
+                openBedrockCategories(player);
+            } else {
+                guiController.openCategories(player);
+            }
+        } else if (nativeShop == null || !nativeShop.open(player, null)) {
+            guiController.openCategories(player);
         }
-        guiController.openCategories(player);
+    }
+
+    public void configureNativeMenus(NativeMenus menus) {
+        closeNativeShop();
+        nativeMenus = menus;
+        if (enabled && menus != null) {
+            nativeShop = new NativeShop(plugin, menus, catalog, service, economyGateway, this::openClassicCategory);
+        }
+    }
+
+    private void closeNativeShop() {
+        if (nativeShop != null) {
+            nativeShop.close();
+            nativeShop = null;
+        }
+    }
+
+    private void openClassicCategory(Player player, ShopCategory category) {
+        if (enabled && guiController != null && player.isOnline()) {
+            guiController.openCategory(player, category);
+        }
     }
 
     public void configurePlatform(ClientPlatformGateway platformGateway, BedrockFormSender bedrockFormSender) {
@@ -163,10 +195,13 @@ public final class ShopModule implements PluginModule {
             openMainMenu(player);
             return;
         }
-        if (platformGateway.resolvePlatform(player.getUniqueId()) == ClientPlatform.BEDROCK
-            && bedrockFormSender != null) {
-            openBedrockCategory(player, category);
-        } else {
+        if (platformGateway.resolvePlatform(player.getUniqueId()) == ClientPlatform.BEDROCK) {
+            if (bedrockFormSender != null) {
+                openBedrockCategory(player, category);
+            } else {
+                guiController.openCategory(player, category);
+            }
+        } else if (nativeShop == null || !nativeShop.open(player, category)) {
             guiController.openCategory(player, category);
         }
     }
@@ -345,6 +380,7 @@ public final class ShopModule implements PluginModule {
 
     private void clearRuntimeState() {
         enabled = false;
+        closeNativeShop();
         formGeneration.invalidate();
         npcs.clear();
         guiController = null;

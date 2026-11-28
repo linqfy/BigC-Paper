@@ -8,14 +8,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Locale;
 import java.util.UUID;
+import java.util.function.Function;
 
 public final class VaultEconomyGateway implements RewardGateway {
 
-    private final JavaPlugin plugin;
+    private final Function<UUID, OfflinePlayer> players;
     private final Economy economy;
 
     public VaultEconomyGateway(JavaPlugin plugin, Economy economy) {
-        this.plugin = plugin;
+        this(id -> plugin.getServer().getOfflinePlayer(id), economy);
+    }
+
+    VaultEconomyGateway(Function<UUID, OfflinePlayer> players, Economy economy) {
+        this.players = players;
         this.economy = economy;
     }
 
@@ -44,12 +49,20 @@ public final class VaultEconomyGateway implements RewardGateway {
         }
     }
 
+    double balance(UUID playerId) {
+        try {
+            return economy.getBalance(players.apply(playerId));
+        } catch (RuntimeException unavailable) {
+            return Double.NaN;
+        }
+    }
+
     @Override
     public void deposit(UUID playerId, double amount) {
-        OfflinePlayer player = plugin.getServer().getOfflinePlayer(playerId);
+        OfflinePlayer player = players.apply(playerId);
         EconomyResponse response = economy.depositPlayer(player, amount);
         if (!response.transactionSuccess()) {
-            throw new IllegalStateException("No se pudo depositar la recompensa: " + response.errorMessage);
+            throw new RewardClaims.Refused("No se pudo depositar la recompensa: " + response.errorMessage);
         }
     }
 }
