@@ -13,7 +13,9 @@ public final class ShopItemResolver {
     private final Function<ItemStack, Optional<String>> customIdLookup;
 
     public ShopItemResolver(CustomItemRegistry registry) {
-        this(registry, stack -> registry.findByItemStack(stack).map(CustomItem::getId));
+        // resolveItemId also reports custom ids that are no longer registered, so such a stack is never
+        // mistaken for the plain vanilla item it is built on.
+        this(registry, registry::resolveItemId);
     }
 
     ShopItemResolver(CustomItemRegistry registry, Function<ItemStack, Optional<String>> customIdLookup) {
@@ -29,6 +31,11 @@ public final class ShopItemResolver {
         CustomItem item = registry.findById(entry.customItemId())
             .orElseThrow(() -> new IllegalArgumentException("Custom item desconocido: " + entry.customItemId()));
         return item.createItemStack(entry.amount());
+    }
+
+    /** A custom product can only be traded while its item is still registered. */
+    boolean available(ShopEntry entry) {
+        return entry.material() != null || registry.findById(entry.customItemId()).isPresent();
     }
 
     public boolean matches(ItemStack stack, ShopEntry entry) {

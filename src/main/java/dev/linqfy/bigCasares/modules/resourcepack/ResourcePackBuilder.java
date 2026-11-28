@@ -1,5 +1,7 @@
 package dev.linqfy.bigCasares.modules.resourcepack;
 
+import dev.linqfy.bigCasares.modules.tideframe.PanelPack;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -23,7 +25,14 @@ public final class ResourcePackBuilder {
     private final Path sourceRoot;
     private final Path outputDirectory;
 
+    private final boolean panelsEnabled;
+
     public ResourcePackBuilder(Path sourceRoot, Path outputDirectory) {
+        this(sourceRoot, outputDirectory, Files.isDirectory(sourceRoot.resolve("sources/pantalla")));
+    }
+
+    ResourcePackBuilder(Path sourceRoot, Path outputDirectory, boolean panelsEnabled) {
+        this.panelsEnabled = panelsEnabled;
         this.sourceRoot = sourceRoot.toAbsolutePath().normalize();
         this.outputDirectory = outputDirectory.toAbsolutePath().normalize();
     }
@@ -34,7 +43,7 @@ public final class ResourcePackBuilder {
         Path bedrockSource = sourceRoot.resolve("bedrock");
         ResourcePackRegistry registry = ResourcePackRegistry.load(registryFile);
 
-        String inputSha = treeDigest(sourceRoot, "SHA-256");
+        String inputSha = treeDigest(sourceRoot, "SHA-256", panelsEnabled);
         Path manifestFile = outputDirectory.resolve("manifest.json");
         Path javaPack = outputDirectory.resolve("bigcasares-java.zip");
         Path bedrockPack = outputDirectory.resolve("bigcasares-bedrock.mcpack");
@@ -47,11 +56,14 @@ public final class ResourcePackBuilder {
 
         Files.createDirectories(outputDirectory);
         Path assembledRoot = outputDirectory.resolve("assembled");
-        Path javaRoot = assembledRoot.resolve("java");
+        Path javaRoot = assembledRoot.resolve(panelsEnabled ? "java" : "classic/java");
         Path bedrockRoot = assembledRoot.resolve("bedrock");
         copyTree(javaSource, javaRoot);
         copyTree(bedrockSource, bedrockRoot);
         new SharedResourcePackAssembler().assemble(sourceRoot, javaRoot, bedrockRoot, registry);
+        if (panelsEnabled) {
+            PanelPack.assemble(javaRoot);
+        }
         new ResourcePackValidator().validate(registry, javaRoot, bedrockRoot);
         new JavaResourcePackBuilder().build(javaRoot, outputDirectory);
         new BedrockResourcePackBuilder().build(bedrockRoot, outputDirectory);
@@ -102,8 +114,13 @@ public final class ResourcePackBuilder {
         return UUID.fromString(matcher.group(1));
     }
 
-    private static String treeDigest(Path root, String algorithm) throws IOException {
+    private static String treeDigest(Path root, String algorithm, boolean panelsEnabled) throws IOException {
         MessageDigest digest = digest(algorithm);
+        digest.update((byte) (panelsEnabled ? 1 : 0));
+        if (panelsEnabled) {
+            // The panel shader and icon table come from the jar, so a plugin update must rebuild the pack.
+            digest.update(PanelPack.fingerprint().getBytes(StandardCharsets.UTF_8));
+        }
         List<Path> files;
         try (var stream = Files.walk(root)) {
             files = stream.filter(Files::isRegularFile)

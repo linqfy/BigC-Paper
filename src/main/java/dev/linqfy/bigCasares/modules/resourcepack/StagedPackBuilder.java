@@ -15,7 +15,15 @@ public final class StagedPackBuilder {
     private final Path packsRoot;
     private final List<JavaPackLayerProvider> javaLayers;
 
+    private final boolean panelsEnabled;
+
     public StagedPackBuilder(Path sourceRoot, Path packsRoot, List<JavaPackLayerProvider> javaLayers) {
+        this(sourceRoot, packsRoot, javaLayers, false);
+    }
+
+    StagedPackBuilder(Path sourceRoot, Path packsRoot, List<JavaPackLayerProvider> javaLayers,
+                      boolean panelsEnabled) {
+        this.panelsEnabled = panelsEnabled;
         this.sourceRoot = Objects.requireNonNull(sourceRoot, "sourceRoot").toAbsolutePath().normalize();
         this.packsRoot = Objects.requireNonNull(packsRoot, "packsRoot").toAbsolutePath().normalize();
         this.javaLayers = List.copyOf(javaLayers);
@@ -29,7 +37,7 @@ public final class StagedPackBuilder {
         }
         Files.createDirectories(staging);
         try {
-            ResourcePackBuildResult base = new ResourcePackBuilder(sourceRoot, staging).build();
+            ResourcePackBuildResult base = new ResourcePackBuilder(sourceRoot, staging, panelsEnabled).build();
             Path javaPack = staging.resolve("bigcasares-java.zip");
             for (int index = 0; index < javaLayers.size(); index++) {
                 JavaPackLayerProvider layer = javaLayers.get(index);

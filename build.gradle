@@ -299,6 +299,15 @@ tasks.named("jar") {
 }
 
 processResources {
+    from("resourcepack/java") {
+        include "assets/bigcasares/textures/font/fuente.png"
+    }
+    // The panel shader is coupled to the menu code (colour markers, cube faces), so the plugin reads it from its
+    // own jar instead of the editable copy, which a new jar never overwrites.
+    from("resourcepack/sources/pantalla") {
+        include "text.vsh"
+        into "pantalla"
+    }
     def props = [version: version]
     inputs.properties props
     filteringCharset = 'UTF-8'

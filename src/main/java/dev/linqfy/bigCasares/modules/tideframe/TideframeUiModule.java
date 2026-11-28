@@ -7,17 +7,14 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-/**
- * Draws the missions and shop chest menus over a background from BigCasares' own resource pack. Only the inventory
- * title changes: menus, clicks, purchases and claims stay in their modules. A Java player without the loaded pack,
- * or a Bedrock player, sees the plain title as before, and so does everyone while this module is off.
- */
+/** Offers the two Java panels to players with the active pack and supplies titles for the chest fallback. */
 public final class TideframeUiModule implements PluginModule {
     public static final String ID = "tideframe-ui";
 
     private final Predicate<UUID> packLoaded;
     private final Predicate<UUID> bedrock;
     private volatile boolean enabled;
+    private NativeMenus menus;
 
     /**
      * @param packLoaded true when the player has BigCasares' Java resource pack loaded
@@ -28,6 +25,11 @@ public final class TideframeUiModule implements PluginModule {
         this.bedrock = Objects.requireNonNull(bedrock, "bedrock");
     }
 
+    public NativeMenus attach(org.bukkit.plugin.Plugin owner) {
+        menus = new NativeMenus(owner, packLoaded, bedrock);
+        return menus;
+    }
+
     @Override
     public String getId() {
         return ID;
@@ -36,11 +38,13 @@ public final class TideframeUiModule implements PluginModule {
     @Override
     public void onEnable() {
         enabled = true;
+        if (menus != null) menus.enable();
     }
 
     @Override
     public void onDisable() {
         enabled = false;
+        if (menus != null) menus.disable();
     }
 
     /** The title style for menus; asks for each player when the menu opens. */

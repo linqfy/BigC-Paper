@@ -143,7 +143,7 @@ public final class ModuleManager {
         return isEnabledInConfig(config, moduleId);
     }
 
-    static boolean isEnabledInConfig(ConfigurationSection config, String moduleId) {
+    public static boolean isEnabledInConfig(ConfigurationSection config, String moduleId) {
         String nestedPath = "modules." + moduleId + ".enabled";
         if (config.isSet(nestedPath)) {
             return config.getBoolean(nestedPath);

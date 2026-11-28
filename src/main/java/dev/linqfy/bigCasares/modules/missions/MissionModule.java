@@ -5,6 +5,7 @@ import dev.linqfy.bigCasares.module.PluginModule;
 import dev.linqfy.bigCasares.module.runtime.BukkitRuntimeRegistrations;
 import dev.linqfy.bigCasares.module.runtime.RuntimeRegistrationScope;
 import dev.linqfy.bigCasares.modules.tideframe.MenuTitleStyle;
+import dev.linqfy.bigCasares.modules.tideframe.NativeMenus;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -46,6 +47,9 @@ public final class MissionModule implements PluginModule {
     private final Set<UUID> dirtyPlayers = new LinkedHashSet<>();
     private final Set<UUID> pendingRevalidation = new java.util.HashSet<>();
     private BukkitRuntimeRegistrations registrations;
+    private NativeMenus nativeMenus;
+    private final Map<UUID, MissionPanel.Page> nativeViews = new LinkedHashMap<>();
+    private final Set<UUID> menuClaimsInProgress = new LinkedHashSet<>();
     private volatile Supplier<MenuTitleStyle> menuTitleStyle =
         () -> MenuTitleStyle.PLAIN;
 
@@ -56,6 +60,10 @@ public final class MissionModule implements PluginModule {
     /** How the missions menu titles look (the tideframe-ui module draws a background); plain titles by default. */
     public void configureMenuTitleStyle(Supplier<MenuTitleStyle> style) {
         this.menuTitleStyle = style == null ? () -> MenuTitleStyle.PLAIN : style;
+    }
+
+    public void configureNativeMenus(NativeMenus menus) {
+        nativeMenus = menus;
     }
 
     @Override
@@ -90,6 +98,10 @@ public final class MissionModule implements PluginModule {
         this.hudController = new MissionHudController(this, economyGateway, () -> menuTitleStyle.get());
 
         scope.register("module-state", this::clearRuntimeState);
+        scope.register("fullscreen-missions", () -> {
+            if (nativeMenus != null) nativeMenus.closeGroup("missions");
+            nativeViews.clear();
+        });
         scope.register("hud-open-views", hudController::closeOpenViews);
         registrations.registerListener("mission-listener", new MissionListener(this, plugin, registrations));
         registrations.registerListener("hud-listener", hudController);
@@ -117,21 +129,100 @@ public final class MissionModule implements PluginModule {
             return;
         }
         revalidatePassiveMissions(player);
+        MissionScope scope = view == MissionHudView.WEEKLY_LIST ? MissionScope.WEEKLY : MissionScope.DAILY;
+        if (view != MissionHudView.CLAIMABLES && showNative(player, scope, 0)) return;
+        if (nativeMenus != null) nativeMenus.close(player);
         hudController.open(player, view);
     }
 
-    public void claimAll(Player player) {
+    private boolean showNative(Player player, MissionScope scope, int pageIndex) {
+        if (!enabled || nativeMenus == null || !nativeMenus.available(player)) return false;
         MissionPlayerState state = getOrCreateState(player);
-        MissionPlayerState claimed = playerMissionService.claimAllCompleted(player.getUniqueId(), state, economyGateway);
-        storage.save(claimed);
-        stateCache.put(player.getUniqueId(), claimed);
-        dirtyPlayers.remove(player.getUniqueId());
-        double amount = sumClaimables(state);
-        if (amount > 0.0) {
-            player.sendMessage("§aReclamaste " + economyGateway.format(amount) + " en recompensas.");
-        } else {
-            player.sendMessage("§eNo tenes recompensas pendientes.");
+        var page = MissionPanel.Page.of(state, scope, pageIndex);
+        var panel = MissionPanel.draw(page, economyGateway.balance(player.getUniqueId()), countClaimables(state) > 0,
+            (tab, index) -> navigateNative(player, tab, index),
+            () -> {
+                claimMenuRewards(player);
+                navigateNative(player, scope, page.index());
+            },
+            () -> {
+                if (!player.hasPermission("bigcasares.shop.open")) {
+                    player.sendMessage("§cNo tenés permiso para abrir la tienda.");
+                    return;
+                }
+                var shop = plugin.getShopModule();
+                if (shop != null && shop.isEnabled()) shop.openMainMenu(player);
+                else player.sendMessage("§cLa tienda no está disponible.");
+            });
+        UUID id = player.getUniqueId();
+        panel.onClose(() -> nativeViews.remove(id, page));
+        if (!nativeMenus.show(player, panel)) return false;
+        nativeViews.put(id, page);
+        return true;
+    }
+
+    private void navigateNative(Player player, MissionScope scope, int page) {
+        if (!enabled || !player.isOnline()) return;
+        if (!showNative(player, scope, page)) {
+            nativeMenus.close(player);
+            hudController.open(player, scope == MissionScope.DAILY ? MissionHudView.DAILY_LIST : MissionHudView.WEEKLY_LIST);
         }
+    }
+
+    private void refreshNative(Player player) {
+        var page = nativeViews.get(player.getUniqueId());
+        if (page != null && nativeMenus.isOpen(player, "missions")) navigateNative(player, page.scope(), page.index());
+    }
+
+    /** Pays every completed mission once, for the chest menu, the command and the full-screen panel alike. */
+    public void claimAll(Player player) {
+        UUID id = player.getUniqueId();
+        if (!menuClaimsInProgress.add(id)) return;
+        try {
+            MissionPlayerState state = getOrCreateState(player);
+            RewardClaims.Result result = RewardClaims.claim(state, economyGateway, storage::save);
+            if (result.state() != state) {
+                stateCache.put(id, result.state());
+            }
+            if (!result.stored()) {
+                // The refused reward's receipt is still on disk: keep the unclaimed state pending so the next save fixes it.
+                dirtyPlayers.add(id);
+                plugin.getLogger().severe("La economía rechazó el pago de " + result.failedMission() + " para " + id
+                    + " y no se pudo guardar que sigue pendiente; se reintenta en el próximo guardado.");
+            } else if (result.state() != state) {
+                dirtyPlayers.remove(id);
+            }
+            refreshNative(player);
+            if (result.paid() > 0.0) {
+                player.sendMessage("§aReclamaste " + economyGateway.format(result.paid()) + " en recompensas.");
+            }
+            switch (result.outcome()) {
+                case PAID -> {
+                    if (result.count() == 0) player.sendMessage("§eNo tenes recompensas pendientes.");
+                }
+                case NOT_SAVED -> {
+                    player.sendMessage("§cNo se pudo guardar el cobro; la recompensa no se pagó. Probá de nuevo más tarde.");
+                    plugin.getLogger().warning("No se pudo guardar el cobro de " + result.failedMission() + " para " + id
+                        + "; no se pagó.");
+                }
+                case REFUSED -> player.sendMessage("§cLa economía rechazó el pago; la recompensa sigue pendiente.");
+                case UNCONFIRMED -> {
+                    player.sendMessage("§cLa economía no confirmó el pago. Avisale a un administrador.");
+                    plugin.getLogger().severe("El pago de " + result.failedMission() + " para " + id
+                        + " quedó sin confirmar: se marcó como reclamado para no pagarlo dos veces. Revisar el saldo.");
+                }
+            }
+        } finally {
+            menuClaimsInProgress.remove(id);
+        }
+    }
+
+    void claimMenuRewards(Player player) {
+        if (!player.hasPermission("bigcasares.missions.claim")) {
+            player.sendMessage("§cNo tenés permiso para reclamar recompensas.");
+            return;
+        }
+        claimAll(player);
     }
 
     public void reroll(Player player) {
@@ -139,6 +230,7 @@ public final class MissionModule implements PluginModule {
         storage.save(fresh);
         stateCache.put(player.getUniqueId(), fresh);
         dirtyPlayers.remove(player.getUniqueId());
+        refreshNative(player);
     }
 
     public void rerollDaily(Player player) {
@@ -164,6 +256,7 @@ public final class MissionModule implements PluginModule {
         storage.save(rerolled);
         stateCache.put(player.getUniqueId(), rerolled);
         dirtyPlayers.remove(player.getUniqueId());
+        refreshNative(player);
         player.sendMessage("§aTus misiones diarias fueron reasignadas.");
     }
 
@@ -343,7 +436,7 @@ public final class MissionModule implements PluginModule {
             updated = revalidateAssignment(player, updated, MissionScope.WEEKLY, assignment);
         }
 
-        cacheUpdated(updated);
+        cacheUpdated(player, updated);
     }
 
     private static boolean hasPassiveAssignment(MissionPlayerState state) {
@@ -409,7 +502,7 @@ public final class MissionModule implements PluginModule {
         MissionPlayerState updated = state;
         updated = updateScope(player, updated, MissionScope.DAILY, missionType, mode, value, material, text, entityType);
         updated = updateScope(player, updated, MissionScope.WEEKLY, missionType, mode, value, material, text, entityType);
-        cacheUpdated(updated);
+        cacheUpdated(player, updated);
     }
 
     public void recordOutboundProgress(
@@ -422,12 +515,17 @@ public final class MissionModule implements PluginModule {
         MissionPlayerState state = getOrCreateState(player);
         MissionPlayerState updated = updateOutboundScope(state, MissionScope.DAILY, type, marker, metric, entityType);
         updated = updateOutboundScope(updated, MissionScope.WEEKLY, type, marker, metric, entityType);
-        cacheUpdated(updated);
+        cacheUpdated(player, updated);
     }
 
     public void flush(UUID playerId) {
-        MissionPlayerState state = stateCache.remove(playerId);
-        if (state != null && dirtyPlayers.remove(playerId)) storage.save(state);
+        nativeViews.remove(playerId);
+        MissionPlayerState state = stateCache.get(playerId);
+        if (state != null && dirtyPlayers.contains(playerId)) {
+            storage.save(state);
+            dirtyPlayers.remove(playerId);
+        }
+        stateCache.remove(playerId);
     }
 
     private MissionPlayerState updateOutboundScope(
@@ -470,9 +568,18 @@ public final class MissionModule implements PluginModule {
     }
 
     private void cacheUpdated(MissionPlayerState state) {
+        Player player = plugin.getServer().getPlayer(state.playerId());
+        cacheUpdated(player, state);
+    }
+
+    private void cacheUpdated(Player player, MissionPlayerState state) {
         // Move/click/interact handlers call this constantly; only real changes need a save.
-        if (stateCache.put(state.playerId(), state) != state) {
+        var previous = stateCache.put(state.playerId(), state);
+        if (previous != state) {
             dirtyPlayers.add(state.playerId());
+        }
+        if (player != null && nativeViews.containsKey(player.getUniqueId()) && !state.equals(previous)) {
+            refreshNative(player);
         }
     }
 

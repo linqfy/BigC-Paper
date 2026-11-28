@@ -497,6 +497,9 @@ public final class BigCasares extends JavaPlugin {
                 && resourcePackModule.service().map(service -> service.hasLoadedBigCasaresPack(playerId)).orElse(false),
             playerId -> resolveClientPlatform(playerId) == ClientPlatform.BEDROCK
         );
+        var nativeMenus = tideframeUiModule.attach(this);
+        this.missionModule.configureNativeMenus(nativeMenus);
+        this.shopModule.configureNativeMenus(nativeMenus);
         this.missionModule.configureMenuTitleStyle(tideframeUiModule::style);
         this.shopModule.configureMenuTitleStyle(tideframeUiModule::style);
 
